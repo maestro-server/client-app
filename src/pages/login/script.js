@@ -1,3 +1,6 @@
+
+import Auth from 'factories/auth'
+
 export default {
   name: 'login',
 
@@ -13,7 +16,12 @@ export default {
 
   methods: {
     login: function () {
-      console.log("fdsfds");
+
+      new Auth()
+        .auth(
+          this.model,
+          () => this.$router.push('/dashboard')
+        )
     }
   }
 

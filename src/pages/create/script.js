@@ -16,8 +16,13 @@ export default {
 
   methods: {
     create: function () {
+
       new User()
-        .create({name: "Felipe"})
+        .create(
+          this.model,
+          () => this.$router.push('/login')
+        )
+
     }
   }
 

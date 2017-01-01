@@ -10,6 +10,7 @@ export default {
   },
 
   alert: {
+    show: false,
     title: null,
     msg: null,
     type: null

@@ -6,7 +6,7 @@ export default {
     commit('CHANGE_PAGE', ['icon', icon])
   },
 
-  callAlert ({commit}, {title, msg, type='success'}) {
-    commit('CALL_ALERT', {title, msg, type})
+  callAlert ({commit}, args) {
+    commit('CALL_ALERT', {...args})
   }
 }

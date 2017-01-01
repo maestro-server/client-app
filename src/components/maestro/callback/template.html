@@ -1,7 +1,12 @@
 <div>
-  <alert v-model="showTop" placement="top" duration="3000" :type="type" width="400px" dismissable>
-    <span class="icon-info-circled alert-icon-float-left"></span>
-    <strong>{{title}}</strong>
-    <p>{{msg}}</p>
+  <alert v-model="showTop" duration="6000" placement="top" :type="type" width="400px" dismissable>
+
+      <i v-show="type == 'danger'" class="fa fa-times-circle" aria-hidden="true"></i>
+      <i v-show="type == 'success'" class="fa fa-check-circle" aria-hidden="true"></i>
+      <i v-show="type == 'warning'" class="fa fa-exclamation-circle" aria-hidden="true"></i>
+
+      <strong>{{title}}</strong>
+      <p>{{msg}}</p>
+
   </alert>
 </div>
