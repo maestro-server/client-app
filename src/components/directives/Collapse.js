@@ -1,8 +1,8 @@
 /**
  * Collapse directive
  */
-import {coerce} from '../utils/utils.js'
-import $ from '../utils/NodeList.js'
+import {coerce} from '../../utils/utils.js'
+import $ from '../../utils/NodeList.js'
 
 export default {
   bind (el, binding) {
