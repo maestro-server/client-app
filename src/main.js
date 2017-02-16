@@ -4,6 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import mcore from 'bootstrap/mcore'
+import mdirectives from 'bootstrap/mdirectives'
+
+Vue.use(mcore)
+Vue.use(mdirectives)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
