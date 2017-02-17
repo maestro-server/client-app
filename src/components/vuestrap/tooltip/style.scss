@@ -1,17 +1,28 @@
-h1, h2 {
-  font-weight: normal;
+.tooltip.top,
+.tooltip.left,
+.tooltip.right,
+.tooltip.bottom {
+  opacity: .9;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.fadein-enter {
+  animation:fadein-in 0.3s ease-in;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.fadein-leave-active {
+  animation:fadein-out 0.3s ease-out;
 }
-
-a {
-  color: #42b983;
+@keyframes fadein-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .9;
+  }
+}
+@keyframes fadein-out {
+  0% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+  }
 }

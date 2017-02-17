@@ -1,17 +1,26 @@
-h1, h2 {
-  font-weight: normal;
+.form-group {
+  position: relative;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+label~.close {
+  top: 25px;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.input-group>.icon {
+  position: relative;
+  display: table-cell;
+  width:0;
+  z-index: 3;
 }
-
-a {
-  color: #42b983;
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+.has-feedback .close {
+  right: 20px;
 }

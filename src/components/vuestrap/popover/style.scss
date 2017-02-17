@@ -1,17 +1,32 @@
-h1, h2 {
-  font-weight: normal;
+.popover.top,
+.popover.left,
+.popover.right,
+.popover.bottom {
+  display: block;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.scale-enter {
+  animation:scale-in 0.15s ease-in;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.scale-leave-active {
+  animation:scale-out 0.15s ease-out;
 }
-
-a {
-  color: #42b983;
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }

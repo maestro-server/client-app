@@ -1,17 +1,23 @@
-h1, h2 {
-  font-weight: normal;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s ease;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.fade-enter,
+.fade-leave-active {
+  height: 0;
+  opacity: 0;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.alert.top {
+  position: fixed;
+  top: 30px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 1050;
 }
-
-a {
-  color: #42b983;
+.alert.top-right {
+  position: fixed;
+  top: 30px;
+  right: 50px;
+  z-index: 1050;
 }

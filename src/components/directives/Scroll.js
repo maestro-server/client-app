@@ -1,3 +1,4 @@
+import Vue from 'vue'
 /**
  * Click outside directive
  */
@@ -20,7 +21,7 @@ function bind (el, binding) {
   }
 }
 
-function unbind(el) {
+function unbind (el) {
   events.forEach(function (e) { window.removeEventListener(e, el[HANDLER], false) })
   document.removeEventListener('load', el[HANDLER], false)
   delete el[HANDLER];

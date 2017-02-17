@@ -1,8 +1,9 @@
+import PopoverMixin from '../../utils/popoverMixins.js'
+
 export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  mixins: [PopoverMixin],
+  props: {
+    effect: {type: String, default: 'scale'},
+    trigger: {type: String, default: 'hover'}
   }
 }

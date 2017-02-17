@@ -1,19 +1,25 @@
-<div class="hello">
-  <h1>{{ msg }}</h1>
-  <h2>Essential Links</h2>
-  <ul>
-    <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-    <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-    <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-    <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    <br>
-    <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-  </ul>
-  <h2>Ecosystem</h2>
-  <ul>
-    <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-    <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-    <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-    <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-  </ul>
-</div>
+<nav :class="['navbar', 'navbar-'+type, placement === 'static'?'navbar-static-top':'navbar-fixed-'+placement]">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button v-if="!$slots.collapse" type="button" class="navbar-toggle collapsed" aria-expanded="false" @click="toggleCollapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <slot name="collapse"></slot>
+      <slot name="brand"></slot>
+    </div>
+    <div :class="['navbar-collapse',{collapse:collapsed}]">
+      <ul class="nav navbar-nav">
+        <slot></slot>
+      </ul>
+      <ul v-if="$slots.left" class="nav navbar-nav navbar-left">
+        <slot name="left"></slot>
+      </ul>
+      <ul v-if="$slots.right" class="nav navbar-nav navbar-right">
+        <slot name="right"></slot>
+      </ul>
+    </div>
+  </div>
+</nav>

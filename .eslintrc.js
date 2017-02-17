@@ -28,6 +28,7 @@ module.exports = {
     "padded-blocks": [2, "never"],   // http://eslint.org/docs/rules/padded-blocks
     "semi": 0,           // http://eslint.org/docs/rules/semi
     "quotes": 0,
+    "no-extend-native": 0,
     "padded-blocks": 0,
     "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
       "before": false,

@@ -1,8 +1,15 @@
+import {coerce} from '../../utils/utils.js'
+
 export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  props: {
+    animated: {type: Boolean, default: false},
+    label: {default: false},
+    now: {required: true},
+    striped: {type: Boolean, default: false},
+    type: {type: String}
+  },
+  computed: {
+    labelBool () { return coerce.boolean(this.label) },
+    nowNum () { return coerce.number(this.now) }
   }
 }

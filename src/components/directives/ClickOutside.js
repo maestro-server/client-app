@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 /**
  * Click outside directive
  */
@@ -11,7 +13,16 @@ function addListener (node, callback) {
 }
 
 function removeListener (node, callback) {
-  binded = binded.filter(el => el.node !== node ? true : !callback ? false : el.callback !== callback)
+  binded = binded.filter(el => {
+    if (el.node !== node) {
+      return true
+    }
+    if (!callback) {
+      return false
+    } else {
+      return el.callback !== callback
+    }
+  })
   if (!binded.length) document.removeEventListener('click', handler, false)
 }
 
@@ -27,7 +38,7 @@ export default {
     }
   },
   update (el, binding) {
-    if (binding.value !== binding.oldValue){
+    if (binding.value !== binding.oldValue) {
       removeListener(el, binding.oldValue)
       addListener(el, binding.value)
     }

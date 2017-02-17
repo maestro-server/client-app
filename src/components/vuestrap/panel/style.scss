@@ -1,17 +1,12 @@
-h1, h2 {
-  font-weight: normal;
+.accordion-toggle {
+  cursor: pointer;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: all .5s ease;
+  overflow: hidden;
 }
+.collapse-enter,
+.collapse-leave-active {
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
