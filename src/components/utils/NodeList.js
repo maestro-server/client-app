@@ -9,6 +9,7 @@ let Events = []
 function isNode (val) {
   return val instanceof window.Node
 }
+
 function isNodeList (val) {
   return val instanceof window.NodeList || val instanceof NodeList || val instanceof window.HTMLCollection || val instanceof Array
 }
