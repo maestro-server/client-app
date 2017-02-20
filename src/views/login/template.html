@@ -1,0 +1,19 @@
+<div class="login">
+
+  <div class="row">
+    <div class="col-sm-4 col-offset-3">
+
+      <bform-validator v-model="valid.all">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+          <bform-validator @valid="valid.username = true" @invalid="valid.username = false">
+            <binput label="Username" v-model="data.username" required></binput>
+          </bform-validator>
+
+        </div>
+      </bform-validator>
+
+    </div>
+  </div>
+
+</div>
