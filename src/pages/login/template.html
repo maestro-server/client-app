@@ -5,8 +5,9 @@
 
       <form-validator>
         <div class="col-xs-12">
-
-          <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login" /><br/><br/>
+          <div class="col-xs-12 text-center">
+            <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login" class="text-center img-responsive-center" /><br/>
+          </div>
 
           <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
             <bsinput type="text" label="Username" required></bsinput>
@@ -14,6 +15,11 @@
           </form-validator>
 
           <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
+        </div>
+
+        <div class="col-xs-12">
+          <p><a href="">Create a account</a></p>
+          <p><a href="">Forgot password</a></p>
         </div>
       </form-validator>
 

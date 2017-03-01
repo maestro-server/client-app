@@ -24,11 +24,8 @@
 
 // Components
 @import "sass/component-animations";
-@import "sass/dropdowns";
 @import "sass/button-groups";
 @import "sass/input-groups";
-@import "sass/navs";
-@import "sass/navbar";
 @import "sass/breadcrumbs";
 @import "sass/pagination";
 @import "sass/pager";
@@ -43,11 +40,6 @@
 @import "sass/responsive-embed";
 @import "sass/wells";
 @import "sass/close";
-
-// Components w/ JavaScript
-@import "sass/modals";
-@import "sass/tooltip";
-@import "sass/popovers";
 
 // Utility classes
 @import "sass/utilities";
