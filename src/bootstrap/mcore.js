@@ -4,7 +4,7 @@ function plugin (Vue) {
   if (plugin.installed) return
 
   for (let key in Components) {
-    Vue.component('b' + key, Components[key])
+    Vue.component(key, Components[key])
   }
 }
 

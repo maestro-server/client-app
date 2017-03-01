@@ -1,0 +1,23 @@
+<div class="login container">
+
+  <div class="row vertical-center">
+    <div class="col-sm-6 col-sm-offset-3 well-white">
+
+      <form-validator>
+        <div class="col-xs-12">
+
+          <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login" /><br/><br/>
+
+          <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
+            <bsinput type="text" label="Username" required></bsinput>
+            <bsinput type="password" label="Password" required></bsinput>
+          </form-validator>
+
+          <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
+        </div>
+      </form-validator>
+
+    </div>
+  </div>
+
+</div>

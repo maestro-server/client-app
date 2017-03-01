@@ -1,23 +1,23 @@
 import accordion from './accordion/Accordion.vue'
 import affix from './affix/Affix.vue'
 import alert from './alert/Alert.vue'
-import aside from './aside/Aside.vue'
+import bsaside from './aside/Aside.vue'
 import buttonGroup from './buttongroup/ButtonGroup.vue'
 import carousel from './carousel/Carousel.vue'
-import checkbox from './checkbox/Checkbox.vue'
+import bscheckbox from './checkbox/Checkbox.vue'
 import datepicker from './datapicker/Datepicker.vue'
 import dropdown from './dropdown/Dropdown.vue'
 import formGroup from './formgroup/FormGroup.vue'
 import formValidator from './formvalidator/FormValidator.vue'
-import input from './input/Input.vue'
+import bsinput from './input/Input.vue'
 import modal from './modal/Modal.vue'
 import navbar from './navbar/Navbar.vue'
-import option from './option/Option.vue'
+import bsoption from './option/Option.vue'
 import panel from './panel/Panel.vue'
 import popover from './popover/Popover.vue'
 import progressbar from './progressbar/Progressbar.vue'
-import radio from './radio/Radio.vue'
-import select from './select/Select.vue'
+import bsradio from './radio/Radio.vue'
+import bsselect from './select/Select.vue'
 import slider from './slider/Slider.vue'
 import spinner from './spinner/Spinner.vue'
 import tab from './tab/Tab.vue'
@@ -31,23 +31,23 @@ export default {
   accordion,
   affix,
   alert,
-  aside,
+  bsaside,
   buttonGroup,
   carousel,
-  checkbox,
+  bscheckbox,
   datepicker,
   dropdown,
   formGroup,
   formValidator,
-  input,
+  bsinput,
   modal,
   navbar,
-  option,
+  bsoption,
   panel,
   popover,
   progressbar,
-  radio,
-  select,
+  bsradio,
+  bsselect,
   slider,
   spinner,
   tab,

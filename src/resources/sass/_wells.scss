@@ -4,7 +4,7 @@
 
 
 // Base class
-.well {
+%well {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -16,6 +16,15 @@
     border-color: #ddd;
     border-color: rgba(0,0,0,.15);
   }
+}
+
+.well {
+  @extend %well;
+}
+
+.well-white {
+  @extend %well;
+  background-color: $white;
 }
 
 // Sizes

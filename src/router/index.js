@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import dashboard from 'views/dashboard/router'
-import login from 'views/login/router'
+import home from 'pages/home/router'
+import dashboard from 'pages/dashboard/router'
+import login from 'pages/login/router'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    home,
     dashboard,
     login
   ]

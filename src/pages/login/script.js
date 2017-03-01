@@ -1,15 +1,20 @@
 export default {
   name: 'login',
-  data () {
+
+  data: function () {
     return {
-      valid: {
-        all: false,
-        username: false
-      },
+      valid: false,
       data: {
         username: undefined,
         password: undefined
       }
     }
+  },
+
+  methods: {
+    login: function () {
+      console.log("fdsfds");
+    }
   }
+
 }
