@@ -1,6 +1,12 @@
-# client-app2
+# Client Maestro Server
 
-> CLient app server
+> Client app server
+* Vue 2
+* Vue Router
+* Maestro Bootue
+* Vuex
+* Webpack 2
+
 
 ## Build Setup
 
