@@ -13,7 +13,7 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 
-  width: 250px;
+  width: 230px;
 
   background: $dark-purple;
 
@@ -35,7 +35,19 @@
     a {
       font-size: 16px;
       color: darken($white, 12%);
+
+      small {
+        font-size: 12px;
+        color: darken($white, 40%);
+        padding-left: 27px;
+
+      }
     }
+  }
+
+  .figure {
+    width: 24px;
+    display: inline-block;
   }
 }
 
