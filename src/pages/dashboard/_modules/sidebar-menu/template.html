@@ -1,33 +1,49 @@
 <!-- Sidebar -->
 <nav id="sidebar-wrapper" class="sidebar-menu">
-  <ul class="sidebar-nav">
-    <li class="sidebar-brand">
-      <a href="#">
-        Start Bootstrap
-      </a>
-    </li>
-    <li>
-      <a href="#">Dashboard</a>
-    </li>
-    <li>
-      <a href="#">Shortcuts</a>
-    </li>
-    <li>
-      <a href="#">Overview</a>
-    </li>
-    <li>
-      <a href="#">Events</a>
-    </li>
-    <li>
-      <a href="#">About</a>
-    </li>
-    <li>
-      <a href="#">Services</a>
-    </li>
-    <li>
-      <a href="#">Contact</a>
-    </li>
-  </ul>
+
+  <header>
+    <div class="col-xs-10">
+      <router-link to="/dashboard">
+        <img src="./../../../../resources/assets/imgs/logo250-white.png" alt="Maestro - Logo" class="img-responsive">
+      </router-link>
+    </div>
+  </header>
+
+  <div class="col-xs-12">
+    <ul class="nav nav-stacked">
+      <li>
+        <a href="#">
+          <i class="fa fa-server" aria-hidden="true"></i> Architecture<br/>
+          <small>Servers and Services</small>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-cube" aria-hidden="true"></i> Applications<br>
+          <small>Configs, new hosts</small>
+        </a>
+
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-bullseye" aria-hidden="true"></i> Deploys
+        </a>
+
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> Monitory</a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-users" aria-hidden="true"></i> Teams</a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-user" aria-hidden="true"></i> Settings</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <!-- /#sidebar-wrapper -->
 
