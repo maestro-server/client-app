@@ -1,5 +1,5 @@
 export default {
-  name: 'hello',
+  name: 'dashboard-profile',
   data () {
     return {
       msg: 'Welcome to profile'

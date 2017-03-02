@@ -2,6 +2,6 @@ import comp from './profile'
 
 export default {
   path: 'profile',
-  name: 'Profile',
+  name: 'dashboard-profile',
   component: comp
 }

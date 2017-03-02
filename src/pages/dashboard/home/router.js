@@ -1,7 +1,7 @@
-import comp from './dashboard'
+import comp from './home'
 
 export default {
   path: '/',
-  name: 'Dashboard',
+  name: 'dashboard-home',
   component: comp
 }
