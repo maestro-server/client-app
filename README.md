@@ -1,6 +1,6 @@
 # Client Maestro Server
 
-## Client app server
+## Tools
 
 - Vue 2
 - Vue Router
