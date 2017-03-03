@@ -88,10 +88,6 @@ $headings-color: inherit !default;
 // [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
 $icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "/resources/assets/fonts/bootstrap/") !default;
 
-//** File name for all font files.
-$icon-font-name: "glyphicons-halflings-regular" !default;
-//** Element ID within SVG icon file.
-$icon-font-svg-id: "glyphicons_halflingsregular" !default;
 
 //== Components
 //
@@ -846,3 +842,7 @@ $dl-horizontal-offset: $component-offset-horizontal !default;
 $dl-horizontal-breakpoint: $grid-float-breakpoint !default;
 //** Horizontal line color.
 $hr-border: $gray-lighter !default;
+
+
+//** maestro variables
+$sidebar-width: 230px;

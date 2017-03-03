@@ -1,4 +1,11 @@
+@import '../../resources/sass/variables';
+
 .wrapper {
   position: absolute;
-  left: 230px;
+  padding-left: $sidebar-width;
+  width: 100%;
+  background: #ECF0F1;
+  min-height: 100%;
+
+  box-sizing: border-box;
 }

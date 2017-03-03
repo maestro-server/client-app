@@ -13,7 +13,8 @@
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 
-  width: 230px;
+  width: $sidebar-width;
+  box-sizing: border-box;
 
   background: $dark-purple;
 
@@ -42,7 +43,7 @@
           padding-left: 27px;
         }
 
-        &:hover {
+        &:hover, &.router-link-active {
           background: darken($dark-purple, 15%);
         }
       }
@@ -58,7 +59,7 @@
 
 
   &.minified {
-    left: -230px;
+    left: -$sidebar-width;
   }
 
 

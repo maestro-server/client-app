@@ -1,4 +1,4 @@
 
 export default {
-  get_title_page: state => state.viewer.title
+  get_page: state => state.viewer
 }

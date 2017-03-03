@@ -56,9 +56,8 @@
 
 // For maestro
 // -------------------------
-.bg-purple {
-  background: $bg-purple;
-}
+.bg-purple {background: $bg-purple;}
+.bg-white {background: $white;}
 
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
@@ -66,4 +65,17 @@
 
   display: flex;
   align-items: center;
+}
+
+.page {
+  padding: 12px 15px;
+}
+
+.card-box {
+  border: 1px solid $well-border;
+  border-radius: $border-radius-base;
+
+  box-sizing: border-box;
+
+  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
 }

@@ -4,6 +4,8 @@
  */
 export default {
   viewer: {
-    title: "Dashboard"
+    title: "Dashboard",
+    icon: null,
+    subtitle: null
   }
 }
