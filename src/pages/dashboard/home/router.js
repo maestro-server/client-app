@@ -2,6 +2,6 @@ import comp from './home'
 
 export default {
   path: '/',
-  name: 'dashboard-home',
+  name: 'dashboard',
   component: comp
 }
