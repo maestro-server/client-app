@@ -9,7 +9,8 @@ import datepicker from './datapicker/Datepicker.vue'
 import dropdown from './dropdown/Dropdown.vue'
 import formGroup from './formgroup/FormGroup.vue'
 import formValidator from './formvalidator/FormValidator.vue'
-import bsinput from './input/Input.vue'
+import bsInput from './input/Input.vue'
+import inputFile from './inputfile/inputFile.vue'
 import modal from './modal/Modal.vue'
 import navbar from './navbar/Navbar.vue'
 import bsoption from './option/Option.vue'
@@ -17,6 +18,7 @@ import panel from './panel/Panel.vue'
 import popover from './popover/Popover.vue'
 import progressbar from './progressbar/Progressbar.vue'
 import bsradio from './radio/Radio.vue'
+import selectCountry from './select-country/Select-Country.vue'
 import bsselect from './select/Select.vue'
 import slider from './slider/Slider.vue'
 import spinner from './spinner/Spinner.vue'
@@ -39,7 +41,9 @@ export default {
   dropdown,
   formGroup,
   formValidator,
-  bsinput,
+  selectCountry,
+  bsInput,
+  inputFile,
   modal,
   navbar,
   bsoption,

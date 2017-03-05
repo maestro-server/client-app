@@ -1,4 +1,4 @@
-import Components from '../components/vuestrap/index'
+import Components from '../components/bootue/index'
 
 function plugin (Vue) {
   if (plugin.installed) return

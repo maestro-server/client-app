@@ -1,0 +1,93 @@
+<div class="profile">
+
+  <div class="col-xs-12 col-sm-6">
+
+    <h3>Change Profile</h3>
+    The information you provide below will be shown on your invoices.<br/><br/>
+    <form action="get" class="row">
+      <form-validator v-model="valid.profile" @valid="valid = true" @invalid="valid.profile = false">
+
+        <div class="col-xs-12 col-sm-2 col-sm-offset-2">
+          <img src="../../../../resources/assets/imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
+        </div>
+        <input-file label="Upload your avatar" class="col-xs-12 col-sm-5"></input-file>
+
+        <bs-input type="text" label="Full Name" required class="col-xs-12" icon></bs-input>
+
+        <bs-input type="text" label="Phone number" class="col-xs-12"></bs-input>
+
+        <bs-input type="text" label="Company" class="col-xs-12 col-sm-6"></bs-input>
+        <bs-input type="text" label="Job" class="col-xs-12 col-sm-6"></bs-input>
+
+        <select-country baseclass="col-xs-6" v-model="profile.country"></select-country>
+
+        <bs-input type="text" label="City" class="col-xs-12"></bs-input>
+
+        <bs-input type="text" label="Address" class="col-xs-12"></bs-input>
+
+      </form-validator>
+
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" :disabled="!valid.profile" @click="updateProfile">
+          Update profile
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+
+    <h3>Change account email</h3>
+
+    <form action="get" class="row">
+      <form-validator v-model="valid.pass" @valid="valid.pass = true" @invalid="valid.pass = false">
+        <bs-input type="email" label="Current email" required class="col-xs-6"></bs-input>
+
+        <bs-input type="email" label="New email" required class="col-xs-6"></bs-input>
+      </form-validator>
+
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" :disabled="!valid.pass" @click="updatePassWord">
+          Update a new password
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+
+    <h3>Two-Factor Authentication</h3>
+    Protect your account by setting up second factor authentication. You can choose from Google Authenticator.
+    <br/><br/>
+
+    <a href="#" class="btn btn-primary pull-right">Google Authenticator</a>
+
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+
+    <h3>Change or password</h3>
+    Change your password or recover your current one.
+    <br/><br/>
+    <form action="get" class="row">
+      <form-validator v-model="valid.pass" @valid="valid.pass = true" @invalid="valid.pass = false">
+        <bs-input type="text" label="Current password" required class="col-xs-12"></bs-input>
+
+        <bs-input type="text" label="New password" required class="col-xs-6"></bs-input>
+        <bs-input type="text" label="Verify password" required class="col-xs-6"></bs-input>
+      </form-validator>
+
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" :disabled="!valid.pass" @click="updatePassWord">
+          Save a new password
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+

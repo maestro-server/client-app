@@ -3,25 +3,32 @@
   <div class="row vertical-center">
     <div class="col-sm-6 col-sm-offset-3 well-white">
 
-      <form-validator>
-        <div class="col-xs-12">
-          <div class="col-xs-12 text-center">
-            <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login" class="text-center img-responsive-center" /><br/>
+      <form>
+        <form-validator>
+          <div class="col-xs-12">
+            <div class="col-xs-12 text-center">
+              <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login"
+                   class="text-center img-responsive-center"/><br/>
+            </div>
+
+            <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
+              <bs-input type="email" label="Email" required icon></bs-input>
+              <bs-input type="password" label="Password" required icon></bs-input>
+            </form-validator>
+
+            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
           </div>
 
-          <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
-            <bsinput type="text" label="Username" required></bsinput>
-            <bsinput type="password" label="Password" required></bsinput>
-          </form-validator>
-
-          <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
-        </div>
-
-        <div class="col-xs-12">
-          <p><router-link to="create">Create a account</router-link></p>
-          <p><router-link to="forgot">Forgot password</router-link></p>
-        </div>
-      </form-validator>
+          <div class="col-xs-12">
+            <p>
+              <router-link to="create">Create a account</router-link>
+            </p>
+            <p>
+              <router-link to="forgot">Forgot password</router-link>
+            </p>
+          </div>
+        </form-validator>
+      </form>
 
     </div>
   </div>

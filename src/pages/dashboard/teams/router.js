@@ -4,8 +4,8 @@ import accdelete from './delete/router'
 import profile from './profile/router'
 
 export default {
-  path: 'settings',
-  redirect: 'settings/profile',
+  path: 'teams',
+  redirect: 'teams/list',
   component: comp,
   children: [
     billing,

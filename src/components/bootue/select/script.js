@@ -15,7 +15,11 @@ export default {
     minSearch: {type: Number, default: 0},
     multiple: {type: Boolean, default: false},
     name: {type: String, default: null},
-    options: {type: Array, default () { return [] }},
+    options: {
+      type: Array, default () {
+        return []
+      }
+    },
     optionsLabel: {type: String, default: 'label'},
     optionsValue: {type: String, default: 'value'},
     parent: {default: true},
@@ -39,28 +43,53 @@ export default {
     }
   },
   computed: {
-    canSearch () { return this.minSearch ? this.list.length >= this.minSearch : this.search },
-    classes () { return [{open: this.show, disabled: this.disabled}, this.class, this.isLi ? 'dropdown' : this.inInput ? 'input-group-btn' : 'btn-group'] },
+    canSearch () {
+      return this.minSearch ? this.list.length >= this.minSearch : this.search
+    },
+    classes () {
+      return [{
+        open: this.show,
+        disabled: this.disabled
+      }, this.class, this.isLi ? 'dropdown' : this.inInput ? 'input-group-btn' : 'btn-group']
+    },
     filteredOptions () {
       var search = (this.searchValue || '').toLowerCase()
       return !search ? this.list : this.list.filter(el => {
         return ~el[this.optionsLabel].toLowerCase().search(search)
       })
     },
-    hasParent () { return this.parent instanceof Array ? this.parent.length : this.parent },
-    inInput () { return this.$parent._input },
-    isLi () { return this.$parent._navbar || this.$parent.menu || this.$parent._tabset },
-    limitText () { return this.text.limit.replace('{{limit}}', this.limit) },
+    hasParent () {
+      return this.parent instanceof Array ? this.parent.length : this.parent
+    },
+    inInput () {
+      return this.$parent._input
+    },
+    isLi () {
+      return this.$parent._navbar || this.$parent.menu || this.$parent._tabset
+    },
+    limitText () {
+      return this.text.limit.replace('{{limit}}', this.limit)
+    },
     selected () {
-      if (this.list.length === 0) { return '' }
+      if (this.list.length === 0) {
+        return ''
+      }
       var sel = this.values.map(val => (this.list.find(o => o[this.optionsValue] === val) || {})[this.optionsLabel]).filter(val => val !== undefined)
       this.$emit('selected', sel)
       return sel.join(', ')
     },
-    showPlaceholder () { return (this.values.length === 0 || !this.hasParent) ? (this.placeholder || this.text.notSelected) : null },
-    text () { return translations(this.lang) },
-    values () { return this.val instanceof Array ? this.val : ~[null, undefined].indexOf(this.val) ? [] : [this.val] },
-    valOptions () { return this.list.map(el => el[this.optionsValue]) }
+    showPlaceholder () {
+      return (this.values.length === 0 || !this.hasParent) ? (this.placeholder || this.text.notSelected) : null
+    },
+    text () {
+      return translations(this.lang)
+    },
+    values () {
+      return this.val instanceof Array ? this.val : ~[null, undefined].indexOf(this.val) ? [] : [this.val]
+    },
+    valOptions () {
+      return this.list.map(el => el[this.optionsValue])
+    }
   },
   watch: {
     options (options) {
@@ -83,10 +112,14 @@ export default {
       if (val !== old && this._parent) this._parent.validate()
     },
     value (val, old) {
-      if (val !== old) { this.val = val }
+      if (val !== old) {
+        this.val = val
+      }
     },
     val (val, old) {
-      if (val === undefined) { this.val = val = null }
+      if (val === undefined) {
+        this.val = val = null
+      }
       if (val !== old) {
         this.$emit('change', val)
         this.$emit('input', val)
@@ -109,7 +142,9 @@ export default {
     },
     checkData () {
       if (this.multiple) {
-        if (this.limit < 1) { this.limit = 1 }
+        if (this.limit < 1) {
+          this.limit = 1
+        }
         if (!(this.val instanceof Array)) {
           this.val = (this.val === null || this.val === undefined) ? [] : [this.val]
         }
@@ -119,11 +154,15 @@ export default {
           this.val = this.val.slice(0, this.limit)
         }
       } else {
-        if (!~this.valOptions.indexOf(this.val)) { this.val = null }
+        if (!~this.valOptions.indexOf(this.val)) {
+          this.val = null
+        }
       }
     },
     clear () {
-      if (this.disabled || this.readonly) { return }
+      if (this.disabled || this.readonly) {
+        return
+      }
       this.val = this.val instanceof Array ? [] : null
       this.toggle()
     },
@@ -153,7 +192,9 @@ export default {
     },
     setOptions (options) {
       this.list = options.map(el => {
-        if (el instanceof Object) { return el }
+        if (el instanceof Object) {
+          return el
+        }
         let obj = {}
         obj[this.optionsLabel] = el
         obj[this.optionsValue] = el
@@ -166,11 +207,16 @@ export default {
       if (!this.show) this.$refs.btn.focus()
     },
     urlChanged () {
-      if (!this.url || !this.$http) { return }
+      if (!this.url || !this.$http) {
+        return
+      }
       this.loading = true
       this.$http.get(this.url).then(response => {
         var data = response.data instanceof Array ? response.data : []
-        try { data = JSON.parse(data) } catch (e) {}
+        try {
+          data = JSON.parse(data)
+        } catch (e) {
+        }
         this.setOptions(data)
         this.loading = false
         this.checkData()
@@ -186,14 +232,18 @@ export default {
     this.setOptions(this.options)
     this.val = this.value
     this._select = true
-    if (this.val === undefined || !this.parent) { this.val = null }
+    if (this.val === undefined || !this.parent) {
+      this.val = null
+    }
     if (!this.multiple && this.val instanceof Array) {
       this.val = this.val[0]
     }
     this.checkData()
     if (this.url) this.urlChanged()
     let parent = this.$parent
-    while (parent && !parent._formValidator) { parent = parent.$parent }
+    while (parent && !parent._formValidator) {
+      parent = parent.$parent
+    }
     if (parent && parent._formValidator) {
       parent.children.push(this)
       this._parent = parent
