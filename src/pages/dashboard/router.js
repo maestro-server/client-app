@@ -1,6 +1,7 @@
 import comp from './dashboard'
 import home from './home/router'
 import settings from './settings/router'
+import teams from './teams/router'
 import architectures from './architectures/router'
 
 export default {
@@ -9,6 +10,7 @@ export default {
   children: [
     home,
     settings,
+    teams,
     architectures
   ]
 }

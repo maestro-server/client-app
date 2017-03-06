@@ -1,15 +1,13 @@
-import comp from './settings'
-import billing from './billing/router'
-import accdelete from './delete/router'
-import profile from './profile/router'
+import comp from './teams'
+import team from './team/router'
+import access from './access/router'
 
 export default {
   path: 'teams',
-  redirect: 'teams/list',
+  redirect: 'teams/team/list',
   component: comp,
   children: [
-    billing,
-    accdelete,
-    profile
+    team,
+    access
   ]
 }

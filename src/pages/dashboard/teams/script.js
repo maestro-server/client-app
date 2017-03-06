@@ -4,7 +4,7 @@ import topmenu from '../_modules/top-menu/top-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'create': 'Create a team', 'billing': 'Billing'}
+      submenu: {'team/': 'Teams', 'access': 'Access Roles'}
     }
   },
 
@@ -16,9 +16,9 @@ export default {
 
   mounted () {
     this.setPage([
-      'Settings',
-      'Profile, plan and billing',
-      'fa-user'
+      'Team',
+      'Team, users and acess rules',
+      'fa-users'
     ])
   },
 
