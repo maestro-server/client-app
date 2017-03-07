@@ -1,17 +1,15 @@
-<div class="col-xs-12 page">
-
-  <div class="card-box bg-white">
-
-    <div class="row">
-      <top-menu :list="submenu" base="dashboard/settings"></top-menu>
-    </div>
-
-    <div class="row">
-
-      <router-view></router-view>
-
-    </div>
-
+<modal v-model="show" effect="fade">
+  <!-- custom header -->
+  <div slot="modal-header" class="modal-header">
+    <h4 class="modal-title">
+      <i>Custom</i> <code>Modal</code> <b>Title</b>
+    </h4>
   </div>
-
-</div>
+  ...
+  <!-- custom buttons -->
+  <div slot="modal-footer" class="modal-footer">
+    <button type="button" class="btn btn-default" @click="show = false">Exit</button>
+    <button type="button" class="btn btn-success" @click="saveMethod">Custom Save</button>
+    <button type="button" class="btn btn-success" @click="otherMethod">Another Action</button>
+  </div>
+</modal>

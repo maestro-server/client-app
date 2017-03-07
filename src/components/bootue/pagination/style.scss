@@ -1,6 +1,9 @@
 //
 // Pagination (multiple pages)
 // --------------------------------------------------
+@import "../../../resources/sass/variables";
+@import "../../../resources/sass/mixins";
+
 .pagination {
   display: inline-block;
   padding-left: 0;

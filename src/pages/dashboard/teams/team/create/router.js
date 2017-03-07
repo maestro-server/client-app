@@ -1,4 +1,4 @@
-import comp from './create'
+import comp from './create.vue'
 
 export default {
   path: 'create',

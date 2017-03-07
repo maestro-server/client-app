@@ -1,6 +1,5 @@
 import comp from './team'
-import tcreate from './create/router'
-import tedit from './edit/router'
+import mcreate from './create/router'
 import tlist from './list/router'
 
 export default {
@@ -8,8 +7,7 @@ export default {
   redirect: 'team/list',
   component: comp,
   children: [
-    tcreate,
-    tedit,
+    mcreate,
     tlist
   ]
 }

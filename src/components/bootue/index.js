@@ -14,6 +14,7 @@ import inputFile from './inputfile/inputFile.vue'
 import modal from './modal/Modal.vue'
 import navbar from './navbar/Navbar.vue'
 import bsoption from './option/Option.vue'
+import pagination from './pagination/Pagination.vue'
 import panel from './panel/Panel.vue'
 import popover from './popover/Popover.vue'
 import progressbar from './progressbar/Progressbar.vue'
@@ -28,6 +29,7 @@ import tabs from './tabs/Tabs.vue'
 import toggleButton from './togglebutton/ToggleButton.vue'
 import tooltip from './tooltip/Tooltip.vue'
 import typeahead from './typeahead/Typeahead.vue'
+import bslabel from './label/Label.vue'
 
 export default {
   accordion,
@@ -47,6 +49,7 @@ export default {
   modal,
   navbar,
   bsoption,
+  pagination,
   panel,
   popover,
   progressbar,
@@ -59,5 +62,6 @@ export default {
   tabs,
   toggleButton,
   tooltip,
-  typeahead
+  typeahead,
+  bslabel
 }
