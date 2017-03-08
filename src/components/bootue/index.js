@@ -10,6 +10,8 @@ import dropdown from './dropdown/Dropdown.vue'
 import formGroup from './formgroup/FormGroup.vue'
 import formValidator from './formvalidator/FormValidator.vue'
 import bsInput from './input/Input.vue'
+import superInput from './super-input/Input.vue'
+
 import inputFile from './inputfile/inputFile.vue'
 import modal from './modal/Modal.vue'
 import navbar from './navbar/Navbar.vue'
@@ -45,6 +47,7 @@ export default {
   formValidator,
   selectCountry,
   bsInput,
+  superInput,
   inputFile,
   modal,
   navbar,

@@ -1,5 +1,4 @@
 import comp from './team'
-import mcreate from './create/router'
 import tlist from './list/router'
 
 export default {
@@ -7,7 +6,6 @@ export default {
   redirect: 'team/list',
   component: comp,
   children: [
-    mcreate,
     tlist
   ]
 }
