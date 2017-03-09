@@ -1,7 +1,6 @@
-import login from './login'
+import comp from './login'
 
 export default {
   path: '/login',
-  name: 'Login',
-  component: login
+  component: comp
 }

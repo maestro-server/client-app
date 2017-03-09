@@ -11,7 +11,18 @@
                    class="text-center img-responsive-center"/><br/>
             </div>
 
+            <h3 class="purple text-center mt10 col-xs-12">Welcome to best fullfiment devops system</h3>
+
             <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
+              <bs-input
+                type="name"
+                label="Name"
+                v-model="model.name"
+                required
+                icon
+                error="Insert name"
+              ></bs-input>
+
               <bs-input
                 type="email"
                 label="Email"
@@ -21,6 +32,8 @@
                 error="Insert valid email"
               ></bs-input>
 
+              <hr/>
+
               <bs-input
                 type="password"
                 label="Password"
@@ -29,19 +42,18 @@
                 icon
               ></bs-input>
 
+              <bs-input type="password"
+                        label="Verify password"
+                        :match="model.password"
+                        required
+                        icon
+                        error="Insert match password"
+              ></bs-input>
             </form-validator>
 
-            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
+            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="create">Sign up</button>
           </div>
 
-          <div class="col-xs-12">
-            <p>
-              <router-link to="create" class="btn btn-default">Create a account</router-link>
-            </p>
-            <p>
-              <router-link to="forgot" class="btn btn-default">Forgot password</router-link>
-            </p>
-          </div>
         </form-validator>
       </form>
 

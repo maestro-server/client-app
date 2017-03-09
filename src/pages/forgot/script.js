@@ -6,7 +6,7 @@ export default {
       valid: false,
       model: {
         email: undefined,
-        password: undefined
+        name: undefined
       }
     }
   },

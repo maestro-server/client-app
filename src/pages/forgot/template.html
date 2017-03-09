@@ -11,6 +11,9 @@
                    class="text-center img-responsive-center"/><br/>
             </div>
 
+            <h4 class="text-center col-xs-12 mt10">Forgot password</h4>
+            <p>Enter both your username and email address associated to your account and we'll send you a password reset link.</p>
+
             <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
               <bs-input
                 type="email"
@@ -22,26 +25,24 @@
               ></bs-input>
 
               <bs-input
-                type="password"
-                label="Password"
-                v-model="model.password"
+                type="name"
+                label="Name"
+                v-model="model.name"
                 required
                 icon
+                error="Insert name"
               ></bs-input>
 
             </form-validator>
 
-            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
+            <div class="text-right">
+              <router-link to="/login" class="btn btn-default">Back</router-link>
+              <button type="button" class="btn btn-primary" :disabled="!valid" @click="login">Sign in</button>
+            </div>
+
           </div>
 
-          <div class="col-xs-12">
-            <p>
-              <router-link to="create" class="btn btn-default">Create a account</router-link>
-            </p>
-            <p>
-              <router-link to="forgot" class="btn btn-default">Forgot password</router-link>
-            </p>
-          </div>
+
         </form-validator>
       </form>
 

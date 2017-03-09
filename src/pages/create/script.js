@@ -5,14 +5,14 @@ export default {
     return {
       valid: false,
       model: {
-        email: undefined,
-        password: undefined
-      }
+        name: null,
+        email: null,
+        password: null}
     }
   },
 
   methods: {
-    login: function () {
+    create: function () {
       console.log("fdsfds");
     }
   }
