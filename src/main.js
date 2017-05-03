@@ -5,11 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import mcore from 'bootstrap/mcore'
-import mdirectives from 'bootstrap/mdirectives'
-
-Vue.use(mcore)
-Vue.use(mdirectives)
+import bootue from './components'
+Vue.use(bootue)
 
 /* eslint-disable no-new */
 new Vue({

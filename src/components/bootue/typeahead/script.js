@@ -1,5 +1,7 @@
-import {delayer, getJSON} from '../../utils/utils.js'
-let DELAY = 300
+import delayer from '../_core/_utils/delayer.js'
+import getJSON from './_utils/getJSON.js'
+
+const DELAY = 300
 
 export default {
   props: {
@@ -33,7 +35,7 @@ export default {
     templateComp () {
       return {
         template: typeof this.template === 'string' ? '<span>' + this.template + '</span>' : '<strong v-html="item"></strong>',
-        props: { item: {default: null} }
+        props: {item: {default: null}}
       }
     }
   },
@@ -76,12 +78,18 @@ export default {
       this.setValue(this.onHit(this.items[this.current], this))
     },
     up () {
-      if (this.current > 0) { this.current-- }
-      else { this.current = this.items.length - 1 }
+      if (this.current > 0) {
+        this.current--
+      } else {
+        this.current = this.items.length - 1
+      }
     },
     down () {
-      if (this.current < this.items.length - 1) { this.current++ }
-      else { this.current = 0 }
+      if (this.current < this.items.length - 1) {
+        this.current++
+      } else {
+        this.current = 0
+      }
     }
   },
   created () {

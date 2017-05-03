@@ -1,4 +1,4 @@
-import Scroll from '../../directives/Scroll.js'
+import Scroll from './_directives/Scroll.js'
 
 export default {
   directives: {
@@ -7,7 +7,7 @@ export default {
   props: {
     offset: {
       type: Number,
-      default: 0
+      default: 1
     }
   },
   data () {

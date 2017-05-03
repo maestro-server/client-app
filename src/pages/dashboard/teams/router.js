@@ -1,6 +1,7 @@
 import comp from './teams'
 import team from './team/router'
 import access from './access/router'
+import project from './project/router'
 
 export default {
   path: 'teams',
@@ -8,6 +9,7 @@ export default {
   component: comp,
   children: [
     team,
-    access
+    access,
+    project
   ]
 }

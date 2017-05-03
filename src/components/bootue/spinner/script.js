@@ -1,4 +1,6 @@
-import {coerce, delayer} from '../../utils/utils.js'
+
+import delayer from '../_core/_utils/delayer.js'
+
 const MIN_WAIT = 500 // in ms
 
 export default {
@@ -28,7 +30,6 @@ export default {
   },
   methods: {
     hide () {
-      let delay = 0
       this.active = false
     },
     show (options) {

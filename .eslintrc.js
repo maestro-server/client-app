@@ -4,19 +4,40 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+      "ecmaVersion": 6
   },
   env: {
-    browser: true,
+    "node": true,
+    "mocha": true
   },
-  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: 'standard',
+  extends: "eslint:recommended",
   // required to lint *.vue files
   plugins: [
     'html'
   ],
   // add your custom rules here
   'rules': {
+    "linebreak-style": [
+        2,
+        "unix"
+    ],
+    "semi": 0,
+    "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
+        "before": false,
+        "after": true
+    }],
+    "no-catch-shadow": 2, // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
+    "no-delete-var": 2, // disallow deletion of variables
+    "no-label-var": 2, // disallow labels that share a name with a variable
+    "no-shadow": 2, // disallow declaration of variables already declared in the outer scope
+    "no-shadow-restricted-names": 2, // disallow shadowing of names such as arguments
+    "no-undef": 0, // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef-init": 2, // disallow use of undefined when initializing variables
+    "no-unused-vars": ["error", { "vars": "local", "args": "after-used" }], // disallow declaration of variables that are not used in the code
+    "no-use-before-define": 2, // disallow use of variables before they are defined
+    "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
+
+    "no-var": 2, // require let or const instead of var (off by default)
     "no-multiple-empty-lines": 0,
     "no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
     "no-new-object": 2,              // http://eslint.org/docs/rules/no-new-object
@@ -25,19 +46,12 @@ module.exports = {
     "no-extra-parens": [2, "functions"], // http://eslint.org/docs/rules/no-extra-parens
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
     "one-var": [2, "never"],         // http://eslint.org/docs/rules/one-var
-    "padded-blocks": [2, "never"],   // http://eslint.org/docs/rules/padded-blocks
-    "semi": 0,           // http://eslint.org/docs/rules/semi
     "quotes": 0,
     "no-extend-native": 0,
     "padded-blocks": 0,
-    "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
-      "before": false,
-      "after": true
-    }],
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    // allow async-await
-    'generator-star-spacing': 0,
+    "arrow-parens": 0,
+    "generator-star-spacing": 0,
+    "no-console": 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

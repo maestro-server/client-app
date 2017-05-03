@@ -9,5 +9,3 @@ export default {
   name: 'app'
 }
 </script>
-
-<style src="./resources/_bootstrap.scss" lang="scss"></style>

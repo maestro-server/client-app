@@ -4,7 +4,7 @@ import topmenu from '../_modules/top-menu/top-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'team/': 'Teams', 'access': 'Access Roles'}
+      submenu: {'team/': 'Teams', 'projects': 'Projects', 'access': 'Access Roles'}
     }
   },
 
