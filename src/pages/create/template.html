@@ -4,7 +4,7 @@
     <div class="col-sm-6 col-sm-offset-3 well-white">
 
       <form>
-        <form-validator>
+
           <div class="col-xs-12">
             <div class="col-xs-12 text-center">
               <img src="../../resources/assets/imgs/logo300.png" alt="Maestro - Login"
@@ -13,7 +13,6 @@
 
             <h3 class="purple text-center mt10 col-xs-12">Welcome to best fullfiment devops system</h3>
 
-            <form-validator v-model="valid" @valid="valid = true" @invalid="valid = false">
               <bs-input
                 type="name"
                 label="Name"
@@ -49,12 +48,11 @@
                         icon
                         error="Insert match password"
               ></bs-input>
-            </form-validator>
+
 
             <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="create">Sign up</button>
           </div>
 
-        </form-validator>
       </form>
 
     </div>

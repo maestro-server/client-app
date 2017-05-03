@@ -3,14 +3,14 @@
 
   <modal title="Create new Team" effect="fade" width="800" v-model="createModal" @closed="closed">
 
-    <form id="createTeam1" class="row" v-if="step == 1">
+    <form id="createTeam1" class="row" v-if="step == 1" >
 
-      <form-validator v-model="valid" class="col-sm-offset-2 col-sm-8">
+      <div class="col-sm-offset-2 col-sm-8">
 
         <div class="col-xs-12 col-sm-3 text-center">
           <img src="../../../../../resources/assets/imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
         </div>
-        <input-file label="Upload team logo" class="col-xs-12 col-sm-9"></input-file>
+        <bs-input-file label="Upload team logo" class="col-xs-12 col-sm-9"></bs-input-file>
 
         <bs-input type="text" label="Name" required class="col-xs-12 mt10" icon></bs-input>
 
@@ -18,7 +18,7 @@
 
         <bs-input type="text" label="Url" required class="col-xs-12" icon></bs-input>
 
-      </form-validator>
+      </div>
 
     </form>
 

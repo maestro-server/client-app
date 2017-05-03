@@ -5,7 +5,7 @@
 
     <form id="createAr1" class="row" v-if="step == 1">
 
-      <form-validator v-model="valid" class="col-sm-offset-2 col-sm-8">
+      <section class="col-sm-offset-2 col-sm-8">
 
         <bs-input type="text" label="Name" required class="col-xs-12 mt10" icon></bs-input>
 
@@ -13,14 +13,14 @@
 
         <div class="col-xs-12">
           <bsselect class="wd100" justified placeholder="Select type">
-            <bsoption>Admin</bsoption>
-            <bsoption>Developer</bsoption>
-            <bsoption>Leitor</bsoption>
+            <bs-option>Admin</bs-option>
+            <bs-option>Developer</bs-option>
+            <bs-option>Leitor</bs-option>
           </bsselect>
         </div>
 
 
-      </form-validator>
+      </section>
 
     </form>
 
