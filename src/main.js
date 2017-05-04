@@ -6,7 +6,10 @@ import router from './router'
 import store from './store'
 
 import bootue from './components'
+import VeeValidate from 'vee-validate'
+
 Vue.use(bootue)
+Vue.use(VeeValidate);
 
 /* eslint-disable no-new */
 new Vue({

@@ -15,6 +15,12 @@ export default {
     create: function () {
       console.log("fdsfds");
     }
+  },
+
+  validators: {
+    checkSamePasswords: function(val) {
+      return val == this.model.password;
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 import '../Forms.vue'
 
 export default {
-  props: {
+    props: {
     clearButton: {type: Boolean, default: false},
     cols: {type: Number, default: null},
     datalist: {type: Array, default: null},
@@ -10,7 +10,6 @@ export default {
     error: {type: String, default: null},
     icon: {type: Boolean, default: false},
     label: {type: String, default: null},
-    state: {type: String, default: null},
     name: {type: String, default: null},
     placeholder: {type: String, default: null},
     readonly: {type: Boolean, default: false},
@@ -23,12 +22,16 @@ export default {
     horizontalLabelWrapper: {type: String, default: 'col-sm-2'}
   },
   data () {
-    let val = this.value
-
     return {
       options: this.datalist,
-      val,
-      isGroup: false
+      val: this.value,
+      isGroup: false,
+      state: null,
+      constants: {
+        SUCCESS: 'success',
+        WARNING: 'warning',
+        ERROR: 'error'
+      }
     }
   },
   computed: {
@@ -56,13 +59,13 @@ export default {
     showIcon () {
       let icc
       switch (this.state) {
-        case 'success':
+        case this.constants.SUCCESS:
           icc = 'check'
           break
-        case 'error':
+        case this.constants.ERROR:
           icc = 'times'
           break
-        case 'warning':
+        case this.constants.WARNING:
           icc = 'exclamation'
           break
       }
@@ -79,6 +82,9 @@ export default {
     }
   },
   watch: {
+    error (val) {
+      this.state=val ? this.constants.ERROR : this.constants.SUCCESS
+    },
     datalist (val, old) {
       if (val !== old && val instanceof Array) {
         this.options = val
