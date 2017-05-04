@@ -11,24 +11,26 @@
             </div>
 
               <bs-input
-                type="email"
                 label="Email"
                 v-model="model.email"
-                required
+                v-validate.initial="'required|email'"
                 icon
-                error="Insert valid email"
+                name="email"
+                :error="fields.email && fields.email.dirty ? errors.first('email') : false"
               ></bs-input>
 
               <bs-input
                 type="password"
                 label="Password"
                 v-model="model.password"
-                required
+                v-validate.initial="'required'"
                 icon
+                name="password"
+                :error="fields.password && fields.password.dirty ? errors.first('password') : false"
               ></bs-input>
 
 
-            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="login">Sign in</button>
+            <button type="button" class="btn btn-primary pull-right" :disabled="errors.any()" @click="login">Sign in</button>
           </div>
 
           <div class="col-xs-12">

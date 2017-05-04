@@ -12,15 +12,14 @@
     <div :is="type=='textarea'?type:'input'" class="form-control" ref="input"
               :cols="cols"
               :disabled="disabled"
-              :list="id_datalist"
               :name="name"
               :placeholder="placeholder"
               :readonly="readonly"
               :rows="rows"
               :title="attr(title)"
               :type="type=='textarea'?null:type"
-              v-model="val"
-              @blur="emit" @focus="emit" @input="emit"
+              v-bind:value="value"
+              @input="bindInput" @focus="emit" @blur="emit"
     ></div>
 
     <div v-if="clearButton && value" :class="{icon:icon}">
@@ -35,9 +34,6 @@
   </div>
 
 
-  <datalist v-if="id_datalist" :id="id_datalist">
-    <option v-for="opc in options" :value="opc"></option>
-  </datalist>
   <div v-if="showHelp" class="help-block relative" @click="focus">{{help}}</div>
   <div v-if="showError" class="help-block with-errors relative" @click="focus">{{error}}</div>
 </div>

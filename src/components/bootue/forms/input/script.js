@@ -4,7 +4,6 @@ export default {
     props: {
     clearButton: {type: Boolean, default: false},
     cols: {type: Number, default: null},
-    datalist: {type: Array, default: null},
     disabled: {type: Boolean, default: false},
     help: {type: String, default: null},
     error: {type: String, default: null},
@@ -23,8 +22,6 @@ export default {
   },
   data () {
     return {
-      options: this.datalist,
-      val: this.value,
       isGroup: false,
       state: null,
       constants: {
@@ -35,18 +32,6 @@ export default {
     }
   },
   computed: {
-    id_datalist () {
-      if (this.type !== 'textarea' && this.datalist instanceof Array) {
-        if (!this._id_datalist) {
-          if (!this.$root.id_datalist) {
-            this.$root.id_datalist = 0
-          }
-          this._id_datalist = 'input-datalist' + this.$root.id_datalist++
-        }
-        return this._id_datalist
-      }
-      return null
-    },
     input () {
       return this.$refs.input
     },
@@ -84,31 +69,33 @@ export default {
   watch: {
     error (val) {
       this.state=val ? this.constants.ERROR : this.constants.SUCCESS
-    },
-    datalist (val, old) {
-      if (val !== old && val instanceof Array) {
-        this.options = val
-      }
-    },
-    options (val, old) {
-      if (val !== old) this.$emit('options', val)
-    },
-    val (val) {
-      this.$emit('input', val)
     }
   },
   methods: {
+    bindChanges (value, ev='input') {
+      this.input.value = value
+      this.$emit(ev, value)
+    },
     attr (value) {
       return ~['', null, undefined].indexOf(value) || value instanceof Function ? null : value
     },
     emit (e) {
-      this.$emit(e.type, e.type === 'input' ? e.target.value : e)
+      this.$emit(
+        e.type,
+        e.type === 'input' ? e.target.value : e
+      )
+    },
+    bindInput (e) {
+      this.bindChanges(
+        e.type === 'input' ? e.target.value : e,
+        e.type
+      )
     },
     focus () {
       this.input.focus()
     },
     reset () {
-      this.val = ''
+      this.bindChanges('')
     },
     classWrapper () {
       if (this.isGroup && !this.inline) {

@@ -16,19 +16,19 @@
               <bs-input
                 label="Name"
                 v-model="model.name"
-                v-validate="'required'"
+                v-validate.initial="'required'"
                 icon
                 name="name"
-                :error="errors.first('name')"
+                :error="fields.name && fields.name.dirty ? errors.first('name') : false"
               ></bs-input>
 
               <bs-input
                 label="Email"
                 v-model="model.email"
-                v-validate="'required|email'"
+                v-validate.initial="'required|email'"
                 icon
                 name="email"
-                :error="errors.first('email')"
+                :error="fields.email && fields.email.dirty ? errors.first('email') : false"
               ></bs-input>
 
               <hr/>
@@ -37,23 +37,22 @@
                 type="password"
                 label="Password"
                 v-model="model.password"
-                v-validate="'required'"
+                v-validate.initial="'required'"
                 icon
                 name="password"
-                :error="errors.first('password')"
+                :error="fields.password && fields.password.dirty ? errors.first('password') : false"
               ></bs-input>
 
               <bs-input type="password"
                         label="Verify password"
-                        v-validate="'confirmed:password'"
+                        v-validate.initial="'required|confirmed:password'"
                         icon
                         name="verypassword"
-                        :error="errors.first('verypassword')"
-                        data-vv-as="password"
+                        :error="fields.verypassword && fields.verypassword.dirty ? errors.first('verypassword') : false"
               ></bs-input>
 
 
-            <button type="button" class="btn btn-primary pull-right" :disabled="!valid" @click="create">Sign up</button>
+            <button type="button" class="btn btn-primary pull-right" :disabled="errors.any()" @click="create">Sign up</button>
           </div>
 
       </form>
