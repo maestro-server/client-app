@@ -18,7 +18,6 @@
               :rows="rows"
               :title="attr(title)"
               :type="type=='textarea'?null:type"
-              v-bind:value="value"
               @input="bindInput" @focus="emit" @blur="emit"
     ></div>
 

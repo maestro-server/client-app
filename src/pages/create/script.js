@@ -1,3 +1,6 @@
+
+import User from 'factories/users'
+
 export default {
   name: 'login',
 
@@ -13,8 +16,13 @@ export default {
 
   methods: {
     create: function () {
-      console.log("fdsfds");
+      new User()
+        .create({name: "Felipe"})
     }
+  },
+
+  mounted () {
+    this.create()
   }
 
 }

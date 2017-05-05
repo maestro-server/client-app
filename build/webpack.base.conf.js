@@ -26,9 +26,11 @@ module.exports = {
     ],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
+      'config': resolve('config'),
       'src': resolve('src'),
-      'imgs': resolve('src/resources/imgs'),
-      'components': resolve('src/components')
+      'imgs': resolve('src/assets/imgs'),
+      'components': resolve('src/components'),
+      'factories': resolve('src/resources/factories')
     }
   },
   module: {

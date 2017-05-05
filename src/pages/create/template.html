@@ -19,7 +19,7 @@
                 v-validate.initial="'required'"
                 icon
                 name="name"
-                :error="fields.name && fields.name.dirty ? errors.first('name') : false"
+                :error="fields.name && fields.name.dirty ? errors.first('name') : ''"
               ></bs-input>
 
               <bs-input
@@ -28,7 +28,7 @@
                 v-validate.initial="'required|email'"
                 icon
                 name="email"
-                :error="fields.email && fields.email.dirty ? errors.first('email') : false"
+                :error="fields.email && fields.email.dirty ? errors.first('email') : ''"
               ></bs-input>
 
               <hr/>
@@ -40,7 +40,7 @@
                 v-validate.initial="'required'"
                 icon
                 name="password"
-                :error="fields.password && fields.password.dirty ? errors.first('password') : false"
+                :error="fields.password && fields.password.dirty ? errors.first('password') : ''"
               ></bs-input>
 
               <bs-input type="password"
@@ -48,7 +48,7 @@
                         v-validate.initial="'required|confirmed:password'"
                         icon
                         name="verypassword"
-                        :error="fields.verypassword && fields.verypassword.dirty ? errors.first('verypassword') : false"
+                        :error="fields.verypassword && fields.verypassword.dirty ? errors.first('verypassword') : ''"
               ></bs-input>
 
 
