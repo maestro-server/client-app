@@ -1,14 +1,11 @@
 import axios from 'axios'
-import url from 'config/api.env'
+import {URL, TIMEOUT} from 'config/api.env'
 
-export default function(objs = {}) {
-
-  console.log(url)
+export default function() {
 
   return axios.create({
-    baseURL: url,
-    timeout: 30,
-    headers: objs
+    baseURL: URL,
+    timeout: TIMEOUT
   });
 
 }

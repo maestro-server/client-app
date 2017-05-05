@@ -1,17 +1,13 @@
 
-import Requester from '../requests/request'
+import Factory from './factory'
 
-class Users {
+class Users extends Factory {
 
   constructor() {
+    super()
+
     this.entity = '/users'
     return this
-  }
-
-  create (data) {
-
-    return Requester.post(this.entity, data)
-      .then((e) => console.log(e))
   }
 
 }

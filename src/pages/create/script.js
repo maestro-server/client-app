@@ -19,10 +19,6 @@ export default {
       new User()
         .create({name: "Felipe"})
     }
-  },
-
-  mounted () {
-    this.create()
   }
 
 }
