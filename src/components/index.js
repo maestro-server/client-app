@@ -1,4 +1,7 @@
-import Components from './bootue/index'
+import ComponentsB from './bootue/index'
+import ComponentsM from './maestro/index'
+
+const Components = Object.assign(ComponentsB, ComponentsM)
 
 function plugin (Vue) {
   if (plugin.installed) return

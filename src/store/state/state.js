@@ -7,5 +7,11 @@ export default {
     title: "Dashboard",
     icon: null,
     subtitle: null
+  },
+
+  alert: {
+    title: null,
+    msg: null,
+    type: null
   }
 }

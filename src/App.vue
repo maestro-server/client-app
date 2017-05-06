@@ -7,10 +7,7 @@
 </template>
 
 <script>
-import callback from 'components/maestro/callback/Callback.vue'
-
 export default {
-  name: 'app',
-  components: {callback}
+  name: 'app'
 }
 </script>

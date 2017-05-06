@@ -1,10 +1,7 @@
+import store  from '../../../store'
 
 export default {
-  props: {
-    title: {type: String},
-    msg: {type: String}
-  },
-
+  store,
   data: () => {
     return {
       showTop: true
@@ -13,11 +10,16 @@ export default {
 
   computed: {
     title: () => {
-      return "ohhh"
+      return store.getters.call_alert.title
     },
 
     msg: () => {
-      return "ohhhh"
+      return store.getters.call_alert.msg
+    },
+
+    type: () => {
+      return store.getters.call_alert.type
     }
+
   }
 }
