@@ -30,7 +30,8 @@ module.exports = {
       'src': resolve('src'),
       'imgs': resolve('src/assets/imgs'),
       'components': resolve('src/components'),
-      'factories': resolve('src/resources/factories')
+      'factories': resolve('src/resources/factories'),
+      'services': resolve('src/resources/services')
     }
   },
   module: {

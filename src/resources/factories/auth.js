@@ -1,46 +1,25 @@
 
 import Factory from './factory'
+import LocalStorageRepository from '../repositories/localStorage'
 
 class Auth extends Factory {
 
   constructor() {
     super()
-
     this.entity = '/users/auth'
-    this.ACCESS = 'x-access'
-
-    this.callback;
-
     return this
   }
 
   auth (data, success) {
-
-    this.callback = success
-
     return this.create(data, (e) => {
-      this.success(this, e)
+      this.success(e)
+      success()
     })
   }
 
-  success (that, result) {
-
-    const token = result.data.token
-
-
-
-    this.createStore(token)
-
-    //this.callback()
-  }
-
-  createStore () {
-    console.log(this)
-    localStorage.setItem('x-access', "ok")
-  }
-
-  restoreStore () {
-    return localStorage.getItem(this.ACCESS)
+  success (result) {
+    new LocalStorageRepository()
+    .createStore(result.data.token)
   }
 
 }
