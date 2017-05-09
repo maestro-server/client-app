@@ -6,9 +6,29 @@ import frejected from '../callbacks/request_rejected'
 
 class Factory {
 
-  create (data, call_success = fsuccess, call_rejected = frejected) {
+  constructor () {
+
+    this.header = {}
+  }
+
+  headers (objs) {
+
+    this.header = objs
+    return this
+  }
+
+  get (params={}, call_success = fsuccess, call_rejected = frejected) {
+
     Requester
-      .post(this.entity, data)
+      .get(this.entity, {params}, this.header)
+      .then(call_success)
+      .catch(call_rejected)
+  }
+
+  create (data={}, call_success = fsuccess, call_rejected = frejected) {
+
+    Requester
+      .post(this.entity, data, this.header)
       .then(call_success)
       .catch(call_rejected)
   }

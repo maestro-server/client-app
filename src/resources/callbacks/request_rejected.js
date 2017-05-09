@@ -8,7 +8,7 @@ export default (e) => {
     let data = {
       show: true,
       msg: response.data.title || "Houston, we have a problem ...",
-      title: response.data.message,
+      title: response.data.message || response.statusText,
       type: "danger"
     }
 

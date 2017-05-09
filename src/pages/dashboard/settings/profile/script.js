@@ -1,5 +1,7 @@
 import {mapActions} from 'vuex'
 
+import Users from 'factories/users'
+
 export default {
   data: function () {
     return {
@@ -19,6 +21,11 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
+    me () {
+      new Users()
+        .me({}, (e) => console.log(e))
+    },
+
     updateProfile () {
 
     },
@@ -27,7 +34,11 @@ export default {
 
     }
   },
-  mounted() {
+
+  mounted () {
+
+    this.me()
+
     this.setPage([
       'Settings',
       'Profile, plan and billing',

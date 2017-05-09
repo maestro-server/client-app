@@ -1,5 +1,11 @@
 import LocalStorageRepository from '../repositories/localStorage'
 
-export default () => {
-  return new LocalStorageRepository().restoreStore()
-}
+const getToken = () => new LocalStorageRepository().restoreStore()
+export const Authorization = getToken()
+
+export default getToken
+
+
+
+
+
