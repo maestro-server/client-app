@@ -4,15 +4,20 @@ import Requester from '../requests/request'
 import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'
 
+import {Authorization} from 'services/getToken'
+
 class Factory {
 
   constructor () {
-
     this.header = {}
   }
 
-  headers (objs) {
+  authorization () {
+    this.headers({Authorization})
+    return this
+  }
 
+  headers (objs) {
     this.header = objs
     return this
   }

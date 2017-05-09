@@ -10,16 +10,16 @@ class Auth extends Factory {
     return this
   }
 
-  auth (data, success) {
+  auth (data, callback) {
     return this.create(data, (e) => {
       this.success(e)
-      success()
+      callback()
     })
   }
 
   success (result) {
     new LocalStorageRepository()
-    .createStore(result.data.token)
+      .createStore(result.data.token)
   }
 
 }

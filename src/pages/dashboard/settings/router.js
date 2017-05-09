@@ -4,6 +4,7 @@ import accdelete from './delete/router'
 import profile from './profile/router'
 
 export default {
+  name: 'settings-profile',
   path: 'settings',
   redirect: 'settings/profile',
   component: comp,

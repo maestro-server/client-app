@@ -20,7 +20,10 @@ export default {
       new Auth()
         .auth(
           this.model,
-          () => this.$router.push('/dashboard')
+          () => {
+            console.log(this.$router)
+            this.$router.push('/dashboard')
+          }
         )
     }
   }

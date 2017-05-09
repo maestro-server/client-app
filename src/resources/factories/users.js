@@ -1,6 +1,5 @@
 
 import Factory from './factory'
-import {Authorization} from 'services/getToken'
 
 class Users extends Factory {
 
@@ -12,10 +11,10 @@ class Users extends Factory {
   }
 
   me (params) {
-
     this.entity = '/me'
 
-    this.headers({Authorization})
+    this
+      .authorization()
       .get(params)
   }
 

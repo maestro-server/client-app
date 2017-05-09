@@ -4,8 +4,6 @@ const req = {
 
   get: (entity, data={}, headers={}) => {
 
-    console.log(headers)
-
     return caxios(headers)
       .get(entity, data)
   },
