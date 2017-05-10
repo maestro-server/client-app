@@ -2,6 +2,11 @@ import store from '../../store'
 
 export default (e) => {
 
+  if(e.response.status == 401) {
+    window.location.hash = "logout"
+    return
+  }
+
   if(e.response) {
     const {response} = e
 

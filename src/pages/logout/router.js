@@ -1,10 +1,9 @@
-import comp from './logout'
+import Login from 'services/login'
 
 export default {
   path: '/logout',
-  component: comp,
   beforeEnter: function(to, from, next) {
-
-    next()
+    Login.destroyLogin()
+    next('/login')
   }
 }

@@ -23,7 +23,7 @@ export default {
 
     me () {
       new Users()
-        .me({}, (e) => console.log(e))
+        .me({}, (e) => this.profile = e.data)
     },
 
     updateProfile () {

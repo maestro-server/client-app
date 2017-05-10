@@ -15,10 +15,9 @@ export default {
   },
 
   methods: {
-    login: function (e) {
+    login: function () {
 
       this.$validator.validateAll().then(() => {
-
         new Auth()
           .auth(
             this.model,
@@ -28,6 +27,7 @@ export default {
       }).catch((e) => {
         console.log(e)
       });
+
     }
   }
 

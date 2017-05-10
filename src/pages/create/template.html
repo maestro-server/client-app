@@ -14,7 +14,7 @@
             <h3 class="purple text-center mt10 col-xs-12">Welcome to best fullfiment devops system</h3>
 
               <bs-input
-                label="Name"
+                label="Username"
                 v-model="model.name"
                 v-validate.initial="'required'"
                 icon
@@ -51,8 +51,11 @@
                         :error="fields.verypassword && fields.verypassword.dirty ? errors.first('verypassword') : ''"
               ></bs-input>
 
+            <div class="text-right">
+              <router-link to="/login" class="btn btn-default">Back</router-link>
 
-            <button type="button" class="btn btn-primary pull-right" @click="create">Sign up</button>
+              <button type="button" class="btn btn-primary" @click="create">Sign up</button>
+            </div>
           </div>
 
       </form>

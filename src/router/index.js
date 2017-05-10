@@ -4,12 +4,12 @@ import Router from 'vue-router'
 import home from 'pages/home/router'
 import dashboard from 'pages/dashboard/router'
 import login from 'pages/login/router'
-import logout from 'pages/login/router'
+import logout from 'pages/logout/router'
 
 import forgot from 'pages/forgot/router'
 import create from 'pages/create/router'
 
-import token from 'services/getToken'
+import Login from 'services/login'
 
 
 Vue.use(Router)
@@ -30,7 +30,7 @@ Vue.use(Router)
 router.beforeEach((to, from, next) => {
   const regex = /dashboard/
 
-  if(regex.test(to.path, from.path) && !token()) {
+  if(regex.test(to.path, from.path) && !Login.getToken()) {
     next('/login')
   }
   next()

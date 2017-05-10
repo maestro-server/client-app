@@ -24,6 +24,10 @@ class LocalStorage {
   restoreStore () {
     return localStorage.getItem(this.ACCESS)
   }
+
+  deleteStore () {
+    localStorage.removeItem(this.ACCESS)
+  }
 }
 
 export default LocalStorage

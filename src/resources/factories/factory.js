@@ -4,7 +4,7 @@ import Requester from '../requests/request'
 import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'
 
-import {Authorization} from 'services/getToken'
+import Login from 'services/login'
 
 class Factory {
 
@@ -13,6 +13,7 @@ class Factory {
   }
 
   authorization () {
+    const Authorization = Login.Authorization()
     this.headers({Authorization})
     return this
   }
