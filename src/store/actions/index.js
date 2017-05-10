@@ -8,5 +8,10 @@ export default {
 
   callAlert ({commit}, args) {
     commit('CALL_ALERT', {...args})
-  }
+  },
+
+  setUser ({commit}, args) {
+    commit('SET_USER', args)
+  },
+
 }

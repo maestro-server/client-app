@@ -13,7 +13,7 @@ class Auth extends Factory {
   auth (data, callback) {
     return this.create(data, (e) => {
       this.success(e)
-      callback()
+      callback(e)
     })
   }
 

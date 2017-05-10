@@ -1,8 +1,13 @@
 
 class LocalStorage {
 
-  constructor() {
-    this.ACCESS = 'x-access'
+  constructor(key='x-access') {
+    this.ACCESS = key
+    return this
+  }
+
+  setKey (key) {
+    this.ACCESS = key
     return this
   }
 
@@ -12,6 +17,8 @@ class LocalStorage {
     } catch(e) {
       console.log(e)
     }
+
+    return this
   }
 
   restoreStore () {

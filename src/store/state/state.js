@@ -14,5 +14,9 @@ export default {
     title: null,
     msg: null,
     type: null
+  },
+
+  me: {
+    _id: null
   }
 }

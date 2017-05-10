@@ -1,5 +1,5 @@
-
 import Auth from 'factories/auth'
+import Login from 'services/login'
 
 export default {
   name: 'login',
@@ -15,16 +15,19 @@ export default {
   },
 
   methods: {
-    login: function () {
+    login: function (e) {
 
-      new Auth()
-        .auth(
-          this.model,
-          () => {
-            console.log(this.$router)
-            this.$router.push('/dashboard')
-          }
-        )
+      this.$validator.validateAll().then(() => {
+
+        new Auth()
+          .auth(
+            this.model,
+            (e) => Login.setLogin(this, e)
+          )
+
+      }).catch((e) => {
+        console.log(e)
+      });
     }
   }
 

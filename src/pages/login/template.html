@@ -16,6 +16,7 @@
                 v-validate.initial="'required|email'"
                 icon
                 name="email"
+                @keydown.enter="login"
                 :error="fields.email && fields.email.dirty ? errors.first('email') : ''"
               ></bs-input>
 
@@ -26,6 +27,7 @@
                 v-validate.initial="'required'"
                 icon
                 name="password"
+                @keydown.enter="login"
                 :error="fields.password && fields.password.dirty ? errors.first('password') : ''"
               ></bs-input>
 

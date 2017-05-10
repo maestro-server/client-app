@@ -10,12 +10,12 @@ class Users extends Factory {
     return this
   }
 
-  me (params) {
+  me (params, success) {
     this.entity = '/me'
 
     this
       .authorization()
-      .get(params)
+      .get(params, success)
   }
 
 }
