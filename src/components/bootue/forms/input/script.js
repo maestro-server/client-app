@@ -9,6 +9,7 @@ export default {
     error: {type: String, default: null},
     icon: {type: Boolean, default: true},
     label: {type: String, default: null},
+    state: {type: String, default: null},
     name: {type: String, default: null},
     placeholder: {type: String, default: null},
     readonly: {type: Boolean, default: false},
@@ -23,7 +24,7 @@ export default {
   data () {
     return {
       isGroup: false,
-      state: null,
+      inState: this.state,
       constants: {
         SUCCESS: 'success',
         WARNING: 'warning',
@@ -32,18 +33,15 @@ export default {
     }
   },
   computed: {
-    input () {
-      return this.$refs.input
-    },
-    showError () {
-      return this.error
-    },
-    showHelp () {
-      return this.help && (!this.showError)
-    },
+    input () {return this.$refs.input},
+    showError () {return this.error},
+    showHelp () {return this.help && (!this.showError)},
+    title () {return this.error || this.help || ''},
+    showState () {return this.inState ? `has-${this.inState}` : ''},
+    labelFeedback () {return this.$slots['label'] || this.label},
     showIcon () {
       let icc
-      switch (this.state) {
+      switch (this.inState) {
         case this.constants.SUCCESS:
           icc = 'check'
           break
@@ -55,20 +53,11 @@ export default {
           break
       }
       return icc
-    },
-    title () {
-      return this.error || this.help || ''
-    },
-    showState () {
-      return this.state ? `has-${this.state}` : ''
-    },
-    labelFeedback () {
-      return this.$slots['label'] || this.label
     }
   },
   watch: {
     error (val) {
-      this.state=val ? this.constants.ERROR : this.constants.SUCCESS
+      this.inState=val ? this.constants.ERROR : this.constants.SUCCESS
     }
   },
   methods: {

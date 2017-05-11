@@ -13,12 +13,12 @@
          :cols="cols"
          :disabled="disabled"
          :name="name"
-         :value="value"
          :placeholder="placeholder"
          :readonly="readonly"
          :rows="rows"
          :title="attr(title)"
          :type="type=='textarea'?null:type"
+         v-bind:value="value"
          @input="bindInput"
          @focus="emit" @blur="emit" @keydown="emit"
     ></div>

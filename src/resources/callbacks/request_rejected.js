@@ -2,21 +2,28 @@ import store from '../../store'
 
 export default (e) => {
 
-  if(e.response.status == 401) {
-    window.location.hash = "logout"
-    return
+  let data = {
+    show: true,
+    msg: "Houston, we have a problem ...",
+    title: "Sorry, but occur a problem, contact us",
+    type: "danger"
   }
 
   if(e.response) {
     const {response} = e
 
-    let data = {
-      show: true,
-      msg: response.data.title || "Houston, we have a problem ...",
-      title: response.data.message || response.statusText,
-      type: "danger"
+    if(response.status == 401) {
+      window.location.hash = "logout"
+      return
     }
 
-    store.dispatch('callAlert', {...data})
+    const ch = {
+      msg: response.data.title || data.msg,
+      title: response.data.message || response.statusText || data.msg,
+    }
+
+    Object.assign(data, ch)
   }
+
+  store.dispatch('callAlert', {...data})
 }

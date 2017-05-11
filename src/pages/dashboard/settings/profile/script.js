@@ -1,6 +1,6 @@
 import {mapActions} from 'vuex'
 
-import Users from 'factories/users'
+import Me from 'factories/me'
 
 export default {
   data: function () {
@@ -9,8 +9,10 @@ export default {
         pass: false,
         profile: false
       },
-
+      email: null,
+      pass: {},
       model: {
+        email:null,
         name: null,
         fullname: null
       }
@@ -23,12 +25,17 @@ export default {
     ]),
 
     me () {
-      new Users()
-        .me({}, (e) => Object.assign(this.model, e.data))
+      new Me()
+        .authorization()
+        .get({}, (e) => Object.assign(this.model, e.data))
     },
 
     updateProfile () {
-
+      new Me()
+        .authorization()
+        .update(
+          this.model
+        )
     },
 
     updatePassWord () {

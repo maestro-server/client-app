@@ -19,17 +19,14 @@
       <bs-input
         label="Username"
         v-model="model.name"
-        :value="model.name"
         name="name"
         class="col-xs-12"
         disabled
       ></bs-input>
 
-
       <bs-input
         label="Full Name"
         v-model="model.fullname"
-        :value="model.fullname"
         name="fullname"
         class="col-xs-12"
       ></bs-input>
@@ -89,13 +86,28 @@
 
     <h3>Change account email</h3>
 
-    <form action="get" class="row">
-      <bs-input type="email" label="Current email" required class="col-xs-6"></bs-input>
+    <form action="get" class="row" data-vv-scope="femail">
+      <bs-input
+        label="Current email"
+        v-model="model.email"
+        name="current"
+        class="col-xs-6"
+        disabled
+      ></bs-input>
 
-      <bs-input type="email" label="New email" required class="col-xs-6"></bs-input>
+      <bs-input
+        type="email"
+        label="New Email"
+        v-model="email"
+        v-validate.initial="'required|email'"
+        data-vv-scope="femail"
+        name="cemail"
+        class="col-xs-6"
+        :error="makeError('cemail', 'femail')"
+      ></bs-input>
 
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" :disabled="!valid.pass" @click="updatePassWord">
+        <button type="button" class="btn btn-primary pull-right" :disabled="errors.any('femail')" @click="updatePassWord">
           Update a new password
         </button>
       </div>

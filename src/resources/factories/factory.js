@@ -8,7 +8,8 @@ import Login from 'services/login'
 
 class Factory {
 
-  constructor () {
+  constructor (e) {
+    this.entity = e
     this.header = {}
   }
 
@@ -24,7 +25,6 @@ class Factory {
   }
 
   get (params={}, call_success = fsuccess, call_rejected = frejected) {
-
     Requester
       .get(this.entity, {params}, this.header)
       .then(call_success)
@@ -32,9 +32,22 @@ class Factory {
   }
 
   create (data={}, call_success = fsuccess, call_rejected = frejected) {
-
     Requester
       .post(this.entity, data, this.header)
+      .then(call_success)
+      .catch(call_rejected)
+  }
+
+  update (data={}, call_success = fsuccess, call_rejected = frejected) {
+    Requester
+      .put(this.entity, data, this.header)
+      .then(call_success)
+      .catch(call_rejected)
+  }
+
+  patch (data={}, call_success = fsuccess, call_rejected = frejected) {
+    Requester
+      .patch(this.entity, data, this.header)
       .then(call_success)
       .catch(call_rejected)
   }
