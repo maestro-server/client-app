@@ -14,10 +14,9 @@
                 label="Email"
                 v-model="model.email"
                 v-validate.initial="'required|email'"
-                icon
                 name="email"
                 @keydown.enter="login"
-                :error="fields.email && fields.email.dirty ? errors.first('email') : ''"
+                :error="makeError('email')"
               ></bs-input>
 
               <bs-input
@@ -25,10 +24,9 @@
                 label="Password"
                 v-model="model.password"
                 v-validate.initial="'required'"
-                icon
                 name="password"
                 @keydown.enter="login"
-                :error="fields.password && fields.password.dirty ? errors.first('password') : ''"
+                :error="makeError('password')"
               ></bs-input>
 
 

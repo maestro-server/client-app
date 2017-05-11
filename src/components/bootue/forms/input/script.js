@@ -7,7 +7,7 @@ export default {
     disabled: {type: Boolean, default: false},
     help: {type: String, default: null},
     error: {type: String, default: null},
-    icon: {type: Boolean, default: false},
+    icon: {type: Boolean, default: true},
     label: {type: String, default: null},
     name: {type: String, default: null},
     placeholder: {type: String, default: null},

@@ -6,29 +6,79 @@
     The information you provide below will be shown on your invoices.<br/><br/>
     <form action="get" class="row">
 
-        <div class="col-xs-12 col-sm-2 col-sm-offset-1">
-          <img src="~imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
-        </div>
-        <bs-input-file label="Upload your avatar" class="col-xs-12 col-sm-7"></bs-input-file>
+      <div class="col-xs-12 col-sm-2 col-sm-offset-1">
+        <img src="~imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
+      </div>
+      <bs-input-file
+        label="Upload your avatar"
+        v-model="model.avatar"
+        :value="model.avatar"
+        class="col-xs-12 col-sm-7">
+      </bs-input-file>
 
-        <bs-input type="text" label="Username" required class="col-xs-12" icon></bs-input>
+      <bs-input
+        label="Username"
+        v-model="model.name"
+        :value="model.name"
+        name="name"
+        class="col-xs-12"
+        disabled
+      ></bs-input>
 
-        <bs-input type="text" label="Full Name" required class="col-xs-12" icon></bs-input>
 
-        <bs-input type="text" label="Phone number" class="col-xs-12"></bs-input>
+      <bs-input
+        label="Full Name"
+        v-model="model.fullname"
+        :value="model.fullname"
+        name="fullname"
+        class="col-xs-12"
+      ></bs-input>
 
-        <bs-input type="text" label="Company" class="col-xs-12 col-sm-6"></bs-input>
-        <bs-input type="text" label="Job" class="col-xs-12 col-sm-6"></bs-input>
+      <bs-input
+        label="Phone number"
+        v-model="model.phone"
+        :value="model.phone"
+        name="phone"
+        class="col-xs-12"
+      ></bs-input>
 
-        <bs-select-country baseclass="col-xs-6" v-model="profile.country"></bs-select-country>
+      <bs-input
+        label="Company"
+        v-model="model.company"
+        :value="model.company"
+        name="company"
+        class="col-xs-6"
+      ></bs-input>
 
-        <bs-input type="text" label="City" class="col-xs-12"></bs-input>
+      <bs-input
+        label="Job"
+        v-model="model.job"
+        :value="model.job"
+        name="job"
+        class="col-xs-6"
+      ></bs-input>
 
-        <bs-input type="text" label="Address" class="col-xs-12"></bs-input>
+      <bs-select-country baseclass="col-xs-6" v-model="model.country"></bs-select-country>
+
+      <bs-input
+        label="City"
+        v-model="model.city"
+        :value="model.city"
+        name="city"
+        class="col-xs-12"
+      ></bs-input>
+
+      <bs-input
+        label="Address"
+        v-model="model.address"
+        :value="model.address"
+        name="address"
+        class="col-xs-12"
+      ></bs-input>
 
 
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" :disabled="!valid.profile" @click="updateProfile">
+        <button type="button" class="btn btn-primary pull-right" @click="updateProfile">
           Update profile
         </button>
       </div>
@@ -40,9 +90,9 @@
     <h3>Change account email</h3>
 
     <form action="get" class="row">
-        <bs-input type="email" label="Current email" required class="col-xs-6"></bs-input>
+      <bs-input type="email" label="Current email" required class="col-xs-6"></bs-input>
 
-        <bs-input type="email" label="New email" required class="col-xs-6"></bs-input>
+      <bs-input type="email" label="New email" required class="col-xs-6"></bs-input>
 
       <div class="col-xs-12">
         <button type="button" class="btn btn-primary pull-right" :disabled="!valid.pass" @click="updatePassWord">
@@ -70,10 +120,10 @@
     Change your password or recover your current one.
     <br/><br/>
     <form action="get" class="row">
-        <bs-input type="text" label="Current password" required class="col-xs-12"></bs-input>
+      <bs-input type="text" label="Current password" required class="col-xs-12"></bs-input>
 
-        <bs-input type="text" label="New password" required class="col-xs-6"></bs-input>
-        <bs-input type="text" label="Verify password" required class="col-xs-6"></bs-input>
+      <bs-input type="text" label="New password" required class="col-xs-6"></bs-input>
+      <bs-input type="text" label="Verify password" required class="col-xs-6"></bs-input>
 
       <div class="col-xs-12">
         <button type="button" class="btn btn-primary pull-right" :disabled="!valid.pass" @click="updatePassWord">

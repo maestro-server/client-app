@@ -10,8 +10,9 @@ export default {
         profile: false
       },
 
-      profile: {
-        country: null
+      model: {
+        name: null,
+        fullname: null
       }
     }
   },
@@ -23,7 +24,7 @@ export default {
 
     me () {
       new Users()
-        .me({}, (e) => this.profile = e.data)
+        .me({}, (e) => Object.assign(this.model, e.data))
     },
 
     updateProfile () {

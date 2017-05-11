@@ -10,15 +10,17 @@
     <slot name="before"></slot>
 
     <div :is="type=='textarea'?type:'input'" class="form-control" ref="input"
-              :cols="cols"
-              :disabled="disabled"
-              :name="name"
-              :placeholder="placeholder"
-              :readonly="readonly"
-              :rows="rows"
-              :title="attr(title)"
-              :type="type=='textarea'?null:type"
-              @input="bindInput" @focus="emit" @blur="emit" @keydown="emit"
+         :cols="cols"
+         :disabled="disabled"
+         :name="name"
+         :value="value"
+         :placeholder="placeholder"
+         :readonly="readonly"
+         :rows="rows"
+         :title="attr(title)"
+         :type="type=='textarea'?null:type"
+         @input="bindInput"
+         @focus="emit" @blur="emit" @keydown="emit"
     ></div>
 
     <div v-if="clearButton && value" :class="{icon:icon}">

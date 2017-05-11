@@ -17,18 +17,16 @@
                 label="Username"
                 v-model="model.name"
                 v-validate.initial="'required'"
-                icon
                 name="name"
-                :error="fields.name && fields.name.dirty ? errors.first('name') : ''"
+                :error="makeError('name')"
               ></bs-input>
 
               <bs-input
                 label="Email"
                 v-model="model.email"
                 v-validate.initial="'required|email'"
-                icon
                 name="email"
-                :error="fields.email && fields.email.dirty ? errors.first('email') : ''"
+                :error="makeError('email')"
               ></bs-input>
 
               <hr/>
@@ -38,17 +36,15 @@
                 label="Password"
                 v-model="model.password"
                 v-validate.initial="'required'"
-                icon
                 name="password"
-                :error="fields.password && fields.password.dirty ? errors.first('password') : ''"
+                :error="makeError('password')"
               ></bs-input>
 
               <bs-input type="password"
                         label="Verify password"
                         v-validate.initial="'required|confirmed:password'"
-                        icon
                         name="verypassword"
-                        :error="fields.verypassword && fields.verypassword.dirty ? errors.first('verypassword') : ''"
+                        :error="makeError('verypassword')"
               ></bs-input>
 
             <div class="text-right">
