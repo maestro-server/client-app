@@ -23,7 +23,7 @@
                 type="password"
                 label="Password"
                 v-model="model.password"
-                v-validate.initial="'required'"
+                v-validate.initial="'required|min:4'"
                 name="password"
                 @keydown.enter="login"
                 :error="makeError('password')"

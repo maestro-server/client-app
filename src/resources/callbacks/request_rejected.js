@@ -11,8 +11,10 @@ export default (e) => {
 
   if(e.response) {
     const {response} = e
+    const hash = window.location.hash
 
-    if(response.status == 401) {
+
+    if(response.status == 401 && hash!="#/login") {
       window.location.hash = "logout"
       return
     }

@@ -13,8 +13,7 @@ export default {
       pass: {},
       model: {
         email:null,
-        name: null,
-        fullname: null
+        name: null
       }
     }
   },
