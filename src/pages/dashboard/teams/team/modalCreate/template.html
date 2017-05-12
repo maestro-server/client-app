@@ -12,11 +12,36 @@
         </div>
         <bs-input-file label="Upload team logo" class="col-xs-12 col-sm-9"></bs-input-file>
 
-        <bs-input type="text" label="Name" required class="col-xs-12 mt10" icon></bs-input>
+        <bs-input
+          label="Name"
+          v-model="model.name"
+          v-validate.initial="'required'"
+          data-vv-scope="faddTeams"
+          name="name"
+          class="col-xs-12 mt10"
+          :error="makeError('name')"
+        ></bs-input>
 
-        <bs-input type="email" label="Email" required class="col-xs-12" icon></bs-input>
+        <bs-input
+          type="email"
+          label="Email"
+          v-model="model.email"
+          v-validate.initial="'required|email'"
+          data-vv-scope="faddTeams"
+          name="email"
+          class="col-xs-12"
+          :error="makeError('email')"
+        ></bs-input>
 
-        <bs-input type="text" label="Url" required class="col-xs-12" icon></bs-input>
+        <bs-input
+          label="Url"
+          v-model="model.url"
+          v-validate.initial="'url'"
+          data-vv-scope="faddTeams"
+          name="url"
+          class="col-xs-12"
+          :error="makeError('url')"
+        ></bs-input>
 
       </div>
 
@@ -27,55 +52,31 @@
       <h5 class="col-xs-12">Choose the users for the team
         <small>(You can choose later.)</small>
       </h5>
-      <bs-input type="email" label="Email" required class="col-xs-12" icon></bs-input>
+
+      <bs-input
+        type="email"
+        label="Email"
+        v-model="newMember.email"
+        v-validate.initial="'required|email'"
+        data-vv-scope="faddUsers"
+        name="email"
+        class="col-xs-12"
+      ></bs-input>
 
       <div class="col-xs-12 text-right">
-        <button class="btn btn-primary">Add Users</button>
+        <button class="btn btn-primary" :disabled="errors.any('faddUsers')" @click="addMember">Add Users</button>
 
         <hr/>
 
         <ul class="list-group mt20">
-          <li class="list-group-item">
-            <button class="btn btn-danger btn-xs pull-left">
+          <li class="list-group-item" v-for="member in members">
+            <button class="btn btn-danger btn-xs pull-left" @click="deleteUser(member)">
               <i class="fa fa-minus-circle" aria-hidden="true"></i>
             </button>
-            Felipe Klerk Signorini
-          </li>
-          <li class="list-group-item">
-            <button class="btn btn-danger btn-xs pull-left">
-              <i class="fa fa-minus-circle" aria-hidden="true"></i>
-            </button>
-            Mileide
+            {{member.username}}
           </li>
         </ul>
 
-      </div>
-
-    </form>
-
-    <form id="createTeam3" class="row" v-if="step == 3">
-
-      <h5 class="col-xs-12">Choose the initial access roles
-        <small>(You can choose later.)</small>
-      </h5>
-      <bs-input type="text" label="Access role" required class="col-xs-12" icon></bs-input>
-
-      <div class="col-xs-12 text-right">
-        <button class="btn btn-primary">Add Role</button>
-
-        <hr/>
-
-        <ul class="list-group mt20">
-          <li class="list-group-item disabled">
-            Admin B2W team
-          </li>
-          <li class="list-group-item">
-            <button class="btn btn-danger btn-xs pull-left">
-              <i class="fa fa-minus-circle" aria-hidden="true"></i>
-            </button>
-            DevOps
-          </li>
-        </ul>
       </div>
 
     </form>
@@ -83,8 +84,8 @@
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
       <button type="button" class="btn btn-default" @click="previousMethod" v-if="previousValid">Previous</button>
-      <button type="button" class="btn btn-success" @click="nextMethod" v-if="forwardValid">Next</button>
-      <button type="button" class="btn btn-primary" @click="saveMethod" v-if="finalValid">Create</button>
+      <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('faddTeams')">Next</button>
+      <button type="button" class="btn btn-primary" @click="saveMethod" v-if="finalValid" :disabled="errors.any('faddTeams')">Create</button>
     </div>
 
   </modal>

@@ -1,9 +1,13 @@
+import Teams from 'factories/teams'
+
 export default {
   data () {
     return {
       step: 1,
       createModal: false,
-      valid: false
+      model: {},
+      newMember: {},
+      members: {}
     }
   },
 
@@ -12,10 +16,10 @@ export default {
       return this.step > 1
     },
     forwardValid () {
-      return this.step < 3
+      return this.step < 2
     },
     finalValid () {
-      return this.step == 3
+      return this.step == 2
     }
   },
 
@@ -33,13 +37,25 @@ export default {
     },
 
     saveMethod () {
-
+      new Teams()
+        .authorization()
+        .create(this.model, () => this.successAddTeams())
     },
 
     closed () {
       this.step = 1;
       this.createModal = false;
       this.valid = false;
+    },
+
+    addMember () {
+
+    },
+
+    deleteUser () {},
+
+    successAddTeams () {
+      this.createModal = false
     }
 
   }

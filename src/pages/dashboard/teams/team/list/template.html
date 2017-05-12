@@ -2,33 +2,30 @@
 
   <panel v-for="team in teams">
     <div class="col-xs-6">
-      <h3 class="mt0">B2W</h3>
-      <a href="" class="btn btn-primary">
+      <h3 class="mt0">{{team.name}}</h3>
+      <a href="" class="btn btn-primary" @click="addUsers(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add users
       </a>
 
-      <a href="" class="btn btn-primary">
+      <a href="" class="btn btn-primary" @click="editTeam(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Edit team
       </a>
-      <a href="" class="btn btn-danger">
+      <a href="" class="btn btn-danger" @click="deleteTeam(team)">
         <i class="fa fa-minus-circle" aria-hidden="true"></i> Delete team
       </a>
     </div>
     <div class="col-xs-6 text-right">
-      <button class="btn btn-danger btn-xs">
-        <i class="fa fa-key" aria-hidden="true"></i> Access Roles <span class="badge">2</span>
+
+      <button class="btn btn-default btn-xs">
+        <i class="fa fa-server" aria-hidden="true"></i> Servers <span class="badge">{{team.count_server || 0}}</span>
       </button>
 
       <button class="btn btn-default btn-xs">
-        <i class="fa fa-server" aria-hidden="true"></i> Servers <span class="badge">2</span>
+        <i class="fa fa-cube" aria-hidden="true"></i> Applications <span class="badge">{{team.count_applications || 0}}</span>
       </button>
 
       <button class="btn btn-default btn-xs">
-        <i class="fa fa-cube" aria-hidden="true"></i> Applications <span class="badge">2</span>
-      </button>
-
-      <button class="btn btn-default btn-xs">
-        <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">2</span>
+        <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">{{team.members.length}}</span>
       </button>
     </div>
   </panel>
@@ -41,7 +38,7 @@
     <well>
       <h4>You dont have any teams, Do you like to create one?</h4>
       <hr/>
-      <router-link to="/login" class="btn btn-primary btn-lg">Create new Team</router-link>
+      <button class="btn btn-primary btn-lg" @click.stop="callCreateModal">Create new Team</button>
 
     </well>
   </div>
