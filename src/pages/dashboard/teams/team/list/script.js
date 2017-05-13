@@ -4,15 +4,17 @@ import Teams from 'factories/teams'
 export default {
   data: function () {
     return {
-      teams: []
+      result: {
+        items: []
+      }
     }
   },
 
   methods: {
-    fetchData: function () {
+    fetchData: function (query={}) {
       new Teams()
         .authorization()
-        .list((e) => {this.teams = e.data.items})
+        .list(query, (e) => {this.result = e.data})
     },
     callCreateModal: function () {
       this.$parent.$refs.modal_create.createModal = true
@@ -28,6 +30,10 @@ export default {
 
     deleteTeam: function (team) {
       console.log(team)
+    },
+
+    changePage (page) {
+      this.fetchData({page})
     }
   },
 

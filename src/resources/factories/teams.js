@@ -7,9 +7,9 @@ class Users extends Factory {
     super(e)
   }
 
-  list (success) {
+  list (query={}, success) {
 
-    this.get({}, success)
+    this.get(query, success)
   }
 
 }

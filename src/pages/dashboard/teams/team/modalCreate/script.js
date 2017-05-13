@@ -56,6 +56,7 @@ export default {
 
     successAddTeams () {
       this.createModal = false
+      this.$parent.$refs.content.fetchData()
     }
 
   }
