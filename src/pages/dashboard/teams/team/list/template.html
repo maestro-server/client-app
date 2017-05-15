@@ -4,16 +4,16 @@
 
     <div class="col-xs-6">
       <h3 class="mt0">{{team.name}}</h3>
-      <a href="" class="btn btn-success" @click="addUsers(team)">
+      <button class="btn btn-success" @click.stop="addUsers(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add users
-      </a>
+      </button>
 
-      <a href="" class="btn btn-primary" @click="editTeam(team)">
+      <button class="btn btn-primary" @click.stop="editTeam(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Edit team
-      </a>
-      <a href="" class="btn btn-danger" @click="deleteTeam(team)">
+      </button>
+      <button class="btn btn-danger" @click.stop="deleteTeam(team)">
         <i class="fa fa-minus-circle" aria-hidden="true"></i> Delete team
-      </a>
+      </button>
     </div>
     <div class="col-xs-6 text-right">
 

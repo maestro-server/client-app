@@ -52,6 +52,13 @@ class Factory {
       .catch(call_rejected)
   }
 
+  delete (data={}, call_success = fsuccess, call_rejected = frejected) {
+    Requester
+      .delete(this.entity, data, this.header)
+      .then(call_success)
+      .catch(call_rejected)
+  }
+
 }
 
 export default Factory

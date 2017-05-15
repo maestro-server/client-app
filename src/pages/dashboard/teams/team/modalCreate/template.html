@@ -1,7 +1,7 @@
 <div>
-  <button class="btn btn-primary pull-right" @click="createModal = true">New team</button>
+  <button class="btn btn-primary pull-right" @click="show">New team</button>
 
-  <modal title="Create new Team" effect="fade" width="800" v-model="createModal" @closed="closed">
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
     <form id="createTeam1" class="row" v-if="step == 1" >
 
@@ -19,7 +19,7 @@
           data-vv-scope="faddTeams"
           name="name"
           class="col-xs-12 mt10"
-          :error="makeError('name')"
+          :error="makeError('name', 'faddTeams')"
         ></bs-input>
 
         <bs-input
@@ -30,7 +30,7 @@
           data-vv-scope="faddTeams"
           name="email"
           class="col-xs-12"
-          :error="makeError('email')"
+          :error="makeError('email', 'faddTeams')"
         ></bs-input>
 
         <bs-input
@@ -40,7 +40,7 @@
           data-vv-scope="faddTeams"
           name="url"
           class="col-xs-12"
-          :error="makeError('url')"
+          :error="makeError('url', 'faddTeams')"
         ></bs-input>
 
       </div>
@@ -85,7 +85,7 @@
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
       <button type="button" class="btn btn-default" @click="previousMethod" v-if="previousValid">Previous</button>
       <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('faddTeams')">Next</button>
-      <button type="button" class="btn btn-primary" @click="saveMethod" v-if="finalValid" :disabled="errors.any('faddTeams')">Create</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any('faddTeams')">Save</button>
     </div>
 
   </modal>

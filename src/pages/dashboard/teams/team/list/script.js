@@ -10,26 +10,45 @@ export default {
     }
   },
 
+  computed: {
+    MCreate () {return this.$parent.$refs.modal_create},
+    MDelete () {return this.$parent.$refs.modal_delete}
+  },
+
   methods: {
     fetchData: function (query={}) {
       new Teams()
         .authorization()
         .list(query, (e) => {this.result = e.data})
     },
+
     callCreateModal: function () {
-      this.$parent.$refs.modal_create.createModal = true
+      this.MCreate
+        .onClickCallBack((model) => {
+          new Teams()
+            .authorization()
+            .create(model, () => {
+
+              this.result.items.unshift(model)
+            })
+        })
+        .show()
     },
 
     addUsers: function (team) {
-      console.log(team)
+      this.MCreate
+        .setupSteps(2,2,2)
+        .show(team, 2)
     },
 
     editTeam: function (team) {
-      console.log(team)
+      this.MCreate
+        .setupSteps(1,1,1)
+        .show(team)
     },
 
     deleteTeam: function (team) {
-      console.log(team)
+      this.MDelete.show(team)
     },
 
     changePage (page) {
