@@ -1,4 +1,5 @@
-e
+
+import _ from 'lodash'
 // define a mixin object
 export default {
   data () {
@@ -8,8 +9,7 @@ export default {
       showModal: false,
       model: {},
       stepControl: {},
-      edit: false,
-      callback: () => {}
+      create: true
     }
   },
 
@@ -25,16 +25,18 @@ export default {
     }
   },
 
-
   methods: {
     afterShow () {},
+    createSave () {},
+    editSave () {},
+    callback () {},
     show (model={}, step=1, showModal=true) {
       this.step = step
       this.showModal = showModal
-      this.model = model
-      this.edit = Object.keys(model).length === 1
+      this.model = _.clone(model)
+      this.create = _.empty(model)
 
-      if(this.edit) {
+      if(this.create) {
         this.setupSteps()
       }
 
@@ -42,21 +44,11 @@ export default {
     },
 
     actionClick () {
-      if(this.edit) {
+      if(this.create) {
         this.createSave()
       } else {
         this.editSave()
       }
-    },
-
-    createSave () {
-
-    },
-
-    editSave () {
-      new Teams()
-        .authorization()
-        .update(this.model._id, this.model, this.callback(this.model))
     },
 
     setupSteps (previous=1, forwad=2, final=2) {
@@ -76,15 +68,21 @@ export default {
       }
     },
 
-    onClickCallBack (func) {
+    closed () {
+      this.step = 1
+      this.errors.clear('modals');
+      this.showModal = false
+      this.model = {}
+    },
+
+    onFinishCallBack (func) {
       this.callback = func
       return this
     },
 
-    closed () {
-      this.step = 1
-      this.createModal = false
-      this.model = {}
+    finishJob () {
+      this.callback(this.model)
+      this.closed()
     }
 
   }

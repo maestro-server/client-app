@@ -1,6 +1,4 @@
 <div>
-  <button class="btn btn-primary pull-right" @click="show">New team</button>
-
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
     <form id="createTeam1" class="row" v-if="step == 1" >
@@ -16,10 +14,10 @@
           label="Name"
           v-model="model.name"
           v-validate.initial="'required'"
-          data-vv-scope="faddTeams"
+          data-vv-scope="modals"
           name="name"
           class="col-xs-12 mt10"
-          :error="makeError('name', 'faddTeams')"
+          :error="makeError('name', 'modals')"
         ></bs-input>
 
         <bs-input
@@ -27,20 +25,20 @@
           label="Email"
           v-model="model.email"
           v-validate.initial="'required|email'"
-          data-vv-scope="faddTeams"
+          data-vv-scope="modals"
           name="email"
           class="col-xs-12"
-          :error="makeError('email', 'faddTeams')"
+          :error="makeError('email', 'modals')"
         ></bs-input>
 
         <bs-input
           label="Url"
           v-model="model.url"
           v-validate.initial="'url'"
-          data-vv-scope="faddTeams"
+          data-vv-scope="modals"
           name="url"
           class="col-xs-12"
-          :error="makeError('url', 'faddTeams')"
+          :error="makeError('url', 'modals')"
         ></bs-input>
 
       </div>
@@ -84,8 +82,8 @@
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
       <button type="button" class="btn btn-default" @click="previousMethod" v-if="previousValid">Previous</button>
-      <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('faddTeams')">Next</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any('faddTeams')">Save</button>
+      <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('modals')">Next</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any('modals')">Save</button>
     </div>
 
   </modal>

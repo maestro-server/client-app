@@ -1,3 +1,14 @@
+<div>
+<div class="pb10">
+  <h3 class="col-xs-10 pb10">
+    Team
+  </h3>
+  <div class="col-xs-2 pb10 mt20">
+    <button class="btn btn-primary pull-right" @click="addTeam">New team</button>
+  </div>
+</div>
+
+
 <div class="col-xs-12">
 
   <panel v-for="team in result.items">
@@ -39,9 +50,10 @@
     <well>
       <h4>You dont have any teams, Do you like to create one?</h4>
       <hr/>
-      <button class="btn btn-primary btn-lg" @click.stop="callCreateModal">Create new Team</button>
+      <button class="btn btn-primary btn-lg" @click.stop="addTeam">Create new Team</button>
 
     </well>
   </div>
 
+</div>
 </div>

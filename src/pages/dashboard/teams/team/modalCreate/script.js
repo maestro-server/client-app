@@ -15,17 +15,23 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.edit ? 'Create new Team' : `Edit ${this.model.name} team`
+      this.text.title =  this.create ? 'Create new Team' : `Edit ${this.model.name} team`
     },
-
 
     addMember () {
 
     },
 
-    successAddTeams () {
-      this.closed()
-      this.$parent.$refs.content.fetchData()
+    createSave () {
+      new Teams()
+        .authorization()
+        .create(this.model, this.finishJob)
+    },
+
+    editSave () {
+      new Teams()
+        .authorization()
+        .update(this.model._id, this.model, this.finishJob)
     }
 
   }

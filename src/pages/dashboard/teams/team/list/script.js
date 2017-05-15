@@ -22,16 +22,9 @@ export default {
         .list(query, (e) => {this.result = e.data})
     },
 
-    callCreateModal: function () {
+    addTeam: function () {
       this.MCreate
-        .onClickCallBack((model) => {
-          new Teams()
-            .authorization()
-            .create(model, () => {
-
-              this.result.items.unshift(model)
-            })
-        })
+        .onFinishCallBack(() => {this.fetchData()})
         .show()
     },
 
