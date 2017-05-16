@@ -1,32 +1,18 @@
+import Modals from 'mixins/modals'
 import Teams from 'factories/teams'
 
 export default {
-  data () {
-    return {
-      showModal: false,
-      text: {
-        title: null
-      },
-      team: null
-    }
-  },
+  mixins: [Modals],
 
   methods: {
-
-    show (team) {
-      this.team = team
-      this.text.title = `DELETE ${team.name} ?`
-      this.showModal = true
+    afterShow () {
+      this.text.title = `DELETE ${this.model.name} ?`
     },
 
-    closed () {
-      this.showModal = false
-    },
-
-    deleteModel () {
+    editSave () {
       new Teams()
         .authorization()
-        .delete(this.team._id, () => this.closed())
+        .delete(this.model._id, this.finishJob)
     }
   }
 

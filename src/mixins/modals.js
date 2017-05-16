@@ -4,12 +4,13 @@ import _ from 'lodash'
 export default {
   data () {
     return {
-      text: {},
+      text: {title:null},
       step: 1,
       showModal: false,
       model: {},
       stepControl: {},
-      create: true
+      create: true,
+      force: true
     }
   },
 
@@ -34,7 +35,8 @@ export default {
       this.step = step
       this.showModal = showModal
       this.model = _.clone(model)
-      this.create = _.empty(model)
+      this.create = _.isEmpty(model)
+      this.errors.clear('modals')
 
       if(this.create) {
         this.setupSteps()
@@ -70,9 +72,9 @@ export default {
 
     closed () {
       this.step = 1
-      this.errors.clear('modals');
       this.showModal = false
       this.model = {}
+      this.force = false
     },
 
     onFinishCallBack (func) {

@@ -58,6 +58,9 @@ export default {
   watch: {
     error (val) {
       this.inState=val ? this.constants.ERROR : this.constants.SUCCESS
+    },
+    value (val) {
+      this.bindChanges(val)
     }
   },
   methods: {

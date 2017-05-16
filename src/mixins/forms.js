@@ -2,7 +2,7 @@
 // define a mixin object
 export default {
   methods: {
-    makeError (name, scope=null) {
+    makeError (name, scope=null, force=true) {
       let ff = this.fields
       let str = name
 
@@ -15,7 +15,7 @@ export default {
         }
       }
 
-      return ff[name] && ff[name].dirty ? this.errors.first(str) : ''
+      return force && ff[name] && ff[name].dirty ? this.errors.first(str) : ''
     }
   }
 }

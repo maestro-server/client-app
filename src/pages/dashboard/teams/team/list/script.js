@@ -37,11 +37,22 @@ export default {
     editTeam: function (team) {
       this.MCreate
         .setupSteps(1,1,1)
+        .onFinishCallBack((e) => {
+          team.name = e.name
+          team.email = e.email
+        })
         .show(team)
     },
 
     deleteTeam: function (team) {
-      this.MDelete.show(team)
+      this.MDelete
+        .onFinishCallBack((e) => {
+          const narr = this.result.items.filter((e) => {
+            return e != team
+          })
+          this.result.items = narr
+        })
+        .show(team)
     },
 
     changePage (page) {
