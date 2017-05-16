@@ -1,3 +1,4 @@
+import Login from 'services/login'
 
 export default function getJSON (url) {
   let request = new window.XMLHttpRequest()
@@ -44,6 +45,7 @@ export default function getJSON (url) {
   }
   request.open('GET', url)
   request.setRequestHeader('Accept', 'application/json')
+  request.setRequestHeader("Authorization", Login.Authorization())
   request.send()
   return p
 }

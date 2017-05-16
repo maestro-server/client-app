@@ -52,18 +52,17 @@
         <small>(You can choose later.)</small>
       </h5>
 
-      <bs-input
-        type="email"
-        label="Email"
-        v-model="newMember.email"
-        v-validate.initial="'required|email'"
-        data-vv-scope="faddUsers"
-        name="email"
+      <typeahead
+        placeholder="What is the email account to new member? "
+        async-key="items"
+        :async="URL"
+        :template="templateMembers"
+        :on-hit="memberSelected"
         class="col-xs-12"
-      ></bs-input>
+      ></typeahead>
 
-      <div class="col-xs-12 text-right">
-        <button class="btn btn-primary" :disabled="errors.any('faddUsers')" @click="addMember">Add Users</button>
+      <div class="col-xs-12 mt10 text-right">
+        <button class="btn btn-primary" :disabled="errors.any('newmember')" @click="addMember">Add Users</button>
 
         <hr/>
 
@@ -72,7 +71,7 @@
             <button class="btn btn-danger btn-xs pull-left" @click="deleteUser(member)">
               <i class="fa fa-minus-circle" aria-hidden="true"></i>
             </button>
-            {{member.username}}
+            {{member.name}} - <small>{{member.email}}</small>
           </li>
         </ul>
 

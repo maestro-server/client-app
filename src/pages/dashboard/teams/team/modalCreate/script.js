@@ -7,8 +7,11 @@ export default {
 
   data () {
     return {
+      SELemail: null,
       newMember: {},
-      members: {}
+      members: [],
+      URL: "http://localhost:8888/users/autocomplete?complete=",
+      templateMembers: "{{item.name}} - <small>{{item.email}}</small>"
     }
   },
 
@@ -32,6 +35,10 @@ export default {
       new Teams()
         .authorization()
         .update(this.model._id, this.model, this.finishJob)
+    },
+
+    memberSelected(item) {
+      this.members.push(item)
     }
 
   }

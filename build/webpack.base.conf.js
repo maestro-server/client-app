@@ -29,7 +29,7 @@ module.exports = {
       'config': resolve('config'),
       'src': resolve('src'),
       'imgs': resolve('src/assets/imgs'),
-      'mixins': resolve('src/assets/mixins'),
+      'mixins': resolve('src/mixins'),
       'components': resolve('src/components'),
       'factories': resolve('src/resources/factories'),
       'services': resolve('src/resources/services')
