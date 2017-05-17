@@ -1,4 +1,5 @@
 
+import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Teams from 'factories/teams'
 
@@ -7,9 +8,6 @@ export default {
 
   data () {
     return {
-      SELemail: null,
-      newMember: {},
-      members: [],
       URL: "http://localhost:8888/users/autocomplete?complete=",
       templateMembers: "{{item.name}} - <small>{{item.email}}</small>"
     }
@@ -21,10 +19,6 @@ export default {
       this.text.title =  this.create ? 'Create new Team' : `Edit ${this.model.name} team`
     },
 
-    addMember () {
-
-    },
-
     createSave () {
       new Teams()
         .authorization()
@@ -32,13 +26,29 @@ export default {
     },
 
     editSave () {
-      new Teams()
-        .authorization()
-        .update(this.model._id, this.model, this.finishJob)
+        new Teams()
+          .authorization()
+          .update(this.model._id, this.model, this.finishJob)
+    },
+
+    deleteUser (team) {
+      const narr = this.model.members.filter((e) => {
+        return e != team
+      })
+      this.model.members = narr
     },
 
     memberSelected(item) {
-      this.members.push(item)
+      const exist = _.find(this.model.members, ['_id', item._id])
+
+      if(!exist) {
+        item.role=1
+        this.model.members.push(item)
+      }
+    },
+
+    afterClose() {
+      this.model.members = []
     }
 
   }

@@ -9,8 +9,7 @@ export default {
       showModal: false,
       model: {},
       stepControl: {},
-      create: true,
-      force: true
+      create: true
     }
   },
 
@@ -28,6 +27,7 @@ export default {
 
   methods: {
     afterShow () {},
+    afterClose () {},
     createSave () {},
     editSave () {},
     callback () {},
@@ -36,12 +36,6 @@ export default {
       this.showModal = showModal
       this.model = _.clone(model)
       this.create = _.isEmpty(model)
-      this.errors.clear('modals')
-
-      if(this.create) {
-        this.setupSteps()
-      }
-
       this.afterShow()
     },
 
@@ -71,10 +65,12 @@ export default {
     },
 
     closed () {
-      this.step = 1
-      this.showModal = false
+      this.step=1
       this.model = {}
-      this.force = false
+      this.errors.clear('modals')
+      this.showModal = false
+
+      this.afterClose()
     },
 
     onFinishCallBack (func) {

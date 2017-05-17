@@ -52,26 +52,32 @@
         <small>(You can choose later.)</small>
       </h5>
 
-      <typeahead
-        placeholder="What is the email account to new member? "
-        async-key="items"
-        :async="URL"
-        :template="templateMembers"
-        :on-hit="memberSelected"
-        class="col-xs-12"
-      ></typeahead>
+      <div class="col-xs-12">
+        <typeahead
+          placeholder="What is the email account to new member? "
+          async-key="items"
+          :async="URL"
+          :template="templateMembers"
+          :on-hit="memberSelected"
+        ></typeahead>
+     </div>
+     <hr/>
 
       <div class="col-xs-12 mt10 text-right">
-        <button class="btn btn-primary" :disabled="errors.any('newmember')" @click="addMember">Add Users</button>
-
-        <hr/>
 
         <ul class="list-group mt20">
-          <li class="list-group-item" v-for="member in members">
-            <button class="btn btn-danger btn-xs pull-left" @click="deleteUser(member)">
+          <li class="list-group-item" v-for="member in model.members">
+            <button class="btn btn-danger btn-xs pull-left" @click.stop="deleteUser(member)">
               <i class="fa fa-minus-circle" aria-hidden="true"></i>
             </button>
+
             {{member.name}} - <small>{{member.email}}</small>
+
+            <button-group v-model="member.role" type="warning">
+              <bs-radio :selected-value="1">Read</bs-radio>
+              <bs-radio :selected-value="3">Write</bs-radio>
+              <bs-radio :selected-value="7">Admin</bs-radio>
+            </button-group>
           </li>
         </ul>
 

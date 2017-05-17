@@ -24,6 +24,7 @@ export default {
 
     addTeam: function () {
       this.MCreate
+        .setupSteps(1,1,1)
         .onFinishCallBack(() => {this.fetchData()})
         .show()
     },
@@ -40,13 +41,14 @@ export default {
         .onFinishCallBack((e) => {
           team.name = e.name
           team.email = e.email
+          team.members = e.members
         })
         .show(team)
     },
 
     deleteTeam: function (team) {
       this.MDelete
-        .onFinishCallBack((e) => {
+        .onFinishCallBack(() => {
           const narr = this.result.items.filter((e) => {
             return e != team
           })
