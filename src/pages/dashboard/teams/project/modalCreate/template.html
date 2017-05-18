@@ -18,19 +18,11 @@
         <h5 class="col-xs-12">Choose team</h5>
         <div class="col-xs-12">
 
-          <bs-select
-          label="Name"
-          v-model="model.team"
-          placeholder="No team"
-          class="wd100"
-          justified
-          search
-          name="team"
-          :error="makeError('team', 'modals')"
-          >
-            <bs-option>Devops</bs-option>
-            <bs-option>Front</bs-option>
-          </bs-select>
+          <typeahead
+            placeholder="No teams, this project is mine"
+
+          ></typeahead>
+
         </div>
 
       </section>

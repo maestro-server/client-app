@@ -18,6 +18,7 @@ export default {
     cap(data) {
       return data.charAt(0).toUpperCase() + data.slice(1)
     },
+
     fetchData: function (query={}) {
       new Projects()
         .authorization()
