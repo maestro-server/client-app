@@ -1,24 +1,26 @@
+// import _ from 'lodash'
+import Modals from 'mixins/modals'
+import Projects from 'factories/projects'
+
 export default {
-  data () {
-    return {
-      createModal: false,
-      valid: false
-    }
-  },
-
-  computed: {
-
-  },
+  mixins: [Modals],
 
   methods: {
-    saveMethod () {
-
+    afterShow () {
+      this.text.title =  this.create ? 'Create new Project' : `Edit ${this.model.name} project`
     },
 
-    closed () {
-      this.createModal = false;
-      this.valid = false;
-    }
+    createSave () {
+      new Projects()
+        .authorization()
+        .create(this.model, this.finishJob)
+    },
+
+    editSave () {
+        new Projects()
+          .authorization()
+          .patchID(this.model._id, this.model, this.finishJob)
+    },
 
   }
 

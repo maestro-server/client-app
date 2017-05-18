@@ -24,6 +24,10 @@ class Factory {
     return this
   }
 
+  list (query={}, success = null) {
+    this.get(query, success)
+  }
+
   get (params={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .get(this.entity, {params}, this.header)
@@ -45,11 +49,21 @@ class Factory {
       .catch(call_rejected)
   }
 
+  patchID (id, data, success=null) {
+    this.entity += "/"+id
+    this.patch(data, success)
+  }
+
   patch (data={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .patch(this.entity, data, this.header)
       .then(call_success)
       .catch(call_rejected)
+  }
+
+  deleteID (id, success=null) {
+    this.entity += "/"+id
+    this.delete({}, success)
   }
 
   delete (data={}, call_success = fsuccess, call_rejected = frejected) {

@@ -28,7 +28,7 @@ export default {
     editSave () {
         new Teams()
           .authorization()
-          .update(this.model._id, this.model, this.finishJob)
+          .patchID(this.model._id, this.model, this.finishJob)
     },
 
     deleteUser (team) {
