@@ -1,4 +1,4 @@
-import store from '../../store'
+import store from 'store'
 import LocalStorageRepository from '../repositories/localStorage'
 
 class Login {

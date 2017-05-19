@@ -1,4 +1,4 @@
-import store  from '../../../store'
+import store  from 'store'
 
 export default {
 
@@ -20,4 +20,3 @@ export default {
 
   }
 }
-

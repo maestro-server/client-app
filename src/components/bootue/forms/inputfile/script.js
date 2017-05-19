@@ -68,6 +68,7 @@ export default {
 
       this.val = files
       this.text = files[0].name
+      this.$emit('selected', files)
     }
   },
 

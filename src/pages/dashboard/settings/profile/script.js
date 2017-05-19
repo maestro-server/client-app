@@ -1,8 +1,10 @@
 import {mapActions} from 'vuex'
-
+import mixinUploader from 'mixins/upload'
 import Me from 'factories/me'
 
 export default {
+  mixins: [mixinUploader],
+
   data: function () {
     return {
       valid: {
@@ -43,9 +45,9 @@ export default {
   },
 
   mounted () {
+    this.setRefUploader('users') // using by uploader mixins to determine how
 
     this.me()
-
     this.setPage([
       'Settings',
       'Profile, plan and billing',
