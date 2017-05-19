@@ -5,13 +5,17 @@ export default {
     return {
       result: {
         items: []
-      }
+      },
+      team:false
     }
   },
 
   computed: {
     MCreate () {return this.$parent.$refs.modal_create},
-    MDelete () {return this.$parent.$refs.modal_delete}
+    MDelete () {return this.$parent.$refs.modal_delete},
+    title () {
+      return this.team ? this.team.name+' Projects' : 'My Projects'
+    }
   },
 
   methods: {
@@ -20,12 +24,17 @@ export default {
     },
 
     fetchData: function (query={}) {
-      new Projects()
-        .authorization()
-        .list(query, (e) => {this.result = e.data})
+      const Project = new Projects().authorization()
+
+      if(this.team) {
+        Project.listByTeam(query, this.team._id, (e) => {this.result = e.data})
+      } else {
+        Project.list(query, (e) => {this.result = e.data})
+      }
     },
 
     addProject: function () {
+
       this.MCreate
         .setupSteps(1,1,1)
         .onFinishCallBack(() => {this.fetchData()})
@@ -59,6 +68,14 @@ export default {
   },
 
   created () {
+    if(_.has(this.$route, 'query.team_id')) {
+      this.team = {
+        '_id': this.$route.query.team_id,
+        'name': this.$route.query.team_name
+      }
+    }
+
+
     this.fetchData()
   }
 }
