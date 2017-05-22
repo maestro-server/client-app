@@ -1,5 +1,6 @@
 import {mapActions} from 'vuex'
 import Me from 'factories/me'
+import Auth from 'factories/auth'
 
 import _ from 'lodash'
 
@@ -7,12 +8,8 @@ export default {
 
   data: function () {
     return {
-      valid: {
-        pass: false,
-        profile: false
-      },
-      email: null,
-      pass: {},
+      cemail: null,
+      cpass: {},
       model: {
         email: null,
         name: null
@@ -33,15 +30,28 @@ export default {
     },
 
     updateProfile () {
+      const data = _.omit(this.model, 'email')
+
       new Me()
         .authorization()
-        .update(
-          this.model
-        )
+        .update(data)
+    },
+
+    updateEmail () {
+      const email = this.cemail
+
+      new Me()
+        .authorization()
+        .update({email}, () => {this.model.email = email})
     },
 
     updatePassWord () {
+      const {email} = this.model
+      this.cpass = _.merge(this.cpass, {email})
 
+      new Auth()
+        .authorization()
+        .patchID('pass', this.cpass)
     }
   },
 

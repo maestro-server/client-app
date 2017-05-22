@@ -95,16 +95,16 @@
       <bs-input
         type="email"
         label="New Email"
-        v-model="email"
+        v-model="cemail"
         v-validate.initial="'required|email'"
         data-vv-scope="femail"
-        name="cemail"
+        name="email"
         class="col-xs-6"
-        :error="makeError('cemail', 'femail')"
+        :error="makeError('email', 'femail')"
       ></bs-input>
 
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" :disabled="errors.any('femail')" @click="updatePassWord">
+        <button type="button" class="btn btn-primary pull-right" :disabled="errors.any('femail')" @click="updateEmail">
           Update a new password
         </button>
       </div>
@@ -133,7 +133,7 @@
       <bs-input
         type="password"
         label="Current password"
-        v-model="model.password"
+        v-model="cpass.password"
         v-validate.initial="'required'"
         name="password"
         data-vv-scope="fpassword"
@@ -144,7 +144,7 @@
       <bs-input
         type="password"
         label="New password"
-        v-model="model.newpassword"
+        v-model="cpass.newpass"
         v-validate.initial="'required'"
         name="newpassword"
         data-vv-scope="fpassword"

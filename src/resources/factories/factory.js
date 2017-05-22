@@ -24,7 +24,7 @@ class Factory {
     return this
   }
 
-  list (query={}, success = null) {
+  list (query={}, success = fsuccess) {
     this.get(query, success)
   }
 
@@ -49,7 +49,7 @@ class Factory {
       .catch(call_rejected)
   }
 
-  patchID (id, data, success=null) {
+  patchID (id, data, success=fsuccess) {
     this.entity += "/"+id
     this.patch(data, success)
   }
@@ -61,7 +61,7 @@ class Factory {
       .catch(call_rejected)
   }
 
-  deleteID (id, success=null) {
+  deleteID (id, success=fsuccess) {
     this.entity += "/"+id
     this.delete({}, success)
   }

@@ -1,18 +1,12 @@
-import store  from 'store'
+
 import defaultImg from 'imgs/avatar_default.jpeg'
-import validImage from 'resources/repositories/validImage'
-import Uploader from 'services/uploader'
+import validImage from './libs/validImage'
+import Uploader from './libs/uploader'
 
 export default {
   props: {
-    refs: {
-      type: String,
-      default: "teams"
-    },
-    defaultImg: {
-      type: String,
-      default: defaultImg
-    },
+    refs: {type: String, default: "teams"},
+    defaultImg: {type: String, default: defaultImg},
     value: {default: null},
     imgSize: {type: String, default: "col-xs-12 col-sm-3"},
     inputSize: {type: String, default: "col-xs-12 col-sm-9"}
@@ -71,6 +65,7 @@ export default {
       this.spinner = false
 
       this.file=file.filename
+      this.$nextTick()
       this.$emit('input', file.filename)
     }
   }
