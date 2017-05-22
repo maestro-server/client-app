@@ -6,16 +6,12 @@
     The information you provide below will be shown on your invoices.<br/><br/>
     <form action="get" class="row">
 
-      <div class="col-xs-12 col-sm-2 col-sm-offset-1">
-        <img src="~imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
-      </div>
-      <bs-input-file
-        label="Upload your avatar"
+      <uploader
+        refs="users"
         v-model="model.avatar"
-        :value="model.avatar"
-        class="col-xs-12 col-sm-7"
-        @selected="upload">
-      </bs-input-file>
+        imgSize="col-xs-12 col-sm-2 col-sm-offset-1"
+        inputSize="col-xs-12 col-sm-7"
+      ></uploader>
 
       <bs-input
         label="Username"

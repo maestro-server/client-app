@@ -1,9 +1,9 @@
 import {mapActions} from 'vuex'
-import mixinUploader from 'mixins/upload'
 import Me from 'factories/me'
 
+import _ from 'lodash'
+
 export default {
-  mixins: [mixinUploader],
 
   data: function () {
     return {
@@ -14,11 +14,12 @@ export default {
       email: null,
       pass: {},
       model: {
-        email:null,
+        email: null,
         name: null
       }
     }
   },
+
 
   methods: {
     ...mapActions([
@@ -28,7 +29,7 @@ export default {
     me () {
       new Me()
         .authorization()
-        .get({}, (e) => Object.assign(this.model, e.data))
+        .get({}, (e) => _.merge(this.model, e.data))
     },
 
     updateProfile () {
@@ -45,8 +46,6 @@ export default {
   },
 
   mounted () {
-    this.setRefUploader('users') // using by uploader mixins to determine how
-
     this.me()
     this.setPage([
       'Settings',

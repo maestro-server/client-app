@@ -5,10 +5,12 @@
 
       <div class="col-sm-offset-2 col-sm-8">
 
-        <div class="col-xs-12 col-sm-3 text-center">
-          <img src="~imgs/avatar_default.jpeg" alt="" class="img-responsive img-circle">
-        </div>
-        <bs-input-file label="Upload team logo" class="col-xs-12 col-sm-9"></bs-input-file>
+
+        <uploader
+          refs="teams"
+          v-model="model.avatar"
+        ></uploader>
+
 
         <bs-input
           label="Name"

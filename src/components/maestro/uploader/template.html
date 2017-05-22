@@ -1,0 +1,15 @@
+<div>
+  <div :class="imgSize">
+    <img :src="showAvatar" alt="" class="img-responsive img-circle">
+  </div>
+
+  <bs-input-file
+    label="Upload your avatar"
+    v-model="label"
+    :class="inputSize"
+    v-bind:value="value"
+    @selected="upload">
+  </bs-input-file>
+
+  <spinner v-model="spinner" size="lg" text="Loading..."></spinner>
+</div>

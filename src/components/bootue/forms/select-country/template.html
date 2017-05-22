@@ -1,15 +1,15 @@
 <div class="selectCountry">
-  <div :class="baseclass">
+  <div :class="baseclass" ref="input">
     <div class="form-group btn-group-justified">
       <label>{{labelCountry}}</label><br/>
       <bs-select :options="options.country"
-                placeholder="Select your Country"
-                class="wd100"
-                v-model="vcountry"
-                @change="selectCountryChange"
-                 :disabled="disabled"
-                 :readonly="readonly"
-                 :search="search"
+          placeholder="Select your Country"
+          class="wd100"
+          v-model="vcountry"
+          @change="selectCountryChange"
+           :disabled="disabled"
+           :readonly="readonly"
+           :search="search"
       ></bs-select>
       </div>
   </div>
