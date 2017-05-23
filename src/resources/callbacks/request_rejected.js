@@ -15,7 +15,7 @@ export default (e) => {
 
 
     if(response.status == 401 && hash!="#/login") {
-      // window.location.hash = "logout"
+      window.location.hash = "logout"
       return
     }
 

@@ -17,9 +17,9 @@ export default {
 
   methods: {
     fetchData: function (query={}) {
-      new Teams()
+      new Teams(query)
         .authorization()
-        .list(query, (e) => {this.result = e.data})
+        .list((e) => {this.result = e.data})
     },
 
     addTeam: function () {

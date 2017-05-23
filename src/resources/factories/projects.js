@@ -3,23 +3,16 @@ import Factory from './factory'
 
 class Projects extends Factory {
 
-  constructor(e="/projects") {
-    super(e)
+  constructor(data={}, e="/projects") {
+    super(data, e)
+
+    if(this.isTeam()) {
+      this.setEntity(`/teams/${this.model.team._id}/projects`)
+    }
   }
 
-  listByTeam (query={}, team, success) {
-    this.entity = `/teams/${team}/projects`
-    super.list(query, success)
-  }
-
-  createByTeam (data={}, success) {
-    this.entity = `/teams/${data.team._id}/projects`
-    super.create(data, success)
-  }
-
-  updateByTeam (data={}, success) {
-    this.entity = `/teams/${data.team._id}/projects`
-    super.update(data, success)
+  isTeam() {
+    return _.has(this.model, 'team._id')
   }
 }
 

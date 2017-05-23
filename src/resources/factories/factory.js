@@ -9,11 +9,17 @@ import Login from 'services/login'
 
 class Factory {
 
-  constructor (e) {
+  constructor (model={}, e) {
     this.entity = e
     this.header = {}
+    this.model =  model
 
     store.dispatch('onSpinner')
+  }
+
+  setEntity(e) {
+    this.entity = e
+    return this
   }
 
   authorization () {
@@ -27,51 +33,53 @@ class Factory {
     return this
   }
 
-  list (query={}, success = fsuccess) {
-    this.get(query, success)
+  list (success = fsuccess) {
+    this.get(success)
   }
 
-  get (params={}, call_success = fsuccess, call_rejected = frejected) {
+  get (call_success = fsuccess, call_rejected = frejected) {
+    const params = this.model
+
     Requester
       .get(this.entity, {params}, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
-  create (data={}, call_success = fsuccess, call_rejected = frejected) {
+  create (call_success = fsuccess, call_rejected = frejected) {
     Requester
-      .post(this.entity, data, this.header)
+      .post(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
-  update (data={}, call_success = fsuccess, call_rejected = frejected) {
+  update (call_success = fsuccess, call_rejected = frejected) {
     Requester
-      .put(this.entity, data, this.header)
+      .put(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
-  patchID (id, data, success=fsuccess) {
+  patchID (id, call_success = fsuccess) {
     this.entity += "/"+id
-    this.patch(data, success)
+    this.patch(call_success)
   }
 
-  patch (data={}, call_success = fsuccess, call_rejected = frejected) {
+  patch (call_success = fsuccess, call_rejected = frejected) {
     Requester
-      .patch(this.entity, data, this.header)
+      .patch(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   deleteID (id, success=fsuccess) {
     this.entity += "/"+id
-    this.delete({}, success)
+    this.delete(success)
   }
 
-  delete (data={}, call_success = fsuccess, call_rejected = frejected) {
+  delete (call_success = fsuccess, call_rejected = frejected) {
     Requester
-      .delete(this.entity, data, this.header)
+      .delete(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }

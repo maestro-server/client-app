@@ -18,29 +18,25 @@ export default {
     },
 
     createSave () {
-      const Project = new Projects().authorization()
-
-      if(_.has(this.model, 'team')) {
-        Project.createByTeam(this.model, this.finishJob)
-      } else {
-        Project.create(this.model, this.finishJob)
-      }
+      new Projects(this.model)
+      .authorization()
+      .create(this.finishJob)
     },
 
     editSave () {
-        new Projects()
-          .authorization()
-          .patchID(this.model._id, this.model, this.finishJob)
+      new Projects(this.model)
+      .authorization()
+      .patchID(this.model._id, this.finishJob)
     },
 
     setTeam(item) {
-      console.log(item)
       this.$set(this.model, 'team', item)
       return this
     },
 
     teamSelected(item) {
       this.setTeam(item)
+      this.model.input = ""
     }
 
   }

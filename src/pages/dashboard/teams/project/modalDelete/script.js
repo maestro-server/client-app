@@ -10,7 +10,8 @@ export default {
     },
 
     editSave () {
-      new Projects()
+      console.log(this.model)
+      new Projects(this.model)
         .authorization()
         .deleteID(this.model._id, this.finishJob)
     }

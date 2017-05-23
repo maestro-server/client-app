@@ -1,4 +1,5 @@
 import Projects from 'factories/projects'
+import _ from 'lodash'
 
 export default {
   data: function () {
@@ -24,34 +25,38 @@ export default {
     },
 
     fetchData: function (query={}) {
-      const Project = new Projects().authorization()
+      const {team} = this
+      const filter = _.merge(query, {team})
 
-      if(this.team) {
-        Project.listByTeam(query, this.team._id, (e) => {this.result = e.data})
-      } else {
-        Project.list(query, (e) => {this.result = e.data})
-      }
+      new Projects(filter)
+      .authorization()
+      .list((e) => {this.result = e.data})
     },
 
     addProject: function () {
+      const {team} = this
 
       this.MCreate
         .setupSteps(1,1,1)
         .onFinishCallBack(() => {this.fetchData()})
-        .show()
+        .show({team})
     },
 
     editProject: function (project) {
+      const {team} = this
+
       this.MCreate
         .setupSteps(1,1,1)
         .onFinishCallBack((e) => {
           project.name = e.name
           project.email = e.email
         })
-        .show(project)
+        .show(_.merge(project, {team}))
     },
 
     deleteProject: function (project) {
+      const {team} = this
+      
       this.MDelete
         .onFinishCallBack(() => {
           const narr = this.result.items.filter((e) => {
@@ -59,7 +64,7 @@ export default {
           })
           this.result.items = narr
         })
-        .show(project)
+        .show(_.merge(project, {team}))
     },
 
     changePage (page) {
@@ -74,7 +79,6 @@ export default {
         'name': this.$route.query.team_name
       }
     }
-
 
     this.fetchData()
   }

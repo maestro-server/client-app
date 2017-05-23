@@ -18,11 +18,8 @@ export default {
     login: function () {
 
       this.$validator.validateAll().then(() => {
-        new Auth()
-          .auth(
-            this.model,
-            (e) => Login.setLogin(this, e)
-          )
+        new Auth(this.model)
+          .auth((e) => Login.setLogin(this, e))
 
       }).catch((e) => {
         console.log(e)

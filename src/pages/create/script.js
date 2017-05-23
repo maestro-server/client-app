@@ -17,9 +17,8 @@ export default {
 
   methods: {
     create () {
-      new User()
+      new User(this.model)
         .create(
-          this.model,
           this.finishCallBack
         )
     },

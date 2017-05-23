@@ -20,15 +20,15 @@ export default {
     },
 
     createSave () {
-      new Teams()
+      new Teams(this.model)
         .authorization()
-        .create(this.model, this.finishJob)
+        .create(this.finishJob)
     },
 
     editSave () {
-        new Teams()
+        new Teams(this.model)
           .authorization()
-          .patchID(this.model._id, this.model, this.finishJob)
+          .patchID(this.model._id, this.finishJob)
     },
 
     deleteUser (team) {

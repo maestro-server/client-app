@@ -30,21 +30,13 @@ class Uploader {
   }
 
   uploadFile(file, resp) {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('PUT', resp.signedRequest)
-    xhr.setRequestHeader("Content-Type", file.type)
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          this.callback(file, resp)
-        }
-        else {
-          Uploader.uploadError('Could not upload file.')
-        }
-      }
-    };
-    xhr.send(file);
+    axios.put(resp.signedRequest, file, {headers: {"Content-Type": file.type}})
+      .then(() => {
+        this.callback(file, resp)
+      })
+      .catch(() => {
+        Uploader.uploadError('Could not upload file.')
+      });
   }
 
   static uploadError(title) {

@@ -35,7 +35,7 @@ export default {
       this.step = step
       this.showModal = showModal
       this.model = _.clone(model)
-      this.create = _.isEmpty(model)
+      this.create = !_.has(model, '_id')
       this.afterShow()
     },
 

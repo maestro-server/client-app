@@ -26,32 +26,32 @@ export default {
     me () {
       new Me()
         .authorization()
-        .get({}, (e) => _.merge(this.model, e.data))
+        .list((e) => _.merge(this.model, e.data))
     },
 
     updateProfile () {
       const data = _.omit(this.model, 'email')
 
-      new Me()
+      new Me(data)
         .authorization()
-        .update(data)
+        .update()
     },
 
     updateEmail () {
       const email = this.cemail
 
-      new Me()
+      new Me({email})
         .authorization()
-        .update({email}, () => {this.model.email = email})
+        .update(() => {this.model.email = email})
     },
 
     updatePassWord () {
       const {email} = this.model
       this.cpass = _.merge(this.cpass, {email})
 
-      new Auth()
+      new Auth(this.cpass)
         .authorization()
-        .patchID('pass', this.cpass)
+        .patchID('pass')
     }
   },
 
