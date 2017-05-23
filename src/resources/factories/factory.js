@@ -1,5 +1,6 @@
 
 import Requester from '../requests/request'
+import store from 'store'
 
 import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'
@@ -11,6 +12,8 @@ class Factory {
   constructor (e) {
     this.entity = e
     this.header = {}
+
+    store.dispatch('onSpinner')
   }
 
   authorization () {
@@ -31,22 +34,22 @@ class Factory {
   get (params={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .get(this.entity, {params}, this.header)
-      .then(call_success)
-      .catch(call_rejected)
+      .then((e) => this.finishCallback(e, call_success))
+      .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   create (data={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .post(this.entity, data, this.header)
-      .then(call_success)
-      .catch(call_rejected)
+      .then((e) => this.finishCallback(e, call_success))
+      .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   update (data={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .put(this.entity, data, this.header)
-      .then(call_success)
-      .catch(call_rejected)
+      .then((e) => this.finishCallback(e, call_success))
+      .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   patchID (id, data, success=fsuccess) {
@@ -57,8 +60,8 @@ class Factory {
   patch (data={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .patch(this.entity, data, this.header)
-      .then(call_success)
-      .catch(call_rejected)
+      .then((e) => this.finishCallback(e, call_success))
+      .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   deleteID (id, success=fsuccess) {
@@ -69,8 +72,13 @@ class Factory {
   delete (data={}, call_success = fsuccess, call_rejected = frejected) {
     Requester
       .delete(this.entity, data, this.header)
-      .then(call_success)
-      .catch(call_rejected)
+      .then((e) => this.finishCallback(e, call_success))
+      .catch((e) => this.finishCallback(e, call_rejected))
+  }
+
+  finishCallback (e, callback) {
+    store.dispatch('offSpinner')
+    callback(e)
   }
 
 }

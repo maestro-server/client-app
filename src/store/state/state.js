@@ -18,5 +18,9 @@ export default {
 
   me: {
     _id: null
+  },
+
+  spinner: {
+    show: false
   }
 }

@@ -14,4 +14,16 @@ export default {
     commit('SET_USER', args)
   },
 
+  onSpinner ({commit}) {
+    commit('SET_SPINNER', {show: true})
+  },
+
+  offSpinner ({commit}) {
+    commit('SET_SPINNER', {show: false})
+  },
+
+  setSpinner ({commit}, args) {
+    commit('SET_SPINNER', {...args})
+  }
+
 }

@@ -10,5 +10,9 @@ export default {
 
   CALL_ALERT (state, args) {
     state.alert = Object.assign(state.alert, args)
+  },
+
+  SET_SPINNER (state, args) {
+    state.spinner = Object.assign(state.spinner, args)
   }
 }
