@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from 'pages/home/router'
-import dashboard from 'pages/dashboard/router'
-import login from 'pages/login/router'
-import logout from 'pages/logout/router'
+import home from 'src/pages/home/router'
+import dashboard from 'src/pages/dashboard/router'
+import login from 'src/pages/login/router'
+import logout from 'src/pages/logout/router'
 
-import forgot from 'pages/forgot/router'
-import create from 'pages/create/router'
+import forgot from 'src/pages/forgot/router'
+import create from 'src/pages/create/router'
 
 import Login from 'services/login'
 

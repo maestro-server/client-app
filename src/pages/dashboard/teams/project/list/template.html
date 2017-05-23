@@ -11,7 +11,7 @@
 
   <div class="col-xs-12">
 
-    <panel v-for="project in result.items">
+    <panel v-for="project in result.items" :key="project._id">
       <div class="col-xs-4">
         <h3 class="mt0">{{project.name}}</h3>
         <button class="btn btn-primary btn-sm" @click.stop="editProject(project)">

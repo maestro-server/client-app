@@ -7,13 +7,6 @@ module.exports = {
     sourceMap: isProduction
       ? config.build.productionSourceMap
       : config.dev.cssSourceMap,
-    extract: isProduction,
-    scss: 'vue-style-loader!css-loader!sass-loader',
-    sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-  }),
-  postcss: [
-    require('autoprefixer')({
-      browsers: ['last 2 versions']
-    })
-  ]
+    extract: isProduction
+  })
 }

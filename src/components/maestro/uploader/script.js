@@ -63,7 +63,6 @@ export default {
 
     finishCallBack(data, file) {
       this.spinner = false
-
       this.file=file.filename
       this.$nextTick()
       this.$emit('input', file.filename)

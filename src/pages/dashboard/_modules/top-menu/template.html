@@ -1,6 +1,6 @@
 <nav>
   <ul class="nav nav-tabs">
-    <router-link tag="li" :to="url(key)" v-for="link, key in list" active-class="active">
+    <router-link tag="li" :to="url(key)" v-for="link, key in list" :key="key" active-class="active">
       <a>{{ link }}</a>
     </router-link>
   </ul>

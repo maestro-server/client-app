@@ -35,22 +35,23 @@
                 type="password"
                 label="Password"
                 v-model="model.password"
-                v-validate.initial="'required'"
+                v-validate.initial="'required|min:4'"
                 name="password"
                 :error="makeError('password')"
               ></bs-input>
 
-              <bs-input type="password"
-                        label="Verify password"
-                        v-validate.initial="'required|confirmed:password'"
-                        name="verypassword"
-                        :error="makeError('verypassword')"
+              <bs-input
+                type="password"
+                label="Verify password"
+                v-validate.initial="'required|min:4|confirmed:password'"
+                name="verypassword"
+                :error="makeError('verypassword')"
               ></bs-input>
 
             <div class="text-right">
               <router-link to="/login" class="btn btn-default">Back</router-link>
 
-              <button type="button" class="btn btn-primary" @click="create">Sign up</button>
+              <button type="button" class="btn btn-primary" :disabled="errors.any()" @click="create">Sign up</button>
             </div>
           </div>
 

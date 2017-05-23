@@ -11,7 +11,7 @@
 
 <div class="col-xs-12">
 
-  <panel v-for="team in result.items">
+  <panel v-for="team in result.items" :key="team._id">
 
     <div class="col-xs-7">
       <h3 class="mt0">{{team.name}}</h3>
