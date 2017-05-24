@@ -14,6 +14,7 @@
   <panel v-for="team in result.items" :key="team._id">
 
     <div class="col-xs-7">
+      <imager :src="team.avatar" class="pull-left mini-avatar"></imager>
       <h3 class="mt0">{{team.name}}</h3>
       <button class="btn btn-success btn-sm" @click.stop="addUsers(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Members

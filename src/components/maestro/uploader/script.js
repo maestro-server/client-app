@@ -24,8 +24,7 @@ export default {
   computed: {
     showAvatar() {
       if(this.file) {
-        const time = Math.round(new Date().getTime()/1000)
-        return `${STATIC_URL}${this.file}?v=${time}`
+        return `${STATIC_URL}${this.file}`
       }
 
       return this.defaultImg
@@ -62,10 +61,13 @@ export default {
     },
 
     finishCallBack(data, file) {
+      const time = Math.round(new Date().getTime()/1000)
       this.spinner = false
-      this.file=file.filename
+
+      this.file=`${file.filename}?v=${time}`
+
       this.$nextTick()
-      this.$emit('input', file.filename)
+      this.$emit('input', this.file)
     }
   }
 }
