@@ -1,10 +1,10 @@
 import axios from 'axios'
-import {URL, TIMEOUT} from 'config/api.env'
+import {TIMEOUT} from 'config/api.env'
 
 export default function(headers={}) {
 
   return axios.create({
-    baseURL: URL,
+    baseURL: API_URL,
     timeout: TIMEOUT,
     headers
   })

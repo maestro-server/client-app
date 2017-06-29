@@ -16,9 +16,9 @@ export default {
 
   mounted() {
     this.setPage([
-      'Architectures',
-      'Servers and services',
-      'fa-server'
+      'Applications',
+      'Configs, new hosts',
+      'fa-cube'
     ])
   }
 }

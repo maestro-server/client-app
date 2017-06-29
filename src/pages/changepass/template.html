@@ -1,0 +1,45 @@
+<div class="login container">
+
+  <div class="row vertical-center">
+    <div class="col-sm-6 col-sm-offset-3 well-white">
+
+      <form>
+
+          <div class="col-xs-12">
+            <div class="col-xs-12 text-center">
+              <img src="~imgs/logo300.png" alt="Maestro - Login"
+                   class="text-center img-responsive-center"/><br/>
+            </div>
+
+            <h4 class="text-center col-xs-12 mt10">Change your password</h4>
+            <p>Ok, lets change your password.</p>
+
+            <bs-input
+              type="password"
+              label="Password"
+              v-model="model.password"
+              v-validate.initial="'required|min:4'"
+              name="password"
+              :error="makeError('password')"
+            ></bs-input>
+
+            <bs-input
+              type="password"
+              label="Verify password"
+              v-validate.initial="'required|min:4|confirmed:password'"
+              name="verypassword"
+              :error="makeError('verypassword')"
+            ></bs-input>
+
+            <div class="text-right">
+              <router-link to="/login" class="btn btn-default">Back</router-link>
+              <button type="button" class="btn btn-primary" :disabled="errors.any()" @click="changePass">Send</button>
+            </div>
+          </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

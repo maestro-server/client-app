@@ -7,6 +7,7 @@ import login from 'src/pages/login/router'
 import logout from 'src/pages/logout/router'
 
 import forgot from 'src/pages/forgot/router'
+import changepass from 'src/pages/changepass/router'
 import create from 'src/pages/create/router'
 
 import Login from 'services/login'
@@ -21,6 +22,7 @@ Vue.use(Router)
     login,
     logout,
     forgot,
+    changepass,
     create
   ]
 })

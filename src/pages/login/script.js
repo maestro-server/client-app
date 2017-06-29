@@ -6,7 +6,6 @@ export default {
 
   data: function () {
     return {
-      valid: false,
       model: {
         email: undefined,
         password: undefined
@@ -21,9 +20,7 @@ export default {
         new Auth(this.model)
           .auth((e) => Login.setLogin(this, e))
 
-      }).catch((e) => {
-        console.log(e)
-      });
+      }).catch();
 
     }
   }

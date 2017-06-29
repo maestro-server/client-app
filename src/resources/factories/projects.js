@@ -1,18 +1,10 @@
 
-import Factory from './factory'
+import FactoryTeam from './factoryTeam'
 
-class Projects extends Factory {
+class Projects extends FactoryTeam {
 
-  constructor(data={}, e="/projects") {
-    super(data, e)
-
-    if(this.isTeam()) {
-      this.setEntity(`/teams/${this.model.team._id}/projects`)
-    }
-  }
-
-  isTeam() {
-    return _.has(this.model, 'team._id')
+  constructor(model={}, route="/projects") {
+    super(model, route)
   }
 }
 

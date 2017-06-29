@@ -15,29 +15,18 @@
             <p>Enter both your username and email address associated to your account and we'll send you a password reset link.</p>
 
               <bs-input
-                type="email"
                 label="Email"
                 v-model="model.email"
-                required
-                icon
-                error="Insert valid email"
+                v-validate.initial="'required|email'"
+                name="email"
+                @keydown.enter="forgot"
+                :error="makeError('email')"
               ></bs-input>
-
-              <bs-input
-                type="name"
-                label="Name"
-                v-model="model.name"
-                required
-                icon
-                error="Insert name"
-              ></bs-input>
-
 
             <div class="text-right">
               <router-link to="/login" class="btn btn-default">Back</router-link>
-              <button type="button" class="btn btn-primary" :disabled="!valid" @click="login">Sign in</button>
+              <button type="button" class="btn btn-primary" :disabled="errors.any()" @click="forgot">Send</button>
             </div>
-
           </div>
 
       </form>

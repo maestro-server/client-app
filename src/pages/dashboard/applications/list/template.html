@@ -1,0 +1,49 @@
+<div>
+  <div class="pb10">
+    <h3 class="col-xs-8 pb10">
+      {{title}}
+    </h3>
+    <div class="col-xs-4 pb10 mt20">
+      <button class="btn btn-primary pull-right" @click="addE">New applications</button>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+
+    <panel v-for="application in result.items" :key="application._id">
+      <div class="col-xs-4">
+        <h3 class="mt0">{{application.name}}</h3>
+        <button class="btn btn-primary btn-sm" @click.stop="editE(application)">
+          <i class="fa fa-pencil" aria-hidden="true"></i> Edit applications
+        </button>
+        <button class="btn btn-danger btn-sm" @click.stop="deleteE(application)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Delete applications
+        </button>
+      </div>
+      <div class="col-xs-8 text-right">
+        <button class="btn btn-primary btn-xs" v-if="application.owner.refs">
+          <i class="fa fa-users" aria-hidden="true"></i> {{cap(application.owner.refs)}} <span class="badge">{{cap(application.owner.name)}}</span>
+        </button>
+
+        <button class="btn btn-default btn-xs">
+          <i class="fa fa-server" aria-hidden="true"></i> Servers/Applications <span class="badge">{{application.count || 0}}</span>
+        </button>
+      </div>
+    </panel>
+
+    <div class="text-center">
+      <pagination :total_pages="result.total_pages" :current_page="result.current_page"
+                  @changePage="changePage"></pagination>
+    </div>
+
+    <div class="text-center" v-if="result.found == 0">
+      <well>
+        <h4>You dont have any applications, Do you like to create one?</h4>
+        <hr/>
+        <button class="btn btn-primary btn-lg" @click.stop="addE">Create new Application</button>
+
+      </well>
+    </div>
+
+  </div>
+</div>

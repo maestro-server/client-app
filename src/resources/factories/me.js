@@ -3,8 +3,8 @@ import Factory from './factory'
 
 class Me extends Factory {
 
-  constructor(data={}, e="/me") {
-    super(data, e)
+  constructor(model={}, e="/me") {
+    super(model, e)
   }
 }
 

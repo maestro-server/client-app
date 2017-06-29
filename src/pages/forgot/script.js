@@ -1,19 +1,28 @@
+import Auth from 'factories/auth'
+
 export default {
-  name: 'login',
+  name: 'forgot',
 
   data: function () {
     return {
-      valid: false,
       model: {
-        email: undefined,
-        name: undefined
+        email: undefined
       }
     }
   },
 
   methods: {
-    login: function () {
-      console.log("fdsfds");
+    forgot: function () {
+
+      this.$validator.validateAll().then(() => {
+        const callback_url = `${BASE_URL}#/changepass`
+        const data = Object.assign({}, this.model, {callback_url});
+
+        new Auth(data, '/users/forgot')
+          .create()
+
+      }).catch();
+
     }
   }
 

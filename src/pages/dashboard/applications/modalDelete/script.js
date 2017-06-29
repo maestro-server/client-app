@@ -1,5 +1,5 @@
 import Modals from 'mixins/modals'
-import Projects from 'factories/projects'
+import Applications from 'factories/applications'
 
 export default {
   mixins: [Modals],
@@ -10,7 +10,7 @@ export default {
     },
 
     editSave () {
-      new Projects(this.model)
+      new Applications(this.model)
         .authorization()
         .deleteID(this.model._id, this.finishJob)
     }

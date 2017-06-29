@@ -1,4 +1,4 @@
-import Projects from 'factories/projects'
+import Applications from 'factories/applications'
 import _ from 'lodash'
 
 export default {
@@ -15,7 +15,7 @@ export default {
     MCreate () {return this.$parent.$refs.modal_create},
     MDelete () {return this.$parent.$refs.modal_delete},
     title () {
-      return this.team ? this.team.name+' Projects' : 'My Projects'
+      return this.team ? this.team.name+' Applications' : 'My Applications'
     }
   },
 
@@ -28,7 +28,7 @@ export default {
       const {team} = this
       const filter = _.merge(query, {team})
 
-      new Projects(filter)
+      new Applications(filter)
       .authorization()
       .list((e) => {this.result = e.data})
     },
@@ -60,7 +60,7 @@ export default {
       this.MDelete
         .onFinishCallBack(() => {
           const narr = this.result.items.filter((e) => {
-            return e != project
+            return e != entity
           })
           this.result.items = narr
         })

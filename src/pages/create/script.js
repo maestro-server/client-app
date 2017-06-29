@@ -23,8 +23,7 @@ export default {
         )
     },
 
-    finishCallBack (e) {
-      console.log(e)
+    finishCallBack () {
       let data = {
         show: true,
         title: `Welcome to Maestro, plz login with your new account`,

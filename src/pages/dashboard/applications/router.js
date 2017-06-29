@@ -1,9 +1,9 @@
-import comp from './architectures.vue'
+import comp from './applications'
 import tlist from './list/router'
 
 export default {
-  path: 'architectures',
-  redirect: 'architectures/list',
+  path: 'applications',
+  redirect: 'applications/list',
   component: comp,
   children: [
     tlist
