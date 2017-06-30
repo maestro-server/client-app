@@ -1,0 +1,21 @@
+<div class="col-xs-12 page">
+
+  <div class="pull-right">
+    <a class="btn btn-primary btn-xs"><i aria-hidden="true" class="fa fa-cog"></i> Settings</a>
+  </div>
+
+  <div class="card-box bg-white">
+
+    <div class="row">
+      <top-menu :list="submenu" base="dashboard/inventory"></top-menu>
+    </div>
+
+    <div class="row">
+
+      <router-view></router-view>
+
+    </div>
+
+  </div>
+
+</div>

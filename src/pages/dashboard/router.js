@@ -4,6 +4,7 @@ import settings from './settings/router'
 import teams from './teams/router'
 import architectures from './architectures/router'
 import applications from './applications/router'
+import inventory from './inventory/router'
 
 export default {
   path: '/dashboard',
@@ -13,6 +14,7 @@ export default {
     settings,
     teams,
     architectures,
-    applications
+    applications,
+    inventory
   ]
 }
