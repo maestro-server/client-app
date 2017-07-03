@@ -19,6 +19,7 @@
     "vee-validate": "^2.0.0-rc.3",
     "vue": "^2.2.6",
     "vue-router": "^2.3.1",
+    "vue-tables-2": "^0.6.37",
     "vuex": "^2.3.1"
   },
   "devDependencies": {
