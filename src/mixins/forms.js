@@ -1,4 +1,4 @@
-
+'use strict'
 // define a mixin object
 export default {
   methods: {

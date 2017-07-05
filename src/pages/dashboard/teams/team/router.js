@@ -1,3 +1,4 @@
+'use strict'
 import comp from './team'
 import tlist from './list/router'
 

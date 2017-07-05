@@ -1,4 +1,4 @@
-
+'use strict'
 import callback from './callback/Callback.vue'
 import uploader from './uploader/Uploader.vue'
 import loader from './loader/Loader.vue'

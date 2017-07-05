@@ -1,3 +1,4 @@
+'use strict'
 import {mapActions} from 'vuex'
 import Me from 'factories/me'
 import Auth from 'factories/auth'

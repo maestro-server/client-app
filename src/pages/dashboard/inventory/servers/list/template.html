@@ -9,30 +9,18 @@
   </div>
 
   <div class="col-xs-12">
+    <v-client-table v-if="ifDataLoad" name="servers-list" :data="result.items" :columns="columns" :options="options">
+      <template slot="os" scope="props">
+        {{props.row.os.base}}
+      </template>
+      <template slot="created_at" scope="props">
+        {{format(props.row.created_at)}}
+      </template>
+      <template slot="updated_at" scope="props">
+        {{format(props.row.updated_at)}}
+      </template>
+    </v-client-table>
 
-    <panel v-for="architecture in result.items" :key="architecture._id">
-      <div class="col-xs-4">
-        <h3 class="mt0">{{architecture.name}}</h3>
-        <button class="btn btn-primary btn-sm" @click.stop="editE(architecture)">
-          <i class="fa fa-pencil" aria-hidden="true"></i> Edit architecture
-        </button>
-        <button class="btn btn-danger btn-sm" @click.stop="deleteE(architecture)">
-          <i class="fa fa-trash" aria-hidden="true"></i> Delete architecture
-        </button>
-      </div>
-      <div class="col-xs-8 text-right">
-
-        <button class="btn btn-default btn-xs">
-          <i class="fa fa-server" aria-hidden="true"></i> Servers/Applications <span class="badge">{{architecture.count || 0}}</span>
-        </button>
-      </div>
-    </panel>
-    
-
-    <div class="text-center">
-      <pagination :total_pages="result.total_pages" :current_page="result.current_page"
-                  @changePage="changePage"></pagination>
-    </div>
 
     <div class="text-center" v-if="result.found == 0">
       <well>

@@ -1,3 +1,4 @@
+'use strict'
 import Modals from 'mixins/modals'
 import Teams from 'factories/teams'
 

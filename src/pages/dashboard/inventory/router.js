@@ -1,3 +1,4 @@
+'use strict'
 import comp from './inventory.vue'
 import servers from './servers/list/router'
 import applications from './applications/list/router'

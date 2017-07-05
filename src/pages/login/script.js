@@ -1,3 +1,4 @@
+'use strict'
 import Auth from 'factories/auth'
 import Login from 'services/login'
 

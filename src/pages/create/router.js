@@ -1,3 +1,4 @@
+'use strict'
 import comp from './create'
 
 export default {

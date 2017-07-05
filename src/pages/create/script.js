@@ -1,3 +1,4 @@
+'use strict'
 
 import User from 'factories/users'
 import store from 'store'

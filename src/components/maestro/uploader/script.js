@@ -1,4 +1,4 @@
-
+'use strict'
 import defaultImg from 'imgs/avatar_default.jpeg'
 import validImage from './libs/validImage'
 import Uploader from './libs/uploader'

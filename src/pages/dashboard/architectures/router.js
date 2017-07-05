@@ -1,3 +1,4 @@
+'use strict'
 import comp from './architectures.vue'
 import tlist from './list/router'
 

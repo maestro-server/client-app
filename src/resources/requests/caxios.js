@@ -1,3 +1,4 @@
+'use strict'
 import axios from 'axios'
 import {TIMEOUT} from 'config/api.env'
 

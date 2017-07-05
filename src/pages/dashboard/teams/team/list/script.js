@@ -1,4 +1,4 @@
-
+'use strict'
 import Teams from 'factories/teams'
 
 export default {

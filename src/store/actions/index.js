@@ -1,4 +1,4 @@
-
+'use strict'
 export default {
   setPage ({commit}, [title, subtitle = null, icon = null]) {
     commit('CHANGE_PAGE', ['title', title])

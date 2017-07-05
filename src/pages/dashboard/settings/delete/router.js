@@ -1,3 +1,4 @@
+'use strict'
 import comp from './delete'
 
 export default {

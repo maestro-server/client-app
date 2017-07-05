@@ -1,3 +1,4 @@
+'use strict'
 import store from 'store'
 import LocalStorageRepository from '../repositories/localStorage'
 

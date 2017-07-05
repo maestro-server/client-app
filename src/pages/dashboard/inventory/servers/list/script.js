@@ -1,5 +1,7 @@
-import Inventory from 'factories/inventory'
+'use strict'
+import Servers from 'factories/servers'
 import _ from 'lodash'
+import format from 'src/resources/libs/formatData'
 
 export default {
   data: function () {
@@ -7,7 +9,22 @@ export default {
       result: {
         items: []
       },
-      team:false
+      team:false,
+      columns: ['hostname', 'os', 'ipv4_private', 'updated_at', 'created_at'],
+      options: {
+       saveState: true,
+       uniqueKey: "_id",
+       perPage: 25,
+       filterByColumn: true,
+       sortIcon: { base:'fa', up:'fa-arrow-up', down:'fa-arrow-down' },
+       headings: {
+        hostname: 'Hostname',
+        os: 'OS',
+        ipv4_private: 'IP Private',
+        updated_at: 'Updated At',
+        created_at: 'Created At'
+      },
+      }
     }
   },
 
@@ -16,10 +33,12 @@ export default {
     MDelete () {return this.$parent.$refs.modal_delete},
     title () {
       return this.team ? this.team.name+' Servers' : 'My Servers'
-    }
+    },
+    ifDataLoad () {return this.result.items.length}
   },
 
   methods: {
+    format,
     cap(data) {
       return data.charAt(0).toUpperCase() + data.slice(1)
     },
@@ -28,7 +47,7 @@ export default {
       const {team} = this
       const filter = _.merge(query, {team})
 
-      new Inventory(filter)
+      new Servers(filter)
       .authorization()
       .list((e) => {this.result = e.data})
     },
@@ -80,6 +99,6 @@ export default {
       }
     }
 
-    this.fetchData()
+    this.fetchData({limit:1000})
   }
 }

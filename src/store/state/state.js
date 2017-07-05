@@ -1,3 +1,4 @@
+'use strict'
 /**
  * Default init state
  *

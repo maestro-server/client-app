@@ -1,3 +1,4 @@
+'use strict'
 import comp from './dashboard'
 import home from './home/router'
 import settings from './settings/router'

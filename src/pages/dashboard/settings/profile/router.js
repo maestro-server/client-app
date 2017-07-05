@@ -1,3 +1,4 @@
+'use strict'
 import comp from './profile'
 
 export default {

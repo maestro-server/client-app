@@ -1,3 +1,4 @@
+'use strict'
 import {mapActions} from 'vuex'
 
 export default {

@@ -1,3 +1,4 @@
+'use strict'
 import caxios from './caxios'
 
 const req = {

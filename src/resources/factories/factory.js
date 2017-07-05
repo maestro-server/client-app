@@ -1,3 +1,4 @@
+'use strict'
 
 import Requester from '../requests/request'
 import store from 'store'

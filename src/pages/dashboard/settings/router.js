@@ -1,3 +1,4 @@
+'use strict'
 import comp from './settings'
 import billing from './billing/router'
 import accdelete from './delete/router'

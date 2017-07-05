@@ -1,3 +1,4 @@
+'use strict'
 import Modals from 'mixins/modals'
 import Projects from 'factories/projects'
 

@@ -1,3 +1,4 @@
+'use strict'
 import ComponentsB from './bootue/index'
 import ComponentsM from './maestro/index'
 

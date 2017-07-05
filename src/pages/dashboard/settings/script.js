@@ -1,3 +1,4 @@
+'use strict'
 import {mapActions} from 'vuex'
 import topmenu from '../_modules/top-menu/top-menu.vue'
 

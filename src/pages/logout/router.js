@@ -1,3 +1,4 @@
+'use strict'
 import Login from 'services/login'
 
 export default {

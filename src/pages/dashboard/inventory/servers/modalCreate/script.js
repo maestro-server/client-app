@@ -1,3 +1,4 @@
+'use strict'
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Architectures from 'factories/architectures'

@@ -1,4 +1,4 @@
-
+'use strict'
 export default {
   SET_USER (state, user) {
     state.me = Object.assign(state.me, user)

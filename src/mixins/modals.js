@@ -1,4 +1,4 @@
-
+'use strict'
 import _ from 'lodash'
 // define a mixin object
 export default {

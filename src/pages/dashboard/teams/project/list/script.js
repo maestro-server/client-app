@@ -1,3 +1,4 @@
+'use strict'
 import Projects from 'factories/projects'
 import _ from 'lodash'
 

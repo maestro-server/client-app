@@ -1,4 +1,4 @@
-
+'use strict'
 import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Teams from 'factories/teams'

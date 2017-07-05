@@ -1,3 +1,4 @@
+'use strict'
 import comp from './applications'
 import tlist from './list/router'
 

@@ -1,4 +1,5 @@
-import Inventory from 'factories/inventory'
+'use strict'
+import Applications from 'factories/applications'
 import _ from 'lodash'
 
 export default {
@@ -28,7 +29,7 @@ export default {
       const {team} = this
       const filter = _.merge(query, {team})
 
-      new Inventory(filter)
+      new Applications(filter)
       .authorization()
       .list((e) => {this.result = e.data})
     },
