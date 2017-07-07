@@ -2,6 +2,7 @@
 import Servers from 'factories/servers'
 import _ from 'lodash'
 import format from 'src/resources/libs/formatData'
+import moment from 'moment'
 
 export default {
   data: function () {
@@ -10,20 +11,22 @@ export default {
         items: []
       },
       team:false,
-      columns: ['hostname', 'os', 'ipv4_private', 'updated_at', 'created_at'],
+      columns: ['hostname', 'ipv4_private', 'os', 'dc', 'role', 'environment', 'auth', 'user', 'updated_at', 'created_at', 'edit'],
       options: {
        saveState: true,
        uniqueKey: "_id",
        perPage: 25,
        filterByColumn: true,
        sortIcon: { base:'fa', up:'fa-arrow-up', down:'fa-arrow-down' },
+       listColumns:{
+         role: [{text:'application'}, {text:'container'}, {text:'database'}, {text:'hybrid'}],
+         environment: [{text:'production'}, {text:'staging'}, {text:'development'}, {text:'uta'}]
+       },
        headings: {
-        hostname: 'Hostname',
-        os: 'OS',
         ipv4_private: 'IP Private',
         updated_at: 'Updated At',
         created_at: 'Created At'
-      },
+      }
       }
     }
   },
@@ -49,7 +52,15 @@ export default {
 
       new Servers(filter)
       .authorization()
-      .list((e) => {this.result = e.data})
+      .list((e) => {this.result.items = e.data.items.map((d) => {
+        d.os=d.os.dist
+        d.dc=d.dc.name
+        d.user=d.auth.reduce((o, f) => `${o.admin} ${f.admin}`, {admin:''})
+        d.auth=d.auth.reduce((o, f) => `${o.name} ${f.name}`, {name:''})
+        d.updated_at = moment.utc(d.updated_at)
+        d.created_at = moment.utc(d.created_at)
+        return d
+      })})
     },
 
     addE: function () {
@@ -99,6 +110,6 @@ export default {
       }
     }
 
-    this.fetchData({limit:1000})
+    this.fetchData({limit:100})
   }
 }

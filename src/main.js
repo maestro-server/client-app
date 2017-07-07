@@ -11,7 +11,7 @@ import bootue from './components'
 import VeeValidate from 'vee-validate'
 
 import {ClientTable} from 'vue-tables-2'
-Vue.use(ClientTable, {}, true)
+Vue.use(ClientTable, {}, false)
 
 Vue.use(bootue)
 Vue.use(VeeValidate)

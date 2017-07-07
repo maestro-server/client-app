@@ -10,15 +10,11 @@
 
   <div class="col-xs-12">
     <v-client-table v-if="ifDataLoad" name="servers-list" :data="result.items" :columns="columns" :options="options">
-      <template slot="os" scope="props">
-        {{props.row.os.base}}
-      </template>
-      <template slot="created_at" scope="props">
-        {{format(props.row.created_at)}}
-      </template>
-      <template slot="updated_at" scope="props">
-        {{format(props.row.updated_at)}}
-      </template>
+      <template slot="edit" scope="props">
+        <div>
+            <a class="fa fa-edit" href="#"></a>
+        </div>
+    </template>
     </v-client-table>
 
 
