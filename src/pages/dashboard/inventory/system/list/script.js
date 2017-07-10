@@ -2,7 +2,15 @@
 import System from 'factories/system'
 import _ from 'lodash'
 
+import modalCreate from '../modalCreate/create'
+import modalDelete from '../modalDelete/delete'
+
 export default {
+  components: {
+    modalCreate,
+    modalDelete
+  },
+
   data: function () {
     return {
       result: {
@@ -13,8 +21,8 @@ export default {
   },
 
   computed: {
-    MCreate () {return this.$parent.$refs.modal_create},
-    MDelete () {return this.$parent.$refs.modal_delete},
+    MCreate () {return this.$refs.modal_create},
+    MDelete () {return this.$refs.modal_delete},
     title () {
       return this.team ? this.team.name+' System' : 'My System'
     }

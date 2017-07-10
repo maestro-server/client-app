@@ -18,7 +18,7 @@
     </v-client-table>
 
 
-    <div class="text-center" v-if="result.found == 0">
+    <div class="text-center" v-if="ifDataLoad == 0">
       <well>
         <h4>You dont have any servers, Do you like to create one?</h4>
         <hr/>
@@ -28,4 +28,7 @@
     </div>
 
   </div>
+
+  <modal-create class="mt15" ref="modal_create"></modal-create>
+  <modal-delete class="mt15" ref="modal_delete"></modal-delete>
 </div>

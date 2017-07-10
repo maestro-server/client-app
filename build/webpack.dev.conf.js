@@ -20,7 +20,7 @@ module.exports = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env,
-      'BASE_URL': JSON.stringify("http://localhost:8080"),
+      'BASE_URL': JSON.stringify("http://localhost:8880"),
       'API_URL': JSON.stringify("http://localhost:8888"),
       'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/')
     }),

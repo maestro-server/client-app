@@ -15,7 +15,7 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
+      this.text.title =  this.create ? 'Create new System' : `Edit ${this.model.name} system`
     },
 
     createSave () {
