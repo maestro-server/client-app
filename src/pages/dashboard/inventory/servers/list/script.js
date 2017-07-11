@@ -1,7 +1,6 @@
 'use strict'
 import Servers from 'factories/servers'
 import _ from 'lodash'
-import format from 'src/resources/libs/formatData'
 import moment from 'moment'
 
 import modalCreate from '../modalCreate/create'
@@ -50,7 +49,6 @@ export default {
   },
 
   methods: {
-    format,
     cap(data) {
       return data.charAt(0).toUpperCase() + data.slice(1)
     },

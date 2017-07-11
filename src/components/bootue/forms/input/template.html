@@ -2,10 +2,10 @@
      :class="[showState]">
 
   <slot name="label">
-    <label v-if="label" class="control-label" :class="horizontalLabelClass()" @click="focus">{{label}}</label>
+    <label v-if="label" class="control-label" :class="labelClass()" @click="focus">{{label}}</label>
   </slot>
 
-  <div :class="classWrapper()">
+  <div :class="wrapperClass()">
 
     <slot name="before"></slot>
 
@@ -33,9 +33,9 @@
     </div>
 
     <slot name="after"></slot>
+
+    <div v-if="showHelp" class="help-block relative" @click="focus">{{help}}</div>
+    <div v-if="showError" class="help-block with-errors relative" @click="focus">{{error}}</div>
   </div>
 
-
-  <div v-if="showHelp" class="help-block relative" @click="focus">{{help}}</div>
-  <div v-if="showError" class="help-block with-errors relative" @click="focus">{{error}}</div>
 </div>

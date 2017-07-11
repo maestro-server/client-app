@@ -1,13 +1,13 @@
 import '../Forms.vue'
 
 export default {
-    props: {
+  props: {
     clearButton: {type: Boolean, default: false},
     cols: {type: Number, default: null},
     disabled: {type: Boolean, default: false},
     help: {type: String, default: null},
     error: {type: String, default: null},
-    icon: {type: Boolean, default: true},
+    icon: {type: Boolean, default: false},
     label: {type: String, default: null},
     state: {type: String, default: null},
     name: {type: String, default: null},
@@ -16,72 +16,54 @@ export default {
     rows: {type: Number, default: 3},
     type: {type: String, default: 'text'},
     value: {default: null},
-    inline: {type: Boolean, default: false},
-    horizontal: {type: Boolean, default: false},
-    horizontalWrapper: {type: String, default: 'col-sm-10'},
-    horizontalLabelWrapper: {type: String, default: 'col-sm-2'}
+    formType: {type: String, default: null},
+    horizontalWrapper: {type: String, default: 'col-sm-9'},
+    horizontalLabelWrapper: {type: String, default: 'col-sm-3'}
   },
   data () {
     return {
-      isGroup: false,
       inState: this.state,
+      inFormType: this.formType,
       constants: {
-        SUCCESS: 'success',
-        WARNING: 'warning',
-        ERROR: 'error'
+        SUCCESS: {name: 'success', icon: 'check'},
+        WARNING: {name: 'warning', icon: 'exclamation'},
+        ERROR: {name: 'error', icon: 'times'}
       }
     }
   },
   computed: {
-    input () {return this.$refs.input},
-    showError () {return this.error},
-    showHelp () {return this.help && (!this.showError)},
-    title () {return this.error || this.help || ''},
-    showState () {return this.inState ? `has-${this.inState}` : ''},
-    labelFeedback () {return this.$slots['label'] || this.label},
-    showIcon () {
-      let icc
-      switch (this.inState) {
-        case this.constants.SUCCESS:
-          icc = 'check'
-          break
-        case this.constants.ERROR:
-          icc = 'times'
-          break
-        case this.constants.WARNING:
-          icc = 'exclamation'
-          break
-      }
-      return icc
-    }
+    input () { return this.$refs.input },
+    showError () { return this.error },
+    showHelp () { return this.help && (!this.showError) },
+    title () { return this.error || this.help || '' },
+    showState () { return this.inState ? `has-${this.inState}` : '' },
+    labelFeedback () { return this.$slots['label'] || this.label },
+    showIcon () { return this.inState ? this.constants[this.inState.toUpperCase()].icon : null }
   },
   watch: {
     error (val) {
-      this.inState=val ? this.constants.ERROR : this.constants.SUCCESS
+      this.setState(val)
     },
     value (val) {
       this.bindChanges(val)
     }
   },
   methods: {
-    bindChanges (value, ev='input') {
-      this.input.value = value
-      this.$emit(ev, value)
+    setState (val) {
+      this.inState = val ? this.constants.ERROR.name : this.constants.SUCCESS.name
     },
     attr (value) {
       return ~['', null, undefined].indexOf(value) || value instanceof Function ? null : value
     },
     emit (e) {
-      this.$emit(
-        e.type,
-        e.type === 'input' ? e.target.value : e
-      )
+      this.$emit(e.type, e.type === 'input' ? e.target.value : e)
     },
     bindInput (e) {
-      this.bindChanges(
-        e.type === 'input' ? e.target.value : e,
-        e.type
-      )
+      this.bindChanges(e.type === 'input' ? e.target.value : e, e.type)
+    },
+    bindChanges (value, ev = 'input') {
+      this.input.value = value
+      this.$emit(ev, value)
     },
     focus () {
       this.input.focus()
@@ -89,28 +71,37 @@ export default {
     reset () {
       this.bindChanges('')
     },
-    classWrapper () {
-      if (this.isGroup && !this.inline) {
-        return 'input-group'
+    wrapperClass () {
+      let wClass
+
+      switch (this.inFormType) {
+        case 'group':
+          wClass = 'input-group'
+          break;
+        case 'inline':
+          wClass = 'relative inline'
+          break;
+        case 'horizontal':
+          wClass = this.horizontalWrapper
+          break;
+        default:
+          wClass = 'relative'
       }
 
-      if (this.horizontal) {
-        return this.horizontalWrapper
-      }
-
-      return 'relative'
+      return wClass
     },
-    horizontalLabelClass () {
-      if (this.horizontal) {
-        return this.horizontalLabelWrapper
-      }
+    labelClass () {
+      return this.inFormType === "horizontal" ? this.horizontalLabelWrapper : null;
     }
   },
-  created () {
-    this._input = true
-  },
   mounted () {
-    this.isGroup = typeof this.$slots.before === 'object' || typeof this.$slots.after === 'object'
+    const group = typeof this.$slots.before === 'object' || typeof this.$slots.after === 'object'
+
+    this.inFormType = group ? 'group' : this.formType
+
+    if(this.error) {
+      this.setState(this.error)
+    }
   },
   beforeDestroy () {
     if (this._parent) {
