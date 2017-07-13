@@ -1,18 +1,14 @@
 'use strict'
-import Servers from 'factories/servers'
+import Applications from 'factories/applications'
 import _ from 'lodash'
 
 import modalCreate from '../modalCreate/create'
 import modalDelete from '../modalDelete/delete'
 
-import svTable from './table'
-
-
 export default {
   components: {
     modalCreate,
-    modalDelete,
-    svTable
+    modalDelete
   },
 
   data: function () {
@@ -20,8 +16,7 @@ export default {
       result: {
         items: []
       },
-      team:false,
-      ifDataLoad: false
+      team:false
     }
   },
 
@@ -29,7 +24,7 @@ export default {
     MCreate () {return this.$refs.modal_create},
     MDelete () {return this.$refs.modal_delete},
     title () {
-      return this.team ? this.team.name+' Servers' : 'My Servers'
+      return this.team ? this.team.name+' Inventory Settings' : 'My Inventory Settings'
     }
   },
 
@@ -42,12 +37,9 @@ export default {
       const {team} = this
       const filter = _.merge(query, {team})
 
-      new Servers(filter)
+      new Applications(filter)
       .authorization()
-      .list((e) => {
-        this.ifDataLoad = e.data.items.length
-        this.$refs.svTable.prepared(e.data.items)
-      })
+      .list((e) => {this.result = e.data})
     },
 
     addE: function () {
@@ -82,6 +74,10 @@ export default {
           this.result.items = narr
         })
         .show(_.merge(entity, {team}))
+    },
+
+    changePage (page) {
+      this.fetchData({page})
     }
   },
 
@@ -93,6 +89,6 @@ export default {
       }
     }
 
-    this.fetchData({limit:300})
+    this.fetchData()
   }
 }

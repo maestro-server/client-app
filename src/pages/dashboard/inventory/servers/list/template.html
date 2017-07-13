@@ -9,21 +9,14 @@
   </div>
 
   <div class="col-xs-12">
-    <v-client-table v-if="ifDataLoad" name="servers-list" :data="result.items" :columns="columns" :options="options">
-      <template slot="edit" scope="props">
-          <div>
-              <a class="fa fa-edit" href="#"></a>
-          </div>
-      </template>
-    </v-client-table>
 
+    <sv-table ref="svTable"></sv-table>
 
-    <div class="text-center" v-if="ifDataLoad == 0">
+    <div class="text-center" v-if="ifDataLoad === 0">
       <well>
         <h4>You dont have any servers, Do you like to create one?</h4>
         <hr/>
         <button class="btn btn-primary btn-lg" @click.stop="addE">Create new servers</button>
-
       </well>
     </div>
 

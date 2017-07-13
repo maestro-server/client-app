@@ -3,6 +3,8 @@ import comp from './inventory.vue'
 import servers from './servers/list/router'
 import applications from './applications/list/router'
 import system from './system/list/router'
+import datacenter from './datacenter/list/router'
+import settings from './settings/single/router'
 
 export default {
   path: 'inventory',
@@ -11,6 +13,8 @@ export default {
   children: [
     servers,
     applications,
-    system
+    system,
+    datacenter,
+    settings
   ]
 }

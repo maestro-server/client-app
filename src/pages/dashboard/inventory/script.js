@@ -5,7 +5,7 @@ import topMenu from '../_modules/top-menu/top-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'servers': 'Servers', 'system': 'System', 'applications': 'Applications'},
+      submenu: {'servers': 'Servers', 'system': 'System', 'applications': 'Applications', 'datacenter':'Datacenters'},
       reference: null,
       teams: ['teste']
     }
