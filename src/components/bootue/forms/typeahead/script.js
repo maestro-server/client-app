@@ -1,4 +1,4 @@
-import delayer from '../_core/_utils/delayer.js'
+import delayer from '../../_core/_utils/delayer.js'
 import getJSON from './_utils/getJSON.js'
 
 const DELAY = 300
@@ -19,7 +19,11 @@ export default {
     placeholder: {type: String},
     template: {type: String},
     type: {type: String, default: 'text'},
-    value: {type: String, default: ''}
+    value: {type: String, default: ''},
+    label: {type: String, default: null},
+    formType: {type: String, default: null},
+    horizontalWrapper: {type: String, default: 'col-sm-9'},
+    horizontalLabelWrapper: {type: String, default: 'col-sm-3'}
   },
   data () {
     return {

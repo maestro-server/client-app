@@ -11,10 +11,12 @@ export default {
 
   data () {
     return {
-      server: {os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], dc: {}},
+      server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], dc: {}},
       storage: {name: null, size: null, root: null},
       service: {service: null, version: null},
       auth: {name: null, admin: null, type: null},
+      datacenter: {name: null, zones: []},
+      zone: null,
       URL: API_URL+"/teams/autocomplete?complete=",
       template: "{{item.name}} - <small>{{item.email}}</small>",
       showKeyForm: false,
@@ -25,9 +27,11 @@ export default {
         env: ['Production', 'Staging', 'Development', 'UTA'],
         role: ['Application', 'Container', 'Database', 'Hybrid'],
         os: ['Linux', 'Windows', 'Solaris', 'FreeBSD', 'MacOS'],
-        services: ["Apache HTTPD", "Nginx", "Docker", "Oracle Databse", 'MySQL'],
+        services: ["Apache HTTPD", "Nginx", "Docker", "Oracle Database", 'MySQL'],
         datacenter: []
-      }
+      },
+      showModalDC: false,
+      showModalZones: false
     }
   },
 
@@ -89,6 +93,22 @@ export default {
 
     deleteServices(key) {
       this.server.services.splice(key, 1)
+    },
+
+    addZones() {
+      if(this.zone) {
+        this.datacenter.zones.push(this.zone)
+        this.zone = ''
+      }
+    },
+
+    deleteZones(key) {
+      this.datacenter.zones.splice(key, 1)
+    },
+
+    clearZones() {
+      this.datacenter.zones = []
+      this.showModalZones = false
     }
   }
 

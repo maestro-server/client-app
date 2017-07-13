@@ -32,7 +32,6 @@ import tabs from './tabs/Tabs.vue'
 import './thumbnail/Thumbnail.vue'
 import toggleButton from './togglebutton/ToggleButton.vue'
 import tooltip from './tooltip/Tooltip.vue'
-import typeahead from './typeahead/Typeahead.vue'
 import './typography/Type.vue'
 import './typography/font-awesome/FontAwesome.vue'
 import well from './wells/Wells.vue'
@@ -65,7 +64,6 @@ let components = {
   tabs,
   toggleButton,
   tooltip,
-  typeahead,
   well
 }
 
