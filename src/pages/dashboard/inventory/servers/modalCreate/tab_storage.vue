@@ -1,6 +1,7 @@
 <template>
   <div>
-    <bs-input form-type="horizontal" label="Name" v-model="storage.name" name="name" data-vv-scope="storage" v-validate.initial="'required'"
+    <bs-input form-type="horizontal" label="Name" v-model="storage.name" name="name" data-vv-scope="storage"
+              v-validate.initial="'required'"
               placeholder="/dev/sda"></bs-input>
     <bs-input form-type="horizontal" label="Size (GB)" v-model="storage.size" name="size" placeholder="500"
               data-vv-scope="storage" v-validate.initial="'numeric'"
@@ -46,30 +47,30 @@
 
 
 <script>
-'use strict'
+  'use strict'
 
-export default {
+  export default {
 
-  data: function () {
-    return {
-      value: [],
-      storage: {name: null, size: null, root: null}
-    }
-  },
-
-  methods: {
-    addStorage() {
-      if(this.storage.name && this.storage.size) {
-        this.value.push(this.storage)
-        this.storage = {}
+    data: function () {
+      return {
+        value: [],
+        storage: {name: null, size: null, root: null}
       }
     },
 
-    deleteStorage(key) {
-      this.value.splice(key, 1)
-    }
-  }
+    methods: {
+      addStorage() {
+        if (this.storage.name && this.storage.size) {
+          this.value.push(this.storage)
+          this.storage = {}
+        }
+      },
 
-}
+      deleteStorage(key) {
+        this.value.splice(key, 1)
+      }
+    }
+
+  }
 
 </script>

@@ -31,34 +31,34 @@
 
 
 <script>
-'use strict'
+  'use strict'
 
-export default {
+  export default {
 
-  props: {
-    options: {default: []}
-  },
+    props: {
+      options: {default: []}
+    },
 
-  data: function () {
-    return {
-      value: [],
-      service: {service: null, version: null}
-    }
-  },
-
-  methods: {
-    addServices() {
-      if(this.service.name) {
-        this.value.push(this.service)
-        this.service = {}
+    data: function () {
+      return {
+        value: [],
+        service: {service: null, version: null}
       }
     },
 
-    deleteServices(key) {
-      this.value.splice(key, 1)
-    }
-  }
+    methods: {
+      addServices() {
+        if (this.service.name) {
+          this.value.push(this.service)
+          this.service = {}
+        }
+      },
 
-}
+      deleteServices(key) {
+        this.value.splice(key, 1)
+      }
+    }
+
+  }
 
 </script>

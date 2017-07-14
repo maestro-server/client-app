@@ -22,6 +22,10 @@ export default {
 
   data: function () {
     return {
+      datacenter: {name: null, zones: []},
+      zone: null,
+      showModalDC: false,
+      showModalZones: false,
       server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], tags: [], dc: {}},
       options: {
         serverType: ['Virtual', 'Exalogic', 'Exadata', 'Physical', 'PSeries'],
