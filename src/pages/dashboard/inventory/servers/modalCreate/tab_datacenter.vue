@@ -47,11 +47,14 @@
         <div class="col-xs-12">
           <small>Here, choose which database options you might use during servers creation.</small>
           <form class="col-xs-12">
-            <bs-input class="mt10" v-model="datacenter.name" label="Datacenter"
+            <bs-input v-model="datacenter.name" label="Datacenter"
+                      placeholder="AWS - OTB, California, Azure"></bs-input>
+
+            <bs-input v-model="datacenter.provider" label="Provider"
                       placeholder="AWS, Google Cloud, Azure"></bs-input>
           </form>
 
-          <a href="#" v-if="datacenter.name" @click.prevent.stop="showModalZones = true" class="pull-right">I like to create my own zones</a>
+          <a href="#" @click.prevent.stop="showModalZones = true" class="pull-right">I like to create my own zones</a>
 
           <bs-label type="success pull-right mt10">{{datacenter.zones.length}} zones created</bs-label>
         </div>
@@ -113,7 +116,7 @@
     data: function () {
       return {
         value: {name: null, zone: null, instance: null, type: null},
-        datacenter: {name: null, zones: []},
+        datacenter: {name: null, zones: [], provider: null},
         zone: null,
         showModalDC: false,
         showModalZones: false
