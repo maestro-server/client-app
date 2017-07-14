@@ -11,7 +11,6 @@
     <bs-select v-if="options.length > 0" form-type="horizontal" :options="options" v-model="value.name"
                label="Datacenter"></bs-select>
 
-
     <div class="row" v-if="options.length == 0">
       <div class="col-xs-3 text-right">
         <label>Datacenter</label>
@@ -26,9 +25,9 @@
 
     <div class="col-xs-12 mt10"></div>
 
-    <typeahead form-type="horizontal" name="zone" v-model="value.zone" label="Zone"></typeahead>
+    <typeahead form-type="horizontal" name="zone" v-model="value.zone" label="Zone" placeholder="sa-east-1"></typeahead>
 
-    <typeahead form-type="horizontal" name="instance" v-model="value.instance" label="Instance type"></typeahead>
+    <typeahead form-type="horizontal" name="instance" v-model="value.instance" label="Instance type" placeholder="m3.medium"></typeahead>
 
 
     <div class="row mt20">
@@ -41,6 +40,8 @@
         </button-group>
       </div>
     </div>
+
+    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="value.id"></bs-input>
 
     <modal title="Datacenters" effect="fade" v-model="showModalDC" @closed="showModalDC = false" sub-modal small>
       <div class="row">
