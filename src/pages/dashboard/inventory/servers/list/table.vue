@@ -1,5 +1,10 @@
 <template>
-  <v-client-table v-if="items.length > 0" name="servers-list" :data="items" :columns="columns" :options="options">
+  <v-server-table
+  name="servers-list"
+  url="http://127.0.0.1:8888/servers/"
+  :columns="columns"
+  :options="options">
+
     <template slot="hostname" scope="props">
         <a href="#">{{props.row.hostname}}</a>
     </template>
@@ -9,13 +14,12 @@
             <a class="fa fa-trash btn btn-danger btn-xs" href="#"></a>
         </div>
     </template>
-  </v-client-table>
+  </v-server-table>
 </template>
 
 
 <script>
 'use strict'
-import moment from 'moment'
 
 export default {
 
@@ -24,6 +28,12 @@ export default {
       items: [],
       columns: ['hostname', 'ipv4_private', 'os', 'dc', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
       options: {
+       responseAdapter: (resp) => {
+         return {
+           data: this.prepared(resp.data.items),
+           count: resp.data.found
+         }
+       },
        saveState: true,
        uniqueKey: "_id",
        perPage: 25,
@@ -45,13 +55,13 @@ export default {
 
   methods: {
     prepared (data) {
-      this.items = data.map((d) => {
+      return data.map((d) => {
        d.os=d.os.dist
        d.dc=d.dc.name
        d.user=d.auth.reduce((o, f) => `${o.admin} ${f.admin}`, {admin:''})
        d.auth=d.auth.reduce((o, f) => `${o.name} ${f.name}`, {name:''})
-       d.updated_at = moment.utc(d.updated_at)
-       d.created_at = moment.utc(d.created_at)
+       d.updated_at = new Date(d.updated_at).toLocaleString(),
+       d.created_at = new Date(d.created_at).toLocaleString()
        return d
      })
     }

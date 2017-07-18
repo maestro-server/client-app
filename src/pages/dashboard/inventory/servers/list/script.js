@@ -1,5 +1,4 @@
 'use strict'
-import Servers from 'factories/servers'
 import _ from 'lodash'
 
 import modalCreate from '../modalCreate/create'
@@ -20,8 +19,7 @@ export default {
       result: {
         items: []
       },
-      team:false,
-      ifDataLoad: false
+      team:false
     }
   },
 
@@ -36,18 +34,6 @@ export default {
   methods: {
     cap(data) {
       return data.charAt(0).toUpperCase() + data.slice(1)
-    },
-
-    fetchData: function (query={}) {
-      const {team} = this
-      const filter = _.merge(query, {team})
-
-      new Servers(filter)
-      .authorization()
-      .list((e) => {
-        this.ifDataLoad = e.data.items.length
-        this.$refs.svTable.prepared(e.data.items)
-      })
     },
 
     addE: function () {
@@ -92,7 +78,5 @@ export default {
         'name': this.$route.query.team_name
       }
     }
-
-    this.fetchData({limit:300})
   }
 }

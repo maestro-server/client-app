@@ -9,17 +9,7 @@
   </div>
 
   <div class="col-xs-12">
-
     <sv-table ref="svTable"></sv-table>
-
-    <div class="text-center" v-if="ifDataLoad === 0">
-      <well>
-        <h4>You dont have any servers, Do you like to create one?</h4>
-        <hr/>
-        <button class="btn btn-primary btn-lg" @click.stop="addE">Create new servers</button>
-      </well>
-    </div>
-
   </div>
 
   <modal-create class="mt15" ref="modal_create"></modal-create>
