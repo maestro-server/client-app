@@ -22,19 +22,28 @@
                      label="Provider" v-validate.initial="'required'" @selected="setupRegions"></bs-select>
           <bs-input v-if="ownProvider" form-type="horizontal" label="Provider" name="provider" v-model="provider"></bs-input>
 
-           <div class="text-right">
-             <a href="#" @click.stop.prevent="showModalRegions = true"><i class="fa fa-plus-circle"></i> Create Regions ({{options.regions.length}})</a>
-           </div>
-          <bs-select form-type="horizontal" :options="options.regions" v-model="regions" name="regions[]"
-                      label="Regions" multiple placeholder="All Regions Avaliable"
-                      help="Select wich regions is permitted" @selected="setupZones"></bs-select>
 
-
-          <div class="text-right">
-            <a href="#" @click.stop.prevent="showModalZones = true"><i class="fa fa-plus-circle"></i> Create Zones ({{options.zones.length}})</a>
+          <div class="row">
+            <div class="col-xs-3 text-right mt5">
+              <label>Regions</label>
+            </div>
+            <div class="col-xs-9">
+              <button class="btn btn-primary btn-sm" @click.stop.prevent="showModalRegions = true">
+                <i class="fa fa-cloud-upload"></i> Manange Regions</button>
+              {{regions.length}} regions avaliable
+            </div>
           </div>
-          <bs-select form-type="horizontal" :options="options.zones" v-model="zones"
-                      label="Zones" multiple placeholder="All Zones Avaliable" help="Select wich zones is permitted"></bs-select>
+
+          <div class="row mt20">
+            <div class="col-xs-3 text-right mt5">
+              <label>Zones</label>
+            </div>
+            <div class="col-xs-9">
+              <button class="btn btn-primary btn-sm" @click.stop.prevent="showModalZones = true">
+                <i class="fa fa-bullseye"></i> Manange Zones</button>
+              {{zones.length}} zones avaliable
+            </div>
+          </div>
 
           <hr/>
 
@@ -67,7 +76,7 @@
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
       <button type="button" class="btn btn-primary" @click="actionClick"
-              :disabled="errors.any('modals')">Create Database
+              :disabled="errors.any('modals')">Save
       </button>
     </div>
 
@@ -87,17 +96,17 @@
     </div>
 
     <div class="well col-xs-12 mt10">
-      <ul v-if="options.regions.length > 0" class="list-group">
-        <li class="list-group-item" v-for="znc, index in options.regions" :key="index">
+      <ul v-if="regions.length > 0" class="list-group">
+        <li class="list-group-item" v-for="znc, index in regions" :key="index">
           {{znc}}
 
           <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteRegions(index)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>
-      <span v-if="options.regions.length <= 0" class="col-xs-12 text-center">None regions</span>
-      <bs-label v-if="options.regions.length > 0" type="default">{{options.regions.length}} Region<span
-        v-if="options.regions.length > 1">s</span></bs-label>
+      <span v-if="regions.length <= 0" class="col-xs-12 text-center">None regions</span>
+      <bs-label v-if="regions.length > 0" type="default">{{regions.length}} Region<span
+        v-if="regions.length > 1">s</span></bs-label>
     </div>
 
 
@@ -113,7 +122,7 @@
       <div class="col-xs-12">
         <small>I would like to delimit which zones can be used (Can create more than one zone).</small>
         <form>
-          <bs-input class="mt10" v-model="zone" label="Zone" placeholder="sa-east-1"></bs-input>
+          <bs-input class="mt10" v-model="zone" label="Zone" placeholder="sa-east-1a"></bs-input>
         </form>
         <a href="#" @click.prevent.stop="addZones" class="btn btn-primary btn-sm pull-left"><i
           class="fa fa-plus-circle"></i> Zone</a>
@@ -121,17 +130,17 @@
     </div>
 
     <div class="well col-xs-12 mt10">
-      <ul v-if="options.zones.length > 0" class="list-group">
-        <li class="list-group-item" v-for="znc, index in options.zones" :key="index">
+      <ul v-if="zones.length > 0" class="list-group">
+        <li class="list-group-item" v-for="znc, index in zones" :key="index">
           {{znc}}
 
           <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteZones(index)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>
-      <span v-if="options.zones.length <= 0" class="col-xs-12 text-center">None zone</span>
-      <bs-label v-if="options.zones.length > 0" type="default">{{options.zones.length}} Zone<span
-        v-if="options.zones.length > 1">s</span></bs-label>
+      <span v-if="zones.length <= 0" class="col-xs-12 text-center">None zone</span>
+      <bs-label v-if="zones.length > 0" type="default">{{zones.length}} Zone<span
+        v-if="zones.length > 1">s</span></bs-label>
     </div>
 
 

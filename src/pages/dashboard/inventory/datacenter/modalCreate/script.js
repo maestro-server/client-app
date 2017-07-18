@@ -1,7 +1,7 @@
 'use strict'
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
-import Servers from 'factories/servers'
+import Datacenters from 'factories/datacenters'
 
 
 export default {
@@ -20,8 +20,6 @@ export default {
       auth: {},
       options: {
         provider: ['AWS', 'OpenStack'],
-        regions: [],
-        zones: [],
         baser: {
           'AWS': [
             {region: 'sa-east-1 (South America)', zones: ['sa-east-1a', 'sa-east-1b', 'sa-east-1c']},
@@ -38,32 +36,48 @@ export default {
   },
 
   watch: {
-    provider: function(val) {
-      this.model.provider = val
+    regions (val) {
+      this.setupZones()
     }
   },
 
   methods: {
     changeProvider(bool) {
-      this.provider = ""
-      this.regions = this.zones = this.options.zones = this.options.regions = []
+      this.provider = null
+      this.regions = []
+      this.zones = []
       this.ownProvider = bool
     },
 
+
+    setupModel () {
+      this.model.regions = this.regions
+      this.model.zones = this.zones
+      this.model.provider = this.provider
+    },
+
     afterShow () {
-      this.text.title =  this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
+      this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
+
+      this.regions = this.model.regions || []
+      this.zones = this.model.zones || []
+      this.provider = this.model.provider
     },
 
     createSave () {
-      new Servers(this.model)
-      .authorization()
-      .create(this.finishJob)
+      this.setupModel()
+
+      new Datacenters(this.model)
+        .authorization()
+        .create(this.finishJob)
     },
 
     editSave () {
-      new Servers(this.model)
-      .authorization()
-      .patchID(this.model._id, this.finishJob)
+      this.setupModel()
+
+      new Datacenters(this.model)
+        .authorization()
+        .patchID(this.model._id, this.finishJob)
     },
 
     setTeam(item) {
@@ -78,51 +92,54 @@ export default {
 
     setupRegions() {
       if (this.options.baser.hasOwnProperty(this.provider))
-        this.options.regions = this.options.baser[this.provider].map(e=>e.region)
+        this.regions = this.options.baser[this.provider].map(e => e.region)
     },
 
     setupZones() {
-      if (this.regions.length > 0) {
-        let arr = []
+      let arr = []
+
+      if (this.options.baser.hasOwnProperty(this.provider) && this.regions.length > 0) {
+
         this.options.baser[this.provider].map((reg) => {
-          if(this.regions.indexOf(reg.region) > -1) {
+          if (this.regions.indexOf(reg.region) > -1) {
             arr = arr.concat(reg.zones)
           }
         })
 
-        this.options.zones = arr
       }
+
+      this.zones = arr
     },
 
     addZones() {
       if (this.zone) {
-        this.options.zones.push(this.zone)
+        this.zones.push(this.zone)
         this.zone = ''
       }
     },
 
     deleteZones(key) {
-      this.options.zones.splice(key, 1)
+      this.zones.splice(key, 1)
     },
 
     clearZones() {
-      this.options.zones = []
+      this.zones = []
       this.showModalZones = false
     },
 
     addRegions() {
       if (this.region) {
-        this.options.regions.push(this.region)
+        this.regions.push(this.region)
         this.region = ''
       }
     },
 
     deleteRegions(key) {
-      this.options.regions.splice(key, 1)
+      this.regions.splice(key, 1)
     },
 
     clearRegions() {
-      this.options.regions = []
+      this.regions = []
       this.showModalRegions = false
     }
 
