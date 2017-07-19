@@ -25,8 +25,7 @@ export default {
             {region: 'sa-east-1 (South America)', zones: ['sa-east-1a', 'sa-east-1b', 'sa-east-1c']},
             {region: 'us-east-1 (US East (Virginia)', zones: ['us-east-1a', 'us-east-1b', 'us-east-1c']},
             {region: 'us-east-2 (US East (Ohio))', zones: ['us-east-2a', 'us-east-2b', 'us-east-2c']}
-          ],
-          'OpenStack': []
+          ]
         },
         connections: {
           openstack: ['SSl without validation', 'SSL', 'Non-SSl']
@@ -36,7 +35,7 @@ export default {
   },
 
   watch: {
-    regions (val) {
+    regions () {
       this.setupZones()
     }
   },
@@ -44,11 +43,14 @@ export default {
   methods: {
     changeProvider(bool) {
       this.provider = null
-      this.regions = []
-      this.zones = []
       this.ownProvider = bool
+      this.resetDC()
     },
 
+    resetDC() {
+      this.regions = []
+      this.zones = []
+    },
 
     setupModel () {
       this.model.regions = this.regions
@@ -59,9 +61,13 @@ export default {
     afterShow () {
       this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
 
-      this.regions = this.model.regions || []
-      this.zones = this.model.zones || []
-      this.provider = this.model.provider
+      const regions = this.model.regions || []
+      const zones = this.model.zones || []
+      const provider = this.model.provider
+
+      this.$set(this, 'regions', regions)
+      this.$set(this, 'zones', zones)
+      this.$set(this, 'provider', provider)
     },
 
     createSave () {
@@ -91,24 +97,21 @@ export default {
     },
 
     setupRegions() {
-      if (this.options.baser.hasOwnProperty(this.provider))
+      if (this.options.baser.hasOwnProperty(this.provider)) {
         this.regions = this.options.baser[this.provider].map(e => e.region)
+      }
     },
 
     setupZones() {
-      let arr = []
-
       if (this.options.baser.hasOwnProperty(this.provider) && this.regions.length > 0) {
-
+        let arr = []
         this.options.baser[this.provider].map((reg) => {
           if (this.regions.indexOf(reg.region) > -1) {
             arr = arr.concat(reg.zones)
           }
         })
-
+        this.zones = arr
       }
-
-      this.zones = arr
     },
 
     addZones() {

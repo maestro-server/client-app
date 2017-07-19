@@ -12,7 +12,12 @@
 
     <panel v-for="item in result.items" :key="item._id">
       <div class="col-xs-4">
-        <h3 class="mt0">{{item.name}}</h3>
+        <h3 class="mt0">
+          {{item.name}}
+          <bs-label type="success" class="btn-xs" v-if="item.sucessed === true">Connected</bs-label>
+          <bs-label type="warning" class="btn-xs" v-if="item.sucessed === undefined">Disconnected</bs-label>
+          <bs-label type="danger" class="btn-xs" v-if="item.sucessed === false">Disconnected</bs-label>
+        </h3>
         <button class="btn btn-primary btn-sm" @click.stop="editE(item)">
           <i class="fa fa-pencil" aria-hidden="true"></i> Edit datacenter
         </button>
@@ -25,6 +30,10 @@
         <button class="btn btn-default btn-xs">
           <i class="fa fa-server" aria-hidden="true"></i> Instance <span class="badge">{{item.count || 0}}</span>
         </button>
+
+        <bs-label type="primary"><i class="fa fa-cloud"></i> {{ item.provider }}</bs-label>
+        <bs-label type="success"><i class="fa fa-cloud-upload"></i> {{ item.regions.length }} Regions</bs-label>
+        <bs-label type="success"><i class="fa fa-bullseye"></i> {{ item.zones.length }} Zones</bs-label>
       </div>
     </panel>
 
