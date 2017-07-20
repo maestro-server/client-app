@@ -2,6 +2,8 @@
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
+import Adminer from 'factories/adminer'
+import formatAdminer from 'src/resources/libs/formatAdminerData'
 
 import tabDatacenter from './tab_datacenter'
 import tabAuth from './tab_auth'
@@ -29,7 +31,7 @@ export default {
       server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], tags: [], dc: {}},
       options: {
         serverType: ['Virtual', 'Exalogic', 'Exadata', 'Physical', 'PSeries'],
-        status: ['Active', 'Desactive', 'Avaliable'],
+        status: ['Active', 'Avaliable'],
         auths: ['PKI', 'AD', 'LDAP', 'Password'],
         env: ['Production', 'Staging', 'Development', 'UTA'],
         role: ['Application', 'Container', 'Database', 'Hybrid'],
@@ -67,6 +69,14 @@ export default {
       this.model.input = ""
     }
 
+  },
+
+  created () {
+    new Adminer({key: 'server_options'})
+      .authorization()
+      .list((e) => {
+        this.options = formatAdminer(e)
+      })
   }
 
 }

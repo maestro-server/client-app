@@ -13,13 +13,13 @@
         </div>
 
         <div class="col-xs-12 text-right clearfix">
-          <button v-if="!ownProvider" type="button" class="btn btn-primary btn-xs" @click="changeProvider(true)">I have my own Provider</button>
-          <button v-if="ownProvider" type="button" class="btn btn-warning btn-xs" @click="changeProvider(false)">Back to Cloud providers</button>
+          <button v-if="!ownProvider" type="button" class="btn btn-primary btn-xs" @click="changeProvider(true)" :disabled="!this.create">I have my own Provider</button>
+          <button v-if="ownProvider" type="button" class="btn btn-warning btn-xs" @click="changeProvider(false)" :disabled="!this.create">Back to Cloud providers</button>
         </div>
 
         <div class="col-xs-12 mt10">
           <bs-select v-if="!ownProvider" form-type="horizontal" :options="options.provider" v-model="provider" name="provider"
-                     label="Provider" v-validate.initial="'required'" @selected="setupRegions"></bs-select>
+                     label="Provider" v-validate.initial="'required'" :disabled="!this.create"></bs-select>
           <bs-input v-if="ownProvider" form-type="horizontal" label="Provider" name="provider" v-model="provider"></bs-input>
 
 

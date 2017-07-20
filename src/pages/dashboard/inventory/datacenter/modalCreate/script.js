@@ -2,6 +2,8 @@
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Datacenters from 'factories/datacenters'
+import Adminer from 'factories/adminer'
+import formatAdminer from 'src/resources/libs/formatAdminerData'
 
 
 export default {
@@ -18,25 +20,19 @@ export default {
       zones: [],
       zone: null,
       auth: {},
-      options: {
-        provider: ['AWS', 'OpenStack'],
-        baser: {
-          'AWS': [
-            {region: 'sa-east-1 (South America)', zones: ['sa-east-1a', 'sa-east-1b', 'sa-east-1c']},
-            {region: 'us-east-1 (US East (Virginia)', zones: ['us-east-1a', 'us-east-1b', 'us-east-1c']},
-            {region: 'us-east-2 (US East (Ohio))', zones: ['us-east-2a', 'us-east-2b', 'us-east-2c']}
-          ]
-        },
-        connections: {
-          openstack: ['SSl without validation', 'SSL', 'Non-SSl']
-        }
-      }
+      options: {}
     }
   },
 
   watch: {
     regions () {
-      this.setupZones()
+      if(this.create)
+        this.setupZones()
+    },
+
+    provider () {
+      if(this.create)
+        this.setupRegions()
     }
   },
 
@@ -56,18 +52,23 @@ export default {
       this.model.regions = this.regions
       this.model.zones = this.zones
       this.model.provider = this.provider
+      this.model.metas = {ownProvider: this.ownProvider}
     },
 
     afterShow () {
       this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
 
-      const regions = this.model.regions || []
-      const zones = this.model.zones || []
-      const provider = this.model.provider
+      _.defaults(this.model, {
+        regions: [],
+        zones: [],
+        provider: null,
+        metas: {ownProvider:false}
+      })
 
-      this.$set(this, 'regions', regions)
-      this.$set(this, 'zones', zones)
-      this.$set(this, 'provider', provider)
+      this.$set(this, 'regions', this.model.regions)
+      this.$set(this, 'zones', this.model.zones)
+      this.$set(this, 'provider', this.model.provider)
+      this.$set(this, 'ownProvider', this.model.metas.ownProvider)
     },
 
     createSave () {
@@ -103,15 +104,17 @@ export default {
     },
 
     setupZones() {
+      let arr = []
       if (this.options.baser.hasOwnProperty(this.provider) && this.regions.length > 0) {
-        let arr = []
+
         this.options.baser[this.provider].map((reg) => {
           if (this.regions.indexOf(reg.region) > -1) {
             arr = arr.concat(reg.zones)
           }
         })
-        this.zones = arr
+
       }
+      this.zones = arr
     },
 
     addZones() {
@@ -146,6 +149,14 @@ export default {
       this.showModalRegions = false
     }
 
+  },
+
+  created () {
+    new Adminer({key: 'datacenter_options'})
+      .authorization()
+      .list((e) => {
+        this.options = formatAdminer(e)
+      })
   }
 
 }
