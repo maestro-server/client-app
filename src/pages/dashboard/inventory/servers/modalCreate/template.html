@@ -33,7 +33,7 @@
 
           <hr/>
 
-          <bs-select form-type="horizontal" :options="options.env" v-model="server.environment" name="environment"
+          <bs-select form-type="horizontal" :options="options.environment" v-model="server.environment" name="environment"
                      label="Environment"></bs-select>
           <bs-select form-type="horizontal" :options="options.role" v-model="server.roles" name="roles"
                      label="Role"></bs-select>
@@ -60,7 +60,7 @@
         <!-- ================= Datacenter ================= -->
         <!-- ============================================== -->
         <tab header="Datacenter">
-          <tab-datacenter :options="options.datacenter" :serverType="options.serverType"></tab-datacenter>
+          <tab-datacenter :serverType="options.serverType"></tab-datacenter>
         </tab>
 
         <!-- ================= Storage ================= -->

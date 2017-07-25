@@ -66,7 +66,7 @@
 export default {
 
   props: {
-    options: {default: []}
+    options: {}
   },
 
   data: function () {

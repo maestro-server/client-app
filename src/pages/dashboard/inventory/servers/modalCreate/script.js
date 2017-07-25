@@ -24,21 +24,11 @@ export default {
 
   data: function () {
     return {
-      datacenter: {name: null, zones: []},
       zone: null,
       showModalDC: false,
       showModalZones: false,
       server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], tags: [], dc: {}},
-      options: {
-        serverType: ['Virtual', 'Exalogic', 'Exadata', 'Physical', 'PSeries'],
-        status: ['Active', 'Avaliable'],
-        auths: ['PKI', 'AD', 'LDAP', 'Password'],
-        env: ['Production', 'Staging', 'Development', 'UTA'],
-        role: ['Application', 'Container', 'Database', 'Hybrid'],
-        os: ['Linux', 'Windows', 'Solaris', 'FreeBSD', 'MacOS'],
-        services: ["Apache HTTPD", "Nginx", "Docker", "Oracle Database", 'MySQL'],
-        datacenter: []
-      }
+      options: {}
     }
   },
 
@@ -68,10 +58,9 @@ export default {
       this.setTeam(item)
       this.model.input = ""
     }
-
   },
 
-  created () {
+  created() {
     new Adminer({key: 'server_options'})
       .authorization()
       .list((e) => {
