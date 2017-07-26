@@ -21,10 +21,12 @@
 
 <script>
 'use strict'
-
+import _ from 'lodash'
 import Adminer from 'factories/adminer'
 import Datacenters from 'factories/datacenters'
+import Login from 'services/login'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
 
@@ -33,18 +35,12 @@ export default {
       items: [],
       columns: ['hostname', 'ipv4_private', 'os', 'dc', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
       options: {
-       responseAdapter: (resp) => {
-         return {
+       headers: { Authorization: Login.Authorization() },
+       responseAdapter: (resp) => ({
            data: this.prepared(resp.data.items),
-           count: resp.data.found
-         }
-       },
-       saveState: true,
-       uniqueKey: "_id",
-       perPage: 25,
-       filterByColumn: true,
+           count: resp.data.found}
+        ),
        filterable: ['hostname', 'ipv4_private', 'os', 'dc', 'role', 'environment', 'auth', 'user'],
-       sortIcon: { base:'fa', up:'fa-arrow-up', down:'fa-arrow-down' },
        listColumns:{
          role:[],
          environment: [],
@@ -73,42 +69,31 @@ export default {
      })
    },
 
-   fetchDataCenters: function (query = {}) {
-     const {team} = this
-     const filter = _.merge(query, {team})
+   fetchAdminer (e) {
+      const data = formatAdminer(e)
+     _.forEach(this.options.listColumns, (val, key) => {
+       const list = _.get(data, key)
 
-     new Datacenters(filter)
-       .authorization()
-       .list((e) => {
-         const data = _.get(e, 'data.items')
-         if(!_.isEmpty(data)) {
-           this.options.listColumns.dc = data.map(item=>({text: item.name}))
-         }
-       })
+       if(!_.isEmpty(list)) {
+         this.options.listColumns[key] = list.map(item=>({text: item}))
+       }
+     })
    },
 
-   fetchOptions: function (query = {}) {
-     const {team} = this
-     const filter = _.merge(query, {team})
-
-     new Adminer(filter)
-       .authorization()
-       .list((e) => {
-          const data = formatAdminer(e)
-          _.forEach(this.options.listColumns, (val, key) => {
-            const list = _.get(data, key)
-
-            if(!_.isEmpty(list)) {
-              this.options.listColumns[key] = list.map(item=>({text: item}))
-            }
-          });
-       })
+   fetchDatacenter (e) {
+     const data = _.get(e, 'data.items')
+     if(!_.isEmpty(data)) {
+       this.options.listColumns.dc = data.map(item=>({text: item.name}))
+     }
    }
  },
 
  created() {
-   this.fetchOptions({key: 'server_options'})
-   this.fetchDataCenters()
+   FectherEntity(Adminer)(this)({k: 'server_options', p: true})
+   .find(this.fetchAdminer, {key: 'server_options'})
+
+   FectherEntity(Datacenters)(this)({k: 'datacenter'})
+   .find(this.fetchDatacenter)
  }
 }
 

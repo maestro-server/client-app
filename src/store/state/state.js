@@ -23,5 +23,7 @@ export default {
 
   spinner: {
     show: false
-  }
+  },
+
+  cache: {}
 }

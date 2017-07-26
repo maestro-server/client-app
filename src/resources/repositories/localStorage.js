@@ -12,9 +12,13 @@ class LocalStorage {
     return this
   }
 
-  createStore (token) {
+  createStore (result) {
+    if(_.isObject(result)) {
+      result = JSON.stringify(result)
+    }
+
     try {
-      localStorage.setItem(this.ACCESS, token)
+      localStorage.setItem(this.ACCESS, result)
     } catch(e) {
       console.log(e)
     }
@@ -23,7 +27,15 @@ class LocalStorage {
   }
 
   restoreStore () {
-    return localStorage.getItem(this.ACCESS)
+    const result = localStorage.getItem(this.ACCESS)
+
+    if(!_.isEmpty(result)) {
+      try {
+        return JSON.parse(result)
+      } catch(e) {
+        return result
+      }
+    }
   }
 
   deleteStore () {

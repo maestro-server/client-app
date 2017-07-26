@@ -24,6 +24,10 @@ export default {
 
   setSpinner ({commit}, args) {
     commit('SET_SPINNER', {...args})
+  },
+
+  callCache ({commit}, args) {
+    commit('CALL_CACHE', {...args})
   }
 
 }

@@ -14,5 +14,9 @@ export default {
 
   SET_SPINNER (state, args) {
     state.spinner = Object.assign(state.spinner, args)
+  },
+
+  CALL_CACHE (state, args) {
+    state.cache = Object.assign(state.cache, args)
   }
 }

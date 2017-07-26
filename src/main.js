@@ -9,13 +9,13 @@ import mixins_forms from 'mixins/forms'
 
 import bootue from './components'
 import VeeValidate from 'vee-validate'
-import {ServerTable} from 'vue-tables-2'
+import {ServerTable} from 'maestro-vue-tables-2'
 
 
 Vue.use(bootue)
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
-Vue.use(ServerTable, {}, false)
+Vue.use(ServerTable, {}, true)
 
 /* eslint-disable no-new */
 new Vue({
