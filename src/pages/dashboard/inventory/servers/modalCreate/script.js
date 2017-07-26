@@ -28,7 +28,16 @@ export default {
       showModalDC: false,
       showModalZones: false,
       server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], tags: [], dc: {}},
-      options: {}
+      options: {
+        status:[],
+        environment:[],
+        os:[],
+        serverType:[],
+        storage:[],
+        auths:[],
+        services:[],
+        tags:[]
+      }
     }
   },
 
