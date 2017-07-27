@@ -4,6 +4,7 @@
   url="http://127.0.0.1:8888/servers/"
   :columns="columns"
   :options="options"
+  ref="vTable"
   >
 
     <template slot="hostname" scope="props">
@@ -11,8 +12,8 @@
     </template>
     <template slot="actions" scope="props">
         <div>
-            <a class="fa fa-edit btn btn-primary btn-xs" href="#"></a>
-            <a class="fa fa-trash btn btn-danger btn-xs" href="#"></a>
+            <a class="fa fa-edit btn btn-primary btn-xs" @click.stop="editP(props.row)"></a>
+            <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteE(props.row)"></a>
         </div>
     </template>
   </v-server-table>
@@ -59,15 +60,21 @@ export default {
   methods: {
     prepared (data) {
       return data.map((d) => {
-       d.os=`${d.os.base} ${d.os.dist}`
-       d.dc=d.dc.name
-       d.user=d.auth.reduce((o, f) => `${o.admin} ${f.admin}`, {admin:''})
-       d.auth=d.auth.reduce((o, f) => `${o.name} ${f.name}`, {name:''})
-       d.updated_at = new Date(d.updated_at).toLocaleString(),
+       d.os=`${_.get(d, 'os.base', '')} ${_.get(d, 'os.dist', '')}`
+       d.dc=_.get(d, 'dc.name', '-')
+       d.user=this.reduceARR(d, 'auth', (o, f) => `${o.admin} ${f.admin}`, {admin:''})
+       d.auth=this.reduceARR(d, 'auth', (o, f) => `${o.name} ${f.name}`, {name:''})
+       d.updated_at = new Date(d.updated_at).toLocaleString()
        d.created_at = new Date(d.created_at).toLocaleString()
        return d
      })
-   },
+    },
+
+    reduceARR (obj, k, fn) {
+      if(!_.isEmpty(obj[k])) {
+        return obj[k].reduce(fn)
+      }
+    },
 
    fetchAdminer (e) {
       const data = formatAdminer(e)
@@ -85,6 +92,10 @@ export default {
      if(!_.isEmpty(data)) {
        this.options.listColumns.dc = data.map(item=>({text: item.name}))
      }
+   },
+
+   editP (data) {
+     this.$parent.editE(data)
    }
  },
 

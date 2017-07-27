@@ -4,6 +4,7 @@ import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
+import FectherEntity from 'services/fetchEntity'
 
 import tabDatacenter from './tab_datacenter'
 import tabAuth from './tab_auth'
@@ -27,7 +28,8 @@ export default {
       zone: null,
       showModalDC: false,
       showModalZones: false,
-      server: {status: "Active",  os: {base: null, dist: null, version: null}, storage:[], auth:[], services: [], tags: [], dc: {}},
+      server: {status: "Active", storage:[], auth:[], services: [], tags: [], dc: {}},
+      os: {base: null, dist: null, version: null},
       options: {
         status:[],
         environment:[],
@@ -44,15 +46,27 @@ export default {
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
+
+      this.$set(this, 'server', this.model)
+      this.$set(this, 'os', this.model.os)
+    },
+
+    setupModel () {
+      this.model.os = this.os
+      this.model = this.server
     },
 
     createSave () {
+      this.setupModel()
+
       new Servers(this.model)
       .authorization()
       .create(this.finishJob)
     },
 
     editSave () {
+      this.setupModel()
+
       new Servers(this.model)
       .authorization()
       .patchID(this.model._id, this.finishJob)
@@ -66,15 +80,20 @@ export default {
     teamSelected(item) {
       this.setTeam(item)
       this.model.input = ""
+    },
+
+    fetchData() {
+      FectherEntity(Adminer)(this)({k: 'server_options', p: true})
+      .find(this.fetchAdminer, {key: 'server_options'})
+    },
+
+    fetchAdminer (e) {
+      this.options = formatAdminer(e)
     }
   },
 
   created() {
-    new Adminer({key: 'server_options'})
-      .authorization()
-      .list((e) => {
-        this.options = formatAdminer(e)
-      })
+    this.fetchData()
   }
 
 }

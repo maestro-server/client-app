@@ -15,7 +15,7 @@ import {ServerTable} from 'maestro-vue-tables-2'
 Vue.use(bootue)
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
-Vue.use(ServerTable, {}, true)
+Vue.use(ServerTable, {})
 
 /* eslint-disable no-new */
 new Vue({

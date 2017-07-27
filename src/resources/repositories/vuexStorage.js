@@ -1,5 +1,6 @@
 'use strict'
 
+import _ from 'lodash'
 import store from 'src/store'
 
 class VuexStorage {
@@ -28,7 +29,9 @@ class VuexStorage {
   }
 
   deleteStore () {
-    localStorage.removeItem(this.ACCESS)
+    const content = this.restoreStore()
+    const newValue = _.omit(content, this.ACCESS)
+    this.createStore(newValue)
   }
 }
 

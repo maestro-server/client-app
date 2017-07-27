@@ -32,6 +32,13 @@ const Cache = ({k, t, p}) => (fn) => {
           }
 
           fn(data)
+        },
+
+        remove () {
+          new Repository(k)
+                    .deleteStore();
+
+          return proc(callback)
         }
     };
 };

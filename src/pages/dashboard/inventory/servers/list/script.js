@@ -41,7 +41,7 @@ export default {
 
       this.MCreate
         .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.fetchData()})
+        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
         .show({team})
     },
 

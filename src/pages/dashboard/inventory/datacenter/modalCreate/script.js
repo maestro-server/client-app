@@ -4,6 +4,7 @@ import Modals from 'mixins/modals'
 import Datacenters from 'factories/datacenters'
 import Adminer from 'factories/adminer'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
+import FectherEntity from 'services/fetchEntity'
 
 
 export default {
@@ -147,16 +148,17 @@ export default {
     clearRegions() {
       this.regions = []
       this.showModalRegions = false
-    }
+    },
+
+    fetchAdminer (e) {
+       this.options = formatAdminer(e)
+    },
 
   },
 
   created () {
-    new Adminer({key: 'datacenter_options'})
-      .authorization()
-      .list((e) => {
-        this.options = formatAdminer(e)
-      })
+    FectherEntity(Adminer)(this)({k: 'datacenter_options', p: true, t: 86400})
+    .find(this.fetchAdminer, {key: 'datacenter_options'})
   }
 
 }

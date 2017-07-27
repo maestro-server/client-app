@@ -20,9 +20,9 @@
             </div>
           </div>
 
-          <bs-input class="mt20" form-type="horizontal" name="hostname" label="Hostname" v-model="server.hostname"
+          <bs-input class="mt20" form-type="horizontal" name="hostname" label="Hostname*" v-model="server.hostname"
                     v-validate.initial="'required'" :error="makeError('hostname')"></bs-input>
-          <bs-input form-type="horizontal" name="ipv4_private" label="IP Private" v-model="server.ipv4_private"
+          <bs-input form-type="horizontal" name="ipv4_private" label="IP Private*" v-model="server.ipv4_private"
                     v-validate.initial="'required|ip'" :error="makeError('ipv4_private')"></bs-input>
           <bs-input form-type="horizontal" name="ipv4_public" label="IP Public" v-model="server.ipv4_public"
                     v-validate.initial="'ip'" :error="makeError('ipv4_public')"></bs-input>
@@ -34,21 +34,21 @@
           <hr/>
 
           <bs-select form-type="horizontal" :options="options.environment" v-model="server.environment" name="environment"
-                     label="Environment"></bs-select>
-          <bs-select form-type="horizontal" :options="options.role" v-model="server.roles" name="roles"
-                     label="Role"></bs-select>
+                     label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
+          <bs-select form-type="horizontal" :options="options.role" v-model="server.role" name="role"
+                     label="Role*" v-validate.initial="'required'" :error="makeError('role')"></bs-select>
 
           <div class="row">
             <div class="col-xs-3 text-right mt5">
-              <label>OS</label>
+              <label>OS*</label>
             </div>
             <div class="col-xs-9">
-              <bs-select form-type="horizontal" :options="options.os" v-model="server.os.base" name="OS Base"
+              <bs-select form-type="horizontal" :options="options.os" v-model="os.base" name="OS Base"
                          placeholder="Operational System" v-validate.initial="'required'"
                          :error="makeError('OS Base')"></bs-select>
-              <bs-input form-type="horizontal" v-if="server.os.base" v-model="server.os.dist" name="OS Dist"
+              <bs-input form-type="horizontal" v-if="os.base" v-model="os.dist" name="OS Dist"
                         placeholder="Distro"></bs-input>
-              <bs-input form-type="horizontal" v-if="server.os.base" v-model="server.os.version" name="OS Version"
+              <bs-input form-type="horizontal" v-if="os.base" v-model="os.version" name="OS Version"
                         placeholder="Version"></bs-input>
             </div>
 
@@ -93,7 +93,7 @@
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any()">Save</button>
     </div>
 
   </modal>

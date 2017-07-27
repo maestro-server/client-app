@@ -6,6 +6,7 @@ import modalCreate from '../modalCreate/create'
 import modalDelete from '../modalDelete/delete'
 
 import Datacenters from 'factories/datacenters'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   components: {
@@ -39,15 +40,9 @@ export default {
       return data.charAt(0).toUpperCase() + data.slice(1)
     },
 
-    fetchData: function (query = {}) {
-      const {team} = this
-      const filter = _.merge(query, {team})
-
-      new Datacenters(filter)
-        .authorization()
-        .list((e) => {
-          this.result = e.data
-        })
+    fetchData: function () {
+      FectherEntity(Datacenters)(this)({k: 'datacenter'})
+      .find((e) => this.result = e.data)
     },
 
     addE: function () {
