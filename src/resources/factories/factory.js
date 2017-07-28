@@ -38,6 +38,11 @@ class Factory {
     this.get(success)
   }
 
+  getID (id, success=fsuccess) {
+    this.entity += "/"+id
+    this.get(success)
+  }
+
   get (call_success = fsuccess, call_rejected = frejected) {
     const params = this.model
 

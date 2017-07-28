@@ -8,12 +8,13 @@
   >
 
     <template slot="hostname" scope="props">
-        <a href="#">{{props.row.hostname}}</a>
+        <router-link :to="'/dashboard/inventory/servers/single/'+props.row._id">{{props.row.hostname}}</router-link>
     </template>
     <template slot="actions" scope="props">
         <div>
-            <a class="fa fa-edit btn btn-primary btn-xs" @click.stop="editP(props.row)"></a>
-            <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteE(props.row)"></a>
+            <router-link :to="'/dashboard/inventory/servers/single/'+props.row._id" class="fa fa-eye btn btn-primary btn-xs"></router-link>
+            <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
+            <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
         </div>
     </template>
   </v-server-table>
@@ -96,6 +97,10 @@ export default {
 
    editP (data) {
      this.$parent.editE(data)
+   },
+
+   deleteP (data) {
+     this.$parent.deleteE(data)
    }
  },
 

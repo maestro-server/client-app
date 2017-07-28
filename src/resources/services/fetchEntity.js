@@ -15,6 +15,17 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
             .authorization()
             .list(end)
         });
+    },
+
+    findOne (fn, _id) {
+      const filter = {team}
+
+      Cache(opts)(fn)
+        .process((end) => {
+          new Entity(filter)
+            .authorization()
+            .getID(_id, end)
+        });
     }
   }
 

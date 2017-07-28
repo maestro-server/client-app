@@ -8,8 +8,8 @@
 
     <div class="mt10 clearfix col-xs-12"></div>
 
-    <bs-select v-if="options.length > 0" form-type="horizontal" :options="options" v-model="value.name"
-               label="Datacenter"></bs-select>
+    <bs-select v-if="options.length > 0" form-type="horizontal" :options="options" v-model="datacenter"
+               label="Datacenter" placeholder="Select Datacenter"></bs-select>
 
     <div class="row" v-if="options.length == 0">
       <div class="col-xs-3 text-right">
@@ -25,23 +25,24 @@
 
     <div class="col-xs-12 mt10"></div>
 
-    <typeahead form-type="horizontal" name="zone" v-model="value.zone" label="Zone" placeholder="sa-east-1"></typeahead>
+    <bs-select form-type="horizontal" :options="datacenter.regions" v-model="model.region"
+               label="Region" placeholder="Select Region"></bs-select>
 
-    <typeahead form-type="horizontal" name="instance" v-model="value.instance" label="Instance type" placeholder="m3.medium"></typeahead>
-
+    <bs-select form-type="horizontal" :options="datacenter.zones" v-model="model.zone"
+               label="Zones" placeholder="Select Zone" search></bs-select>
 
     <div class="row mt20">
       <div class="col-xs-3 text-right mt5">
         <label>Type</label>
       </div>
       <div class="col-xs-9">
-        <button-group v-model="value.type" type="primary">
+        <button-group v-model="model.type" type="primary">
           <bs-radio v-for="stc, i in serverType" :key="stc" :selected-value="stc">{{stc}}</bs-radio>
         </button-group>
       </div>
     </div>
 
-    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="value.id"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="model.id"></bs-input>
 
   </div>
 </template>
@@ -49,6 +50,9 @@
 
 <script>
   'use strict'
+
+  import Datacenters from 'factories/datacenters'
+  import FectherEntity from 'services/fetchEntity'
 
   export default {
     props: {
@@ -58,7 +62,7 @@
     data: function () {
       return {
         options: [],
-        value: {name: null, zone: null, instance: null, type: null},
+        model: {name: null, zone: null, instance: null, type: null},
         datacenter: {name: null, zones: [], provider: null},
         zone: null,
         showModalDC: false,
@@ -67,25 +71,22 @@
     },
 
     methods: {
-      addZones() {
-        if (this.zone) {
-          this.datacenter.zones.push(this.zone)
-          this.zone = ''
+      fetchDatacenter (e) {
+        const data = _.get(e, 'data.items')
+        if(!_.isEmpty(data)) {
+          this.model = {}
+          this.options = data.map(item=>({value: item, label: item.name}))
         }
       },
 
-      deleteZones(key) {
-        this.datacenter.zones.splice(key, 1)
-      },
-
-      clearZones() {
-        this.datacenter.zones = []
-        this.showModalZones = false
-      },
-
-      actionClick() {
-
+      fetchData: function () {
+        FectherEntity(Datacenters)(this)({k: 'datacenter'})
+        .find(this.fetchDatacenter)
       }
+    },
+
+    created () {
+      this.fetchData()
     }
   }
 

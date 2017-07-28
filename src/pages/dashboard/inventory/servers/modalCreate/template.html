@@ -23,7 +23,7 @@
           <bs-input class="mt20" form-type="horizontal" name="hostname" label="Hostname*" v-model="server.hostname"
                     v-validate.initial="'required'" :error="makeError('hostname')"></bs-input>
           <bs-input form-type="horizontal" name="ipv4_private" label="IP Private*" v-model="server.ipv4_private"
-                    v-validate.initial="'required|ip'" :error="makeError('ipv4_private')"></bs-input>
+                    v-validate="'required|ip'" :error="makeError('ipv4_private')"></bs-input>
           <bs-input form-type="horizontal" name="ipv4_public" label="IP Public" v-model="server.ipv4_public"
                     v-validate.initial="'ip'" :error="makeError('ipv4_public')"></bs-input>
           <bs-input form-type="horizontal" name="cpu" label="CPU (cores)" v-model="server.cpu"
@@ -96,7 +96,6 @@
       <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any()">Save</button>
     </div>
 
-  </modal>
   </modal>
 
 

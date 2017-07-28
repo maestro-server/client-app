@@ -1,18 +1,15 @@
 'use strict'
 import _ from 'lodash'
-import svTable from './table'
 
+import Servers from 'factories/servers'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
-  components: {
-    svTable
-  },
 
   data: function () {
     return {
-      result: {
-        items: []
-      },
+      id: null,
+      model: {},
       team:false
     }
   },
@@ -44,7 +41,7 @@ export default {
 
       this.MCreate
         .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .onFinishCallBack(() => this.fetchData())
         .show(_.merge(entity, {team}))
     },
 
@@ -52,12 +49,19 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .onFinishCallBack(() => {this.$route.push('/dashboard/inventory/servers')})
         .show(_.merge(entity, {team}))
-    }
+    },
+
+    fetchData: function (id) {
+      FectherEntity(Servers)(this)({k: 'server_'+id})
+      .findOne((e) => this.model = e.data, id)
+    },
   },
 
   created () {
+    this.fetchData(this.$route.params.id)
+
     if(_.has(this.$route, 'query.team_id')) {
       this.team = {
         '_id': this.$route.query.team_id,

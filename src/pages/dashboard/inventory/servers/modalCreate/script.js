@@ -47,6 +47,20 @@ export default {
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
 
+      if(!this.create) {
+        this.editLoad()
+      }
+    },
+
+    editLoad () {
+      const {_id} = this.model
+      FectherEntity(Servers)(this)({k: 'server_'+_id})
+      .findOne((e) => this.model = e.data, _id)
+
+      _.defaults(this.model, {
+        os: {base:null}
+      })
+
       this.$set(this, 'server', this.model)
       this.$set(this, 'os', this.model.os)
     },
