@@ -1,5 +1,5 @@
 'use strict'
-// import _ from 'lodash'
+import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
@@ -49,25 +49,36 @@ export default {
 
       if(!this.create) {
         this.editLoad()
+        return;
       }
+
+      this.resetDC()
     },
 
     editLoad () {
       const {_id} = this.model
       FectherEntity(Servers)(this)({k: 'server_'+_id})
-      .findOne((e) => this.model = e.data, _id)
+      .findOne((e) => {
+        this.model = e.data
+        this.$set(this, 'server', this.model)
+        this.$set(this, 'os', this.model.os)
+      }, _id)
+    },
 
-      _.defaults(this.model, {
-        os: {base:null}
+    resetDC() {
+      this.server = {}
+      this.os = {}
+      this.fields = _.map(this.fields, (e) => {
+        e.touched = false
+        e.dirty = false
+        return e
       })
-
-      this.$set(this, 'server', this.model)
-      this.$set(this, 'os', this.model.os)
+      this.errors.clear()
     },
 
     setupModel () {
-      this.model.os = this.os
-      this.model = this.server
+      this.model = _.pickBy(this.server, _.identity)
+      this.model.os = _.pickBy(this.os, _.identity)
     },
 
     createSave () {

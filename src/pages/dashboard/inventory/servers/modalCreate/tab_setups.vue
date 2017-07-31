@@ -48,14 +48,20 @@
 
     methods: {
       addServices() {
-        if (this.service.name) {
-          this.value.push(this.service)
+        const svc = _.pickBy(this.service, _.identity)
+        const exist = _.find(this.value, ['name', svc.name])
+
+        if(!exist) {
           this.service = {}
+
+          this.value.push(svc)
+          this.$emit('update', _.get(this, 'value', []))
         }
       },
 
       deleteServices(key) {
         this.value.splice(key, 1)
+        this.$emit('update', _.get(this, 'value', []))
       }
     }
 
