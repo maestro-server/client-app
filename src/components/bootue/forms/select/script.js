@@ -139,7 +139,16 @@ export default {
   },
   methods: {
     setState (val) {
-      this.inState = val ? this.constants.ERROR.name : this.constants.SUCCESS.name
+      this.inState = this.logicState(val) || false;
+    },
+    logicState (val) {
+      if(val) {
+        return this.constants.ERROR.name
+      }
+
+      if(!val && this.value) {
+        return this.constants.SUCCESS.name
+      }
     },
     close () {
       this.show = false
@@ -229,10 +238,10 @@ export default {
       switch (this.formType) {
         case 'inline':
           wClass = 'relative inline'
-        break;
+          break;
         case 'horizontal':
           wClass = this.horizontalWrapper
-        break;
+          break;
         default:
           wClass = 'relative'
       }

@@ -12,7 +12,7 @@ export default {
     state: {type: String, default: null},
     name: {type: String, default: null},
     placeholder: {type: String, default: null},
-    readonly: {type: Boolean, default: false},
+    readonly: {type: Boolean, default: falsse},
     rows: {type: Number, default: 3},
     type: {type: String, default: 'text'},
     value: {default: null},
@@ -50,7 +50,16 @@ export default {
   },
   methods: {
     setState (val) {
-      this.inState = val ? this.constants.ERROR.name : this.constants.SUCCESS.name
+      this.inState = this.logicState(val) || false;
+    },
+    logicState (val) {
+      if(val) {
+        return this.constants.ERROR.name
+      }
+
+      if(!val && this.value) {
+        return this.constants.SUCCESS.name
+      }
     },
     attr (value) {
       return ~['', null, undefined].indexOf(value) || value instanceof Function ? null : value

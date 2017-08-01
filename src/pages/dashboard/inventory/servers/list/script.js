@@ -13,15 +13,19 @@ export default {
       result: {
         items: []
       },
-      team:false
+      team: false
     }
   },
 
   computed: {
-    MCreate () {return this.$parent.$refs.modal_create},
-    MDelete () {return this.$parent.$refs.modal_delete},
-    title () {
-      return this.team ? this.team.name+' Servers' : 'My Servers'
+    MCreate() {
+      return this.$parent.$refs.modal_create
+    },
+    MDelete() {
+      return this.$parent.$refs.modal_delete
+    },
+    title() {
+      return this.team ? this.team.name + ' Servers' : 'My Servers'
     }
   },
 
@@ -34,8 +38,10 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .setupSteps(1, 1, 1)
+        .onFinishCallBack(() => {
+          this.$refs.svTable.$refs.vTable.refresh()
+        })
         .show({team})
     },
 
@@ -43,8 +49,10 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .setupSteps(1, 1, 1)
+        .onFinishCallBack(() => {
+          this.$refs.svTable.$refs.vTable.refresh()
+        })
         .show(_.merge(entity, {team}))
     },
 
@@ -52,13 +60,15 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .onFinishCallBack(() => {
+          this.$refs.svTable.$refs.vTable.refresh()
+        })
         .show(_.merge(entity, {team}))
     }
   },
 
-  created () {
-    if(_.has(this.$route, 'query.team_id')) {
+  created() {
+    if (_.has(this.$route, 'query.team_id')) {
       this.team = {
         '_id': this.$route.query.team_id,
         'name': this.$route.query.team_name

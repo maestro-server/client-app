@@ -45,14 +45,20 @@
 
     methods: {
       addTags() {
-        if (this.tags.value) {
-          this.value.push(this.tags)
+        const tags = _.pickBy(this.tags, _.identity)
+        const exist = _.find(this.value, ['key', tags.key])
+
+        if(!exist) {
           this.tags = {}
+
+          this.value.push(tags)
+          this.$emit('update', _.get(this, 'value', []))
         }
       },
 
       deleteTags(key) {
         this.value.splice(key, 1)
+        this.$emit('update', _.get(this, 'value', []))
       }
     }
   }

@@ -41,7 +41,7 @@ export default {
 
       this.MCreate
         .setupSteps(1,1,1)
-        .onFinishCallBack(() => this.fetchData())
+        .onFinishCallBack(() => this.fetchData(entity._id))
         .show(_.merge(entity, {team}))
     },
 
