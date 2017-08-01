@@ -61,40 +61,40 @@
 
 
 <script>
-  'use strict'
+'use strict'
 
-  export default {
+export default {
 
-    props: {
-      options: {}
-    },
+  props: {
+    options: {}
+  },
 
-    data: function () {
-      return {
-        value: [],
-        auth: {name: null, admin: null, type: null},
-        showKeyForm: false
-      }
-    },
+  data: function () {
+    return {
+      value: [],
+      auth: {name: null, admin: null, type: null},
+      showKeyForm: false
+    }
+  },
 
-    methods: {
-      addAuth() {
-        const auth = _.pickBy(this.auth, _.identity)
-        const exist = _.find(this.value, ['name', tags.name])
+  methods: {
+    addAuth() {
+      const auth = _.pickBy(this.auth, _.identity)
+      const exist = _.find(this.value, ['name', tags.name])
 
-        if(!exist) {
-          this.auth = {}
+      if(!exist) {
+        this.auth = {}
 
-          this.value.push(auth)
-          this.$emit('update', _.get(this, 'value', []))
-        }
-      },
-
-      deleteAuth(key) {
-        this.value.splice(key, 1)
+        this.value.push(auth)
         this.$emit('update', _.get(this, 'value', []))
       }
+    },
+
+    deleteAuth(key) {
+      this.value.splice(key, 1)
+      this.$emit('update', _.get(this, 'value', []))
     }
   }
+}
 
 </script>

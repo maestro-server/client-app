@@ -84,7 +84,7 @@
 
       fetchData: function () {
         FectherEntity(Datacenters)(this)({k: 'datacenter'})
-          .find(this.fetchDatacenter)
+        .find(this.fetchDatacenter)
       },
 
       updateProvider: function() {

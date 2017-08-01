@@ -58,11 +58,11 @@ export default {
     editLoad () {
       const {_id} = this.model
       FectherEntity(Servers)(this)({k: 'server_'+_id})
-        .findOne((e) => {
-          this.model = e.data
-          this.$set(this, 'server', this.model)
-          this.$set(this, 'os', this.model.os)
-        }, _id)
+      .findOne((e) => {
+        this.model = e.data
+        this.$set(this, 'server', this.model)
+        this.$set(this, 'os', this.model.os)
+      }, _id)
     },
 
     resetDC() {
@@ -85,16 +85,16 @@ export default {
       this.setupModel()
 
       new Servers(this.model)
-        .authorization()
-        .create(this.finishJob)
+      .authorization()
+      .create(this.finishJob)
     },
 
     editSave () {
       this.setupModel()
 
       new Servers(this.model)
-        .authorization()
-        .patchID(this.model._id, this.finishJob)
+      .authorization()
+      .patchID(this.model._id, this.finishJob)
     },
 
     setTeam(item) {
@@ -109,7 +109,7 @@ export default {
 
     fetchData() {
       FectherEntity(Adminer)(this)({k: 'server_options', p: true})
-        .find(this.fetchAdminer, {key: 'server_options'})
+      .find(this.fetchAdminer, {key: 'server_options'})
     },
 
     fetchAdminer (e) {
