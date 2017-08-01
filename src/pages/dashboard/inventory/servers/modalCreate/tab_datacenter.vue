@@ -8,8 +8,10 @@
 
     <div class="mt10 clearfix col-xs-12"></div>
 
+    {{model}}
+
     <bs-select v-if="options.length > 0" form-type="horizontal" :options="options" v-model="datacenter"
-               label="Datacenter" placeholder="Select Datacenter" @selected="updateProvider"></bs-select>
+               label="Datacenter" placeholder="Select Datacenter" @selected="updateProvider" ref="s_provider"></bs-select>
 
     <div class="row" v-if="options.length == 0">
       <div class="col-xs-3 text-right">
@@ -26,10 +28,10 @@
     <div class="col-xs-12 mt10"></div>
 
     <bs-select form-type="horizontal" :options="datacenter.regions" v-model="model.region"
-               label="Region" placeholder="Select Region" @selected="updateModel"></bs-select>
+               label="Region" placeholder="Select Region" @selected="updateModel" ref="s_regions"></bs-select>
 
     <bs-select form-type="horizontal" :options="datacenter.zones" v-model="model.zone"
-               label="Zones" placeholder="Select Zone" search @selected="updateModel"></bs-select>
+               label="Zones" placeholder="Select Zone" search @selected="updateModel" refs="s_zones"></bs-select>
 
     <div class="row mt20">
       <div class="col-xs-3 text-right mt5">
@@ -42,8 +44,8 @@
       </div>
     </div>
 
-    <bs-input class="mt20" form-type="horizontal" label="Instance Type" v-model="model.instance"></bs-input>
-    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="model.instance_id"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="Instance Type" v-model="model.instance" @input="updateModel"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="model.instance_id" @input="updateModel"></bs-input>
 
   </div>
 </template>
@@ -60,24 +62,25 @@
       serverType: {}
     },
 
-    data: function () {
-      const templateModel = {name: null, zone: null, instance_id:null, instance: null, type: null, region: null};
-
+    initialState () {
       return {
         options: [],
-        resetModel: _.clone(templateModel),
-        model: templateModel,
-        datacenter: {name: null, zones: [], provider: null, region: null},
+        model: {name: null, zone: null, instance_id:null, instance: null, type: null, region: null},
+        datacenter: {name: null, zones: [], provider: null, region: []},
         showModalDC: false,
         showModalZones: false
       }
     },
 
+    data: function () {
+      return this.$options.initialState()
+    },
+
+
     methods: {
       fetchDatacenter (e) {
         const data = _.get(e, 'data.items')
         if(!_.isEmpty(data)) {
-          this.model = this.resetModel
           this.options = data.map(item=>({value: item, label: item.name}))
         }
       },
@@ -88,7 +91,6 @@
       },
 
       updateProvider: function() {
-        this.model = {}
         this.model.name = _.get(this, 'datacenter.name')
 
         this.updateModel()
@@ -96,6 +98,13 @@
 
       updateModel: function() {
         this.$emit('update', _.pickBy(this.model, _.identity))
+      },
+
+      updaterEdit() {
+      },
+
+      reset() {
+        Object.assign(this.$data, this.$options.initialState())
       }
     },
 

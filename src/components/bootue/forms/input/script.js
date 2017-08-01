@@ -12,7 +12,7 @@ export default {
     state: {type: String, default: null},
     name: {type: String, default: null},
     placeholder: {type: String, default: null},
-    readonly: {type: Boolean, default: falsse},
+    readonly: {type: Boolean, default: false},
     rows: {type: Number, default: 3},
     type: {type: String, default: 'text'},
     value: {default: null},

@@ -43,13 +43,31 @@ export default {
     }
   },
 
+  computed: {
+    tab_dc() {
+      return this.$refs.tab_dc
+    },
+    tab_storage() {
+      return this.$refs.tab_storage
+    },
+    tab_auth() {
+      return this.$refs.tab_auth
+    },
+    tab_services() {
+      return this.$refs.tab_services
+    },
+    tab_tags() {
+      return this.$refs.tab_tags
+    }
+  },
+
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
 
       if(!this.create) {
         this.editLoad()
-        return;
+        return
       }
 
       this.resetDC()
@@ -62,18 +80,23 @@ export default {
         this.model = e.data
         this.$set(this, 'server', this.model)
         this.$set(this, 'os', this.model.os)
+
+        this.tab_dc.updaterEdit(this.model.dc)
+        this.tab_storage.updaterEdit(this.model.storage)
+        this.tab_auth.updaterEdit(this.model.auth)
+        this.tab_services.updaterEdit(this.model.services)
+        this.tab_tags.updaterEdit(this.model.tags)
       }, _id)
     },
 
     resetDC() {
       this.server = {}
       this.os = {}
-      this.fields = _.map(this.fields, (e) => {
-        e.touched = false
-        e.dirty = false
-        return e
-      })
-      this.errors.clear()
+      this.tab_dc.reset()
+      this.tab_storage.reset()
+      this.tab_auth.reset()
+      this.tab_services.reset()
+      this.tab_tags.reset()
     },
 
     setupModel () {

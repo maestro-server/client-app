@@ -80,10 +80,10 @@ export default {
   methods: {
     addAuth() {
       const auth = _.pickBy(this.auth, _.identity)
-      const exist = _.find(this.value, ['name', tags.name])
+      const exist = _.find(this.value, ['name', auth.name])
 
       if(!exist) {
-        this.auth = {}
+        this.reset()
 
         this.value.push(auth)
         this.$emit('update', _.get(this, 'value', []))
@@ -93,6 +93,15 @@ export default {
     deleteAuth(key) {
       this.value.splice(key, 1)
       this.$emit('update', _.get(this, 'value', []))
+    },
+
+    updaterEdit(data) {
+      this.$set(this, 'value', data || [])
+    },
+
+    reset() {
+      this.auth = {}
+      this.value = []
     }
   }
 }

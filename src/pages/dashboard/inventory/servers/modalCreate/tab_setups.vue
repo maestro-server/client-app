@@ -52,7 +52,7 @@
         const exist = _.find(this.value, ['name', svc.name])
 
         if(!exist) {
-          this.service = {}
+          this.reset()
 
           this.value.push(svc)
           this.$emit('update', _.get(this, 'value', []))
@@ -62,6 +62,15 @@
       deleteServices(key) {
         this.value.splice(key, 1)
         this.$emit('update', _.get(this, 'value', []))
+      },
+
+      updaterEdit(data) {
+        this.$set(this, 'value', data || [])
+      },
+
+      reset() {
+        this.service = {}
+        this.value = []
       }
     }
 

@@ -60,31 +60,31 @@
         <!-- ================= Datacenter ================= -->
         <!-- ============================================== -->
         <tab header="Datacenter">
-          <tab-datacenter :serverType="options.serverType" @update="val => server.dc = val"></tab-datacenter>
+          <tab-datacenter :serverType="options.serverType" @update="val => server.dc = val" ref="tab_dc"></tab-datacenter>
         </tab>
 
         <!-- ================= Storage ================= -->
         <!-- ============================================== -->
         <tab header="Storage">
-          <tab-storage :options="options.storage" @update="val => server.storage = val"></tab-storage>
+          <tab-storage :options="options.storage" @update="val => server.storage = val" ref="tab_storage"></tab-storage>
         </tab>
 
         <!-- ================= Autentication ================= -->
         <!-- ============================================== -->
         <tab header="Auth">
-          <tab-auth :options="options.auths" @update="val => server.auth = val"></tab-auth>
+          <tab-auth :options="options.auths" @update="val => server.auth = val" ref="tab_auth"></tab-auth>
         </tab>
 
         <!-- ================= Setups ================= -->
         <!-- ============================================== -->
         <tab header="Setups">
-          <tab-setups :options="options.services" @update="val => server.services = val"></tab-setups>
+          <tab-setups :options="options.services" @update="val => server.services = val" ref="tab_services"></tab-setups>
         </tab>
 
         <!-- ================= Tags ================= -->
         <!-- ============================================== -->
         <tab header="Tags">
-          <tab-tags :options="options.tags" @update="val => server.tags = val"></tab-tags>
+          <tab-tags :options="options.tags" @update="val => server.tags = val" ref="tab_tags"></tab-tags>
         </tab>
       </tabs>
 
