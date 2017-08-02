@@ -43,26 +43,60 @@ export default {
     }
   },
 
+  computed: {
+    tab_dc() {
+      return this.$refs.tab_dc
+    },
+    tab_storage() {
+      return this.$refs.tab_storage
+    },
+    tab_auth() {
+      return this.$refs.tab_auth
+    },
+    tab_services() {
+      return this.$refs.tab_services
+    },
+    tab_tags() {
+      return this.$refs.tab_tags
+    }
+  },
+
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
 
       if(!this.create) {
         this.editLoad()
+        return
       }
+
+      this.resetDC()
     },
 
     editLoad () {
       const {_id} = this.model
       FectherEntity(Servers)(this)({k: 'server_'+_id})
-      .findOne((e) => this.model = e.data, _id)
+      .findOne((e) => {
+        this.model = e.data
+        this.$set(this, 'server', this.model)
+        this.$set(this, 'os', this.model.os)
 
-      _.defaults(this.model, {
-        os: {base:null}
-      })
+        this.tab_dc.updaterEdit(this.model.dc)
+        this.tab_storage.updaterEdit(this.model.storage)
+        this.tab_auth.updaterEdit(this.model.auth)
+        this.tab_services.updaterEdit(this.model.services)
+        this.tab_tags.updaterEdit(this.model.tags)
+      }, _id)
+    },
 
-      this.$set(this, 'server', this.model)
-      this.$set(this, 'os', this.model.os)
+    resetDC() {
+      this.server = {}
+      this.os = {}
+      this.tab_dc.reset()
+      this.tab_storage.reset()
+      this.tab_auth.reset()
+      this.tab_services.reset()
+      this.tab_tags.reset()
     },
 
     setupModel () {

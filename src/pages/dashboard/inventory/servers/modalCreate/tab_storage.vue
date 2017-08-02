@@ -49,6 +49,8 @@
 <script>
   'use strict'
 
+  import _ from 'lodash'
+
   export default {
 
     data: function () {
@@ -60,14 +62,29 @@
 
     methods: {
       addStorage() {
-        if (this.storage.name && this.storage.size) {
-          this.value.push(this.storage)
-          this.storage = {}
+        const stg = _.pickBy(this.storage, _.identity)
+        const exist = _.find(this.value, ['name', stg.name])
+
+        if(!exist) {
+          this.reset()
+
+          this.value.push(stg)
+          this.$emit('update', _.get(this, 'value', []))
         }
       },
 
       deleteStorage(key) {
         this.value.splice(key, 1)
+        this.$emit('update', _.get(this, 'value', []))
+      },
+
+      updaterEdit(data) {
+        this.$set(this, 'value', data || [])
+      },
+
+      reset() {
+        this.storage = {}
+        this.value = []
       }
     }
 

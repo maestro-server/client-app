@@ -15,7 +15,7 @@ export default {
         }
       }
 
-      return force && ff[name] && ff[name].dirty ? this.errors.first(str) : ''
+      return force && ff[name] && ff[name].touched && ff[name].dirty ? this.errors.first(str) : ''
     }
   }
 }

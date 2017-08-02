@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <bs-input form-type="horizontal" name="name" label="Key name" v-model="auth.name" data-vv-scope="auth"
+    <bs-input form-type="horizontal" name="name" label="Key name*" v-model="auth.name" data-vv-scope="auth"
               v-validate.initial="'required'"></bs-input>
     <hr/>
     <div class="row">
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <bs-input class="mt20" form-type="horizontal" label="Username" v-model="auth.username" data-vv-scope="auth"
+    <bs-input class="mt20" form-type="horizontal" label="Username*" v-model="auth.username" data-vv-scope="auth"
               v-validate.initial="'required'"></bs-input>
 
     <div class="row" v-if="auth.type == 'PKI'">
@@ -79,14 +79,29 @@ export default {
 
   methods: {
     addAuth() {
-      if(this.auth.name && this.auth.type && this.auth.username) {
-        this.value.push(this.auth)
-        this.auth = {}
+      const auth = _.pickBy(this.auth, _.identity)
+      const exist = _.find(this.value, ['name', auth.name])
+
+      if(!exist) {
+        this.reset()
+
+        this.value.push(auth)
+        this.$emit('update', _.get(this, 'value', []))
       }
     },
 
     deleteAuth(key) {
       this.value.splice(key, 1)
+      this.$emit('update', _.get(this, 'value', []))
+    },
+
+    updaterEdit(data) {
+      this.$set(this, 'value', data || [])
+    },
+
+    reset() {
+      this.auth = {}
+      this.value = []
     }
   }
 }
