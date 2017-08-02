@@ -32,6 +32,7 @@ export default {
   },
   watch: {
     transition (val, old) {
+      //this.$parent.errors.clear()
       if (val === old) { return }
       const el = this.$el
       const body = document.body

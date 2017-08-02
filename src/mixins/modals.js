@@ -68,14 +68,6 @@ export default {
       this.step=1
       this.model = {}
 
-      this.showModal = false
-      this.fields = _.map(this.fields, (e) => {
-        e.touched = false
-        e.dirty = false
-        return e
-      })
-      this.errors.clear()
-
       this.afterClose()
     },
 

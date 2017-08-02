@@ -64,7 +64,6 @@ export default {
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
-
       if(!this.create) {
         this.editLoad()
         return
@@ -91,7 +90,7 @@ export default {
 
     resetDC() {
       this.server = {}
-      this.os = {}
+      this.os = {base: null, dist: null, version: null}
       this.tab_dc.reset()
       this.tab_storage.reset()
       this.tab_auth.reset()
@@ -109,7 +108,7 @@ export default {
 
       new Servers(this.model)
       .authorization()
-      .create()
+      .create(this.finishJob)
     },
 
     editSave () {

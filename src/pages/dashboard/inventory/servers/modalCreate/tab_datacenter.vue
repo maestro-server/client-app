@@ -20,7 +20,7 @@
       <div class="col-xs-9">
         <div class="pull-left">
           <bs-label type="danger">None datacenter record.</bs-label>
-          <a href="#">Do you like to create one?</a>
+          <a href="#" @click.stop.prevent="addE">Do you like to create one?</a>
         </div>
       </div>
     </div>
@@ -46,7 +46,6 @@
 
     <bs-input class="mt20" form-type="horizontal" label="Instance Type" v-model="model.instance" @input="updateModel"></bs-input>
     <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="model.instance_id" @input="updateModel"></bs-input>
-
   </div>
 </template>
 
@@ -62,7 +61,7 @@
       serverType: {}
     },
 
-    initialState () {
+    data: function () {
       return {
         options: [],
         model: {name: null, zone: null, instance_id:null, instance: null, type: null, region: null},
@@ -72,12 +71,12 @@
       }
     },
 
-    data: function () {
-      return this.$options.initialState()
-    },
-
 
     methods: {
+      addE: function () {
+        this.$router.push('/dashboard/inventory/datacenter');
+      },
+
       fetchDatacenter (e) {
         const data = _.get(e, 'data.items')
         if(!_.isEmpty(data)) {
@@ -104,7 +103,6 @@
       },
 
       reset() {
-        Object.assign(this.$data, this.$options.initialState())
       }
     },
 
