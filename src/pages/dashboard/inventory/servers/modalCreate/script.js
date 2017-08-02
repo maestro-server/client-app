@@ -1,5 +1,5 @@
 'use strict'
-// import _ from 'lodash'
+import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
@@ -66,8 +66,8 @@ export default {
     },
 
     setupModel () {
-      this.model.os = this.os
-      this.model = this.server
+      this.model = _.pickBy(this.server, _.identity)
+      this.model.os = _.pickBy(this.os, _.identity)
     },
 
     createSave () {
@@ -75,7 +75,7 @@ export default {
 
       new Servers(this.model)
       .authorization()
-      .create(this.finishJob)
+      .create()
     },
 
     editSave () {

@@ -60,7 +60,7 @@
         <!-- ================= Datacenter ================= -->
         <!-- ============================================== -->
         <tab header="Datacenter">
-          <tab-datacenter :serverType="options.serverType"></tab-datacenter>
+          <tab-datacenter :serverType="options.serverType" @update="val => server.dc = val"></tab-datacenter>
         </tab>
 
         <!-- ================= Storage ================= -->
