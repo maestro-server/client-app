@@ -49,7 +49,8 @@
             role: [],
             environment: [],
             os: [],
-            dc: []
+            dc: [],
+            auth: []
           },
           headings: {
             ipv4_private: 'IP Private',
@@ -65,18 +66,23 @@
         return data.map((d) => {
           d.os = `${_.get(d, 'os.base', '')} ${_.get(d, 'os.dist', '')}`
           d.dc = _.get(d, 'dc.name', '-')
-          d.user = this.reduceARR(d, 'auth', (o, f) => `${o.admin} ${f.admin}`, {admin: ''})
-          d.auth = this.reduceARR(d, 'auth', (o, f) => `${o.name} ${f.name}`, {name: ''})
+
+
+          d.user = _.reduce(d.auth, function(o, f, k) {
+            const str = k > 0 ? "|" : ""
+            return `${o} ${str} ${f.username}`;
+          }, "");
+
+          d.auth = _.reduce(d.auth, function(o, f, k) {
+            const str = k > 0 ? "|" : ""
+            return `${o} ${str} ${f.type}`;
+          }, "");
+
+
           d.updated_at = new Date(d.updated_at).toLocaleString()
           d.created_at = new Date(d.created_at).toLocaleString()
           return d
         })
-      },
-
-      reduceARR(obj, k, fn) {
-        if (!_.isEmpty(obj[k])) {
-          return obj[k].reduce(fn)
-        }
       },
 
       fetchAdminer(e) {

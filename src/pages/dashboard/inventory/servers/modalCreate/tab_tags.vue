@@ -1,21 +1,21 @@
 <template>
   <div>
     <div id="baseServices">
-      <bs-input form-type="horizontal" v-model="tags.key" name="key" label="Key" data-vv-scope="tags"
+      <bs-input form-type="horizontal" v-model="tags.key" name="key" label="Key"
                 v-validate.initial="'required'"></bs-input>
-      <bs-input form-type="horizontal" v-model="tags.value" name="value" label="Value" data-vv-scope="tags"
+      <bs-input form-type="horizontal" v-model="tags.value" name="value" label="Value"
                 v-validate.initial="'required'"></bs-input>
     </div>
 
     <div class="text-center mt20">
       <button class="btn btn-primary" type="button" name="button" @click.prevent="addTags"
-              :disabled="errors.any('tags')"><i class="fa fa-plus-circle"></i> Tag
+              :disabled="errors.any()"><i class="fa fa-plus-circle"></i> Tag
       </button>
     </div>
 
     <div class="well row mt20">
       <ul v-if="value.length > 0" class="list-group">
-        <li class="list-group-item" v-for="stg, index in value" :key="index">
+        <li class="list-group-item" v-for="stg, i in value" :key="i">
           <bs-label>{{stg.key}}</bs-label>
           - {{stg.value}}
 
@@ -37,9 +37,12 @@
   export default {
 
     data: function () {
+      const tagsTemplate = {key: null, value: null}
+
       return {
         value: [],
-        tags: {key: null, value: null}
+        resetTags: tagsTemplate,
+        tags: _.clone(tagsTemplate)
       }
     },
 
@@ -49,7 +52,7 @@
         const exist = _.find(this.value, ['key', tags.key])
 
         if(!exist) {
-          this.reset()
+          this.$set(this, 'tags', _.clone(this.resetTags))
 
           this.value.push(tags)
           this.$emit('update', _.get(this, 'value', []))
@@ -66,7 +69,7 @@
       },
 
       reset() {
-        this.tags = {}
+        this.$set(this, 'tags', _.clone(this.resetTags))
         this.value = []
       }
     }

@@ -25,6 +25,7 @@ export default {
 
   data: function () {
     return {
+      tabShow:0,
       zone: null,
       showModalDC: false,
       showModalZones: false,
@@ -36,7 +37,7 @@ export default {
         os:[],
         serverType:[],
         storage:[],
-        auths:[],
+        auth:[],
         services:[],
         tags:[]
       }
@@ -63,13 +64,9 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.name} server`
-      if(!this.create) {
-        this.editLoad()
-        return
-      }
+      this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.hostname} server`
 
-      this.resetDC()
+      this.create ? this.resetDC() : this.editLoad()
     },
 
     editLoad () {
@@ -89,6 +86,7 @@ export default {
     },
 
     resetDC() {
+      this.tabShow=0
       this.server = {}
       this.os = {base: null, dist: null, version: null}
       this.tab_dc.reset()

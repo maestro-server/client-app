@@ -15,7 +15,7 @@
       <div class="col-xs-9">
         <button-group v-model="storage.root" type="default">
           <bs-radio selected-value="root">Yes</bs-radio>
-          <bs-radio selected-value="">No</bs-radio>
+          <bs-radio selected-value="secondary">No</bs-radio>
         </button-group>
       </div>
     </div>
@@ -28,7 +28,7 @@
 
     <div class="well row mt20">
       <ul v-if="value.length > 0" class="list-group">
-        <li class="list-group-item" v-for="stg, i in value" :key="stg">
+        <li class="list-group-item" v-for="stg, i in value" :key="stg.name">
           {{stg.name}} -
           <bs-label>{{stg.size}} GB</bs-label>
           <bs-label type="danger" v-if="stg.root == 'root'">root</bs-label>
@@ -54,9 +54,12 @@
   export default {
 
     data: function () {
+      const storageTemplate = {name: null, size: null, root: null}
+
       return {
         value: [],
-        storage: {name: null, size: null, root: null}
+        resetStorage: _.clone(storageTemplate),
+        storage: _.clone(storageTemplate)
       }
     },
 
@@ -66,7 +69,7 @@
         const exist = _.find(this.value, ['name', stg.name])
 
         if(!exist) {
-          this.reset()
+          this.$set(this, 'storage', _.clone(this.resetStorage))
 
           this.value.push(stg)
           this.$emit('update', _.get(this, 'value', []))
@@ -83,7 +86,7 @@
       },
 
       reset() {
-        this.storage = {}
+        this.$set(this, 'storage', _.clone(this.resetStorage))
         this.value = []
       }
     }

@@ -14,7 +14,7 @@
 
     <div class="well row mt20">
       <ul v-if="value.length > 0" class="list-group">
-        <li class="list-group-item" v-for="stg, index in value" :key="index">
+        <li class="list-group-item" v-for="stg, i in value" :key="i">
           {{stg.name}} <span v-if="stg.version">-></span>
           <bs-label>{{stg.version}}</bs-label>
 
@@ -40,9 +40,12 @@
     },
 
     data: function () {
+      const serviceTemplate = {service: null, version: null}
+
       return {
         value: [],
-        service: {service: null, version: null}
+        resetService: serviceTemplate,
+        service: _.clone(serviceTemplate)
       }
     },
 
@@ -52,7 +55,7 @@
         const exist = _.find(this.value, ['name', svc.name])
 
         if(!exist) {
-          this.reset()
+          this.$set(this, 'service', _.clone(this.resetService))
 
           this.value.push(svc)
           this.$emit('update', _.get(this, 'value', []))
@@ -69,7 +72,7 @@
       },
 
       reset() {
-        this.service = {}
+        this.$set(this, 'service', _.clone(this.resetService))
         this.value = []
       }
     }
