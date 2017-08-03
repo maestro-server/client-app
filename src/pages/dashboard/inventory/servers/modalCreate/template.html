@@ -1,6 +1,6 @@
 <div>
 
-  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @reset="reset">
 
     <form class="row form-horizontal">
 
@@ -14,7 +14,7 @@
             <div class="col-xs-3 text-right mt5">
               <label>Status</label>
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-9" v-if="server.status">
               <button-group v-model="server.status" type="primary">
                 <bs-radio v-for="sts, i in options.status" :key="sts" :selected-value="sts">{{sts}}</bs-radio>
               </button-group>

@@ -65,10 +65,18 @@ export default {
     },
 
     closed () {
+      this.errors.clear()
+
       this.step=1
       this.model = {}
 
+      this.showModal = false
+
       this.afterClose()
+    },
+
+    reset () {
+      this.errors.clear()
     },
 
     onFinishCallBack (func) {

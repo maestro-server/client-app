@@ -49,6 +49,7 @@ export default {
           el.classList.remove('in')
         }
       } else {
+        this.$emit('reset')
         this.$emit(this.val ? 'opened' : 'closed')
         if (!this.val) {
           el.style.display = 'none'
