@@ -10,6 +10,7 @@ import carousel from './carousel/Carousel.vue'
 import './close/Close.vue'
 import bsCode from './code/Code.vue'
 import bsLabel from './label/Label.vue'
+import displayer from './displayer/Displayer.vue'
 import dropdown from './dropdown/Dropdown.vue'
 import './grid/Grid.vue'
 import './jumbotron/Jumbotron.vue'
@@ -48,6 +49,7 @@ let components = {
   bsCode,
   bsLabel,
   carousel,
+  displayer,
   dropdown,
   lists,
   modal,

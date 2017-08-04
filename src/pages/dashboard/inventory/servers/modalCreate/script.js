@@ -63,6 +63,11 @@ export default {
   },
 
   methods: {
+    setTabShow (index) {
+      this.tabShow = index
+      return this
+    },
+
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.hostname} server`
 

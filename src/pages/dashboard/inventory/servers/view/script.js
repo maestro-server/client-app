@@ -9,38 +9,70 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {},
-      team:false
+      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, dc:{name:null}, active:true},
+      team: false,
+      showJson:false
     }
   },
 
   computed: {
-    MCreate () {return this.$parent.$refs.modal_create},
-    MDelete () {return this.$parent.$refs.modal_delete},
-    title () {
-      return this.team ? this.team.name+' Servers' : 'My Servers'
+    MCreate() {
+      return this.$parent.$refs.modal_create
+    },
+    MDelete() {
+      return this.$parent.$refs.modal_delete
+    },
+    title() {
+      return this.team ? this.team.name + ' Servers' : 'My Servers'
+    },
+    activeShow() {
+      return this.model.active ? "success" : "danger"
+    },
+    activeLabel() {
+      return this.model.active ? "Active" : "Desactive"
+    },
+    filtered() {
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
     }
   },
 
   methods: {
     cap(data) {
-      return data.charAt(0).toUpperCase() + data.slice(1)
+      if(!_.isEmpty(data)) {
+        return data.charAt(0).toUpperCase() + data.slice(1)
+      }
     },
 
-    addE: function () {
+    isObject: function (value) {
+      return _.isPlainObject(value);
+    },
+
+    isArray: function (value) {
+      return _.isArray(value);
+    },
+
+    isString: function (value) {
+      return _.isString(value);
+    },
+
+    addE: function (index=0) {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.$refs.svTable.$refs.vTable.refresh()})
+        .setupSteps(1, 1, 1)
+        .setTabShow(index)
+        .onFinishCallBack(() => {
+          this.$refs.svTable.$refs.vTable.refresh()
+        })
         .show({team})
     },
 
-    editE: function (entity) {
+    editE: function (entity, index=0) {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1,1,1)
+        .setupSteps(1, 1, 1)
+        .setTabShow(index)
         .onFinishCallBack(() => this.fetchData(entity._id))
         .show(_.merge(entity, {team}))
     },
@@ -49,20 +81,28 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => {this.$route.push('/dashboard/inventory/servers')})
+        .onFinishCallBack(() => {
+          this.$route.push('/dashboard/inventory/servers')
+        })
         .show(_.merge(entity, {team}))
     },
 
     fetchData: function (id) {
-      FectherEntity(Servers)(this)({k: 'server_'+id})
-      .findOne((e) => this.model = e.data, id)
+      FectherEntity(Servers)(this)({k: 'server_' + id})
+        .findOne((e) => {
+          this.$set(this, 'model', e.data)
+        }, id)
     },
+
+    toggleView() {
+      this.showJson = !this.showJson;
+    }
   },
 
-  created () {
+  created() {
     this.fetchData(this.$route.params.id)
 
-    if(_.has(this.$route, 'query.team_id')) {
+    if (_.has(this.$route, 'query.team_id')) {
       this.team = {
         '_id': this.$route.query.team_id,
         'name': this.$route.query.team_name
