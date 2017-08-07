@@ -1,7 +1,7 @@
 <template>
   <v-server-table
     name="servers-list"
-    url="http://127.0.0.1:8888/servers/"
+    :url="url"
     :columns="columns"
     :options="options"
     ref="vTable"
@@ -35,6 +35,7 @@
 
     data: function () {
       return {
+        url: `${API_URL}/servers/`,
         items: [],
         columns: ['hostname', 'ipv4_private', 'os', 'dc', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
         options: {
@@ -113,7 +114,7 @@
     },
 
     created() {
-      FectherEntity(Adminer)(this)({k: 'server_options', p: true})
+      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local'})
         .find(this.fetchAdminer, {key: 'server_options'})
 
       FectherEntity(Datacenters)(this)({k: 'datacenter'})

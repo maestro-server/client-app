@@ -1,33 +1,30 @@
 'use strict';
 
 import _ from 'lodash'
-import vuexStorage from './vuexStorage'
-import localStorage from './localStorage'
 
 
 
-const Cache = ({k, t, p}) => (fn) => {
+const Cache = ({k, time, persistence, force}) => (fn) => {
 
-    const Repository = p ? localStorage : vuexStorage
+    const repositoryP = persistence || 'vuex'
+    const Repository = require(`./${repositoryP}Storage`).default
 
     const callback = function (result) {
       if(result.status == 200 && !_.isEmpty(result.data)) {
 
-        new Repository(k, t)
+        new Repository(k, time)
                 .createStore(_.pick(result, 'data', 'status'));
 
         fn(result)
       }
-
-
     }
 
     return {
         process (proc) {
-          let data = new Repository(k, t)
+          let data = new Repository(k, time)
                         .restoreStore();
 
-          if(_.isEmpty(data)) {
+          if(_.isEmpty(data) || force) {
             return proc(callback)
           }
 

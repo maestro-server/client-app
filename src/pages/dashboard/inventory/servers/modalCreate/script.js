@@ -80,6 +80,7 @@ export default {
       .findOne((e) => {
         this.model = e.data
         this.$set(this, 'server', this.model)
+
         this.$set(this, 'os', this.model.os)
 
         this.tab_dc.updaterEdit(this.model.dc)
@@ -133,7 +134,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'server_options', p: true})
+      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})
     },
 

@@ -14,16 +14,16 @@
     <displayer class="col-xs-2" :type="activeShow">
       <h3 class="white">{{model.status || 'Active'}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="warning">
+    <displayer class="col-xs-2" type="warning" v-if="model.environment">
       <h3 class="white">{{model.environment}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="warning">
+    <displayer class="col-xs-2" type="warning" v-if="model.role">
       <h3 class="white">{{model.role}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="model.os.base">
+    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'os.base')">
       <h3 class="white">{{model.os.base}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="model.dc.name">
+    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'dc.name')">
       <h3 class="white">{{model.dc.name}}</h3>
     </displayer>
     <displayer class="col-xs-2" type="primary" v-if="model.ipv4_private">
@@ -70,7 +70,7 @@
   <div class="col-xs-6">
 
     <div class="col-xs-12">
-      <h3><i class="fa fa-cogs" aria-hidden="true"></i> Services <bs-label type="default" class="pull-right">{{model.services.length}}</bs-label></h3>
+      <h3><i class="fa fa-cogs" aria-hidden="true"></i> Services <bs-label type="default" class="pull-right" v-if="model.services">{{model.services.length}}</bs-label></h3>
 
       <ul class="list-group">
         <li class="list-group-item" v-for="service in model.services">
@@ -89,7 +89,7 @@
     </div>
 
     <div class="col-xs-12">
-      <h3><i class="fa fa-cog" aria-hidden="true"></i> Accounts <bs-label type="default" class="pull-right">{{model.auth.length}}</bs-label></h3>
+      <h3><i class="fa fa-cog" aria-hidden="true"></i> Accounts <bs-label type="default" class="pull-right" v-if="model.auth">{{model.auth.length}}</bs-label></h3>
 
       <ul class="list-group">
         <li class="list-group-item" v-for="stg in model.auth">
@@ -112,7 +112,7 @@
     </div>
 
     <div class="col-xs-12">
-      <h3><i class="fa fa-hdd-o" aria-hidden="true"></i> Storages <bs-label type="default" class="pull-right">{{model.storage.length}}</bs-label></h3>
+      <h3><i class="fa fa-hdd-o" aria-hidden="true"></i> Storages <bs-label type="default" class="pull-right" v-if="model.storage">{{model.storage.length}}</bs-label></h3>
 
       <ul class="list-group">
         <li class="list-group-item" v-for="stg in model.storage">
@@ -128,7 +128,7 @@
     </div>
 
     <div class="col-xs-12">
-      <h3><i class="fa fa-tags" aria-hidden="true"></i> Tags <bs-label type="default" class="pull-right">{{model.tags.length}}</bs-label></h3>
+      <h3><i class="fa fa-tags" aria-hidden="true"></i> Tags <bs-label type="default" class="pull-right" v-if="model.tags">{{model.tags.length}}</bs-label></h3>
 
       <ul class="list-group">
         <li class="list-group-item" v-for="stg in model.tags">

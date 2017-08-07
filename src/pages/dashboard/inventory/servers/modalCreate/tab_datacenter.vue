@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="clearfix">
-      <button class="btn btn-primary btn-xs pull-right"><i
-        class="fa fa-plus-circle"></i> Datacenter
-      </button>
+      <router-link to="/dashboard/inventory/datacenter" class="btn btn-primary btn-xs pull-right">
+        <i class="fa fa-plus-circle"></i> Datacenter</router-link>
+
     </div>
 
     <div class="mt10 clearfix col-xs-12"></div>
@@ -18,7 +18,7 @@
       <div class="col-xs-9">
         <div class="pull-left">
           <bs-label type="danger">None datacenter record.</bs-label>
-          <a href="#" @click.stop.prevent="addE">Do you like to create one?</a>
+          <router-link to="/dashboard/inventory/datacenter">Do you like to create one?</router-link>
         </div>
       </div>
     </div>
@@ -71,9 +71,6 @@
 
 
     methods: {
-      addE: function () {
-        this.$router.push('/dashboard/inventory/datacenter');
-      },
 
       fetchDatacenter (e) {
         const data = _.get(e, 'data.items')

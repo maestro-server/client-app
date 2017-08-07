@@ -16,21 +16,6 @@
 
     <bs-input class="mt20" form-type="horizontal" label="Username*" v-model="auth.username" v-validate.initial="'required'"></bs-input>
 
-    <div class="row" v-if="auth.type == 'PKI'">
-      <div class="col-xs-3 text-right mt5">
-        <label>Key File</label>
-      </div>
-      <div class="col-xs-9" v>
-        <button class="btn btn-primary" @click.stop.prevent="showKeyForm = true">Add Key</button>
-        <bs-input v-if="showKeyForm" v-model="auth.key" type="textarea" label="Add Key" class="col-xs-12"
-                  placeholder="Begins with 'ssh-rsa', 'ssh-dss', 'ssh-ed25519', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', or 'ecdsa-sha2-nistp521'"></bs-input>
-      </div>
-    </div>
-
-    <div v-if="auth.type == 'Password'">
-      <bs-input form-type="horizontal" type="password" v-model="auth.password" label="Password"></bs-input>
-    </div>
-
     <div class="text-center mt20">
       <button class="btn btn-primary" type="button" name="button" @click.prevent="addAuth"
               :disabled="errors.any()"><i class="fa fa-plus-circle"></i> Authorization
@@ -73,8 +58,7 @@ export default {
     return {
       value: [],
       resetAuth: templateAuth,
-      auth: _.clone(templateAuth),
-      showKeyForm: false
+      auth: _.clone(templateAuth)
     }
   },
 

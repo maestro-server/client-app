@@ -37,11 +37,11 @@ export default {
 
   methods: {
     cap(data) {
-      return data.charAt(0).toUpperCase() + data.slice(1)
+      return _.startCase(data)
     },
 
-    fetchData: function () {
-      FectherEntity(Datacenters)(this)({k: 'datacenter'})
+    fetchData: function (force=false) {
+      FectherEntity(Datacenters)(this)({k: 'datacenter', force})
       .find((e) => this.result = e.data)
     },
 
@@ -51,7 +51,7 @@ export default {
       this.MCreate
         .setupSteps(1, 1, 1)
         .onFinishCallBack(() => {
-          this.fetchData()
+          this.fetchData(true)
         })
         .show({team})
     },

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <bs-input form-type="horizontal" label="Name" v-model="storage.name" name="name" data-vv-scope="storage"
+    <bs-input form-type="horizontal" label="Name" v-model="storage.name" name="name"
               v-validate.initial="'required'"
               placeholder="/dev/sda"></bs-input>
     <bs-input form-type="horizontal" label="Size (GB)" v-model="storage.size" name="size" placeholder="500"
-              data-vv-scope="storage" v-validate.initial="'numeric'"
-              :error="makeError('size', 'storage')"></bs-input>
+              v-validate.initial="'required|numeric'"
+              :error="makeError('size')"></bs-input>
 
 
     <div class="row" id="baseStorage">
@@ -22,7 +22,7 @@
 
     <div class="text-center mt20">
       <button class="btn btn-primary" type="button" name="button" @click="addStorage"
-              :disabled="errors.any('storage')"><i class="fa fa-plus-circle"></i> Storage
+              :disabled="errors.any()"><i class="fa fa-plus-circle"></i> Storage
       </button>
     </div>
 

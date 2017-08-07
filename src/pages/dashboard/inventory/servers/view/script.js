@@ -22,9 +22,6 @@ export default {
     MDelete() {
       return this.$parent.$refs.modal_delete
     },
-    title() {
-      return this.team ? this.team.name + ' Servers' : 'My Servers'
-    },
     activeShow() {
       return this.model.active ? "success" : "danger"
     },
@@ -37,10 +34,12 @@ export default {
   },
 
   methods: {
+    existGet(key, path) {
+      return _.get(key, path, false)
+    },
+
     cap(data) {
-      if(!_.isEmpty(data)) {
-        return data.charAt(0).toUpperCase() + data.slice(1)
-      }
+      return _.startCase(data)
     },
 
     isObject: function (value) {
@@ -81,9 +80,7 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => {
-          this.$route.push('/dashboard/inventory/servers')
-        })
+        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/servers'))
         .show(_.merge(entity, {team}))
     },
 
@@ -92,10 +89,6 @@ export default {
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, id)
-    },
-
-    toggleView() {
-      this.showJson = !this.showJson;
     }
   },
 
