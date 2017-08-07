@@ -1,15 +1,18 @@
 <template>
   <div>
     <div id="baseServices">
-      <bs-input form-type="horizontal" v-model="tags.key" name="key" label="Key"
-                v-validate.initial="'required'"></bs-input>
-      <bs-input form-type="horizontal" v-model="tags.value" name="value" label="Value"
-                v-validate.initial="'required'"></bs-input>
+      <bs-select form-type="horizontal" :options="types" v-model="deployer.type" name="type"
+                 label="Type*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
+
+      <bs-input form-type="horizontal" v-model="deployer.link" name="link" label="Link"></bs-input>
+
+      <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="deployer.description"
+      ></bs-input>
     </div>
 
     <div class="text-center mt20">
-      <button class="btn btn-primary" type="button" name="button" @click.prevent="addTags"
-              :disabled="errors.any()"><i class="fa fa-plus-circle"></i> Tag
+      <button class="btn btn-primary" type="button" name="button" @click.prevent="addDeploy"
+              :disabled="errors.any()"><i class="fa fa-plus-circle"></i> Deploy
       </button>
     </div>
 
@@ -19,12 +22,12 @@
           <bs-label>{{stg.key}}</bs-label>
           - {{stg.value}}
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteTags(index)"><i
+          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteDeployer(index)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>
-      <span v-if="value.length <= 0" class="col-xs-12 text-center">None tags</span>
-      <bs-label v-if="value.length > 0" type="default">{{value.length}} Tag<span
+      <span v-if="value.length <= 0" class="col-xs-12 text-center">None deployer</span>
+      <bs-label v-if="value.length > 0" type="default">{{value.length}} Deploy<span
         v-if="value.length > 1">s</span></bs-label>
     </div>
   </div>
@@ -35,31 +38,30 @@
   'use strict'
 
   export default {
+    props: {
+      types: {}
+    },
 
     data: function () {
-      const tagsTemplate = {key: null, value: null}
+      const deployerTemplate = {type: null, link: null, description:null}
 
       return {
         value: [],
-        resetTags: tagsTemplate,
-        tags: _.clone(tagsTemplate)
+        resetDeployer: deployerTemplate,
+        deployer: _.clone(deployerTemplate)
       }
     },
 
     methods: {
-      addTags() {
-        const tags = _.pickBy(this.tags, _.identity)
-        const exist = _.find(this.value, ['key', tags.key])
+      addDeploy() {
+        const deployer = _.pickBy(this.deployer, _.identity)
 
-        if(!exist) {
-          this.$set(this, 'tags', _.clone(this.resetTags))
-
-          this.value.push(tags)
-          this.$emit('update', _.get(this, 'value', []))
-        }
+        this.$set(this, 'deployer', _.clone(this.resetDeployer))
+        this.value.push(deployer)
+        this.$emit('update', _.get(this, 'value', []))
       },
 
-      deleteTags(key) {
+      deleteDeployer(key) {
         this.value.splice(key, 1)
         this.$emit('update', _.get(this, 'value', []))
       },
@@ -69,7 +71,7 @@
       },
 
       reset() {
-        this.$set(this, 'tags', _.clone(this.resetTags))
+        this.$set(this, 'deployer', _.clone(this.resetDeployer))
         this.value = []
       }
     }

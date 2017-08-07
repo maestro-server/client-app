@@ -14,7 +14,11 @@ export default {
     matchStart: {type: Boolean, default: false},
     onHit: {
       type: Function,
-      default (item) { return item }
+      default:item=>item
+    },
+    onSearch: {
+      type: Function,
+      default: (url,val) => url+val
     },
     placeholder: {type: String},
     template: {type: String},
@@ -104,7 +108,7 @@ export default {
       }
       this.asign = ''
       if (this.async) {
-        getJSON(this.async + this.val).then(data => {
+        getJSON(this.onSearch(this.async, this.val)).then(data => {
           this.setItems(data)
         })
       } else if (this.data) {

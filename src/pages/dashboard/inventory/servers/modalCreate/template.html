@@ -66,13 +66,13 @@
         <!-- ================= Storage ================= -->
         <!-- ============================================== -->
         <tab header="Storage">
-          <tab-storage :options="options.storage" @update="val => server.storage = val" ref="tab_storage"></tab-storage>
+          <tab-storage @update="val => server.storage = val" ref="tab_storage"></tab-storage>
         </tab>
 
         <!-- ================= Autentication ================= -->
         <!-- ============================================== -->
         <tab header="Auth">
-          <tab-auth :options="options.auth" @update="val => server.auth = val" ref="tab_auth"></tab-auth>
+          <tab-auth @update="val => server.auth = val" ref="tab_auth"></tab-auth>
         </tab>
 
         <!-- ================= Setups ================= -->
@@ -84,7 +84,7 @@
         <!-- ================= Tags ================= -->
         <!-- ============================================== -->
         <tab header="Tags">
-          <tab-tags :options="options.tags" @update="val => server.tags = val" ref="tab_tags"></tab-tags>
+          <tab-tags @update="val => server.tags = val" ref="tab_tags"></tab-tags>
         </tab>
       </tabs>
 

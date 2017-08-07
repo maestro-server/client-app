@@ -1,7 +1,7 @@
 'use strict'
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
-import Servers from 'factories/servers'
+import Applications from 'factories/applications'
 import Adminer from 'factories/adminer'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
@@ -9,6 +9,7 @@ import FectherEntity from 'services/fetchEntity'
 import tabTags from './tab_tags'
 import tabServers from './tab_servers'
 import tabDeploy from './tab_deploy'
+import tabSpec from './tab_spec'
 
 export default {
   mixins: [Modals],
@@ -16,7 +17,8 @@ export default {
   components: {
     tabTags,
     tabServers,
-    tabDeploy
+    tabDeploy,
+    tabSpec
   },
 
   data () {
@@ -27,7 +29,7 @@ export default {
       options: {
         environment:[],
         role: [],
-        tags:[]
+        deploy:[]
       }
     }
   },
@@ -43,14 +45,22 @@ export default {
       this.text.title =  this.create ? 'Create new Applications' : `Edit ${this.model.name} applications`
     },
 
+    setupModel () {
+      this.model = _.pickBy(this.app, _.identity)
+    },
+
     createSave () {
-      new Servers(this.model)
+      this.setupModel()
+
+      new Applications(this.model)
       .authorization()
       .create(this.finishJob)
     },
 
     editSave () {
-      new Servers(this.model)
+      this.setupModel()
+
+      new Applications(this.model)
       .authorization()
       .patchID(this.model._id, this.finishJob)
     },
@@ -66,8 +76,8 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'server_options'})
+      FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'app_options'})
     },
 
     fetchAdminer (e) {

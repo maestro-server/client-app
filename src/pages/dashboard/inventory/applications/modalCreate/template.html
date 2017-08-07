@@ -13,7 +13,6 @@
 
             <div class="col-xs-12">
 
-
               <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="app.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
@@ -23,48 +22,38 @@
               <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment" name="environment"
                          label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
 
-              <bs-select form-type="horizontal" :options="options.role" v-model="app.role" name="role"
-                         label="Role*" v-validate.initial="'required'" :error="makeError('role')"></bs-select>
-
               <bs-select form-type="horizontal" :options="options.system" v-model="app.system" name="system"
                          label="System"></bs-select>
 
-              <hr>
-
-              <div>
-                <h5 class="mt0 text-center">Specification {{app.role}}</h5>
-
-                <bs-input class="mt20" form-type="horizontal" name="link" label="Link" v-model="spec.link"
-                          v-validate.initial="'url'" :error="makeError('link')"></bs-input>
-
-                <bs-input class="mt20" form-type="horizontal" name="id" label="Id" v-model="spec.id"></bs-input>
-
-                <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="spec.description"
-                ></bs-input>
-              </div>
             </div>
 
           </div>
 
         </tab>
 
+        <!-- ================= Spec ================= -->
+        <!-- ============================================== -->
+        <tab header="Spec">
+          <tab-spec :roles="options.role" @update="val => app.spec = val" ref="tab_spec"></tab-spec>
+        </tab>
+
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers">
-          <tab-servers :options="options.tags" @update="val => app.servers = val" ref="tab_servers"></tab-servers>
+          <tab-servers @update="val => app.servers = val" ref="tab_servers"></tab-servers>
         </tab>
 
         <!-- ================= Deploy ================= -->
         <!-- ============================================== -->
         <tab header="Deploy">
-          <tab-deploy :options="options.tags" @update="val => app.spec = val" ref="tab_spec"></tab-deploy>
+          <tab-deploy :types="options.deploy" @update="val => app.spec = val" ref="tab_spec"></tab-deploy>
         </tab>
 
         <!-- ================= Tags ================= -->
         <!-- ============================================== -->
         <tab header="Tags">
-          <tab-tags :options="options.tags" @update="val => app.tags = val" ref="tab_tags"></tab-tags>
+          <tab-tags @update="val => app.tags = val" ref="tab_tags"></tab-tags>
         </tab>
       </tabs>
 
