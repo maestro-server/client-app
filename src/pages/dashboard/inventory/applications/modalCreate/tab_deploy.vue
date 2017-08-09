@@ -4,9 +4,9 @@
       <bs-select form-type="horizontal" :options="types" v-model="deployer.type" name="type"
                  label="Type*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
 
-      <bs-input form-type="horizontal" v-model="deployer.link" name="link" label="Link"></bs-input>
+      <bs-input form-type="horizontal" v-model="deployer.provider" name="provider" label="Provider"></bs-input>
 
-      <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="deployer.description"
+      <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Notes" v-model="deployer.notes"
       ></bs-input>
     </div>
 
@@ -19,8 +19,7 @@
     <div class="well row mt20">
       <ul v-if="value.length > 0" class="list-group">
         <li class="list-group-item" v-for="stg, i in value" :key="i">
-          <bs-label>{{stg.key}}</bs-label>
-          - {{stg.value}}
+          {{stg.type}} <bs-label>{{stg.provider}}</bs-label>
 
           <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteDeployer(index)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
@@ -43,7 +42,7 @@
     },
 
     data: function () {
-      const deployerTemplate = {type: null, link: null, description:null}
+      const deployerTemplate = {type: null, provider: null, notes:null}
 
       return {
         value: [],

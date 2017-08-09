@@ -1,7 +1,7 @@
 'use strict'
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
-import Servers from 'factories/servers'
+import System from 'factories/system'
 
 export default {
   mixins: [Modals],
@@ -19,13 +19,13 @@ export default {
     },
 
     createSave () {
-      new Servers(this.model)
+      new System(this.model)
       .authorization()
       .create(this.finishJob)
     },
 
     editSave () {
-      new Servers(this.model)
+      new System(this.model)
       .authorization()
       .patchID(this.model._id, this.finishJob)
     },

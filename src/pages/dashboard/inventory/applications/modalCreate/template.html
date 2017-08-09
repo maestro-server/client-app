@@ -22,8 +22,25 @@
               <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment" name="environment"
                          label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
 
-              <bs-select form-type="horizontal" :options="options.system" v-model="app.system" name="system"
+              <bs-select form-type="horizontal" v-if="options.system" :options="options.system" v-model="app.system" name="system"
                          label="System"></bs-select>
+
+              <div class="row" v-if="!options.system">
+                <div class="col-xs-3 text-right">
+                  <label>System</label>
+                </div>
+                <div class="col-xs-9">
+                  <div class="pull-left">
+                    <bs-label type="danger">None system record.</bs-label>
+                    <router-link to="/dashboard/inventory/system">Do you like to create one?</router-link>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <bs-select form-type="horizontal" search :options="options.languages" v-model="app.language" name="type" label="Language" placeholder="Code is?"></bs-select>
+              <bs-select form-type="horizontal" :options="options.clusters" v-model="app.cluster" name="type" label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>
 
             </div>
 
@@ -47,7 +64,7 @@
         <!-- ================= Deploy ================= -->
         <!-- ============================================== -->
         <tab header="Deploy">
-          <tab-deploy :types="options.deploy" @update="val => app.spec = val" ref="tab_spec"></tab-deploy>
+          <tab-deploy :types="options.deploy" @update="val => app.deploy = val" ref="tab_deploy"></tab-deploy>
         </tab>
 
         <!-- ================= Tags ================= -->

@@ -38,10 +38,6 @@ export default {
       return _.get(key, path, false)
     },
 
-    cap(data) {
-      return _.startCase(data)
-    },
-
     isObject: function (value) {
       return _.isPlainObject(value);
     },

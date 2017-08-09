@@ -35,9 +35,16 @@
     <div class="well row mt20">
 
       <ul v-if="value.length > 0" class="list-group">
-        <li class="list-group-item" v-for="stg, i in value" :key="i">
-          {{stg.hostname}}
-          <bs-label>{{stg.ipv4_private}}</bs-label>
+        <li class="list-group-item row" v-for="item, i in value" :key="i">
+          <div class="col-xs-10">
+          <b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>
+          <h5 class='ft15'>
+            <bs-label type='default'>{{item.ipv4_private}}</bs-label>
+            <bs-label type='default'>{{item.ipv4_public}}</bs-label>
+            <bs-label type='success'>{{item.role}}</bs-label>
+            <bs-label type='success'>{{item.environment}}</bs-label>
+          </h5>
+          </div>
 
           <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServer(index)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
@@ -47,9 +54,15 @@
       <bs-label v-if="value.length > 0" type="default">{{value.length}} Server<span
         v-if="value.length > 1">s</span></bs-label>
     </div>
-    <small class="pull-right">List only the servers which have deploy. DB, or cache is not consider the server to associate</small>
+    <small class="pull-right">List all servers which that app use, db, cache and storage object is included</small>
   </div>
 </template>
+
+<style>
+  .ft15 {
+    font-size:15px;
+  }
+</style>
 
 
 <script>
@@ -62,7 +75,9 @@
       return {
         URL: `${API_URL}/servers?query=`,
         value: [],
-        template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.dc'>{{item.dc.name}}</span> | {{item.ipv4_private}}, {{item.ipv4_public}}"
+        clearValue: [],
+        template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.dc'>{{item.dc.name}}</span><br/> " +
+        "<h5 class='ft15'><bs-label type='default'>{{item.ipv4_private}}</bs-label> <bs-label type='default'>{{item.ipv4_public}}</bs-label> <bs-label type='success'>{{item.role}}</bs-label> <bs-label type='success'>{{item.environment}}</bs-label></h5>"
       }
     },
 
@@ -80,12 +95,15 @@
 
         if (!exist) {
           this.value.push(item)
+          this.clearValue.push(_.get(item, '_id'))
+          this.$emit('update', this.clearValue)
         }
       },
 
       deleteServer(key) {
         this.value.splice(key, 1)
-        this.$emit('update', _.get(this, 'value', []))
+        this.clearValue.splice(key, 1)
+        this.$emit('update', this.clearValue)
       },
 
       updaterEdit(data) {
@@ -93,7 +111,7 @@
       },
 
       reset() {
-        this.value = []
+        this.value = this.clearValue = []
       }
     }
   }

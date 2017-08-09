@@ -30,10 +30,6 @@ export default {
   },
 
   methods: {
-    cap(data) {
-      return data.charAt(0).toUpperCase() + data.slice(1)
-    },
-
     addE: function () {
       const {team} = this
 

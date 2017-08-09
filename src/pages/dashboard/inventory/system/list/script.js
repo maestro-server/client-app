@@ -29,10 +29,6 @@ export default {
   },
 
   methods: {
-    cap(data) {
-      return data.charAt(0).toUpperCase() + data.slice(1)
-    },
-
     fetchData: function (query={}) {
       const {team} = this
       const filter = _.merge(query, {team})

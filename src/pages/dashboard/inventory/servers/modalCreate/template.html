@@ -72,7 +72,7 @@
         <!-- ================= Autentication ================= -->
         <!-- ============================================== -->
         <tab header="Auth">
-          <tab-auth @update="val => server.auth = val" ref="tab_auth"></tab-auth>
+          <tab-auth :options="options.auth" @update="val => server.auth = val" ref="tab_auth"></tab-auth>
         </tab>
 
         <!-- ================= Setups ================= -->

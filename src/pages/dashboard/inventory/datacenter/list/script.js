@@ -36,11 +36,7 @@ export default {
   },
 
   methods: {
-    cap(data) {
-      return _.startCase(data)
-    },
-
-    fetchData: function (force=false) {
+      fetchData: function (force=false) {
       FectherEntity(Datacenters)(this)({k: 'datacenter', force})
       .find((e) => this.result = e.data)
     },
