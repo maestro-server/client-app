@@ -1,6 +1,7 @@
 'use strict'
 // import _ from 'lodash'
 import Modals from 'mixins/modals'
+import Servers from 'factories/servers'
 import Applications from 'factories/applications'
 import System from 'factories/system'
 import Adminer from 'factories/adminer'
@@ -53,6 +54,11 @@ export default {
 
     editLoad () {
       const {_id} = this.model
+
+      FectherEntity(Servers)(this)({k: 'app_servera_'+_id})
+        .find((e) => {
+          this.tab_servers.updaterEdit(_.get(e, 'data.items', []))
+        }, {_id: this.model.servers})
 
       this.$set(this, 'app', this.model)
       this.tab_spec.updaterEdit(this.app.spec)
@@ -116,7 +122,7 @@ export default {
 
 
     fetchAdminer (e) {
-      this.options = formatAdminer(e)
+      _.assign(this.options, formatAdminer(e))
     }
 
   },

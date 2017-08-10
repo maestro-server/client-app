@@ -95,15 +95,13 @@
 
         if (!exist) {
           this.value.push(item)
-          this.clearValue.push(_.get(item, '_id'))
-          this.$emit('update', this.clearValue)
+          this.emitUpdate(this.value)
         }
       },
 
       deleteServer(key) {
         this.value.splice(key, 1)
-        this.clearValue.splice(key, 1)
-        this.$emit('update', this.clearValue)
+        this.emitUpdate(this.value)
       },
 
       updaterEdit(data) {
@@ -111,7 +109,12 @@
       },
 
       reset() {
-        this.value = this.clearValue = []
+        this.value = []
+      },
+
+      emitUpdate(data) {
+        const m = data.map(e=>e._id)
+        this.$emit('update', m)
       }
     }
   }

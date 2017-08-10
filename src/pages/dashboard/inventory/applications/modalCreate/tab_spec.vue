@@ -92,7 +92,7 @@
       },
 
       updaterEdit(data) {
-        this.deployer = data
+        this.deployer = _.assign({},this.resetDeployer,data)
       },
 
       reset() {

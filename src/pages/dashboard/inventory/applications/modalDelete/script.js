@@ -1,4 +1,4 @@
-'use strict'
+    'use strict'
 import Modals from 'mixins/modals'
 import Applications from 'factories/applications'
 
