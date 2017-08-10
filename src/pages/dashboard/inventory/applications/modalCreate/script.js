@@ -3,7 +3,6 @@
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Applications from 'factories/applications'
-import System from 'factories/system'
 import Adminer from 'factories/adminer'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
@@ -25,13 +24,14 @@ export default {
 
   data () {
     return {
+      URL_SYSTEM: `${API_URL}/system?query=`,
+      template: "<b>{{item.name}}</b>",
       tabShow:0,
       app: {name: null, description: null, environment: null, system:null, language: null, cluster: null, deploy: [], tags: [], servers: [], spec: {}},
       options: {
         environment:[],
         role: [],
         deploy:[],
-        system: [],
         languages: [],
         clusters: []
       }
@@ -46,6 +46,19 @@ export default {
   },
 
   methods: {
+    setTabShow (index) {
+      this.tabShow = index
+      return this
+    },
+
+    requestSearch(async, val, key='name') {
+      return `${async}%7B"${key}":"${val}"%7D`
+    },
+
+    onHit(item) {
+      this.$set(this.app, 'system',  _.pick(item, ['name', '_id']))
+    },
+
     afterShow () {
       this.text.title =  this.create ? 'Create new Applications' : `Edit ${this.model.name} applications`
 
@@ -107,19 +120,13 @@ export default {
       this.model.input = ""
     },
 
+    deleteSystem() {
+      this.app.system=null
+    },
+
     fetchData() {
       FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local'})
         .find(this.fetchAdminer, {key: 'app_options'})
-
-      FectherEntity(System)(this)({k: 'system'})
-        .find(this.fetchSystem)
-    },
-
-    fetchSystem (e) {
-      const data = _.get(e, 'data.items')
-      if(!_.isEmpty(data)) {
-        this.options.system = data.map(item=>({value: item, label: item.name}))
-      }
     },
 
 

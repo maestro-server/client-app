@@ -22,20 +22,38 @@
               <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment" name="environment"
                          label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
 
-              <bs-select form-type="horizontal" v-if="options.system" :options="options.system" v-model="app.system" name="system"
-                         label="System" options-value="_id"></bs-select>
+              <hr>
 
-              <div class="row" v-if="!options.system">
-                <div class="col-xs-3 text-right">
+              <div class="text-right">
+                <router-link to="/dashboard/inventory/system" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus-circle"></i> System</router-link>
+              </div>
+
+
+              <typeahead
+                label="System"
+                placeholder="System name"
+                :async="URL_SYSTEM"
+                async-key="items"
+                :onSearch="requestSearch"
+                :template="template"
+                form-type="horizontal"
+                :on-hit="onHit"
+                class="mt10"
+                v-if="!app.system"
+              ></typeahead>
+
+              <div class="row" v-if="app.system">
+                <div class="col-xs-3 text-right mt5">
                   <label>System</label>
                 </div>
                 <div class="col-xs-9">
-                  <div class="pull-left">
-                    <bs-label type="danger">None system record.</bs-label>
-                    <router-link to="/dashboard/inventory/system">Do you like to create one?</router-link>
-                  </div>
+                  <span class="btn btn-primary">
+                    <b>{{app.system.name}}</b> -
+                    <span class="btn btn-default btn-xs" @click.stop="deleteSystem"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                  </span>
                 </div>
               </div>
+
 
               <hr>
 
@@ -50,7 +68,7 @@
 
         <!-- ================= Spec ================= -->
         <!-- ============================================== -->
-        <tab header="Spec">
+        <tab header="Role">
           <tab-spec :roles="options.role" @update="val => app.spec = val" ref="tab_spec"></tab-spec>
         </tab>
 

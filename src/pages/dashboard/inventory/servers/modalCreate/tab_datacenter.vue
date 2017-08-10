@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearfix">
-      <router-link to="/dashboard/inventory/datacenter" class="btn btn-primary btn-xs pull-right">
+      <router-link to="/dashboard/inventory/datacenter" class="btn btn-primary btn-xs pull-right" target="_blank">
         <i class="fa fa-plus-circle"></i> Datacenter</router-link>
 
     </div>

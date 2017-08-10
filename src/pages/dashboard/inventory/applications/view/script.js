@@ -1,6 +1,7 @@
 'use strict'
 import _ from 'lodash'
 
+import Applications from 'factories/applications'
 import Servers from 'factories/servers'
 import FectherEntity from 'services/fetchEntity'
 
@@ -9,7 +10,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, dc:{name:null}, active:true},
+      model: {tags: [], servers:[], deploy:[]},
       team: false,
       showJson:false
     }
@@ -29,7 +30,7 @@ export default {
       return this.model.active ? "Active" : "Desactive"
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
     }
   },
 
@@ -81,10 +82,22 @@ export default {
     },
 
     fetchData: function (id) {
-      FectherEntity(Servers)(this)({k: 'server_' + id})
+      FectherEntity(Applications)(this)({k: 'applications_' + id})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
+          this.fetchServers()
         }, id)
+    },
+
+    fetchServers() {
+      const {_id} = this.model
+
+      if (!_.isEmpty(this.model.servers)) {
+        FectherEntity(Servers)(this)({k: 'app_server_'+_id})
+          .find((e) => {
+            this.model.servers = _.get(e, 'data.items', [])
+          }, {_id: this.model.servers})
+      }
     }
   },
 

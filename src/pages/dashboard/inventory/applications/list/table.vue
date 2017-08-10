@@ -1,16 +1,12 @@
 <template>
   <v-server-table
-    name="app -list"
+    name="app-list"
     :url="url"
     :columns="columns"
     :options="options"
     ref="vTable"
   >
 
-
-    <template slot="hostname" scope="props">
-      <router-link :to="'/dashboard/inventory/applications/single/'+props.row._id">{{props.row.name}}</router-link>
-    </template>
     <template slot="qtdserver" scope="props">
       <bs-label>{{props.row.qtdserver}}</bs-label>
     </template>
@@ -33,6 +29,8 @@
   'use strict'
   import _ from 'lodash'
   import Login from 'services/login'
+  import FectherEntity from 'services/fetchEntity'
+  import System from 'factories/system'
 
   export default {
 
@@ -40,7 +38,7 @@
       return {
         url: `${API_URL}/applications/`,
         items: [],
-        columns: ['name', 'system', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
+        columns: ['name', 'lsystem', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
         options: {
           headers: {Authorization: Login.Authorization()},
           responseAdapter: (resp) => ({
@@ -48,9 +46,13 @@
               count: resp.data.found
             }
           ),
-          filterable: ['name', 'language', 'environment'],
+          filterable: ['name', 'language', 'environment', 'lsystem'],
+          listColumns: {
+            lsystem: []
+          },
           headings: {
             updated_at: 'Updated At',
+            lsystem: "System",
             qtdserver: 'Servers',
             qtddeploy: 'Deploys',
             created_at: 'Created At'
@@ -62,7 +64,7 @@
     methods: {
       prepared(data) {
         return data.map((d) => {
-          d.system = _.get(d, 'system.name', '')
+          d.lsystem = _.get(d, 'system.name', '')
           d.qtdserver = _.size(d.servers)
           d.qtddeploy = _.size(d.deploy)
 
@@ -79,10 +81,19 @@
 
       deleteP(data) {
         this.$parent.deleteE(data)
+      },
+
+      fetchSystem(e) {
+        const data = _.get(e, 'data.items')
+        if (!_.isEmpty(data)) {
+          this.options.listColumns.lsystem = data.map(item => ({text: item.name}))
+        }
       }
     },
 
     created() {
+      FectherEntity(System)(this)({k: 'system'})
+        .find(this.fetchSystem)
     }
   }
 
