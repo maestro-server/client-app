@@ -23,7 +23,7 @@
                          label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
 
               <bs-select form-type="horizontal" v-if="options.system" :options="options.system" v-model="app.system" name="system"
-                         label="System"></bs-select>
+                         label="System" options-value="_id"></bs-select>
 
               <div class="row" v-if="!options.system">
                 <div class="col-xs-3 text-right">

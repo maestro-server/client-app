@@ -1,7 +1,7 @@
 'use strict'
 import comp from './inventory.vue'
 import servers from './servers/router'
-import applications from './applications/list/router'
+import applications from './applications/router'
 import system from './system/list/router'
 import datacenter from './datacenter/list/router'
 import settings from './settings/single/router'
