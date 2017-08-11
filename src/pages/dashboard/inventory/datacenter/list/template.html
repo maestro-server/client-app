@@ -18,10 +18,10 @@
           <bs-label type="warning" class="btn-xs" v-if="item.sucessed === undefined">Disconnected</bs-label>
           <bs-label type="danger" class="btn-xs" v-if="item.sucessed === false">Disconnected</bs-label>
         </h3>
-        <button class="btn btn-primary btn-sm" @click.stop="editE(item)">
+        <button class="btn btn-primary btn-xs" @click.stop="editE(item)">
           <i class="fa fa-pencil" aria-hidden="true"></i> Edit datacenter
         </button>
-        <button class="btn btn-danger btn-sm" @click.stop="deleteE(item)">
+        <button class="btn btn-danger btn-xs" @click.stop="deleteE(item)">
           <i class="fa fa-trash" aria-hidden="true"></i> Delete datacenter
         </button>
       </div>

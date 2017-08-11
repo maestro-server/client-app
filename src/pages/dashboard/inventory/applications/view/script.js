@@ -10,7 +10,8 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {list_servers:[], tags: [], servers:[], deploy:[]},
+      model: {tags: [], servers:[], deploy:[]},
+      list_servers: [],
       team: false,
       showJson:false
     }
@@ -22,12 +23,6 @@ export default {
     },
     MDelete() {
       return this.$parent.$refs.modal_delete
-    },
-    activeShow() {
-      return this.model.active ? "success" : "danger"
-    },
-    activeLabel() {
-      return this.model.active ? "Active" : "Desactive"
     },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
@@ -84,7 +79,7 @@ export default {
       if (!_.isEmpty(this.model.servers)) {
         FectherEntity(Servers)(this)({k: 'app_server_'+_id})
           .find((e) => {
-            this.model.list_servers = _.get(e, 'data.items', [])
+            this.$set(this, 'list_servers', _.get(e, 'data.items', []))
           }, {_id: this.model.servers})
       }
     }
