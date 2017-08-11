@@ -106,6 +106,7 @@
 
       updaterEdit(data) {
         this.$set(this, 'value', data || [])
+        this.emitUpdate(this.value)
       },
 
       reset() {

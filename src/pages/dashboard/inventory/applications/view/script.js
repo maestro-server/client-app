@@ -10,7 +10,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], servers:[], deploy:[]},
+      model: {list_servers:[], tags: [], servers:[], deploy:[]},
       team: false,
       showJson:false
     }
@@ -51,17 +51,6 @@ export default {
       return _.isString(value);
     },
 
-    addE: function (index=0) {
-      const {team} = this
-
-      this.MCreate
-        .setupSteps(1, 1, 1)
-        .setTabShow(index)
-        .onFinishCallBack(() => {
-          this.$refs.svTable.$refs.vTable.refresh()
-        })
-        .show({team})
-    },
 
     editE: function (entity, index=0) {
       const {team} = this
@@ -77,7 +66,7 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/servers'))
+        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/applications'))
         .show(_.merge(entity, {team}))
     },
 
@@ -95,7 +84,7 @@ export default {
       if (!_.isEmpty(this.model.servers)) {
         FectherEntity(Servers)(this)({k: 'app_server_'+_id})
           .find((e) => {
-            this.model.servers = _.get(e, 'data.items', [])
+            this.model.list_servers = _.get(e, 'data.items', [])
           }, {_id: this.model.servers})
       }
     }

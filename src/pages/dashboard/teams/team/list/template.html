@@ -16,17 +16,17 @@
     <div class="col-xs-7">
       <imager :src="team.avatar" class="pull-left mini-avatar"></imager>
       <h3 class="mt0">{{team.name}}</h3>
-      <button class="btn btn-success btn-sm" @click.stop="addUsers(team)">
+      <button class="btn btn-primary btn-xs" @click.stop="addUsers(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Members
       </button>
 
-      <button class="btn btn-primary btn-sm" @click.stop="editTeam(team)">
+      <button class="btn btn-primary btn-xs" @click.stop="editTeam(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Edit team
       </button>
-      <router-link class="btn btn-warning btn-sm" :to="{ path: '/dashboard/teams/projects/list', query: { 'team_id': team._id, 'team_name': team.name }}">
+      <router-link class="btn btn-primary btn-xs" :to="{ path: '/dashboard/teams/projects/list', query: { 'team_id': team._id, 'team_name': team.name }}">
         <i class="fa fa-stop-circle-o" aria-hidden="true"></i> Team Projects
       </router-link>
-      <button class="btn btn-danger btn-sm" @click.stop="deleteTeam(team)">
+      <button class="btn btn-danger btn-xs" @click.stop="deleteTeam(team)">
         <i class="fa fa-minus-circle" aria-hidden="true"></i> Delete team
       </button>
     </div>

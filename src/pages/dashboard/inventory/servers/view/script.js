@@ -50,18 +50,6 @@ export default {
       return _.isString(value);
     },
 
-    addE: function (index=0) {
-      const {team} = this
-
-      this.MCreate
-        .setupSteps(1, 1, 1)
-        .setTabShow(index)
-        .onFinishCallBack(() => {
-          this.$refs.svTable.$refs.vTable.refresh()
-        })
-        .show({team})
-    },
-
     editE: function (entity, index=0) {
       const {team} = this
 

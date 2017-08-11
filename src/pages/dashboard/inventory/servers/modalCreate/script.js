@@ -29,7 +29,7 @@ export default {
       zone: null,
       showModalDC: false,
       showModalZones: false,
-      server: {status: "Active", storage:[], auth:[], services: [], tags: [], dc: {}},
+      server: {status: "Active", role:null, storage:[], auth:[], services: [], tags: [], dc: {}},
       os: {base: null, dist: null, version: null},
       options: {
         status:[],

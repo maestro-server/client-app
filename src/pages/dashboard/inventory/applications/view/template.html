@@ -72,11 +72,11 @@
 
     <div class="col-xs-12">
       <h3><i class="fa fa-server" aria-hidden="true"></i> Servers
-        <bs-label type="default" class="pull-right" v-if="model.servers">{{model.servers.length}}</bs-label>
+        <bs-label type="default" class="pull-right" v-if="model.list_servers">{{model.list_servers.length}}</bs-label>
       </h3>
 
       <ul class="list-group">
-        <li class="list-group-item" v-for="item in model.servers">
+        <li class="list-group-item" v-for="item in model.list_servers">
           <div class="row">
             <div class="col-xs-10">
               <b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>

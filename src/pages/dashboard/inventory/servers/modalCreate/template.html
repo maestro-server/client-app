@@ -30,7 +30,6 @@
                     v-validate="'numeric'" :error="makeError('cpu')"></bs-input>
           <bs-input form-type="horizontal" name="memory" label="Memory (GB)" v-model="server.memory"
                     v-validate="'numeric'" :error="makeError('memory')"></bs-input>
-
           <hr/>
 
           <bs-select form-type="horizontal" :options="options.environment" v-model="server.environment" name="environment"
