@@ -18,7 +18,7 @@
           {{stg.name}} <span v-if="stg.version">-></span>
           <bs-label>{{stg.version}}</bs-label>
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServices(index)"><i
+          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServices(i)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>

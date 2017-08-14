@@ -19,7 +19,7 @@
           <bs-label>{{stg.key}}</bs-label>
           - {{stg.value}}
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteTags(index)"><i
+          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteTags(i)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>

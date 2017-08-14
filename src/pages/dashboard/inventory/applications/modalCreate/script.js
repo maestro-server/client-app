@@ -27,7 +27,12 @@ export default {
       URL_SYSTEM: `${API_URL}/system?query=`,
       template: "<b>{{item.name}}</b>",
       tabShow:0,
-      app: {name: null, description: null, environment: null, system:null, language: null, cluster: null, deploy: [], tags: [], servers: [], spec: {}},
+      app: {
+        name: null, description: null,
+        environment: null, system:null,
+        language: null, cluster: null,
+        deploy: [], tags: [], servers: [], spec: {}
+      },
       options: {
         environment:[],
         role: [],

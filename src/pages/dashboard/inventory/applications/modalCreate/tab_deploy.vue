@@ -21,7 +21,7 @@
         <li class="list-group-item" v-for="stg, i in value" :key="i">
           {{stg.type}} <bs-label>{{stg.provider}}</bs-label>
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteDeployer(index)"><i
+          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteDeployer(i)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>

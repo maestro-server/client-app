@@ -37,7 +37,7 @@
       <ul v-if="value.length > 0" class="list-group">
         <li class="list-group-item row" v-for="item, i in value" :key="i">
           <div class="col-xs-10">
-          <b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>
+          <b class="text-capitalize">{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>
           <h5 class='ft15'>
             <bs-label type='default'>{{item.ipv4_private}}</bs-label>
             <bs-label type='default'>{{item.ipv4_public}}</bs-label>
@@ -46,7 +46,7 @@
           </h5>
           </div>
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServer(index)"><i
+          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServer(i)"><i
             class="fa fa-trash" aria-hidden="true"></i></button>
         </li>
       </ul>
@@ -54,7 +54,7 @@
       <bs-label v-if="value.length > 0" type="default">{{value.length}} Server<span
         v-if="value.length > 1">s</span></bs-label>
     </div>
-    <small class="pull-right">List all servers which that app use, db, cache and storage object is included</small>
+    <small class="pull-right">List all servers which that app stay, don't put dbs, cache, lbs or storage object</small>
   </div>
 </template>
 
