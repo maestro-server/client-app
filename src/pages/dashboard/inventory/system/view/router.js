@@ -1,7 +1,7 @@
 'use strict'
-import comp from './list'
+import comp from './view'
 
 export default {
-  path: '/',
+  path: 'single/:id',
   component: comp
 }

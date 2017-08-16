@@ -19,10 +19,10 @@
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="system.description"
               ></bs-input>
 
+
             </div>
 
           </div>
-
         </tab>
 
         <!-- ================= Links ================= -->
@@ -31,10 +31,10 @@
           <tab-check :types="options.check" @update="val => system.check = val" ref="tab_check"></tab-check>
         </tab>
 
-        <!-- ================= Applications (LBs, Dbas e etc) ================= -->
+        <!-- ================= Clients ================= -->
         <!-- ============================================== -->
-        <tab header="Apps">
-          <tab-apps :types="options.apps" @update="val => system.applications = val" ref="tab_apps"></tab-apps>
+        <tab header="Clients">
+          <tab-clients :types="options.check" @update="val => system.clients = val" ref="tab_clients"></tab-clients>
         </tab>
 
 

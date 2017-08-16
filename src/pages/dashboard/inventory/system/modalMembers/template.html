@@ -1,0 +1,27 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+
+      <tabs nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= Applications (LBs, Dbas e etc) ================= -->
+        <!-- ============================================== -->
+        <tab header="Applications, LoadBalancers, DataBases and more">
+          <tab-apps :types="options.apps" @update="val => apps = val" ref="tab_apps"></tab-apps>
+        </tab>
+
+      </tabs>
+
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

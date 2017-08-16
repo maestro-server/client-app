@@ -22,7 +22,7 @@ export default {
       return this.$parent.$refs.modal_delete
     },
     title() {
-      return this.team ? this.team.name + ' System' : 'My System'
+      return this.team ? this.team.name + ' Clients' : 'My Clients'
     }
   },
 

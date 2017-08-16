@@ -2,7 +2,8 @@
 import comp from './inventory.vue'
 import servers from './servers/router'
 import applications from './applications/router'
-import system from './system/list/router'
+import system from './system/router'
+import clients from './clients/router'
 import datacenter from './datacenter/list/router'
 import settings from './settings/single/router'
 
@@ -15,6 +16,7 @@ export default {
     applications,
     system,
     datacenter,
+    clients,
     settings
   ]
 }

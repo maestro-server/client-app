@@ -1,18 +1,12 @@
 <template>
   <v-server-table
-    name="app-list"
+    name="client-list"
     :url="url"
     :columns="columns"
     :options="options"
     ref="vTable"
   >
 
-    <template slot="qtdserver" scope="props">
-      <bs-label>{{props.row.qtdserver}}</bs-label>
-    </template>
-    <template slot="qtddeploy" scope="props">
-      <bs-label>{{props.row.qtddeploy}}</bs-label>
-    </template>
     <template slot="actions" scope="props">
       <div>
         <router-link :to="'/dashboard/inventory/applications/single/'+props.row._id"
@@ -29,32 +23,23 @@
   'use strict'
   import _ from 'lodash'
   import Login from 'services/login'
-  import FectherEntity from 'services/fetchEntity'
-  import System from 'factories/system'
-
   export default {
 
     data: function () {
       return {
-        url: `${API_URL}/applications/`,
+        url: `${API_URL}/clients/`,
         items: [],
-        columns: ['name', 'lsystem', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
+        columns: ['name', 'contact','updated_at', 'created_at', 'actions'],
         options: {
           headers: {Authorization: Login.Authorization()},
           responseAdapter: (resp) => ({
-              data: this.prepared(resp.data.items),
+              data: this.prepared(_.get(resp, 'data.items', [])),
               count: resp.data.found
             }
           ),
-          filterable: ['name', 'language', 'environment', 'lsystem'],
-          listColumns: {
-            lsystem: []
-          },
+          filterable: ['name'],
           headings: {
             updated_at: 'Updated At',
-            lsystem: "System",
-            qtdserver: 'Servers',
-            qtddeploy: 'Deploys',
             created_at: 'Created At'
           }
         }
@@ -64,15 +49,6 @@
     methods: {
       prepared(data) {
         return data.map((d) => {
-          d.qtdserver = _.size(d.servers)
-          d.qtddeploy = _.size(d.deploy)
-
-          d.lsystem = _.reduce(d.system, function(o, f, k) {
-            const str = k > 0 ? "|" : ""
-            return `${o} ${str} ${f.name}`;
-          }, "");
-
-
           d.updated_at = new Date(d.updated_at).toLocaleString()
           d.created_at = new Date(d.created_at).toLocaleString()
           return d
@@ -85,19 +61,7 @@
 
       deleteP(data) {
         this.$parent.deleteE(data)
-      },
-
-      fetchSystem(e) {
-        const data = _.get(e, 'data.items')
-        if (!_.isEmpty(data)) {
-          this.options.listColumns.lsystem = data.map(item => ({text: item.name}))
-        }
       }
-    },
-
-    created() {
-      FectherEntity(System)(this)({k: 'system'})
-        .find(this.fetchSystem)
     }
   }
 

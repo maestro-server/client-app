@@ -2,25 +2,26 @@
   <div>
     <div class="row">
       <div class="col-xs-12">
-        <p>Insert all components of your system, applications, database, cache servers and more.</p>
-        <div class="col-xs-5">
-          <bs-select :options="types" v-model="type" name="type"
-                     label="Component" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
 
+        <div class="text-right">
+          <router-link to="/dashboard/inventory/clients" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus-circle"></i> Clients</router-link>
         </div>
 
-        <div class="col-xs-7">
-          <typeahead
-            label="Application"
-            placeholder="MyWebApp"
-            :async="URL"
-            async-key="items"
-            :onSearch="requestSearch"
-            :template="template"
-            :on-hit="onHit"
-            class="col-xs-12"
-          ></typeahead>
-        </div>
+        <typeahead
+          label="Clients"
+          placeholder="Clients name"
+          :async="URL"
+          async-key="items"
+          :onSearch="requestSearch"
+          :template="template"
+          form-type="horizontal"
+          :on-hit="onHit"
+          class="mt10"
+        ></typeahead>
+
+        <hr>
+
+
       </div>
 
     </div>
@@ -66,25 +67,24 @@
     data: function () {
 
       return {
-        URL: `${API_URL}/applications?query=`,
-        type: "Application",
-        value: [],
-        clearValue: [],
-        template: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.spec'>{{item.spec.role}}</bs-label></h5>"
+        URL: `${API_URL}/clients?query=`,
+        template: "<b>{{item.name}}</b>",
+        value: []
       }
     },
 
     methods: {
       requestSearch(async, val, key='name') {
-        return `${async}%7B"${key}":"${val}", "family":"${this.type}"%7D`
+        return `${async}%7B"${key}":"${val}"%7D`
       },
 
       onHit(item) {
         const exist = _.find(this.value, ['_id', item._id])
 
-        if (!exist) {
-          this.value.push(item)
-          this.emitUpdate(this.value)
+        if(!exist) {
+
+          this.value.push(_.pick(item, ['name', '_id']))
+          this.$emit('update', _.get(this, 'value', []))
         }
       },
 

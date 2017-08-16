@@ -11,7 +11,6 @@ import tabTags from './tab_tags'
 import tabServers from './tab_servers'
 import tabDeploy from './tab_deploy'
 import tabSpec from './tab_spec'
-import tabSystem from './tab_system'
 
 export default {
   mixins: [Modals],
@@ -20,16 +19,17 @@ export default {
     tabTags,
     tabServers,
     tabDeploy,
-    tabSpec,
-    tabSystem
+    tabSpec
   },
 
   data () {
     return {
+      URL_SYSTEM: `${API_URL}/system?query=`,
+      template: "<b>{{item.name}}</b>",
       tabShow:0,
       app: {
         name: null, description: null,
-        environment: null, system: [],
+        environment: null, system:null,
         language: null, cluster: null,
         deploy: [], tags: [], servers: [], spec: {}
       },
@@ -47,7 +47,6 @@ export default {
     tab_spec() {return this.$refs.tab_spec},
     tab_servers() {return this.$refs.tab_servers},
     tab_deploy() {return this.$refs.tab_deploy},
-    tab_system() {return this.$refs.tab_system},
     tab_tags() {return this.$refs.tab_tags}
   },
 
@@ -55,6 +54,14 @@ export default {
     setTabShow (index) {
       this.tabShow = index
       return this
+    },
+
+    requestSearch(async, val, key='name') {
+      return `${async}%7B"${key}":"${val}"%7D`
+    },
+
+    onHit(item) {
+      this.$set(this.app, 'system',  _.pick(item, ['name', '_id']))
     },
 
     afterShow () {
@@ -77,7 +84,6 @@ export default {
       this.tab_spec.updaterEdit(this.app.spec)
       this.tab_deploy.updaterEdit(this.model.deploy)
       this.tab_tags.updaterEdit(this.model.tags)
-      this.tab_system.updaterEdit(this.model.system)
     },
 
     resetApp() {
@@ -87,7 +93,6 @@ export default {
       this.tab_servers.reset()
       this.tab_deploy.reset()
       this.tab_tags.reset()
-      this.tab_system.reset()
     },
 
     setupModel () {
@@ -120,10 +125,15 @@ export default {
       this.model.input = ""
     },
 
+    deleteSystem() {
+      this.app.system=null
+    },
+
     fetchData() {
       FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local'})
         .find(this.fetchAdminer, {key: 'app_options'})
     },
+
 
     fetchAdminer (e) {
       _.assign(this.options, formatAdminer(e))

@@ -69,7 +69,7 @@
       },
 
       reset() {
-        this.$set(this, 'system', _.clone(this.systemTemplate))
+        this.$set(this, 'system', _.clone(this.resetSystem))
         this.value = []
       }
     }
