@@ -38,7 +38,7 @@ export default {
     },
 
     afterShow () {
-      this.text.title =  this.create ? 'Create new System' : `Edit ${this.model.name} system`
+      this.text.title =  this.create ? 'Create new System' : `Add news app into ${this.model.name} system`
 
       if(!this.create) {
         this.editLoad()
