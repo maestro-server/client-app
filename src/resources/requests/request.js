@@ -25,7 +25,7 @@ const req = {
 
   delete: (entity, data={}, headers={}) => {
     return caxios(headers)
-      .delete(entity, data, headers)
+      .delete(entity, {data})
   }
 
 }

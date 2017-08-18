@@ -51,11 +51,11 @@
 
     <div class="col-xs-12">
       <h3><i class="fa fa-superpowers" aria-hidden="true"></i> Applications
-        <bs-label type="default" class="pull-right" v-if="list_apps">{{list_apps.length}}</bs-label>
+        <bs-label type="default" class="pull-right" v-if="model.list_apps">{{model.list_apps.length}}</bs-label>
       </h3>
 
       <ul class="list-group">
-        <li class="list-group-item" v-for="item in list_apps">
+        <li class="list-group-item" v-for="item in model.list_apps">
           <div class="row">
             <div class="col-xs-10">
               <b class="text-capitalize">{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span>
@@ -96,7 +96,7 @@
         </li>
       </ul>
 
-      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 3)"><i
+      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 2)"><i
         class="fa fa-user-o" aria-hidden="true"></i> Manage Clients
       </button>
     </div>
@@ -139,7 +139,7 @@
         </li>
       </ul>
 
-      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 4)"><i
+      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 3)"><i
         class="fa fa-tags" aria-hidden="true"></i> Manage Tags
       </button>
     </div>

@@ -1,73 +1,86 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Applications from 'factories/applications'
+import System from 'factories/system'
 import Adminer from 'factories/adminer'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
 
-import tabApps from './tab_apps'
-
 export default {
   mixins: [Modals],
 
-  components: {
-    tabApps
-  },
-
-  data () {
+  data() {
     return {
-      URL_CLIENT: `${API_URL}/clients?query=`,
-      template: "<b>{{item.name}}</b>",
-      apps: {},
+      tmp: {created: [], deleted: []},
       options: {
-        check:[],
+        check: [],
         apps: []
-      }
+      },
+      URL: `${API_URL}/applications?query=`,
+      type: "Application",
+      value: [],
+      mirrorValue: [],
+      template_apps: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.spec'>{{item.spec.role}}</bs-label></h5>"
     }
   },
 
-  computed: {
-    tab_apps() {return this.$refs.tab_apps}
-  },
-
   methods: {
-    setTabShow (index) {
+    setTabShow(index) {
       this.tabShow = index
       return this
     },
 
-    afterShow () {
-      this.text.title =  this.create ? 'Create new System' : `Add news app into ${this.model.name} system`
+    afterShow() {
+      this.text.title = this.create ? 'Create new System' : `Add news app into ${this.model.name} system`
 
-      if(!this.create) {
+      if (!this.create) {
         this.editLoad()
       }
     },
 
-    editLoad () {
-      const {_id} = this.model
+    editLoad() {
+      const {list_apps} = this.model
+      this.$set(this, 'value', list_apps)
 
-      FectherEntity(Applications)(this)({k: 'system_app_'+_id})
-        .find((e) => {
-          this.tab_apps.updaterEdit(_.get(e, 'data.items', []))
-        }, {"system._id": _id})
-
+      this.mirrorValue = _.clone(list_apps)
     },
 
-    setupModel () {
-      this.model = _.pickBy(this.system, _.identity)
+    setupModel() {
+      const oldv = this.mirrorValue.map(e => e._id)
+      const newv = this.value.map(e => e._id)
+
+      this.tmp.created = _.difference(newv, oldv)
+      this.tmp.deleted = _.difference(oldv, newv)
     },
 
-    createSave () {},
-
-    editSave () {
+    editSave() {
       this.setupModel()
-
-      new Applications(this.model)
-        .authorization()
-        .patchID(this.model._id, this.finishJob)
+      this.createdSystemApp(this.tmp.created)
+      this.deletedSystemApp(this.tmp.deleted)
     },
+
+    createdSystemApp(id) {
+      if (!_.isEmpty(id)) {
+        new System({id})
+          .authorization()
+          .patchID(
+            `${this.model._id}/applications`,
+            this.finishJob
+          )
+      }
+    },
+
+    deletedSystemApp(id) {
+      if (!_.isEmpty(id)) {
+        new System({id})
+          .authorization()
+          .deleteID(
+            `${this.model._id}/applications`,
+            this.finishJob
+          )
+      }
+    },
+
 
     setTeam(item) {
       this.$set(this.model, 'team', item)
@@ -85,10 +98,25 @@ export default {
     },
 
 
-    fetchAdminer (e) {
+    fetchAdminer(e) {
       _.assign(this.options, formatAdminer(e))
-    }
+    },
 
+    requestSearch(async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}", "family":"${this.type}"%7D`
+    },
+
+    onHit(item) {
+      const exist = _.find(this.value, ['_id', item._id])
+
+      if (!exist) {
+        this.value.push(item)
+      }
+    },
+
+    deleteApp(key) {
+      this.value.splice(key, 1)
+    }
   },
 
   created() {

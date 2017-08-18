@@ -10,8 +10,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], clients:[], check: []},
-      list_apps: [],
+      model: {tags: [], clients:[], check: [], list_apps:[]},
       team: false,
       showJson:false
     }
@@ -28,7 +27,7 @@ export default {
       return this.$parent.$refs.modal_delete
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'clients'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'clients', 'list_apps'])
     }
   },
 
@@ -60,7 +59,7 @@ export default {
         .show(_.merge(entity, {team}))
     },
 
-    editM: function (entity, index=0) {
+    editM: function (entity) {
       const {team} = this
 
       this.MMembers
@@ -90,7 +89,7 @@ export default {
       if (id) {
         FectherEntity(Applications)(this)({k: 'system_app_'+id})
           .find((e) => {
-            this.$set(this, 'list_apps', _.get(e, 'data.items', []))
+            this.$set(this.model, 'list_apps', _.get(e, 'data.items', []))
           }, {"system._id": id})
       }
     }
