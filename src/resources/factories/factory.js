@@ -84,7 +84,6 @@ class Factory {
   }
 
   delete (call_success = fsuccess, call_rejected = frejected) {
-    console.log(this.model)
     Requester
       .delete(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
