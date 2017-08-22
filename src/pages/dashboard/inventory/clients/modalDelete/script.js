@@ -1,6 +1,6 @@
     'use strict'
 import Modals from 'mixins/modals'
-import Applications from 'factories/applications'
+import Clients from 'factories/clients'
 
 export default {
   mixins: [Modals],
@@ -11,7 +11,7 @@ export default {
     },
 
     editSave () {
-      new Applications(this.model)
+      new Clients(this.model)
         .authorization()
         .deleteID(this.model._id, this.finishJob)
     }

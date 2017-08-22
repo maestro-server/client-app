@@ -9,7 +9,7 @@
 
     <template slot="actions" scope="props">
       <div>
-        <router-link :to="'/dashboard/inventory/applications/single/'+props.row._id"
+        <router-link :to="'/dashboard/inventory/clients/single/'+props.row._id"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>
         <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>

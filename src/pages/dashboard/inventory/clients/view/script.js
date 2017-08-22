@@ -1,8 +1,8 @@
 'use strict'
 import _ from 'lodash'
 
-import Applications from 'factories/applications'
-import Servers from 'factories/servers'
+import Clients from 'factories/clients'
+import System from 'factories/system'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
@@ -10,8 +10,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], servers:[], deploy:[]},
-      list_servers: [],
+      model: {tags: [], contacts:[], list_system:[]},
       team: false,
       showJson:false
     }
@@ -21,11 +20,14 @@ export default {
     MCreate() {
       return this.$parent.$refs.modal_create
     },
+    MMembers() {
+      return this.$parent.$refs.modal_members
+    },
     MDelete() {
       return this.$parent.$refs.modal_delete
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'contacts', 'list_system', 'team'])
     }
   },
 
@@ -57,36 +59,45 @@ export default {
         .show(_.merge(entity, {team}))
     },
 
+    editM: function (entity) {
+      const {team} = this
+
+      this.MMembers
+        .setupSteps(1, 1, 1)
+        .onFinishCallBack(() => this.fetchData(entity._id))
+        .show(_.merge(entity, {team}))
+    },
+
     deleteE: function (entity) {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/applications'))
+        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/system'))
         .show(_.merge(entity, {team}))
     },
 
     fetchData: function (id) {
-      FectherEntity(Applications)(this)({k: 'applications_' + id})
-        .findOne((e) => {
-          this.$set(this, 'model', e.data)
-          this.fetchServers()
-        }, id)
+      if (id) {
+        FectherEntity(Clients)(this)({k: 'client_' + id})
+          .findOne((e) => {
+            this.$set(this, 'model', e.data)
+          }, id)
+      }
     },
 
-    fetchServers() {
-      const {_id} = this.model
-
-      if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)(this)({k: 'app_server_'+_id})
+    fetchSystem(id) {
+      if (id) {
+        FectherEntity(System)(this)({k: 'client_system_'+id})
           .find((e) => {
-            this.$set(this, 'list_servers', _.get(e, 'data.items', []))
-          }, {_id: this.model.servers})
+            this.$set(this.model, 'list_system', _.get(e, 'data.items', []))
+          }, {"clients._id": id})
       }
     }
   },
 
   created() {
     this.fetchData(this.$route.params.id)
+    this.fetchSystem(this.$route.params.id)
 
     if (_.has(this.$route, 'query.team_id')) {
       this.team = {

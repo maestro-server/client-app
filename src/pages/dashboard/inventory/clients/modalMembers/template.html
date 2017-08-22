@@ -1,0 +1,60 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+
+      <tabs nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= System ================= -->
+        <!-- ============================================== -->
+        <tab header="Insert all system for this client">
+          <div class="row">
+            <div class="col-xs-12">
+
+                <typeahead
+                  label="System"
+                  placeholder="MySystem"
+                  :async="URL"
+                  async-key="items"
+                  :onSearch="requestSearch"
+                  :template="template_system"
+                  form-type="horizontal"
+                  :on-hit="onHit"
+                ></typeahead>
+            </div>
+
+          </div>
+
+          <div class="well row mt20">
+
+            <ul v-if="value.length > 0" class="list-group">
+              <li class="list-group-item row" v-for="item, i in value" :key="i">
+                <div class="col-xs-10">
+                  <b class="text-capitalize">{{item.name}}</b>
+                </div>
+
+                <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteApp(i)"><i
+                  class="fa fa-trash" aria-hidden="true"></i></button>
+              </li>
+            </ul>
+            <span v-if="value.length <= 0" class="col-xs-12 text-center">None system selected</span>
+            <bs-label v-if="value.length > 0" type="default">{{value.length}} System<span
+              v-if="value.length > 1">s</span></bs-label>
+          </div>
+
+        </tab>
+
+      </tabs>
+
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

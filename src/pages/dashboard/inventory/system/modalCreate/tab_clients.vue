@@ -103,8 +103,7 @@
       },
 
       emitUpdate(data) {
-        const m = data.map(e=>e._id)
-        this.$emit('update', m)
+        this.$emit('update', data)
       }
     }
   }
