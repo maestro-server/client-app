@@ -1,5 +1,4 @@
 'use strict'
-// import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Datacenters from 'factories/datacenters'
 import Adminer from 'factories/adminer'
@@ -17,23 +16,22 @@ export default {
       ownProvider: false,
       provider: null,
       regions: [],
+      regionT: null,
       region: null,
       zones: [],
+      zoneT: null,
       zone: null,
       auth: {},
-      options: {}
+      options: {provider: [], connections: [], regions:[], zones:[]}
     }
   },
 
   watch: {
-    regions () {
-      if(this.create)
-        this.setupZones()
+    region (val) {
+      this.addRegions(val)
     },
-
-    provider () {
-      if(this.create)
-        this.setupRegions()
+    zone (val) {
+      this.addZones(val)
     }
   },
 
@@ -98,11 +96,48 @@ export default {
       this.model.input = ""
     },
 
-    setupRegions() {
+    /*
+    Regions functions
+     */
+
+    setupModalRegions() {
+      this.showModalRegions = true
+      this.options.regions = []
       if (this.options.baser.hasOwnProperty(this.provider)) {
-        this.regions = this.options.baser[this.provider].map(e => e.region)
+        this.options.regions = this.options.baser[this.provider].map(e => e.region)
       }
     },
+
+    addRegions(region) {
+      const exist = _.filter(this.regions, e=>e==region).length
+      if (region && !exist) {
+        this.regions.push(region)
+      }
+    },
+
+    addTegionT() {
+      this.addRegions(this.regionT)
+      this.regionT=null
+    },
+
+    deleteRegions(key) {
+      this.regions.splice(key, 1)
+    },
+
+    clearRegions() {
+      this.zones = []
+      this.regions = []
+      this.showModalRegions = false
+    },
+
+    submitRegions() {
+      this.setupZones()
+      this.showModalRegions = false
+    },
+
+    /*
+    Zones functions
+     */
 
     setupZones() {
       let arr = []
@@ -116,13 +151,19 @@ export default {
 
       }
       this.zones = arr
+      this.options.zones = _.clone(arr)
     },
 
-    addZones() {
-      if (this.zone) {
-        this.zones.push(this.zone)
-        this.zone = ''
+    addZones(zone) {
+      const exist = _.filter(this.zones, e=>e==zone).length
+      if (zone && !exist) {
+        this.zones.push(zone)
       }
+    },
+
+    addZoneT() {
+      this.addZones(this.zoneT)
+      this.zoneT=null
     },
 
     deleteZones(key) {
@@ -134,24 +175,8 @@ export default {
       this.showModalZones = false
     },
 
-    addRegions() {
-      if (this.region) {
-        this.regions.push(this.region)
-        this.region = ''
-      }
-    },
-
-    deleteRegions(key) {
-      this.regions.splice(key, 1)
-    },
-
-    clearRegions() {
-      this.regions = []
-      this.showModalRegions = false
-    },
-
     fetchAdminer (e) {
-       this.options = formatAdminer(e)
+      _.assign(this.options, formatAdminer(e))
     },
 
   },

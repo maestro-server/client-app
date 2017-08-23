@@ -19,7 +19,8 @@
 
         <div class="col-xs-12 mt10">
           <bs-select v-if="!ownProvider" form-type="horizontal" :options="options.provider" v-model="provider" name="provider"
-                     label="Provider" :disabled="!this.create"></bs-select>
+                     label="Provider" :disabled="!this.create" @change="clearRegions"></bs-select>
+
           <bs-input v-if="ownProvider" form-type="horizontal" label="Provider" name="provider" v-model="provider"></bs-input>
 
 
@@ -28,7 +29,7 @@
               <label>Regions</label>
             </div>
             <div class="col-xs-9">
-              <button class="btn btn-primary btn-sm" @click.stop.prevent="showModalRegions = true">
+              <button class="btn btn-primary btn-sm" @click.stop.prevent="setupModalRegions" :disabled="!provider">
                 <i class="fa fa-cloud-upload"></i> Manange Regions</button>
               {{regions.length}} regions avaliable
             </div>
@@ -39,7 +40,7 @@
               <label>Zones</label>
             </div>
             <div class="col-xs-9">
-              <button class="btn btn-primary btn-sm" @click.stop.prevent="showModalZones = true">
+              <button class="btn btn-primary btn-sm" @click.stop.prevent="showModalZones = true" :disabled="regions.length == 0">
                 <i class="fa fa-bullseye"></i> Manange Zones</button>
               {{zones.length}} zones avaliable
             </div>
@@ -82,21 +83,29 @@
 
   </modal>
 
+
   <modal :title="'Regions ' + provider" effect="fade" v-model="showModalRegions" @closed="showModalRegions = false"
          sub-modal small>
     <div class="row">
       <div class="col-xs-12">
-        <small>I would like to delimit which regions can be used (Can create more than one region).</small>
-        <form>
-          <bs-input class="mt10" v-model="region" label="Region" placeholder="sa-east-1"></bs-input>
+        <small>Choose and delimit which regions can be used.</small>
+        <form v-if="options.regions.length > 0">
+          <bs-select :options="options.regions" v-model="region"
+                     label="Region" class="mt10"></bs-select>
         </form>
-        <a href="#" @click.prevent.stop="addRegions" class="btn btn-primary btn-sm pull-left"><i
-          class="fa fa-plus-circle"></i> Region</a>
+
+        <form v-if="options.regions.length == 0">
+          <bs-input class="mt10" v-model="regionT" label="Region" placeholder="sa-east-1"></bs-input>
+          <a href="#" @click.prevent.stop="addTegionT" class="btn btn-primary btn-sm pull-left"><i
+            class="fa fa-plus-circle"></i> Region</a>
+
+        </form>
       </div>
     </div>
 
+
     <div class="well col-xs-12 mt10">
-      <ul v-if="regions.length > 0" class="list-group">
+      <ul v-if="regions.length > 0" class="list-group mt5">
         <li class="list-group-item" v-for="znc, index in regions" :key="index">
           {{znc}}
 
@@ -111,8 +120,8 @@
 
 
     <div slot="modal-footer" class="modal-footer">
-      <button type="button" class="btn btn-danger" @click="clearRegions()">Clear Regions</button>
-      <button type="button" class="btn btn-primary" @click="showModalRegions = false">Add Regions</button>
+      <button type="button" class="btn btn-danger" @click="clearRegions">Clear Regions</button>
+      <button type="button" class="btn btn-primary" @click="submitRegions">Add Regions</button>
     </div>
   </modal>
 
@@ -120,12 +129,18 @@
          sub-modal small>
     <div class="row">
       <div class="col-xs-12">
-        <small>I would like to delimit which zones can be used (Can create more than one zone).</small>
-        <form>
-          <bs-input class="mt10" v-model="zone" label="Zone" placeholder="sa-east-1a"></bs-input>
+        <small>Choose and delimit  which zones can be used.</small>
+        <form v-if="options.zones.length > 0">
+          <bs-select :options="options.zones" v-model="zone"
+                     label="Region" class="mt10"></bs-select>
         </form>
-        <a href="#" @click.prevent.stop="addZones" class="btn btn-primary btn-sm pull-left"><i
-          class="fa fa-plus-circle"></i> Zone</a>
+
+        <form v-if="options.zones.length == 0">
+          <bs-input class="mt10" v-model="zoneT" label="Zone" placeholder="sa-east-1a"></bs-input>
+          <a href="#" @click.prevent.stop="addZoneT" class="btn btn-primary btn-sm pull-left"><i
+            class="fa fa-plus-circle"></i> Zone</a>
+
+        </form>
       </div>
     </div>
 
