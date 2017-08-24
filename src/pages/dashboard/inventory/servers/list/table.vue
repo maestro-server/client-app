@@ -37,7 +37,7 @@
       return {
         url: `${API_URL}/servers/`,
         items: [],
-        columns: ['hostname', 'ipv4_private', 'os', 'dc', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
+        columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
         options: {
           headers: {Authorization: Login.Authorization()},
           responseAdapter: (resp) => ({
@@ -45,12 +45,12 @@
               count: resp.data.found
             }
           ),
-          filterable: ['hostname', 'ipv4_private', 'os', 'dc', 'role', 'environment', 'auth', 'user'],
+          filterable: ['hostname', 'ipv4_private', 'os', 'datacenters', 'role', 'environment', 'auth', 'user'],
           listColumns: {
             role: [],
             environment: [],
             os: [],
-            dc: [],
+            datacenters: [],
             auth: []
           },
           headings: {
@@ -66,7 +66,7 @@
       prepared(data) {
         return data.map((d) => {
           d.os = `${_.get(d, 'os.base', '')} ${_.get(d, 'os.dist', '')}`
-          d.dc = _.get(d, 'dc.name', '-')
+          d.datacenters = _.get(d, 'datacenters.name', '-')
 
 
           d.user = _.reduce(d.auth, function(o, f, k) {
@@ -100,7 +100,7 @@
       fetchDatacenter(e) {
         const data = _.get(e, 'data.items')
         if (!_.isEmpty(data)) {
-          this.options.listColumns.dc = data.map(item => ({text: item.name}))
+          this.options.listColumns.datacenters = data.map(item => ({text: item.name}))
         }
       },
 

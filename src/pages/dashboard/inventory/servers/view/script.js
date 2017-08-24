@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, dc:{name:null}, active:true},
+      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, datacenters:{name:null}, active:true},
       team: false,
       showJson:false
     }

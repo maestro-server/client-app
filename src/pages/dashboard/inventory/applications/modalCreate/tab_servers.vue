@@ -37,7 +37,7 @@
       <ul v-if="value.length > 0" class="list-group">
         <li class="list-group-item row" v-for="item, i in value" :key="i">
           <div class="col-xs-10">
-          <b class="text-capitalize">{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>
+          <b class="text-capitalize">{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.datacenters'> - {{item.datacenters.name}}</span><br/>
           <h5 class='ft15'>
             <bs-label type='default'>{{item.ipv4_private}}</bs-label>
             <bs-label type='default'>{{item.ipv4_public}}</bs-label>
@@ -76,7 +76,7 @@
         URL: `${API_URL}/servers?query=`,
         value: [],
         clearValue: [],
-        template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.dc'>{{item.dc.name}}</span><br/> " +
+        template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +
         "<h5 class='ft15'><bs-label type='default'>{{item.ipv4_private}}</bs-label> <bs-label type='default'>{{item.ipv4_public}}</bs-label> <bs-label type='success'>{{item.role}}</bs-label> <bs-label type='success'>{{item.environment}}</bs-label></h5>"
       }
     },

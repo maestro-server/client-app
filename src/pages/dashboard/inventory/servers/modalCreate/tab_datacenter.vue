@@ -90,7 +90,7 @@
 
         this.regions = _.get(dc, 'value.regions', [])
         this.zones = _.get(dc, 'value.zones', [])
-        this._id = _.get(dc, 'value._id')
+        this.value._id = _.get(dc, 'value._id')
 
         this.updateModel()
       },
@@ -100,11 +100,11 @@
       },
 
       updaterEdit(data) {
-        this.$set(this, 'value', data || [])
+        this.$set(this, 'value', data || {})
       },
 
       reset() {
-        this.value = []
+        this.value = {}
       }
     },
 

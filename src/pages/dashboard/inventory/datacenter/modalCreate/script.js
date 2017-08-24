@@ -57,16 +57,13 @@ export default {
     afterShow () {
       this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
 
-      _.defaults(this.model, {
-        regions: [],
-        zones: [],
-        provider: null,
-        metas: {ownProvider:false}
-      })
+      this.create ? this.resetDC() : this.editLoad()
+    },
 
+    editLoad () {
+      this.$set(this, 'provider', this.model.provider)
       this.$set(this, 'regions', this.model.regions)
       this.$set(this, 'zones', this.model.zones)
-      this.$set(this, 'provider', this.model.provider)
       this.$set(this, 'ownProvider', this.model.metas.ownProvider)
     },
 
@@ -124,10 +121,11 @@ export default {
       this.regions.splice(key, 1)
     },
 
-    clearRegions() {
-      this.zones = []
-      this.regions = []
-      this.showModalRegions = false
+    clearRegions(data) {
+      if(data != this.provider) {
+        this.zones = []
+        this.regions = []
+      }
     },
 
     submitRegions() {

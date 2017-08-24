@@ -48,7 +48,7 @@
 
           <hr/>
 
-          <h4>Provider Connection {{provider}}</h4>
+          <h4 v-if="!ownProvider">Provider Connection {{provider}}</h4>
           <div v-if="provider == 'AWS'">
             <bs-input form-type="horizontal" label="Access Key ID" name="name" v-model="auth.key"></bs-input>
             <bs-input form-type="horizontal" label="Secret Access Key" name="name" v-model="auth.secret"></bs-input>
@@ -130,7 +130,7 @@
     <div class="row">
       <div class="col-xs-12">
         <small>Choose and delimit  which zones can be used.</small>
-        <form v-if="options.zones.length > 0">
+        <form v-if="options.zones.length >  0">
           <bs-select :options="options.zones" v-model="zone"
                      label="Region" class="mt10"></bs-select>
         </form>

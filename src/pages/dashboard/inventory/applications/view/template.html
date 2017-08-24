@@ -76,7 +76,7 @@
         <li class="list-group-item" v-for="item in list_servers">
           <div class="row">
             <div class="col-xs-10">
-              <b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.dc'> - {{item.dc.name}}</span><br/>
+              <b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span><span v-if='item.datacenters'> - {{item.datacenters.name}}</span><br/>
               <h5 class='ft15'>
                 <bs-label type='default'>{{item.ipv4_private}}</bs-label>
                 <bs-label type='default'>{{item.ipv4_public}}</bs-label>

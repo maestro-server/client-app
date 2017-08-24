@@ -23,8 +23,8 @@
     <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'os.base')">
       <h3 class="white">{{model.os.base}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'dc.name')">
-      <h3 class="white">{{model.dc.name}}</h3>
+    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'datacenters.name')">
+      <h3 class="white">{{model.datacenters.name}}</h3>
     </displayer>
     <displayer class="col-xs-2" type="primary" v-if="model.ipv4_private">
       <h3 class="white">{{model.ipv4_private}}</h3>

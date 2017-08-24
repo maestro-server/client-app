@@ -29,7 +29,7 @@ export default {
       zone: null,
       showModalDC: false,
       showModalZones: false,
-      server: {status: "Active", role:null, storage:[], auth:[], services: [], tags: [], dc: {}},
+      server: {status: "Active", role:null, storage:[], auth:[], services: [], tags: [], datacenters: {}},
       os: {base: null, dist: null, version: null},
       options: {
         status:[],
@@ -112,7 +112,7 @@ export default {
 
       new Servers(this.model)
       .authorization()
-      .create(this.finishJob)
+      .create()
     },
 
     editSave () {
