@@ -10,7 +10,7 @@ import FectherEntity from 'services/fetchEntity'
 import tabTags from './tab_tags'
 import tabServers from './tab_servers'
 import tabDeploy from './tab_deploy'
-import tabSpec from './tab_spec'
+import tabRole from './tab_role'
 import tabSystem from './tab_system'
 
 export default {
@@ -20,7 +20,7 @@ export default {
     tabTags,
     tabServers,
     tabDeploy,
-    tabSpec,
+    tabRole,
     tabSystem
   },
 
@@ -31,7 +31,7 @@ export default {
         name: null, description: null,
         environment: null, system: [],
         language: null, cluster: null,
-        deploy: [], tags: [], servers: [], spec: {}
+        deploy: [], tags: [], servers: [], role: {}
       },
       options: {
         environment:[],
@@ -44,7 +44,7 @@ export default {
   },
 
   computed: {
-    tab_spec() {return this.$refs.tab_spec},
+    tab_role() {return this.$refs.tab_role},
     tab_servers() {return this.$refs.tab_servers},
     tab_deploy() {return this.$refs.tab_deploy},
     tab_system() {return this.$refs.tab_system},
@@ -74,7 +74,7 @@ export default {
       }
 
       this.$set(this, 'app', this.model)
-      this.tab_spec.updaterEdit(this.app.spec)
+      this.tab_role.updaterEdit(this.app.role)
       this.tab_deploy.updaterEdit(this.model.deploy)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_system.updaterEdit(this.model.system)
@@ -83,7 +83,7 @@ export default {
     resetApp() {
       this.tabShow=0
       this.app = {}
-      this.tab_spec.reset()
+      this.tab_role.reset()
       this.tab_servers.reset()
       this.tab_deploy.reset()
       this.tab_tags.reset()
@@ -121,7 +121,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local'})
+      FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'app_options'})
     },
 

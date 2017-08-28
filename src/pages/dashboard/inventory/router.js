@@ -4,7 +4,7 @@ import servers from './servers/router'
 import applications from './applications/router'
 import system from './system/router'
 import clients from './clients/router'
-import datacenter from './datacenter/list/router'
+import datacenter from './datacenter/router'
 import settings from './settings/single/router'
 
 export default {

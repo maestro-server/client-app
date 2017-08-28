@@ -5,8 +5,34 @@
     </h3>
   </div>
 
-  <div class="col-xs-12">
+  <div>
 
+    <form action="get" class="row">
+      <div class="col-xs-12 col-sm-6">
+        <bs-input
+          label="Username"
+
+          name="name"
+          class="col-xs-12"
+          disabled
+        ></bs-input>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+
+      </div>
+
+
+
+
+
+
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" @click="updateProfile">
+          Update profile
+        </button>
+      </div>
+    </form>
 
   </div>
 

@@ -1,5 +1,5 @@
 'use strict'
-import store  from 'store'
+import store from 'src/store'
 
 export default {
 

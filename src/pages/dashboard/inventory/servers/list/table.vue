@@ -114,7 +114,7 @@
     },
 
     created() {
-      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local'})
+      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'server_options'})
 
       FectherEntity(Datacenters)(this)({k: 'datacenter'})

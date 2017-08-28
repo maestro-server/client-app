@@ -1,5 +1,10 @@
 'use strict'
 
+import store from 'store'
+import expirePlugin from 'store/plugins/expire'
+store.addPlugin(expirePlugin)
+
+
 class LocalStorage {
 
   constructor(key='x-access') {
@@ -12,34 +17,20 @@ class LocalStorage {
     return this
   }
 
-  createStore (result) {
-    if(_.isObject(result)) {
-      result = JSON.stringify(result)
-    }
+  createStore (result, expires=60) {
+    const seconds = expires * 1000
+    const date = new Date().getTime() + seconds
 
-    try {
-      localStorage.setItem(this.ACCESS, result)
-    } catch(e) {
-      console.log(e)
-    }
-
+    store.set(this.ACCESS, result, date)
     return this
   }
 
   restoreStore () {
-    const result = localStorage.getItem(this.ACCESS)
-
-    if(!_.isEmpty(result)) {
-      try {
-        return JSON.parse(result)
-      } catch(e) {
-        return result
-      }
-    }
+    return store.get(this.ACCESS)
   }
 
   deleteStore () {
-    localStorage.removeItem(this.ACCESS)
+    store.remove(this.ACCESS)
   }
 }
 

@@ -12,8 +12,8 @@ const Cache = ({k, time, persistence, force}) => (fn) => {
     const callback = function (result) {
       if(result.status == 200 && !_.isEmpty(result.data)) {
 
-        new Repository(k, time)
-                .createStore(_.pick(result, 'data', 'status'));
+        new Repository(k)
+                .createStore(_.pick(result, 'data', 'status'), time);
 
         fn(result)
       }

@@ -2,6 +2,6 @@
 import comp from './list'
 
 export default {
-  path: 'datacenter',
+  path: '/',
   component: comp
 }

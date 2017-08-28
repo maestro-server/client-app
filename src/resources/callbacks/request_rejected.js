@@ -1,7 +1,28 @@
 'use strict'
-import store from 'store'
+import store from 'src/store'
+import _ from 'lodash'
+
+const mapper = {
+  422: {
+    title: (e) => `Field, ${_.get(e, 'err.errors[0].message')}`,
+    msg: (e) => `Complete path is ${_.toUpper(_.get(e, 'err.errors[0].path'))}`
+  },
+  401: {
+    title: (e) => `${_.get(e, 'err.errors[0].message')}`,
+    msg: () => "You not authorize to do this!"
+  },
+  404: {
+    title: "The resource not exist.",
+    msg: () => ""
+  },
+  409: {
+    title: (e) => `Field, ${_.get(e, 'err.errors[0].message')}`,
+    msg: () => "One of yours data is duplicate (Conflict)"
+  }
+}
 
 export default (e) => {
+  const response = _.get(e, 'response', null)
 
   let data = {
     show: true,
@@ -10,19 +31,21 @@ export default (e) => {
     type: "danger"
   }
 
-  if(e.response) {
-    const {response} = e
-    const hash = window.location.hash
+  if(response) {
 
+    const hash = window.location.hash
 
     if(response.status == 401 && hash!="#/login") {
       window.location.hash = "logout"
       return
     }
 
+
     const ch = {
-      msg: response.data.title || data.msg,
-      title: response.data.message || response.statusText || data.msg,
+      show: true,
+      msg: mapper[response.status].msg(_.get(response, 'data')),
+      title: mapper[response.status].title(_.get(response, 'data')),
+      type: "danger"
     }
 
     Object.assign(data, ch)

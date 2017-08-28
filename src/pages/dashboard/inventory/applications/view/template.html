@@ -21,8 +21,8 @@
     <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'system.name')">
       <h3 class="white">{{model.system.name}}</h3>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'spec.role')">
-      <h3 class="white">{{model.spec.role}}</h3>
+    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'role.role')">
+      <h3 class="white">{{model.role.role}}</h3>
     </displayer>
     <displayer class="col-xs-2" type="primary" v-if="model.servers">
       <h3 class="white"><b>{{model.servers.length}}</b> Servers</h3>

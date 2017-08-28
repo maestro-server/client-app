@@ -27,8 +27,8 @@
       </div>
       <div class="col-xs-8 text-right">
 
-        <button class="btn btn-default btn-xs">
-          <i class="fa fa-server" aria-hidden="true"></i> Instance <span class="badge">{{item.servers_count || 0}}</span>
+        <button class="btn btn-default btn-xs" @click.stop="seeInstances(item)">
+          <i class="fa fa-server" aria-hidden="true"></i> Instances
         </button>
 
         <bs-label type="primary"><i class="fa fa-cloud"></i> {{ item.provider }}</bs-label>
@@ -53,7 +53,4 @@
     </div>
 
   </div>
-
-  <modal-create class="mt15" ref="modal_create"></modal-create>
-  <modal-delete class="mt15" ref="modal_delete"></modal-delete>
 </div>

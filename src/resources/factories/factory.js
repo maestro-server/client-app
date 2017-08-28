@@ -1,7 +1,7 @@
 'use strict'
 
 import Requester from '../requests/request'
-import store from 'store'
+import store from 'src/store'
 
 import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'

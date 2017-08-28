@@ -93,7 +93,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'system_options', persistence: 'local'})
+      FectherEntity(Adminer)(this)({k: 'system_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'system_options'})
     },
 

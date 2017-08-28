@@ -97,7 +97,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'clients_options', persistence: 'local'})
+      FectherEntity(Adminer)(this)({k: 'clients_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'clients_options'})
     },
 

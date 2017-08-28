@@ -33,7 +33,7 @@
           <div class="col-xs-10">
             <b class="text-capitalize">{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span>
             <h5 class='ft15 inline'>
-              <bs-label type='default' v-if='item.spec'>{{item.spec.role}}</bs-label>
+              <bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label>
             </h5>
           </div>
 

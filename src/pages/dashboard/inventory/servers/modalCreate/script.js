@@ -112,7 +112,7 @@ export default {
 
       new Servers(this.model)
       .authorization()
-      .create()
+      .create(this.finishJob)
     },
 
     editSave () {
@@ -134,7 +134,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local'})
+      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local', time: 2840})
       .find(this.fetchAdminer, {key: 'server_options'})
     },
 

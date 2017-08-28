@@ -26,6 +26,28 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
             .authorization()
             .getID(_id, end)
         });
+    },
+
+    updater (fn, _id) {
+      const filter = {team}
+
+      Cache(opts)(fn)
+        .remove((end) => {
+          new Entity(filter)
+            .authorization()
+            .getID(_id, end)
+        });
+    },
+
+    remove (fn, _id) {
+      const filter = {team}
+
+      Cache(opts)(fn)
+        .remove((end) => {
+          new Entity(filter)
+            .authorization()
+            .getID(_id, end)
+        });
     }
   }
 

@@ -1,7 +1,7 @@
 'use strict'
 
 import User from 'factories/users'
-import store from 'store'
+import store from 'src/store'
 
 export default {
   name: 'login',

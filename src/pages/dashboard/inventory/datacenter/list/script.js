@@ -2,18 +2,10 @@
 
 import _ from 'lodash'
 
-import modalCreate from '../modalCreate/create'
-import modalDelete from '../modalDelete/delete'
-
 import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
-  components: {
-    modalCreate,
-    modalDelete
-  },
-
   data: function () {
     return {
       result: {
@@ -25,10 +17,13 @@ export default {
 
   computed: {
     MCreate () {
-      return this.$refs.modal_create
+      return this.$parent.$refs.modal_create
     },
     MDelete () {
-      return this.$refs.modal_delete
+      return this.$parent.$refs.modal_delete
+    },
+    MInstances () {
+      return this.$parent.$refs.modal_instances
     },
     title () {
       return this.team ? this.team.name + ' Datacenters' : 'My Datacenters'
@@ -36,12 +31,12 @@ export default {
   },
 
   methods: {
-      fetchData: function (force=false) {
+    fetchData (force=false) {
       FectherEntity(Datacenters)(this)({k: 'datacenter', force})
       .find((e) => this.result = e.data)
     },
 
-    addE: function () {
+    addE () {
       const {team} = this
 
       this.MCreate
@@ -52,7 +47,7 @@ export default {
         .show({team})
     },
 
-    editE: function (entity) {
+    editE (entity) {
       const {team} = this
 
       this.MCreate
@@ -63,7 +58,7 @@ export default {
         .show(_.merge(entity, {team}))
     },
 
-    deleteE: function (entity) {
+    deleteE (entity) {
       const {team} = this
 
       this.MDelete
@@ -73,6 +68,14 @@ export default {
           })
           this.result.items = narr
         })
+        .show(_.merge(entity, {team}))
+    },
+
+    seeInstances (entity) {
+      const {team} = this
+
+      this.MInstances
+        .setupSteps(1, 1, 1)
         .show(_.merge(entity, {team}))
     },
 
