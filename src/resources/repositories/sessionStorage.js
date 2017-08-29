@@ -3,11 +3,11 @@
 import factoryStorage from './factoryStorage.js'
 
 import engine from 'store/src/store-engine'
-import storages from 'store/storages/localStorage'
+import storages from 'store/storages/sessionStorage'
 import expirePlugin from 'store/plugins/expire'
 
 
-class LocalStorage extends factoryStorage {
+class SessionStorage extends factoryStorage {
 
   constructor(key='x-access') {
     const store = engine.createStore([storages], [expirePlugin])
@@ -15,4 +15,4 @@ class LocalStorage extends factoryStorage {
   }
 }
 
-export default LocalStorage
+export default SessionStorage

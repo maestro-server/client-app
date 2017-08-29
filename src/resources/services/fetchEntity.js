@@ -28,25 +28,26 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
         });
     },
 
-    updater (fn, _id) {
-      const filter = {team}
+    update (fn, model, path) {
+      const key = path || model._id
 
       Cache(opts)(fn)
         .remove((end) => {
-          new Entity(filter)
+          new Entity(model)
             .authorization()
-            .getID(_id, end)
+            .patchID(key, end)
         });
     },
 
-    remove (fn, _id) {
-      const filter = {team}
+    remove (fn, model, path) {
+      const key = path || model._id
 
       Cache(opts)(fn)
         .remove((end) => {
-          new Entity(filter)
+
+          new Entity(model)
             .authorization()
-            .getID(_id, end)
+            .deleteID(key, end)
         });
     }
   }

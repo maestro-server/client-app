@@ -80,9 +80,8 @@ export default {
     editSave () {
       this.setupModel()
 
-      new System(this.model)
-        .authorization()
-        .patchID(this.model._id, this.finishJob)
+      FectherEntity(System)(this)({k: 'system_'+this.model._id})
+        .update(this.finishJob, this.model)
     },
 
     setTeam(item) {

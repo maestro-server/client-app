@@ -81,9 +81,8 @@ export default {
     editSave () {
       this.setupModel()
 
-      new Clients(this.model)
-      .authorization()
-      .patchID(this.model._id, this.finishJob)
+      FectherEntity(Clients)(this)({k: 'client_'+this.model._id})
+        .update(this.finishJob, this.model)
     },
 
     setTeam(item) {

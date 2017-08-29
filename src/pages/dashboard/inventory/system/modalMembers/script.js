@@ -61,12 +61,11 @@ export default {
 
     createdSystemApp(id) {
       if (!_.isEmpty(id)) {
-        new System({id})
-          .authorization()
-          .patchID(
-            `${this.model._id}/applications`,
-            this.finishJob
-          )
+
+        const _id =  `${this.model._id}/applications`
+
+        FectherEntity(System)(this)({k: 'system_app_'+this.model._id})
+          .update(this.finishJob, {id}, _id)
       }
     },
 

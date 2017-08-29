@@ -1,6 +1,7 @@
 'use strict'
 import Modals from 'mixins/modals'
 import System from 'factories/system'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [Modals],
@@ -11,9 +12,10 @@ export default {
     },
 
     editSave () {
-      new System(this.model)
-        .authorization()
-        .deleteID(this.model._id, this.finishJob)
+      const k = 'system_'+this.model._id
+
+      FectherEntity(System)(this)({k})
+        .remove(this.finishJob, this.model)
     }
   }
 

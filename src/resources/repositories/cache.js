@@ -31,11 +31,11 @@ const Cache = ({k, time, persistence, force}) => (fn) => {
           fn(data)
         },
 
-        remove () {
+        remove (proc) {
           new Repository(k)
                     .deleteStore();
 
-          return proc(callback)
+          return proc(fn)
         }
     };
 };

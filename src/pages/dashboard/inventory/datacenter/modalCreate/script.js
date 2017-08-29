@@ -78,9 +78,8 @@ export default {
     editSave () {
       this.setupModel()
 
-      new Datacenters(this.model)
-        .authorization()
-        .patchID(this.model._id, this.finishJob)
+      FectherEntity(Datacenters)(this)({k: 'datacenter_'+this.model._id})
+        .update(this.finishJob, this.model)
     },
 
     setTeam(item) {

@@ -1,6 +1,7 @@
     'use strict'
 import Modals from 'mixins/modals'
 import Clients from 'factories/clients'
+    import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [Modals],
@@ -11,9 +12,10 @@ export default {
     },
 
     editSave () {
-      new Clients(this.model)
-        .authorization()
-        .deleteID(this.model._id, this.finishJob)
+      const k = 'client_'+this.model._id
+
+      FectherEntity(Clients)(this)({k})
+        .remove(this.finishJob, this.model)
     }
   }
 

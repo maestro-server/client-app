@@ -1,38 +1,19 @@
 'use strict'
 
-import _ from 'lodash'
-import store from 'src/store'
+import factoryStorage from './factoryStorage.js'
 
-class VuexStorage {
+import engine from 'store/src/store-engine'
+import storages from './vuexStorage/vuexStorage'
+import expirePlugin from 'store/plugins/expire'
+
+
+class vuexStorage extends factoryStorage {
 
   constructor(key='x-access') {
-    this.ACCESS = key
-    return this
+    const store = engine.createStore([storages], [expirePlugin])
+    super(key, store)
   }
 
-  setKey (key) {
-    this.ACCESS = key
-    return this
-  }
-
-  createStore (result) {
-    const prep = {[this.ACCESS]: result}
-    return store.dispatch('callCache', prep)
-  }
-
-  restoreStore () {
-    const cache = store.state.cache
-
-    if(cache.hasOwnProperty(this.ACCESS)) {
-      return cache[this.ACCESS]
-    }
-  }
-
-  deleteStore () {
-    const content = this.restoreStore()
-    const newValue = _.omit(content, this.ACCESS)
-    this.createStore(newValue)
-  }
 }
 
-export default VuexStorage
+export default vuexStorage
