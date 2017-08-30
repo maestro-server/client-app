@@ -1,5 +1,7 @@
 'use strict'
+
 import Teams from 'factories/teams'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   data: function () {
@@ -16,16 +18,15 @@ export default {
   },
 
   methods: {
-    fetchData: function (query={}) {
-      new Teams(query)
-        .authorization()
-        .list((e) => {this.result = e.data})
+    fetchData: function (force = false) {
+      FectherEntity(Teams)(this)({k: 'teams', force})
+        .find((e) => this.result = e.data)
     },
 
     addTeam: function () {
       this.MCreate
         .setupSteps(1,1,1)
-        .onFinishCallBack(() => {this.fetchData()})
+        .onFinishCallBack(this.fetchData)
         .show()
     },
 
@@ -39,9 +40,7 @@ export default {
       this.MCreate
         .setupSteps(1,1,1)
         .onFinishCallBack((e) => {
-          team.name = e.name
-          team.email = e.email
-          team.members = e.members
+          _.merge(team, e)
         })
         .show(team)
     },

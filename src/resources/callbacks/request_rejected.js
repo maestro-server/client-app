@@ -16,7 +16,7 @@ const mapper = {
     msg: () => ""
   },
   409: {
-    title: (e) => `Field, ${_.get(e, 'err.errors[0].message')}`,
+    title: (e) => `Field, ${_.get(e, 'err.errors[0].failed')}`,
     msg: () => "One of yours data is duplicate (Conflict)"
   }
 }

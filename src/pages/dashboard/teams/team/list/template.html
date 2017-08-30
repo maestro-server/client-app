@@ -31,15 +31,6 @@
       </button>
     </div>
     <div class="col-xs-5 text-right">
-
-      <button class="btn btn-default btn-xs">
-        <i class="fa fa-server" aria-hidden="true"></i> Servers <span class="badge">{{team.count_server || 0}}</span>
-      </button>
-
-      <button class="btn btn-default btn-xs">
-        <i class="fa fa-cube" aria-hidden="true"></i> Applications <span class="badge">{{team.count_applications || 0}}</span>
-      </button>
-
       <button class="btn btn-default btn-xs" @click.stop="addUsers(team)">
         <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">{{team.members.length}}</span>
       </button>

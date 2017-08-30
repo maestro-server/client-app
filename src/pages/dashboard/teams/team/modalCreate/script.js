@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Teams from 'factories/teams'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [Modals],
@@ -26,15 +27,12 @@ export default {
     },
 
     editSave () {
-        new Teams(this.model)
-          .authorization()
-          .patchID(this.model._id, this.finishJob)
+      FectherEntity(Teams)(this)({k: `teams_${this.model._id}`})
+        .update(this.finishJob, this.model)
     },
 
     deleteUser (team) {
-      const narr = this.model.members.filter((e) => {
-        return e != team
-      })
+      const narr = this.model.members.filter(e => e != team)
       this.model.members = narr
     },
 

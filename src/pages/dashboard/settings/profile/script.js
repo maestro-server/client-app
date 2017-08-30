@@ -1,9 +1,11 @@
 'use strict'
+
+import _ from 'lodash'
 import {mapActions} from 'vuex'
 import Me from 'factories/me'
 import Auth from 'factories/auth'
+import FectherEntity from 'services/fetchEntity'
 
-import _ from 'lodash'
 
 export default {
 
@@ -25,25 +27,22 @@ export default {
     ]),
 
     me () {
-      new Me()
-        .authorization()
-        .list((e) => _.merge(this.model, e.data))
+      FectherEntity(Me)(this)({k: 'me'})
+        .find((e) => _.merge(this.model, e.data))
     },
 
     updateProfile () {
       const data = _.omit(this.model, 'email')
 
-      new Me(data)
-        .authorization()
-        .update()
+      FectherEntity(Me)(this)({k: 'me'})
+        .update(this.finishJob, data, '?')
     },
 
     updateEmail () {
       const email = this.cemail
 
-      new Me({email})
-        .authorization()
-        .update(() => {this.model.email = email})
+      FectherEntity(Me)(this)({k: 'me'})
+        .update(() => {this.model.email = email}, {email}, '?')
     },
 
     updatePassWord () {

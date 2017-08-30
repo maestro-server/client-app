@@ -3,17 +3,15 @@
 
     <form id="createTeam1" class="row" v-if="step == 1" >
 
-      <div class="col-sm-offset-2 col-sm-8">
-
+      <div class="col-sm-offset-1 col-xs-10">
 
         <uploader
           refs="teams"
           v-model="model.avatar"
         ></uploader>
 
-
         <bs-input
-          label="Name"
+          label="Name*"
           v-model="model.name"
           v-validate.initial="'required'"
           data-vv-scope="modals"
@@ -22,12 +20,11 @@
           :error="makeError('name', 'modals')"
         ></bs-input>
 
-
         <bs-input
           type="email"
           label="Email"
           v-model="model.email"
-          v-validate.initial="'required|email'"
+          v-validate.initial="'email'"
           data-vv-scope="modals"
           name="email"
           class="col-xs-12"

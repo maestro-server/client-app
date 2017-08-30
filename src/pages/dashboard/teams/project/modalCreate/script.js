@@ -1,7 +1,8 @@
 'use strict'
-// import _ from 'lodash'
+
 import Modals from 'mixins/modals'
 import Projects from 'factories/projects'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [Modals],
@@ -25,9 +26,8 @@ export default {
     },
 
     editSave () {
-      new Projects(this.model)
-      .authorization()
-      .patchID(this.model._id, this.finishJob)
+      FectherEntity(Projects)(this)({k: 'projects_'+this.model._id})
+        .update(this.finishJob, this.model)
     },
 
     setTeam(item) {

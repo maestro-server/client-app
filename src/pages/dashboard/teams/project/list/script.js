@@ -1,6 +1,9 @@
 'use strict'
-import Projects from 'factories/projects'
+
 import _ from 'lodash'
+import Projects from 'factories/projects'
+import FectherEntity from 'services/fetchEntity'
+
 
 export default {
   data: function () {
@@ -25,9 +28,8 @@ export default {
       const {team} = this
       const filter = _.merge(query, {team})
 
-      new Projects(filter)
-      .authorization()
-      .list((e) => {this.result = e.data})
+      FectherEntity(Projects)(this)({k: 'projects'})
+        .find((e) => this.result = e.data)
     },
 
     addE: function () {
@@ -45,8 +47,7 @@ export default {
       this.MCreate
         .setupSteps(1,1,1)
         .onFinishCallBack((e) => {
-          entity.name = e.name
-          entity.email = e.email
+          _.merge(entity, e)
         })
         .show(_.merge(entity, {team}))
     },
@@ -56,9 +57,7 @@ export default {
 
       this.MDelete
         .onFinishCallBack(() => {
-          const narr = this.result.items.filter((e) => {
-            return e != project
-          })
+          const narr = this.result.items.filter(e => e != project)
           this.result.items = narr
         })
         .show(_.merge(entity, {team}))

@@ -63,9 +63,7 @@ export default {
 
       this.MDelete
         .onFinishCallBack(() => {
-          const narr = this.result.items.filter((e) => {
-            return e != entity
-          })
+          const narr = this.result.items.filter(e => e != entity)
           this.result.items = narr
         })
         .show(_.merge(entity, {team}))
