@@ -1,6 +1,6 @@
 'use strict';
 
-import Cache from '../repositories/cache'
+import CacheRequester from './cacheRequester'
 
 
 const FetcherData = (Entity) => ({team} = {}) => (opts) => {
@@ -9,7 +9,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     find (fn, query = {}) {
       const filter = _.merge(query, {team})
 
-      Cache(opts)(fn)
+      CacheRequester(opts)(fn)
         .process((end) => {
           new Entity(filter)
             .authorization()
@@ -20,7 +20,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     findOne (fn, _id) {
       const filter = {team}
 
-      Cache(opts)(fn)
+      CacheRequester(opts)(fn)
         .process((end) => {
           new Entity(filter)
             .authorization()
@@ -31,7 +31,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     update (fn, model, path) {
       const key = path || model._id
 
-      Cache(opts)(fn)
+      CacheRequester(opts)(fn)
         .remove((end) => {
           new Entity(model)
             .authorization()
@@ -42,7 +42,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     remove (fn, model, path) {
       const key = path || model._id
 
-      Cache(opts)(fn)
+      CacheRequester(opts)(fn)
         .remove((end) => {
 
           new Entity(model)

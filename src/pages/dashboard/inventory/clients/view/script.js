@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Clients from 'factories/clients'
 import System from 'factories/system'
 import FectherEntity from 'services/fetchEntity'
+import CacheManager from 'services/cacheManager'
 
 export default {
 
@@ -64,7 +65,7 @@ export default {
 
       this.MMembers
         .setupSteps(1, 1, 1)
-        .onFinishCallBack(() => this.fetchData(entity._id))
+        .onFinishCallBack(CacheManager({k: `client_system_${this.model._id}`}).remove)
         .show(_.merge(entity, {team}))
     },
 
@@ -85,9 +86,9 @@ export default {
       }
     },
 
-    fetchSystem(id) {
+    fetchSystem(id, force = true) {
       if (id) {
-        FectherEntity(System)(this)({k: 'client_system_'+id})
+        FectherEntity(System)(this)({k: 'client_system_'+id, force})
           .find((e) => {
             this.$set(this.model, 'list_system', _.get(e, 'data.items', []))
           }, {"clients._id": id})

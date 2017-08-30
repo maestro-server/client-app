@@ -39,9 +39,9 @@ export default {
     },
 
     editLoad() {
-      const {list_apps} = this.model
-      this.$set(this, 'value', list_apps)
+      const list_apps = _.get(this, 'model.list_apps', [])
 
+      this.$set(this, 'value', list_apps)
       this.mirrorValue = _.clone(list_apps)
     },
 
@@ -63,7 +63,6 @@ export default {
       if (!_.isEmpty(id)) {
 
         const _id =  `${this.model._id}/applications`
-
         FectherEntity(System)(this)({k: 'system_app_'+this.model._id})
           .update(this.finishJob, {id}, _id)
       }
@@ -71,12 +70,10 @@ export default {
 
     deletedSystemApp(id) {
       if (!_.isEmpty(id)) {
-        new System({id})
-          .authorization()
-          .deleteID(
-            `${this.model._id}/applications`,
-            this.finishJob
-          )
+
+        const _id =  `${this.model._id}/applications`
+        FectherEntity(System)(this)({k: 'system_app_'+this.model._id})
+          .remove(this.finishJob, {id}, _id)
       }
     },
 

@@ -31,9 +31,9 @@ export default {
     },
 
     editLoad() {
-      const {list_system} = this.model
-      this.$set(this, 'value', list_system)
+      const list_system = _.get(this, 'model.list_system', [])
 
+      this.$set(this, 'value', list_system)
       this.mirrorValue = _.clone(list_system)
     },
 
@@ -53,23 +53,19 @@ export default {
 
     createdClientSys(id) {
       if (!_.isEmpty(id)) {
-        new Clients({id})
-          .authorization()
-          .patchID(
-            `${this.model._id}/system`,
-            this.finishJob
-          )
+
+        const _id =  `${this.model._id}/system`
+        FectherEntity(Clients)(this)({k: 'system_app_'+this.model._id})
+          .update(this.finishJob, {id}, _id)
       }
     },
 
     deletedClientSys(id) {
       if (!_.isEmpty(id)) {
-        new Clients({id})
-          .authorization()
-          .deleteID(
-            `${this.model._id}/system`,
-            this.finishJob
-          )
+
+        const _id =  `${this.model._id}/system`
+        FectherEntity(Clients)(this)({k: 'system_app_'+this.model._id})
+          .remove(this.finishJob, {id}, _id)
       }
     },
 

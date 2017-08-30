@@ -34,7 +34,7 @@ function each(fn) {
 function remove(key) {
   const content = vuexData()
   const newValue = _.omit(content, key)
-  write(newValue)
+  return vuexStore.dispatch('callCache', newValue)
 }
 
 function clearAll() {

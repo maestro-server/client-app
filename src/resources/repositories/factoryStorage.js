@@ -3,18 +3,18 @@
 
 class FactoryStorage {
 
-  constructor(key='x-access', store) {
+  constructor(key = 'x-access', store) {
     this.ACCESS = key
     this.store = store
     return this
   }
 
-  setKey (key) {
+  setKey(key) {
     this.ACCESS = key
     return this
   }
 
-  createStore (result, expires=60) {
+  createStore(result, expires = 60) {
     const seconds = expires * 1000
     const date = new Date().getTime() + seconds
 
@@ -22,11 +22,11 @@ class FactoryStorage {
     return this
   }
 
-  restoreStore () {
+  restoreStore() {
     return this.store.get(this.ACCESS)
   }
 
-  deleteStore () {
+  deleteStore() {
     this.store.remove(this.ACCESS)
   }
 }

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import System from 'factories/system'
 import Applications from 'factories/applications'
 import FectherEntity from 'services/fetchEntity'
+import CacheManager from 'services/cacheManager'
 
 export default {
 
@@ -27,7 +28,7 @@ export default {
       return this.$parent.$refs.modal_delete
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'clients', 'list_apps'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'clients', 'list_apps', 'teams'])
     }
   },
 
@@ -55,7 +56,7 @@ export default {
       this.MCreate
         .setupSteps(1, 1, 1)
         .setTabShow(index)
-        .onFinishCallBack(() => this.fetchData(entity._id))
+        .onFinishCallBack(() => this.fetchData(entity._id, true))
         .show(_.merge(entity, {team}))
     },
 
@@ -64,7 +65,7 @@ export default {
 
       this.MMembers
         .setupSteps(1, 1, 1)
-        .onFinishCallBack(() => this.fetchData(entity._id))
+        .onFinishCallBack(CacheManager({k: `system_app_${this.model._id}`}).remove)
         .show(_.merge(entity, {team}))
     },
 
@@ -85,9 +86,9 @@ export default {
       }
     },
 
-    fetchApps(id) {
+    fetchApps(id, force = true) {
       if (id) {
-        FectherEntity(Applications)(this)({k: 'system_app_'+id})
+        FectherEntity(Applications)(this)({k: 'system_app_'+id, force})
           .find((e) => {
             this.$set(this.model, 'list_apps', _.get(e, 'data.items', []))
           }, {"system._id": id})
