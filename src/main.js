@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 
 import mixins_forms from 'mixins/forms'
+import Notifications from 'vue-notification'
+
 
 import bootue from './components'
 import VeeValidate from 'vee-validate'
@@ -16,6 +18,7 @@ Vue.use(bootue)
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
 Vue.use(ServerTable, {})
+Vue.use(Notifications)
 
 /* eslint-disable no-new */
 new Vue({
