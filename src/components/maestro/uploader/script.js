@@ -1,12 +1,11 @@
 'use strict'
-import defaultImg from 'imgs/avatar_default.jpeg'
 import validImage from './libs/validImage'
 import Uploader from './libs/uploader'
 
 export default {
   props: {
     refs: {type: String, default: "teams"},
-    defaultImg: {type: String, default: defaultImg},
+    defaultImg: {type: String, default: '/static/imgs/avatar_default.jpeg'},
     value: {default: null},
     imgSize: {type: String, default: "col-xs-12 col-sm-3"},
     inputSize: {type: String, default: "col-xs-12 col-sm-9"}

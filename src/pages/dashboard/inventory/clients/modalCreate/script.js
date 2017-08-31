@@ -1,5 +1,5 @@
 'use strict'
-// import _ from 'lodash'
+
 import Modals from 'mixins/modals'
 import Clients from 'factories/clients'
 import Adminer from 'factories/adminer'

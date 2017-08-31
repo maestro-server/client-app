@@ -20,11 +20,14 @@ var webpackConfig = merge(baseConfig, {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': require('../config/test.env'),
-      'API_URL': JSON.stringify("http://localhost:8888"),
-      'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/')
-    }),
+    new webpack.DefinePlugin(
+      Object.assign({
+          'process.env': require('../config/env/test.env')
+        },
+        config.dev.appConfig.test,
+        config.dev.appConfig.all
+      )
+    ),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',

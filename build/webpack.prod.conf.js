@@ -10,7 +10,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
+  ? require('../config/env/test.env')
   : config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -28,11 +28,14 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new webpack.DefinePlugin({
-      'process.env': env,
-      'API_URL': JSON.stringify("http://localhost:8888"),
-      'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/')
-    }),
+    new webpack.DefinePlugin(
+      Object.assign({
+          'process.env': env
+        },
+        config.dev.appConfig.prod,
+        config.dev.appConfig.all
+      )
+    ),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

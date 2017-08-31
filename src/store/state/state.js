@@ -18,7 +18,8 @@ export default {
   },
 
   me: {
-    _id: null
+    _id: null,
+    tenant: {}
   },
 
   spinner: {

@@ -18,12 +18,14 @@ module.exports = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': config.dev.env,
-      'BASE_URL': JSON.stringify("http://localhost:8880"),
-      'API_URL': JSON.stringify("http://localhost:8888"),
-      'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/')
-    }),
+    new webpack.DefinePlugin(
+      Object.assign({
+        'process.env': config.dev.env
+        },
+        config.dev.appConfig.dev,
+        config.dev.appConfig.all
+      )
+    ),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

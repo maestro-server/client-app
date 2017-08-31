@@ -18,11 +18,7 @@ export default {
   methods: {
     ...mapActions([
       'setPage'
-    ]),
-
-    fetchData() {
-
-    }
+    ])
   },
 
   mounted() {
@@ -31,9 +27,5 @@ export default {
       'Database on all its infra',
       'fa-th'
     ])
-  },
-
-  created () {
-    this.fetchData()
   }
 }

@@ -14,6 +14,10 @@ export default {
     commit('SET_USER', args)
   },
 
+  setTenant ({commit}, tenant) {
+    commit('SET_USER', {tenant})
+  },
+
   onSpinner ({commit}) {
     commit('SET_SPINNER', {show: true})
   },

@@ -1,9 +1,10 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var base_config = require('./app.config')
 
 module.exports = {
   build: {
-    env: require('./prod.env'),
+    env: require('./env/prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -19,10 +20,11 @@ module.exports = {
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+    bundleAnalyzerReport: process.env.npm_config_report,
+    appConfig: Object.assign({}, base_config)
   },
   dev: {
-    env: require('./dev.env'),
+    env: require('./env/dev.env'),
     port: 8880,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
@@ -33,6 +35,7 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    appConfig: Object.assign({}, base_config)
   }
 }
