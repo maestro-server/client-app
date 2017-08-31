@@ -4,7 +4,7 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-      "ecmaVersion": 6
+    "ecmaVersion": 6
   },
   env: {
     "node": true,
@@ -18,13 +18,13 @@ module.exports = {
   // add your custom rules here
   'rules': {
     "linebreak-style": [
-        2,
-        "unix"
+      2,
+      "unix"
     ],
     "semi": 0,
     "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
-        "before": false,
-        "after": true
+      "before": false,
+      "after": true
     }],
     "no-catch-shadow": 2, // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
     "no-delete-var": 2, // disallow deletion of variables
@@ -33,7 +33,7 @@ module.exports = {
     "no-shadow-restricted-names": 2, // disallow shadowing of names such as arguments
     "no-undef": 0, // disallow use of undeclared variables unless mentioned in a /*global */ block
     "no-undef-init": 2, // disallow use of undefined when initializing variables
-    "no-unused-vars": ["error", { "vars": "local", "args": "after-used" }], // disallow declaration of variables that are not used in the code
+    "no-unused-vars": ["error", {"vars": "local", "args": "after-used"}], // disallow declaration of variables that are not used in the code
     "no-use-before-define": 2, // disallow use of variables before they are defined
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
 
