@@ -4,6 +4,10 @@ export default {
     state.me = Object.assign(state.me, user)
   },
 
+  SET_TENANT (state, tn) {
+    state.tenant = Object.assign(state.tenant, tn)
+  },
+
   CHANGE_PAGE (state, [key, val]) {
     state.viewer[key] = val
   },

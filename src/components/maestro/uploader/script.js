@@ -5,7 +5,7 @@ import Uploader from './libs/uploader'
 export default {
   props: {
     refs: {type: String, default: "teams"},
-    defaultImg: {type: String, default: '/static/imgs/avatar_default.jpeg'},
+    defaultImg: {type: String, default: IMG_AVATAR_DEFAULT},
     value: {default: null},
     imgSize: {type: String, default: "col-xs-12 col-sm-3"},
     inputSize: {type: String, default: "col-xs-12 col-sm-9"}

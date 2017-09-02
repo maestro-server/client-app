@@ -1,13 +1,15 @@
 'use strict';
 
+import _ from 'lodash'
 import storage from '../repositories/storage'
 
 
 const CacheManager = (opts) => {
 
   return {
-    find () {
-      return storage(opts).get()
+    find (filter) {
+      const data = storage(opts).get()
+      return filter ? _.pick(data, filter) : data
     },
 
     set (data) {

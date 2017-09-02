@@ -1,4 +1,7 @@
 'use strict'
+
+import CacheManager from 'services/cacheManager'
+
 /**
  * Default init state
  *
@@ -17,10 +20,9 @@ export default {
     type: null
   },
 
-  me: {
-    _id: null,
-    tenant: {}
-  },
+  me: CacheManager({k: 'user', persistence: 'local'}).find(['_id', 'email', 'name']),
+
+  tenant: CacheManager({k: 'tenant', persistence: 'local'}).find(),
 
   spinner: {
     show: false

@@ -7,16 +7,31 @@ import FectherEntity from 'services/fetchEntity'
 export default {
   data () {
     return {
+      showDropDown: false,
       teams: {}
     }
   },
 
-  method: {
+  methods: {
     fetchData: function () {
       FectherEntity(Teams)(this)({k: 'teams'})
         .find((e) => {
           this.$set(this, 'teams', e.data)
         })
+    },
+    img_default(item) {
+      const img = STATIC_URL + item.avatar
+
+      return item.avatar ? img : IMG_AVATAR_DEFAULT
+    }
+  },
+
+  computed: {
+    users () {
+      return this.$store.getters.get_me
+    },
+    tenant () {
+      return this.$store.getters.get_tenant
     }
   },
 

@@ -5,12 +5,6 @@
     <p :if="page.subtitle">{{page.subtitle}}</p>
   </div>
 
-  <div class="pull-left mt20 ml20">
-    |
-    <dropdown text="My Cloud" type="primary">
-      <li><a href="#dropdown">MyTeam</a></li>
-    </dropdown>
-    |
-  </div>
+  <tenant-drop-down></tenant-drop-down>
 
 </header>

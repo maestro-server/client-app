@@ -1,26 +1,28 @@
 'use strict'
+
+import _ from 'lodash'
 import store from 'src/store'
-import LocalStorageRepository from '../repositories/localStorage'
+import CacheManager from 'services/cacheManager'
 
 class Login {
 
-  static getToken = () => new LocalStorageRepository().restoreStore()
+  static getToken = () => CacheManager({k: 'x-access', persistence: 'local'}).find()
 
-  static getUser = () => new LocalStorageRepository('user').restoreStore()
+  static getUser = () => CacheManager({k: 'user', persistence: 'local'}).find(['_id', 'email'])
 
-  static getID = () => Login.getUser()._id
+  static getID = () => _.get(Login.getUser(), '_id')
 
   static Authorization = () => `JWT ${Login.getToken()}`
 
   static setLogin (that, e) {
     const {user} = e.data
-    new LocalStorageRepository('user').createStore(user)
+    CacheManager({k: 'user', persistence: 'local'}).set(user)
 
     that.$router.push('/dashboard')
   }
 
   static destroyLogin () {
-    new LocalStorageRepository().deleteStore()
+    CacheManager({k: 'user', persistence: 'local'}).remove()
     store.dispatch('setUser', {})
   }
 

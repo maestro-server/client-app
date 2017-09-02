@@ -15,7 +15,7 @@ export default {
   },
 
   setTenant ({commit}, tenant) {
-    commit('SET_USER', {tenant})
+    commit('SET_TENANT', tenant)
   },
 
   onSpinner ({commit}) {
