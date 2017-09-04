@@ -2,9 +2,14 @@
 
 import Teams from 'factories/teams'
 import FectherEntity from 'services/fetchEntity'
+import VBar from 'v-bar'
 
 
 export default {
+  components: {
+    VBar
+  },
+
   data () {
     return {
       showDropDown: false,

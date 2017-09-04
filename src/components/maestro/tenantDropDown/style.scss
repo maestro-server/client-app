@@ -4,6 +4,10 @@
 @import "../../bootue/_core/mixins";
 @import "./_variables/variables";
 
+.twrapper {
+  max-height: 350px;
+}
+
 .wrapper-tenants {
   max-width: 260px;
 
@@ -32,7 +36,7 @@
   .slide-fade-enter, .slide-fade-leave-to {
     transform: translateY(-100px);
     opacity: 0;
-  }
+  },
 
   i {
     line-height: 30px;
