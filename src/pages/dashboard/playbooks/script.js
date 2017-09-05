@@ -23,8 +23,8 @@ export default {
 
   mounted() {
     this.setPage([
-      'Inventory',
-      'Cloud CMDB, this area show all setups made in your infrastructure',
+      'Cloud Inventory',
+      'Database of all yours infra',
       'fa-th'
     ])
   }

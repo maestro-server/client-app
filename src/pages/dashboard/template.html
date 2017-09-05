@@ -1,18 +1,14 @@
 <div>
 
-  <dashboard-sidebar-menu></dashboard-sidebar-menu>
+  <div class="wrapper">
 
-  <div id="wrapper" class="wrapper">
+    <dashboard-header></dashboard-header>
 
-    <section class="wrapper-content">
+    <dashboard-title-page></dashboard-title-page>
 
-      <dashboard-header></dashboard-header>
+    <router-view></router-view>
 
-      <router-view></router-view>
-
-      <dashboard-footer></dashboard-footer>
-
-    </section>
+    <dashboard-footer></dashboard-footer>
 
   </div>
 

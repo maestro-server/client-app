@@ -1,0 +1,28 @@
+@import '../../_variables/variables';
+@import '../../_mixins/mixins';
+
+
+.navbar-main .navbar-nav {
+  margin-bottom: 20px;
+  height: 66px;
+  background: $gray-lighter2;
+  border: none;
+
+  li a {
+    color: $gray-darker;
+  }
+
+  li:hover {
+    padding: 0;
+
+    a, small, span {
+      background-color: $gray-light;
+      color: $white;
+    }
+  }
+
+  li a.router-link-active {
+    background-color: $brand-primary;
+    color: $white;
+  }
+}

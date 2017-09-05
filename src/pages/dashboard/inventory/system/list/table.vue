@@ -8,7 +8,7 @@
   >
 
     <template slot="actions" scope="props">
-      <div>
+      <div class="min-table">
         <router-link :to="'/dashboard/inventory/system/single/'+props.row._id"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>
         <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>

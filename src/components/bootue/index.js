@@ -35,6 +35,7 @@ import toggleButton from './togglebutton/ToggleButton.vue'
 import tooltip from './tooltip/Tooltip.vue'
 import './typography/Type.vue'
 import './typography/font-awesome/FontAwesome.vue'
+import './typography/font-maestro/FontMaestro.vue'
 import well from './wells/Wells.vue'
 
 import SpreadButtons from './buttons/'

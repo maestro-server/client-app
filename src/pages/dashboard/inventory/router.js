@@ -8,6 +8,7 @@ import datacenter from './datacenter/router'
 import settings from './settings/single/router'
 
 export default {
+  name: 'inventory',
   path: 'inventory',
   redirect: 'inventory/servers',
   component: comp,

@@ -1,0 +1,34 @@
+<div>
+  <navbar type="main">
+    <li>
+      <router-link :to="{ name: 'inventory' }">
+        <span class="figure">
+          <i class="fa fa-th" aria-hidden="true"></i>
+        </span>
+        Inventory
+        <br/>
+        <small>All about your infra</small>
+      </router-link>
+    </li>
+
+    <li>
+      <router-link :to="{ name: 'playbooks' }">
+        <span class="figure">
+          <i class="icon-ansible" aria-hidden="true"></i>
+        </span>
+        Plabooks<br/>
+        <small>Jobs, scheduling</small>
+      </router-link>
+    </li>
+
+    <li>
+      <router-link :to="{ name: 'reports' }">
+        <span class="figure">
+          <i class="fa fa-map" aria-hidden="true"></i>
+        </span>
+        Reports<br/>
+        <small>Exports, custom queries</small>
+      </router-link>
+    </li>
+  </navbar>
+</div>

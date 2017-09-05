@@ -1,0 +1,103 @@
+//
+// Tenant DropDown
+// --------------------------------------------------
+@import '../../_variables/variables';
+@import '../../_mixins/mixins';
+
+
+.wrapper-settings {
+  position: relative;
+
+  .c-1 {
+    float: left;
+    font-size: 28px;
+    padding-top: 3px;
+  }
+
+  .c-2 {
+    padding: 0 2px;
+    line-height: 35px;
+  }
+
+  .slide-fade-enter-active {
+    transition: all .2s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .2s ease;
+
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateY(-50px);
+    opacity: 0;
+  },
+
+  i {
+    line-height: 30px;
+  }
+}
+
+.setting {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: $font-size-medium;
+  box-shadow: 0 1px 10px $brand-primary-darker;
+
+  background: $brand-primary;
+  z-index: 5;
+
+  a {
+    padding: 15px;
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    font-size: $font-size-large;
+    text-transform: capitalize;
+  }
+
+  @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
+}
+
+.settings {
+  float:left;
+  position: absolute;
+  right: 0;
+  padding: 0;
+  background: $brand-primary;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+  box-shadow: 1px 2px 10px #b4b4b4;
+  z-index: 3;
+  min-width: 160px;
+
+  @include gradient-vertical($start-color: $brand-primary, $end-color: $brand-secondary);
+
+  ul {
+    padding: 5px 0 3px;
+    margin: 0;
+    width: 100%;
+  }
+
+  li {
+    padding: 0;
+    list-style: none;
+    cursor: default;
+    @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
+
+    a {
+      padding: 4px 15px;
+      display: inline-block;
+      width: 100%;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 2px $brand-primary-darker;
+      text-transform: capitalize;
+    }
+
+    a:hover {
+      @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-primary-darker, $start-percent: 0%, $end-percent: 30%);
+    }
+  }
+}

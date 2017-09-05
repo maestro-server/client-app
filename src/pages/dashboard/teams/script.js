@@ -1,6 +1,6 @@
 'use strict'
 import {mapActions} from 'vuex'
-import topmenu from '../_modules/top-menu/top-menu.vue'
+import topmenu from '../_modules/tabMenu/tab-menu.vue'
 
 export default {
   data () {
@@ -24,6 +24,6 @@ export default {
   },
 
   components: {
-    'top-menu': topmenu
+    'tab-menu': topmenu
   }
 }
