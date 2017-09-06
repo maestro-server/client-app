@@ -2,7 +2,7 @@
 import comp from './dashboard'
 import home from './home/router'
 import teams from './teams/router'
-import settings from './settings/router'
+import profile from './profile/router'
 import inventory from './inventory/router'
 import playbooks from './playbooks/router'
 import reports from './reports/router'
@@ -12,7 +12,7 @@ export default {
   component: comp,
   children: [
     home,
-    settings,
+    profile,
     teams,
     inventory,
     playbooks,

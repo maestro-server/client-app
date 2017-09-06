@@ -8,7 +8,7 @@
   max-height: 350px;
 }
 
-.wrapper-tenants {
+.wrapper-maestro-menu {
   position: relative;
   max-width: 260px;
   margin-right: 2px;
@@ -22,6 +22,10 @@
   .c-2 {
     padding: 0 10px;
     line-height: 35px;
+    max-width: 170px;
+    display: inline-block;
+    overflow: hidden;
+    height: 35px;
   }
 
   img {
@@ -45,32 +49,39 @@
   }
 }
 
-.tenant {
+.maestro-menu {
   position: relative;
-  color: #fff;
-  text-decoration: none;
-  font-size: $font-size-medium;
   box-shadow: 0 1px 10px $brand-primary-darker;
   min-width: 260px;
 
   background: $brand-primary;
   z-index: 5;
 
+  span {
+    cursor: default;
+  }
+
+
   a {
-    padding: 15px;
+    padding: 15px 15px 5px;
     display: inline-block;
     width: 100%;
-    color: #fff;
-    text-decoration: none;
+    color: $white;
     font-size: $font-size-large;
     text-transform: capitalize;
+  }
+
+  a:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: $white;
+    background: $brand-primary-darker
   }
 
   @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
 }
 
-.tenants {
-  float:left;
+.maestro-dropdown {
   position: absolute;
   min-width: 260px;
   padding: 0;
@@ -92,11 +103,11 @@
   li {
     padding: 0;
     list-style: none;
-    cursor: default;
+    cursor: pointer;
     @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
 
     a {
-      padding: 8px 10px;
+      padding: 10px 10px 0;
       display: inline-block;
       width: 100%;
       color: #fff;
@@ -111,3 +122,41 @@
     }
   }
 }
+
+
+.wrapper-settings {
+  margin-right: 0;
+
+  .c-1 {
+    font-size: 28px;
+    padding-top: 3px;
+  }
+
+  .c-2 {
+    padding: 0 2px;
+    line-height: 35px;
+  }
+
+  .maestro-menu {
+    min-width: 50px;
+  }
+
+  .maestro-dropdown {
+    right: 0;
+    min-width: 160px;
+
+    ul {
+      padding: 5px 0 3px;
+
+      li a {
+        cursor: pointer;
+        padding: 4px 15px;
+        font-size: $font-size-base;
+      }
+    }
+  }
+}
+
+
+
+

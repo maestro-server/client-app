@@ -225,12 +225,9 @@ export default {
       }
     },
     eventClickOutside (val) {
-      if (val) {
-        document.addEventListener('click', this.clickOutside, false)
-        return
-      }
-
-      document.removeEventListener('click', this.clickOutside, false)
+      return val
+        ? document.addEventListener('click', this.clickOutside, false)
+        : document.removeEventListener('click', this.clickOutside, false)
     },
     wrapperClass () {
       let wClass
