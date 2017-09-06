@@ -7,7 +7,6 @@ import store from './store'
 
 import mixins_forms from 'mixins/forms'
 import Notifications from 'vue-notification'
-import Vuebar from 'vuebar'
 
 
 import bootue from './components'
@@ -19,7 +18,6 @@ Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
 Vue.use(ServerTable, {})
 Vue.use(Notifications)
-Vue.use(Vuebar)
 
 /* eslint-disable no-new */
 new Vue({
