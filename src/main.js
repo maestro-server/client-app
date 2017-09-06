@@ -9,7 +9,6 @@ import mixins_forms from 'mixins/forms'
 import Notifications from 'vue-notification'
 import Vuebar from 'vuebar'
 
-
 import bootue from './components'
 import VeeValidate from 'vee-validate'
 import {ServerTable} from 'maestro-vue-tables-2'

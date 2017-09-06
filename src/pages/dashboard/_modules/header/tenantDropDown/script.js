@@ -77,7 +77,7 @@ export default {
 
       const obj = _.assign({}, this.tenant, tn)
       this.$set(this, 'tenant', obj)
-      
+
       this.toggle('all')
     }
   },
