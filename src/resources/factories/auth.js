@@ -5,8 +5,8 @@ import LocalStorageRepository from '../repositories/localStorage'
 
 class Auth extends Factory {
 
-  constructor(model={}, e='/users/auth') {
-    super(model, e)
+  constructor(model={}) {
+    super(model, '/users/auth')
   }
 
   auth (callback) {

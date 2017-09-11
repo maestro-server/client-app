@@ -31,12 +31,12 @@
   import Login from 'services/login'
   import FectherEntity from 'services/fetchEntity'
   import System from 'factories/system'
+  import Applications from 'factories/applications'
 
   export default {
 
     data: function () {
       return {
-        url: `${API_URL}/applications/`,
         items: [],
         columns: ['name', 'lsystem', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
         options: {
@@ -58,6 +58,13 @@
             created_at: 'Created At'
           }
         }
+      }
+    },
+
+    computed: {
+      url() {
+        const aa = new Applications().getUrl()
+        return `${API_URL}${aa}`
       }
     },
 
@@ -96,7 +103,7 @@
     },
 
     created() {
-      FectherEntity(System)(this)({k: 'system'})
+      FectherEntity(System)({k: 'system'})
         .find(this.fetchSystem)
     }
   }

@@ -51,7 +51,7 @@ export default {
     },
 
     fetchData: function () {
-      FectherEntity(Teams)(this)({k: 'teams'})
+      FectherEntity(Teams)({k: 'teams', force: true})
         .find((e) => {
           this.$set(this, 'teams', e.data)
         })
@@ -68,8 +68,9 @@ export default {
     changeTenant(team, refs='teams') {
       const tn = _.assign({}, team, {refs})
 
-      this.updateViewTenant(tn)
       store.dispatch('setTenant', tn)
+      this.updateViewTenant(tn)
+      this.$router.go()
     },
 
     updateViewTenant(tn) {

@@ -1,28 +1,29 @@
 'use strict';
 
 import CacheRequester from './cacheRequester'
+import store from 'src/store'
 
 
-const FetcherData = (Entity) => ({team} = {}) => (opts) => {
+const FetcherData = (Entity) => (opts) => {
+
+  const tenant = store.getters.get_tenant
 
   return {
     find (fn, query = {}) {
-      const filter = _.merge(query, {team})
 
-      CacheRequester(opts)(fn)
+      CacheRequester(opts)(tenant)(fn)
         .process((end) => {
-          new Entity(filter)
+          new Entity(query)
             .authorization()
             .list(end)
         });
     },
 
     findOne (fn, _id) {
-      const filter = {team}
 
-      CacheRequester(opts)(fn)
+      CacheRequester(opts)(tenant)(fn)
         .process((end) => {
-          new Entity(filter)
+          new Entity({})
             .authorization()
             .getID(_id, end)
         });
@@ -31,7 +32,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     update (fn, model, path) {
       const key = path || model._id
 
-      CacheRequester(opts)(fn)
+      CacheRequester(opts)(tenant)(fn)
         .remove((end) => {
           new Entity(model)
             .authorization()
@@ -42,7 +43,7 @@ const FetcherData = (Entity) => ({team} = {}) => (opts) => {
     remove (fn, model, path) {
       const key = path || model._id
 
-      CacheRequester(opts)(fn)
+      CacheRequester(opts)(tenant)(fn)
         .remove((end) => {
 
           new Entity(model)

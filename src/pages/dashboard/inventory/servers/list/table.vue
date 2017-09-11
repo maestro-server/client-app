@@ -25,6 +25,7 @@
 <script>
   'use strict'
   import _ from 'lodash'
+  import Servers from 'factories/servers'
   import Adminer from 'factories/adminer'
   import Datacenters from 'factories/datacenters'
   import Login from 'services/login'
@@ -35,7 +36,6 @@
 
     data: function () {
       return {
-        url: `${API_URL}/servers/`,
         items: [],
         columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'auth', 'user', 'updated_at', 'created_at', 'actions'],
         options: {
@@ -59,6 +59,13 @@
             created_at: 'Created At'
           }
         }
+      }
+    },
+
+    computed: {
+      url() {
+        const aa = new Servers().getUrl()
+        return `${API_URL}${aa}`
       }
     },
 
@@ -114,10 +121,10 @@
     },
 
     created() {
-      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'server_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'server_options'})
 
-      FectherEntity(Datacenters)(this)({k: 'datacenter'})
+      FectherEntity(Datacenters)({k: 'datacenter'})
         .find(this.fetchDatacenter)
     }
   }

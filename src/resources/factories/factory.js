@@ -18,6 +18,10 @@ class Factory {
     store.dispatch('onSpinner')
   }
 
+  getUrl() {
+    return this.entity
+  }
+
   setEntity(e) {
     this.entity = e
     return this

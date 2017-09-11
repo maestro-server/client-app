@@ -2,6 +2,7 @@
 import comp from './changepass'
 
 export default {
-  path: '/changepass',
+  name: 'change-password',
+  path: 'changepass',
   component: comp
 }

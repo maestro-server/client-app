@@ -2,14 +2,16 @@
 
 import _ from 'lodash'
 import storage from '../repositories/storage'
+import acceptTenants from '../libs/acceptableTenants'
 
 
-const CacheRequester = ({k, time, persistence, force}) => (fn) => {
+const CacheRequester = ({k, time, persistence, force}) => ({refs, _id}={}) => (fn) => {
+
+    const key = acceptTenants(refs) ? `${k}_${_id}` : k
 
     const callback = function (result) {
       if(result.status == 200 && !_.isEmpty(result.data)) {
-
-        storage({k, time, persistence})
+        storage({k:key, time, persistence})
           .create(_.pick(result, 'data', 'status'))
 
         fn(result)
@@ -18,7 +20,7 @@ const CacheRequester = ({k, time, persistence, force}) => (fn) => {
 
     return {
         process (proc) {
-          let data = storage({k, time, persistence}).get()
+          let data = storage({k:key, time, persistence}).get()
 
           if(_.isEmpty(data) || force) {
             return proc(callback)
@@ -28,7 +30,7 @@ const CacheRequester = ({k, time, persistence, force}) => (fn) => {
         },
 
         remove (proc) {
-          storage({k, persistence}).delete()
+          storage({k:key, persistence}).delete()
 
           return proc(fn)
         }

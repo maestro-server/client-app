@@ -67,7 +67,7 @@ export default {
       const {_id} = this.model
 
       if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)(this)({k: 'app_server_'+_id})
+        FectherEntity(Servers)({k: 'app_server_'+_id})
           .find((e) => {
             this.tab_servers.updaterEdit(_.get(e, 'data.items', []))
           }, {_id: this.model.servers})
@@ -105,7 +105,7 @@ export default {
     editSave () {
       this.setupModel()
 
-      FectherEntity(Applications)(this)({k: 'application_'+this.model._id})
+      FectherEntity(Applications)({k: 'application_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 
@@ -120,7 +120,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'app_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'app_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'app_options'})
     },
 

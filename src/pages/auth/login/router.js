@@ -2,6 +2,7 @@
 import comp from './login'
 
 export default {
-  path: '/login',
+  name: 'login',
+  path: 'login',
   component: comp
 }

@@ -19,7 +19,7 @@ export default {
 
   methods: {
     fetchData: function (force = false) {
-      FectherEntity(Teams)(this)({k: 'teams', force})
+      FectherEntity(Teams)({k: 'teams', force})
         .find((e) => this.result = e.data)
     },
 

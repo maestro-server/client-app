@@ -80,7 +80,7 @@ export default {
     editSave () {
       this.setupModel()
 
-      FectherEntity(System)(this)({k: 'system_'+this.model._id})
+      FectherEntity(System)({k: 'system_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 
@@ -100,7 +100,7 @@ export default {
 
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'system_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'system_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'system_options'})
     },
 

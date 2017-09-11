@@ -2,6 +2,7 @@
 import comp from './forgot'
 
 export default {
-  path: '/forgot',
+  name: 'forgot-password',
+  path: 'forgot',
   component: comp
 }

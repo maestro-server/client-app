@@ -26,7 +26,7 @@ export default {
     },
 
     editSave () {
-      FectherEntity(Projects)(this)({k: 'projects_'+this.model._id})
+      FectherEntity(Projects)({k: 'projects_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 

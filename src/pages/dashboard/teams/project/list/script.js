@@ -27,7 +27,7 @@ export default {
 
   methods: {
     fetchData: function () {
-      FectherEntity(Projects)(this)({k: 'projects'})
+      FectherEntity(Projects)({k: 'projects'})
         .find((e) => this.result = e.data)
     },
 

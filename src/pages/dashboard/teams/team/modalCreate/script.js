@@ -27,7 +27,7 @@ export default {
     },
 
     editSave () {
-      FectherEntity(Teams)(this)({k: `teams_${this.model._id}`})
+      FectherEntity(Teams)({k: `teams_${this.model._id}`})
         .update(this.finishJob, this.model)
     },
 

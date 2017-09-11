@@ -78,7 +78,7 @@ export default {
     editSave () {
       this.setupModel()
 
-      FectherEntity(Datacenters)(this)({k: 'datacenter_'+this.model._id})
+      FectherEntity(Datacenters)({k: 'datacenter_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 
@@ -179,7 +179,7 @@ export default {
   },
 
   created () {
-    FectherEntity(Adminer)(this)({k: 'datacenter_options', persistence: 'local', time: 42400})
+    FectherEntity(Adminer)({k: 'datacenter_options', persistence: 'local', time: 42400})
     .find(this.fetchAdminer, {key: 'datacenter_options'})
   }
 

@@ -79,7 +79,7 @@ export default {
 
     fetchData: function (id) {
       if (id) {
-        FectherEntity(System)(this)({k: 'system_' + id})
+        FectherEntity(System)({k: 'system_' + id})
           .findOne((e) => {
             this.$set(this, 'model', e.data)
           }, id)
@@ -88,7 +88,7 @@ export default {
 
     fetchApps(id, force = true) {
       if (id) {
-        FectherEntity(Applications)(this)({k: 'system_app_'+id, force})
+        FectherEntity(Applications)({k: 'system_app_'+id, force})
           .find((e) => {
             this.$set(this.model, 'list_apps', _.get(e, 'data.items', []))
           }, {"system._id": id})

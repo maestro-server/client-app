@@ -55,7 +55,7 @@ export default {
       if (!_.isEmpty(id)) {
 
         const _id =  `${this.model._id}/system`
-        FectherEntity(Clients)(this)({k: 'system_app_'+this.model._id})
+        FectherEntity(Clients)({k: 'system_app_'+this.model._id})
           .update(this.finishJob, {id}, _id)
       }
     },
@@ -64,7 +64,7 @@ export default {
       if (!_.isEmpty(id)) {
 
         const _id =  `${this.model._id}/system`
-        FectherEntity(Clients)(this)({k: 'system_app_'+this.model._id})
+        FectherEntity(Clients)({k: 'system_app_'+this.model._id})
           .remove(this.finishJob, {id}, _id)
       }
     },
