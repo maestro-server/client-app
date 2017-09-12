@@ -23,7 +23,7 @@
       <button class="btn btn-primary btn-xs" @click.stop="editTeam(team)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Edit team
       </button>
-      <router-link class="btn btn-primary btn-xs" :to="{ path: '/dashboard/teams/projects/list', query: { 'team_id': team._id, 'team_name': team.name }}">
+      <router-link class="btn btn-primary btn-xs" :to="{ name: 'projects', query: { 'team_id': team._id, 'team_name': team.name }}">
         <i class="fa fa-stop-circle-o" aria-hidden="true"></i> Team Projects
       </router-link>
       <button class="btn btn-danger btn-xs" @click.stop="deleteTeam(team)">

@@ -61,7 +61,7 @@ export default {
       const {team} = this
 
       this.MDelete
-        .onFinishCallBack(() => this.$router.push('/dashboard/inventory/applications'))
+        .onFinishCallBack(() => this.$router.push({name: 'applications'}))
         .show(_.merge(entity, {team}))
     },
 

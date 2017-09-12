@@ -1,9 +1,14 @@
 'use strict';
 
+import session from './sessionStorage'
+import local from './localStorage'
+import vuex from './vuexStorage'
+
+const avaliable = {session, local, vuex}
+
 const Storage = ({k, time, persistence}) => {
 
-  const repositoryP = persistence || 'session'
-  const Repository = require(`./${repositoryP}Storage`).default
+  const Repository = avaliable[persistence || 'session']
 
   return {
     create(result) {
@@ -19,7 +24,13 @@ const Storage = ({k, time, persistence}) => {
     delete() {
       return new Repository(k)
         .deleteStore();
+    },
+
+    clear() {
+      return new Repository()
+        .clearStore();
     }
+
   };
 };
 

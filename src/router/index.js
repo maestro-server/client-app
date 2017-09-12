@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
   const regex = /dashboard/
 
   if(regex.test(to.path, from.path) && !Login.getToken()) {
-    next('/login')
+    next('/auth/login')
   }
   next()
 })

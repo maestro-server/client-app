@@ -4,7 +4,7 @@
       <div class="col-xs-12">
 
         <div class="text-right">
-          <router-link to="/dashboard/inventory/clients" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus-circle"></i> Clients</router-link>
+          <router-link :to="{name: 'clients'}" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus-circle"></i> Clients</router-link>
         </div>
 
         <typeahead

@@ -16,8 +16,8 @@ const mapper = {
     msg: () => ""
   },
   409: {
-    title: (e) => `Field, ${_.get(e, 'err.errors[0].failed')}`,
-    msg: () => "One of yours data is duplicate (Conflict)"
+    title: (e) => `${_.get(e, 'err.errors[0].failed')}`,
+    msg: () => "This data is duplicate (Conflict)"
   }
 }
 
@@ -36,7 +36,7 @@ export default (e) => {
     const hash = window.location.hash
 
     if(response.status == 401 && hash!="#/login") {
-      window.location.hash = "logout"
+      window.location.hash = "/auth/logout"
       return
     }
 

@@ -12,19 +12,23 @@ export default {
       model: {
         name: null,
         email: null,
-        password: null}
+        password: null,
+        verypassword: null
+      }
     }
   },
 
   methods: {
-    create () {
-      new User(this.model)
-        .create(
-          this.finishCallBack
-        )
+    create() {
+      this.$validator.validateAll().then((result) => {
+        if(result) {
+          new User(this.model)
+            .create(this.finishCallBack)
+        }
+      })
     },
 
-    finishCallBack () {
+    finishCallBack() {
       let data = {
         show: true,
         title: `Welcome to Maestro, plz login with your new account`,
@@ -32,7 +36,7 @@ export default {
       }
 
       store.dispatch('callAlert', {...data})
-      this.$router.push('/login')
+      this.$router.push({name: 'login'})
     }
   }
 

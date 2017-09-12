@@ -4,7 +4,7 @@ import _ from 'lodash'
 import storage from '../repositories/storage'
 
 
-const CacheManager = (opts) => {
+const CacheManager = (opts = {}) => {
 
   return {
     find (filter) {
@@ -18,6 +18,16 @@ const CacheManager = (opts) => {
 
     remove () {
       storage(opts).delete()
+    },
+
+    clear () {
+      storage(opts).clear()
+    },
+
+    clearAll () {
+      storage({}).clear()
+      storage({persistence: 'local'}).clear()
+      storage({persistence: 'vuex'}).clear()
     }
   }
 

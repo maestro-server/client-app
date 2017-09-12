@@ -29,6 +29,10 @@ class FactoryStorage {
   deleteStore() {
     this.store.remove(this.ACCESS)
   }
+
+  clearStore() {
+    this.store.clearAll()
+  }
 }
 
 export default FactoryStorage

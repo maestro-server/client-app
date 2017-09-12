@@ -22,11 +22,11 @@ export default {
     }
   },
 
-  created () {
+  created() {
     const {query} = this.$route
 
     if (!query.hasOwnProperty('token')) {
-       this.$router.push('/forgot')
+      this.$router.push({name: 'forgot'})
     }
 
     this.model = query

@@ -17,8 +17,9 @@ class Login {
   static setLogin (that, e) {
     const {user} = e.data
     CacheManager({k: 'user', persistence: 'local'}).set(user)
+    store.dispatch('setUser', user)
 
-    that.$router.push('/dashboard')
+    that.$router.push({name: 'dashboard'})
   }
 
   static destroyLogin () {
