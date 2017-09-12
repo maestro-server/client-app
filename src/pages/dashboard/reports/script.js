@@ -23,9 +23,9 @@ export default {
 
   mounted() {
     this.setPage([
-      'Cloud Inventory',
-      'Database of all yours infra',
-      'fa-th'
+      'Cloud Reports',
+      'Create and mananger custom reports',
+      'fa-map'
     ])
   }
 }

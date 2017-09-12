@@ -5,6 +5,7 @@ import applications from './applications/router'
 import system from './system/router'
 import clients from './clients/router'
 import datacenter from './datacenter/router'
+import providers from './providers/router'
 import settings from './settings/single/router'
 
 export default {
@@ -18,6 +19,7 @@ export default {
     system,
     datacenter,
     clients,
-    settings
+    settings,
+    providers
   ]
 }

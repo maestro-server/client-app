@@ -1,10 +1,10 @@
 'use strict'
-import comp from './datacenter'
+import comp from './providers'
 import list from './list/router'
 
 export default {
-  name: 'datacenter',
-  path: 'datacenter',
+  name: 'providers',
+  path: 'providers',
   component: comp,
   children: [
     list

@@ -4,7 +4,7 @@ import list from './list/router'
 import single from './view/router'
 
 export default {
-  name: 'inventory.system',
+  name: 'system',
   path: 'system',
   component: comp,
   children: [

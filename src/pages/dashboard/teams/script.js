@@ -18,7 +18,7 @@ export default {
   mounted () {
     this.setPage([
       'Team',
-      'Team, users and acess rules',
+      'Team, users and access rules',
       'fa-users'
     ])
   },

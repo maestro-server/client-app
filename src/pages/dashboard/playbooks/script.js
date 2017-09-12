@@ -23,9 +23,9 @@ export default {
 
   mounted() {
     this.setPage([
-      'Cloud Inventory',
-      'Database of all yours infra',
-      'fa-th'
+      'Cloud Playbooks',
+      'Setup and run yours playbooks, jobs and terraforms rules.',
+      'icon-ansible'
     ])
   }
 }

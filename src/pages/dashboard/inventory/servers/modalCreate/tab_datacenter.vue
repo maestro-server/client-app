@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearfix">
-      <router-link :to="{name: 'inventory.datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
+      <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
         <i class="fa fa-plus-circle"></i> Datacenter</router-link>
 
     </div>
@@ -18,7 +18,7 @@
       <div class="col-xs-9">
         <div class="pull-left">
           <bs-label type="danger">None datacenter record.</bs-label>
-          <router-link :to="{name: 'inventory.datacenter'}">Do you like to create one?</router-link>
+          <router-link :to="{name: 'datacenter'}">Do you like to create one?</router-link>
         </div>
       </div>
     </div>
