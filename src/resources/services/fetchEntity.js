@@ -10,7 +10,6 @@ const FetcherData = (Entity) => (opts) => {
 
   return {
     find (fn, query = {}) {
-
       CacheRequester(opts)(tenant)(fn)
         .process((end) => {
           new Entity(query)

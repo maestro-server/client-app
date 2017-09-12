@@ -3,6 +3,7 @@
 import _ from 'lodash'
 import storage from '../repositories/storage'
 import acceptTenants from '../libs/acceptableTenants'
+import store from 'src/store'
 
 
 const CacheRequester = ({k, time, persistence, force}) => ({refs, _id}={}) => (fn) => {
@@ -27,6 +28,7 @@ const CacheRequester = ({k, time, persistence, force}) => ({refs, _id}={}) => (f
           }
 
           fn(data)
+          store.dispatch('offSpinner')
         },
 
         remove (proc) {

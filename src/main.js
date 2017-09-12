@@ -11,12 +11,15 @@ import Notifications from 'vue-notification'
 import bootue from './components'
 import VeeValidate from 'vee-validate'
 import {ServerTable} from 'maestro-vue-tables-2'
+import Vuebar from 'vuebar';
+
 
 Vue.use(bootue)
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
 Vue.use(ServerTable, {})
 Vue.use(Notifications)
+Vue.use(Vuebar);
 
 /* eslint-disable no-new */
 new Vue({
