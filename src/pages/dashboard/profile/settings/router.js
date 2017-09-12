@@ -2,6 +2,6 @@
 import comp from './profile'
 
 export default {
-  path: 'profile',
+  path: 'settings',
   component: comp
 }

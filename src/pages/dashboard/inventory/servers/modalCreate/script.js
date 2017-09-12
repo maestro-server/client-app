@@ -76,7 +76,7 @@ export default {
 
     editLoad () {
       const {_id} = this.model
-      FectherEntity(Servers)(this)({k: 'server_'+_id})
+      FectherEntity(Servers)({k: 'server_'+_id})
       .findOne((e) => {
         this.model = e.data
         this.$set(this, 'server', this.model)
@@ -118,7 +118,7 @@ export default {
     editSave () {
       this.setupModel()
 
-      FectherEntity(Servers)(this)({k: 'server_'+this.model._id})
+      FectherEntity(Servers)({k: 'server_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 
@@ -133,7 +133,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'server_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'server_options', persistence: 'local', time: 2840})
       .find(this.fetchAdminer, {key: 'server_options'})
     },
 

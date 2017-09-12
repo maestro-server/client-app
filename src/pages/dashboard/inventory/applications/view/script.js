@@ -66,7 +66,7 @@ export default {
     },
 
     fetchData: function (id) {
-      FectherEntity(Applications)(this)({k: 'application_' + id})
+      FectherEntity(Applications)({k: 'application_' + id})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
           this.fetchServers()
@@ -77,7 +77,7 @@ export default {
       const {_id} = this.model
 
       if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)(this)({k: 'app_server_'+_id})
+        FectherEntity(Servers)({k: 'app_server_'+_id})
           .find((e) => {
             this.$set(this, 'list_servers', _.get(e, 'data.items', []))
           }, {_id: this.model.servers})

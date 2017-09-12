@@ -32,7 +32,7 @@ export default {
 
   methods: {
     fetchData (force=false) {
-      FectherEntity(Datacenters)(this)({k: 'datacenter', force})
+      FectherEntity(Datacenters)({k: 'datacenter', force})
       .find((e) => this.result = e.data)
     },
 

@@ -81,7 +81,7 @@ export default {
     editSave () {
       this.setupModel()
 
-      FectherEntity(Clients)(this)({k: 'client_'+this.model._id})
+      FectherEntity(Clients)({k: 'client_'+this.model._id})
         .update(this.finishJob, this.model)
     },
 
@@ -96,7 +96,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'clients_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'clients_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'clients_options'})
     },
 

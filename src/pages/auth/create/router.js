@@ -2,6 +2,7 @@
 import comp from './create'
 
 export default {
-  path: '/create',
+  name: 'create-user',
+  path: 'create',
   component: comp
 }

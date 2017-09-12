@@ -1,25 +1,26 @@
 <div>
-  <div class="wrapper-tenants pull-left">
+  <div class="wrapper-maestro-menu pull-left">
 
-    <div class="tenant">
-      <a @click.stop="showDropDown = !showDropDown">
+    <div class="maestro-menu">
+      <a @click.stop="toggle('tenants')">
         <span class="c-1">
-          <img :src="img_default(users)" class="img-circle img-responsive-center">
+          <img :src="avatar" class="img-circle img-responsive-center">
         </span>
         <span class="c-2">
-            {{users.name}}
-            <i class="fa pull-right" :class="{'fa-chevron-up': showDropDown, 'fa-chevron-down': !showDropDown}"
-               aria-hidden="true"></i>
-          </span>
+            {{tenant.name}}
+
+        </span>
+        <i class="fa pull-right" :class="{'fa-chevron-up': showDrop.tenants, 'fa-chevron-down': !showDrop.tenants}"
+           aria-hidden="true"></i>
       </a>
     </div>
 
     <transition name="slide-fade">
-      <div class="tenants" v-if="showDropDown">
+      <div class="maestro-dropdown" v-if="showDrop.tenants">
         <h4 class="white ml10 mt20">Users</h4>
         <ul v-if="users">
           <li>
-            <a href="#">
+            <a @click="changeTenant(users, 'users')">
               <span class="c-1">
                 <img :src="img_default(users)" class="img-circle img-responsive-center">
               </span>
@@ -36,7 +37,7 @@
           <div>
             <ul v-if="teams">
               <li v-for="team in teams.items" :key="team._id">
-                <a href="#">
+                <a @click="changeTenant(team, 'teams')">
                   <span class="c-1">
                     <img :src="img_default(team)" class="img-circle img-responsive-center">
                   </span>
@@ -48,7 +49,40 @@
             </ul>
           </div>
         </div>
+      </div>
+    </transition>
 
+  </div>
+
+
+
+  <div class="wrapper-maestro-menu wrapper-settings pull-left">
+
+    <div class="maestro-menu">
+      <a @click.stop="toggle('settings')">
+        <span class="c-1">
+          <i class="fa fa-cog pull-right" aria-hidden="true"></i>
+        </span>
+        <span class="c-2">
+          <i class="fa pull-right" :class="{'fa-chevron-up': showDrop.settings, 'fa-chevron-down': !showDrop.settings}" aria-hidden="true"></i>
+        </span>
+      </a>
+    </div>
+
+    <transition name="slide-fade">
+      <div class="maestro-dropdown" v-if="showDrop.settings">
+
+        <ul class="text-right">
+          <template v-for="item, key in menu">
+            <hr v-if="key === 'hr'">
+
+            <li v-if="key !== 'hr'" @click="toggle('all')">
+              <router-link :to="{ name: key }">
+                <i class="fa" :class="item[1]" aria-hidden="true"></i> {{item[0]}}
+              </router-link>
+            </li>
+          </template>
+        </ul>
 
       </div>
     </transition>

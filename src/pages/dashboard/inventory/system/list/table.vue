@@ -25,12 +25,12 @@
   import Login from 'services/login'
   import FectherEntity from 'services/fetchEntity'
   import Clients from 'factories/clients'
+  import System from 'factories/system'
 
   export default {
 
     data: function () {
       return {
-        url: `${API_URL}/system/`,
         items: [],
         columns: ['name', 'lclients',  'links', 'updated_at', 'created_at', 'actions'],
         options: {
@@ -50,6 +50,13 @@
             created_at: 'Created At'
           }
         }
+      }
+    },
+
+    computed: {
+      url() {
+        const aa = new System().getUrl()
+        return `${API_URL}${aa}`
       }
     },
 
@@ -91,7 +98,7 @@
     },
 
     created() {
-      FectherEntity(Clients)(this)({k: 'clients'})
+      FectherEntity(Clients)({k: 'clients'})
         .find(this.fetchClients)
     }
   }

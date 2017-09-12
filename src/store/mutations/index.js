@@ -1,11 +1,17 @@
 'use strict'
+
+import CacheManager from 'services/cacheManager'
+
+
 export default {
   SET_USER (state, user) {
     state.me = Object.assign(state.me, user)
+    CacheManager({k: 'user', persistence: 'local'}).set(state.me)
   },
 
   SET_TENANT (state, tn) {
-    state.tenant = Object.assign(state.tenant, tn)
+    state.tenant = tn
+    CacheManager({k: 'tenant', persistence: 'local'}).set(tn)
   },
 
   CHANGE_PAGE (state, [key, val]) {

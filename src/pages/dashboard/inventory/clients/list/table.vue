@@ -23,11 +23,12 @@
   'use strict'
   import _ from 'lodash'
   import Login from 'services/login'
+  import Clients from 'factories/clients'
+
   export default {
 
     data: function () {
       return {
-        url: `${API_URL}/clients/`,
         items: [],
         columns: ['name', 'contact','updated_at', 'created_at', 'actions'],
         options: {
@@ -43,6 +44,13 @@
             created_at: 'Created At'
           }
         }
+      }
+    },
+
+    computed: {
+      url() {
+        const aa = new Clients().getUrl()
+        return `${API_URL}${aa}`
       }
     },
 

@@ -4,12 +4,7 @@ import Router from 'vue-router'
 
 import home from 'src/pages/home/router'
 import dashboard from 'src/pages/dashboard/router'
-import login from 'src/pages/login/router'
-import logout from 'src/pages/logout/router'
-
-import forgot from 'src/pages/forgot/router'
-import changepass from 'src/pages/changepass/router'
-import create from 'src/pages/create/router'
+import auth from 'src/pages/auth/router'
 
 import Login from 'services/login'
 
@@ -20,11 +15,7 @@ Vue.use(Router)
   routes: [
     home,
     dashboard,
-    login,
-    logout,
-    forgot,
-    changepass,
-    create
+    auth
   ]
 })
 

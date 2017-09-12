@@ -63,7 +63,7 @@ export default {
       if (!_.isEmpty(id)) {
 
         const _id =  `${this.model._id}/applications`
-        FectherEntity(System)(this)({k: 'system_app_'+this.model._id})
+        FectherEntity(System)({k: 'system_app_'+this.model._id})
           .update(this.finishJob, {id}, _id)
       }
     },
@@ -72,7 +72,7 @@ export default {
       if (!_.isEmpty(id)) {
 
         const _id =  `${this.model._id}/applications`
-        FectherEntity(System)(this)({k: 'system_app_'+this.model._id})
+        FectherEntity(System)({k: 'system_app_'+this.model._id})
           .remove(this.finishJob, {id}, _id)
       }
     },
@@ -89,7 +89,7 @@ export default {
     },
 
     fetchData() {
-      FectherEntity(Adminer)(this)({k: 'system_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'system_options', persistence: 'local', time: 2840})
         .find(this.fetchAdminer, {key: 'system_options'})
     },
 

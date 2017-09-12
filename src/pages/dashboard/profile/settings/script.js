@@ -27,21 +27,21 @@ export default {
     ]),
 
     me () {
-      FectherEntity(Me)(this)({k: 'me'})
+      FectherEntity(Me)({k: 'me'})
         .find((e) => _.merge(this.model, e.data))
     },
 
     updateProfile () {
       const data = _.omit(this.model, 'email')
 
-      FectherEntity(Me)(this)({k: 'me'})
+      FectherEntity(Me)({k: 'me'})
         .update(this.finishJob, data, '?')
     },
 
     updateEmail () {
       const email = this.cemail
 
-      FectherEntity(Me)(this)({k: 'me'})
+      FectherEntity(Me)({k: 'me'})
         .update(() => {this.model.email = email}, {email}, '?')
     },
 

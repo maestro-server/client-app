@@ -2,12 +2,10 @@
 
 import mainMenu from './mainMenu/main-menu'
 import tenantDropDown from './tenantDropDown/TenantDropDown'
-import settingDropDown from './settingDropDown/SettingDropDown'
 
 export default {
   components: {
     tenantDropDown,
-    settingDropDown,
     mainMenu
   },
 

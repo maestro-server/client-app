@@ -2,12 +2,12 @@
 import comp from './settings'
 import billing from './billing/router'
 import accdelete from './delete/router'
-import profile from './profile/router'
+import profile from './settings/router'
 
 export default {
-  name: 'settings-profile',
-  path: 'settings',
-  redirect: 'settings/profile',
+  name: 'profile',
+  path: 'profile',
+  redirect: 'profile/settings',
   component: comp,
   children: [
     billing,

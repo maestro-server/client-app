@@ -1,11 +1,11 @@
 'use strict'
 
-import FactoryTeam from './factoryTeam'
+import FactoryTenant from './factoryTenant'
 
-class Architectures extends FactoryTeam {
+class Architectures extends FactoryTenant {
 
-  constructor(model={}, route="/architectures") {
-    super(model, route)
+  constructor(model={}, tenant=false) {
+    super(model, "/architectures", tenant)
   }
 }
 

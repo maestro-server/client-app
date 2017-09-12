@@ -1,0 +1,27 @@
+<form>
+
+    <div class="col-xs-12">
+      <div class="col-xs-12 text-center">
+        <img src="/static/imgs/logo300.png" alt="Maestro - Login"
+             class="text-center img-responsive-center"/><br/>
+      </div>
+
+      <h4 class="text-center col-xs-12 mt10">Forgot password</h4>
+      <p>Enter both your username and email address associated to your account and we'll send you a password reset link.</p>
+
+        <bs-input
+          label="Email"
+          v-model="model.email"
+          v-validate.initial="'required|email'"
+          name="email"
+          @keydown.enter="forgot"
+          :error="makeError('email')"
+        ></bs-input>
+
+      <div class="text-right">
+        <router-link :to="{name: 'login'}" class="btn btn-default">Back</router-link>
+        <button type="button" class="btn btn-primary" :disabled="errors.any()" @click="forgot">Send</button>
+      </div>
+    </div>
+
+</form>

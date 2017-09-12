@@ -79,7 +79,7 @@ export default {
 
     fetchData: function (id) {
       if (id) {
-        FectherEntity(Clients)(this)({k: 'client_' + id})
+        FectherEntity(Clients)({k: 'client_' + id})
           .findOne((e) => {
             this.$set(this, 'model', e.data)
           }, id)
@@ -88,7 +88,7 @@ export default {
 
     fetchSystem(id, force = true) {
       if (id) {
-        FectherEntity(System)(this)({k: 'client_system_'+id, force})
+        FectherEntity(System)({k: 'client_system_'+id, force})
           .find((e) => {
             this.$set(this.model, 'list_system', _.get(e, 'data.items', []))
           }, {"clients._id": id})

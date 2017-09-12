@@ -69,7 +69,7 @@ export default {
     },
 
     fetchData: function (id) {
-      FectherEntity(Servers)(this)({k: 'server_' + id})
+      FectherEntity(Servers)({k: 'server_' + id})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, id)
