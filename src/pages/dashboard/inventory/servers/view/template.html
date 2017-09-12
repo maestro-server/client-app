@@ -1,37 +1,37 @@
 <div>
   <div class="pb10">
-    <h3 class="col-xs-7 pb10">
+    <h3 class="col-xs-6">
       Server - <span class="text-capitalize">{{model.hostname}}</span>
     </h3>
-    <div class="col-xs-5 pb10 mt20 text-right">
+    <div class="col-xs-6 mt20 text-right">
       <button class="btn btn-warning" @click="editE(model)">Edit ACL</button>
       <button class="btn btn-success" @click="editE(model)">Edit <span class="text-capitalize">{{model.hostname}}</span></button>
       <button class="btn btn-danger" @click="deleteE(model)">Delete server</button>
     </div>
   </div>
 
-  <div class="col-xs-12 mt10 row">
-    <displayer class="col-xs-2" :type="activeShow">
-      <h3 class="white">{{model.status || 'Active'}}</h3>
+  <div class="col-xs-12 mt10 bg-gray-lighter">
+    <displayer class="col-sm-2 col-xs-4 mt20" :type="activeShow">
+      <h4 class="white">{{model.status || 'Active'}}</h4>
     </displayer>
-    <displayer class="col-xs-2" type="warning" v-if="model.environment">
-      <h3 class="white">{{model.environment}}</h3>
+    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.environment">
+      <h4 class="white">{{model.environment}}</h4>
     </displayer>
-    <displayer class="col-xs-2" type="warning" v-if="model.role">
-      <h3 class="white">{{model.role}}</h3>
+    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.role">
+      <h4 class="white">{{model.role}}</h4>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'os.base')">
-      <h3 class="white">{{model.os.base}}</h3>
+    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="existGet(model, 'os.base')">
+      <h4 class="white">{{model.os.base}}</h4>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="existGet(model, 'datacenters.name')">
-      <h3 class="white">{{model.datacenters.name}}</h3>
+    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="existGet(model, 'datacenters.name')">
+      <h4 class="white">{{model.datacenters.name}}</h4>
     </displayer>
-    <displayer class="col-xs-2" type="primary" v-if="model.ipv4_private">
-      <h3 class="white">{{model.ipv4_private}}</h3>
+    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.ipv4_private">
+      <h4 class="white">{{model.ipv4_private}}</h4>
     </displayer>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-6 mt10">
     <h3> <i class="fa fa-info" aria-hidden="true"></i> Info</h3>
 
     <table class="table table-striped">
@@ -67,7 +67,7 @@
     </table>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-6 mt10">
 
     <div class="col-xs-12">
       <h3><i class="fa fa-cogs" aria-hidden="true"></i> Services <bs-label type="default" class="pull-right" v-if="model.services">{{model.services.length}}</bs-label></h3>

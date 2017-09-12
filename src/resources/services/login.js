@@ -16,7 +16,6 @@ class Login {
 
   static setLogin (that, e) {
     const {user} = e.data
-    CacheManager({k: 'user', persistence: 'local', time: 10600}).set(user)
     store.dispatch('setUser', user)
 
     that.$router.push({name: 'dashboard'})

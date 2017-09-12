@@ -1,7 +1,8 @@
 'use strict'
 
 import Factory from './factory'
-import LocalStorageRepository from '../repositories/localStorage'
+import CacheManager from 'services/cacheManager'
+
 
 class Auth extends Factory {
 
@@ -17,8 +18,7 @@ class Auth extends Factory {
   }
 
   success (result) {
-    new LocalStorageRepository()
-      .createStore(result.data.token)
+    CacheManager({k: 'x-access', persistence: 'local', time: 10600}).set(result.data.token)
   }
 }
 
