@@ -12,12 +12,12 @@ const Storage = ({k, time, persistence}) => {
 
   return {
     create(result) {
-      return new Repository(k)
-        .createStore(result, time);
+      return new Repository(k, time)
+        .createStore(result);
     },
 
     get() {
-      return new Repository(k, time)
+      return new Repository(k)
         .restoreStore();
     },
 

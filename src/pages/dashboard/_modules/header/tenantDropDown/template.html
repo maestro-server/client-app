@@ -31,11 +31,11 @@
           </li>
         </ul>
 
-        <h4 class="white ml10 mt20">Teams</h4>
+        <h4 class="white ml10 mt20" v-if="hasTeams">Teams</h4>
 
         <div v-bar class="twrapper">
           <div>
-            <ul v-if="teams">
+            <ul v-if="hasTeams">
               <li v-for="team in teams.items" :key="team._id">
                 <a @click="changeTenant(team, 'teams')">
                   <span class="c-1">
@@ -47,6 +47,11 @@
                 </a>
               </li>
             </ul>
+
+            <div class="col-xs-12 text-right" @click="toggle('all')">
+              <router-link :to="{name: 'teams'}" class="white"><i class="fa fa-plus-circle mt10"></i> New Team</router-link>
+            </div>
+
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default {
         logout: ['Logout', 'fa-sign-out']
       },
       showDrop: {tenants: false, settings: false},
-      teams: [],
+      teams: {},
       tenant: {name: null, _id: null},
       avatar: IMG_AVATAR_DEFAULT
     }
@@ -92,6 +92,10 @@ export default {
     },
     storageTeam() {
       return this.$store.getters.get_tenant
+    },
+    hasTeams() {
+      const total = _.get(this.teams, 'items', [])
+      return total.length
     }
   },
 
