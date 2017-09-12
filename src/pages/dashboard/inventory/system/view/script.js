@@ -54,7 +54,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .setTabShow(index)
         .onFinishCallBack(() => this.fetchData(entity._id, true))
         .show(_.merge(entity, {team}))
@@ -64,7 +63,6 @@ export default {
       const {team} = this
 
       this.MMembers
-        .setupSteps(1, 1, 1)
         .onFinishCallBack(CacheManager({k: `system_app_${this.model._id}`}).remove)
         .show(_.merge(entity, {team}))
     },

@@ -88,7 +88,7 @@
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
       <button type="button" class="btn btn-default" @click="previousMethod" v-if="previousValid">Previous</button>
       <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('modals')">Next</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any('modals')">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any('modals')">Save</button>
     </div>
 
   </modal>

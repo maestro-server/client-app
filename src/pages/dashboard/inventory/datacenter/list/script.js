@@ -40,7 +40,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .onFinishCallBack(() => {
           this.fetchData(true)
         })
@@ -51,7 +50,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .onFinishCallBack((e) => {
           _.merge(entity, e)
         })
@@ -73,7 +71,6 @@ export default {
       const {team} = this
 
       this.MInstances
-        .setupSteps(1, 1, 1)
         .show(_.merge(entity, {team}))
     },
 

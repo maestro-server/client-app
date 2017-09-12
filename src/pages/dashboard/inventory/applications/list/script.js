@@ -31,7 +31,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .onFinishCallBack(() => {
           this.$refs.svTable.$refs.vTable.refresh()
         })
@@ -42,7 +41,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .onFinishCallBack(() => {
           this.$refs.svTable.$refs.vTable.refresh()
         })

@@ -92,7 +92,7 @@
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid" :disabled="errors.any()">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
     </div>
 
   </modal>

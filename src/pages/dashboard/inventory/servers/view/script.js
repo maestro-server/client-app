@@ -54,7 +54,6 @@ export default {
       const {team} = this
 
       this.MCreate
-        .setupSteps(1, 1, 1)
         .setTabShow(index)
         .onFinishCallBack(() => this.fetchData(entity._id))
         .show(_.merge(entity, {team}))
