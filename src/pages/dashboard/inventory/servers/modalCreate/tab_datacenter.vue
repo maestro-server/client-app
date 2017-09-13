@@ -4,13 +4,12 @@
       <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
         <i class="fa fa-plus-circle"></i> Datacenter
       </router-link>
-
     </div>
 
     <div class="mt10 clearfix col-xs-12"></div>
 
-    <bs-select v-if="options.length > 0" form-type="horizontal" :options="providers" v-model="value.name"
-               label="Datacenter" placeholder="Select Datacenter" @selected="updateProvider"
+    <bs-select v-if="options.length > 0" :disabled="updated" form-type="horizontal" :options="providers" v-model="value.name"
+               label="Datacenter" placnewereholder="Select Datacenter" @selected="updateProvider"
                ref="s_provider"></bs-select>
 
     <div class="row" v-if="options.length == 0">
@@ -65,6 +64,7 @@
 
     data: function () {
       return {
+        updated: false,
         options: [],
         value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null},
         providers: [],
@@ -75,7 +75,6 @@
 
 
     methods: {
-
       fetchDatacenter(e) {
         const data = _.get(e, 'data.items')
         if (!_.isEmpty(data)) {
@@ -104,10 +103,12 @@
       },
 
       updaterEdit(data) {
+        this.updated = _.has(data, 'name')
         this.$set(this, 'value', data || {})
       },
 
       reset() {
+        this.updated = false
         this.value = {}
       }
     },

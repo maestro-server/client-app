@@ -86,7 +86,7 @@ export default {
 
         this.$set(this, 'os', this.model.os)
 
-        this.tab_dc.updaterEdit(this.model.dc)
+        this.tab_dc.updaterEdit(this.model.datacenters)
         this.tab_storage.updaterEdit(this.model.storage)
         this.tab_auth.updaterEdit(this.model.auth)
         this.tab_services.updaterEdit(this.model.services)

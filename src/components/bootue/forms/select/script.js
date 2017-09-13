@@ -216,8 +216,10 @@ export default {
       this.$emit('options', this.list)
     },
     toggle () {
-      this.show = !this.show
-      if (!this.show) this.$refs.btn.focus()
+      if(!this.disabled) {
+        this.show = !this.show
+        if (!this.show) this.$refs.btn.focus()
+      }
     },
     clickOutside (e) {
       if (!this.$el.contains(e.target)) {
