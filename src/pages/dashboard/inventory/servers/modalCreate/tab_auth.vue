@@ -1,7 +1,8 @@
 <template>
 
   <div>
-    <bs-input form-type="horizontal" name="name" label="Key name*" v-model="auth.name" v-validate.initial="'required'"></bs-input>
+    <bs-input form-type="horizontal" name="name" label="Key name*" v-model="auth.name"
+              v-validate.initial="'required'"></bs-input>
     <hr/>
     <div class="row">
       <div class="col-xs-3 text-right mt5">
@@ -14,7 +15,8 @@
       </div>
     </div>
 
-    <bs-input class="mt20" form-type="horizontal" label="Username*" v-model="auth.username" v-validate.initial="'required'"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="Username*" v-model="auth.username"
+              v-validate.initial="'required'"></bs-input>
 
     <div class="text-center mt20">
       <button class="btn btn-primary" type="button" name="button" @click.prevent="addAuth"
@@ -44,51 +46,51 @@
 
 
 <script>
-'use strict'
+  'use strict'
 
-export default {
+  export default {
 
-  props: {
-    options: {}
-  },
+    props: {
+      options: {}
+    },
 
-  data: function () {
-    const templateAuth = {name: null, admin: null, type: null}
+    data: function () {
+      const templateAuth = {name: null, admin: null, type: null}
 
-    return {
-      value: [],
-      resetAuth: templateAuth,
-      auth: _.clone(templateAuth)
-    }
-  },
-
-  methods: {
-    addAuth() {
-      const auth = _.pickBy(this.auth, _.identity)
-      const exist = _.find(this.value, ['name', auth.name])
-
-      if(!exist) {
-        this.$set(this, 'auth', _.clone(this.resetAuth))
-
-        this.value.push(auth)
-        this.$emit('update', _.get(this, 'value', []))
+      return {
+        value: [],
+        resetAuth: templateAuth,
+        auth: _.clone(templateAuth)
       }
     },
 
-    deleteAuth(key) {
-      this.value.splice(key, 1)
-      this.$emit('update', _.get(this, 'value', []))
-    },
+    methods: {
+      addAuth() {
+        const auth = _.pickBy(this.auth, _.identity)
+        const exist = _.find(this.value, ['name', auth.name])
 
-    updaterEdit(data) {
-      this.$set(this, 'value', data || [])
-    },
+        if (!exist) {
+          this.$set(this, 'auth', _.clone(this.resetAuth))
 
-    reset() {
-      this.$set(this, 'auth', _.clone(this.resetAuth))
-      this.value = []
+          this.value.push(auth)
+          this.$emit('update', _.get(this, 'value', []))
+        }
+      },
+
+      deleteAuth(key) {
+        this.value.splice(key, 1)
+        this.$emit('update', _.get(this, 'value', []))
+      },
+
+      updaterEdit(data) {
+        this.$set(this, 'value', data || [])
+      },
+
+      reset() {
+        this.$set(this, 'auth', _.clone(this.resetAuth))
+        this.value = []
+      }
     }
   }
-}
 
 </script>

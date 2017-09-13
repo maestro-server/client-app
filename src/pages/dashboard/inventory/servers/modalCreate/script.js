@@ -25,7 +25,6 @@ export default {
 
   data: function () {
     return {
-      tabShow:0,
       zone: null,
       showModalDC: false,
       showModalZones: false,
@@ -63,15 +62,19 @@ export default {
   },
 
   methods: {
-    setTabShow (index) {
-      this.tabShow = index
-      return this
-    },
-
     afterShow () {
       this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.hostname} server`
+    },
 
-      this.create ? this.resetDC() : this.editLoad()
+    createLoad () {
+      this.tabShow=0
+      this.server = {}
+      this.os = {base: null, dist: null, version: null}
+      this.tab_dc.reset()
+      this.tab_storage.reset()
+      this.tab_auth.reset()
+      this.tab_services.reset()
+      this.tab_tags.reset()
     },
 
     editLoad () {
@@ -91,16 +94,6 @@ export default {
       }, _id)
     },
 
-    resetDC() {
-      this.tabShow=0
-      this.server = {}
-      this.os = {base: null, dist: null, version: null}
-      this.tab_dc.reset()
-      this.tab_storage.reset()
-      this.tab_auth.reset()
-      this.tab_services.reset()
-      this.tab_tags.reset()
-    },
 
     setupModel () {
       this.model = _.pickBy(this.server, _.identity)
@@ -110,9 +103,8 @@ export default {
     createSave () {
       this.setupModel()
 
-      new Servers(this.model)
-      .authorization()
-      .create(this.finishJob)
+      FectherEntity(Servers)({k: 'server'})
+        .create(this.finishJob, this.model)
     },
 
     editSave () {
@@ -122,18 +114,8 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    setTeam(item) {
-      this.$set(this.model, 'team', item)
-      return this
-    },
-
-    teamSelected(item) {
-      this.setTeam(item)
-      this.model.input = ""
-    },
-
     fetchData() {
-      FectherEntity(Adminer)({k: 'server_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({k: 'server_options', persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})
     },
 

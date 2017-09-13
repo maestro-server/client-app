@@ -9,7 +9,7 @@ import expirePlugin from 'store/plugins/expire'
 
 class LocalStorage extends factoryStorage {
 
-  constructor(key='x-access', expires = 1200) {
+  constructor(key='x-access', expires = 86400) {
     const store = engine.createStore([storages], [expirePlugin])
     super(key, store, expires)
   }

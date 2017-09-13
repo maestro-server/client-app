@@ -28,6 +28,16 @@ const FetcherData = (Entity) => (opts) => {
         });
     },
 
+    create (fn, model) {
+
+      CacheRequester(opts)(tenant)(fn)
+        .remove((end) => {
+          new Entity(model)
+            .authorization()
+            .create(end)
+        })
+    },
+
     update (fn, model, path) {
       const key = path || model._id
 

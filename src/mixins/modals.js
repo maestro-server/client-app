@@ -4,6 +4,7 @@ import _ from 'lodash'
 export default {
   data () {
     return {
+      tabShow:0,
       text: {title:null},
       showModal: false,
       model: {},
@@ -17,11 +18,20 @@ export default {
     createSave () {},
     editSave () {},
     callback () {},
-    show (model={}, step=1, showModal=true) {
+    createLoad() {},
+    editLoad() {},
+    show (model={}, showModal=true) {
       this.showModal = showModal
       this.model = _.clone(model)
       this.create = !_.has(model, '_id')
-      this.afterShow()
+
+      this.afterShow() // hook to call after show modal
+      this.create ? this.createLoad() : this.editLoad()
+    },
+
+    setTabShow (index) {
+      this.tabShow = index
+      return this
     },
 
     actionClick () {
@@ -33,7 +43,6 @@ export default {
     },
 
     closed () {
-      this.step=1
       this.model = {}
       this.showModal = false
 

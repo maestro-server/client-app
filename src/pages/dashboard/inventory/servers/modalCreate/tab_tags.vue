@@ -51,7 +51,7 @@
         const tags = _.pickBy(this.tags, _.identity)
         const exist = _.find(this.value, ['key', tags.key])
 
-        if(!exist) {
+        if (!exist) {
           this.$set(this, 'tags', _.clone(this.resetTags))
 
           this.value.push(tags)

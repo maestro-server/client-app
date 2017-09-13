@@ -68,7 +68,7 @@
         const stg = _.pickBy(this.storage, _.identity)
         const exist = _.find(this.value, ['name', stg.name])
 
-        if(!exist) {
+        if (!exist) {
           this.$set(this, 'storage', _.clone(this.resetStorage))
 
           this.value.push(stg)

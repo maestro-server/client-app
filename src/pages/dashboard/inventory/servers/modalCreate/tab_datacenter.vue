@@ -2,14 +2,16 @@
   <div>
     <div class="clearfix">
       <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
-        <i class="fa fa-plus-circle"></i> Datacenter</router-link>
+        <i class="fa fa-plus-circle"></i> Datacenter
+      </router-link>
 
     </div>
 
     <div class="mt10 clearfix col-xs-12"></div>
 
     <bs-select v-if="options.length > 0" form-type="horizontal" :options="providers" v-model="value.name"
-               label="Datacenter" placeholder="Select Datacenter" @selected="updateProvider" ref="s_provider"></bs-select>
+               label="Datacenter" placeholder="Select Datacenter" @selected="updateProvider"
+               ref="s_provider"></bs-select>
 
     <div class="row" v-if="options.length == 0">
       <div class="col-xs-3 text-right">
@@ -42,8 +44,10 @@
       </div>
     </div>
 
-    <bs-input class="mt20" form-type="horizontal" label="Instance Type" v-model="value.instance" @input="updateModel"></bs-input>
-    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="value.instance_id" @input="updateModel"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="Instance Type" v-model="value.instance"
+              @input="updateModel"></bs-input>
+    <bs-input class="mt20" form-type="horizontal" label="ID Instance" v-model="value.instance_id"
+              @input="updateModel"></bs-input>
   </div>
 </template>
 
@@ -62,7 +66,7 @@
     data: function () {
       return {
         options: [],
-        value: {_id:null, name: null, zone: null, instance_id:null, instance: null, type: null, region: null},
+        value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null},
         providers: [],
         zones: [],
         regions: []
@@ -72,21 +76,21 @@
 
     methods: {
 
-      fetchDatacenter (e) {
+      fetchDatacenter(e) {
         const data = _.get(e, 'data.items')
-        if(!_.isEmpty(data)) {
-          this.options = data.map(item=>({value: item, label: item.name}))
-          this.providers = this.options.map(d=>d.label)
+        if (!_.isEmpty(data)) {
+          this.options = data.map(item => ({value: item, label: item.name}))
+          this.providers = this.options.map(d => d.label)
         }
       },
 
       fetchData: function () {
         FectherEntity(Datacenters)({k: 'datacenter'})
-        .find(this.fetchDatacenter)
+          .find(this.fetchDatacenter)
       },
 
-      updateProvider: function(val) {
-        const dc = _.head(this.options.filter(d=>d.label == val))
+      updateProvider: function (val) {
+        const dc = _.head(this.options.filter(d => d.label == val))
 
         this.regions = _.get(dc, 'value.regions', [])
         this.zones = _.get(dc, 'value.zones', [])
@@ -95,7 +99,7 @@
         this.updateModel()
       },
 
-      updateModel: function() {
+      updateModel: function () {
         this.$emit('update', _.pickBy(this.value, _.identity))
       },
 
@@ -108,7 +112,7 @@
       }
     },
 
-    created () {
+    created() {
       this.fetchData()
     }
   }

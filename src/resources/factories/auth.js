@@ -18,7 +18,7 @@ class Auth extends Factory {
   }
 
   success (result) {
-    CacheManager({k: 'x-access', persistence: 'local', time: 10600}).set(result.data.token)
+    CacheManager({k: 'x-access', persistence: 'local', time: 860000}).set(result.data.token)
   }
 }
 
