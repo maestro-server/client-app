@@ -1,0 +1,25 @@
+<div>
+  <slot name="forms"></slot>
+
+  <div class="text-center mt20">
+    <button class="btn btn-primary" type="button" name="button" @click="add"
+            :disabled="$parent.errors.any()"><i class="fa fa-plus-circle"></i> {{label}}
+    </button>
+  </div>
+
+  <div class="well row mt20">
+
+    <ul v-if="basket.length > 0" class="list-group">
+      <li class="list-group-item" v-for="item, i in basket">
+        <slot name="view"  :item="item"></slot>
+        <button class="btn btn-danger btn-xs pull-right" @click.prevent.stop="del(i)"><i
+          class="fa fa-trash" aria-hidden="true"></i></button>
+      </li>
+    </ul>
+
+    <span v-if="basket.length <= 0" class="col-xs-12 text-center">None {{label}}</span>
+    <bs-label v-if="basket.length > 0" type="default">{{basket.length}} {{label}}<span
+      v-if="basket.length > 1">s</span></bs-label>
+  </div>
+
+</div>

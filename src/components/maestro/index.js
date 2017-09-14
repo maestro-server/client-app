@@ -5,8 +5,10 @@ import loader from './loader/Loader.vue'
 import imager from './imager/Imager.vue'
 import jsonTree from './jsontree/TreeView.vue'
 import treeViewItem from './jsontree/TreeViewItem.vue'
+import createrList from './createrList/CreaterList.vue'
 
 let components = {
+  createrList,
   callback,
   uploader,
   jsonTree,

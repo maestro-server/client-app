@@ -109,7 +109,6 @@ export default {
 
     editSave () {
       this.setupModel()
-
       FectherEntity(Servers)({k: 'server_'+this.model._id})
         .update(this.finishJob, this.model)
     },
@@ -127,5 +126,4 @@ export default {
   created() {
     this.fetchData()
   }
-
 }
