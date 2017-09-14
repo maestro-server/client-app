@@ -8,5 +8,11 @@ export default {
 
   components: {
     svTable
+  },
+
+  data: function () {
+    return {
+      name: "Servers"
+    }
   }
 }
