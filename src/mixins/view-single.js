@@ -1,59 +1,47 @@
 'use strict'
 
-import _ from 'lodash'
-import Login from 'services/login'
-import formatAdminer from 'src/resources/libs/formatAdminerData'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   data: function () {
     return {
-      options: {
-        headers: {Authorization: Login.Authorization()},
-        responseAdapter: (resp) => ({
-            data: this.prepared(resp.data.items),
-            count: resp.data.found
-          }
-        )
-      }
+      id: null
     }
   },
 
   computed: {
-    url() {
-      const url = this.entity.getUrl()
-      return `${API_URL}${url}`
+    MCreate() {
+      return this.$parent.$refs.modal_create
+    },
+    MDelete() {
+      return this.$parent.$refs.modal_delete
     }
   },
 
   methods: {
-    viewReducer(old, obj, key, fielder) {
-      const str = key > 0 ? "|" : ""
-      return `${old} ${str} ${obj[fielder]}`;
+    edit: function (index=0) {
+      this.MCreate
+        .setTabShow(index)
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
     },
 
-    editP(data) {
-      this.$parent.editE(data)
+    del: function () {
+      this.MDelete
+        .onFinishCallBack(() => this.$router.push({name: this.key}))
+        .show(this.model)
     },
 
-    deleteP(data) {
-      this.$parent.deleteE(data)
-    },
-
-    fetchAdminer(e) {
-      const data = formatAdminer(e)
-      _.forEach(
-        this.options.listColumns,
-        (val, key) => this.fetchData(key, key)(data, '')
-      )
-    },
-
-    fetchData(opt, fielder='data.items') {
-      return (result, getter='name') => {
-        const data = _.get(result, fielder)
-        if (!_.isEmpty(data)) {
-          this.options.listColumns[opt] = data.map(item => ({text: _.get(item, getter, item)}))
-        }
-      }
+    fetchData: function () {
+      FectherEntity(this.entity)({k: `${this.key}_${this.id}`})
+        .findOne((e) => {
+          this.$set(this, 'model', e.data)
+        }, this.id)
     }
+  },
+
+  created() {
+    this.id = this.$route.params.id
+    this.fetchData()
   }
 }

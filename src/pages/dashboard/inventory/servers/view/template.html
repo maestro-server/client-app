@@ -11,23 +11,8 @@
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">
-    <displayer class="col-sm-2 col-xs-4 mt20" :type="activeShow">
-      <h4 class="white">{{model.status || 'Active'}}</h4>
-    </displayer>
-    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.environment">
-      <h4 class="white">{{model.environment}}</h4>
-    </displayer>
-    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.role">
-      <h4 class="white">{{model.role}}</h4>
-    </displayer>
-    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="existGet(model, 'os.base')">
-      <h4 class="white">{{model.os.base}}</h4>
-    </displayer>
-    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="existGet(model, 'datacenters.name')">
-      <h4 class="white">{{model.datacenters.name}}</h4>
-    </displayer>
-    <displayer class="col-sm-2 col-xs-4 mt20" type="info" v-if="model.ipv4_private">
-      <h4 class="white">{{model.ipv4_private}}</h4>
+    <displayer class="col-sm-2 col-xs-4 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'" v-if="item.val">
+      <h4 class="white">{{item.val}}</h4>
     </displayer>
   </div>
 
