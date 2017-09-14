@@ -9,9 +9,7 @@ export default {
   data: function () {
     return {
       id: null,
-      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, datacenters:{name:null}, active:true},
-      team: false,
-      showJson:false
+      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, datacenters:{name:null}, active:true}
     }
   },
 
@@ -38,51 +36,29 @@ export default {
       return _.get(key, path, false)
     },
 
-    isObject: function (value) {
-      return _.isPlainObject(value);
-    },
-
-    isArray: function (value) {
-      return _.isArray(value);
-    },
-
-    isString: function (value) {
-      return _.isString(value);
-    },
-
-    editE: function (entity, index=0) {
-      const {team} = this
-
+    edit: function (index=0) {
       this.MCreate
         .setTabShow(index)
-        .onFinishCallBack(() => this.fetchData(entity._id))
-        .show(_.merge(entity, {team}))
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
     },
 
-    deleteE: function (entity) {
-      const {team} = this
-
+    del: function () {
       this.MDelete
         .onFinishCallBack(() => this.$router.push({name: 'servers'}))
-        .show(_.merge(entity, {team}))
+        .show(this.model)
     },
 
-    fetchData: function (id) {
-      FectherEntity(Servers)({k: 'server_' + id})
+    fetchData: function () {
+      FectherEntity(Servers)({k: 'server_' + this.id})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
-        }, id)
+        }, this.id)
     }
   },
 
   created() {
-    this.fetchData(this.$route.params.id)
-
-    if (_.has(this.$route, 'query.team_id')) {
-      this.team = {
-        '_id': this.$route.query.team_id,
-        'name': this.$route.query.team_name
-      }
-    }
+    this.id = this.$route.params.id
+    this.fetchData()
   }
 }

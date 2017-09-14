@@ -11,7 +11,7 @@
 
     <ul v-if="basket.length > 0" class="list-group">
       <li class="list-group-item" v-for="item, i in basket">
-        <slot name="view"  :item="item"></slot>
+        <slot name="view" :item="item"></slot>
         <button class="btn btn-danger btn-xs pull-right" @click.prevent.stop="del(i)"><i
           class="fa fa-trash" aria-hidden="true"></i></button>
       </li>

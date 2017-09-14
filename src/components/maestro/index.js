@@ -6,9 +6,13 @@ import imager from './imager/Imager.vue'
 import jsonTree from './jsontree/TreeView.vue'
 import treeViewItem from './jsontree/TreeViewItem.vue'
 import createrList from './createrList/CreaterList.vue'
+import infoView from './infoView/InfoView.vue'
+import createrConfigList from './createrConfigList/CreaterConfigList.vue'
 
 let components = {
+  createrConfigList,
   createrList,
+  infoView,
   callback,
   uploader,
   jsonTree,

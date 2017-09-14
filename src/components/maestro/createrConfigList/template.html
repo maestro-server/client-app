@@ -1,0 +1,22 @@
+<div>
+  <div class="col-xs-12">
+    <h3><i class="fa" :class="icons" aria-hidden="true"></i> {{label}}s
+      <bs-label type="default" class="pull-right" v-if="basket">{{basket.length}}</bs-label>
+    </h3>
+
+    <ul class="list-group">
+      <li class="list-group-item" v-for="item in basket">
+        <slot name="view" :item="item">{{item.name}}</slot>
+
+        <div class="pull-right">
+          <button class="btn btn-success btn-xs" @click.prevent="callConfig(item)"><i
+            class="fa  fa-cog" aria-hidden="true"></i></button>
+        </div>
+      </li>
+    </ul>
+
+    <button class="btn btn-primary pull-right" @click.prevent="callEdit"><i
+      class="fa" :class="icons" aria-hidden="true"></i> Manage {{label}}
+    </button>
+  </div>
+</div>

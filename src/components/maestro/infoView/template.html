@@ -1,0 +1,35 @@
+<div>
+  <h3><i class="fa fa-info" aria-hidden="true"></i> Info</h3>
+
+  <table class="table table-striped">
+    <tbody>
+
+    <tr v-for="item, key in data">
+      <th width="30%" class="text-capitalize">{{key}}:</th>
+      <td>
+
+        <template v-if="isArray(item)">
+          <ul class="pl0">
+            <li v-for="i2 in item">
+              <template v-for="i3, k in i2">
+                <strong>{{k}}: </strong> {{i3}}<br/>
+              </template>
+            </li>
+          </ul>
+        </template>
+
+        <template v-if="isObject(item)">
+          <template v-for="o1, ok in item">
+            <strong>{{ok}}: </strong> {{o1}}<br/>
+          </template>
+        </template>
+
+        <template v-if="isString(item)">
+          {{ item }}
+        </template>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

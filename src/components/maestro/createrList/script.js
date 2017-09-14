@@ -4,7 +4,7 @@ export default {
   props: {
     single: {},
     basket: {default: []},
-    label: {},
+    label: {type: String},
     fielder: {default: 'name'}
   },
 

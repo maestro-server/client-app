@@ -13,9 +13,7 @@ export default {
     },
 
     editSave () {
-      const k = 'server_'+this.model._id
-
-      FectherEntity(Servers)({k})
+      FectherEntity(Servers)({k: `server_${this.model._id}`})
         .remove(this.finishJob, this.model)
     }
   }
