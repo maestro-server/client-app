@@ -4,7 +4,8 @@ export default {
   props: {
     single: {},
     basket: {default: []},
-    label: {}
+    label: {},
+    fielder: {default: 'name'}
   },
 
   data: function () {
@@ -16,7 +17,7 @@ export default {
   methods: {
     add() {
       const stg = _.pickBy(this.single, _.identity)
-      const exist = _.find(this.basket, ['name', stg.name])
+      const exist = _.find(this.basket, [this.fielder, stg[this.fielder]])
 
       if (!_.isEmpty(stg) && !exist) {
         this.$emit('update:single', _.clone(this.reseter))

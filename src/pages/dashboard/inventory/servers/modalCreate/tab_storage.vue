@@ -1,5 +1,4 @@
 <template>
-
   <creater-list :single.sync="single" :basket="value" label="Storage" @update="updaterEdit">
     <template slot="forms">
       <bs-input form-type="horizontal" label="Name" v-model="single.name" name="name"
@@ -35,24 +34,14 @@
 <script>
  'use strict'
 
+ import TabCreaterList from 'mixins/tab-creater-list'
+
  export default {
+   mixins: [TabCreaterList],
 
    data: function () {
      return {
-       value: [],
        single: {name: null, size: null, root: null}
-     }
-   },
-
-   methods: {
-     updaterEdit(data) {
-       this.$set(this, 'value', data || [])
-       this.$emit('update', this.value)
-       this.errors.clear()
-     },
-
-     reset() {
-       this.value = []
      }
    }
 

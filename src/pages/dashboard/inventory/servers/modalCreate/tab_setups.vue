@@ -1,82 +1,38 @@
 <template>
-  <div>
-    <div id="baseServices">
-      <bs-select form-type="horizontal" :options="options" v-model="service.name" name="name"
-                 label="Service" data-vv-scope="service" v-validate.initial="'required'" search></bs-select>
-      <bs-input form-type="horizontal" v-model="service.version" name="version" label="Version"></bs-input>
-    </div>
+  <creater-list :single.sync="single" :basket="value" label="Setup" @update="updaterEdit">
 
-    <div class="text-center mt20">
-      <button class="btn btn-primary" type="button" name="button" @click.prevent="addServices"
-              :disabled="errors.any('service')"><i class="fa fa-plus-circle"></i> Service
-      </button>
-    </div>
+    <template slot="forms">
+      <bs-select form-type="horizontal" :options="options" v-model="single.name" name="name"
+                 label="Service" v-validate.initial="'required'" search></bs-select>
+      <bs-input form-type="horizontal" v-model="single.version" name="version" label="Version"></bs-input>
+    </template>
 
-    <div class="well row mt20">
-      <ul v-if="value.length > 0" class="list-group">
-        <li class="list-group-item" v-for="stg, i in value" :key="i">
-          {{stg.name}} <span v-if="stg.version">-></span>
-          <bs-label>{{stg.version}}</bs-label>
+    <template slot="view" scope="props">
+      {{props.item.name}} <span v-if="props.item.version">-></span>
+      <bs-label>{{props.item.version}}</bs-label>
+    </template>
 
-          <button class="btn btn-danger btn-xs pull-right" @click.prevent="deleteServices(i)"><i
-            class="fa fa-trash" aria-hidden="true"></i></button>
-        </li>
-      </ul>
-      <span v-if="value.length <= 0" class="col-xs-12 text-center">None service</span>
-      <bs-label v-if="value.length > 0" type="default">{{value.length}} Service<span
-        v-if="value.length > 1">s</span></bs-label>
-    </div>
-  </div>
+  </creater-list>
 </template>
 
 
 <script>
   'use strict'
 
+  import TabCreaterList from 'mixins/tab-creater-list'
+
   export default {
+    mixins: [TabCreaterList],
 
     props: {
       options: {}
     },
 
     data: function () {
-      const serviceTemplate = {service: null, version: null}
-
       return {
-        value: [],
-        resetService: serviceTemplate,
-        service: _.clone(serviceTemplate)
-      }
-    },
-
-    methods: {
-      addServices() {
-        const svc = _.pickBy(this.service, _.identity)
-        const exist = _.find(this.value, ['name', svc.name])
-
-        if(!exist) {
-          this.$set(this, 'service', _.clone(this.resetService))
-
-          this.value.push(svc)
-          this.$emit('update', _.get(this, 'value', []))
-        }
-      },
-
-      deleteServices(key) {
-        this.value.splice(key, 1)
-        this.$emit('update', _.get(this, 'value', []))
-      },
-
-      updaterEdit(data) {
-        this.$set(this, 'value', data || [])
-      },
-
-      reset() {
-        this.$set(this, 'service', _.clone(this.resetService))
-        this.value = []
+        single: {service: null, version: null}
       }
     }
-
   }
 
 </script>
