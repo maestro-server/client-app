@@ -14,8 +14,10 @@ class Factory {
     this.entity = e
     this.header = {}
     this.model =  model
+  }
 
-    store.dispatch('onSpinner')
+  getName() {
+    return this.constructor.name.toLowerCase()
   }
 
   getUrl() {
@@ -50,21 +52,21 @@ class Factory {
   get (call_success = fsuccess, call_rejected = frejected) {
     const params = this.model
 
-    Requester
+    Requester()
       .get(this.entity, {params}, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   create (call_success = fsuccess, call_rejected = frejected) {
-    Requester
+    Requester()
       .post(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
 
   update (call_success = fsuccess, call_rejected = frejected) {
-    Requester
+    Requester()
       .put(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
@@ -76,7 +78,7 @@ class Factory {
   }
 
   patch (call_success = fsuccess, call_rejected = frejected) {
-    Requester
+    Requester()
       .patch(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
@@ -88,7 +90,7 @@ class Factory {
   }
 
   delete (call_success = fsuccess, call_rejected = frejected) {
-    Requester
+    Requester()
       .delete(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))

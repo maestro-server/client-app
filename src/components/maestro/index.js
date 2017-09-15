@@ -8,15 +8,21 @@ import treeViewItem from './jsontree/TreeViewItem.vue'
 import createrList from './createrList/CreaterList.vue'
 import infoView from './infoView/InfoView.vue'
 import createrConfigList from './createrConfigList/CreaterConfigList.vue'
+import listBox from './listBox/ListBox.vue'
+import headerEntity from './headerEntity/HeaderEntity.vue'
+import headerViewEntity from './headerViewEntity/HeaderViewEntity.vue'
 
 let components = {
   createrConfigList,
+  headerViewEntity,
+  headerEntity,
   createrList,
   infoView,
   callback,
   uploader,
   jsonTree,
   treeViewItem,
+  listBox,
   loader,
   imager
 }

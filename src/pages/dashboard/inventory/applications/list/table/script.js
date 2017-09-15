@@ -46,7 +46,7 @@ export default {
   },
 
   created() {
-    FectherEntity(System)({k: 'system'})
+    FectherEntity(System)()
       .find(this.fetchData('lsystem'))
   }
 }

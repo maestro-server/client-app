@@ -8,7 +8,7 @@
   >
 
     <template slot="hostname" scope="props">
-      <router-link :to="'/dashboard/inventory/servers/single/'+props.row._id">{{props.row.hostname}}</router-link>
+      <router-link :to="{name: 'servers.single', params: { id: props.row._id }}">{{props.row.hostname}}</router-link>
     </template>
     <template slot="actions" scope="props">
       <div class="min-table">

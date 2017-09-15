@@ -2,7 +2,6 @@
   <div>
     <div class="row">
       <div class="col-xs-12">
-
         <div class="text-right">
           <router-link :to="{name: 'clients'}" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus-circle"></i> Clients</router-link>
         </div>
@@ -20,14 +19,10 @@
         ></typeahead>
 
         <hr>
-
-
       </div>
-
     </div>
 
     <div class="well row mt20">
-
       <ul v-if="value.length > 0" class="list-group">
         <li class="list-group-item row" v-for="item, i in value" :key="i">
           <div class="col-xs-10">
@@ -67,7 +62,7 @@
     data: function () {
 
       return {
-        URL: `${API_URL}/clients?query=`,
+        URL: `${API_URL}clients?query=`,
         template: "<b>{{item.name}}</b>",
         value: []
       }

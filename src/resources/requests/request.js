@@ -1,31 +1,36 @@
 'use strict'
 import caxios from './caxios'
+import store from 'src/store'
 
-const req = {
+const req = () => {
 
-  get: (entity, data={}, headers={}) => {
-    return caxios(headers)
-      .get(entity, data)
-  },
+  store.dispatch('onSpinner')
 
-  post: (entity, data={}, headers={}) => {
-    return caxios(headers)
-      .post(entity, data)
-  },
+  return {
+    get: (entity, data={}, headers={}) => {
+      return caxios(headers)
+        .get(entity, data)
+    },
 
-  put: (entity, data={}, headers={}) => {
-    return caxios(headers)
-      .put(entity, data)
-  },
+    post: (entity, data={}, headers={}) => {
+      return caxios(headers)
+        .post(entity, data)
+    },
 
-  patch: (entity, data={}, headers={}) => {
-    return caxios(headers)
-      .patch(entity, data)
-  },
+    put: (entity, data={}, headers={}) => {
+      return caxios(headers)
+        .put(entity, data)
+    },
 
-  delete: (entity, data={}, headers={}) => {
-    return caxios(headers)
-      .delete(entity, {data})
+    patch: (entity, data={}, headers={}) => {
+      return caxios(headers)
+        .patch(entity, data)
+    },
+
+    delete: (entity, data={}, headers={}) => {
+      return caxios(headers)
+        .delete(entity, {data})
+    }
   }
 
 }

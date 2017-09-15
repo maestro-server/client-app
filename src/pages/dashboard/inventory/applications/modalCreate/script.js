@@ -1,10 +1,9 @@
 'use strict'
-// import _ from 'lodash'
+
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Applications from 'factories/applications'
 import Adminer from 'factories/adminer'
-import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
 
 import tabTags from './tab_tags'
@@ -26,7 +25,6 @@ export default {
 
   data () {
     return {
-      tabShow:0,
       app: {
         name: null, description: null,
         environment: null, system: [],
@@ -52,22 +50,23 @@ export default {
   },
 
   methods: {
-    setTabShow (index) {
-      this.tabShow = index
-      return this
-    },
-
     afterShow () {
       this.text.title =  this.create ? 'Create new Applications' : `Edit ${this.model.name} applications`
+    },
 
-      this.create ? this.resetApp() : this.editLoad()
+    createLoad () {
+      this.tabShow=0
+      this.app = {}
+      this.tab_role.reset()
+      this.tab_servers.reset()
+      this.tab_deploy.reset()
+      this.tab_tags.reset()
+      this.tab_system.reset()
     },
 
     editLoad () {
-      const {_id} = this.model
-
       if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)({k: 'app_server_'+_id})
+        FectherEntity(Servers)()
           .find((e) => {
             this.tab_servers.updaterEdit(_.get(e, 'data.items', []))
           }, {_id: this.model.servers})
@@ -80,16 +79,6 @@ export default {
       this.tab_system.updaterEdit(this.model.system)
     },
 
-    resetApp() {
-      this.tabShow=0
-      this.app = {}
-      this.tab_role.reset()
-      this.tab_servers.reset()
-      this.tab_deploy.reset()
-      this.tab_tags.reset()
-      this.tab_system.reset()
-    },
-
     setupModel () {
       this.model = _.pickBy(this.app, _.identity)
     },
@@ -97,35 +86,20 @@ export default {
     createSave () {
       this.setupModel()
 
-      new Applications(this.model)
-      .authorization()
-      .create(this.finishJob)
+      FectherEntity(Applications)()
+        .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
 
-      FectherEntity(Applications)({k: 'application_'+this.model._id})
+      FectherEntity(Applications)()
         .update(this.finishJob, this.model)
     },
 
-    setTeam(item) {
-      this.$set(this.model, 'team', item)
-      return this
-    },
-
-    teamSelected(item) {
-      this.setTeam(item)
-      this.model.input = ""
-    },
-
     fetchData() {
-      FectherEntity(Adminer)({k: 'app_options', persistence: 'local', time: 2840})
+      FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key: 'app_options'})
-    },
-
-    fetchAdminer (e) {
-      _.assign(this.options, formatAdminer(e))
     }
 
   },

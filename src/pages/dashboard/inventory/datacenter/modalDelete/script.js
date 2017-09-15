@@ -12,9 +12,7 @@ export default {
     },
 
     editSave () {
-      const k = 'datacenter_'+this.model._id
-
-      FectherEntity(Datacenters)(this)({k})
+      FectherEntity(Datacenters)(this)()
         .remove(this.finishJob, this.model)
     }
   }

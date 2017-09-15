@@ -1,15 +1,9 @@
 <div>
   <div class="pb10">
-    <h3 class="col-xs-8 pb10">
-      {{title}}
-    </h3>
-    <div class="col-xs-4 pb10 mt20">
-      <button class="btn btn-primary pull-right" @click="addE">New application</button>
-    </div>
+    <header-entity @add="addE" label="Application"></header-entity>
   </div>
 
   <div class="col-xs-12">
     <sv-table ref="svTable"></sv-table>
   </div>
-
 </div>

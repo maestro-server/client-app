@@ -5,7 +5,7 @@ import FactoryTenant from './factoryTenant'
 class Projects extends FactoryTenant {
 
   constructor(model={}, tenant=false) {
-    super(model, "/projects", tenant)
+    super(model, "projects", tenant)
   }
 }
 

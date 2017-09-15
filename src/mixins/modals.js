@@ -1,5 +1,6 @@
 'use strict'
 import _ from 'lodash'
+import formatAdminer from 'src/resources/libs/formatAdminerData'
 
 export default {
   data () {
@@ -61,6 +62,10 @@ export default {
     finishJob () {
       this.callback(this.model)
       this.closed()
+    },
+
+    fetchAdminer (e) {
+      _.assign(this.options, formatAdminer(e))
     }
 
   }

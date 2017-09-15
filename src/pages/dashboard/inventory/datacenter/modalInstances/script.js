@@ -1,7 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import svTable from './table'
+import svTable from './table/table'
 
 export default {
   mixins: [Modals],

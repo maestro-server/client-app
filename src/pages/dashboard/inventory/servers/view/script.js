@@ -10,7 +10,6 @@ export default {
 
   data: function () {
     return {
-      key: 'servers',
       entity: Servers,
       model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, datacenters:{name:null}, active:true}
     }

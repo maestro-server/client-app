@@ -5,7 +5,7 @@ import Factory from './factory'
 class Adminer extends Factory {
 
   constructor(model={}) {
-    super(model, "/adminer")
+    super(model, "adminer")
   }
 }
 

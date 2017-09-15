@@ -6,26 +6,21 @@ import Applications from 'factories/applications'
 import FectherEntity from 'services/fetchEntity'
 import CacheManager from 'services/cacheManager'
 
+import ViewSingle from 'mixins/view-single'
+
 export default {
+  mixins: [ViewSingle],
 
   data: function () {
     return {
-      id: null,
-      model: {tags: [], clients:[], check: [], list_apps:[]},
-      team: false,
-      showJson:false
+      entity: System,
+      model: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []}
     }
   },
 
   computed: {
-    MCreate() {
-      return this.$parent.$refs.modal_create
-    },
     MMembers() {
       return this.$parent.$refs.modal_members
-    },
-    MDelete() {
-      return this.$parent.$refs.modal_delete
     },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'clients', 'list_apps', 'teams'])
@@ -33,76 +28,23 @@ export default {
   },
 
   methods: {
-    existGet(key, path) {
-      return _.get(key, path, false)
-    },
-
-    isObject: function (value) {
-      return _.isPlainObject(value);
-    },
-
-    isArray: function (value) {
-      return _.isArray(value);
-    },
-
-    isString: function (value) {
-      return _.isString(value);
-    },
-
-
-    editE: function (entity, index=0) {
-      const {team} = this
-
-      this.MCreate
-        .setTabShow(index)
-        .onFinishCallBack(() => this.fetchData(entity._id, true))
-        .show(_.merge(entity, {team}))
-    },
-
-    editM: function (entity) {
-      const {team} = this
-
+    editM: function () {
       this.MMembers
-        .onFinishCallBack(CacheManager({k: `system_app_${this.model._id}`}).remove)
-        .show(_.merge(entity, {team}))
+        .onFinishCallBack(CacheManager({k: `applications_${this.model._id}_system._id`}).remove)
+        .show(this.model)
     },
 
-    deleteE: function (entity) {
-      const {team} = this
-
-      this.MDelete
-        .onFinishCallBack(() => this.$router.push({name: 'system'}))
-        .show(_.merge(entity, {team}))
-    },
-
-    fetchData: function (id) {
-      if (id) {
-        FectherEntity(System)({k: 'system_' + id})
-          .findOne((e) => {
-            this.$set(this, 'model', e.data)
-          }, id)
-      }
-    },
-
-    fetchApps(id, force = true) {
-      if (id) {
-        FectherEntity(Applications)({k: 'system_app_'+id, force})
+    fetchApps(force = true) {
+      if (this.id) {
+        FectherEntity(Applications)({force})
           .find((e) => {
             this.$set(this.model, 'list_apps', _.get(e, 'data.items', []))
-          }, {"system._id": id})
+          }, {"system._id": this.id})
       }
     }
   },
 
   created() {
-    this.fetchData(this.$route.params.id)
-    this.fetchApps(this.$route.params.id)
-
-    if (_.has(this.$route, 'query.team_id')) {
-      this.team = {
-        '_id': this.$route.query.team_id,
-        'name': this.$route.query.team_name
-      }
-    }
+    this.fetchApps()
   }
 }

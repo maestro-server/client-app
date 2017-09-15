@@ -5,7 +5,8 @@ export default {
     single: {},
     basket: {default: []},
     label: {type: String},
-    fielder: {default: 'name'}
+    fielder: {default: 'name'},
+    showAddBtn: {default: true, type: Boolean}
   },
 
   data: function () {

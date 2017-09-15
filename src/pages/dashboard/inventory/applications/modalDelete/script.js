@@ -12,9 +12,7 @@ export default {
     },
 
     editSave () {
-      const k = 'application_'+this.model._id
-
-      FectherEntity(Applications)(this)({k})
+      FectherEntity(Applications)(this)()
         .remove(this.finishJob, this.model)
     }
   }

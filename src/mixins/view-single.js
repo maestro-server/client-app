@@ -27,13 +27,15 @@ export default {
     },
 
     del: function () {
+      const call = this.rollbackRoute || this.entity.name.toLowerCase()
+
       this.MDelete
-        .onFinishCallBack(() => this.$router.push({name: this.key}))
+        .onFinishCallBack(() => this.$router.push({name: call}))
         .show(this.model)
     },
 
     fetchData: function () {
-      FectherEntity(this.entity)({k: `${this.key}_${this.id}`})
+      FectherEntity(this.entity)()
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, this.id)

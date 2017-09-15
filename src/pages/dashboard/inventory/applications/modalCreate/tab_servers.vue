@@ -73,7 +73,7 @@
     data: function () {
 
       return {
-        URL: `${API_URL}/servers?query=`,
+        URL: `${API_URL}servers?query=`,
         value: [],
         clearValue: [],
         template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +

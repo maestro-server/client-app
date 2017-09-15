@@ -1,0 +1,11 @@
+<div>
+  <h3 class="col-xs-7 pb10">
+    {{label}} - <span class="text-capitalize">{{name}}</span>
+  </h3>
+  <div class="col-xs-5 pb10 mt20 text-right">
+    <button class="btn btn-warning" @click="edit">Edit ACL</button>
+    <button class="btn btn-success" @click="edit">Edit <span class="text-capitalize">{{name}}</span>
+    </button>
+    <button class="btn btn-danger" @click="del">Delete {{label}}</button>
+  </div>
+</div>

@@ -67,7 +67,7 @@
     data: function () {
 
       return {
-        URL_SYSTEM: `${API_URL}/system?query=`,
+        URL_SYSTEM: `${API_URL}system?query=`,
         template: "<b>{{item.name}}</b>",
         value: [],
         clearValue: []

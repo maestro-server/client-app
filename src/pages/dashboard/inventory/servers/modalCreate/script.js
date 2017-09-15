@@ -3,7 +3,6 @@ import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
-import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
 
 import tabDatacenter from './tab_datacenter'
@@ -79,7 +78,7 @@ export default {
 
     editLoad () {
       const {_id} = this.model
-      FectherEntity(Servers)({k: 'server_'+_id})
+      FectherEntity(Servers)()
       .findOne((e) => {
         this.model = e.data
         this.$set(this, 'server', this.model)
@@ -103,23 +102,19 @@ export default {
     createSave () {
       this.setupModel()
 
-      FectherEntity(Servers)({k: 'server'})
+      FectherEntity(Servers)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
-      FectherEntity(Servers)({k: 'server_'+this.model._id})
+      FectherEntity(Servers)()
         .update(this.finishJob, this.model)
     },
 
     fetchData() {
-      FectherEntity(Adminer)({k: 'server_options', persistence: 'local'})
+      FectherEntity(Adminer)({persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})
-    },
-
-    fetchAdminer (e) {
-      this.options = formatAdminer(e)
     }
   },
 

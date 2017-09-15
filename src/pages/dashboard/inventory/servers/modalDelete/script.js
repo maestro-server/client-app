@@ -13,7 +13,7 @@ export default {
     },
 
     editSave () {
-      FectherEntity(Servers)({k: `server_${this.model._id}`})
+      FectherEntity(Servers)()
         .remove(this.finishJob, this.model)
     }
   }

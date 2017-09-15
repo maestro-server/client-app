@@ -28,36 +28,21 @@ export default {
 
   watch: {
     region (val) {
-      this.addRegions(val)
+      this.addItems(val, 'regions')
     },
     zone (val) {
-      this.addZones(val)
+      this.addItems(val, 'zones')
     }
   },
 
   methods: {
-    changeProvider(bool) {
-      this.provider = null
-      this.ownProvider = bool
-      this.resetDC()
-    },
-
-    resetDC() {
-      this.regions = []
-      this.zones = []
-    },
-
-    setupModel () {
-      this.model.regions = this.regions
-      this.model.zones = this.zones
-      this.model.provider = this.provider
-      this.model.metas = {ownProvider: this.ownProvider}
-    },
-
     afterShow () {
       this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
+    },
 
-      this.create ? this.resetDC() : this.editLoad()
+    createLoad () {
+      this.regions = []
+      this.zones = []
     },
 
     editLoad () {
@@ -67,63 +52,59 @@ export default {
       this.$set(this, 'ownProvider', this.model.metas.ownProvider)
     },
 
+    setupModel () {
+      this.model.regions = this.regions
+      this.model.zones = this.zones
+      this.model.provider = this.provider
+      this.model.metas = {ownProvider: this.ownProvider}
+    },
+
     createSave () {
       this.setupModel()
 
-      new Datacenters(this.model)
-        .authorization()
-        .create(this.finishJob)
+      FectherEntity(Datacenters)()
+        .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
 
-      FectherEntity(Datacenters)({k: 'datacenter_'+this.model._id})
+      FectherEntity(Datacenters)()
         .update(this.finishJob, this.model)
     },
 
-    setTeam(item) {
-      this.$set(this.model, 'team', item)
-      return this
+    changeProvider(bool) {
+      this.provider = null
+      this.ownProvider = bool
+      this.createLoad()
     },
 
-    teamSelected(item) {
-      this.setTeam(item)
-      this.model.input = ""
+    addItems(item, entity) {
+      const exist = _.filter(this[entity], e=>e==item).length
+      if (entity && !exist) {
+        this[entity].push(item)
+      }
     },
 
+    clearItems(data) {
+      if(data != this.provider) {
+        this.zones = []
+        this.regions = []
+      }
+    },
+
+    addItemToTmpList(path) {
+      this[path] = []
+      this[`showModal${path.toUpperCase()}`] = false
+    },
     /*
     Regions functions
      */
-
     setupModalRegions() {
       this.showModalRegions = true
       this.options.regions = []
       if (this.options.baser.hasOwnProperty(this.provider)) {
         this.options.regions = this.options.baser[this.provider].map(e => e.region)
-      }
-    },
-
-    addRegions(region) {
-      const exist = _.filter(this.regions, e=>e==region).length
-      if (region && !exist) {
-        this.regions.push(region)
-      }
-    },
-
-    addTegionT() {
-      this.addRegions(this.regionT)
-      this.regionT=null
-    },
-
-    deleteRegions(key) {
-      this.regions.splice(key, 1)
-    },
-
-    clearRegions(data) {
-      if(data != this.provider) {
-        this.zones = []
-        this.regions = []
       }
     },
 
@@ -149,37 +130,12 @@ export default {
       }
       this.zones = arr
       this.options.zones = _.clone(arr)
-    },
-
-    addZones(zone) {
-      const exist = _.filter(this.zones, e=>e==zone).length
-      if (zone && !exist) {
-        this.zones.push(zone)
-      }
-    },
-
-    addZoneT() {
-      this.addZones(this.zoneT)
-      this.zoneT=null
-    },
-
-    deleteZones(key) {
-      this.zones.splice(key, 1)
-    },
-
-    clearZones() {
-      this.zones = []
-      this.showModalZones = false
-    },
-
-    fetchAdminer (e) {
-      _.assign(this.options, formatAdminer(e))
-    },
+    }
 
   },
 
   created () {
-    FectherEntity(Adminer)({k: 'datacenter_options', persistence: 'local', time: 42400})
+    FectherEntity(Adminer)({persistence: 'local', time: 42400})
     .find(this.fetchAdminer, {key: 'datacenter_options'})
   }
 

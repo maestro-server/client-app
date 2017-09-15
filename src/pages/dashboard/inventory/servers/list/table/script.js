@@ -50,10 +50,10 @@ export default {
   },
 
   created() {
-    FectherEntity(Adminer)({k: 'server_options', persistence: 'local'})
+    FectherEntity(Adminer)({persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})
 
-    FectherEntity(Datacenters)({k: 'datacenter'})
+    FectherEntity(Datacenters)()
       .find(this.fetchData('datacenters'))
   }
 }

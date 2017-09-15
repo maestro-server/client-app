@@ -1,0 +1,37 @@
+<div>
+  <panel v-for="item, i in items" :key="i">
+    <div class="col-xs-4">
+      <slot name="header" :item="item">
+        <h3 class="mt0">
+          {{item.name}}
+        </h3>
+      </slot>
+
+      <button class="btn btn-primary btn-xs" @click.stop="edit(item)">
+        <i class="fa fa-pencil" aria-hidden="true"></i> Edit {{label}}
+      </button>
+      <button class="btn btn-danger btn-xs" @click.stop="del(item)">
+        <i class="fa fa-trash" aria-hidden="true"></i> Delete {{label}}
+      </button>
+    </div>
+    <div class="col-xs-8 text-right">
+      <slot name="info" :item="item"></slot>
+    </div>
+  </panel>
+
+
+  <div class="text-center">
+    <pagination :total_pages="total_pages" :current_page="current_page"
+                @changePage="changePage"></pagination>
+  </div>
+
+  <div class="text-center" v-if="items.length == 0">
+    <well>
+      <h4>You dont have any {{label}}, Do you like to create one?</h4>
+      <hr/>
+      <button class="btn btn-primary btn-lg" @click.stop="addE">Create new {{label}}</button>
+
+    </well>
+  </div>
+
+</div>

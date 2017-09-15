@@ -1,149 +1,37 @@
 <div>
   <div class="pb10">
-    <h3 class="col-xs-7 pb10">
-      System - <span class="text-capitalize">{{model.name}}</span>
-    </h3>
-    <div class="col-xs-5 pb10 mt20 text-right">
-      <button class="btn btn-warning" @click="editE(model)">Edit ACL</button>
-      <button class="btn btn-success" @click="editE(model)">Edit <span class="text-capitalize">{{model.name}}</span>
-      </button>
-      <button class="btn btn-danger" @click="deleteE(model)">Delete app</button>
-    </div>
+    <header-view-entity label="System" :name="model.name" @del="del" @edit="edit()"></header-view-entity>
   </div>
 
   <div class="col-xs-6">
-    <h3><i class="fa fa-info" aria-hidden="true"></i> Info</h3>
-
-    <table class="table table-striped">
-      <tbody>
-
-      <tr v-for="item, key in filtered">
-        <th width="30%" class="text-capitalize">{{key}}:</th>
-        <td>
-
-          <template v-if="isArray(item)">
-            <ul class="pl0">
-              <li v-for="i2 in item">
-                <template v-for="i3, k in i2">
-                  <strong>{{k}}: </strong> {{i3}}<br/>
-                </template>
-              </li>
-            </ul>
-          </template>
-
-          <template v-if="isObject(item)">
-            <template v-for="o1, ok in item">
-              <strong>{{ok}}: </strong> {{o1}}<br/>
-            </template>
-          </template>
-
-          <template v-if="isString(item)">
-            {{ item }}
-          </template>
-        </td>
-      </tr>
-
-      </tbody>
-    </table>
+    <info-view :data="filtered"></info-view>
   </div>
 
   <div class="col-xs-6">
 
-    <div class="col-xs-12">
-      <h3><i class="fa fa-superpowers" aria-hidden="true"></i> Applications
-        <bs-label type="default" class="pull-right" v-if="model.list_apps">{{model.list_apps.length}}</bs-label>
-      </h3>
+    <creater-config-list label="Application" :basket="model.list_apps" @edit="editM" icons="fa-superpowers">
+      <template slot="view" scope="props">
+        <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+        <h5 class='ft15 inline'>
+          <bs-label type='default' v-if='props.item.family'>{{props.item.family}}</bs-label>
+          <bs-label type='default' v-if='props.item.spec'>{{props.item.spec.role}}</bs-label>
+        </h5>
+      </template>
+    </creater-config-list>
 
-      <ul class="list-group">
-        <li class="list-group-item" v-for="item in model.list_apps">
-          <div class="row">
-            <div class="col-xs-10">
-              <b class="text-capitalize">{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span>
-              <h5 class='ft15 inline'>
-                <bs-label type='default' v-if='item.family'>{{item.family}}</bs-label>
-                <bs-label type='default' v-if='item.spec'>{{item.spec.role}}</bs-label>
-              </h5>
-            </div>
+    <creater-config-list label="Client" :basket="model.clients" @edit="edit" :index="2" icons="fa-user-o"></creater-config-list>
 
-            <div class="col-xs-2 text-right">
-              <button class="btn btn-success btn-xs" @click.prevent="deleteAuth(index)"><i
-                class="fa fa-cog" aria-hidden="true"></i></button>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <creater-config-list label="Link" :basket="model.check" @edit="edit" :index="3" icons="fa-link">
+      <template slot="view" scope="props">
+        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
+      </template>
+    </creater-config-list>
 
-      <button class="btn btn-primary pull-right" @click.prevent="editM(model)"><i
-        class="fa fa-superpowers" aria-hidden="true"></i> Manage Applications
-      </button>
-    </div>
-
-    <div class="col-xs-12">
-      <h3><i class="fa fa-user-o" aria-hidden="true"></i> Clients
-        <bs-label type="default" class="pull-right" v-if="model.deploy">{{model.clients.length}}</bs-label>
-      </h3>
-
-      <ul class="list-group">
-        <li class="list-group-item" v-for="stg in model.clients">
-          {{stg.name}}
-
-          <div class="pull-right">
-            <button class="btn btn-success btn-xs" @click.prevent="deleteAuth(index)"><i
-              class="fa fa-cog" aria-hidden="true"></i></button>
-
-          </div>
-
-        </li>
-      </ul>
-
-      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 2)"><i
-        class="fa fa-user-o" aria-hidden="true"></i> Manage Clients
-      </button>
-    </div>
-
-
-    <div class="col-xs-12">
-      <h3><i class="fa fa-link" aria-hidden="true"></i> Links
-        <bs-label type="default" class="pull-right" v-if="model.check">{{model.check.length}}</bs-label>
-      </h3>
-
-      <ul class="list-group">
-        <li class="list-group-item" v-for="stg in model.check">
-          <bs-label>{{stg.key}}</bs-label>
-          - {{stg.value}}
-
-          <div class="pull-right">
-            <button class="btn btn-success btn-xs" @click.prevent="deleteAuth(index)"><i
-              class="fa fa-cog" aria-hidden="true"></i></button>
-
-          </div>
-
-        </li>
-      </ul>
-
-      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 1)"><i
-        class="fa fa-link" aria-hidden="true"></i> Manage Links
-      </button>
-    </div>
-
-
-    <div class="col-xs-12">
-      <h3><i class="fa fa-tags" aria-hidden="true"></i> Tags
-        <bs-label type="default" class="pull-right" v-if="model.tags">{{model.tags.length}}</bs-label>
-      </h3>
-
-      <ul class="list-group">
-        <li class="list-group-item" v-for="stg in model.tags">
-          <bs-label>{{stg.key}}</bs-label>
-          - {{stg.value}}
-        </li>
-      </ul>
-
-      <button class="btn btn-primary pull-right" @click.prevent="editE(model, 3)"><i
-        class="fa fa-tags" aria-hidden="true"></i> Manage Tags
-      </button>
-    </div>
-
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags">
+      <template slot="view" scope="props">
+        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
+      </template>
+    </creater-config-list>
 
   </div>
 

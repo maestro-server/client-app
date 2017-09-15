@@ -1,7 +1,5 @@
 'use strict'
 
-import titleTenant from 'src/resources/libs/formatTitleTenant'
-
 export default {
   data: function () {
     return {
@@ -17,9 +15,6 @@ export default {
     },
     MDelete() {
       return this.$parent.$refs.modal_delete
-    },
-    title() {
-      return titleTenant(this.name, 'My '+this.name)
     }
   },
 
