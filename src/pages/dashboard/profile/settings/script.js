@@ -8,7 +8,6 @@ import FectherEntity from 'services/fetchEntity'
 
 
 export default {
-
   data: function () {
     return {
       cemail: null,
@@ -27,22 +26,22 @@ export default {
     ]),
 
     me () {
-      FectherEntity(Me)({k: 'me'})
+      FectherEntity(Me)()
         .find((e) => _.merge(this.model, e.data))
     },
 
     updateProfile () {
       const data = _.omit(this.model, 'email')
 
-      FectherEntity(Me)({k: 'me'})
+      FectherEntity(Me)()
         .update(this.finishJob, data, '?')
     },
 
     updateEmail () {
       const email = this.cemail
 
-      FectherEntity(Me)({k: 'me'})
-        .update(() => {this.model.email = email}, {email}, '?')
+      FectherEntity(Me)()
+        .update(() => this.model.email = email, {email}, '?')
     },
 
     updatePassWord () {
@@ -57,10 +56,5 @@ export default {
 
   mounted () {
     this.me()
-    this.setPage([
-      'Settings',
-      'Profile, plan and billing',
-      'fa-user'
-    ])
   }
 }
