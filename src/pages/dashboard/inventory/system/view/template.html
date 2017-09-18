@@ -8,8 +8,7 @@
   </div>
 
   <div class="col-xs-6">
-
-    <creater-config-list label="Application" :basket="model.list_apps" @edit="editM" icons="fa-code">
+    <creater-config-list label="Application" :basket="list_apps" @edit="editM" icons="fa-code">
       <template slot="view" scope="props">
         <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
         <h5 class='ft15 inline'>

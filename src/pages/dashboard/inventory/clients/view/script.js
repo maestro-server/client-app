@@ -14,7 +14,7 @@ export default {
   data: function () {
     return {
       entity: Clients,
-      model: {tags: [], contacts:[], list_system:[]},
+      model: {tags: [], contacts:[]},
       list_system: []
     }
   },
@@ -30,16 +30,21 @@ export default {
 
   methods: {
     editM: function () {
+      const {list_system} = this
+
       this.MMembers
-        .onFinishCallBack(CacheManager({k: `client_system_${this.model._id}`}).remove)
-        .show(this.model)
+        .onFinishCallBack((e)=>{
+          this.$set(this, 'list_system', _.get(e, 'list_system', []))
+          CacheManager({k: `client_system_${this.model._id}`}).remove()
+        })
+        .show(_.merge(this.model, {list_system}))
     },
 
     fetchSystem(force = true) {
       if (this.id) {
         FectherEntity(System)({force})
           .find((e) => {
-            this.$set(this.model, 'list_system', _.get(e, 'data.items', []))
+            this.$set(this, 'list_system', _.get(e, 'data.items', []))
           }, {"clients._id": this.id})
       }
     }

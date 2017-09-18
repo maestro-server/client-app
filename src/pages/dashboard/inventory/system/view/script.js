@@ -14,6 +14,7 @@ export default {
   data: function () {
     return {
       entity: System,
+      list_apps: [],
       model: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []}
     }
   },
@@ -29,16 +30,21 @@ export default {
 
   methods: {
     editM: function () {
+      const {list_apps} = this
+
       this.MMembers
-        .onFinishCallBack(CacheManager({k: `applications_${this.model._id}_system._id`}).remove)
-        .show(this.model)
+        .onFinishCallBack((e)=>{
+          this.$set(this, 'list_apps', _.get(e, 'list_apps', []))
+          CacheManager({k: `applications_${this.model._id}_system._id`}).remove()
+        })
+        .show(_.merge(this.model, {list_apps}))
     },
 
     fetchApps(force = true) {
       if (this.id) {
         FectherEntity(Applications)({force})
           .find((e) => {
-            this.$set(this.model, 'list_apps', _.get(e, 'data.items', []))
+            this.$set(this, 'list_apps', _.get(e, 'data.items', []))
           }, {"system._id": this.id})
       }
     }
