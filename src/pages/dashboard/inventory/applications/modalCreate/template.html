@@ -16,15 +16,19 @@
               <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="app.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="app.description"
+              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
+                        v-model="app.description"
               ></bs-input>
 
-              <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment" name="environment"
-                         label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
+              <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment"
+                         name="environment"
+                         label="Environment*" v-validate.initial="'required'"
+                         :error="makeError('environment')"></bs-select>
 
-
-              <bs-select form-type="horizontal" search :options="options.languages" v-model="app.language" name="type" label="Language" placeholder="Code is?"></bs-select>
-              <bs-select form-type="horizontal" :options="options.clusters" v-model="app.cluster" name="type" label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>
+              <bs-select form-type="horizontal" search :options="options.languages" v-model="app.language" name="type"
+                         label="Language*" placeholder="Code is?"></bs-select>
+              <bs-select form-type="horizontal" :options="options.clusters" v-model="app.cluster" name="type"
+                         label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>
 
             </div>
 

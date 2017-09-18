@@ -1,67 +1,21 @@
 <template>
   <div>
-    <div>
-      <bs-select form-type="horizontal" :options="roles" v-model="deployer.role" name="role"
-                 label="Role*" v-validate.initial="'required'" @selected="updaterValue"></bs-select>
-      <hr>
+    <bs-select form-type="horizontal" :options="roles" v-model="role" name="role"
+               label="Role*" v-validate.initial="'required'" @selected="reset"></bs-select>
+    <hr>
 
-      <h5 class="mt0 text-center" v-if="deployer.role">{{deployer.role}} specification</h5>
+    <h5 class="mt0 text-center" v-if="role">{{role}} specification</h5>
 
-      <div v-if="deployer.role == 'Application'">
-        <bs-input class="mt20" form-type="horizontal" name="endpoint" label="Endpoint" v-model="deployer.endpoint"
-                  v-validate.initial="'url'" :error="makeError('endpoint')" @blur="updaterValue"></bs-input>
-
-        <bs-input form-type="horizontal" name="path" label="Code Path" v-model="deployer.path" placeholder="/var/www/myapp" @blur="updaterValue"></bs-input>
-
-        <bs-input form-type="horizontal" name="code" label="Command" v-model="deployer.command" placeholder="java -jar myapp.jar" @blur="updaterValue"></bs-input>
-
-        <bs-input type="textarea" form-type="horizontal" name="description" label="Notes" v-model="deployer.notes" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Worker'">
-        <bs-input form-type="horizontal" name="path" label="Code Path" v-model="deployer.path" placeholder="/var/www/myapp" @blur="updaterValue"></bs-input>
-
-        <bs-input form-type="horizontal" name="code" label="Command" v-model="deployer.command" placeholder="java -jar myapp.jar" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'LoadBalance'">
-        <bs-input class="mt20" form-type="horizontal" name="name" label="Name" v-model="deployer.name" @blur="updaterValue"></bs-input>
-
-        <bs-input class="mt20" form-type="horizontal" name="endpoint" label="Endpoint" v-model="deployer.endpoint"
-                  v-validate.initial="'url'" :error="makeError('endpoint')" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Jobs'">
-        <bs-input form-type="horizontal" name="cron" label="Cron" v-model="deployer.cron" placeholder="12 * * * *" @blur="updaterValue"></bs-input>
-
-        <bs-input form-type="horizontal" name="path" label="Code Path" v-model="deployer.path" placeholder="/var/www/myapp" @blur="updaterValue"></bs-input>
-
-        <bs-input form-type="horizontal" name="code" label="Command" v-model="deployer.command" placeholder="java -jar myapp.jar" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Service Discovery'">
-        <bs-input class="mt20" form-type="horizontal" name="name" label="Name" v-model="deployer.name" @blur="updaterValue"></bs-input>
-
-        <bs-input class="mt20" form-type="horizontal" name="endpoint" label="Endpoint" v-model="deployer.endpoint"
-                  v-validate.initial="'url'" :error="makeError('endpoint')" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Monitoring'">
-        <bs-input class="mt20" form-type="horizontal" name="name" label="Name" v-model="deployer.name" @blur="updaterValue"></bs-input>
-
-        <bs-input class="mt20" form-type="horizontal" name="endpoint" label="Endpoint" v-model="deployer.endpoint"
-                  v-validate.initial="'url'" :error="makeError('endpoint')" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Testing'">
-        <bs-input type="textarea" form-type="horizontal" name="description" label="Notes" v-model="deployer.notes" @blur="updaterValue"></bs-input>
-      </div>
-
-      <div v-if="deployer.role == 'Standard'">
-
-        <bs-input type="textarea" form-type="horizontal" name="description" label="Notes" v-model="deployer.notes" @blur="updaterValue"></bs-input>
-      </div>
-    </div>
+    <template v-for="form in forms">
+      <bs-input class="mt20" form-type="horizontal"
+                :name="form.name"
+                :label="form.label"
+                v-model="deployer[form.name]"
+                v-validate.initial="form.validate"
+                :error="makeError(form.name)"
+                @blur="updaterValue"
+      ></bs-input>
+    </template>
 
   </div>
 </template>
@@ -69,6 +23,7 @@
 
 <script>
   'use strict'
+  import _ from 'lodash'
 
   export default {
     props: {
@@ -79,20 +34,48 @@
       const resetDeployer = {role:null, name: null, id:null, link: null, notes:null}
 
       return {
+        role: 'Application',
         resetDeployer: resetDeployer,
-        deployer: _.clone(resetDeployer)
+        deployer: _.clone(resetDeployer),
+        mapper: {
+          'Application': [
+            {name: 'endpoint', label: 'Endpoint', validate: 'url'},
+            {name: 'path', label: 'Code Path', placeholder: '/var/www/myapp', validate: 'min:2'},
+            {name: 'code', label: 'Command', placeholder: 'java -jar myapp.jar', validate: 'min:2'},
+            {name: 'description', label: 'Notes', type: 'textarea', validate: 'min:2'}
+          ],
+          'Worker': [
+            {name: 'path', label: 'Code Path', placeholder: '/var/www/myapp', validate: 'min:2'},
+            {name: 'code', label: 'Command', placeholder: 'java -jar myapp.jar', validate: 'min:2'}
+          ],
+          'Jobs': [
+            {name: 'cron', label: 'Cron', placeholder: '12 * * * *', validate: 'min:9'},
+            {name: 'path', label: 'Code Path', placeholder: '/var/www/myapp', validate: 'min:2'},
+            {name: 'code', label: 'Command', placeholder: 'java -jar myapp.jar', validate: 'min:2'}
+          ],
+          'Testing': [
+            {name: 'description', label: 'Notes', type: 'textarea', validate: 'min:2'}
+          ],
+          'Standard': [
+            {name: 'description', label: 'Notes', type: 'textarea', validate: 'min:2'}
+          ]
+        }
+      }
+    },
+
+    computed: {
+      forms() {
+        const role = _.get(this, 'role')
+        return _.get(this.mapper, role, [])
       }
     },
 
     methods: {
       updaterValue() {
+        _.set(this.deployer, 'role', this.role)
         const dpp = _.pickBy(this.deployer, _.identity)
 
         this.$emit('update', dpp)
-      },
-
-      updaterEdit(data) {
-        this.deployer = _.assign({},this.resetDeployer,data)
       },
 
       reset() {
