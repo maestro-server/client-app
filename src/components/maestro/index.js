@@ -16,12 +16,12 @@ let components = {
   createrConfigList,
   headerViewEntity,
   headerEntity,
+  treeViewItem,
   modalDelete,
   createrList,
   infoView,
   callback,
   uploader,
-  treeViewItem,
   listBox,
   loader,
   imager

@@ -13,6 +13,15 @@ export default {
       this.$emit('update', this.value)
     },
 
+    onHit(item) {
+      const exist = _.find(this.value, ['_id', item._id])
+
+      if (!exist) {
+        this.value.push(item)
+        this.updaterEdit(this.value)
+      }
+    },
+
     reset() {
       this.value = []
     }
