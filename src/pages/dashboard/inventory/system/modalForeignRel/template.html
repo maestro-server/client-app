@@ -1,0 +1,48 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal">
+      <div class="col-xs-12">
+        <creater-list :basket="value" :label="label" :showAddBtn="false">
+
+          <template slot="forms">
+            <p>Insert all components of your system, applications, database, cache servers and more.</p>
+            <div class="col-xs-5">
+              <bs-select :options="options.apps" v-model="type" name="type"
+                         label="Component" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
+            </div>
+
+            <div class="col-xs-7">
+              <typeahead :label="label"
+                         placeholder="MyWebApp"
+                         :async="URL"
+                         async-key="items"
+                         :onSearch="requestSearch"
+                         :template="template_apps"
+                         :on-hit="onHit"
+                         class="col-xs-12"
+              ></typeahead>
+            </div>
+          </template>
+
+          <template slot="view" scope="props">
+            <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+            <span class='ft15 inline'>
+            <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>
+          </span>
+          </template>
+
+        </creater-list>
+      </div>
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

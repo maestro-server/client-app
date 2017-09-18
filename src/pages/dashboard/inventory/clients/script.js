@@ -1,13 +1,13 @@
 'use strict'
 
 import modalCreate from './modalCreate/create'
-import modalMembers from './modalMembers/create'
+import modalForeignRelation from './modalForeignRel/create'
 import Clients from 'factories/clients'
 
 export default {
   components: {
     modalCreate,
-    modalMembers
+    modalForeignRelation
   },
 
   data() {

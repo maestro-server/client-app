@@ -13,7 +13,7 @@
                 v-model="deployer[form.name]"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"
-                @blur="updaterValue"
+                @blur="updaterEdit"
       ></bs-input>
     </template>
 
@@ -71,7 +71,7 @@
     },
 
     methods: {
-      updaterValue() {
+      updaterEdit() {
         _.set(this.deployer, 'role', this.role)
         const dpp = _.pickBy(this.deployer, _.identity)
 

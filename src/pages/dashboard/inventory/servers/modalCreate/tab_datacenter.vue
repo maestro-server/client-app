@@ -75,17 +75,17 @@
 
 
     methods: {
+      fetchData: function () {
+        FectherEntity(Datacenters)()
+          .find(this.fetchDatacenter)
+      },
+
       fetchDatacenter(e) {
         const data = _.get(e, 'data.items')
         if (!_.isEmpty(data)) {
           this.options = data.map(item => ({value: item, label: item.name}))
           this.providers = this.options.map(d => d.label)
         }
-      },
-
-      fetchData: function () {
-        FectherEntity(Datacenters)({k: 'datacenter'})
-          .find(this.fetchDatacenter)
       },
 
       updateProvider: function (val) {

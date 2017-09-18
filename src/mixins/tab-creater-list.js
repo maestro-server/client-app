@@ -17,7 +17,8 @@ export default {
       const exist = _.find(this.value, ['_id', item._id])
 
       if (!exist) {
-        this.value.push(item)
+        const getters = _.isArray(this.filter) ? _.pick(item, this.filter) : item
+        this.value.push(getters)
         this.updaterEdit(this.value)
       }
     },

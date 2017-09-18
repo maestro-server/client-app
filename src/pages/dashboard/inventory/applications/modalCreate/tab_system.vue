@@ -21,10 +21,7 @@
     </template>
 
     <template slot="view" scope="props">
-      <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
-      <span class='ft15 inline'>
-        <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>
-      </span>
+      <b class="text-capitalize">{{props.item.name}}</b>
     </template>
 
   </creater-list>
@@ -44,6 +41,7 @@
       return {
         URL_SYSTEM: `${API_URL}system?query=`,
         template: "<b>{{item.name}}</b>",
+        filter: ['_id', 'name']
       }
     },
 
