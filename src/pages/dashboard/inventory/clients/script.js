@@ -1,13 +1,18 @@
 'use strict'
 
 import modalCreate from './modalCreate/create'
-import modalDelete from './modalDelete/delete'
 import modalMembers from './modalMembers/create'
+import Clients from 'factories/clients'
 
 export default {
   components: {
     modalCreate,
-    modalDelete,
     modalMembers
+  },
+
+  data() {
+    return {
+      entity: Clients
+    }
   }
 }

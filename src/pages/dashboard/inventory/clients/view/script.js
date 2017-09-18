@@ -14,7 +14,8 @@ export default {
   data: function () {
     return {
       entity: Clients,
-      model: {tags: [], contacts:[], list_system:[]}
+      model: {tags: [], contacts:[], list_system:[]},
+      list_system: []
     }
   },
 

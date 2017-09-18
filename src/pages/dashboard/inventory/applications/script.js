@@ -1,11 +1,16 @@
 'use strict'
 
 import modalCreate from './modalCreate/create'
-import modalDelete from './modalDelete/delete'
+import Applications from 'factories/applications'
 
 export default {
   components: {
-    modalCreate,
-    modalDelete
+    modalCreate
+  },
+
+  data() {
+    return {
+      entity: Applications
+    }
   }
 }

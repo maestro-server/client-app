@@ -5,78 +5,37 @@ import Applications from 'factories/applications'
 import Servers from 'factories/servers'
 import FectherEntity from 'services/fetchEntity'
 
+import ViewSingle from 'mixins/view-single'
+
 export default {
+  mixins: [ViewSingle],
 
   data: function () {
     return {
-      id: null,
+      entity: Applications,
       model: {tags: [], servers:[], deploy:[]},
-      list_servers: [],
-      team: false,
-      showJson:false
+      list_servers: []
     }
   },
 
   computed: {
-    MCreate() {
-      return this.$parent.$refs.modal_create
-    },
-    MDelete() {
-      return this.$parent.$refs.modal_delete
-    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
+    },
+    viewDisplayer() {
+      return [
+        {val: this.model.environment, type: 'primary'},
+        {val: this.model.language},
+        {val: _.get(this.model, 'os.name', false)},
+        {val: _.get(this.model, 'role.role', false)}
+      ]
     }
   },
 
   methods: {
-    existGet(key, path) {
-      return _.get(key, path, false)
-    },
-
-    isObject: function (value) {
-      return _.isPlainObject(value);
-    },
-
-    isArray: function (value) {
-      return _.isArray(value);
-    },
-
-    isString: function (value) {
-      return _.isString(value);
-    },
-
-
-    editE: function (entity, index=0) {
-      const {team} = this
-
-      this.MCreate
-        .setTabShow(index)
-        .onFinishCallBack(() => this.fetchData(entity._id))
-        .show(_.merge(entity, {team}))
-    },
-
-    deleteE: function (entity) {
-      const {team} = this
-
-      this.MDelete
-        .onFinishCallBack(() => this.$router.push({name: 'applications'}))
-        .show(_.merge(entity, {team}))
-    },
-
-    fetchData: function (id) {
-      FectherEntity(Applications)({k: 'application_' + id})
-        .findOne((e) => {
-          this.$set(this, 'model', e.data)
-          this.fetchServers()
-        }, id)
-    },
-
     fetchServers() {
-      const {_id} = this.model
-
       if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)({k: 'app_server_'+_id})
+        FectherEntity(Servers)({force: true})
           .find((e) => {
             this.$set(this, 'list_servers', _.get(e, 'data.items', []))
           }, {_id: this.model.servers})
@@ -85,13 +44,6 @@ export default {
   },
 
   created() {
-    this.fetchData(this.$route.params.id)
-
-    if (_.has(this.$route, 'query.team_id')) {
-      this.team = {
-        '_id': this.$route.query.team_id,
-        'name': this.$route.query.team_name
-      }
-    }
+    this.$on('finishFetchData', this.fetchServers)
   }
 }

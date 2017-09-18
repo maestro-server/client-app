@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: Datacenters,
-      name: "Datacenters"
+      name: "Datacenter"
     }
   },
 

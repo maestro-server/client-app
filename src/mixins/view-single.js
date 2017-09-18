@@ -34,10 +34,11 @@ export default {
         .show(this.model)
     },
 
-    fetchData: function () {
-      FectherEntity(this.entity)()
+    fetchData: function (force=true) {
+      FectherEntity(this.entity)({force})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
+          this.$emit('finishFetchData')
         }, this.id)
     }
   },

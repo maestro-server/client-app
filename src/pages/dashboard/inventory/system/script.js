@@ -2,12 +2,17 @@
 
 import modalCreate from './modalCreate/create'
 import modalMembers from './modalMembers/create'
-import modalDelete from './modalDelete/delete'
+import System from 'factories/system'
 
 export default {
   components: {
     modalCreate,
-    modalDelete,
     modalMembers
+  },
+
+  data() {
+    return {
+      entity: System
+    }
   }
 }

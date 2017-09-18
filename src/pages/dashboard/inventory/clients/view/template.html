@@ -17,13 +17,15 @@
 
     <creater-config-list label="Contact" :basket="model.contacts" @edit="edit" :index="1" icons="fa-commenting-o">
       <template slot="view" scope="props">
-        <bs-label>{{props.item.channel}}</bs-label> - {{props.item.value}}
+        <bs-label>{{props.item.channel}}</bs-label>
+        - {{props.item.value}}
       </template>
     </creater-config-list>
 
     <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="2" icons="fa-tags">
       <template slot="view" scope="props">
-        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
+        <bs-label>{{props.item.key}}</bs-label>
+        - {{props.item.value}}
       </template>
     </creater-config-list>
 

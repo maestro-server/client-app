@@ -13,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      name: "Clients"
+      name: "Client"
     }
   }
 }
