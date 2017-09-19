@@ -12,7 +12,7 @@ const mapper = {
     msg: () => "You not authorize to do this!"
   },
   404: {
-    title: "The resource not exist.",
+    title: () => "The resource not exist.",
     msg: () => ""
   },
   409: {
@@ -39,7 +39,6 @@ export default (e) => {
       window.location.hash = "/auth/logout"
       return
     }
-
 
     const ch = {
       show: true,

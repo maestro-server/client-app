@@ -18,7 +18,7 @@ class Uploader {
   }
 
   getSignedRequest(file) {
-    const URL = `${API_URL}/${this.ref}/upload?filetype=${file.type}`
+    const URL = `${API_URL}${this.ref}/upload?filetype=${file.type}`
 
     axios.get(URL, {headers: {"Authorization": Login.Authorization()}})
       .then((result) => {

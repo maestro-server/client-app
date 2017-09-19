@@ -39,7 +39,7 @@
               <li v-for="team in teams.items" :key="team._id">
                 <a @click="changeTenant(team, 'teams')">
                   <span class="c-1">
-                    <img :src="img_default(team)" class="img-circle img-responsive-center">
+                    <img :src="img_default(team)" class="img-circle img-responsive-center square-avatar">
                   </span>
                       <span class="c-2">
                     {{team.name}}

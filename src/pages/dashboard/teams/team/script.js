@@ -1,12 +1,17 @@
 'use strict'
 import modalCreate from './modalCreate/create'
-import modalDelete from './modalDelete/delete'
+import Teams from 'factories/teams'
 
 export default {
 
   components: {
-    modalCreate,
-    modalDelete
+    modalCreate
+  },
+
+  data() {
+    return {
+      entity: Teams
+    }
   }
 
 }

@@ -12,7 +12,7 @@ class factoryTeam extends Factory {
     const {refs, _id} = store.getters.get_tenant || {}
     const accept = acceptTenants(refs)
     if(accept && _id) {
-      this.setEntity(`/${refs}/${_id}${this.entity}`)
+      this.setEntity(`/${refs}/${_id}/${this.entity}`)
     }
   }
 }

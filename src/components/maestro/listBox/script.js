@@ -14,6 +14,10 @@ export default {
   },
 
   methods: {
+    add() {
+      this.$emit('add')
+    },
+
     edit(item) {
       this.$emit('edit', item)
     },

@@ -9,34 +9,18 @@
           label="Name"
           v-model="model.name"
           v-validate.initial="'required'"
-          data-vv-scope="modals"
           name="name"
-          :error="makeError('name', 'modals')"
+          :error="makeError('name')"
         ></bs-input>
-
-        <typeahead
-          label="Choose team"
-          placeholder="No teams, this project is mine"
-          async-key="items"
-          :async="URL"
-          :template="template"
-          :on-hit="teamSelected"
-          v-model="model.input"
-        ></typeahead>
-
-        <li class="list-group-item" v-if="model.team">
-          {{model.team.name}}
-        </li>
 
       </section>
 
     </form>
 
-
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" v-if="finalValid"
-              :disabled="errors.any('modals')">Save
+      <button type="button" class="btn btn-primary" @click="actionClick"
+              :disabled="errors.any()">Save
       </button>
     </div>
 

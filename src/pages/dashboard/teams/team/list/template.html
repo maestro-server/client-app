@@ -1,54 +1,29 @@
 <div>
-<div class="pb10">
-  <h3 class="col-xs-10 pb10">
-    Team
-  </h3>
-  <div class="col-xs-2 pb10 mt20">
-    <button class="btn btn-primary pull-right" @click="addTeam">New team</button>
-  </div>
-</div>
-
-
-<div class="col-xs-12">
-
-  <panel v-for="team in result.items" :key="team._id">
-
-    <div class="col-xs-7">
-      <imager :src="team.avatar" class="pull-left mini-avatar"></imager>
-      <h3 class="mt0">{{team.name}}</h3>
-      <button class="btn btn-primary btn-xs" @click.stop="addUsers(team)">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> Add/Edit Members
-      </button>
-
-      <button class="btn btn-primary btn-xs" @click.stop="editTeam(team)">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> Edit team
-      </button>
-      <router-link class="btn btn-primary btn-xs" :to="{ name: 'projects', query: { 'team_id': team._id, 'team_name': team.name }}">
-        <i class="fa fa-stop-circle-o" aria-hidden="true"></i> Team Projects
-      </router-link>
-      <button class="btn btn-danger btn-xs" @click.stop="deleteTeam(team)">
-        <i class="fa fa-minus-circle" aria-hidden="true"></i> Delete team
-      </button>
-    </div>
-    <div class="col-xs-5 text-right">
-      <button class="btn btn-default btn-xs" @click.stop="addUsers(team)">
-        <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">{{team.members.length}}</span>
-      </button>
-    </div>
-  </panel>
-
-  <div class="text-center">
-    <pagination :total_pages="result.total_pages" :current_page="result.current_page" @changePage="changePage"></pagination>
+  <div class="pb10">
+    <header-entity @add="addE" :label="name"></header-entity>
   </div>
 
-  <div class="text-center" v-if="result.found == 0">
-    <well>
-      <h4>You dont have any teams, Do you like to create one?</h4>
-      <hr/>
-      <button class="btn btn-primary btn-lg" @click.stop="addTeam">Create new Team</button>
+  <div class="col-xs-12">
 
-    </well>
+    <list-box :items="result.items" :total_pages="result.total_pages" :label="name"
+              @changePage="changePage"
+              @edit="editE"
+              @del="deleteE">
+
+      <template slot="header" scope="props">
+        <img :src="make_avatar(props.item)" class="img-circle img-responsive-center mini-avatar pull-left"/>
+        <h3 class="mt0">
+          {{props.item.name}}
+        </h3>
+      </template>
+
+      <template slot="info" scope="props">
+        <button class="btn btn-default btn-xs" @click.stop="addUsers(props.item)">
+          <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">{{props.item.members.length}}</span>
+        </button>
+      </template>
+
+    </list-box>
+
   </div>
-
-</div>
 </div>

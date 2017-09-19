@@ -1,5 +1,5 @@
 'use strict'
-import _ from 'lodash'
+
 import Modals from 'mixins/modals'
 import Teams from 'factories/teams'
 import FectherEntity from 'services/fetchEntity'
@@ -9,11 +9,10 @@ export default {
 
   data () {
     return {
-      URL: "http://localhost:8888/users/autocomplete?complete=",
+      URL: `${API_URL}users/autocomplete?complete=`,
       templateMembers: "{{item.name}} - <small>{{item.email}}</small>"
     }
   },
-
 
   methods: {
     afterShow () {
@@ -21,34 +20,14 @@ export default {
     },
 
     createSave () {
-      new Teams(this.model)
-        .authorization()
-        .create(this.finishJob)
+      FectherEntity(Teams)()
+        .create(this.finishJob, this.model)
     },
 
     editSave () {
-      FectherEntity(Teams)({k: `teams_${this.model._id}`})
+      FectherEntity(Teams)()
         .update(this.finishJob, this.model)
-    },
-
-    deleteUser (team) {
-      const narr = this.model.members.filter(e => e != team)
-      this.model.members = narr
-    },
-
-    memberSelected(item) {
-      const exist = _.find(this.model.members, ['_id', item._id])
-
-      if(!exist) {
-        item.role=1
-        this.model.members.push(item)
-      }
-    },
-
-    afterClose() {
-      this.model.members = []
     }
-
   }
 
 }

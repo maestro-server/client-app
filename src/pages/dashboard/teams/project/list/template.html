@@ -1,40 +1,16 @@
 <div>
   <div class="pb10">
-    <h3 class="col-xs-8 pb10">
-      {{title}}
-    </h3>
-    <div class="col-xs-4 pb10 mt20">
-      <button class="btn btn-primary pull-right" @click="addE">New project</button>
-    </div>
+    <header-entity @add="addE" :label="name"></header-entity>
   </div>
 
   <div class="col-xs-12">
 
-    <panel v-for="project in result.items" :key="project._id">
-      <div class="col-xs-12">
-        <h3 class="mt0">{{project.name}}</h3>
-        <button class="btn btn-primary btn-sm" @click.stop="editE(project)">
-          <i class="fa fa-pencil" aria-hidden="true"></i> Edit project
-        </button>
-        <button class="btn btn-danger btn-sm" @click.stop="deleteE(project)">
-          <i class="fa fa-trash" aria-hidden="true"></i> Delete project
-        </button>
-      </div>
-    </panel>
-
-    <div class="text-center">
-      <pagination :total_pages="result.total_pages" :current_page="result.current_page"
-                  @changePage="changePage"></pagination>
-    </div>
-
-    <div class="text-center" v-if="result.found == 0">
-      <well>
-        <h4>You dont have any project, Do you like to create one?</h4>
-        <hr/>
-        <button class="btn btn-primary btn-lg" @click.stop="addE">Create new Project</button>
-
-      </well>
-    </div>
+    <list-box :items="result.items" :total_pages="result.total_pages" :label="name"
+              @changePage="changePage"
+              @add="addE"
+              @edit="editE"
+              @del="deleteE">
+    </list-box>
 
   </div>
 </div>
