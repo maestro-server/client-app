@@ -4,6 +4,7 @@ import Modals from 'mixins/modals'
 import ModalsForeignRelation from 'mixins/modals-foreign-relation'
 
 import System from 'factories/system'
+import Applications from 'factories/applications'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
@@ -13,8 +14,8 @@ export default {
   data() {
     return {
       entity: System,
-      relation: 'applications',
-      label: 'Applications',
+      relation: Applications,
+      label: Applications.name,
       fielder: 'list_apps',
       options: {
         apps: []

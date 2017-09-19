@@ -81,6 +81,10 @@
       reset() {
         this.$set(this, 'deployer', _.clone(this.resetDeployer))
       }
+    },
+
+    mounted () {
+      this.updaterEdit()
     }
   }
 

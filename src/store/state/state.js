@@ -20,7 +20,7 @@ export default {
     type: null
   },
 
-  me: CacheManager({k: 'user', persistence: 'local'}).find(['_id', 'email', 'name']),
+  me: CacheManager({k: 'me_list', persistence: 'local'}).find(['_id', 'email', 'name']),
 
   tenant: CacheManager({k: 'tenant', persistence: 'local'}).find(),
 

@@ -20,8 +20,7 @@ export default {
 
   computed: {
     url() {
-      const url = this.entity.getUrl()
-      return `${API_URL}${url}`
+     return this.entity.getUrl()
     }
   },
 

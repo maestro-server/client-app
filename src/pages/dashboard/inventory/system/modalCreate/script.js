@@ -2,6 +2,7 @@
 
 import Modals from 'mixins/modals'
 import System from 'factories/system'
+
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
@@ -20,8 +21,6 @@ export default {
 
   data () {
     return {
-      URL_CLIENT: `${API_URL}/clients?query=`,
-      template: "<b>{{item.name}}</b>",
       system: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []},
       options: {
         check:[],
@@ -72,10 +71,6 @@ export default {
 
       FectherEntity(System)()
         .update(this.finishJob, this.model)
-    },
-
-    deleteSystem() {
-      this.app.system=null
     },
 
     fetchData() {

@@ -6,7 +6,7 @@ import CacheManager from 'services/cacheManager'
 export default {
   SET_USER (state, user) {
     state.me = Object.assign(state.me, user)
-    CacheManager({k: 'user', persistence: 'local'}).set(state.me)
+    CacheManager({k: 'me_list', persistence: 'local'}).set(state.me)
   },
 
   SET_TENANT (state, tn) {

@@ -15,7 +15,7 @@
   li:hover {
     padding: 0;
 
-    a, small, span {
+    a:not(.router-link-active) {
       background-color: $gray-light;
       color: $white;
     }

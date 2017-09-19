@@ -48,6 +48,7 @@
   'use strict'
 
   import TabCreaterList from 'mixins/tab-creater-list'
+  import Servers from 'factories/servers'
 
   export default {
     mixins: [TabCreaterList],
@@ -55,7 +56,7 @@
     data: function () {
 
       return {
-        URL: `${API_URL}servers?query=`,
+        URL: `${new Servers().getUrl()}?query=`,
         template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +
         "<h5 class='ft15'><bs-label type='default'>{{item.ipv4_private}}</bs-label> <bs-label type='default'>{{item.ipv4_public}}</bs-label> <bs-label type='success'>{{item.role}}</bs-label> <bs-label type='success'>{{item.environment}}</bs-label></h5>"
       }

@@ -52,6 +52,18 @@ const FetcherData = (Entity) => (opts = {}) => {
         .remove((end) => {
           new Entity(model)
             .authorization()
+            .updateID(key, end)
+        });
+    },
+
+    patch (fn, model, path) {
+      const key = path || model._id
+      const fk = `${k}_${key}`
+
+      CacheRequester(fk)(opts)(tenant)(fn)
+        .remove((end) => {
+          new Entity(model)
+            .authorization()
             .patchID(key, end)
         });
     },

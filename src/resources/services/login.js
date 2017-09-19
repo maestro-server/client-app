@@ -8,7 +8,7 @@ class Login {
 
   static getToken = () => CacheManager({k: 'x-access', persistence: 'local'}).find()
 
-  static getUser = () => CacheManager({k: 'user', persistence: 'local'}).find(['_id', 'email'])
+  static getUser = () => CacheManager({k: 'me_list', persistence: 'local'}).find(['_id', 'email'])
 
   static getID = () => _.get(Login.getUser(), '_id')
 
@@ -22,7 +22,7 @@ class Login {
   }
 
   static destroyLogin () {
-    CacheManager({k: 'user', persistence: 'local'}).remove()
+    CacheManager({k: 'me_list', persistence: 'local'}).remove()
     store.dispatch('setUser', {})
   }
 

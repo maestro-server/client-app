@@ -20,8 +20,8 @@ class Factory {
     return this.constructor.name.toLowerCase()
   }
 
-  getUrl() {
-    return this.entity
+  getUrl(path=API_URL) {
+    return `${path}${this.entity}`
   }
 
   setEntity(e) {
@@ -63,6 +63,11 @@ class Factory {
       .post(this.entity, this.model, this.header)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
+  }
+
+  updateID (id, call_success = fsuccess) {
+    this.entity += "/"+id
+    this.update(call_success)
   }
 
   update (call_success = fsuccess, call_rejected = frejected) {

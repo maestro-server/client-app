@@ -39,6 +39,8 @@ export default {
           .find((e) => {
             this.$set(this, 'list_servers', _.get(e, 'data.items', []))
           }, {_id: this.model.servers})
+      } else {
+        this.$set(this, 'list_servers', [])
       }
     }
   },

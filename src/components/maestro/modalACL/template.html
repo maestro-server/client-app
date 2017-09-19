@@ -1,50 +1,6 @@
 <div>
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
-    <form id="createTeam1" class="row" v-if="step == 1" >
-
-      <div class="col-sm-offset-1 col-xs-10">
-
-        <uploader
-          refs="teams"
-          v-model="model.avatar"
-        ></uploader>
-
-        <bs-input
-          label="Name*"
-          v-model="model.name"
-          v-validate.initial="'required'"
-          data-vv-scope="modals"
-          name="name"
-          class="col-xs-12 mt10"
-          :error="makeError('name', 'modals')"
-        ></bs-input>
-
-        <bs-input
-          type="email"
-          label="Email"
-          v-model="model.email"
-          v-validate.initial="'email'"
-          data-vv-scope="modals"
-          name="email"
-          class="col-xs-12"
-          :error="makeError('email', 'modals')"
-        ></bs-input>
-
-        <bs-input
-          label="Url"
-          v-model="model.url"
-          v-validate.initial="'url'"
-          data-vv-scope="modals"
-          name="url"
-          class="col-xs-12"
-          :error="makeError('url', 'modals')"
-        ></bs-input>
-
-      </div>
-
-    </form>
-
     <form id="createTeam2" class="row" v-if="step == 2">
 
       <h5 class="col-xs-12">Choose the users for the team

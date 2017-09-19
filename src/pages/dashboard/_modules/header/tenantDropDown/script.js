@@ -1,8 +1,11 @@
 'use strict'
 
+import _ from 'lodash'
 import Teams from 'factories/teams'
 import FectherEntity from 'services/fetchEntity'
 import store from 'src/store'
+
+import Me from 'factories/me'
 
 
 export default {
@@ -20,7 +23,8 @@ export default {
       showDrop: {tenants: false, settings: false},
       teams: {},
       tenant: {name: null, _id: null},
-      avatar: IMG_AVATAR_DEFAULT
+      avatar: IMG_AVATAR_DEFAULT,
+      users: {}
     }
   },
 
@@ -80,16 +84,26 @@ export default {
       this.$set(this, 'tenant', obj)
 
       this.toggle('all')
+    },
+
+    updateUser() {
+      const me = this.$store.getters.get_me
+
+      if(_.isEmpty(me)) {
+        FectherEntity(Me)({persistence: 'local'})
+          .find(this.fallbackUser)
+      }
+
+      this.$set(this, 'users', me)
+    },
+
+    fallbackUser(e) {
+      store.dispatch('setUser',  e.data)
+      this.$set(this, 'users', e.data)
     }
   },
 
   computed: {
-    storageUser() {
-      return this.$store.getters.get_me
-    },
-    users() {
-      return this.storageUser
-    },
     storageTeam() {
       return this.$store.getters.get_tenant
     },
@@ -101,6 +115,7 @@ export default {
 
   created() {
     this.fetchData()
+    this.updateUser()
 
     const tn = this.storageTeam || this.storageUser
     this.updateViewTenant(tn)

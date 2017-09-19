@@ -31,13 +31,14 @@
   'use strict'
 
   import TabCreaterList from 'mixins/tab-creater-list'
+  import Clients from 'factories/clients'
 
   export default {
     mixins: [TabCreaterList],
 
     data: function () {
       return {
-        URL: `${API_URL}clients?query=`,
+        URL: `${new Clients().getUrl()}?query=`,
         template: "<b>{{item.name}}</b>",
         filter: ['_id', 'name']
       }

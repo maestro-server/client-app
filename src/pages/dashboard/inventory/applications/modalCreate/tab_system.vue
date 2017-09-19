@@ -33,13 +33,14 @@
   'use strict'
 
   import TabCreaterList from 'mixins/tab-creater-list'
+  import System from 'factories/system'
 
   export default {
     mixins: [TabCreaterList],
 
     data: function () {
       return {
-        URL_SYSTEM: `${API_URL}system?query=`,
+        URL_SYSTEM: `${new System().getUrl()}?query=`,
         template: "<b>{{item.name}}</b>",
         filter: ['_id', 'name']
       }

@@ -14,13 +14,16 @@ export default {
 
   computed: {
     URL() {
-      return `${API_URL}${this.relation}?query=`
+      return `${new this.relation().getUrl()}?query=`
+    },
+    relName() {
+      return this.relation.name.toLowerCase()
     }
   },
 
   methods: {
     afterShow() {
-      this.text.title = `Add news ${this.relation} into ${this.model.name}`
+      this.text.title = `Add news ${this.relName} into ${this.model.name}`
     },
 
     editLoad() {
@@ -47,15 +50,15 @@ export default {
     createdItems(id) {
       if (!_.isEmpty(id)) {
 
-        const _id =  `${this.model._id}/${this.relation}`
+        const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)({force: true})
-          .update(this.finishJob, {id}, _id)
+          .patch(this.finishJob, {id}, _id)
       }
     },
 
     deletedItems(id) {
       if (!_.isEmpty(id)) {
-        const _id =  `${this.model._id}/${this.relation}`
+        const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)()
           .remove(this.finishJob, {id}, _id)
       }
