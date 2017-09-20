@@ -15,8 +15,8 @@
           :template="templateMembers"
           :on-hit="memberSelected"
         ></typeahead>
-     </div>
-     <hr/>
+      </div>
+      <hr/>
 
       <div class="col-xs-12 mt10 text-right">
 
@@ -26,7 +26,8 @@
               <i class="fa fa-minus-circle" aria-hidden="true"></i>
             </button>
 
-            {{member.name}} - <small>{{member.email}}</small>
+            {{member.name}} -
+            <small>{{member.email}}</small>
 
             <button-group v-model="member.role" type="warning">
               <bs-radio :selected-value="1">Read</bs-radio>
@@ -42,9 +43,7 @@
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-default" @click="previousMethod" v-if="previousValid">Previous</button>
-      <button type="button" class="btn btn-primary" @click="nextMethod" v-if="forwardValid" :disabled="errors.any('modals')">Next</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any('modals')">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
     </div>
 
   </modal>
