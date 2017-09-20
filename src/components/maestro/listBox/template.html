@@ -7,10 +7,13 @@
         </h3>
       </slot>
 
-      <button class="btn btn-primary btn-xs" @click.stop="edit(item)">
+      <button class="btn btn-primary btn-xs" @click.stop="event('edit', item)">
         <i class="fa fa-pencil" aria-hidden="true"></i> Edit {{label}}
       </button>
-      <button class="btn btn-danger btn-xs" @click.stop="del(item)">
+      <button class="btn btn-primary btn-xs" @click.stop="event('acl', item)">
+        <i class="fa fa-key" aria-hidden="true"></i> Edit Access
+      </button>
+      <button class="btn btn-danger btn-xs" @click.stop="event('del', item)">
         <i class="fa fa-trash" aria-hidden="true"></i> Delete {{label}}
       </button>
     </div>
@@ -18,7 +21,6 @@
       <slot name="info" :item="item"></slot>
     </div>
   </panel>
-
 
   <div class="text-center">
     <pagination :total_pages="total_pages" :current_page="current_page"
@@ -30,7 +32,6 @@
       <h4>You dont have any {{label}}, Do you like to create one?</h4>
       <hr/>
       <button class="btn btn-primary btn-lg" @click.stop="add">Create new {{label}}</button>
-
     </well>
   </div>
 

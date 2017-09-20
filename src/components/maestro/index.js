@@ -9,7 +9,7 @@ import modalDelete from './modalDelete/delete.vue'
 import infoView from './infoView/InfoView.vue'
 import callback from './callback/Callback.vue'
 import uploader from './uploader/Uploader.vue'
-import modalACL from './modalACL/create.vue'
+import modalAcl from './modalACL/create.vue'
 import listBox from './listBox/ListBox.vue'
 import loader from './loader/Loader.vue'
 import imager from './imager/Imager.vue'
@@ -24,7 +24,7 @@ let components = {
   infoView,
   callback,
   uploader,
-  modalACL,
+  modalAcl,
   listBox,
   loader,
   imager

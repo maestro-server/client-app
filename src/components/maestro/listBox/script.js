@@ -14,16 +14,8 @@ export default {
   },
 
   methods: {
-    add() {
-      this.$emit('add')
-    },
-
-    edit(item) {
-      this.$emit('edit', item)
-    },
-
-    del(item) {
-      this.$emit('del', item)
+    event(emitter, item = null) {
+      this.$emit(emitter, item)
     },
 
     changePage (page) {

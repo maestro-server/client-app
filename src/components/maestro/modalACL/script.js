@@ -1,54 +1,68 @@
 'use strict'
-import _ from 'lodash'
+
 import Modals from 'mixins/modals'
-import Teams from 'factories/teams'
+import Users from 'factories/users'
+
 import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [Modals],
 
-  data () {
+  props: {
+    entity: {},
+    fielder: {default: "roles", type: String}
+  },
+
+  data() {
     return {
-      URL: "http://localhost:8888/users/autocomplete?complete=",
-      templateMembers: "{{item.name}} - <small>{{item.email}}</small>"
+      label: 'Member',
+      value: [],
+      usersEntity: Users,
+      template: "{{item.name}} - <small>{{item.email}}</small>"
     }
   },
 
+  computed: {
+    URL() {
+      return `${new this.usersEntity().getUrl()}?autocomplete?complete=`
+    }
+  },
 
   methods: {
-    afterShow () {
-      this.text.title =  this.create ? 'Create new Team' : `Edit ${this.model.name} team`
+    afterShow() {
+      this.text.title = `Manange access to ${this.model.name}`
     },
 
-    createSave () {
-      new Teams(this.model)
-        .authorization()
-        .create(this.finishJob)
-    },
+    onHit(item, role = 1) {
+      const exist = _.find(this.value, ['_id', item._id])
 
-    editSave () {
-      FectherEntity(Teams)()
-        .update(this.finishJob, this.model)
-    },
-
-    deleteUser (team) {
-      const narr = this.model.members.filter(e => e != team)
-      this.model.members = narr
-    },
-
-    memberSelected(item) {
-      const exist = _.find(this.model.members, ['_id', item._id])
-
-      if(!exist) {
-        item.role=1
-        this.model.members.push(item)
+      if (!exist) {
+        _.merge(item, {role})
+        this.value.push(item)
       }
     },
 
-    afterClose() {
-      this.model.members = []
+    setupModel () {
+      _.merge(this.model[this.fielder], this.value)
+    },
+
+    editSave() {
+      this.setupModel()
+      console.log(this.model[this.fielder])
+      //FectherEntity(this.entity)()
+      //  .update(this.finishJob, this.model)
+    },
+
+    updateRolers(item, role) {
+      const data = this.value.map((e) => {
+        if (e._id == item._id) {
+          _.merge(e, {role})
+        }
+        return e
+      })
+
+      this.$set(this, 'value', data)
     }
 
   }
-
 }

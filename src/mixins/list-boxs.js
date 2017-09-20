@@ -15,6 +15,9 @@ export default {
     MCreate() {
       return this.$parent.$refs.modal_create
     },
+    MAcl() {
+      return this.$parent.$refs.modal_acl
+    },
     MDelete() {
       return this.$parent.$refs.modal_delete
     }
@@ -35,6 +38,12 @@ export default {
     editE (entity) {
       this.MCreate
         .onFinishCallBack((e) => _.merge(entity, e))
+        .show(entity)
+    },
+
+    aclE(entity) {
+      this.MAcl
+        .onFinishCallBack(() => this.fetchData(true))
         .show(entity)
     },
 

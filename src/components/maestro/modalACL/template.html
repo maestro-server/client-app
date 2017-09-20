@@ -1,44 +1,39 @@
 <div>
-  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
-    <form id="createTeam2" class="row" v-if="step == 2">
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
 
-      <h5 class="col-xs-12">Choose the users for the team
-        <small>(You can choose later.)</small>
-      </h5>
-
+    <form class="row form-horizontal">
       <div class="col-xs-12">
-        <typeahead
-          placeholder="What is the email account to new member? "
-          async-key="items"
-          :async="URL"
-          :template="templateMembers"
-          :on-hit="memberSelected"
-        ></typeahead>
-      </div>
-      <hr/>
+        <creater-list :basket.sync="value" :label="label" :showAddBtn="false">
 
-      <div class="col-xs-12 mt10 text-right">
+          <template slot="forms">
+            <div class="col-xs-12">
+              <h5>Choose the users for the team</h5>
 
-        <ul class="list-group mt20">
-          <li class="list-group-item" v-for="member in model.members">
-            <button class="btn btn-danger btn-xs pull-left" @click.stop="deleteUser(member)">
-              <i class="fa fa-minus-circle" aria-hidden="true"></i>
-            </button>
+              <div class="col-xs-12">
+                <typeahead
+                  placeholder="What is the email account to new member? "
+                  async-key="items"
+                  :async="URL"
+                  :template="template"
+                  :on-hit="onHit"
+                ></typeahead>
+              </div>
+            </div>
+          </template>
 
-            {{member.name}} -
-            <small>{{member.email}}</small>
+          <template slot="view" scope="props">
+            <b>{{props.item.email}}</b> <span v-if='props.item.name' class="text-capitalize">({{props.item.name}})</span>
 
-            <button-group v-model="member.role" type="warning">
-              <bs-radio :selected-value="1">Read</bs-radio>
-              <bs-radio :selected-value="3">Write</bs-radio>
-              <bs-radio :selected-value="7">Admin</bs-radio>
+            <button-group v-model="props.item.role" type="warning">
+              <bs-radio :selected-value="1" class="btn-sm" @checked="updateRolers(props.item, 1)">Read</bs-radio>
+              <bs-radio :selected-value="3" class="btn-sm" @checked="updateRolers(props.item, 3)">Write</bs-radio>
+              <bs-radio :selected-value="7" class="btn-sm" @checked="updateRolers(props.item, 7)">Admin</bs-radio>
             </button-group>
-          </li>
-        </ul>
+          </template>
 
+        </creater-list>
       </div>
-
     </form>
 
     <div slot="modal-footer" class="modal-footer">
@@ -47,4 +42,5 @@
     </div>
 
   </modal>
+
 </div>
