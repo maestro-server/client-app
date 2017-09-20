@@ -34,14 +34,14 @@ export default {
       const data = _.omit(this.model, 'email')
 
       FectherEntity(Me)()
-        .update(this.finishJob, data, '?')
+        .patch(this.finishJob, data, '?')
     },
 
     updateEmail () {
       const email = this.cemail
 
       FectherEntity(Me)()
-        .update(() => this.model.email = email, {email}, '?')
+        .patch(() => this.model.email = email, {email}, '?')
     },
 
     updatePassWord () {
