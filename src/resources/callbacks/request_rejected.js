@@ -7,6 +7,10 @@ const mapper = {
     title: (e) => `Field, ${_.get(e, 'err.errors[0].message')}`,
     msg: (e) => `Complete path is ${_.toUpper(_.get(e, 'err.errors[0].path'))}`
   },
+  400: {
+    title: (e) => `${_.get(e, 'err.errors')}`,
+    msg: () => "We have problems to process this request"
+  },
   401: {
     title: (e) => `${_.get(e, 'err.errors[0].message')}`,
     msg: () => "You not authorize to do this!"

@@ -17,6 +17,7 @@ export default {
     return {
       label: 'Member',
       value: [],
+      defaultRole: 1,
       usersEntity: Users,
       template: "{{item.name}} - <small>{{item.email}}</small>"
     }
@@ -33,13 +34,17 @@ export default {
       this.text.title = `Manange access to ${this.model.name}`
     },
 
-    onHit(item, role = 1) {
+    onHit(item) {
       const exist = _.find(this.value, ['_id', item._id])
 
       if (!exist) {
-        _.merge(item, {role})
-        this.value.push(item)
+        const nItem = _.assign({}, item, {role: this.defaultRole})
+        this.value.push(nItem)
       }
+    },
+
+    editLoad () {
+      this.value = _.get(this.model, 'roles', [])
     },
 
     setupModel () {
@@ -48,9 +53,8 @@ export default {
 
     editSave() {
       this.setupModel()
-      console.log(this.model[this.fielder])
-      //FectherEntity(this.entity)()
-      //  .update(this.finishJob, this.model)
+      FectherEntity(this.entity)()
+        .update(this.finishJob, this.model[this.fielder], this.model._id+'/roles')
     },
 
     updateRolers(item, role) {

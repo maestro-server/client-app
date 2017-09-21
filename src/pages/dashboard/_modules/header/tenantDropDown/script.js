@@ -100,6 +100,8 @@ export default {
     fallbackUser(e) {
       store.dispatch('setUser',  e.data)
       this.$set(this, 'users', e.data)
+
+      this.changeTenant(e.data, 'users')
     }
   },
 

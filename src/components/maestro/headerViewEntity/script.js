@@ -7,11 +7,8 @@ export default {
   },
 
   methods: {
-    edit () {
-      this.$emit('edit')
-    },
-    del () {
-      this.$emit('del')
+    event(emitter, item = null) {
+      this.$emit(emitter, item)
     }
   }
 }

@@ -31,7 +31,7 @@
     <well>
       <h4>You dont have any {{label}}, Do you like to create one?</h4>
       <hr/>
-      <button class="btn btn-primary btn-lg" @click.stop="add">Create new {{label}}</button>
+      <button class="btn btn-primary btn-lg" @click.stop="event('add')">Create new {{label}}</button>
     </well>
   </div>
 

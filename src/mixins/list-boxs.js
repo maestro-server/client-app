@@ -24,7 +24,7 @@ export default {
   },
 
   methods: {
-    fetchData (force=false) {
+    fetchData (force=true) {
       FectherEntity(this.entity)({force})
         .find((e) => this.result = e.data)
     },
@@ -41,7 +41,7 @@ export default {
         .show(entity)
     },
 
-    aclE(entity) {
+    aclE (entity) {
       this.MAcl
         .onFinishCallBack(() => this.fetchData(true))
         .show(entity)

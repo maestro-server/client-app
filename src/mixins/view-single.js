@@ -13,6 +13,9 @@ export default {
     MCreate() {
       return this.$parent.$refs.modal_create
     },
+    MAcl() {
+      return this.$parent.$refs.modal_acl
+    },
     MDelete() {
       return this.$parent.$refs.modal_delete
     }
@@ -23,6 +26,12 @@ export default {
       this.MCreate
         .setTabShow(index)
         .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
+    },
+
+    acl () {
+      this.MAcl
+        .onFinishCallBack(() => this.fetchData(true))
         .show(this.model)
     },
 
