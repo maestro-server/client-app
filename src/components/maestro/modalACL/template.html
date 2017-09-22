@@ -3,29 +3,53 @@
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
 
     <form class="row form-horizontal">
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+
+        <tab header="Users">
+          <div class="col-xs-12">
+            <h5>Search users by name</h5>
+
+            <div class="col-xs-12">
+              <typeahead
+                placeholder="What is the username account for new member? "
+                async-key="items"
+                :async="URL"
+                :template="template"
+                :on-hit="onHitUser"
+              ></typeahead>
+            </div>
+          </div>
+        </tab>
+
+        <tab header="Teams">
+
+          <div class="col-xs-12">
+            <h5>Search teams by name</h5>
+
+            <div class="col-xs-12">
+              <typeahead
+                placeholder="What is the name team? "
+                async-key="items"
+                :async="URL_TEAM"
+                :template="template"
+                :on-hit="onHitTeams"
+              ></typeahead>
+            </div>
+          </div>
+
+        </tab>
+
+      </tabs>
+
       <div class="col-xs-12">
         <creater-list :basket.sync="value" :label="label" :showAddBtn="false">
 
-          <template slot="forms">
-            <div class="col-xs-12">
-              <h5>Choose the users for the team</h5>
-
-              <div class="col-xs-12">
-                <typeahead
-                  placeholder="What is the email account to new member? "
-                  async-key="items"
-                  :async="URL"
-                  :template="template"
-                  :on-hit="onHit"
-                ></typeahead>
-              </div>
-            </div>
-          </template>
-
           <template slot="view" scope="props">
-            <b>{{props.item.email}}</b> <span v-if='props.item.name' class="text-capitalize">({{props.item.name}})</span>
+            <b>{{props.item.email}}</b>
+            <span v-if='props.item.name' class="text-capitalize">({{props.item.name}})</span>
+            <bs-label>{{props.item.refs}}</bs-label><br/>
 
-            <button-group v-model="props.item.role" type="warning">
+            <button-group v-model="props.item.role" type="warning" class="mt5">
               <bs-radio :selected-value="1" class="btn-sm" @checked="updateRolers(props.item, 1)">Read</bs-radio>
               <bs-radio :selected-value="3" class="btn-sm" @checked="updateRolers(props.item, 3)">Write</bs-radio>
               <bs-radio :selected-value="7" class="btn-sm" @checked="updateRolers(props.item, 7)">Admin</bs-radio>
@@ -34,6 +58,8 @@
 
         </creater-list>
       </div>
+
+
     </form>
 
     <div slot="modal-footer" class="modal-footer">

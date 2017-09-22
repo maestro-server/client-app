@@ -8,10 +8,6 @@ export default {
   },
 
   methods: {
-    callConfig(item) {
-      this.$emit('config', item)
-    },
-
     callEdit() {
       this.$emit('edit', this.index)
     }

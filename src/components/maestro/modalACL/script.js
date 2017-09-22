@@ -2,6 +2,7 @@
 
 import Modals from 'mixins/modals'
 import Users from 'factories/users'
+import Teams from 'factories/teams'
 
 import FectherEntity from 'services/fetchEntity'
 
@@ -18,6 +19,7 @@ export default {
       label: 'Member',
       value: [],
       defaultRole: 1,
+      defaultRefs: 'users',
       usersEntity: Users,
       template: "{{item.name}} - <small>{{item.email}}</small>"
     }
@@ -25,7 +27,10 @@ export default {
 
   computed: {
     URL() {
-      return `${new this.usersEntity().getUrl()}?autocomplete?complete=`
+      return `${new Users().getUrl()}/autocomplete?complete=`
+    },
+    URL_TEAM() {
+      return `${new Teams().getUrl()}/autocomplete?complete=`
     }
   },
 
@@ -34,11 +39,19 @@ export default {
       this.text.title = `Manange access to ${this.model.name}`
     },
 
-    onHit(item) {
+    onHitUser(item) {
+      this.onHit(item)
+    },
+
+    onHitTeams(item) {
+      this.onHit(item, 'teams')
+    },
+
+    onHit(item, refs = 'users', role = 1) {
       const exist = _.find(this.value, ['_id', item._id])
 
       if (!exist) {
-        const nItem = _.assign({}, item, {role: this.defaultRole})
+        const nItem = _.assign({}, item, {role, refs})
         this.value.push(nItem)
       }
     },
@@ -53,8 +66,10 @@ export default {
 
     editSave() {
       this.setupModel()
+
+      const cleanArr = this.model[this.fielder].map(e=>_.pick(e, ['_id', 'email', 'name', 'refs', 'role']))
       FectherEntity(this.entity)()
-        .update(this.finishJob, this.model[this.fielder], this.model._id+'/roles')
+        .update(this.finishJob, cleanArr, this.model._id+'/roles')
     },
 
     updateRolers(item, role) {
