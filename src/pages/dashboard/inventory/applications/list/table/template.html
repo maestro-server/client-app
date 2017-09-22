@@ -13,6 +13,7 @@
     <template slot="qtddeploy" scope="props">
       <bs-label>{{props.row.qtddeploy}}</bs-label>
     </template>
+
     <template slot="actions" scope="props">
       <div class="min-table">
         <router-link :to="{name: 'applications.single', params: { id: props.row._id }}"

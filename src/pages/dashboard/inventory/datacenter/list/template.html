@@ -14,6 +14,7 @@
 
       <template slot="header" scope="props">
         <h3 class="mt0">
+          <i :class="toLower(props.item.provider, 'icon-')"></i>
           {{props.item.name}}
           <bs-label type="success" class="btn-xs" v-if="props.item.sucessed === true">Connected</bs-label>
           <bs-label type="warning" class="btn-xs" v-if="props.item.sucessed === undefined">Disconnected</bs-label>
@@ -26,7 +27,7 @@
           <i class="fa fa-server" aria-hidden="true"></i> Instances
         </button>
 
-        <bs-label type="primary"><i class="fa fa-cloud"></i> {{ props.item.provider }}</bs-label>
+        <bs-label type="primary"><i :class="toLower(props.item.provider, 'icon-')"></i> {{ props.item.provider }}</bs-label>
         <bs-label type="success"><i class="fa fa-cloud-upload"></i> {{ props.item.regions.length }} Regions</bs-label>
         <bs-label type="success"><i class="fa fa-bullseye"></i> {{ props.item.zones.length }} Zones</bs-label>
       </template>

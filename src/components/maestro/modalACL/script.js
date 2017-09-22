@@ -11,7 +11,9 @@ export default {
 
   props: {
     entity: {},
-    fielder: {default: "roles", type: String}
+    fielder: {default: "roles", type: String},
+    showUser: {default: true, type: Boolean},
+    showTeam: {default: true, type: Boolean}
   },
 
   data() {
@@ -57,7 +59,7 @@ export default {
     },
 
     editLoad () {
-      this.value = _.get(this.model, 'roles', [])
+      this.value = _.get(this.model, this.fielder, [])
     },
 
     setupModel () {
@@ -69,7 +71,7 @@ export default {
 
       const cleanArr = this.model[this.fielder].map(e=>_.pick(e, ['_id', 'email', 'name', 'refs', 'role']))
       FectherEntity(this.entity)()
-        .update(this.finishJob, cleanArr, this.model._id+'/roles')
+        .update(this.finishJob, cleanArr, this.model._id+'/'+this.fielder)
     },
 
     updateRolers(item, role) {

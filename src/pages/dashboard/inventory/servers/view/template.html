@@ -1,6 +1,6 @@
 <div>
   <div class="pb10">
-    <header-view-entity label="Server" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+    <header-view-entity label="Server" :name="model.hostname" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">
@@ -17,6 +17,8 @@
 
     <creater-config-list label="Service" :basket="model.services" @edit="edit" :index="4">
       <template slot="view" scope="props">
+        <i :class="toLower(props.item.name, 'icon-')" class="fa fa-genderless text-center w18"></i>
+
         {{props.item.name}} <span v-if="props.item.version">-></span>
         <bs-label>{{props.item.version}}</bs-label>
         <div class="pull-right">

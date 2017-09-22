@@ -5,9 +5,9 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'servers': 'Servers', 'applications': 'Applications', 'system': 'System', 'datacenter':'Datacenters', 'clients':'Clients'},
-      reference: null,
-      teams: ['teste']
+      submenu: {'jobs': 'Jobs', 'playbooks': 'Playbooks', 'task-template': 'Task Template',
+        'projects':'Projects', 'scheduler': 'Schedule', 'access-manager':'Access Manager'},
+      reference: null
     }
   },
 
@@ -24,7 +24,7 @@ export default {
   mounted() {
     this.setPage([
       'Cloud Playbooks',
-      'Setup and run yours playbooks, jobs and terraforms rules.',
+      'Setup, run, schedule and audit playbooks.',
       'icon-ansible'
     ])
   }

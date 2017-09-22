@@ -5,7 +5,7 @@ import topmenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'team/': 'Teams', 'projects': 'Projects'}
+      submenu: {'team/': 'Teams'}
     }
   },
 

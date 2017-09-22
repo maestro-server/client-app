@@ -5,7 +5,7 @@
     <form class="row form-horizontal">
       <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
 
-        <tab header="Users">
+        <tab header="Users" v-if="showUser">
           <div class="col-xs-12">
             <h5>Search users by name</h5>
 
@@ -21,7 +21,7 @@
           </div>
         </tab>
 
-        <tab header="Teams">
+        <tab header="Teams" v-if="showTeam">
 
           <div class="col-xs-12">
             <h5>Search teams by name</h5>

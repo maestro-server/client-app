@@ -22,6 +22,10 @@ export default {
   },
 
   methods: {
+    toLower(str, app = '') {
+      return app + _.kebabCase(str.toLowerCase())
+    },
+
     edit: function (index=0) {
       this.MCreate
         .setTabShow(index)

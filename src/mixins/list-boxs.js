@@ -24,6 +24,10 @@ export default {
   },
 
   methods: {
+    toLower(str, app = '') {
+      return app + _.kebabCase(str.toLowerCase())
+    },
+
     fetchData (force=false) {
       FectherEntity(this.entity)({force})
         .find((e) => this.result = e.data)

@@ -5,7 +5,7 @@
 
   <div class="col-xs-12 mt10 row">
     <displayer class="col-sm-2 col-xs-4 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'" v-if="item.val">
-      <h4 class="white">{{item.val}}</h4>
+      <h4 class="white"><i :class="toLower(item.val, 'icon-')" class="fa-lg white"></i> {{item.val}}</h4>
     </displayer>
   </div>
 

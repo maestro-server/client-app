@@ -13,8 +13,8 @@ export default {
     return {
       menu: {
         teams: ['Teams', 'fa-users'],
-        projects: ['Projects', 'fa-sticky-note-o'],
         providers: ['Providers', 'fa-wrench'],
+        events: ['Events', 'fa-bell'],
         hr: true,
         access_manager: ['Access Manager', 'fa-key'],
         profile: ['Profile', 'fa-user'],

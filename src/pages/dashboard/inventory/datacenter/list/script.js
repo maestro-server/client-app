@@ -1,5 +1,6 @@
 'use strict'
 
+import _ from 'lodash'
 import Datacenters from 'factories/datacenters'
 import ListBox from 'mixins/list-boxs'
 

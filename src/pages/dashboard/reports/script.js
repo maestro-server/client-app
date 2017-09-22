@@ -5,9 +5,8 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'servers': 'Servers', 'applications': 'Applications', 'system': 'System', 'datacenter':'Datacenters', 'clients':'Clients'},
-      reference: null,
-      teams: ['teste']
+      submenu: {'reports': 'Reports', 'events': 'Events'},
+      reference: null
     }
   },
 
@@ -23,8 +22,8 @@ export default {
 
   mounted() {
     this.setPage([
-      'Cloud Reports',
-      'Create and mananger custom reports',
+      'Reports',
+      'Create your own reports, schedule and exports.',
       'fa-map'
     ])
   }

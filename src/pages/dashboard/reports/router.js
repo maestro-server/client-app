@@ -1,9 +1,15 @@
 'use strict'
-import comp from './reports.vue'
+import comp from './reports'
+
+import reports from './reports/router'
+import events from './events/router'
 
 export default {
-  name: 'reports',
   path: 'reports',
+  redirect: 'reports/reports/list',
   component: comp,
-  children: []
+  children: [
+    reports,
+    events
+  ]
 }
