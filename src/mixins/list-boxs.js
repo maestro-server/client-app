@@ -24,7 +24,7 @@ export default {
   },
 
   methods: {
-    fetchData (force=true) {
+    fetchData (force=false) {
       FectherEntity(this.entity)({force})
         .find((e) => this.result = e.data)
     },
@@ -37,7 +37,7 @@ export default {
 
     editE (entity) {
       this.MCreate
-        .onFinishCallBack((e) => _.merge(entity, e))
+        .onFinishCallBack(() => this.fetchData(true))
         .show(entity)
     },
 

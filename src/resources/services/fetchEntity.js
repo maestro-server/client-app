@@ -12,9 +12,9 @@ const FetcherData = (Entity) => (opts = {}) => {
 
   return {
     find (fn, query = {}) {
-
       const queryRer =_.reduce(query, (or, rr, kr)=>`${or}_${rr}_${kr}`, '') || 'list'
       const fk = `${k}_${queryRer}`
+
       CacheRequester(fk)(opts)(tenant)(fn)
         .process((end) => {
           new Entity(query)
@@ -54,6 +54,8 @@ const FetcherData = (Entity) => (opts = {}) => {
             .authorization()
             .updateID(key, end)
         });
+
+      CacheRequester(fk)(opts)(tenant)(fn)
     },
 
     patch (fn, model, path) {
@@ -70,6 +72,7 @@ const FetcherData = (Entity) => (opts = {}) => {
 
     remove (fn, model, path) {
       const key = path || model._id
+      const list_k = `${k}_list`
       const fk = `${k}_${key}`
 
       CacheRequester(fk)(opts)(tenant)(fn)
@@ -79,6 +82,9 @@ const FetcherData = (Entity) => (opts = {}) => {
             .authorization()
             .deleteID(key, end)
         });
+
+      CacheRequester(list_k)(opts)(tenant)(fn)
+        .remove(end=>end);
     }
   }
 

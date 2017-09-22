@@ -8,7 +8,6 @@ import acceptTenants from '../libs/acceptableTenants'
 const CacheRequester = (k) => ({time, persistence, force}) => ({refs, _id}={}) => (fn) => {
 
     const key = acceptTenants(refs) ? `${k}_${_id}` : k
-
     const callback = function (result) {
       if(result.status == 200 && !_.isEmpty(result.data)) {
         storage({k:key, time, persistence})
