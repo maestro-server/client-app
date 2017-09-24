@@ -1,7 +1,15 @@
 <nav>
   <ul class="nav nav-tabs">
-    <router-link tag="li" :to="url(key)" v-for="link, key in list" :key="key" active-class="active">
-      <a>{{ link }}</a>
-    </router-link>
+    <template v-for="link, key in list">
+      <router-link tag="li" :to="url(key)" active-class="active">
+        <a>{{ link }}</a>
+      </router-link>
+    </template>
+
+    <dropdown :text="moreTitle" style="margin-right: 20px;" v-if="more">
+      <router-link tag="li" :to="url(k)" v-for="item, k in more" :key="k" active-class="active">
+        <a>{{ item }}</a>
+      </router-link>
+    </dropdown>
   </ul>
 </nav>

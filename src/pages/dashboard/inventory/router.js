@@ -7,6 +7,9 @@ import clients from './clients/router'
 import datacenter from './datacenter/router'
 import providers from './providers/router'
 import settings from './settings/single/router'
+import loadbalances from './loadbalances/router'
+import databases from './databases/router'
+import brokers from './brokers/router'
 
 export default {
   name: 'inventory',
@@ -20,6 +23,9 @@ export default {
     datacenter,
     clients,
     settings,
-    providers
+    providers,
+    loadbalances,
+    databases,
+    brokers
   ]
 }

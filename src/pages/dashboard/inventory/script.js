@@ -5,7 +5,26 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'servers': 'Servers', 'applications': 'Applications', 'system': 'System', 'datacenter':'Datacenters', 'clients':'Clients'}
+      submenu: {
+        'servers': 'Servers',
+        'applications': 'Applications',
+        'loadbalances': 'LoadBalances',
+        'databases': 'Databases',
+        'system': 'System',
+        'datacenter':'Datacenters',
+        'clients':'Clients'
+      },
+      'more': {
+        'cache': 'Cache',
+        'brokers': 'Brokers/Streams',
+        'serverless': 'Serverless',
+        'api-gateway': 'Api Gateway',
+        'cdn': 'CDNs',
+        'object-storage': 'Object Storages',
+        'containers-orchestration': 'Containers Orchestration',
+        'monitor': 'Monitoring System',
+        'logs': 'Logs System'
+      }
     }
   },
 

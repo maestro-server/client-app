@@ -1,15 +1,16 @@
 'use strict'
 import comp from './reports'
 
-import reports from './reports/router'
+import exports from './exports/router'
 import events from './events/router'
 
 export default {
+  name: 'reports',
   path: 'reports',
-  redirect: 'reports/reports/list',
+  redirect: 'reports/exports',
   component: comp,
   children: [
-    reports,
+    exports,
     events
   ]
 }

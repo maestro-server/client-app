@@ -4,7 +4,7 @@ import list from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'playbooks',
+  path: 'playbook',
   component: comp,
   children: [
     list,

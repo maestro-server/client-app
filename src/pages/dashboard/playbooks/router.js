@@ -9,8 +9,9 @@ import scheduler from './scheduler/router'
 import accessManager from './accessManager/router'
 
 export default {
+  name: 'playbooks',
   path: 'playbooks',
-  redirect: 'playbooks/playbook/list',
+  redirect: 'playbooks/jobs',
   component: comp,
   children: [
     project,

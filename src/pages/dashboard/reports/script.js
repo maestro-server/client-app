@@ -5,7 +5,7 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'reports': 'Reports', 'events': 'Events'},
+      submenu: {'exports': 'Reports', 'events': 'Events'},
       reference: null
     }
   },

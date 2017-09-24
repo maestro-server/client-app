@@ -1,10 +1,10 @@
 'use strict'
-import comp from './applications'
+import comp from './exports'
 import list from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'applications',
+  path: 'exports',
   component: comp,
   children: [
     list,

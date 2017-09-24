@@ -5,7 +5,7 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'jobs': 'Jobs', 'playbooks': 'Playbooks', 'task-template': 'Task Template',
+      submenu: {'jobs': 'Jobs', 'playbook': 'Playbooks', 'task-template': 'Task Template',
         'projects':'Projects', 'scheduler': 'Schedule', 'access-manager':'Access Manager'},
       reference: null
     }
