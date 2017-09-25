@@ -25,26 +25,20 @@ export default {
 
   data () {
     return {
+      own: 'no',
       app: {
-        name: null, description: null,
-        environment: null, system: [],
-        language: null, cluster: null,
-        deploy: [], tags: [], servers: [], role: {}
+        family: 'Loadbalance',
+        name: null, description: null, provider:null,
+        tags: [], servers: [], targets: []
       },
       options: {
-        environment:[],
-        role: [],
-        deploy:[],
-        languages: [],
-        clusters: []
+        providers: []
       }
     }
   },
 
   computed: {
-    tab_role() {return this.$refs.tab_role},
     tab_servers() {return this.$refs.tab_servers},
-    tab_deploy() {return this.$refs.tab_deploy},
     tab_system() {return this.$refs.tab_system},
     tab_tags() {return this.$refs.tab_tags}
   },
@@ -57,9 +51,7 @@ export default {
     createLoad () {
       this.tabShow=0
       this.app = {}
-      this.tab_role.reset()
       this.tab_servers.reset()
-      this.tab_deploy.reset()
       this.tab_tags.reset()
       this.tab_system.reset()
     },
@@ -73,8 +65,6 @@ export default {
       }
 
       this.$set(this, 'app', this.model)
-      this.tab_role.updaterEdit(this.app.role)
-      this.tab_deploy.updaterEdit(this.model.deploy)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_system.updaterEdit(this.model.system)
     },
@@ -99,7 +89,7 @@ export default {
 
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'app_options'})
+        .find(this.fetchAdminer, {key: 'lb_options'})
     }
 
   },

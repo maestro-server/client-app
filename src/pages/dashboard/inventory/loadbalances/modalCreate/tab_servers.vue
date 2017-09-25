@@ -1,8 +1,12 @@
 <template>
 
-  <creater-list :basket="value" label="Server" :showAddBtn="false" @update="updaterEdit">
+  <creater-list :basket="value" :label="label" :showAddBtn="false" @update="updaterEdit">
     <template slot="forms">
-      <p class="col-xs-12" >List all servers belongs to application, using the form below to search this servers.</p>
+      <p class="col-xs-12" >
+        <slot name="label">
+          List all servers belongs to application, using the form below to search in servers.
+        </slot>
+      </p>
 
       <div class="col-xs-6">
         <typeahead label="Search by Hostname"
@@ -38,7 +42,11 @@
         </span>
     </template>
 
-    <small class="pull-right" slot="footer">List all servers which that app stay, don't put dbs, cache, lbs or storage object</small>
+    <small class="pull-right" slot="footer">
+      <slot name="footer">
+        List all servers which that app stay, don't put dbs, cache, lbs or storage object
+      </slot>
+    </small>
 
   </creater-list>
 
@@ -53,8 +61,11 @@
   export default {
     mixins: [TabCreaterList],
 
-    data: function () {
+    props: {
+      label: {default: 'Server'}
+    },
 
+    data: function () {
       return {
         URL: `${new Servers().getUrl()}?query=`,
         template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +

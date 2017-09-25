@@ -20,15 +20,30 @@
                         v-model="app.description"
               ></bs-input>
 
-              <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment"
-                         name="environment"
-                         label="Environment*" v-validate.initial="'required'"
-                         :error="makeError('environment')"></bs-select>
+              <div class="row">
+                <div class="col-xs-3 text-right mt5">
+                  <label>Third Party?</label>
+                </div>
+                <div class="col-xs-9">
+                  <button-group v-model="own" type="primary">
+                    <bs-radio selected-value="yes">Yes</bs-radio>
+                    <bs-radio selected-value="no">No</bs-radio>
+                  </button-group>
+                </div>
+              </div>
 
-              <bs-select form-type="horizontal" search :options="options.languages" v-model="app.language" name="type"
-                         label="Language*" placeholder="Code is?"></bs-select>
-              <bs-select form-type="horizontal" :options="options.clusters" v-model="app.cluster" name="type"
-                         label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>
+              <bs-input class="mt20" form-type="horizontal" name="provider" label="Provider"
+                        v-model="app.provider"
+              ></bs-input>
+
+              <bs-input class="mt20" form-type="horizontal" name="endpoint" label="EndPoint"
+                        v-model="app.endpoint"
+              ></bs-input>
+
+              <bs-input class="mt20" form-type="horizontal" name="healthcheck" label="HealthCheck"
+                        v-model="app.healthcheck"
+              ></bs-input>
+
 
             </div>
 
@@ -36,29 +51,27 @@
 
         </tab>
 
-        <!-- ================= Spec ================= -->
+        <!-- ================= Targets ================= -->
         <!-- ============================================== -->
-        <tab header="Role">
-          <tab-role :roles="options.role" @update="val => app.role = val" ref="tab_role"></tab-role>
+        <tab header="Targets">
+          <tab-servers @update="val => app.targets = val" ref="tab_servers" label="Target">
+            <template slot="label">
+              List all targets behond the loadbalance, using the form below to search in servers.
+            </template>
+            <template slot="footer"></template>
+          </tab-servers>
+        </tab>
+
+        <!-- ================= Servers ================= -->
+        <!-- ============================================== -->
+        <tab header="Servers" :disabled="own == 'yes'">
+          <tab-servers @update="val => app.servers = val" ref="tab_servers"></tab-servers>
         </tab>
 
         <!-- ================= System ================= -->
         <!-- ============================================== -->
         <tab header="System">
           <tab-system @update="val => app.system = val" ref="tab_system"></tab-system>
-        </tab>
-
-
-        <!-- ================= Servers ================= -->
-        <!-- ============================================== -->
-        <tab header="Servers">
-          <tab-servers @update="val => app.servers = val" ref="tab_servers"></tab-servers>
-        </tab>
-
-        <!-- ================= Deploy ================= -->
-        <!-- ============================================== -->
-        <tab header="Deploy">
-          <tab-deploy :types="options.deploy" @update="val => app.deploy = val" ref="tab_deploy"></tab-deploy>
         </tab>
 
         <!-- ================= Tags ================= -->
