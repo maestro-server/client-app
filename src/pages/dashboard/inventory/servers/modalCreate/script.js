@@ -5,11 +5,11 @@ import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
-import tabDatacenter from './tab_datacenter'
-import tabAuth from './tab_auth'
-import tabSetups from './tab_setups'
-import tabStorage from './tab_storage'
-import tabTags from './tab_tags'
+import tabDatacenter from 'src/pages/dashboard/_modules/tabs/tab_datacenter'
+import tabAuth from 'src/pages/dashboard/_modules/tabs/tab_auth'
+import tabSetups from 'src/pages/dashboard/_modules/tabs/tab_setups'
+import tabStorage from 'src/pages/dashboard/_modules/tabs/tab_storage'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 
 export default {
   mixins: [Modals],

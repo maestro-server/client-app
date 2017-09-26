@@ -6,11 +6,11 @@ import Applications from 'factories/applications'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
-import tabTags from './tab_tags'
-import tabServers from './tab_servers'
-import tabDeploy from './tab_deploy'
-import tabRole from './tab_role'
-import tabSystem from './tab_system'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
+import tabDeploy from 'src/pages/dashboard/_modules/tabs/tab_deploy'
+import tabRole from 'src/pages/dashboard/_modules/tabs/tab_role'
+import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
 export default {
   mixins: [Modals],

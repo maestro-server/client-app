@@ -5,8 +5,8 @@ import Clients from 'factories/clients'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
-import tabTags from './tab_tags'
-import tabChannel from './tab_channel'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabChannel from 'src/pages/dashboard/_modules/tabs/tab_channel'
 
 export default {
   mixins: [Modals],

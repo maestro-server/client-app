@@ -6,9 +6,9 @@ import System from 'factories/system'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
-import tabTags from './tab_tags'
-import tabCheck from './tab_check'
-import tabClients from './tab_clients'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabCheck from 'src/pages/dashboard/_modules/tabs/tab_check'
+import tabClients from 'src/pages/dashboard/_modules/tabs/tab_clients'
 
 export default {
   mixins: [Modals],

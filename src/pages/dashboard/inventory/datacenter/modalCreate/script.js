@@ -2,7 +2,6 @@
 import Modals from 'mixins/modals'
 import Datacenters from 'factories/datacenters'
 import Adminer from 'factories/adminer'
-import formatAdminer from 'src/resources/libs/formatAdminerData'
 import FectherEntity from 'services/fetchEntity'
 
 
