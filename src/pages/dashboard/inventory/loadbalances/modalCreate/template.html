@@ -26,15 +26,24 @@
                 </div>
                 <div class="col-xs-9">
                   <button-group v-model="own" type="primary">
-                    <bs-radio selected-value="yes">Yes</bs-radio>
-                    <bs-radio selected-value="no">No</bs-radio>
+                    <bs-radio :selected-value="1">Yes</bs-radio>
+                    <bs-radio :selected-value="0">No</bs-radio>
                   </button-group>
                 </div>
               </div>
 
-              <bs-input class="mt20" form-type="horizontal" name="provider" label="Provider"
-                        v-model="app.provider"
+              <div class="text-right mt5">
+                <a class="btn btn-xs" :class="changeType" v-html="labelBtnChangeProvider" @click.stop="changeProvider"></a>
+              </div>
+
+              <bs-select form-type="horizontal" :options="providers" v-model="app.provider" name="provider"
+                         label="Provider*" v-validate.initial="'required'" class="mt5" v-if="!outher"></bs-select>
+
+              <bs-input form-type="horizontal" name="provider" label="Provider*"
+                        v-model="app.provider" v-if="outher" class="mt5"
               ></bs-input>
+
+              <hr>
 
               <bs-input class="mt20" form-type="horizontal" name="endpoint" label="EndPoint"
                         v-model="app.endpoint"
@@ -42,6 +51,7 @@
 
               <bs-input class="mt20" form-type="horizontal" name="healthcheck" label="HealthCheck"
                         v-model="app.healthcheck"
+                        help="How loadblance verify if targets is up?"
               ></bs-input>
 
 

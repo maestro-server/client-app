@@ -25,22 +25,33 @@ export default {
 
   data () {
     return {
-      own: 'no',
+      own: 0,
       app: {
         family: 'Loadbalance',
         name: null, description: null, provider:null,
         tags: [], servers: [], targets: []
       },
       options: {
-        providers: []
-      }
+        third: [],
+        own: []
+      },
+      outher: false,
     }
   },
 
   computed: {
     tab_servers() {return this.$refs.tab_servers},
     tab_system() {return this.$refs.tab_system},
-    tab_tags() {return this.$refs.tab_tags}
+    tab_tags() {return this.$refs.tab_tags},
+    providers() {
+      return this.own ? this.options.third : this.options.own
+    },
+    labelBtnChangeProvider() {
+      return this.outher ? 'Back to selection provider' : '<i class="fa fa-plus"></i> Provider'
+    },
+    changeType() {
+      return this.outher ? 'btn-warning' : 'btn-primary'
+    }
   },
 
   methods: {
@@ -90,7 +101,11 @@ export default {
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key: 'lb_options'})
-    }
+    },
+
+    changeProvider() {
+      this.outher = !this.outher
+    },
 
   },
 

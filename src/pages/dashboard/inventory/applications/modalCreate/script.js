@@ -99,7 +99,7 @@ export default {
 
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'app_options'})
+        .find(this.fetchAdminer, {key: 'lb_options'})
     }
 
   },
