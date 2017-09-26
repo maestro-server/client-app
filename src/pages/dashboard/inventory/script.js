@@ -15,7 +15,7 @@ export default {
         'clients':'Clients'
       },
       'more': {
-        'cache': 'Cache',
+        'cache': 'Distributed Cache',
         'brokers': 'Brokers/Streams',
         'serverless': 'Serverless',
         'api-gateway': 'Api Gateway',

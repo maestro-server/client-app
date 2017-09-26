@@ -26,7 +26,6 @@ export default {
       return [
         {val: this.model.environment, type: 'primary'},
         {val: this.model.language},
-        {val: _.get(this.model, 'os.name', false)},
         {val: _.get(this.model, 'role.role', false)}
       ]
     }

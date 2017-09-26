@@ -1,6 +1,6 @@
 <div>
   <div class="pb10">
-    <header-view-entity label="Application" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+    <header-view-entity :label="label" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
   <div class="col-xs-12 mt10 row">
@@ -15,7 +15,7 @@
 
   <div class="col-xs-6">
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
+    <creater-config-list label="Target" :basket="list_targets" @edit="edit" :index="3" icons="fa-server">
       <template slot="view" scope="props">
         <b>{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if="props.item.datacenters"> - {{props.item.datacenters.name}}</span><br/>
           <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
@@ -25,10 +25,13 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Deploy" :basket="model.deploy" @edit="edit" :index="4" icons="fa-code-fork">
+    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
       <template slot="view" scope="props">
-        {{props.item.type}}
-        <bs-label>{{props.item.provider}}</bs-label>
+        <b>{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if="props.item.datacenters"> - {{props.item.datacenters.name}}</span><br/>
+        <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
+        <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
+        <bs-label type='success'>{{props.item.role}}</bs-label>
+        <bs-label type='success'>{{props.item.environment}}</bs-label>
       </template>
     </creater-config-list>
 

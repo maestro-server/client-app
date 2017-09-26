@@ -30,6 +30,12 @@ export default {
     }
   },
 
+  computed: {
+    url() {
+      return this.entity.getUrl() + '?family=Application'
+    }
+  },
+
   methods: {
     prepared(data) {
       return data.map((d) => {

@@ -11,6 +11,15 @@ import loadbalances from './loadbalances/router'
 import databases from './databases/router'
 import brokers from './brokers/router'
 
+import cache from './cache/router'
+import serverless from './serverless/router'
+import apiGateway from './api-gateway/router'
+import cdn from './cdn/router'
+import objectStorage from './object-storage/router'
+import containersOrchestration from './containers-orchestration/router'
+import monitor from './monitor/router'
+import logs from './logs/router'
+
 export default {
   name: 'inventory',
   path: 'inventory',
@@ -26,6 +35,14 @@ export default {
     providers,
     loadbalances,
     databases,
-    brokers
+    brokers,
+    cache,
+    serverless,
+    apiGateway,
+    cdn,
+    objectStorage,
+    containersOrchestration,
+    monitor,
+    logs
   ]
 }

@@ -54,6 +54,10 @@ export default {
       this.errors.clear()
     },
 
+    resetData () {
+      this.$set(this, 'data', _.assign({}, this.initialApp))
+    },
+
     onFinishCallBack (func) {
       this.callback = func
       return this

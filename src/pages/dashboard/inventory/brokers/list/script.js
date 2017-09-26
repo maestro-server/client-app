@@ -13,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      name: "Brokers/Stream"
+      name: "Broker"
     }
   }
 }

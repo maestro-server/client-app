@@ -13,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      name: "Database"
+      name: "DataBase"
     }
   }
 }

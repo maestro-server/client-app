@@ -1,111 +1,85 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Servers from 'factories/servers'
-import Applications from 'factories/applications'
-import Adminer from 'factories/adminer'
-import FectherEntity from 'services/fetchEntity'
+import ModalsApps from 'mixins/modals-apps'
 
-import tabTags from './tab_tags'
-import tabServers from './tab_servers'
-import tabDeploy from './tab_deploy'
-import tabRole from './tab_role'
-import tabSystem from './tab_system'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
+import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
+import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, ModalsApps],
 
   components: {
     tabTags,
     tabServers,
-    tabDeploy,
     tabRole,
     tabSystem
   },
 
   data () {
     return {
-      app: {
-        name: null, description: null,
-        environment: null, system: [],
-        language: null, cluster: null,
-        deploy: [], tags: [], servers: [], role: {}
+      family: 'Brokers',
+      own: 0,
+      initialData: {
+        name: null, description: null, provider:null,
+        tags: [], servers: [], targets: [],
+        role: {healthcheck: null, endpoint: null}
       },
+      data: {},
       options: {
-        environment:[],
-        role: [],
-        deploy:[],
-        languages: [],
-        clusters: []
-      }
+        third: [],
+        own: []
+      },
+      outher: false,
     }
   },
 
   computed: {
-    tab_role() {return this.$refs.tab_role},
     tab_servers() {return this.$refs.tab_servers},
-    tab_deploy() {return this.$refs.tab_deploy},
+    tab_targets() {return this.$refs.tab_targets},
     tab_system() {return this.$refs.tab_system},
-    tab_tags() {return this.$refs.tab_tags}
+    tab_role() {return this.$refs.tab_role},
+    tab_tags() {return this.$refs.tab_tags},
+    providers() {
+      return this.own ? this.options.third : this.options.own
+    },
+    labelPService() {
+      return this.own ? 'Provider' : 'Service'
+    },
+    labelBtnChangeProvider() {
+      return this.outher ? 'Back to selection '+this.labelPService : '<i class="fa fa-plus"></i> '+this.labelPService
+    },
+    changeType() {
+      return this.outher ? 'btn-warning' : 'btn-primary'
+    }
   },
 
   methods: {
-    afterShow () {
-      this.text.title =  this.create ? 'Create new Applications' : `Edit ${this.model.name} applications`
-    },
-
     createLoad () {
       this.tabShow=0
-      this.app = {}
+      this.resetData()
       this.tab_role.reset()
       this.tab_servers.reset()
-      this.tab_deploy.reset()
+      this.tab_targets.reset()
       this.tab_tags.reset()
       this.tab_system.reset()
     },
 
     editLoad () {
-      if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)()
-          .find((e) => {
-            this.tab_servers.updaterEdit(_.get(e, 'data.items', []))
-          }, {_id: this.model.servers})
-      }
+      this.editLoadServers('servers')
+      this.editLoadServers('targets')
 
-      this.$set(this, 'app', this.model)
-      this.tab_role.updaterEdit(this.app.role)
-      this.tab_deploy.updaterEdit(this.model.deploy)
+      this.$set(this, 'data', this.model)
+      this.tab_role.updaterEdit(this.model.role)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_system.updaterEdit(this.model.system)
     },
 
-    setupModel () {
-      this.model = _.pickBy(this.app, _.identity)
-    },
-
-    createSave () {
-      this.setupModel()
-
-      FectherEntity(Applications)()
-        .create(this.finishJob, this.model)
-    },
-
-    editSave () {
-      this.setupModel()
-
-      FectherEntity(Applications)()
-        .update(this.finishJob, this.model)
-    },
-
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'app_options'})
+    changeProvider() {
+      this.outher = !this.outher
     }
-
-  },
-
-  created() {
-    this.fetchData()
   }
 
 }

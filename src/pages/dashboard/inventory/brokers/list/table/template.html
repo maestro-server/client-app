@@ -1,6 +1,6 @@
 <div>
   <v-server-table
-    name="app-list"
+    name="brokers-list"
     :url="url"
     :columns="columns"
     :options="options"
@@ -10,8 +10,8 @@
     <template slot="qtdserver" scope="props">
       <bs-label>{{props.row.qtdserver}}</bs-label>
     </template>
-    <template slot="qtddeploy" scope="props">
-      <bs-label>{{props.row.qtddeploy}}</bs-label>
+    <template slot="qtdtargets" scope="props">
+      <bs-label>{{props.row.qtdtargets}}</bs-label>
     </template>
     <template slot="actions" scope="props">
       <div class="min-table">

@@ -13,21 +13,20 @@
 
             <div class="col-xs-12">
 
-              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="app.name"
+              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
-                        v-model="app.description"
+                        v-model="data.description"
               ></bs-input>
 
-              <bs-select form-type="horizontal" :options="options.environment" v-model="app.environment"
-                         name="environment"
-                         label="Environment*" v-validate.initial="'required'"
+              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
+                         name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
-              <bs-select form-type="horizontal" search :options="options.languages" v-model="app.language" name="type"
-                         label="Language*" placeholder="Code is?"></bs-select>
-              <bs-select form-type="horizontal" :options="options.clusters" v-model="app.cluster" name="type"
+              <bs-select form-type="horizontal" search :options="options.languages" v-model="data.language" name="type"
+                         label="Language" placeholder="Code is?"></bs-select>
+              <bs-select form-type="horizontal" :options="options.clusters" v-model="data.cluster" name="type"
                          label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>
 
             </div>
@@ -39,32 +38,32 @@
         <!-- ================= Spec ================= -->
         <!-- ============================================== -->
         <tab header="Role">
-          <tab-role :roles="options.role" @update="val => app.role = val" ref="tab_role"></tab-role>
+          <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role"></tab-role>
         </tab>
 
         <!-- ================= System ================= -->
         <!-- ============================================== -->
         <tab header="System">
-          <tab-system @update="val => app.system = val" ref="tab_system"></tab-system>
+          <tab-system @update="val => data.system = val" ref="tab_system"></tab-system>
         </tab>
 
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers">
-          <tab-servers @update="val => app.servers = val" ref="tab_servers"></tab-servers>
+          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
         </tab>
 
         <!-- ================= Deploy ================= -->
         <!-- ============================================== -->
         <tab header="Deploy">
-          <tab-deploy :types="options.deploy" @update="val => app.deploy = val" ref="tab_deploy"></tab-deploy>
+          <tab-deploy :types="options.deploy" @update="val => data.deploy = val" ref="tab_deploy"></tab-deploy>
         </tab>
 
         <!-- ================= Tags ================= -->
         <!-- ============================================== -->
         <tab header="Tags">
-          <tab-tags @update="val => app.tags = val" ref="tab_tags"></tab-tags>
+          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
         </tab>
       </tabs>
 

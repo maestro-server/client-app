@@ -1,10 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Servers from 'factories/servers'
-import Applications from 'factories/applications'
-import Adminer from 'factories/adminer'
-import FectherEntity from 'services/fetchEntity'
+import ModalsApps from 'mixins/modals-apps'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
@@ -13,7 +10,7 @@ import tabRole from 'src/pages/dashboard/_modules/tabs/tab_role'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, ModalsApps],
 
   components: {
     tabTags,
@@ -25,12 +22,14 @@ export default {
 
   data () {
     return {
-      app: {
+      family: 'Application',
+      initialData: {
         name: null, description: null,
         environment: null, system: [],
         language: null, cluster: null,
         deploy: [], tags: [], servers: [], role: {}
       },
+      data: {},
       options: {
         environment:[],
         role: [],
@@ -50,13 +49,9 @@ export default {
   },
 
   methods: {
-    afterShow () {
-      this.text.title =  this.create ? 'Create new Applications' : `Edit ${this.model.name} applications`
-    },
-
     createLoad () {
       this.tabShow=0
-      this.app = {}
+      this.resetData()
       this.tab_role.reset()
       this.tab_servers.reset()
       this.tab_deploy.reset()
@@ -65,47 +60,14 @@ export default {
     },
 
     editLoad () {
-      if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)()
-          .find((e) => {
-            this.tab_servers.updaterEdit(_.get(e, 'data.items', []))
-          }, {_id: this.model.servers})
-      }
+      this.editLoadServers('servers')
 
-      this.$set(this, 'app', this.model)
-      this.tab_role.updaterEdit(this.app.role)
+      this.$set(this, 'data', this.model)
+      this.tab_role.updaterEdit(this.data.role)
       this.tab_deploy.updaterEdit(this.model.deploy)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_system.updaterEdit(this.model.system)
-    },
-
-    setupModel () {
-      this.model = _.pickBy(this.app, _.identity)
-    },
-
-    createSave () {
-      this.setupModel()
-
-      FectherEntity(Applications)()
-        .create(this.finishJob, this.model)
-    },
-
-    editSave () {
-      this.setupModel()
-
-      FectherEntity(Applications)()
-        .update(this.finishJob, this.model)
-    },
-
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'lb_options'})
     }
-
-  },
-
-  created() {
-    this.fetchData()
   }
 
 }

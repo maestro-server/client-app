@@ -13,9 +13,9 @@ export default {
   data: function () {
     return {
       entity: new Applications(),
-      columns: ['name', 'lsystem', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'provider', 'lsystem', 'environment', 'qtdtargets', 'qtdserver', 'updated_at', 'created_at', 'actions'],
       options: {
-        filterable: ['name', 'language', 'environment', 'lsystem'],
+        filterable: ['name', 'provider', 'environment', 'lsystem'],
         listColumns: {
           lsystem: []
         },
@@ -23,10 +23,16 @@ export default {
           updated_at: 'Updated At',
           lsystem: "System",
           qtdserver: 'Servers',
-          qtddeploy: 'Deploys',
+          qtdtargets: 'Targets',
           created_at: 'Created At'
         }
       }
+    }
+  },
+
+  computed: {
+    url() {
+      return this.entity.getUrl() + '?family=Loadbalance'
     }
   },
 
@@ -34,7 +40,7 @@ export default {
     prepared(data) {
       return data.map((d) => {
         d.qtdserver = _.size(d.servers)
-        d.qtddeploy = _.size(d.deploy)
+        d.qtdtargets = _.size(d.targets)
 
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
 

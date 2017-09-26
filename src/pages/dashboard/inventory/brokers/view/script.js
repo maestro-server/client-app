@@ -13,34 +13,41 @@ export default {
   data: function () {
     return {
       entity: Applications,
-      model: {tags: [], servers:[], deploy:[]},
-      list_servers: []
+      label: 'Brokers',
+      model: {tags: [], servers:[], targets:[]},
+      list_servers: [],
+      list_targets: []
     }
   },
 
   computed: {
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers', 'targets'])
     },
     viewDisplayer() {
       return [
         {val: this.model.environment, type: 'primary'},
-        {val: this.model.language},
-        {val: _.get(this.model, 'os.name', false)},
-        {val: _.get(this.model, 'role.role', false)}
+        {val: this.model.provider}
       ]
     }
   },
 
   methods: {
     fetchServers() {
-      if (!_.isEmpty(this.model.servers)) {
+      this.fetchServersF('servers')
+      this.fetchServersF('targets')
+    },
+
+    fetchServersF(fielder) {
+      if (!_.isEmpty(this.model[fielder])) {
+        const data = 'list_'+fielder
+
         FectherEntity(Servers)({force: true})
           .find((e) => {
-            this.$set(this, 'list_servers', _.get(e, 'data.items', []))
-          }, {_id: this.model.servers})
+            this.$set(this, data, _.get(e, 'data.items', []))
+          }, {_id: this.model[fielder]})
       } else {
-        this.$set(this, 'list_servers', [])
+        this.$set(this, data, [])
       }
     }
   },
