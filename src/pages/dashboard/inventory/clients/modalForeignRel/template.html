@@ -3,33 +3,7 @@
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
 
     <form class="row form-horizontal">
-      <div class="col-xs-12">
-        <creater-list :basket="value" :label="label" :showAddBtn="false">
-
-          <template slot="forms">
-            <div class="text-right">
-              <router-link :to="{name: relName}" class="btn btn-primary btn-xs" target="_blank">
-                <i class="fa fa-plus-circle"></i> {{label}}
-              </router-link>
-            </div>
-
-            <typeahead :label="label" :placeholder="label"
-                       :async="URL"
-                       async-key="items"
-                       :onSearch="requestSearch"
-                       :template="template"
-                       form-type="horizontal"
-                       :on-hit="onHit"
-                       class="mt10"
-            ></typeahead>
-          </template>
-
-          <template slot="view" scope="props">
-            <b class="text-capitalize">{{props.item.name}}</b>
-          </template>
-
-        </creater-list>
-      </div>
+      <tab-foreign-relation :label="label" ref="tab_foreign_relation" @update="val => value = val" :relName="relName" :entity="relation"></tab-foreign-relation>
     </form>
 
     <div slot="modal-footer" class="modal-footer">

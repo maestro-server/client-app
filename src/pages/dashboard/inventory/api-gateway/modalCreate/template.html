@@ -59,19 +59,22 @@
         <!-- ================= Spec ================= -->
         <!-- ============================================== -->
         <tab header="Spec">
-          <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role"></tab-role>
+          <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role" :mapper="mapper"></tab-role>
         </tab>
 
         <!-- ================= Targets ================= -->
         <!-- ============================================== -->
-        <tab header="Targets">
-          <tab-servers @update="val => data.targets = val" ref="tab_targets" label="Target">
+        <tab header="Applications">
+          <tab-family-apps @update="val => data.targets = val" ref="tab_targets" label="Application">
             <template slot="label">
-              List all targets behond the loadbalance, using the form below to search in servers.
+              <p>
+                List all applications behond the api gateway.
+              </p>
             </template>
-            <template slot="footer"></template>
-          </tab-servers>
+          </tab-family-apps>
         </tab>
+
+
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->

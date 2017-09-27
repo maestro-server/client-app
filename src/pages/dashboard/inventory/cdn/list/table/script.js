@@ -23,7 +23,7 @@ export default {
           updated_at: 'Updated At',
           lsystem: "System",
           qtdserver: 'Servers',
-          qtdtargets: 'Targets',
+          qtdtargets: 'Applications',
           created_at: 'Created At'
         }
       }
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     url() {
-      return this.entity.getUrl() + '?family=Cdn'
+      return this.entity.getUrl() + '?family=CDN'
     }
   },
 

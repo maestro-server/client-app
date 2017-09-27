@@ -7,9 +7,11 @@
     <h5 class="mt0 text-center" v-if="role">{{role}} specification</h5>
 
     <template v-for="form in forms">
-      <bs-input class="mt20" form-type="horizontal"
+      <bs-input class="mt20"
+                form-type="horizontal"
                 :name="form.name"
                 :label="form.label"
+                :type="form.type"
                 v-model="deployer[form.name]"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"

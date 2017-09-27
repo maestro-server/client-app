@@ -15,13 +15,10 @@
 
   <div class="col-xs-6">
 
-    <creater-config-list label="Target" :basket="list_targets" @edit="edit" :index="3" icons="fa-server">
+    <creater-config-list label="Consumer" :basket="list_targets" @edit="edit" :index="2" icons="fa-code">
       <template slot="view" scope="props">
-        <b>{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if="props.item.datacenters"> - {{props.item.datacenters.name}}</span><br/>
-          <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
-          <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
-          <bs-label type='success'>{{props.item.role}}</bs-label>
-          <bs-label type='success'>{{props.item.environment}}</bs-label>
+        <b>{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+        <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>
       </template>
     </creater-config-list>
 
@@ -35,7 +32,7 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="2" icons="fa-briefcase">
+    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="4" icons="fa-briefcase">
       <template slot="view" scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>
       </template>

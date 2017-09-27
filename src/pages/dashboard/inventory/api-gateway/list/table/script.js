@@ -23,7 +23,7 @@ export default {
           updated_at: 'Updated At',
           lsystem: "System",
           qtdserver: 'Servers',
-          qtdtargets: 'Targets',
+          qtdtargets: 'Apps',
           created_at: 'Created At'
         }
       }

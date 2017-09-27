@@ -6,6 +6,7 @@
                 :name="form.name"
                 :label="form.label"
                 v-model="data[form.name]"
+                :type="form.type"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"
                 @blur="onHit"

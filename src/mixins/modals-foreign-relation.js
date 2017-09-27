@@ -7,8 +7,7 @@ export default {
     return {
       tmp: {created: [], deleted: []},
       value: [],
-      mirrorValue: [],
-      template: "<b>{{item.name}}</b>",
+      mirrorValue: []
     }
   },
 
@@ -30,12 +29,14 @@ export default {
       const list = _.get(this, `model.${this.fielder}`, [])
 
       this.$set(this, 'value', list)
-      this.mirrorValue = _.clone(list)
+      this.mirrorValue = _.clone(list.map(e => e._id))
+
+      this.tabRef.updaterEdit(list)
     },
 
     setupModel() {
-      const oldv = this.mirrorValue.map(e => e._id)
-      const newv = this.value.map(e => e._id)
+      const oldv = this.mirrorValue
+      const newv = this.value
 
       this.tmp.created = _.difference(newv, oldv)
       this.tmp.deleted = _.difference(oldv, newv)
@@ -48,8 +49,8 @@ export default {
     },
 
     createdItems(id) {
-      if (!_.isEmpty(id)) {
 
+      if (!_.isEmpty(id)) {
         const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)({force: true})
           .patch(this.finishJob, {id}, _id)
@@ -61,18 +62,6 @@ export default {
         const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)()
           .remove(this.finishJob, {id}, _id)
-      }
-    },
-
-    requestSearch(async, val, key='name') {
-      return `${async}%7B"${key}":"${val}"%7D`
-    },
-
-    onHit(item) {
-      const exist = _.find(this.value, ['_id', item._id])
-
-      if (!exist) {
-        this.value.push(item)
       }
     },
 
