@@ -75,7 +75,7 @@
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
-        <tab header="Servers" :disabled="own == 'yes'">
+        <tab header="Servers" :disabled="own == 1">
           <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
         </tab>
 

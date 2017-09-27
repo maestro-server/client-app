@@ -6,6 +6,34 @@ import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
+
+  data () {
+    return {
+      own: 0,
+      data: {},
+      options: {
+        third: [],
+        own: []
+      },
+      outher: false,
+    }
+  },
+
+  computed: {
+    providers() {
+      return this.own ? this.options.third : this.options.own
+    },
+    labelPService() {
+      return this.own ? 'Provider' : 'Service'
+    },
+    labelBtnChangeProvider() {
+      return this.outher ? 'Back to selection '+this.labelPService : '<i class="fa fa-plus"></i> '+this.labelPService
+    },
+    changeType() {
+      return this.outher ? 'btn-warning' : 'btn-primary'
+    }
+  },
+
   methods: {
     afterShow () {
       this.text.title =  this.create ? `Create new ${this.family}s` : `Edit ${this.model.name} ${this.family.toLowerCase()}s`
@@ -44,8 +72,11 @@ export default {
 
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key})
-    }
+    },
 
+    changeProvider() {
+      this.outher = !this.outher
+    }
   },
 
   created() {
