@@ -78,6 +78,8 @@
 .icon-html:before,
 .icon-html5:before,
 .icon-java:before,
+.icon-oracle-jdk-java:before,
+.icon-openjdk-java:before,
 .icon-javascript:before,
 .icon-jekyll:before,
 .icon-jenkins:before,
@@ -210,7 +212,7 @@
 .icon-heroku:before { content: "\f128"; }
 .icon-html:before { content: "\f129"; }
 .icon-html5:before { content: "\f12a"; }
-.icon-java:before { content: "\f12b"; }
+.icon-java:before, .icon-oracle-jdk-java:before, .icon-openjdk-java:before { content: "\f12b"; }
 .icon-javascript:before { content: "\f12c"; }
 .icon-jekyll:before { content: "\f12d"; }
 .icon-jenkins:before { content: "\f12e"; }

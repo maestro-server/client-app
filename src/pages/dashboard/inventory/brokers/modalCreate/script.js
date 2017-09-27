@@ -1,9 +1,11 @@
 'use strict'
 
+import Applications from 'factories/applications'
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabApplications from 'src/pages/dashboard/_modules/tabs/tab_applications'
 import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
@@ -14,18 +16,19 @@ export default {
   components: {
     tabTags,
     tabServers,
+    tabApplications,
     tabRole,
     tabSystem
   },
 
   data () {
     return {
-      family: 'Brokers',
+      family: 'Broker',
       own: 0,
       initialData: {
         name: null, description: null, provider:null,
         tags: [], servers: [], targets: [],
-        role: {healthcheck: null, endpoint: null}
+        role: {endpoint_zookeeper: null, endpoint: null, extra_config: null}
       },
       data: {},
       options: {
@@ -33,6 +36,11 @@ export default {
         own: []
       },
       outher: false,
+      mapper: [
+        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
+        {name: 'endpoint_zookeeper', label: 'Zookeeper Endpoint', validate: 'min:2'},
+        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+      ]
     }
   },
 
@@ -69,7 +77,7 @@ export default {
 
     editLoad () {
       this.editLoadServers('servers')
-      this.editLoadServers('targets')
+      this.editLoadServers('targets', Applications)
 
       this.$set(this, 'data', this.model)
       this.tab_role.updaterEdit(this.model.role)

@@ -24,8 +24,8 @@ export default {
       own: 0,
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [], targets: [],
-        role: {healthcheck: null, endpoint: null}
+        tags: [], servers: [],
+        role: {endpoint: null}
       },
       data: {},
       options: {
@@ -33,12 +33,14 @@ export default {
         own: []
       },
       outher: false,
+      mapper: [
+        {name: 'endpoint', label: 'Endpoint', validate: 'url'}
+      ]
     }
   },
 
   computed: {
     tab_servers() {return this.$refs.tab_servers},
-    tab_targets() {return this.$refs.tab_targets},
     tab_system() {return this.$refs.tab_system},
     tab_role() {return this.$refs.tab_role},
     tab_tags() {return this.$refs.tab_tags},
@@ -62,14 +64,12 @@ export default {
       this.resetData()
       this.tab_role.reset()
       this.tab_servers.reset()
-      this.tab_targets.reset()
       this.tab_tags.reset()
       this.tab_system.reset()
     },
 
     editLoad () {
       this.editLoadServers('servers')
-      this.editLoadServers('targets')
 
       this.$set(this, 'data', this.model)
       this.tab_role.updaterEdit(this.model.role)

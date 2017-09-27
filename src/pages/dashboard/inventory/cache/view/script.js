@@ -35,20 +35,6 @@ export default {
   methods: {
     fetchServers() {
       this.fetchServersF('servers')
-      this.fetchServersF('targets')
-    },
-
-    fetchServersF(fielder) {
-      if (!_.isEmpty(this.model[fielder])) {
-        const data = 'list_'+fielder
-
-        FectherEntity(Servers)({force: true})
-          .find((e) => {
-            this.$set(this, data, _.get(e, 'data.items', []))
-          }, {_id: this.model[fielder]})
-      } else {
-        this.$set(this, data, [])
-      }
     }
   },
 

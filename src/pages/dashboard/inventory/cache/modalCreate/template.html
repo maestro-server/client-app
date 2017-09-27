@@ -20,9 +20,6 @@
                          name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
-                        v-model="data.description"></bs-input>
-
               <div class="row">
                 <div class="col-xs-3 text-right mt5">
                   <label>Third Party?</label>
@@ -51,6 +48,11 @@
                           v-model="data.provider"  class="mt5" v-validate.initial="'required'" :error="makeError('provider')"
                 ></bs-input>
               </template>
+
+              <hr>
+
+              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
+                        v-model="data.description"></bs-input>
             </div>
           </div>
 
@@ -59,24 +61,17 @@
         <!-- ================= Spec ================= -->
         <!-- ============================================== -->
         <tab header="Spec">
-          <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role"></tab-role>
-        </tab>
-
-        <!-- ================= Targets ================= -->
-        <!-- ============================================== -->
-        <tab header="Targets">
-          <tab-servers @update="val => data.targets = val" ref="tab_targets" label="Target">
-            <template slot="label">
-              List all targets behond the loadbalance, using the form below to search in servers.
-            </template>
-            <template slot="footer"></template>
-          </tab-servers>
+          <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role" :mapper="mapper"></tab-role>
         </tab>
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 'yes'">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
+          <tab-servers @update="val => data.servers = val" ref="tab_servers">
+            <template slot="label">
+              List all servers behond the cluster, using the form below to search in servers.
+            </template>
+          </tab-servers>
         </tab>
 
         <!-- ================= System ================= -->

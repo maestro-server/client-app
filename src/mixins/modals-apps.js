@@ -11,9 +11,9 @@ export default {
       this.text.title =  this.create ? `Create new ${this.family}s` : `Edit ${this.model.name} ${this.family.toLowerCase()}s`
     },
 
-    editLoadServers(fielder) {
+    editLoadServers(fielder, entitier = Servers) {
       if (!_.isEmpty(this.model[fielder])) {
-        FectherEntity(Servers)()
+        FectherEntity(entitier)()
           .find((e) => {
             this[`tab_${fielder}`].updaterEdit(_.get(e, 'data.items', []))
           }, {_id: this.model[fielder]})
