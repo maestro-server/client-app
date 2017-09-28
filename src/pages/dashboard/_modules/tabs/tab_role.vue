@@ -1,7 +1,7 @@
 <template>
   <div>
     <bs-select form-type="horizontal" :options="roles" v-model="role" name="role"
-               label="Role" @selected="reset"></bs-select>
+               label="Role" @selected="changeData"></bs-select>
     <hr>
 
     <h5 class="mt0 text-center" v-if="role">{{role}} specification</h5>
@@ -12,7 +12,7 @@
                 :name="form.name"
                 :label="form.label"
                 :type="form.type"
-                v-model="deployer[form.name]"
+                v-model="data[form.name]"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"
                 @blur="updaterEdit"
@@ -33,12 +33,12 @@
     },
 
     data: function () {
-      const resetDeployer = {role:null, name: null, id:null, link: null, notes:null}
+      const resetData = {role:null, name: null, id:null, link: null, notes:null}
 
       return {
         role: 'Application',
-        resetDeployer: resetDeployer,
-        deployer: _.clone(resetDeployer),
+        resetData: resetData,
+        data: _.clone(resetData),
         mapper: {
           'Application': [
             {name: 'endpoint', label: 'Endpoint', validate: 'url'},
@@ -74,14 +74,19 @@
 
     methods: {
       updaterEdit() {
-        _.set(this.deployer, 'role', this.role)
-        const dpp = _.pickBy(this.deployer, _.identity)
+        _.set(this.data, 'role', this.role)
+        const dpp = _.pickBy(this.data, _.identity)
 
         this.$emit('update', dpp)
       },
 
+      changeData() {
+        this.updaterEdit()
+        this.reset()
+      },
+
       reset() {
-        this.$set(this, 'deployer', _.clone(this.resetDeployer))
+        this.$set(this, 'data', _.clone(this.resetData))
       }
     },
 

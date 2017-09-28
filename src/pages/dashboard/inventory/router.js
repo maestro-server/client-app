@@ -19,6 +19,9 @@ import objectStorage from './object-storage/router'
 import containersOrchestration from './containers-orchestration/router'
 import monitor from './monitor/router'
 import logs from './logs/router'
+import smtp from './smtp/router'
+import serviceDiscovery from './service-discovery/router'
+import vpn from './vpn/router'
 
 export default {
   name: 'inventory',
@@ -43,6 +46,9 @@ export default {
     objectStorage,
     containersOrchestration,
     monitor,
-    logs
+    logs,
+    smtp,
+    serviceDiscovery,
+    vpn
   ]
 }

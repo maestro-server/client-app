@@ -13,7 +13,7 @@ export default {
   data: function () {
     return {
       entity: new Applications(),
-      columns: ['name', 'provider', 'lsystem', 'environment', 'qtdtargets', 'qtdserver', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'provider', 'lsystem', 'environment', 'qtdserver', 'updated_at', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'provider', 'environment', 'lsystem'],
         listColumns: {
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     url() {
-      return this.entity.getUrl() + '?family=ContainersOrchestration'
+      return this.entity.getUrl() + '?family=ContainerOrchestration'
     }
   },
 
@@ -40,7 +40,6 @@ export default {
     prepared(data) {
       return data.map((d) => {
         d.qtdserver = _.size(d.servers)
-        d.qtdtargets = _.size(d.targets)
 
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
 

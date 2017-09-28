@@ -18,12 +18,15 @@ export default {
         'cache': 'Distributed Cache',
         'brokers': 'Brokers/Streams',
         'serverless': 'Serverless',
+        'service-discovery': 'Services Discovery',
         'api-gateway': 'Api Gateway',
         'cdn': 'CDNs',
         'object-storage': 'Object Storages',
         'containers-orchestration': 'Containers Orchestration',
         'monitor': 'Monitoring System',
-        'logs': 'Logs System'
+        'logs': 'Logs System',
+        'smtp': 'Emails (smtps/mtas)',
+        'vpn': 'VPNs'
       }
     }
   },
