@@ -11,9 +11,23 @@ export default {
     svTable
   },
 
+  computed: {
+    MCreateChooose() {
+      return this.$parent.$refs.modal_create2
+    }
+  },
+
   data: function () {
     return {
       name: "DataBase"
+    }
+  },
+
+  methods: {
+    editChoose: function () {
+      this.MCreateChooose
+        .onFinishCallBack(this.$refs.svTable.$refs.vTable.refresh)
+        .show(this.model)
     }
   }
 }

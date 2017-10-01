@@ -79,6 +79,7 @@
 .icon-html5:before,
 .icon-java:before,
 .icon-oracle-jdk-java:before,
+.icon-jvm:before,
 .icon-openjdk-java:before,
 .icon-javascript:before,
 .icon-jekyll:before,
@@ -110,6 +111,7 @@
 .icon-macos:before,
 .icon-perl:before,
 .icon-php:before,
+.icon-php-php-fpm:before,
 .icon-php-alt:before,
 .icon-playframework:before,
 .icon-plone:before,
@@ -212,7 +214,7 @@
 .icon-heroku:before { content: "\f128"; }
 .icon-html:before { content: "\f129"; }
 .icon-html5:before { content: "\f12a"; }
-.icon-java:before, .icon-oracle-jdk-java:before, .icon-openjdk-java:before { content: "\f12b"; }
+.icon-java:before, .icon-oracle-jdk-java:before, .icon-openjdk-java:before, .icon-jvm:before { content: "\f12b"; }
 .icon-javascript:before { content: "\f12c"; }
 .icon-jekyll:before { content: "\f12d"; }
 .icon-jenkins:before { content: "\f12e"; }
@@ -242,7 +244,7 @@
 .icon-oracle-alt:before { content: "\f146"; }
 .icon-macos:before { content: "\f147"; }
 .icon-perl:before { content: "\f148"; }
-.icon-php:before { content: "\f14a"; }
+.icon-php:before, .icon-php-php-fpm:before { content: "\f14a"; }
 .icon-php-alt:before { content: "\f149"; }
 .icon-playframework:before { content: "\f14b"; }
 .icon-plone:before { content: "\f14c"; }

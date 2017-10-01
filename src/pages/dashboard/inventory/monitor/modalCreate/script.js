@@ -32,7 +32,7 @@ export default {
         third: [],
         own: []
       },
-      outher: false,
+      other: false,
     }
   },
 
@@ -49,10 +49,10 @@ export default {
       return this.own ? 'Provider' : 'Service'
     },
     labelBtnChangeProvider() {
-      return this.outher ? 'Back to selection '+this.labelPService : '<i class="fa fa-plus"></i> '+this.labelPService
+      return this.other ? 'Back to selection '+this.labelPService : '<i class="fa fa-plus"></i> '+this.labelPService
     },
     changeType() {
-      return this.outher ? 'btn-warning' : 'btn-primary'
+      return this.other ? 'btn-warning' : 'btn-primary'
     }
   },
 
@@ -78,7 +78,7 @@ export default {
     },
 
     changeProvider() {
-      this.outher = !this.outher
+      this.other = !this.other
     }
   }
 

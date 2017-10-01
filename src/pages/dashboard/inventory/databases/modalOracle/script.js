@@ -23,23 +23,20 @@ export default {
       family: 'Database',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [],
+        tags: [], servers: [], targets: [],
         role: {healthcheck: null, endpoint: null}
       },
       options: {
         third: [],
-        own: [],
-        types: [],
-        roles: [],
-        cluster: []
-      },
-      mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'version', label: 'Version', validate: 'min:2'},
-        {name: 'patch', label: 'Patch', validate: 'min:2'},
-        {name: 'port', label: 'Port', validate: 'alpha_num'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
-      ]
+        own: []
+      }
+    }
+  },
+
+  methods: {
+    afterShow() {
+      this.text.title = this.create ? `Create new Oracle DB` : `Edit ${this.model.name} Oracle DB`
     }
   }
+
 }
