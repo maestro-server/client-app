@@ -23,23 +23,35 @@ export default {
       family: 'Database',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [],
+        tags: [], servers: [], targets: [],
         role: {healthcheck: null, endpoint: null}
       },
       options: {
-        third: [],
-        own: [],
-        types: [],
-        roles: [],
-        cluster: []
+        cluster: [],
+        mysql: {
+          third: {},
+          own: {}
+        }
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},
         {name: 'version', label: 'Version', validate: 'min:2'},
         {name: 'patch', label: 'Patch', validate: 'min:2'},
         {name: 'port', label: 'Port', validate: 'alpha_num'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        {name: 'extra_config', label: 'My.cnf', type: 'textarea', validate: 'min:2'}
       ]
+    }
+  },
+
+  methods: {
+    afterShow() {
+      this.text.title = this.create ? `Create new MySql` : `Edit ${this.model.name} MySql`
+    }
+  },
+
+  computed: {
+    providers() {
+      return this.own ? this.options.mysql.third : this.options.mysql.own
     }
   }
 }

@@ -20,9 +20,6 @@
                          name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
-                        v-model="data.description"></bs-input>
-
               <div class="row">
                 <div class="col-xs-3 text-right mt5">
                   <label>Third Party?</label>
@@ -42,7 +39,7 @@
               <template v-if="!other">
                 <bs-select form-type="horizontal" :options="providers" v-model="data.provider" name="provider"
                            :label="labelPService" v-validate.initial="'required'" class="mt5"
-                           :error="makeError('provider')"
+                           :error="makeError('provider')" placeholder="How MySql provider is it?"
                 ></bs-select>
               </template>
 
@@ -51,6 +48,14 @@
                           v-model="data.provider"  class="mt5" v-validate.initial="'required'" :error="makeError('provider')"
                 ></bs-input>
               </template>
+
+              <bs-select form-type="horizontal" :options="options.cluster" v-model="data.cluster"
+                         name="cluster" label="Cluster*" v-validate.initial="'required'" placeholder="This DB have any type clusterized?"
+                         :error="makeError('cluster')"></bs-select>
+
+              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
+                        v-model="data.description"></bs-input>
+
             </div>
           </div>
 
@@ -60,17 +65,6 @@
         <!-- ============================================== -->
         <tab header="Spec">
           <tab-role :roles="options.role" @update="val => data.role = val" ref="tab_role" :mapper="mapper"></tab-role>
-        </tab>
-
-        <!-- ================= Targets ================= -->
-        <!-- ============================================== -->
-        <tab header="Targets">
-          <tab-servers @update="val => data.targets = val" ref="tab_targets" label="Target">
-            <template slot="label">
-              List all targets behond the loadbalance, using the form below to search in servers.
-            </template>
-            <template slot="footer"></template>
-          </tab-servers>
         </tab>
 
         <!-- ================= Servers ================= -->

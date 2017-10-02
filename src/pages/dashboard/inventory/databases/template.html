@@ -1,7 +1,11 @@
 <div >
   <router-view></router-view>
 
+  <modal-create-choose class="mt15" ref="modal_create2"></modal-create-choose>
   <modal-create class="mt15" ref="modal_create"></modal-create>
+  <modal-oracle class="mt15" ref="modal_oracle"></modal-oracle>
+  <modal-mysql class="mt15" ref="modal_mysql"></modal-mysql>
+
   <modal-delete class="mt15" ref="modal_delete" :entity="entity"></modal-delete>
   <modal-acl class="mt15" ref="modal_acl" :entity="entity"></modal-acl>
 </div>
