@@ -95,9 +95,13 @@ export default {
     },
 
     setupModel () {
-      _.set(this.data, 'family', this.family)
-      this.model = _.pickBy(this.data, _.identity)
-      _.set(this.model, 'own', this.own)
+
+      this.model = _(this.data)
+        .set('role', _.pickBy(this.data.role, _.identity))
+        .set('family', this.family)
+        .set('own', this.own)
+        .pickBy(_.identity)
+        .value()
     },
 
     createSave () {

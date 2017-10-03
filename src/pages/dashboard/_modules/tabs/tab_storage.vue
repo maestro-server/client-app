@@ -4,8 +4,8 @@
       <bs-input form-type="horizontal" label="Name" v-model="single.name" name="name"
                 v-validate.initial="'required'"
                 placeholder="/dev/sda"></bs-input>
-      <bs-input form-type="horizontal" label="Size (GB)" v-model="single.size" name="size" placeholder="500"
-                v-validate.initial="'required|numeric'"
+      <bs-input type="number" form-type="horizontal" label="Size (GB)" v-model="single.size" name="size" placeholder="500"
+                v-validate.initial="'required|decimal'"
                 :error="makeError('size')"></bs-input>
 
       <div class="row" id="baseStorage">
