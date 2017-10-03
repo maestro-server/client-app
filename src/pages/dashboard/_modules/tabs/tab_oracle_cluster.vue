@@ -123,20 +123,18 @@
       },
 
       requestASMdb(async, val) {
-        console.log(val)
         return this.requestSearch(async, val, 'name', false)
       },
 
       updaterEdit(data) {
-        const info = _.pickBy(this.cluster, _.identity)
         const items = data.map(e=>_.get(e, '_id'))
 
-        const m = {
-          ...info,
+        const merge = {
+          ...this.cluster,
           items
         }
 
-        console.log(m)
+        const m = _.pickBy(merge, _.identity)
         this.$emit('update', m)
       }
     }
