@@ -1,0 +1,30 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal">
+    <p>Select your database.</p>
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+      <div class="col-xs-12">
+        <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Name*" v-model="data.name"
+                  v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+
+        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"
+                   name="storage_type" label="Storage Type" placeholder="How manage your storage?"></bs-select>
+
+        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"
+                   name="storage_type" label="ASM DB" placeholder="How manage your storage?"></bs-select>
+
+        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.role" v-model="data.dataguard"
+                   name="dataguard" label="Role" placeholder="What role is it?"></bs-select>
+      </div>
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

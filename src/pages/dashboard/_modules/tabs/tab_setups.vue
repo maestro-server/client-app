@@ -1,5 +1,5 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="Setup" @update="updaterEdit">
+  <creater-list :single.sync="single" :basket="value" label="Setup" fielder="false" @update="updaterEdit">
 
     <template slot="forms">
       <bs-select form-type="horizontal" :options="options" v-model="single.name" name="name"
@@ -30,7 +30,7 @@
 
     data: function () {
       return {
-        single: {service: null, version: null}
+        single: {name: null, version: null}
       }
     }
   }

@@ -2,13 +2,16 @@
 import _ from 'lodash'
 
 import Applications from 'factories/applications'
-import Servers from 'factories/servers'
-import FectherEntity from 'services/fetchEntity'
+import modalConfig from '../modalServerConfig/create'
 
 import ViewSingle from 'mixins/view-single'
 
 export default {
   mixins: [ViewSingle],
+
+  components: {
+    modalConfig
+  },
 
   data: function () {
     return {
@@ -26,8 +29,13 @@ export default {
     viewDisplayer() {
       return [
         {val: this.model.environment, type: 'primary'},
-        {val: this.model.provider}
+        {val: this.model.provider},
+        {val: this.model.cluster},
+        {val: this.model.dataguard}
       ]
+    },
+    MCreateConfigServer() {
+      return this.$refs.modal_config
     }
   },
 
@@ -47,6 +55,12 @@ export default {
         .setTabShow(index)
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(this.model)
+    },
+
+    callConfig(item) {
+      this.MCreateConfigServer
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(item)
     }
   },
 

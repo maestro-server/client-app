@@ -58,6 +58,8 @@
 .icon-debian:before,
 .icon-digital-ocean:before,
 .icon-docker:before,
+.icon-docker-registry:before,
+.icon-docker-swarm:before,
 .icon-elixir:before,
 .icon-elm:before,
 .icon-erlang:before,
@@ -79,6 +81,8 @@
 .icon-html5:before,
 .icon-java:before,
 .icon-oracle-jdk-java:before,
+.icon-oracle-nosql:before,
+.icon-oracle-coherence:before,
 .icon-jvm:before,
 .icon-openjdk-java:before,
 .icon-javascript:before,
@@ -107,7 +111,14 @@
 .icon-openshift:before,
 .icon-openstack:before,
 .icon-oracle:before,
+.icon-oracle-database:before,
 .icon-oracle-alt:before,
+.icon-oracle-ebs-service-bus:before,
+.icon-oracle-enterprise-manager:before,
+.icon-oracle-forms-and-reports:before,
+.icon-oracle-forms-runtime:before,
+.icon-oracle-weblogic-server:before,
+.icon-oracle-glassfish:before,
 .icon-macos:before,
 .icon-perl:before,
 .icon-php:before,
@@ -194,7 +205,7 @@
 .icon-bare-metal:before { content: "\f113"; }
 .icon-debian:before { content: "\f115"; }
 .icon-digital-ocean:before { content: "\f116"; }
-.icon-docker:before { content: "\f117"; }
+.icon-docker:before, .icon-docker-registry:before, .icon-docker-swarm:before { content: "\f117"; }
 .icon-elixir:before { content: "\f118"; }
 .icon-elm:before { content: "\f119"; }
 .icon-erlang:before { content: "\f11a"; }
@@ -240,7 +251,11 @@
 .icon-objc:before { content: "\f142"; }
 .icon-openshift:before { content: "\f143"; }
 .icon-openstack:before { content: "\f144"; }
-.icon-oracle:before { content: "\f145"; }
+.icon-oracle:before, .icon-oracle-database:before, .icon-oracle-glassfish:before,
+.icon-oracle-ebs-service-bus:before, .icon-oracle-enterprise-manager:before,
+.icon-oracle-forms-and-reports:before, .icon-oracle-forms-runtime:before,
+.icon-oracle-nosql:before, .icon-oracle-coherence:before,
+.icon-oracle-weblogic-server:before { content: "\f145"; }
 .icon-oracle-alt:before { content: "\f146"; }
 .icon-macos:before { content: "\f147"; }
 .icon-perl:before { content: "\f148"; }
