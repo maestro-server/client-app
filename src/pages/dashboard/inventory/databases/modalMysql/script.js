@@ -21,6 +21,7 @@ export default {
   data () {
     return {
       family: 'Database',
+      modal: 'mysql',
       initialData: {
         name: null, description: null, provider:null,
         tags: [], servers: [], targets: [],
@@ -46,6 +47,10 @@ export default {
   methods: {
     afterShow() {
       this.text.title = this.create ? `Create new MySql` : `Edit ${this.model.name} MySql`
+    },
+
+    hookCreateLoad() {
+      this.$set(this.data, 'modal', this.modal)
     }
   },
 

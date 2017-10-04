@@ -3,7 +3,6 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
-import tabOracleCluster from 'src/pages/dashboard/_modules/tabs/tab_oracle_cluster'
 import tabCdbs from 'src/pages/dashboard/_modules/tabs/tab_cdbs'
 import modalGroups from './groups.vue'
 
@@ -11,7 +10,6 @@ export default {
   mixins: [Modals, ModalsApps],
 
   components: {
-    tabOracleCluster,
     modalGroups,
     tabCdbs
   },
@@ -20,9 +18,10 @@ export default {
     return {
       cdb: 0,
       family: 'Database',
+      modal: 'oracle',
       initialData: {
         name: null, description: null, provider:null, storage_types:null, asm_groups: [],
-        tags: [], pdbs: [], cluster: null, type: null,
+        tags: [], pdbs: [], cluster: null, crs_version: null, type: null,
         role: {port: null, endpoint: null}
       },
       options: {
@@ -74,6 +73,10 @@ export default {
 
     clearItems() {
       this.data.asm_groups = []
+    },
+
+    hookCreateLoad() {
+      this.$set(this.data, 'modal', this.modal)
     }
   }
 }

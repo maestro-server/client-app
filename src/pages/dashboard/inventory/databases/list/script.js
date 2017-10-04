@@ -24,6 +24,18 @@ export default {
   },
 
   methods: {
+    MModal(modal) {
+      return this.$parent.$refs[`modal_${modal}`]
+    },
+
+    editE: function (entity) {
+      const type = _.get(entity, 'modal', 'create')
+
+      this.MModal(type)
+        .onFinishCallBack(this.$refs.svTable.$refs.vTable.refresh)
+        .show(entity)
+    },
+
     editChoose: function () {
       this.MCreateChooose
         .onFinishCallBack(this.$refs.svTable.$refs.vTable.refresh)

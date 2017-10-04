@@ -10,31 +10,35 @@
 
       <div class="col-xs-6">
         <typeahead label="Search by Hostname"
-          placeholder="back0100"
-          :async="URL"
-          async-key="items"
-          :onSearch="requestSearch"
-          :template="template"
-          :on-hit="onHit"
-          class="col-xs-12"
+                   placeholder="back0100"
+                   :async="URL"
+                   async-key="items"
+                   :onSearch="requestSearch"
+                   :template="template"
+                   :on-hit="onHit"
+                   class="col-xs-12"
         ></typeahead>
       </div>
 
       <div class="col-xs-6">
         <typeahead label="Search by Private IP" placeholder="10.150.0.0"
-          :async="URL"
-          async-key="items"
-          :onSearch="requestIpSearch"
-          :template="template"
-          :on-hit="onHit"
-          class="col-xs-12"
+                   :async="URL"
+                   async-key="items"
+                   :onSearch="requestIpSearch"
+                   :template="template"
+                   :on-hit="onHit"
+                   class="col-xs-12"
         ></typeahead>
+      </div>
+
+      <div class="col-xs-12" v-if="family">
+        <bs-checkbox class="small pull-right" v-model="filter">Show only server with role {{family}}</bs-checkbox>
       </div>
     </template>
 
     <template slot="view" scope="props">
-        <b class="text-capitalize">{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if='props.item.datacenters'> - {{props.item.datacenters.name}}</span><br/>
-        <span class='ft15'>
+      <b class="text-capitalize">{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if='props.item.datacenters'> - {{props.item.datacenters.name}}</span><br/>
+      <span class='ft15'>
           <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
           <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
           <bs-label type='success'>{{props.item.role}}</bs-label>
@@ -62,11 +66,13 @@
     mixins: [TabCreaterList],
 
     props: {
+      family: {},
       label: {default: 'Server'}
     },
 
     data: function () {
       return {
+        filter: true,
         URL: `${new Servers().getUrl()}?query=`,
         template: "<b>{{item.hostname}}</b> <span v-if='item.os'>({{item.os.base}})</span> - <span v-if='item.datacenters'>{{item.datacenters.name}}</span><br/> " +
         "<h5 class='ft15'><bs-label type='default'>{{item.ipv4_private}}</bs-label> <bs-label type='default'>{{item.ipv4_public}}</bs-label> <bs-label type='success'>{{item.role}}</bs-label> <bs-label type='success'>{{item.environment}}</bs-label></h5>"
@@ -78,8 +84,13 @@
         return this.requestSearch(async, val, 'ipv4_private')
       },
 
-      requestSearch(async, val, key='hostname') {
-        return `${async}%7B"${key}":"${val}"%7D`
+      requestSearch(async, val, key = 'hostname') {
+        const role = this.makeFilter()
+        return `${async}%7B"${key}":"${val}"${role}%7D`
+      },
+
+      makeFilter() {
+        return this.family && this.filter ? `, "role":"${this.family}"` : ''
       },
 
       updaterEdit(data) {

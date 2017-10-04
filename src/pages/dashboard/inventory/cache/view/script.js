@@ -14,9 +14,8 @@ export default {
     return {
       entity: Applications,
       label: 'Cache',
-      model: {tags: [], servers:[], targets:[]},
-      list_servers: [],
-      list_targets: []
+      model: {tags: [], servers:[]},
+      list_servers: []
     }
   },
 

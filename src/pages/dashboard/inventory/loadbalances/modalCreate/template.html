@@ -76,7 +76,7 @@
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
+          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Loadbalance"></tab-servers>
         </tab>
 
         <!-- ================= System ================= -->

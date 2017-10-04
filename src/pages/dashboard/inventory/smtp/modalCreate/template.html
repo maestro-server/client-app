@@ -67,7 +67,7 @@
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers">
+          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="SMTP">
             <template slot="label">
               List all servers behond the cluster, using the form below to search in servers.
             </template>
