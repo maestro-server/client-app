@@ -3,7 +3,7 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
-import tabCdbs from 'src/pages/dashboard/_modules/tabs/tab_cdbs'
+import tabCdbs from 'src/pages/dashboard/_modules/tabs/tab_single_item'
 import modalGroups from './groups.vue'
 
 export default {

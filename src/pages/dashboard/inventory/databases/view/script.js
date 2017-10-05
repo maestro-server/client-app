@@ -5,9 +5,10 @@ import Applications from 'factories/applications'
 import modalConfig from '../modalServerConfig/create'
 
 import ViewSingle from 'mixins/view-single'
+import SingleService from 'mixins/single-service'
 
 export default {
-  mixins: [ViewSingle],
+  mixins: [ViewSingle, SingleService],
 
   components: {
     modalConfig

@@ -1,7 +1,8 @@
 'use strict'
 export default {
   props: {
-    data: {}
+    data: {},
+    title: {default: 'Info'}
   },
 
   methods: {

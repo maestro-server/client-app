@@ -1,0 +1,47 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= Setup ================= -->
+        <!-- ============================================== -->
+        <tab header="Setup">
+          <bs-input class="mt20" form-type="horizontal" name="bin" label="Bin Path" v-model="data.bin" placeholder="/usr/php"></bs-input>
+          <bs-input class="mt20" form-type="horizontal" name="user" label="Main User" v-model="data.user" placeholder="apache"
+          help="This service run which user?"></bs-input>
+
+          <bs-input class="mt20" form-type="horizontal" name="package" label="Package Installed" v-model="data.package"
+                    placeholder="mypackge.rpm" help="Ex: apt-get install php7.0-fpm or rpm://mypackge.rpm"></bs-input>
+        </tab>
+
+
+        <!-- ================= Commands ================= -->
+        <!-- ============================================== -->
+        <tab header="Init/Commands">
+        </tab>
+
+        <!-- ================= Env ================= -->
+        <!-- ============================================== -->
+        <tab header="Env Variables">
+          <tab-tags @update="val => data.envs = val" ref="tab_tags" label="Env"></tab-tags>
+        </tab>
+
+        <!-- ================= Modules ================= -->
+        <!-- ============================================== -->
+        <tab header="Libs/Mods/Packs">
+          <tab-items @update="val => data.mods = val" ref="tab_items" label="Libs/Mods"></tab-items>
+        </tab>
+      </tabs>
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

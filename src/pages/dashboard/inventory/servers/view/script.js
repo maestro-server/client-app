@@ -3,10 +3,14 @@ import _ from 'lodash'
 
 import Servers from 'factories/servers'
 import ViewSingle from 'mixins/view-single'
-
+import modalConfig from '../modalServerConfig/create'
 
 export default {
   mixins: [ViewSingle],
+
+  components: {
+    modalConfig
+  },
 
   data: function () {
     return {
@@ -16,6 +20,9 @@ export default {
   },
 
   computed: {
+    MCreateConfigServer() {
+      return this.$refs.modal_config
+    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
     },
@@ -28,6 +35,14 @@ export default {
         {val: _.get(this.model, 'datacenters.name', false)},
         {val: this.model.ipv4_private}
       ]
+    }
+  },
+
+  methods: {
+    callConfig(item) {
+      this.MCreateConfigServer
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(item)
     }
   }
 }

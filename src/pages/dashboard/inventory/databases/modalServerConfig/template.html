@@ -1,23 +1,72 @@
 <div>
 
   <modal :title="text.title" effect="fade" width="800" v-model="showModal">
-    <p>Select your database.</p>
 
-    <form class="row form-horizontal" @submit.prevent="createSave">
+    <form class="row form-horizontal" @submit.prevent="createSave" v-if="findServices.length > 0">
       <div class="col-xs-12">
-        <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Name*" v-model="data.name"
+        <bs-select class="mt20" form-type="horizontal" :options="findServices" v-model="service"
+                   name="service" label="Service installed" :help="serviceMsg" @selected="setService"></bs-select>
+
+        <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Hostname*" v-model="data.db_hostname"
                   v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
-        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"
-                   name="storage_type" label="Storage Type" placeholder="How manage your storage?"></bs-select>
+        <template v-if="provider.modal === 'oracle'">
+          <bs-select class="mt20" form-type="horizontal" :options="options.oracle.role" v-model="data.dataguard"
+                     name="dataguard" label="Role" placeholder="What role is it?"></bs-select>
+          <hr>
+          <bs-select class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"
+                     name="storage_type" label="Storage Type" placeholder="How manage your storage?"></bs-select>
+        </template>
 
-        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"
-                   name="storage_type" label="ASM DB" placeholder="How manage your storage?"></bs-select>
+        <template v-if="provider.modal !== 'oracle'">
+          <bs-select class="mt20" form-type="horizontal" :options="options.role" v-model="data.role"
+                     name="role" label="Role" placeholder="What role is it?"></bs-select>
+        </template>
 
-        <bs-select class="mt20" form-type="horizontal" :options="options.oracle.role" v-model="data.dataguard"
-                   name="dataguard" label="Role" placeholder="What role is it?"></bs-select>
+
+        <template v-if="showASM">
+          <typeahead label="Search ASM DB"
+                     :async="URL"
+                     async-key="items"
+                     :onSearch="requestSearch"
+                     :template="template"
+                     :on-hit="onHit"
+                     form-type="horizontal"
+                     v-model="data.asm_name"
+                     v-if="!data.asm"
+          ></typeahead>
+
+          <div class="row" v-if="data.asm">
+            <div class="col-xs-3 text-right mt10">
+              <label>ASM Linked</label>
+            </div>
+            <div class="col-xs-8">
+              <div>
+                <bs-label type="info" class="btn btn-sm">
+                  {{data.asm.name}}
+                  <a class="btn btn-default btn-xs" @click="clearASM"><i class="fa fa-times"></i></a>
+                </bs-label>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <template v-if="data.storage_types == 'Default Disk' || provider.modal !== 'oracle'">
+          <bs-select class="mt20" form-type="horizontal" :options="listStorage" options-label="name" options-value="name" v-model="data.disk"
+                     name="disk" label="Storage Path" placeholder="Storage path?"></bs-select>
+
+          <bs-label type="danger" class="pull-right" v-if="listStorage.length == 0">Not found any storage in this server</bs-label>
+        </template>
       </div>
     </form>
+
+    <div v-if="findServices.length == 0" class="well text-center">
+      <h5>{{serviceMsg}}</h5>
+      <router-link v-if="model._id" :to="{name: 'servers.single', params: { id: model._id }}" class="btn btn-primary" target="_blank">
+        <i class="fa  fa-server" aria-hidden="true"></i>
+        Go to <b>{{model.hostname}}</b>
+      </router-link>
+    </div>
 
 
     <div slot="modal-footer" class="modal-footer">

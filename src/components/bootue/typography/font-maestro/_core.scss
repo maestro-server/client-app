@@ -101,6 +101,7 @@
 .icon-mongodb:before,
 .icon-mssql:before,
 .icon-mysql-server:before,
+.icon-oracle-mysql:before,
 .icon-mysql-alt:before,
 .icon-netbsd:before,
 .icon-nginx:before,
@@ -241,7 +242,7 @@
 .icon-maven:before { content: "\f138"; }
 .icon-mongodb:before { content: "\f139"; }
 .icon-mssql:before { content: "\f13a"; }
-.icon-mysql-server:before { content: "\f13b"; }
+.icon-mysql-server:before, .icon-oracle-mysql:before { content: "\f13b"; }
 .icon-mysql-alt:before { content: "\f13c"; }
 .icon-netbsd:before { content: "\f13d"; }
 .icon-nginx:before { content: "\f13e"; }

@@ -91,7 +91,7 @@ export default {
     },
 
     editSwapVars(fielder) {
-      this.$set(this, fielder, _.get(this.model, fielder))
+      this.$set(this, fielder, _.get(this.model, fielder, 0))
     },
 
     setupModel () {

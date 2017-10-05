@@ -1,5 +1,5 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="PDB" fielder="name" @update="updaterEdit">
+  <creater-list :single.sync="single" :basket="value" :label="label" fielder="name" @update="updaterEdit">
 
     <template slot="forms">
       <bs-input form-type="horizontal" v-model="single.name" name="name" label="Name"
@@ -21,6 +21,10 @@
 
   export default {
     mixins: [TabCreaterList],
+
+    props: {
+      label: {}
+    },
 
     data: function () {
       return {

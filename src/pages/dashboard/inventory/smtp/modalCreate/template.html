@@ -36,14 +36,14 @@
                 <a class="btn btn-xs" :class="changeType" v-html="labelBtnChangeProvider" @click.stop="changeProvider"></a>
               </div>
 
-              <template v-if="!outher">
+              <template v-if="!other">
                 <bs-select form-type="horizontal" :options="providers" v-model="data.provider" name="provider"
                            :label="labelPService" v-validate.initial="'required'" class="mt5"
                            :error="makeError('provider')"
                 ></bs-select>
               </template>
 
-              <template v-if="outher">
+              <template v-if="other">
                 <bs-input form-type="horizontal" name="provider" :label="labelPService"
                           v-model="data.provider"  class="mt5" v-validate.initial="'required'" :error="makeError('provider')"
                 ></bs-input>

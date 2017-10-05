@@ -27,9 +27,19 @@
         <bs-label type='success'>{{props.item.environment}}</bs-label>
 
         <div class="pull-right" v-if="model.provider">
-          <button class="btn btn-success btn-xs" @click.prevent="callConfig(props.item)"><i
+          <button class="btn btn-primary btn-xs" @click.prevent="callConfig(props.item)"><i
             class="fa  fa-cog" aria-hidden="true"></i> Manage DB (config, role)</button>
         </div>
+
+        <template v-if="props.item.services">
+          <accordion type="warning" class="mt10">
+            <panel v-for="service, k in findServicesBy(props.item, model.provider)" :key="k">
+              <strong slot="header"><u>{{service.name}} {{service.version}}</u> <i class="fa fa-arrow-down"></i></strong>
+              <info-view :data="service" :title="false"></info-view>
+            </panel>
+          </accordion>
+        </template>
+
       </template>
     </creater-config-list>
 
