@@ -119,7 +119,7 @@ export default {
     this.fetchData()
     this.updateUser()
 
-    const tn = this.storageTeam || this.storageUser
+    const tn = this.storageTeam || this.users
     this.updateViewTenant(tn)
   }
 }
