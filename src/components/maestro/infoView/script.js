@@ -1,8 +1,15 @@
 'use strict'
+
+import treeView from './TreeViewItem.vue'
+
 export default {
   props: {
     data: {},
     title: {default: 'Info'}
+  },
+
+  components: {
+    treeView
   },
 
   methods: {

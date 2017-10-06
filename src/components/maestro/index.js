@@ -7,7 +7,6 @@ import serviceAccordion from './serviceAccordion/ServiceAccordion.vue'
 import viewAppServer from './viewApplicationHeaderServers/view.vue'
 import headerEntity from './headerEntity/HeaderEntity.vue'
 import createrList from './createrList/CreaterList.vue'
-import treeViewItem from './jsontree/TreeViewItem.vue'
 import modalDelete from './modalDelete/delete.vue'
 import infoView from './infoView/InfoView.vue'
 import callback from './callback/Callback.vue'
@@ -26,7 +25,6 @@ let components = {
   serviceAccordion,
   viewAppServer,
   headerEntity,
-  treeViewItem,
   modalDelete,
   createrList,
   infoView,

@@ -1,5 +1,5 @@
 <div>
-  <template v-if="data.services">
+  <template v-if="data.services && provider">
     <accordion type="warning" class="mt10" one-at-atime>
       <panel v-for="service, k in findServicesBy(data, provider)" :key="k">
         <strong slot="header"><u>{{service.name}} {{service.version}}</u> <i class="fa fa-arrow-down"></i></strong>
