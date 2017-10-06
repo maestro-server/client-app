@@ -33,14 +33,11 @@
     <creater-config-list label="System" :basket="model.system" @edit="edit" :index="4" icons="fa-briefcase">
       <template slot="view" scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>
+        <router-link :to="{name: 'system.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags">
-      <template slot="view" scope="props">
-        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
-      </template>
-    </creater-config-list>
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags"></creater-config-list>
 
   </div>
 
