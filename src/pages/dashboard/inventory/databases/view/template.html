@@ -17,28 +17,10 @@
 
     <creater-config-list label="Cluster/Server" :basket="list_servers" @edit="edit" :index="2" icons="fa-server">
       <template slot="view" scope="props">
-        <b>{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span>
-        <span v-if="props.item.datacenters"> - {{props.item.datacenters.name}}</span>
-        <router-link :to="{name: 'servers.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
-        <br/>
-        <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
-        <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
-        <bs-label type='success'>{{props.item.role}}</bs-label>
-        <bs-label type='success'>{{props.item.environment}}</bs-label>
 
-        <div class="pull-right" v-if="model.provider">
-          <button class="btn btn-primary btn-xs" @click.prevent="callConfig(props.item)"><i
-            class="fa  fa-cog" aria-hidden="true"></i> Manage DB (config, role)</button>
-        </div>
+        <view-app-server :data="props.item" :provider="model.provider" @manage="callConfig"></view-app-server>
 
-        <template v-if="props.item.services">
-          <accordion type="warning" class="mt10">
-            <panel v-for="service, k in findServicesBy(props.item, model.provider)" :key="k">
-              <strong slot="header"><u>{{service.name}} {{service.version}}</u> <i class="fa fa-arrow-down"></i></strong>
-              <info-view :data="service" :title="false"></info-view>
-            </panel>
-          </accordion>
-        </template>
+        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
 
       </template>
     </creater-config-list>
@@ -49,18 +31,14 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="4" icons="fa-briefcase">
+    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="3" icons="fa-briefcase">
       <template slot="view" scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>
         <router-link :to="{name: 'system.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags">
-      <template slot="view" scope="props">
-        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
-      </template>
-    </creater-config-list>
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="4" icons="fa-tags"></creater-config-list>
 
   </div>
 

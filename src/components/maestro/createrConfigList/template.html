@@ -5,8 +5,10 @@
     </h3>
 
     <ul class="list-group">
-      <li class="list-group-item" v-for="item in basket">
-        <slot name="view" :item="item">{{item.name}}</slot>
+      <li class="list-group-item" v-for="item, i in basket">
+        <slot name="view" :index="i" :item="item">
+          <bs-label>{{item.key}}</bs-label> - {{item.value}}
+        </slot>
       </li>
     </ul>
 

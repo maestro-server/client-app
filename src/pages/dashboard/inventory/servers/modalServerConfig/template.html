@@ -20,12 +20,13 @@
         <!-- ================= Commands ================= -->
         <!-- ============================================== -->
         <tab header="Init/Commands">
+          <tab-init :managers="options.managers" @update="val => data.init = val" ref="tab_init" label="Env"></tab-init>
         </tab>
 
         <!-- ================= Env ================= -->
         <!-- ============================================== -->
         <tab header="Env Variables">
-          <tab-tags @update="val => data.envs = val" ref="tab_tags" label="Env"></tab-tags>
+          <tab-tags @update="val => data.envs = val" ref="tab_envs" label="Env"></tab-tags>
         </tab>
 
         <!-- ================= Modules ================= -->

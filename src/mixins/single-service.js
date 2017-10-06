@@ -7,7 +7,7 @@ export default {
     findServicesBy(model, provider) {
       return _.chain(model)
         .get('services', [])
-        .filter(e=>e.name === provider)
+        .filter(e=>e.name.toLowerCase() === provider.toLowerCase())
         .value()
     },
 

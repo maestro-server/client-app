@@ -1,7 +1,10 @@
 'use strict'
 
+
 import createrConfigList from './createrConfigList/CreaterConfigList.vue'
 import headerViewEntity from './headerViewEntity/HeaderViewEntity.vue'
+import serviceAccordion from './serviceAccordion/ServiceAccordion.vue'
+import viewAppServer from './viewApplicationHeaderServers/view.vue'
 import headerEntity from './headerEntity/HeaderEntity.vue'
 import createrList from './createrList/CreaterList.vue'
 import treeViewItem from './jsontree/TreeViewItem.vue'
@@ -14,9 +17,14 @@ import listBox from './listBox/ListBox.vue'
 import loader from './loader/Loader.vue'
 import imager from './imager/Imager.vue'
 
+
+
+
 let components = {
   createrConfigList,
   headerViewEntity,
+  serviceAccordion,
+  viewAppServer,
   headerEntity,
   treeViewItem,
   modalDelete,

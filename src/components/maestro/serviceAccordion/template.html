@@ -1,0 +1,10 @@
+<div>
+  <template v-if="data.services">
+    <accordion type="warning" class="mt10" one-at-atime>
+      <panel v-for="service, k in findServicesBy(data, provider)" :key="k">
+        <strong slot="header"><u>{{service.name}} {{service.version}}</u> <i class="fa fa-arrow-down"></i></strong>
+        <info-view :data="service" :title="false"></info-view>
+      </panel>
+    </accordion>
+  </template>
+</div>

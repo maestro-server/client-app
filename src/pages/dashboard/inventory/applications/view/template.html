@@ -17,11 +17,9 @@
 
     <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
       <template slot="view" scope="props">
-        <b>{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if="props.item.datacenters"> - {{props.item.datacenters.name}}</span><br/>
-          <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
-          <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
-          <bs-label type='success'>{{props.item.role}}</bs-label>
-          <bs-label type='success'>{{props.item.environment}}</bs-label>
+        <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
+
+        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
       </template>
     </creater-config-list>
 

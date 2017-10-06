@@ -19,33 +19,22 @@
     <creater-config-list label="Service" :basket="model.services" @edit="edit" :index="4">
       <template slot="view" scope="props">
 
-        <template v-if="props.item.configs">
-          <accordion type="warning" class="row">
-            <panel>
-            <span slot="header">
-              <i :class="toLower(props.item.name, 'icon-')" class="fa fa-genderless text-center w18"></i>
-              {{props.item.name}} <span v-if="props.item.version"> -> </span><bs-label>{{props.item.version}}</bs-label>
-              <i class="fa fa-arrow-down"></i>
-              <div class="pull-right">
-                <button class="btn btn-success btn-xs" @click.prevent.stop="callConfig(props.item)"><i
-                  class="fa  fa-cog" aria-hidden="true"></i></button>
-              </div>
-            </span>
+        <accordion type="warning" class="row">
+          <panel>
+              <span slot="header">
+                <i :class="toLower(props.item.name, 'icon-')" class="fa fa-genderless text-center w18"></i>
+                {{props.item.name}} <span v-if="props.item.version"> -> </span><bs-label>{{props.item.version}}</bs-label>
+                <i class="fa fa-arrow-down"></i>
+                <div class="pull-right">
+                  <button class="btn btn-success btn-xs" @click.prevent.stop="callConfig(props)"><i
+                    class="fa  fa-cog" aria-hidden="true"></i></button>
+                </div>
+              </span>
 
-              <info-view :data="props.item" :title="false"></info-view>
-            </panel>
-          </accordion>
-        </template>
+            <info-view :data="props.item" :title="false"></info-view>
+          </panel>
+        </accordion>
 
-        <template v-if="!props.item.configs">
-          <i :class="toLower(props.item.name, 'icon-')" class="fa fa-genderless text-center w18"></i>
-          {{props.item.name}} <span v-if="props.item.version"> -> </span>
-          <bs-label>{{props.item.version}}</bs-label>
-          <div class="pull-right">
-            <button class="btn btn-success btn-xs" @click.prevent="callConfig(props.item)"><i
-              class="fa  fa-cog" aria-hidden="true"></i></button>
-          </div>
-        </template>
       </template>
     </creater-config-list>
 
