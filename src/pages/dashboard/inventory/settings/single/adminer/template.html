@@ -1,0 +1,16 @@
+<div>
+  <v-server-table
+    name="adminer-list"
+    :url="url"
+    :columns="columns"
+    :options="options"
+    ref="vTable"
+  >
+
+    <template slot="actions" scope="props">
+      <div>
+        <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="optP(props.row)"></a>
+      </div>
+    </template>
+  </v-server-table>
+</div>

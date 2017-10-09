@@ -3,6 +3,9 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+
 import tabCdbs from 'src/pages/dashboard/_modules/tabs/tab_single_item'
 import modalGroups from './groups.vue'
 
@@ -18,6 +21,7 @@ export default {
     return {
       cdb: 0,
       family: 'Database',
+      foptions: 'Oracle',
       modal: 'oracle',
       initialData: {
         name: null, description: null, provider:null, storage_types:null, asm_groups: [],
@@ -25,11 +29,11 @@ export default {
         role: {port: null, endpoint: null}
       },
       options: {
+        third: [],
+        own: [],
         oracle: {
           cluster: [],
-          type: [],
-          third: [],
-          own: []
+          type: []
         }
       },
       mapper: [
@@ -43,12 +47,6 @@ export default {
         {name: 'tns', label: 'TNS', type: 'textarea', validate: 'min:2'},
         {name: 'extra_config', label: 'Extra Configs', type: 'textarea', validate: 'min:2'}
       ]
-    }
-  },
-
-  computed: {
-    providers() {
-      return this.own ? this.options.oracle.third : this.options.oracle.own
     }
   },
 
@@ -77,6 +75,17 @@ export default {
 
     hookCreateLoad() {
       this.$set(this.data, 'modal', this.modal)
+    },
+
+    fetchOptions() {
+      const key = `database_options`
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key})
     }
+  },
+
+  created() {
+    this.fetchOptions()
   }
 }

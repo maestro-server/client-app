@@ -115,6 +115,9 @@ export default {
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'env_options'})
     }
   },
 

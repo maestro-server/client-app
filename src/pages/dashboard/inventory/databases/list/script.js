@@ -12,7 +12,7 @@ export default {
   },
 
   computed: {
-    MCreateChooose() {
+    MCreateChoose() {
       return this.$parent.$refs.modal_create2
     }
   },
@@ -37,7 +37,7 @@ export default {
     },
 
     editChoose: function () {
-      this.MCreateChooose
+      this.MCreateChoose
         .onFinishCallBack(this.$refs.svTable.$refs.vTable.refresh)
         .show(this.model)
     }

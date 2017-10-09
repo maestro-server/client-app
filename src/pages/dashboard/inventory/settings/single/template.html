@@ -7,31 +7,30 @@
 
   <div>
 
-    <form action="get" class="row">
-      <div class="col-xs-12 col-sm-6">
-        <bs-input
-          label="Username"
+    <form>
 
-          name="name"
-          class="col-xs-12"
-          disabled
-        ></bs-input>
+      <div class="col-xs-12 col-sm-5">
+        <info-view :data="options.info"></info-view>
+
+        <hr>
+
+        <h3 class="text-capitalize">Config options</h3>
+        <admin-table ref="svTable"></admin-table>
       </div>
 
-      <div class="col-xs-12 col-sm-6">
+      <div class="col-xs-12 col-sm-7">
+        <div class="row">
+          <h3 class="col-xs-8 pb10 text-capitalize">
+            Services list
+          </h3>
+          <div class="col-xs-4 pb10 mt20">
+            <button class="btn btn-primary pull-right" @click.prevent="addE"><i class="fa fa-plus-circle"></i> New Service</button>
+          </div>
+        </div>
 
+        <sv-table ref="svTable"></sv-table>
       </div>
 
-
-
-
-
-
-      <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" @click="updateProfile">
-          Update profile
-        </button>
-      </div>
     </form>
 
   </div>

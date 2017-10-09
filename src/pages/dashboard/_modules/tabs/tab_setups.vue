@@ -2,7 +2,7 @@
   <creater-list :single.sync="single" :basket="value" label="Setup" fielder="false" @update="updaterEdit">
 
     <template slot="forms">
-      <bs-select form-type="horizontal" :options="options" v-model="single.name" name="name"
+      <bs-select form-type="horizontal" :options="options.own" v-model="single.name" name="name"
                  label="Service" v-validate.initial="'required'" search></bs-select>
       <bs-input form-type="horizontal" v-model="single.version" name="version" label="Version"></bs-input>
     </template>
@@ -20,18 +20,22 @@
   'use strict'
 
   import TabCreaterList from 'mixins/tab-creater-list'
+  import serviceOptions from 'mixins/services-options'
 
   export default {
-    mixins: [TabCreaterList],
-
-    props: {
-      options: {}
-    },
+    mixins: [TabCreaterList, serviceOptions],
 
     data: function () {
       return {
-        single: {name: null, version: null}
+        single: {name: null, version: null},
+        options: {
+          own: []
+        }
       }
+    },
+
+    created() {
+      this.fetchServicesOptions()
     }
   }
 

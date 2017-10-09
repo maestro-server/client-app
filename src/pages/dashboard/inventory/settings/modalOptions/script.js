@@ -21,40 +21,28 @@ export default {
 
   data () {
     return {
-      family: null,
-      families: [],
       data: {
-        name: null,
-        family: [],
-        tags: []
-      },
-      options: {
-        families: []
+        value: {}
       }
     }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Service' : `Edit ${this.model.name} service`
+      this.text.title =  this.create ? 'Create new config' : `Edit ${this.model.key} config`
     },
 
     createLoad () {
       this.tabShow=0
       this.data = {}
-      this.$set(this, 'families', [])
-      this.family = null
       this.tab_items.reset()
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.$set(this, 'families', _.get(this.model, 'family', []))
-      this.tab_items.updaterEdit(this.model.tags)
     },
 
     setupModel () {
-      this.data.family = _.get(this, 'families', null)
       this.model = _.pickBy(this.data, _.identity)
     },
 
@@ -65,26 +53,16 @@ export default {
         .create(this.finishJob, this.model)
     },
 
+    titleAcc(fields, k) {
+      return `${k} (${fields.length})`
+    },
+
     editSave () {
       this.setupModel()
 
       FectherEntity(Services)()
         .patch(this.finishJob, this.model)
-    },
-
-    addFamily() {
-      this.families.push(this.family)
-      this.family = null
-    },
-
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'application_options'})
     }
-  },
-
-  created() {
-    this.fetchData()
   }
 
 }

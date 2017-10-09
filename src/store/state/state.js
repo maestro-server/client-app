@@ -7,6 +7,8 @@ import CacheManager from 'services/cacheManager'
  *
  */
 export default {
+  version: VERSION,
+
   viewer: {
     title: "Dashboard",
     icon: null,

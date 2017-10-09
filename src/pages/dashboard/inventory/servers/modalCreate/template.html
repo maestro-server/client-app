@@ -77,7 +77,7 @@
         <!-- ================= Setups ================= -->
         <!-- ============================================== -->
         <tab header="Setups">
-          <tab-setups :options="options.services" @update="val => server.services = val" ref="tab_services"></tab-setups>
+          <tab-setups @update="val => server.services = val" ref="tab_services"></tab-setups>
         </tab>
 
         <!-- ================= Tags ================= -->

@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import Servers from 'factories/servers'
 import Applications from 'factories/applications'
+
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
@@ -10,7 +11,10 @@ import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 
+import servicesOptions from './services-options'
+
 export default {
+  mixins: [servicesOptions],
 
   components: {
     tabTags,
@@ -119,10 +123,13 @@ export default {
     },
 
     fetchData() {
-      const key = `${this.family.toLowerCase()}_options`
+      const key = `env_options`
+      const family = this.foptions ||  this.family
 
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key})
+
+      this.fetchServicesOptions(family)
     },
 
     changeProvider() {

@@ -3,6 +3,9 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
@@ -41,5 +44,18 @@ export default {
         {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
       ]
     }
+  },
+
+  methods: {
+    fetchOptions() {
+      const key = `database_options`
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key})
+    }
+  },
+
+  created() {
+    this.fetchOptions()
   }
 }

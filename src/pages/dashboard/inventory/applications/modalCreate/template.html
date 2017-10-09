@@ -24,7 +24,7 @@
                          name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
-              <bs-select form-type="horizontal" search :options="options.languages" v-model="data.language" name="type"
+              <bs-select form-type="horizontal" search :options="options.own" v-model="data.language" name="type"
                          label="Language" placeholder="Code is?"></bs-select>
               <bs-select form-type="horizontal" :options="options.clusters" v-model="data.cluster" name="type"
                          label="Cluster mode" placeholder="No" help="This app is clusterized?"></bs-select>

@@ -3,6 +3,9 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
@@ -21,6 +24,7 @@ export default {
   data () {
     return {
       family: 'Database',
+      foptions: 'MySql',
       modal: 'mysql',
       initialData: {
         name: null, description: null, provider:null,
@@ -29,10 +33,8 @@ export default {
       },
       options: {
         cluster: [],
-        mysql: {
-          third: {},
-          own: {}
-        }
+        third: [],
+        own: []
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},
@@ -51,12 +53,17 @@ export default {
 
     hookCreateLoad() {
       this.$set(this.data, 'modal', this.modal)
+    },
+
+    fetchOptions() {
+      const key = `database_options`
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key})
     }
   },
 
-  computed: {
-    providers() {
-      return this.own ? this.options.mysql.third : this.options.mysql.own
-    }
+  created() {
+    this.fetchOptions()
   }
 }

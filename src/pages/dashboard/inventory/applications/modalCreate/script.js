@@ -3,6 +3,9 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+
 import tabDeploy from 'src/pages/dashboard/_modules/tabs/tab_deploy'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_role'
 
@@ -28,7 +31,7 @@ export default {
         environment:[],
         role: [],
         deploy:[],
-        languages: [],
+        own: [],
         clusters: []
       }
     }
@@ -48,6 +51,17 @@ export default {
     hookEditLoad() {
       this.tab_role.updaterEdit(this.data.role)
       this.tab_deploy.updaterEdit(this.model.deploy)
+    },
+
+    fetchOptions() {
+      const key = `application_options`
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key})
     }
+  },
+
+  created() {
+    this.fetchOptions()
   }
 }
