@@ -1,0 +1,23 @@
+<div>
+  <ul class="list-group" v-if="showList">
+    <li class="list-group-item row" v-for="regions, provider in model.value.baser">
+      <div class="row">
+        <div class="col-xs-6">{{provider}}</div>
+        <div class="col-xs-6 text-right">
+          <button class="btn btn-xs btn-primary" @click.prevent="regionsE({regions, provider})">
+            <i class="fa fa-cloud-upload"></i>
+            Regions ({{regions.length}})
+          </button>
+
+          <button class="btn btn-xs btn-primary" @click.prevent="zonesE({regions, provider})">
+            <i class="fa fa-bullseye"></i>
+            Zones
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <modal-regions ref="modal_regions" @update="editSave"></modal-regions>
+  <modal-zones ref="modal_zones" @update="editSave"></modal-zones>
+</div>

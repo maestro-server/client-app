@@ -3,6 +3,7 @@
 import Maestro from 'factories/maestro'
 import svTable from './services/table'
 import adminTable from './adminer/table'
+import regionsTable from './regions/table'
 
 import ListTable from 'mixins/list-table'
 import FectherEntity from 'services/fetchEntity'
@@ -12,7 +13,8 @@ export default {
 
   components: {
     svTable,
-    adminTable
+    adminTable,
+    regionsTable
   },
 
   computed: {

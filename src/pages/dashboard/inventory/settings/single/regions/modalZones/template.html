@@ -1,0 +1,31 @@
+<div>
+
+  <modal title="Zones" effect="fade" v-model="showModal" @closed="closed" @opened="reset">
+    <div class="row">
+      <div class="col-xs-12">
+        <small>Choose and delimit which zones can be used.</small>
+      </div>
+    </div>
+
+    <creater-list :single.sync="item" :basket.sync="items" label="Zone">
+
+      <template slot="forms">
+        <bs-input class="mt10" v-model="item" label="Zone" placeholder="sa-east-1"></bs-input>
+      </template>
+
+      <template slot="view" scope="props">
+        {{props.item.region}}<br>
+        <template v-for="zone in props.item.zones">
+          <bs-label>{{zone}}</bs-label> |
+        </template>
+      </template>
+
+    </creater-list>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-danger" @click="closed">Clear Regions</button>
+      <button type="button" class="btn btn-primary" @click="actionClick">Add Regions</button>
+    </div>
+  </modal>
+</div>

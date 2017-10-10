@@ -1,5 +1,5 @@
 <template>
-  <creater-list :single.sync="item" :basket.sync="items" :show-add-btn="false" :label="label">
+  <creater-list :single.sync="item" :basket.sync="items" :show-add-btn="false" :label="label" @update="updaterEdit">
 
     <template slot="forms">
       <form>
@@ -55,6 +55,7 @@
       addItemTo() {
         this.items.push(this.item)
         this.item = null
+        this.updaterEdit(this.items)
       }
     }
 

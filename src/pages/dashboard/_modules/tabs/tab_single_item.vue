@@ -1,13 +1,13 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" :label="label" fielder="name" @update="updaterEdit">
+  <creater-list :single.sync="single" :basket="value" :label="label" :fielder="fielder" @update="updaterEdit">
 
     <template slot="forms">
-      <bs-input form-type="horizontal" v-model="single.name" name="name" label="Name"
+      <bs-input form-type="horizontal" v-model="single[fielder]" :name="fielder" label="Name"
                 v-validate.initial="'required'"></bs-input>
     </template>
 
     <template slot="view" scope="props">
-      {{props.item.name}}
+      {{props.item[fielder]}}
     </template>
 
   </creater-list>
@@ -23,12 +23,13 @@
     mixins: [TabCreaterList],
 
     props: {
-      label: {}
+      label: {},
+      fielder: {default: 'name', type: String}
     },
 
     data: function () {
       return {
-        single: {name: null}
+        single: {[this.fielder]: null}
       }
     }
 

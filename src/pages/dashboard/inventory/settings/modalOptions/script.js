@@ -2,7 +2,6 @@
 
 import Adminer from 'factories/adminer'
 import Modals from 'mixins/modals'
-import Services from 'factories/services'
 import FectherEntity from 'services/fetchEntity'
 
 import tabItems from 'src/pages/dashboard/_modules/tabs/tab_array_item'
@@ -29,7 +28,7 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new config' : `Edit ${this.model.key} config`
+      this.text.title =  `Edit ${this.model.key} config`
     },
 
     createLoad () {
@@ -46,21 +45,17 @@ export default {
       this.model = _.pickBy(this.data, _.identity)
     },
 
-    createSave () {
-      this.setupModel()
-
-      FectherEntity(Services)()
-        .create(this.finishJob, this.model)
+    isArray(item) {
+      return _.isArray(item)
     },
 
-    titleAcc(fields, k) {
-      return `${k} (${fields.length})`
+    setValue(fields, val) {
+      this.$set(this.data.value, fields, val)
     },
 
     editSave () {
       this.setupModel()
-
-      FectherEntity(Services)()
+      FectherEntity(Adminer)()
         .patch(this.finishJob, this.model)
     }
   }

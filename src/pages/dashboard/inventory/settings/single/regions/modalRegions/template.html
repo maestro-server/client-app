@@ -1,0 +1,17 @@
+<div>
+
+  <modal title="Regions" effect="fade" v-model="showModal" @closed="closed" @opened="reset">
+    <div class="row">
+      <div class="col-xs-12">
+        <small>Choose and delimit which regions can be used.</small>
+      </div>
+    </div>
+
+    <tab-items label="Region" fielder="region" ref="tab_items"></tab-items>
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-danger" @click="closed">Clear Regions</button>
+      <button type="button" class="btn btn-primary" @click="actionClick">Add Regions</button>
+    </div>
+  </modal>
+</div>

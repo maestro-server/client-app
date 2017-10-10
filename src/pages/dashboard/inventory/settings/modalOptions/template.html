@@ -9,8 +9,16 @@
         <div class="col-xs-12">
           <accordion one-at-atime type="warning">
             <template v-for="fields, k in data.value">
-              <panel :header="titleAcc(fields, k)">
-                <tab-items @update="val => data.value[fields] = val" :label="k" :default-value="fields"></tab-items>
+              <panel>
+                <span slot="header">
+                  <b class="text-capitalize">{{k}}</b> <template v-if="fields.length">({{fields.length}})</template>
+                </span>
+
+                <tab-items @update="val => setValue(k, val)" :label="k" :default-value="fields" v-if="isArray(fields)"></tab-items>
+
+                <template v-if="!isArray(fields)">
+                  <info-view :data="fields" :title="false"></info-view>
+                </template>
               </panel>
             </template>
           </accordion>
