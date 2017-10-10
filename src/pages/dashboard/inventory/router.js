@@ -23,6 +23,8 @@ import logs from './logs/router'
 import smtp from './smtp/router'
 import serviceDiscovery from './service-discovery/router'
 import vpn from './vpn/router'
+import dns from './dns/router'
+import cicd from './ci-cd/router'
 
 export default {
   name: 'inventory',
@@ -50,6 +52,8 @@ export default {
     logs,
     smtp,
     serviceDiscovery,
-    vpn
+    vpn,
+    dns,
+    cicd
   ]
 }

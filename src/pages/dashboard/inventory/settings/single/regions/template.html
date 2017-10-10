@@ -8,16 +8,10 @@
             <i class="fa fa-cloud-upload"></i>
             Regions ({{regions.length}})
           </button>
-
-          <button class="btn btn-xs btn-primary" @click.prevent="zonesE({regions, provider})">
-            <i class="fa fa-bullseye"></i>
-            Zones
-          </button>
         </div>
       </div>
     </li>
   </ul>
 
   <modal-regions ref="modal_regions" @update="editSave"></modal-regions>
-  <modal-zones ref="modal_zones" @update="editSave"></modal-zones>
 </div>

@@ -7,10 +7,28 @@
       </div>
     </div>
 
-    <tab-items label="Region" fielder="region" ref="tab_items"></tab-items>
+
+    <tab-items @update="val => regions = val" label="Region" fielder="region" ref="tab_items">
+      <template slot="list" scope="props">
+
+        <div class="listRegions">
+          <accordion type="default">
+            <panel>
+              <span slot="header">
+                <b class="text-capitalize">{{props.item.item.region}}</b>
+                <template v-if="props.item.item.zones">({{props.item.item.zones.length}})</template>
+              </span>
+
+              <tab-array-items @update="val => props.item.item.zones" label="Zone" :default-value="props.item.item.zones"></tab-array-items>
+            </panel>
+          </accordion>
+        </div>
+
+      </template>
+    </tab-items>
 
     <div slot="modal-footer" class="modal-footer">
-      <button type="button" class="btn btn-danger" @click="closed">Clear Regions</button>
+      <button type="button" class="btn btn-danger" @click="closed">Close</button>
       <button type="button" class="btn btn-primary" @click="actionClick">Add Regions</button>
     </div>
   </modal>

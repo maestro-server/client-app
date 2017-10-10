@@ -1,11 +1,13 @@
 <header>
 
-  <div class="col-xs-2 logo">
-    <div class="pull-left">
-      <h1><i class="fa" :class="[icon]" aria-hidden="true"></i> {{ title }}</h1>
-      <p :if="subtitle">{{subtitle}}</p>
+  <router-link :to="{name: 'dashboard'}">
+    <div class="col-xs-2 logo">
+      <div class="pull-left">
+        <h1><i class="fa" :class="[icon]" aria-hidden="true"></i> {{ title }}</h1>
+        <p :if="subtitle">{{subtitle}}</p>
+      </div>
     </div>
-  </div>
+  </router-link>
 
   <div class="col-xs-6">
     <main-menu></main-menu>

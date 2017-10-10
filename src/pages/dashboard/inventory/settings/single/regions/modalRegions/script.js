@@ -2,13 +2,15 @@
 
 import Modals from 'mixins/modals'
 import tabItems from 'src/pages/dashboard/_modules/tabs/tab_single_item'
+import tabArrayItems from 'src/pages/dashboard/_modules/tabs/tab_array_item'
 
 
 export default {
   mixins: [Modals],
 
   components: {
-    tabItems
+    tabItems,
+    tabArrayItems
   },
 
   computed: {
@@ -17,15 +19,15 @@ export default {
 
   data () {
     return {
-      entity: null,
+      data: {},
       provider: null,
-      data: {}
+      regions: []
     }
   },
 
   methods: {
     createLoad () {
-      this.$set(this, 'data', this.model.regions)
+      this.$set(this, 'data', _.clone(this.model.regions))
       this.$set(this, 'provider', this.model.provider)
       this.tab_items.updaterEdit(this.data)
     },
@@ -36,7 +38,9 @@ export default {
 
     createSave () {
       this.setupModel()
-      this.$emit('update', this.model, this.provider)
+      const data = _.map(this.regions, _.clone)
+      this.$emit('update', data, this.provider)
+      this.finishJob()
     }
   }
 

@@ -17,6 +17,7 @@ export default {
       'more': {
         'cache': 'Distributed Cache',
         'brokers': 'Brokers/Streams',
+        'ci-cd': 'CI/CD',
         'serverless': 'Serverless',
         'service-discovery': 'Services Discovery',
         'api-gateway': 'Api Gateway',
@@ -26,7 +27,8 @@ export default {
         'monitor': 'Monitoring System',
         'logs': 'Logs System',
         'smtp': 'Emails (smtps/mtas)',
-        'vpn': 'VPNs'
+        'vpn': 'VPNs',
+        'dns': 'DNS'
       }
     }
   },

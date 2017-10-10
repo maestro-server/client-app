@@ -7,7 +7,9 @@
     </template>
 
     <template slot="view" scope="props">
-      {{props.item[fielder]}}
+      <slot name="list" :item="props">
+        {{props.item[fielder]}}
+      </slot>
     </template>
 
   </creater-list>

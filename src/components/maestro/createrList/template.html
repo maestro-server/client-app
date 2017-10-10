@@ -2,7 +2,7 @@
   <slot name="forms"></slot>
 
   <div class="text-center mt20" v-if="showAddBtn">
-    <button class="btn btn-primary" type="button" name="button" @click="add"
+    <button class="btn btn-primary mt5" type="button" name="button" @click="add"
             :disabled="$parent.errors.any()"><i class="fa fa-plus-circle"></i> {{label}}
     </button>
   </div>
