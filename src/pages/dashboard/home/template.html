@@ -1,16 +1,81 @@
-<!-- Page Content -->
-<div id="page-content-wrapper">
-  <div class="container-fluid">
+<div class="col-xs-12 page">
+
+  <div class="bg-white">
     <div class="row">
-      <div class="col-lg-12">
-        <h1>Simple Sidebar</h1>
-        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens,
-          and will appear non-collapsed on larger screens. When toggled using the button below, the menu will
-          appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+      <h3 class="col-xs-12">Last servers created</h3>
+      <div class="col-sm-3 col-xs-6">
+        <doughnut-chart :data="data"></doughnut-chart>
       </div>
+
+      <server-widget :servers="getLast('servers')"></server-widget>
+
+      <server-widget :servers="getLast('servers', 5)"></server-widget>
+
+      <p class="text-right col-xs-9">Total Servers <b>{{result.servers.found}}</b></p>
+    </div>
+
+
+
+
+
+    <div class="row">
+      <h3 class="col-xs-12">Last servers created</h3>
+
+      <div class="col-sm-3 col-xs-6">
+        <ul class="list-group">
+          <li class="list-group-item" v-for="server in getLast('servers')">
+            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
+            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
+            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
+            <br/>
+            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
+            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
+            <bs-label type='success'>{{server.role}}</bs-label>
+            <bs-label type='success'>{{server.environment}}</bs-label>
+          </li>
+        </ul>
+        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
+      </div>
+
+      <div class="col-sm-3 col-xs-6">
+        <bar-chart :data="data"></bar-chart>
+      </div>
+
+      <div class="col-sm-3 col-xs-6">
+        <ul class="list-group">
+          <li class="list-group-item" v-for="server in getLast('servers')">
+            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
+            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
+            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
+            <br/>
+            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
+            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
+            <bs-label type='success'>{{server.role}}</bs-label>
+            <bs-label type='success'>{{server.environment}}</bs-label>
+          </li>
+        </ul>
+        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
+      </div>
+
+      <div class="col-sm-3 col-xs-6">
+        <ul class="list-group">
+          <li class="list-group-item" v-for="server in getLast('servers')">
+            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
+            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
+            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
+            <br/>
+            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
+            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
+            <bs-label type='success'>{{server.role}}</bs-label>
+            <bs-label type='success'>{{server.environment}}</bs-label>
+          </li>
+        </ul>
+        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
+      </div>
+
+
     </div>
   </div>
+
 </div>
-<!-- /#page-content-wrapper -->
+
