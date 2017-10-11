@@ -3,9 +3,10 @@
 import _ from 'lodash'
 import {mapActions} from 'vuex'
 
-import doughnutChart from './components/doughnut_chart.vue'
-import barChart from './components/bar_chart.vue'
-import pieChart from './components/pie_chart.vue'
+import mostServices from './charts/most_services.vue'
+import mostFamilies from './charts/most_families.vue'
+import mostProviders from './charts/most_provider.vue'
+import mostClients from './charts/most_system_clients.vue'
 
 import serverWidget from './components/servers_widget.vue'
 import appsWidget from './components/apps_widget.vue'
@@ -24,9 +25,10 @@ export default {
   name: 'home',
 
   components: {
-    doughnutChart,
-    barChart,
-    pieChart,
+    mostServices,
+    mostFamilies,
+    mostProviders,
+    mostClients,
     serverWidget,
     appsWidget,
     linksWidget,
@@ -36,7 +38,6 @@ export default {
 
   data () {
     return {
-      colors: ["#2B8B7E", "#FCDA0E", "#2B69AC", "#0E0184", "#5B5DC2", "#D21E94", "#8CA445", "#280AF0", "#3F6DEC", "#91FC1A", "#41923C", "#9B04BD", "#FF7920", "#89DD6E", "#6F7C71", "#F2F1A2"],
       result: {servers:[], applications:[], datacenters: []},
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -58,41 +59,6 @@ export default {
         {route: {name: 'monitor'}, name: 'Monitoring list', icon: 'fa-bullhorn'},
         {route: {name: 'system'}, name: 'System list', icon: 'fa-briefcase'}
       ]
-    }
-  },
-
-  computed: {
-    getMostServices() {
-      if(this.getLast('servers').length > 0) {
-        const labels = []
-        const info = []
-
-        this.result.servers.items.map(e=> {
-          const {services} = e
-
-          services.map(sev=>{
-            const index = _.indexOf(labels, sev.name)
-
-            if(index === -1) {
-              labels.push(sev.name)
-              info.push(0)
-            } else {
-              info[index]++
-            }
-          })
-        })
-
-        const data = info.slice(0, 10)
-
-        let prepared = {
-          labels,
-          datasets: [
-            {backgroundColor: this.colors, data}
-          ]
-        }
-
-        return prepared
-      }
     }
   },
 

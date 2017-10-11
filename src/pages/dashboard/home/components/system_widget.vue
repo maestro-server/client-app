@@ -9,7 +9,7 @@
 
         <template v-if="item.clients" v-for="client in item.clients">
           <router-link :to="{name: 'clients.single', params: { id: client._id }}">
-            <bs-label type='success'>{{client.name}} <i class="fa fa-eye"></i></bs-label>
+            <small class="info"> {{client.name}} <i class="fa fa-eye"></i></small>
           </router-link>
         </template>
       </li>

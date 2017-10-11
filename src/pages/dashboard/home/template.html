@@ -4,9 +4,8 @@
     <div class="row">
       <h3 class="col-xs-9">Servers news</h3>
       <h3 class="col-xs-3">Quick Links</h3>
-      <div class="col-sm-3 col-xs-6">
-        <doughnut-chart :data="getMostServices" v-if="getMostServices" :options="{title: {display: true, text: 'Most services used (last 20 server)'}}"></doughnut-chart>
-      </div>
+
+      <most-services v-if="getLast('servers').length > 0" :results="result.servers.items"></most-services>
 
       <server-widget :servers="getLast('servers')"></server-widget>
 
@@ -22,9 +21,7 @@
 
       <apps-widget :apps="getLast('applications')"></apps-widget>
 
-      <div class="col-sm-3 col-xs-6">
-        <bar-chart :data="data"></bar-chart>
-      </div>
+      <most-families v-if="getLast('applications').length > 0" :results="result.applications.items"></most-families>
 
       <apps-widget :apps="getLast('applications', 5)"></apps-widget>
 
@@ -39,15 +36,12 @@
 
       <dc-widget :items="getLast('datacenters')"></dc-widget>
 
-      <div class="col-sm-3 col-xs-6">
-        <pie-chart :data="data"></pie-chart>
-      </div>
+      <most-providers v-if="getLast('datacenters').length > 0" :results="result.datacenters.items"></most-providers>
 
       <system-widget :items="getLast('system')"></system-widget>
 
-      <div class="col-sm-3 col-xs-6">
-        <doughnut-chart :data="data"></doughnut-chart>
-      </div>
+      <most-clients v-if="getLast('system').length > 0" :results="result.system.items"></most-clients>
+
 
       <p class="text-right col-xs-3" v-if="getLast('datacenters').length > 0">Total dcs <b>{{result.datacenters.found}}</b></p>
       <p class="text-right col-xs-3 col-xs-offset-3" v-if="getLast('system').length > 0">Total system <b>{{result.system.found}}</b></p>
