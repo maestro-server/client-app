@@ -34,7 +34,8 @@ export default {
 
   data () {
     return {
-      result: {servers:[], applications:[], datacenters: []},
+      result: {servers:[], applications:[], datacenters: [], system: []},
+      load:{system: false, applications: false, datacenters: false, servers:false},
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
@@ -62,6 +63,7 @@ export default {
     makeChart(post, entity) {
       const {data} = post
       this.result[entity.name.toLowerCase()] = data
+      this.load[entity.name.toLowerCase()] = true
     },
 
     getLast(entity, offset = 0, limit = 5) {
@@ -81,7 +83,7 @@ export default {
     },
   },
 
-  mounted () {
+  created () {
     this.setPage([
       'Overview',
       'A simple application to manage an IT operations team servers, including systems, applications and services.',

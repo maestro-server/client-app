@@ -5,11 +5,11 @@
       <h3 class="col-xs-9">Servers news</h3>
       <h3 class="col-xs-3">Quick Links</h3>
 
-      <most-multi v-if="getLast('servers').length > 0" :results="result.servers.items" fielder="services" ptitle="Most services installed (last 20 server)"></most-multi>
+      <most-multi v-if="load.servers" :results="result.servers.items" fielder="services" ptitle="Most services installed (last 20 server)"></most-multi>
 
-      <server-widget :servers="getLast('servers')"></server-widget>
+      <server-widget v-if="load.servers" :servers="getLast('servers')"></server-widget>
 
-      <server-widget :servers="getLast('servers', 5)"></server-widget>
+      <server-widget v-if="load.servers" :servers="getLast('servers', 5)"></server-widget>
 
       <links-widget :links="links"></links-widget>
 
@@ -19,13 +19,13 @@
     <div class="row">
       <h3 class="col-xs-12">Apps news</h3>
 
-      <apps-widget :apps="getLast('applications')"></apps-widget>
+      <apps-widget v-if="load.applications" :apps="getLast('applications')"></apps-widget>
 
-      <most-single v-if="getLast('applications').length > 0" :results="result.applications.items" fielder="family" ptitle="Most types used (last 20 apps)"></most-single>
+      <most-single v-if="load.applications" :results="result.applications.items" fielder="family" ptitle="Most types used (last 20 apps)"></most-single>
 
-      <most-single v-if="getLast('applications').length > 0" :results="result.applications.items" fielder="environment" ptitle="Most env installed (last 20 apps)"></most-single>
+      <most-single v-if="load.applications" :results="result.applications.items" fielder="environment" ptitle="Most env installed (last 20 apps)"></most-single>
 
-      <apps-widget :apps="getLast('applications', 5)"></apps-widget>
+      <apps-widget v-if="load.applications" :apps="getLast('applications', 5)"></apps-widget>
 
       <p class="text-right col-xs-12" v-if="getLast('applications').length > 0">Total Apps <b>{{result.applications.found}}</b></p>
     </div>
@@ -34,13 +34,13 @@
       <h3 class="col-xs-6">Datacenters avaliable</h3>
       <h3 class="col-xs-6">System news</h3>
 
-      <dc-widget :items="getLast('datacenters')"></dc-widget>
+      <dc-widget v-if="load.datacenters" :items="getLast('datacenters')"></dc-widget>
 
-      <most-single v-if="getLast('datacenters').length > 0" :results="result.datacenters.items" fielder="provider" ptitle="Most provider updated (last 20 dcs)"></most-single>
+      <most-single v-if="load.datacenters" :results="result.datacenters.items" fielder="provider" ptitle="Most provider updated (last 20 dcs)"></most-single>
 
-      <system-widget :items="getLast('system')"></system-widget>
+      <system-widget v-if="load.system" :items="getLast('system')"></system-widget>
 
-      <most-multi v-if="getLast('system').length > 0" :results="result.system.items" fielder="clients" ptitle="Most clients updated (last 20 system)"></most-multi>
+      <most-multi v-if="load.system" :results="result.system.items" fielder="clients" ptitle="Most clients updated (last 20 system)"></most-multi>
 
       <p class="text-right col-xs-3" v-if="getLast('datacenters').length > 0">Total dcs <b>{{result.datacenters.found}}</b></p>
       <p class="text-right col-xs-3 col-xs-offset-3" v-if="getLast('system').length > 0">Total system <b>{{result.system.found}}</b></p>
