@@ -1,4 +1,4 @@
-<div style="position: relative" :class="{open:showDropdown}">
+<div>
   <bs-input
     :label="label"
     :form-type="formType"
@@ -16,13 +16,15 @@
   >
 
     <template slot="dropper">
-      <ul class="dropdown-menu" ref="dropdown" >
-        <li v-for="(item, i) in items" :class="{active: isActive(i)}">
-          <a @mousedown.prevent="hit" @mousemove="setActive(i)">
-            <component :is="templateComp" :item="item"></component>
-          </a>
-        </li>
-      </ul>
+      <div style="position: relative" :class="{open:showDropdown}">
+        <ul class="dropdown-menu" ref="dropdown" style="position: absolute ">
+          <li v-for="(item, i) in items" :class="{active: isActive(i)}">
+            <a @mousedown.prevent="hit" @mousemove="setActive(i)">
+              <component :is="templateComp" :item="item"></component>
+            </a>
+          </li>
+        </ul>
+      </div>
     </template>
 
   </bs-input>
