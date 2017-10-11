@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <doughnut-chart :data="getMostFamilies" :options="options"></doughnut-chart>
+    <pie-chart :data="getMostFamilies" :options="options"></pie-chart>
   </div>
 </template>
 
@@ -8,17 +8,19 @@
   'use strict'
 
   import charts from 'mixins/charts'
-  import doughnutChart from '../components/doughnut_chart.vue'
+  import pieChart from '../components/pie_chart.vue'
 
   export default {
     mixins: [charts],
 
     props: {
-      results: {default: () => []}
+      results: {default: () => []},
+      fielder: {},
+      ptitle: {}
     },
 
     components: {
-      doughnutChart
+      pieChart
     },
 
     computed: {
@@ -26,8 +28,8 @@
         if(this.results.length > 0) {
 
           const calculate = _(this.results)
-            .filter(e=>_.has(e, 'provider'))
-            .map(e=>e.provider)
+            .filter(e=>_.has(e, this.fielder))
+            .map(e=>_.get(e, this.fielder))
             .transform(this.splitCount, {labels: [], info: []})
             .value()
 
@@ -46,7 +48,7 @@
         options: {
           title: {
             display: true,
-            text: 'Most providers used (last 20 dcs)'
+            text: this.ptitle
           }
         }
       }

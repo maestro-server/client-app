@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <doughnut-chart :data="getMostServices" :options="options"></doughnut-chart>
+    <doughnut-chart :data="getMost" :options="options"></doughnut-chart>
   </div>
 </template>
 
@@ -14,7 +14,9 @@
     mixins: [charts],
 
     props: {
-      results: {default: () => []}
+      results: {default: () => []},
+      fielder: {},
+      ptitle: {}
     },
 
     components: {
@@ -22,12 +24,12 @@
     },
 
     computed: {
-      getMostServices() {
+      getMost() {
         if(this.results.length > 0) {
 
           const calculate = _(this.results)
-            .filter(e=>_.isArray(e.services))
-            .map(e=>e.services)
+            .filter(e=>_.isArray(e[this.fielder]))
+            .map(e=>_.get(e, this.fielder))
             .transform(_.merge, [])
             .transform(this.splitCount, {labels: [], info: []})
             .value()
@@ -42,7 +44,7 @@
 
     data() {
       return {
-        options: {title: {display: true, text: 'Most services used (last 20 server)'}}
+        options: {title: {display: true, text: this.ptitle}}
       }
     },
 

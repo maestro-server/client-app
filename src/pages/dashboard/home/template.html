@@ -5,7 +5,7 @@
       <h3 class="col-xs-9">Servers news</h3>
       <h3 class="col-xs-3">Quick Links</h3>
 
-      <most-services v-if="getLast('servers').length > 0" :results="result.servers.items"></most-services>
+      <most-multi v-if="getLast('servers').length > 0" :results="result.servers.items" fielder="services" ptitle="Most services installed (last 20 server)"></most-multi>
 
       <server-widget :servers="getLast('servers')"></server-widget>
 
@@ -21,11 +21,11 @@
 
       <apps-widget :apps="getLast('applications')"></apps-widget>
 
-      <most-families v-if="getLast('applications').length > 0" :results="result.applications.items"></most-families>
+      <most-single v-if="getLast('applications').length > 0" :results="result.applications.items" fielder="family" ptitle="Most types used (last 20 apps)"></most-single>
+
+      <most-single v-if="getLast('applications').length > 0" :results="result.applications.items" fielder="environment" ptitle="Most env installed (last 20 apps)"></most-single>
 
       <apps-widget :apps="getLast('applications', 5)"></apps-widget>
-
-      <apps-widget :apps="getLast('applications', 10)"></apps-widget>
 
       <p class="text-right col-xs-12" v-if="getLast('applications').length > 0">Total Apps <b>{{result.applications.found}}</b></p>
     </div>
@@ -36,12 +36,11 @@
 
       <dc-widget :items="getLast('datacenters')"></dc-widget>
 
-      <most-providers v-if="getLast('datacenters').length > 0" :results="result.datacenters.items"></most-providers>
+      <most-single v-if="getLast('datacenters').length > 0" :results="result.datacenters.items" fielder="provider" ptitle="Most provider updated (last 20 dcs)"></most-single>
 
       <system-widget :items="getLast('system')"></system-widget>
 
-      <most-clients v-if="getLast('system').length > 0" :results="result.system.items"></most-clients>
-
+      <most-multi v-if="getLast('system').length > 0" :results="result.system.items" fielder="clients" ptitle="Most clients updated (last 20 system)"></most-multi>
 
       <p class="text-right col-xs-3" v-if="getLast('datacenters').length > 0">Total dcs <b>{{result.datacenters.found}}</b></p>
       <p class="text-right col-xs-3 col-xs-offset-3" v-if="getLast('system').length > 0">Total system <b>{{result.system.found}}</b></p>

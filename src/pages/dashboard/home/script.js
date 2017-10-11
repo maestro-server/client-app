@@ -3,10 +3,8 @@
 import _ from 'lodash'
 import {mapActions} from 'vuex'
 
-import mostServices from './charts/most_services.vue'
-import mostFamilies from './charts/most_families.vue'
-import mostProviders from './charts/most_provider.vue'
-import mostClients from './charts/most_system_clients.vue'
+import mostMulti from './charts/most_multi.vue'
+import mostSingle from './charts/most_single.vue'
 
 import serverWidget from './components/servers_widget.vue'
 import appsWidget from './components/apps_widget.vue'
@@ -25,10 +23,8 @@ export default {
   name: 'home',
 
   components: {
-    mostServices,
-    mostFamilies,
-    mostProviders,
-    mostClients,
+    mostSingle,
+    mostMulti,
     serverWidget,
     appsWidget,
     linksWidget,
@@ -79,7 +75,7 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
-    fetchData (entity, force=false) {
+    fetchData (entity, force=true) {
       FectherEntity(entity)({force})
         .find(e=>this.makeChart(e, entity))
     },
