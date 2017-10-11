@@ -11,11 +11,11 @@ export default {
       entity: new Services(),
       columns: ['name', 'lfamily', 'ltags', 'actions'],
       options: {
-        filterable: ['name']
-      },
-      headings: {
-        lfamily: "Family",
-        ltags: 'Tags'
+        filterable: ['name'],
+        headings: {
+          lfamily: "Family",
+          ltags: 'Tags'
+        }
       }
     }
   },

@@ -2,78 +2,55 @@
 
   <div class="bg-white">
     <div class="row">
-      <h3 class="col-xs-12">Last servers created</h3>
+      <h3 class="col-xs-9">Servers news</h3>
+      <h3 class="col-xs-3">Quick Links</h3>
       <div class="col-sm-3 col-xs-6">
-        <doughnut-chart :data="data"></doughnut-chart>
+        <doughnut-chart :data="getMostServices" v-if="getMostServices" :options="{title: {display: true, text: 'Most services used (last 20 server)'}}"></doughnut-chart>
       </div>
 
       <server-widget :servers="getLast('servers')"></server-widget>
 
       <server-widget :servers="getLast('servers', 5)"></server-widget>
 
-      <p class="text-right col-xs-9">Total Servers <b>{{result.servers.found}}</b></p>
+      <links-widget :links="links"></links-widget>
+
+      <p class="text-right col-xs-9" v-if="getLast('servers').length > 0">Total Servers <b>{{result.servers.found}}</b></p>
     </div>
 
-
-
-
-
     <div class="row">
-      <h3 class="col-xs-12">Last servers created</h3>
+      <h3 class="col-xs-12">Apps news</h3>
 
-      <div class="col-sm-3 col-xs-6">
-        <ul class="list-group">
-          <li class="list-group-item" v-for="server in getLast('servers')">
-            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
-            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
-            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
-            <br/>
-            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
-            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
-            <bs-label type='success'>{{server.role}}</bs-label>
-            <bs-label type='success'>{{server.environment}}</bs-label>
-          </li>
-        </ul>
-        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
-      </div>
+      <apps-widget :apps="getLast('applications')"></apps-widget>
 
       <div class="col-sm-3 col-xs-6">
         <bar-chart :data="data"></bar-chart>
       </div>
 
-      <div class="col-sm-3 col-xs-6">
-        <ul class="list-group">
-          <li class="list-group-item" v-for="server in getLast('servers')">
-            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
-            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
-            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
-            <br/>
-            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
-            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
-            <bs-label type='success'>{{server.role}}</bs-label>
-            <bs-label type='success'>{{server.environment}}</bs-label>
-          </li>
-        </ul>
-        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
-      </div>
+      <apps-widget :apps="getLast('applications', 5)"></apps-widget>
+
+      <apps-widget :apps="getLast('applications', 10)"></apps-widget>
+
+      <p class="text-right col-xs-12" v-if="getLast('applications').length > 0">Total Apps <b>{{result.applications.found}}</b></p>
+    </div>
+
+    <div class="row">
+      <h3 class="col-xs-6">Datacenters avaliable</h3>
+      <h3 class="col-xs-6">System news</h3>
+
+      <dc-widget :items="getLast('datacenters')"></dc-widget>
 
       <div class="col-sm-3 col-xs-6">
-        <ul class="list-group">
-          <li class="list-group-item" v-for="server in getLast('servers')">
-            <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
-            <span v-if="server.servercenters"> - {{server.servercenters.name}}</span>
-            <router-link :to="{name: 'servers.single', params: { id: server._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
-            <br/>
-            <bs-label type='default'>{{server.ipv4_private}}</bs-label>
-            <bs-label type='default'>{{server.ipv4_public}}</bs-label>
-            <bs-label type='success'>{{server.role}}</bs-label>
-            <bs-label type='success'>{{server.environment}}</bs-label>
-          </li>
-        </ul>
-        <p class="text-right">Total <b>{{result.servers.found}}</b></p>
+        <pie-chart :data="data"></pie-chart>
       </div>
 
+      <system-widget :items="getLast('system')"></system-widget>
 
+      <div class="col-sm-3 col-xs-6">
+        <doughnut-chart :data="data"></doughnut-chart>
+      </div>
+
+      <p class="text-right col-xs-3" v-if="getLast('datacenters').length > 0">Total dcs <b>{{result.datacenters.found}}</b></p>
+      <p class="text-right col-xs-3 col-xs-offset-3" v-if="getLast('system').length > 0">Total system <b>{{result.system.found}}</b></p>
     </div>
   </div>
 

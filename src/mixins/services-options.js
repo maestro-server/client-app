@@ -19,7 +19,10 @@ export default {
 
     setPosition(data) {
       const fielder = _.get(data, 'owner', false) ? 'third' : 'own'
-      this.options[fielder].push(_.get(data, 'name'))
+
+      if(_.has(this.options, fielder)) {
+        this.options[fielder].push(_.get(data, 'name'))
+      }
     }
   }
 }

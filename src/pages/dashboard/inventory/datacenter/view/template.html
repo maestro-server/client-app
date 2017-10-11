@@ -1,0 +1,26 @@
+<div>
+  <div class="pb10">
+    <header-view-entity label="Datacenter" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+  </div>
+
+  <div class="col-xs-6">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-6">
+
+    <creater-config-list label="Region" :basket="model.regions" @edit="edit" :index="1" icons="fa-cloud-upload">
+      <template slot="view" scope="props">
+        {{props.item}}
+      </template>
+    </creater-config-list>
+
+    <creater-config-list label="Zone" :basket="model.zones" @edit="edit" :index="1" icons="fa-bullseye">
+      <template slot="view" scope="props">
+        {{props.item}}
+      </template>
+    </creater-config-list>
+
+  </div>
+
+</div>
