@@ -4,6 +4,7 @@
     <template slot="forms">
       <bs-select form-type="horizontal" :options="options.own" v-model="single.name" name="name"
                  label="Service" v-validate.initial="'required'" search></bs-select>
+
       <bs-input form-type="horizontal" v-model="single.version" name="version" label="Version"></bs-input>
     </template>
 

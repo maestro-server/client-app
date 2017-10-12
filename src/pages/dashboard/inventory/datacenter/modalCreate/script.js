@@ -80,15 +80,15 @@ export default {
 
     addItems(item, entity) {
       const exist = _.filter(this[entity], e=>e==item).length
-      if (entity && !exist) {
+      if (entity && !_.isEmpty(item) && !exist) {
         this[entity].push(item)
       }
     },
 
     clearItems(data) {
       if(data != this.provider) {
-        this.zones = []
-        this.regions = []
+        this.$set(this, 'zones', [])
+        this.$set(this, 'regions', [])
       }
     },
 

@@ -19,7 +19,7 @@
 
         <div class="col-xs-12 mt10">
           <bs-select v-if="!ownProvider" form-type="horizontal" :options="options.provider" v-model="provider" name="provider"
-                     label="Provider" :disabled="!this.create" @change="clearItems"></bs-select>
+                     label="Provider" :disabled="!this.create" @input="clearItems"></bs-select>
 
           <bs-input v-if="ownProvider" form-type="horizontal" label="Provider" name="provider" v-model="provider"></bs-input>
 
