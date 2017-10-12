@@ -65,7 +65,7 @@
         <!-- ================= Targets ================= -->
         <!-- ============================================== -->
         <tab header="Applications">
-          <tab-applications @update="val => data.targets = val" ref="tab_targets" label="Consumer" default-type="Worker">
+          <tab-applications @update="val => data.targets = val" ref="tab_targets" label="Consumer" default-type="Application">
             <template slot="label">
               List all consumers, using the form below to search in servers.
             </template>
@@ -75,7 +75,7 @@
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
+          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Standard"></tab-servers>
         </tab>
 
         <!-- ================= System ================= -->

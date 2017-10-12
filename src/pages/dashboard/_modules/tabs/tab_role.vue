@@ -1,7 +1,7 @@
 <template>
   <div>
     <bs-select form-type="horizontal" :options="roles" v-model="role" name="role"
-               label="Role" @selected="changeData"></bs-select>
+               label="Role" @input="changeData"></bs-select>
     <hr>
 
     <h5 class="mt0 text-center" v-if="role">{{role}} specification</h5>

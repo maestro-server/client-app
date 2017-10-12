@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-3 col-xs-6" v-if="servers">
+  <div class="col-sm-3 col-xs-6">
     <ul class="list-group">
       <li class="list-group-item" v-for="server in servers">
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">

@@ -2,15 +2,16 @@
 
 import _ from 'lodash'
 import Modals from 'mixins/modals'
-import ModalsApps from 'mixins/modals-apps'
 import SingleService from 'mixins/single-service'
 
 import FectherEntity from 'services/fetchEntity'
 import Servers from 'factories/servers'
 import Applications from 'factories/applications'
 
+import Adminer from 'factories/adminer'
+
 export default {
-  mixins: [Modals, ModalsApps, SingleService],
+  mixins: [Modals, SingleService],
 
   props: {
     provider: {}
@@ -25,11 +26,13 @@ export default {
       initialData: {
         dataguard: null, storage_types: null, db_hostname: null, asm: null, disk: null, asm_name: null, role: null
       },
+      data: {},
       options: {
         oracle: {
           storage_types: [],
           role: []
-        }
+        },
+        role: []
       },
       template: "<b>{{item.name}}</b>"
     }
@@ -134,9 +137,8 @@ export default {
       this.$set(this, 'service', this.wrapperReduce(_.head(list)))
     },
 
-    setService(index) {
-      if(!_.isEmpty(index)) {
-        const search = _.head(index)
+    setService(search) {
+      if(!_.isEmpty(search)) {
         const service = _.head(
           this.services.filter(e => this.wrapperReduce(e) === search)
         )
@@ -148,7 +150,17 @@ export default {
         _.defaults(configs, _.pick(this.provider, ['storage_types', 'dataguard']))
         this.$set(this, 'data', configs)
       }
+    },
+    fetchData() {
+      const key = `database_options`
+
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key})
     }
+  },
+
+  created() {
+    this.fetchData()
   }
 
 }

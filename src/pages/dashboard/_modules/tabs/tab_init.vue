@@ -3,7 +3,7 @@
 
     <div class="col-xs-12">
       <bs-select form-type="horizontal" :options="managers" v-model="data.init" name="init" clear-button
-                 label="Init System" @selected="onHit"></bs-select>
+                 label="Init System" @input="onHit"></bs-select>
       <hr>
       <bs-input class="mt10" form-type="horizontal"
                 name="start" label="Start Cmd" v-model="data.start" placeholder="systemctl httpd start" @blur="onHit"></bs-input>

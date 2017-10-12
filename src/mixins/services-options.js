@@ -8,7 +8,7 @@ export default {
   methods: {
     fetchServicesOptions(family = null) {
       FectherEntity(Services)({persistence: 'local'})
-        .find(this.processOptions, {family})
+        .find(this.processOptions, {family, limit: 500})
     },
 
     processOptions(options) {

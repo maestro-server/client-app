@@ -60,8 +60,7 @@ export default {
     },
 
     typeChange(val) {
-      const v = _.head(val)
-      this.$set(this.data, 'type', v)
+      this.$set(this.data, 'type', val)
       this.$forceUpdate()
     },
 

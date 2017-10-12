@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-3 col-xs-6" v-if="apps">
+  <div class="col-sm-3 col-xs-6">
     <ul class="list-group">
       <li class="list-group-item" v-for="app in apps">
         <router-link :to="{name: 'applications.single', params: { id: app._id }}">

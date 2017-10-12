@@ -20,7 +20,7 @@
             <template slot="forms">
               <form>
                 <bs-select :options="options.families" v-model="family" name="family" form-type="horizontal"
-                           label="Add family" @selected="addFamily" class="mt10"></bs-select>
+                           label="Add family" @input="addFamily" class="mt10"></bs-select>
               </form>
             </template>
 

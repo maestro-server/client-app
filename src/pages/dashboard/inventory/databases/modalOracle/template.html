@@ -22,7 +22,7 @@
 
                 <bs-select form-type="horizontal" :options="options.oracle.type" v-model="data.type"
                            name="type" label="Type*" v-validate.initial="'required'" placeholder="This DB is for apps or oracle services like ASM/SOA"
-                           :error="makeError('type')" @selected="typeChange"></bs-select>
+                           :error="makeError('type')" @input="typeChange"></bs-select>
 
                 <bs-select :disabled="data.type !== 'Application'"
                            class="mt20" form-type="horizontal" :options="options.oracle.storage_types" v-model="data.storage_types"

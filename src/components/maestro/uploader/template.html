@@ -8,7 +8,7 @@
     v-model="label"
     :class="inputSize"
     v-bind:value="value"
-    @selected="upload">
+    @input="upload">
   </bs-input-file>
 
   <spinner v-model="spinner" size="lg" text="Loading..."></spinner>

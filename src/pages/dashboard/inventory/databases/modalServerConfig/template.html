@@ -5,7 +5,7 @@
     <form class="row form-horizontal" @submit.prevent="createSave" v-if="findServices.length > 0">
       <div class="col-xs-12">
         <bs-select class="mt20" form-type="horizontal" :options="findServices" v-model="service"
-                   name="service" label="Service installed" :help="serviceMsg" @selected="setService"></bs-select>
+                   name="service" label="Service installed" :help="serviceMsg" @input="setService"></bs-select>
 
         <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Hostname*" v-model="data.db_hostname"
                   v-validate.initial="'required'" :error="makeError('name')"></bs-input>
@@ -52,7 +52,7 @@
         </template>
 
         <template v-if="data.storage_types == 'Default Disk' || provider.modal !== 'oracle'">
-          <bs-select class="mt20" form-type="horizontal" :options="listStorage" options-label="name" options-value="name" v-model="data.disk"
+          <bs-select class="mt20" form-type="horizontal" :options="listStorage" options-label="name" v-model="data.disk"
                      name="disk" label="Storage Path" placeholder="Storage path?"></bs-select>
 
           <bs-label type="danger" class="pull-right" v-if="listStorage.length == 0">Not found any storage in this server</bs-label>

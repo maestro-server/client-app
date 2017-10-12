@@ -25,8 +25,8 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
-    me () {
-      FectherEntity(Me)()
+    me (force = true) {
+      FectherEntity(Me)({force})
         .find((e) => _.merge(this.model, e.data))
     },
 

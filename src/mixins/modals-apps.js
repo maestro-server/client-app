@@ -42,6 +42,7 @@ export default {
     tab_tags() {return this.$refs.tab_tags},
     tab_role() {return this.$refs.tab_role},
     providers() {
+      this.$set(this.data, 'provider', '')
       return this.own ? this.options.third : this.options.own
     },
     labelPService() {
@@ -134,6 +135,7 @@ export default {
 
     changeProvider() {
       this.other = !this.other
+      this.$set(this.data, 'provider', '')
     }
   },
 

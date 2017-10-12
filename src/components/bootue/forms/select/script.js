@@ -122,6 +122,11 @@ export default {
       default: null
     },
 
+    optionsLabel: {
+      type: String,
+      default: 'value'
+    },
+
     /**
      * Callback to generate the label text. If {option}
      * is an object, returns option[this.label] by default.
@@ -133,8 +138,8 @@ export default {
       type: Function,
       default(option) {
         if (typeof option === 'object') {
-          if (this.label && option[this.label]) {
-            return option[this.label]
+          if (this.optionsLabel && option[this.optionsLabel]) {
+            return option[this.optionsLabel]
           }
         }
         return option;
@@ -182,7 +187,7 @@ export default {
       type: Function,
       default(newOption) {
         if (typeof this.mutableOptions[0] === 'object') {
-          newOption = {[this.label]: newOption}
+          newOption = {[this.optionsLabel]: newOption}
         }
         this.$emit('option:created', newOption)
         return newOption
@@ -357,7 +362,7 @@ export default {
       if (this.multiple) {
         let ref = -1
         this.mutableValue.forEach((val) => {
-          if (val === option || typeof val === 'object' && val[this.label] === option[this.label]) {
+          if (val === option || typeof val === 'object' && val[this.optionsLabel] === option[this.optionsLabel]) {
             ref = val
           }
         })
@@ -411,7 +416,7 @@ export default {
       if (this.multiple && this.mutableValue) {
         let selected = false
         this.mutableValue.forEach(opt => {
-          if (typeof opt === 'object' && opt[this.label] === option[this.label]) {
+          if (typeof opt === 'object' && opt[this.optionsLabel] === option[this.optionsLabel]) {
             selected = true
           } else if (typeof opt === 'object' && opt[this.label] === option) {
             selected = true
@@ -484,7 +489,7 @@ export default {
       let exists = false
 
       this.mutableOptions.forEach(opt => {
-        if (typeof opt === 'object' && opt[this.label] === option) {
+        if (typeof opt === 'object' && opt[this.optionsLabel] === option) {
           exists = true
         } else if (opt === option) {
           exists = true
@@ -597,10 +602,10 @@ export default {
      */
     filteredOptions() {
       let options = this.mutableOptions.filter((option) => {
-        if (typeof option === 'object' && option.hasOwnProperty(this.label)) {
-          return option[this.label].toLowerCase().indexOf(this.search.toLowerCase()) > -1
-        } else if (typeof option === 'object' && !option.hasOwnProperty(this.label)) {
-          return console.warn(`[vue-select warn]: Label key "option.${this.label}" does not exist in options object.\nhttp://sagalbot.github.io/vue-select/#ex-labels`)
+        if (typeof option === 'object' && option.hasOwnProperty(this.optionsLabel)) {
+          return option[this.optionsLabel].toLowerCase().indexOf(this.search.toLowerCase()) > -1
+        } else if (typeof option === 'object' && !option.hasOwnProperty(this.optionsLabel)) {
+          return console.warn(`[vue-select warn]: Label key "option.${this.optionsLabel}" does not exist in options object.\nhttp://sagalbot.github.io/vue-select/#ex-labels`)
         }
         return option.toLowerCase().indexOf(this.search.toLowerCase()) > -1
       })

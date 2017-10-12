@@ -158,6 +158,7 @@
         v-validate.initial="'required|confirmed:newpassword'"
         name="verypassword"
         data-vv-scope="fpassword"
+        v-model="cpass.vpass"
         :error="makeError('verypassword', 'fpassword')"
         class="col-xs-6"
       ></bs-input>
