@@ -34,7 +34,7 @@
           </li>
           <li v-if="required&&!clearButton"><a @mousedown.prevent="clear() && close()">{{ placeholder }}</a></li>
           <li v-for="option in filteredOptions" :id="option[optionsValue]">
-            <a @click.stop.prevent="select(option[optionsValue])">
+            <a @click.stop="action(null)" @mousedown.stop.prevent="select(option[optionsValue])">
               <span v-html="option[optionsLabel]"></span>
               <span class="fa fa-check check-mark" v-show="isSelected(option[optionsValue])"></span>
             </a>

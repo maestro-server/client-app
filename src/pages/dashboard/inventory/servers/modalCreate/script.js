@@ -23,11 +23,14 @@ export default {
   },
 
   data: function () {
+    const defaultServer = {status: "Active", role: null, storage:[], auth:[], services: [], tags: [], datacenters: {}}
+
     return {
       zone: null,
       showModalDC: false,
       showModalZones: false,
-      server: {status: "Active", role:null, storage:[], auth:[], services: [], tags: [], datacenters: {}},
+      initialServer: _.clone(defaultServer),
+      server: _.clone(defaultServer),
       os: {base: null, dist: null, version: null},
       options: {
         status:[],
@@ -67,7 +70,7 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.server = {}
+      this.server = this.initialServer
       this.os = {base: null, dist: null, version: null}
       this.tab_dc.reset()
       this.tab_storage.reset()
