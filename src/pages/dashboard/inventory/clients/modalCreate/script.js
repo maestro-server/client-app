@@ -4,12 +4,13 @@ import Modals from 'mixins/modals'
 import Clients from 'factories/clients'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
+import verifyDuplicate from 'mixins/verify_duplicate'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabChannel from 'src/pages/dashboard/_modules/tabs/tab_channel'
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, verifyDuplicate],
 
   components: {
     tabTags,
@@ -20,7 +21,7 @@ export default {
     return {
       URL_SYSTEM: `${API_URL}/system?query=`,
       template: "<b>{{item.name}}</b>",
-      client: {
+      data: {
         name: null, description: null,
         tags: [], contacts: []
       },
@@ -30,7 +31,8 @@ export default {
         deploy:[],
         languages: [],
         clusters: []
-      }
+      },
+      entity: Clients
     }
   },
 
@@ -46,7 +48,8 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.client = {}
+      this.data = {}
+      this.clearDuplicate()
       this.tab_channel.reset()
       this.tab_tags.reset()
     },
@@ -58,20 +61,20 @@ export default {
     },
 
     setupModel () {
-      this.model = _.pickBy(this.client, _.identity)
+      this.model = _.pickBy(this.data, _.identity)
     },
 
     createSave () {
       this.setupModel()
 
-      FectherEntity(Clients)()
+      FectherEntity(this.entity)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
 
-      FectherEntity(Clients)()
+      FectherEntity(this.entity)()
         .update(this.finishJob, this.model)
     },
 

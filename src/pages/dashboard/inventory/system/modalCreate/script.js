@@ -5,13 +5,14 @@ import System from 'factories/system'
 
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
+import verifyDuplicate from 'mixins/verify_duplicate'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabCheck from 'src/pages/dashboard/_modules/tabs/tab_check'
 import tabClients from 'src/pages/dashboard/_modules/tabs/tab_clients'
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, verifyDuplicate],
 
   components: {
     tabTags,
@@ -21,11 +22,12 @@ export default {
 
   data () {
     return {
-      system: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []},
+      data: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []},
       options: {
         check:[],
         apps: []
-      }
+      },
+      entity: System
     }
   },
 
@@ -42,7 +44,8 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.system = {}
+      this.data = {}
+      this.clearDuplicate()
       this.tab_tags.reset()
       this.tab_clients.reset()
       this.tab_check.reset()
@@ -56,20 +59,20 @@ export default {
     },
 
     setupModel () {
-      this.model = _.pickBy(this.system, _.identity)
+      this.model = _.pickBy(this.data, _.identity)
     },
 
     createSave () {
       this.setupModel()
 
-      FectherEntity(System)()
+      FectherEntity(this.entity)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
 
-      FectherEntity(System)()
+      FectherEntity(this.entity)()
         .update(this.finishJob, this.model)
     },
 

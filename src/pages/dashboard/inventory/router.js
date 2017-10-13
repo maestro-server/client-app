@@ -25,6 +25,9 @@ import serviceDiscovery from './service-discovery/router'
 import vpn from './vpn/router'
 import dns from './dns/router'
 import cicd from './ci-cd/router'
+import auth from './auth/router'
+import nas from './nas/router'
+import repository from './repository/router'
 
 export default {
   name: 'inventory',
@@ -54,6 +57,9 @@ export default {
     serviceDiscovery,
     vpn,
     dns,
-    cicd
+    cicd,
+    auth,
+    repository,
+    nas
   ]
 }

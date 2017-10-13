@@ -1,6 +1,7 @@
 'use strict'
 import _ from 'lodash'
 import Modals from 'mixins/modals'
+import verifyDuplicate from 'mixins/verify_duplicate'
 import Servers from 'factories/servers'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
@@ -12,7 +13,7 @@ import tabStorage from 'src/pages/dashboard/_modules/tabs/tab_storage'
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, verifyDuplicate],
 
   components: {
     tabDatacenter,
@@ -29,9 +30,10 @@ export default {
       zone: null,
       showModalDC: false,
       showModalZones: false,
-      initialServer: _.clone(defaultServer),
-      server: _.clone(defaultServer),
+      initialData: _.clone(defaultServer),
+      data: _.clone(defaultServer),
       os: {base: null, dist: null, version: null},
+      entity: Servers,
       options: {
         status:[],
         environment:[],
@@ -70,7 +72,8 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.server = this.initialServer
+      this.data = _.clone(this.initialData)
+      this.clearDuplicate()
       this.os = {base: null, dist: null, version: null}
       this.tab_dc.reset()
       this.tab_storage.reset()
@@ -98,7 +101,7 @@ export default {
 
 
     setupModel () {
-      this.model = _.pickBy(this.server, _.identity)
+      this.model = _.pickBy(this.data, _.identity)
       this.model.os = _.pickBy(this.os, _.identity)
     },
 

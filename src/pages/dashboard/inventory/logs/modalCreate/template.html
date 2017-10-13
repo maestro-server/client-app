@@ -16,13 +16,6 @@
               <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
-              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
-                         name="environment" label="Environment*" v-validate.initial="'required'"
-                         :error="makeError('environment')"></bs-select>
-
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
-                        v-model="data.description"></bs-input>
-
               <div class="row">
                 <div class="col-xs-3 text-right mt5">
                   <label>Third Party?</label>
@@ -51,6 +44,16 @@
                           v-model="data.provider"  class="mt5" v-validate.initial="'required'" :error="makeError('provider')"
                 ></bs-input>
               </template>
+
+              <hr>
+
+              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
+                         name="environment" label="Environment*" v-validate.initial="'required'"
+                         :error="makeError('environment')"></bs-select>
+
+              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
+                        v-model="data.description"></bs-input>
+
             </div>
           </div>
 

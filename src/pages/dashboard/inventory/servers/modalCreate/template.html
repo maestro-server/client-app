@@ -14,27 +14,48 @@
               <label>Status</label>
             </div>
             <div class="col-xs-9">
-              <button-group v-model="server.status" type="primary">
+              <button-group v-model="data.status" type="primary">
                 <bs-radio v-for="sts, i in options.status" :key="sts" :selected-value="sts">{{sts}}</bs-radio>
               </button-group>
             </div>
           </div>
 
-          <bs-input class="mt20" form-type="horizontal" name="hostname" label="Hostname*" v-model="server.hostname"
-                    v-validate.initial="'required'" :error="makeError('hostname')"></bs-input>
-          <bs-input form-type="horizontal" name="ipv4_private" label="IP Private*" v-model="server.ipv4_private"
-                    v-validate.initial="'required|ip'" :error="makeError('ipv4_private')"></bs-input>
-          <bs-input form-type="horizontal" name="ipv4_public" label="IP Public" v-model="server.ipv4_public"
-                    v-validate="'ip'" :error="makeError('ipv4_public')"></bs-input>
-          <bs-input form-type="horizontal" name="cpu" label="CPU (cores)" v-model="server.cpu"
+
+          <bs-input class="mt20" form-type="horizontal" name="hostname" label="Hostname*" v-model="data.hostname"
+                    v-validate.initial="'required'" :error="makeError('hostname')" @blur="verifyDuplicate">
+
+            <template slot="dropper" v-if="duplicate.hostname">
+              <span class="btn btn-danger btn-xs col-xs-12 mt5">{{duplicate.hostname}}</span>
+            </template>
+          </bs-input>
+
+
+          <bs-input form-type="horizontal" name="ipv4_private" label="IP Private*" v-model="data.ipv4_private"
+                    v-validate.initial="'required|ip'" :error="makeError('ipv4_private')" @blur="verifyDuplicate">
+
+            <template slot="dropper" v-if="duplicate.ipv4_private">
+              <span class="btn btn-danger btn-xs col-xs-12 mt5">{{duplicate.ipv4_private}}</span>
+            </template>
+          </bs-input>
+
+          <bs-input form-type="horizontal" name="ipv4_public" label="IP Public" v-model="data.ipv4_public"
+                    v-validate="'ip'" :error="makeError('ipv4_public')" @blur="verifyDuplicate">
+
+            <template slot="dropper" v-if="duplicate.ipv4_public">
+              <span class="btn btn-danger btn-xs col-xs-12 mt5">{{duplicate.ipv4_public}}</span>
+            </template>
+          </bs-input>
+
+
+          <bs-input form-type="horizontal" name="cpu" label="CPU (cores)" v-model="data.cpu"
                     v-validate="'numeric'" :error="makeError('cpu')"></bs-input>
-          <bs-input form-type="horizontal" name="memory" label="Memory (GB)" v-model="server.memory"
+          <bs-input form-type="horizontal" name="memory" label="Memory (GB)" v-model="data.memory"
                     v-validate="'numeric'" :error="makeError('memory')"></bs-input>
           <hr/>
 
-          <bs-select form-type="horizontal" :options="options.environment" v-model="server.environment" name="environment"
+          <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment" name="environment"
                      label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
-          <bs-select form-type="horizontal" :options="options.role" v-model="server.role" name="role"
+          <bs-select form-type="horizontal" :options="options.role" v-model="data.role" name="role"
                      label="Role*" v-validate.initial="'required'" :error="makeError('role')"></bs-select>
 
           <div class="row">
@@ -59,31 +80,31 @@
         <!-- ================= Datacenter ================= -->
         <!-- ============================================== -->
         <tab header="Datacenter">
-          <tab-datacenter :serverType="options.serverType" @update="val => server.datacenters = val" ref="tab_dc"></tab-datacenter>
+          <tab-datacenter :serverType="options.serverType" @update="val => data.datacenters = val" ref="tab_dc"></tab-datacenter>
         </tab>
 
         <!-- ================= Storage ================= -->
         <!-- ============================================== -->
         <tab header="Storage">
-          <tab-storage @update="val => server.storage = val" ref="tab_storage"></tab-storage>
+          <tab-storage @update="val => data.storage = val" ref="tab_storage"></tab-storage>
         </tab>
 
         <!-- ================= Autentication ================= -->
         <!-- ============================================== -->
         <tab header="Auth">
-          <tab-auth :options="options.auth" @update="val => server.auth = val" ref="tab_auth"></tab-auth>
+          <tab-auth :options="options.auth" @update="val => data.auth = val" ref="tab_auth"></tab-auth>
         </tab>
 
         <!-- ================= Setups ================= -->
         <!-- ============================================== -->
         <tab header="Setups">
-          <tab-setups @update="val => server.services = val" ref="tab_services"></tab-setups>
+          <tab-setups @update="val => data.services = val" ref="tab_services"></tab-setups>
         </tab>
 
         <!-- ================= Tags ================= -->
         <!-- ============================================== -->
         <tab header="Tags">
-          <tab-tags @update="val => server.tags = val" ref="tab_tags"></tab-tags>
+          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
         </tab>
       </tabs>
 

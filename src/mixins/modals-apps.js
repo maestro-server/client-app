@@ -11,10 +11,12 @@ import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 
+import verifyDuplicate from 'mixins/verify_duplicate'
+
 import servicesOptions from './services-options'
 
 export default {
-  mixins: [servicesOptions],
+  mixins: [servicesOptions, verifyDuplicate],
 
   components: {
     tabTags,
@@ -31,6 +33,7 @@ export default {
         third: [],
         own: []
       },
+      entity: Applications,
       other: false,
     }
   },
@@ -66,6 +69,7 @@ export default {
     createLoad () {
       this.tabShow=0
       this.resetData()
+      this.clearDuplicate()
       this.tab_role.reset()
       this.tab_servers.reset()
       this.tab_tags.reset()

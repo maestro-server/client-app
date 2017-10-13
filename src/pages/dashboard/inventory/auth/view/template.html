@@ -1,0 +1,37 @@
+<div>
+  <div class="pb10">
+    <header-view-entity :label="label" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+  </div>
+
+  <div class="col-xs-12 mt10 row">
+    <displayer class="col-sm-2 col-xs-4 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'" v-if="item.val">
+      <h4 class="white">{{item.val}}</h4>
+    </displayer>
+  </div>
+
+  <div class="col-xs-6">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-6">
+
+    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="2" icons="fa-server">
+      <template slot="view" scope="props">
+        <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
+
+        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
+      </template>
+    </creater-config-list>
+
+    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="3" icons="fa-briefcase">
+      <template slot="view" scope="props">
+        <b class="text-capitalize">{{props.item.name}}</b>
+        <router-link :to="{name: 'system.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
+      </template>
+    </creater-config-list>
+
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="4" icons="fa-tags"></creater-config-list>
+
+  </div>
+
+</div>

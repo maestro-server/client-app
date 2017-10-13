@@ -24,11 +24,14 @@ export default {
         'cdn': 'CDNs',
         'object-storage': 'Object Storages',
         'containers-orchestration': 'Containers Orchestration',
+        'repository': 'Repository',
         'monitor': 'Monitoring System',
         'logs': 'Logs System',
         'smtp': 'Emails (smtps/mtas)',
         'vpn': 'VPNs',
-        'dns': 'DNS'
+        'dns': 'DNS',
+        'auth': 'Auth',
+        'nas': 'NAS'
       }
     }
   },

@@ -14,11 +14,12 @@
             <div class="col-xs-12">
 
               <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
-                        v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+                        v-validate.initial="'required'" :error="makeError('name')" @blur="verifyDuplicate">
 
-              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
-                         name="environment" label="Environment*" v-validate.initial="'required'"
-                         :error="makeError('environment')"></bs-select>
+                <template slot="dropper" v-if="duplicate.name">
+                  <span class="btn btn-danger btn-xs col-xs-12 mt5">{{duplicate.name}}</span>
+                </template>
+              </bs-input>
 
               <div class="row">
                 <div class="col-xs-3 text-right mt5">
@@ -52,6 +53,12 @@
               <bs-select form-type="horizontal" :options="options.cluster" v-model="data.cluster"
                          name="cluster" label="Cluster*" v-validate.initial="'required'" placeholder="This DB have any type clusterized?"
                          :error="makeError('cluster')"></bs-select>
+
+              <hr>
+
+              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
+                         name="environment" label="Environment*" v-validate.initial="'required'"
+                         :error="makeError('environment')"></bs-select>
 
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
                         v-model="data.description"></bs-input>

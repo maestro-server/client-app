@@ -24,7 +24,7 @@ export default {
       services: [],
       service: null,
       initialData: {
-        dataguard: null, storage_types: null, db_hostname: null, asm: null, disk: null, asm_name: null, role: null
+        dataguard: null, storage_types: null, db_hostname: null, asm: {}, disk: null, asm_name: null, role: null
       },
       data: {},
       options: {
@@ -117,8 +117,7 @@ export default {
     },
 
     clearASM() {
-      this.data.asm = {}
-      this.data.asm_name = null
+      this.$set(this.data, 'asm', {})
     },
 
     fetchServer (force=true) {
