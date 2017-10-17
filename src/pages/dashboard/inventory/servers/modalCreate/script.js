@@ -84,6 +84,8 @@ export default {
 
     editLoad () {
       const {_id} = this.model
+      this.clearDuplicate()
+
       FectherEntity(Servers)()
       .findOne((e) => {
         this.model = e.data
