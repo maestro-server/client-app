@@ -29,7 +29,6 @@
             </template>
           </bs-input>
 
-
           <bs-input form-type="horizontal" name="ipv4_private" label="IP Private*" v-model="data.ipv4_private"
                     v-validate.initial="'required|ip'" :error="makeError('ipv4_private')" @blur="verifyDuplicate">
 
