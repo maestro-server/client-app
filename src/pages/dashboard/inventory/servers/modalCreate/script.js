@@ -87,7 +87,7 @@ export default {
       FectherEntity(Servers)()
       .findOne((e) => {
         this.model = e.data
-        this.$set(this, 'server', this.model)
+        this.$set(this, 'data', this.model)
 
         this.$set(this, 'os', this.model.os)
 
