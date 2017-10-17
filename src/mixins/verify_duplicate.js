@@ -15,7 +15,7 @@ export default {
       const {name} = target
       const value = this.data[name]
 
-      if(!_.isEmpty(value)) {
+      if(!_.isEmpty(value) && this.create) {
         FectherEntity(this.entity)()
           .find(({data}) => this.processVerifyDuplicate(data, value, name), {[name]: value})
       }
