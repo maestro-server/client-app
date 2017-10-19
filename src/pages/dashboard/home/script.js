@@ -36,16 +36,6 @@ export default {
     return {
       result: {servers:[], applications:[], datacenters: [], system: []},
       load:{system: false, applications: false, datacenters: false, servers:false},
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: ["#2B8B7E", "#FCDA0E", "#2B69AC", "#0E0184", "#5B5DC2", "#D21E94", "#8CA445", "#280AF0", "#3F6DEC", "#91FC1A", "#41923C", "#9B04BD", "#FF7920", "#89DD6E", "#6F7C71", "#F2F1A2"],
-            data: [40, 39, 10, 40, 39, 80, 40]
-          }
-        ]
-      },
       links: [
         {route: {name: 'servers'}, name: 'Server list', icon: 'fa-server'},
         {route: {name: 'applications'}, name: 'Apps list', icon: 'fa-code'},

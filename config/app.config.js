@@ -22,7 +22,7 @@ module.exports = {
 
   },
   prod: {
-
+    'BASE_URL': JSON.stringify("http://localhost:9999")
   },
   test: {
 
