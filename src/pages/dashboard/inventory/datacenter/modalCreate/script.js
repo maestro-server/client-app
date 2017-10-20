@@ -135,7 +135,7 @@ export default {
 
   created () {
     FectherEntity(Adminer)({persistence: 'local', time: 42400})
-    .find(this.fetchAdminer, {key: 'datacenter_options'})
+      .find(this.fetchAdminer, {key: 'datacenter_options'})
   }
 
 }
