@@ -6,8 +6,8 @@ import CacheManager from 'services/cacheManager'
 
 class Auth extends Factory {
 
-  constructor(model={}) {
-    super(model, 'users/auth')
+  constructor(model={}, e='users/auth') {
+    super(model, e)
   }
 
   auth (callback) {
