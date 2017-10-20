@@ -85,16 +85,14 @@ export default {
       }
     },
 
-    clearItems(data) {
-      if(data != this.provider) {
-        this.$set(this, 'zones', [])
-        this.$set(this, 'regions', [])
-      }
+    clearItems() {
+      this.$set(this, 'zones', [])
+      this.$set(this, 'regions', [])
     },
 
-    addItemToTmpList(path) {
-      this[path] = []
-      this[`showModal${path.toUpperCase()}`] = false
+    addItemToTmpList(path, value) {
+      this.$set(this, path, this[value])
+      this[value] = ''
     },
     /*
     Regions functions
@@ -118,7 +116,9 @@ export default {
 
     setupZones() {
       let arr = []
-      if (this.options.baser.hasOwnProperty(this.provider) && this.regions.length > 0) {
+
+      const optProv = this.options.baser.hasOwnProperty(this.provider)
+      if (optProv && this.regions.length > 0) {
 
         this.options.baser[this.provider].map((reg) => {
           if (this.regions.indexOf(reg.region) > -1) {
@@ -135,7 +135,7 @@ export default {
 
   created () {
     FectherEntity(Adminer)({persistence: 'local', time: 42400})
-    .find(this.fetchAdminer, {key: 'datacenter_options'})
+      .find(this.fetchAdminer, {key: 'datacenter_options'})
   }
 
 }
