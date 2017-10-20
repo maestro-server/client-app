@@ -25,7 +25,7 @@ export default {
   created() {
     const {query} = this.$route
 
-    if (!query.hasOwnProperty('token')) {
+    if (!query.hasOwnProperty('token')) {c
       this.$router.push({name: 'forgot'})
     }
 

@@ -78,7 +78,7 @@
 
         <form v-if="options.regions.length == 0">
           <bs-input class="mt10" v-model="regionT" label="Region" placeholder="sa-east-1"></bs-input>
-          <a href="#" @click.prevent.stop="addItemToTmpList('region')" class="btn btn-primary btn-sm pull-left"><i
+          <a href="#" @click.prevent.stop="addItemToTmpList('region', 'regionT')" class="btn btn-primary btn-sm pull-left"><i
             class="fa fa-plus-circle"></i> Region</a>
         </form>
       </template>
@@ -113,7 +113,7 @@
 
         <form v-if="options.zones.length == 0">
           <bs-input class="mt10" v-model="zoneT" label="Zone" placeholder="sa-east-1a"></bs-input>
-          <a href="#" @click.prevent.stop="addItemToTmpList('zone')" class="btn btn-primary btn-sm pull-left"><i
+          <a href="#" @click.prevent.stop="addItemToTmpList('zone', 'zoneT')" class="btn btn-primary btn-sm pull-left"><i
             class="fa fa-plus-circle"></i> Zone</a>
         </form>
       </template>
