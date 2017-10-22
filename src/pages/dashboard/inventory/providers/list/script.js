@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       entity: Providers,
-      name: "Provider",
+      name: "Connection",
     }
   }
 }

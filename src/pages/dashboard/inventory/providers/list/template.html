@@ -11,6 +11,15 @@
               @acl="aclE"
               @edit="editE"
               @del="deleteE">
+
+
+      <template slot="header" scope="props">
+        <h3 class="mt0">
+          <i v-if="props.item.name" :class="toLower(props.item.name, 'icon-')"></i>
+          {{props.item.name}}
+        </h3>
+      </template>
+
     </list-box>
 
   </div>

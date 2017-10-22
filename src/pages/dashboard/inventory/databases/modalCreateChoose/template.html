@@ -3,20 +3,7 @@
   <modal :title="text.title" effect="fade" width="800" v-model="showModal">
     <p>Select your database.</p>
 
-    <div class="row wrapper-btn">
-      <template v-for="db in dbs">
-        <div class="col-xs-4">
-          <h4>{{db.name}}</h4>
-          <div class="btn btn-primary text-center" @click="callStep2(db)">
-            <i :class="db.icon"></i>
-          </div><br/>
-          <template v-for="link in db.links">
-            <span class="small">+ {{link.label}}</span><br/>
-          </template>
-        </div>
-      </template>
-    </div>
-
+    <list-options :lists="dbs" @click="callStep2"></list-options>
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>

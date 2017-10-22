@@ -6,6 +6,7 @@ import headerViewEntity from './headerViewEntity/HeaderViewEntity.vue'
 import serviceAccordion from './serviceAccordion/ServiceAccordion.vue'
 import viewAppServer from './viewApplicationHeaderServers/view.vue'
 import headerEntity from './headerEntity/HeaderEntity.vue'
+import listOptions from './listOptions/listOptions.vue'
 import createrList from './createrList/CreaterList.vue'
 import modalDelete from './modalDelete/delete.vue'
 import infoView from './infoView/InfoView.vue'
@@ -17,14 +18,13 @@ import loader from './loader/Loader.vue'
 import imager from './imager/Imager.vue'
 
 
-
-
 let components = {
   createrConfigList,
   headerViewEntity,
   serviceAccordion,
   viewAppServer,
   headerEntity,
+  listOptions,
   modalDelete,
   createrList,
   infoView,

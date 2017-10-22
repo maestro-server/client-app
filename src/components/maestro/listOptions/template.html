@@ -1,0 +1,15 @@
+<div>
+  <div class="row wrapper-btn">
+    <template v-for="prv in lists">
+      <div class="col-xs-4">
+        <h4>{{prv.name}}</h4>
+        <div class="btn btn-primary text-center" @click="callStep(prv)">
+          <i :class="prv.icon"></i>
+        </div><br/>
+        <template v-for="link in prv.links">
+          <span class="small">+ {{link.label}}</span><br/>
+        </template>
+      </div>
+    </template>
+  </div>
+</div>
