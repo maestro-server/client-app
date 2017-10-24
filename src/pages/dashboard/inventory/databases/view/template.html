@@ -20,7 +20,7 @@
 
         <view-app-server :data="props.item" :provider="model.provider" @manage="callConfig"></view-app-server>
 
-        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
+        <service-accordion :data="props.item" :provider="model.provider" prefix="configs.db_hostname"></service-accordion>
 
       </template>
     </creater-config-list>

@@ -6,6 +6,13 @@ export default {
 
   props: {
     data: {},
-    provider: {}
-  }
+    provider: {},
+    prefix: {}
+  },
+
+  methods: {
+    getPrefix(data) {
+      return _.get(data, this.prefix)
+    }
+  },
 }
