@@ -1,0 +1,26 @@
+<div>
+  <div class="pb10">
+    <header-view-entity label="System" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+  </div>
+
+  <div class="col-xs-4">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-8">
+    <h3><i class="fa fa-key" aria-hidden="true"></i> Tasks and Permissions</h3>
+
+    <ul class="list-group">
+      <li class="list-group-item" v-for="item in permissions">
+        <button class="btn btn-sm btn-primary pull-right">Configure</button>
+        <h4>{{item.name}} <label class="label btn-sm label-danger">Disabled</label></h4>
+
+        <strong class="row col-xs-12 mt10">Permissions Required:</strong>
+        <template v-for="req in item.required">
+          <bs-label type="default">{{req}}</bs-label>  |
+        </template>
+      </li>
+    </ul>
+  </div>
+
+</div>

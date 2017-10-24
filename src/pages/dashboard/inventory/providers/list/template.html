@@ -4,23 +4,7 @@
   </div>
 
   <div class="col-xs-12">
-
-    <list-box :items="result.items" :total_pages="result.total_pages" :label="name"
-              @changePage="changePage"
-              @add="addE"
-              @acl="aclE"
-              @edit="editE"
-              @del="deleteE">
-
-
-      <template slot="header" scope="props">
-        <h3 class="mt0">
-          <i v-if="props.item.name" :class="toLower(props.item.name, 'icon-')"></i>
-          {{props.item.name}}
-        </h3>
-      </template>
-
-    </list-box>
-
+    <sv-table ref="svTable"></sv-table>
   </div>
+
 </div>
