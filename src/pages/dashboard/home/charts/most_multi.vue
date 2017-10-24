@@ -26,13 +26,15 @@
     computed: {
       getMost() {
         if(this.results.length > 0) {
+          console.log("==========================", this.fielder)
 
           const calculate = _(this.results)
             .filter(e=>_.isArray(e[this.fielder]))
             .map(e=>_.get(e, this.fielder))
-            .transform(_.merge, [])
+            .transform((r, e)=>r.push(...e), [])
             .transform(this.splitCount, {labels: [], info: []})
             .value()
+
 
           return this.factoryData(
             _.get(calculate, 'labels'),
@@ -51,7 +53,6 @@
     methods: {
       splitCount(result, value) {
         const index = _.indexOf(result.labels, value.name)
-
         if(index === -1) {
           result.labels.push(value.name)
           result.info.push(1)
