@@ -75,6 +75,7 @@ export default {
     },
 
     editLoad () {
+      this.$set(this, 'data', this.initialData)
       this.fetchServer()
       this.$set(this.data, 'storage_types', _.get(this, 'provider.storage_types'))
       this.$set(this.data, 'dataguard', _.get(this, 'provider.dataguard'))
@@ -113,6 +114,7 @@ export default {
     onHit(item) {
       this.clearASM()
       this.$set(this.data, 'asm', _.pick(item, ['_id', 'name']))
+      this.$set(this.data, 'asm_name', null)
       return item.name
     },
 
@@ -134,6 +136,7 @@ export default {
       const list = this.findServicesBy(services, this.provider.provider)
       this.$set(this, 'services', list)
       this.$set(this, 'service', this.wrapperReduce(_.head(list)))
+      this.setService(this.service)
     },
 
     setService(search) {
@@ -147,6 +150,7 @@ export default {
           _.assign(configs, this.data, service.configs)
         }
         _.defaults(configs, _.pick(this.provider, ['storage_types', 'dataguard']))
+
         this.$set(this, 'data', configs)
       }
     },
