@@ -101,6 +101,8 @@ export default {
           .find((e) => {
             this[`tab_${fielder}`].updaterEdit(_.get(e, 'data.items', []))
           }, {_id: this.model[fielder]})
+      } else {
+        this[`tab_${fielder}`].updaterEdit([])
       }
     },
 

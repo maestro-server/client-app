@@ -4,13 +4,15 @@ import Clients from 'factories/clients'
 import VueTable from 'mixins/vue-table'
 import System from 'factories/system'
 
+import FectherEntity from 'services/fetchEntity'
+
 export default {
   mixins: [VueTable],
 
   data: function () {
     return {
       entity: new System(),
-      columns: ['name', 'contact','updated_at', 'created_at', 'actions'],
+      columns: ['name', 'lclients','updated_at', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'lclients'],
         listColumns: {
@@ -35,11 +37,11 @@ export default {
         d.created_at = new Date(d.created_at).toLocaleString()
         return d
       })
-    },
-
-    created() {
-      FectherEntity(Clients)()
-        .find(this.fetchData('lclients'))
     }
+  },
+
+  created() {
+    FectherEntity(Clients)()
+      .find(this.fetchData('lclients'))
   }
 }
