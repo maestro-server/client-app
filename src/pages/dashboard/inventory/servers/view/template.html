@@ -40,10 +40,8 @@
 
     <creater-config-list label="Account" :basket="model.auth" @edit="edit" :index="3" icons="fa-cog">
       <template slot="view" scope="props">
-        {{props.item.name}} -> Type:
         <bs-label>{{props.item.type}}</bs-label>
-        - Username:
-        <bs-label type="default">{{props.item.username}}</bs-label>
+        {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
       </template>
     </creater-config-list>
 

@@ -2,9 +2,7 @@
   <creater-list :single.sync="single" :basket="value" label="Auth" @update="updaterEdit">
 
     <template slot="forms">
-      <bs-input form-type="horizontal" name="name" label="Key name*" v-model="single.name"
-                v-validate.initial="'required'"></bs-input>
-      <hr/>
+
       <div class="row">
         <div class="col-xs-3 text-right mt5">
           <label>Auth type</label>
@@ -16,15 +14,16 @@
         </div>
       </div>
 
-      <bs-input class="mt20" form-type="horizontal" label="Username*" v-model="single.username"
-                v-validate.initial="'required'"></bs-input>
+      <hr/>
+
+      <bs-input form-type="horizontal" name="name" label="Key name*" v-model="single.name"></bs-input>
+
+      <bs-input class="mt20" form-type="horizontal" label="Username" v-model="single.username"></bs-input>
     </template>
 
     <template slot="view" scope="props">
-      {{props.item.name}} -> Type:
       <bs-label>{{props.item.type}}</bs-label>
-      - Username:
-      <bs-label type="default">{{props.item.username}}</bs-label>
+      {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
     </template>
 
   </creater-list>

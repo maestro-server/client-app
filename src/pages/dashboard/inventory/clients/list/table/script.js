@@ -9,10 +9,11 @@ export default {
   data: function () {
     return {
       entity: new Clients(),
-      columns: ['name', 'contact','updated_at', 'created_at', 'actions'],
+      columns: ['name', 'lcontact','updated_at', 'created_at', 'actions'],
       options: {
         filterable: ['name'],
         headings: {
+          lcontact: 'Contacts',
           updated_at: 'Updated At',
           created_at: 'Created At'
         }
@@ -23,6 +24,8 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
+        d.lcontact = _.reduce(d.contacts, (o, f, k) => this.viewReducer(o, f, k, 'channel'), "")
+
         d.updated_at = new Date(d.updated_at).toLocaleString()
         d.created_at = new Date(d.created_at).toLocaleString()
         return d

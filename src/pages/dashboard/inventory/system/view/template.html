@@ -18,19 +18,19 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Client" :basket="model.clients" @edit="edit" :index="2" icons="fa-user-o"></creater-config-list>
+    <creater-config-list label="Client" :basket="model.clients" @edit="edit" :index="2" icons="fa-user-o">
+      <template slot="view" scope="props">
+        <strong>{{props.item.name}}</strong>
+      </template>
+    </creater-config-list>
 
-    <creater-config-list label="Link" :basket="model.check" @edit="edit" :index="3" icons="fa-link">
+    <creater-config-list label="Link" :basket="model.check" @edit="edit" :index="1" icons="fa-link">
       <template slot="view" scope="props">
         <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags">
-      <template slot="view" scope="props">
-        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
-      </template>
-    </creater-config-list>
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="3" icons="fa-tags"></creater-config-list>
 
   </div>
 

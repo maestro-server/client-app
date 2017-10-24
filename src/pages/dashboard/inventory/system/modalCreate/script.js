@@ -52,7 +52,7 @@ export default {
     },
 
     editLoad () {
-      this.$set(this, 'system', this.model)
+      this.$set(this, 'data', this.model)
       this.tab_check.updaterEdit(this.model.check)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_clients.updaterEdit(this.model.clients)

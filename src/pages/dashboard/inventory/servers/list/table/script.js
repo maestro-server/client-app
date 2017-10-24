@@ -14,9 +14,9 @@ export default {
   data: function () {
     return {
       entity: new Servers(),
-      columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'user', 'updated_at', 'created_at', 'actions'],
+      columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'auth', 'updated_at', 'created_at', 'actions'],
       options: {
-        filterable: ['hostname', 'ipv4_private', 'os', 'datacenters', 'role', 'environment', 'user'],
+        filterable: ['hostname', 'ipv4_private', 'os', 'datacenters', 'role', 'environment', 'auth'],
         listColumns: {
           role: [],
           environment: [],
@@ -39,7 +39,6 @@ export default {
         d.os = `${_.get(d, 'os.base', '')} ${_.get(d, 'os.dist', '')}`
         d.datacenters = _.get(d, 'datacenters.name', '-')
 
-        d.user = _.reduce(d.auth, (o, f, k)=>this.viewReducer(o, f, k, 'username'), "")
         d.auth = _.reduce(d.auth, (o, f, k)=>this.viewReducer(o, f, k, 'type'), "")
 
         d.updated_at = new Date(d.updated_at).toLocaleString()
