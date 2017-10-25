@@ -12,12 +12,15 @@
 
     <ul class="list-group">
       <li class="list-group-item" v-for="item in permissions">
-        <button class="btn btn-sm btn-primary pull-right">Configure</button>
+        <button class="btn btn-sm btn-success pull-right">
+          <i class="fa fa-cog"></i>
+          Test and Actived
+        </button>
         <h4>{{item.name}} <label class="label btn-sm label-danger">Disabled</label></h4>
 
         <strong class="row col-xs-12 mt10">Permissions Required:</strong>
         <template v-for="req in item.required">
-          <bs-label type="default">{{req}}</bs-label>  |
+          <bs-label type="default">{{req}}</bs-label> |
         </template>
       </li>
     </ul>

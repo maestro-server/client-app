@@ -13,7 +13,7 @@ export default {
       model: {},
       permissions: [
         {
-          key: 'servers',
+          key: 'servers-discovery',
           name: 'Server discovery',
           required: ['describe-instances',
             'elb describe-load-balancers',
@@ -23,13 +23,13 @@ export default {
             'describe-auto-scaling-groups']
         },
         {
-          key: 'rds',
+          key: 'rds-discovery',
           name: 'RDS discovery',
           required: [
             'describe-db-instances']
         },
         {
-          key: 's3',
+          key: 's3-discovery',
           name: 'Storage Object discovery',
           required: [
             's3api list-buckets',
@@ -40,14 +40,14 @@ export default {
   },
 
   computed: {
-    MMembers() {
-      return this.$parent.$refs.modal_members
-    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'conn'])
     }
   },
 
   methods: {
+    testTask() {
+
+    }
   }
 }
