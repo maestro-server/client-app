@@ -22,11 +22,20 @@
               Please add your AWS Access Key ID and Secret Access Key.
             </p>
 
+            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.conn.dc"
+                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
+                       ref="s_provider"></bs-select>
+
+            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.conn.regions"
+                       label="Regions" placeholder="Select Regions" multiple></bs-select>
+
             <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
                       v-validate.initial="'required'" :error="makeError('access')"></bs-input>
 
             <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
                       v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+
+
           </div>
           <div class="col-xs-6">
             <p>

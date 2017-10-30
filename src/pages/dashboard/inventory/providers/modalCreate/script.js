@@ -2,6 +2,7 @@
 
 import Modals from 'mixins/modals'
 import Providers from 'factories/providers'
+import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
@@ -33,7 +34,11 @@ export default {
         'AWS': [
           {name: 'Describe Instance', desc: 'List and update EC2 informations', used: 'Require to auto discovery servers'}
         ]
-      }
+      },
+      zones: [],
+      regions: [],
+      options: [],
+      dcs: []
     }
   },
 
@@ -77,7 +82,29 @@ export default {
 
     callStep(prv) {
       this.provider = prv.key
+    },
+
+    fetchData: function () {
+      FectherEntity(Datacenters)()
+        .find(this.fetchDatacenter)
+    },
+
+    fetchDatacenter(e) {
+      const data = _.get(e, 'data.items')
+      if (!_.isEmpty(data)) {
+        this.options = data.map(item => ({value: item, label: item.name}))
+        this.dcs = this.options.map(d => d.label)
+      }
+    },
+
+    updateProvider(val){
+      const dc = _.head(this.options.filter(d => d.label == val))
+      this.regions = _.get(dc, 'value.regions', [])
     }
+  },
+
+  created() {
+    this.fetchData()
   }
 
 }
