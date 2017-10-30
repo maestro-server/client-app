@@ -82,11 +82,12 @@ export default {
 
     callStep(prv) {
       this.provider = prv.key
+      this.fetchData(prv.key)
     },
 
-    fetchData: function () {
+    fetchData: function (provider) {
       FectherEntity(Datacenters)()
-        .find(this.fetchDatacenter)
+        .find(this.fetchDatacenter, {provider})
     },
 
     fetchDatacenter(e) {
@@ -101,10 +102,5 @@ export default {
       const dc = _.head(this.options.filter(d => d.label == val))
       this.regions = _.get(dc, 'value.regions', [])
     }
-  },
-
-  created() {
-    this.fetchData()
   }
-
 }

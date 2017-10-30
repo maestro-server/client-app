@@ -22,7 +22,7 @@
               Please add your AWS Access Key ID and Secret Access Key.
             </p>
 
-            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.conn.dc"
+            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
                        label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
                        ref="s_provider"></bs-select>
 
