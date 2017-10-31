@@ -55,7 +55,7 @@
 <style>
   .tree-view-item-leaf {
     display: block;
-    white-space: nowrap;
+    white-space: normal;
     padding-left: 15px;
   }
 </style>

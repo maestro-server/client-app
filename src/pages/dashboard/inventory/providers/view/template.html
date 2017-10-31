@@ -11,16 +11,33 @@
     <h3><i class="fa fa-key" aria-hidden="true"></i> Tasks and Permissions</h3>
 
     <ul class="list-group">
-      <li class="list-group-item" v-for="item in permissions">
-        <button class="btn btn-sm btn-success pull-right">
-          <i class="fa fa-cog"></i>
-          Test and Actived
-        </button>
-        <h4>{{item.name}} <label class="label btn-sm label-danger">Disabled</label></h4>
+      <li class="list-group-item" v-for="item, key in permissions">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <h4 class="text-capitalize">{{key}} <label class="label btn-sm label-danger">Disabled</label></h4>
+          </div>
+          <div class="col-xs-6 text-right">
+            <button class="btn btn-xs btn-success" @click="task('parcial')">
+              <i class="fa fa-hourglass-end"></i>
+              Sync
+            </button>
+
+            <button class="btn btn-xs btn-danger" @click="task('full')">
+              <i class="fa fa-hourglass"></i>
+              Full Sync
+            </button>
+          </div>
+        </div>
+
+        <div v-if="getlog(key)" class="alert" :class="'alert-'+getlog(key, 'state', 'info')">
+          {{getlog(key)}}
+        </div>
+
 
         <strong class="row col-xs-12 mt10">Permissions Required:</strong>
-        <template v-for="req in item.required">
-          <bs-label type="default">{{req}}</bs-label> |
+        <template v-for="req in item">
+          <bs-label type="default">{{req.command}} {{req.access}}</bs-label>&nbsp;
         </template>
       </li>
     </ul>
