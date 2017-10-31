@@ -14,6 +14,7 @@ module.exports = {
     'API_TIMEOUT': 1000,
     'BASE_URL': JSON.stringify("http://localhost:8880"),
     'API_URL': JSON.stringify("http://localhost:8888/"),
+    'DISCOVERY_URL': JSON.stringify("http://localhost:5000/"),
     'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/'),
     'IMG_AVATAR_DEFAULT': JSON.stringify('/static/imgs/avatar_default.jpeg'),
     'VERSION': JSON.stringify(require("../package.json").version)

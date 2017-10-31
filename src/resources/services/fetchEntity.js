@@ -19,7 +19,7 @@ const FetcherData = (Entity) => (opts = {}) => {
         .process((end) => {
           new Entity(query)
             .authorization()
-            .list(end)
+            .get(end)
         });
     },
 
