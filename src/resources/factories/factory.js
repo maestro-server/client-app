@@ -47,13 +47,13 @@ class Factory {
     this.get(success)
   }
 
-  get (call_success = fsuccess, call_rejected = frejected) {
+  get (call_success = fsuccess) {
     const params = this.model
-    this.factoryRequest('get', {params}, call_success, call_rejected)
+    this.factoryRequest('get', {params}, call_success)
   }
 
-  create (call_success = fsuccess, call_rejected = frejected) {
-    this.factoryRequest('post', this.model, call_success, call_rejected)
+  create (call_success = fsuccess) {
+    this.factoryRequest('post', this.model, call_success)
   }
 
   updateID (id, call_success = fsuccess) {
@@ -61,8 +61,8 @@ class Factory {
     this.update(call_success)
   }
 
-  update (call_success = fsuccess, call_rejected = frejected) {
-    this.factoryRequest('put', this.model, call_success, call_rejected)
+  update (call_success = fsuccess) {
+    this.factoryRequest('put', this.model, call_success)
   }
 
   patchID (id, call_success = fsuccess) {
@@ -70,8 +70,8 @@ class Factory {
     this.patch(call_success)
   }
 
-  patch (call_success = fsuccess, call_rejected = frejected) {
-    this.factoryRequest('patch', this.model, call_success, call_rejected)
+  patch (call_success = fsuccess) {
+    this.factoryRequest('patch', this.model, call_success)
   }
 
   deleteID (id, success=fsuccess) {
@@ -79,12 +79,12 @@ class Factory {
     this.delete(success)
   }
 
-  delete (call_success = fsuccess, call_rejected = frejected) {
+  delete (call_success = fsuccess) {
     const data = this.model
-    this.factoryRequest('delete', {data}, call_success, call_rejected)
+    this.factoryRequest('delete', {data}, call_success)
   }
 
-  factoryRequest (caller, args, call_success = fsuccess, call_rejected = frejected) {
+  factoryRequest (caller, args, call_success, call_rejected = frejected) {
     store.dispatch('onSpinner')
 
     this.requester(this.header)[caller](this.entity, args)
