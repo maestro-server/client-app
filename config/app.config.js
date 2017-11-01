@@ -11,7 +11,7 @@
 
 module.exports = {
   all: {
-    'API_TIMEOUT': 1000,
+    'API_TIMEOUT': 5000,
     'BASE_URL': JSON.stringify("http://localhost:8880"),
     'API_URL': JSON.stringify("http://localhost:8888/"),
     'DISCOVERY_URL': JSON.stringify("http://localhost:5000/"),

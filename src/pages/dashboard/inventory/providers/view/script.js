@@ -25,14 +25,18 @@ export default {
   },
 
   methods: {
-    task(key) {
-      new Providers()
+    task(key, type) {
+      new Providers({type})
         .authorization()
         .updateID(
           `${this.model._id}/task/${key}`,
-          this.fetchData(),
-          this.fetchData()
+          this.logTask,
+          this.logTask
         )
+    },
+
+    logTask() {
+      this.fetchData()
     },
 
     fetchAdminer() {
@@ -40,19 +44,23 @@ export default {
         .find(this.setOptions, {key: 'providers'})
     },
 
-    mergeLog(data, key) {
-      const process = _.get(this.model, `process.${key}`, null)
-      return _.assign({}, data, process)
+    setOptions(data) {
+      const adminer = formatAdminer(data)
+      this.prepareProcessData(adminer)
     },
 
-    setOptions(data) {
-      const res = formatAdminer(data)
-      const prm = _.chain(res)
+    prepareProcessData(adminer) {
+      const prm = _.chain(adminer)
         .get(`permissions.${this.model.name}`)
         .mapValues(this.mergeLog)
         .value()
 
       this.$set(this, 'permissions', prm)
+    },
+
+    mergeLog(data, key) {
+      const process = _.get(this.model, `process.${key}`, null)
+      return _.assign({}, data, process)
     }
   },
 

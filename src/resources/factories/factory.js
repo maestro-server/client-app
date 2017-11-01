@@ -56,9 +56,9 @@ class Factory {
     this.factoryRequest('post', this.model, call_success, call_rejected)
   }
 
-  updateID (id, call_success = fsuccess) {
+  updateID (id, call_success = fsuccess, call_rejected = frejected) {
     this.setEntity(`${this.entity}/${id}`)
-    this.update(call_success)
+    this.update(call_success, call_rejected)
   }
 
   update (call_success = fsuccess, call_rejected = frejected) {
@@ -87,7 +87,7 @@ class Factory {
   factoryRequest (caller, args, call_success, call_rejected) {
     store.dispatch('onSpinner')
 
-    this.requester(this.header)[caller](this.entity, args)
+    this.requester(this.header, this.timeout)[caller](this.entity, args)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }
