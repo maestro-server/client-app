@@ -25,12 +25,14 @@ export default {
   },
 
   methods: {
-    task(type) {
-
-    },
-
-    getlog(key, len='msg', def=null) {
-      return _.get(this.model, `process.${key}.${len}`, def)
+    task(key) {
+      new Providers()
+        .authorization()
+        .updateID(
+          `${this.model._id}/task/${key}`,
+          this.fetchData(),
+          this.fetchData()
+        )
     },
 
     fetchAdminer() {
@@ -38,9 +40,18 @@ export default {
         .find(this.setOptions, {key: 'providers'})
     },
 
+    mergeLog(data, key) {
+      const process = _.get(this.model, `process.${key}`, null)
+      return _.assign({}, data, process)
+    },
+
     setOptions(data) {
       const res = formatAdminer(data)
-      const prm = _.get(res, `permissions.${this.model.name}`)
+      const prm = _.chain(res)
+        .get(`permissions.${this.model.name}`)
+        .mapValues(this.mergeLog)
+        .value()
+
       this.$set(this, 'permissions', prm)
     }
   },

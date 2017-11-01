@@ -18,20 +18,20 @@
             <h4 class="text-capitalize">{{key}} <label class="label btn-sm label-danger">Disabled</label></h4>
           </div>
           <div class="col-xs-6 text-right">
-            <button class="btn btn-xs btn-success" @click="task('parcial')">
+            <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
               <i class="fa fa-hourglass-end"></i>
               Sync
             </button>
 
-            <button class="btn btn-xs btn-danger" @click="task('full')">
+            <button class="btn btn-xs btn-danger" @click="task(key, 'full')">
               <i class="fa fa-hourglass"></i>
               Full Sync
             </button>
           </div>
         </div>
 
-        <div v-if="getlog(key)" class="alert" :class="'alert-'+getlog(key, 'state', 'info')">
-          {{getlog(key)}}
+        <div v-if="item.msg" class="alert" :class="'alert-'+item.state">
+          {{item.msg}}
         </div>
 
 
