@@ -25,7 +25,7 @@ const mapper = {
   },
   500: {
     title: () => "Error occur",
-    msg: (e) => `${_.get(e, 'err.msg')}`
+    msg: (e) => `${_.get(e, 'err.errors.msg')}`
   }
 }
 
