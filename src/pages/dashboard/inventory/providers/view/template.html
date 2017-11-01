@@ -15,17 +15,14 @@
 
         <div class="row">
           <div class="col-xs-6">
-            <h4 class="text-capitalize">{{key}} <label class="label btn-sm label-danger">Disabled</label></h4>
+            <h4 class="text-capitalize">{{key}}
+              <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">Disabled</label>
+            </h4>
           </div>
           <div class="col-xs-6 text-right">
             <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
               <i class="fa fa-hourglass-end"></i>
               Sync
-            </button>
-
-            <button class="btn btn-xs btn-danger" @click="task(key, 'full')">
-              <i class="fa fa-hourglass"></i>
-              Full Sync
             </button>
           </div>
         </div>

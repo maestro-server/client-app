@@ -25,8 +25,8 @@ export default {
   },
 
   methods: {
-    task(key, type) {
-      new Providers({type})
+    task(key) {
+      new Providers()
         .authorization()
         .updateID(
           `${this.model._id}/task/${key}`,
