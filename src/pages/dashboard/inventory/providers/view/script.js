@@ -51,7 +51,7 @@ export default {
 
     prepareProcessData(adminer) {
       const prm = _.chain(adminer)
-        .get(`permissions.${this.model.name}`)
+        .get(`permissions.${this.model.provider}`)
         .mapValues(this.mergeLog)
         .value()
 

@@ -26,7 +26,7 @@
                        label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
                        ref="s_provider"></bs-select>
 
-            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.conn.regions"
+            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
                        label="Regions" placeholder="Select Regions" multiple></bs-select>
 
             <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
@@ -64,18 +64,6 @@
                 }
               </small>
             </div>
-          </div>
-          <div class="col-xs-12">
-            <h4>Permission required</h4>
-            <table class="table table-striped">
-              <tbody>
-              <tr v-for="perm in permission.AWS">
-                <th>{{perm.name}}</th>
-                <td>{{perm.desc}}</td>
-                <td>{{perm.used}}</td>
-              </tr>
-              </tbody>
-            </table>
           </div>
         </template>
 
