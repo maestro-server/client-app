@@ -91,7 +91,7 @@ export default {
         this.model = e.data
         this.$set(this, 'data', this.model)
 
-        this.$set(this, 'os', this.model.os)
+        this.$set(this, 'os', _.defaults(this.model.os, this.os))
 
         this.tab_dc.updaterEdit(this.model.datacenters)
         this.tab_storage.updaterEdit(this.model.storage)

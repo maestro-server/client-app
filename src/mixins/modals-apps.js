@@ -25,12 +25,6 @@ export default {
     tabRole
   },
 
-  watch: {
-    own() {
-      this.$set(this.data, 'provider', '')
-    }
-  },
-
   data () {
     return {
       own: 0,
