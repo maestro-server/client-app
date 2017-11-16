@@ -34,9 +34,12 @@ export default {
 
   methods: {
     formatOwnerUser(data) {
-      return {
-        'name': `${data.refs} - ${data.email} (${data._id})`,
-        '_id': data._id
+      const id = _.get(data, '_id')
+      if(id) {
+        return {
+          'name': `${_.get(data, 'refs')} - ${_.get(data, 'email')} (${_.get(data, '_id')})`,
+          '_id': id
+        }
       }
     },
 
@@ -55,7 +58,11 @@ export default {
     },
 
     fetchAdminer() {
-      this.owner_user = this.formatOwnerUser(_.get(this.model, 'owner_user'))
+      const ouser = this.formatOwnerUser(_.get(this.model, 'owner_user'))
+      if(ouser) {
+        console.log(ouser)
+        this.owner_user = ouser
+      }
 
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.setOptions, {key: 'providers'})
@@ -81,7 +88,21 @@ export default {
     },
 
     saveOwner() {
+      const id_user = _.get(this.owner_user, '_id')
 
+      if(id_user) {
+        let owner_user = _.chain(this.model.roles)
+                          .filter(e=>id_user == e._id)
+                          .head()
+                          .omit('_links')
+                          .value()
+
+        const old = _.pick(this.model, ['_id', 'name', 'dc', 'provider', 'regions', 'conn'])
+        const post = _.assign(old, {owner_user})
+
+        FectherEntity(Providers)()
+          .patch(this.redirectConn, post)
+      }
     }
   },
 
