@@ -73,7 +73,42 @@
         </template>
 
         <template v-if="provider == 'OpenStack'">
+          <div class="col-xs-6">
+            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
+                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
+                       ref="s_provider"></bs-select>
 
+            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
+                       label="Regions" placeholder="Select Regions" multiple></bs-select>
+          </div>
+
+          <div class="col-xs-6">
+            <template v-if="create">
+              <bs-input name="username" label="Username*" v-model="data.conn.username"
+                        v-validate.initial="'required'" :error="makeError('username')"></bs-input>
+
+              <bs-input type="password" class="mt20" name="password" label="Password*" v-model="data.conn.password"
+                        v-validate.initial="'required'" :error="makeError('password')"></bs-input>
+            </template>
+
+            <div class="well" v-if="!create">
+              If you like to update or password, please delete this connection and create a new one.
+            </div>
+          </div>
+
+
+          <div class="col-xs-12">
+            <bs-input name="url" label="Auth URL*" v-model="data.url"
+                      v-validate.initial="'required'" :error="makeError('url')"
+                      help="Its a keystone url"
+                      placeholder="https://keystone.br-maestro-server.com.br:5000/v2.0"
+            ></bs-input>
+
+            <bs-input class="mt10" name="project" label="Project Name*" v-model="data.project"
+                      v-validate.initial="'required'" :error="makeError('project')"></bs-input>
+
+              <p>Hit: All information may be found in Access & Security page inside of GUI OpenStack</p>
+          </div>
         </template>
 
 

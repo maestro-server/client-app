@@ -60,7 +60,6 @@ export default {
     fetchAdminer() {
       const ouser = this.formatOwnerUser(_.get(this.model, 'owner_user'))
       if(ouser) {
-        console.log(ouser)
         this.owner_user = ouser
       }
 
