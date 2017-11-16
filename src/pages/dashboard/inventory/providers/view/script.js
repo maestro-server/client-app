@@ -12,6 +12,7 @@ export default {
 
   data: function () {
     return {
+      owner_user: null,
       entity: Providers,
       model: {},
       permissions: []
@@ -21,10 +22,24 @@ export default {
   computed: {
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'conn'])
+    },
+
+    formatOwnerUsers() {
+      const roles = _.get(this.model, 'roles')
+      if (roles) {
+        return roles.map(this.formatOwnerUser)
+      }
     }
   },
 
   methods: {
+    formatOwnerUser(data) {
+      return {
+        'name': `${data.refs} - ${data.email} (${data._id})`,
+        '_id': data._id
+      }
+    },
+
     task(key) {
       new Providers()
         .authorization()
@@ -40,6 +55,8 @@ export default {
     },
 
     fetchAdminer() {
+      this.owner_user = this.formatOwnerUser(_.get(this.model, 'owner_user'))
+
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.setOptions, {key: 'providers'})
     },
@@ -61,6 +78,10 @@ export default {
     mergeLog(data, key) {
       const process = _.get(this.model, `process.${key}`, null)
       return _.assign({}, data, process)
+    },
+
+    saveOwner() {
+
     }
   },
 

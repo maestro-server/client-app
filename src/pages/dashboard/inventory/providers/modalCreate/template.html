@@ -1,7 +1,7 @@
 <div>
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
-    <template v-if="create">
+    <template>
       <p>
         Configure yours connections, <br>you able to use multiple connections with single datacenter.
         <button class="btn btn-warning btn-sm pull-right" @click="createLoad" v-if="provider">Back</button>
@@ -29,12 +29,17 @@
             <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
                        label="Regions" placeholder="Select Regions" multiple></bs-select>
 
-            <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
-                      v-validate.initial="'required'" :error="makeError('access')"></bs-input>
+            <div class="well" v-if="!create">
+              If you like to update the access provider, please delete this connection and create a new one.
+            </div>
 
-            <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
-                      v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+            <template v-if="create">
+              <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
+                        v-validate.initial="'required'" :error="makeError('access')"></bs-input>
 
+              <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
+                        v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+            </template>
 
           </div>
           <div class="col-xs-6">
@@ -75,18 +80,9 @@
       </form>
     </template>
 
-    <div class="well" v-if="!create">
-      This connection use
-      <i :class="toIcon"></i>
-      <strong>{{provider}} provider</strong>, created at {{model.created_at}},
-      if you like to update, please delete this connection and create a new one.
-    </div>
-
-
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick"
-              :disabled="!create">Save
+      <button type="button" class="btn btn-primary" @click="actionClick">Save
       </button>
     </div>
 

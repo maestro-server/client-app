@@ -4,6 +4,23 @@
   </div>
 
   <div class="col-xs-4">
+    <h4>Access user/team owner</h4>
+    <p>The crawler uses this user/team to find, insert and update entities.</p>
+
+    <bs-select :options="formatOwnerUsers" options-label="name" value-label="_id"
+               label="User/Teams" placeholder="Select ACL Owner" v-model="owner_user"></bs-select>
+    <div class="text-right">
+      <button class="btn btn-primary" @click="saveOwner">Save</button>
+    </div>
+
+    <hr>
+
+    <h4>Templates ACL</h4>
+    <p>When crawler create a new entity, they copy this acl template.</p>
+    <button class="btn btn-primary" @click="acl">ACL template</button>
+
+    <hr>
+
     <info-view :data="filtered"></info-view>
   </div>
 

@@ -67,6 +67,7 @@ export default {
 
     createSave () {
       this.setupModel()
+
       FectherEntity(Providers)()
         .create(this.redirectConn, this.model)
     },
@@ -84,7 +85,8 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.$set(this, 'provider', this.model.name)
+      this.$set(this, 'provider', this.model.provider)
+      this.fetchData(this.provider)
     },
 
     editSave () {
