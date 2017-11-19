@@ -77,11 +77,18 @@
           </tab-servers>
         </tab>
 
+        <!-- ================= Datacenters ================= -->
+        <!-- ============================================== -->
+        <tab header="Datacenters" :disabled="own !== 1">
+          <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
+        </tab>
+
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">
           <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Loadbalance"></tab-servers>
         </tab>
+
 
         <!-- ================= System ================= -->
         <!-- ============================================== -->

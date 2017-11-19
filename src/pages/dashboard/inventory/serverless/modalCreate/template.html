@@ -65,6 +65,12 @@
           <tab-role @update="val => data.role = val" ref="tab_role" :mapper="mapper"></tab-role>
         </tab>
 
+        <!-- ================= Datacenters ================= -->
+        <!-- ============================================== -->
+        <tab header="Datacenters" :disabled="own !== 1">
+          <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
+        </tab>
+
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">

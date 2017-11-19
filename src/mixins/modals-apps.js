@@ -10,6 +10,7 @@ import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
+import tabAppDc from 'src/pages/dashboard/_modules/tabs/tab_app_datacenter.vue'
 
 import verifyDuplicate from 'mixins/verify_duplicate'
 
@@ -22,7 +23,8 @@ export default {
     tabTags,
     tabServers,
     tabSystem,
-    tabRole
+    tabRole,
+    tabAppDc
   },
 
   data () {
@@ -44,6 +46,7 @@ export default {
     tab_system() {return this.$refs.tab_system},
     tab_tags() {return this.$refs.tab_tags},
     tab_role() {return this.$refs.tab_role},
+    tab_app_dc() {return this.$refs.tab_app_dc},
     providers() {
       return this.own ? this.options.third : this.options.own
     },
@@ -74,6 +77,9 @@ export default {
       this.tab_tags.reset()
       this.tab_system.reset()
 
+      if(this.tab_app_dc) {
+        this.tab_app_dc.reset()
+      }
       this.hookCreateLoad()
     },
 
@@ -82,10 +88,13 @@ export default {
       this.editSwapVars('own')
 
       this.$set(this, 'data', this.model)
-      this.tab_role.updaterEdit(this.model.role)
-      this.tab_tags.updaterEdit(this.model.tags)
-      this.tab_system.updaterEdit(this.model.system)
+      this.tab_role.updaterEdit(_.get(this.model, 'role'))
+      this.tab_tags.updaterEdit(_.get(this.model, 'tags'))
+      this.tab_system.updaterEdit(_.get(this.model, 'system'))
 
+      if(this.tab_app_dc) {
+        this.tab_app_dc.updaterEdit(_.get(this.model, 'datacenters'))
+      }
       this.hookEditLoad()
     },
 

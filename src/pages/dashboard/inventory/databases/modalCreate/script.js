@@ -11,6 +11,7 @@ import tabServers from 'src/pages/dashboard/_modules/tabs/tab_servers'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
+
 export default {
   mixins: [Modals, ModalsApps],
 
