@@ -6,6 +6,7 @@ import FectherEntity from 'services/fetchEntity'
 import store from 'src/store'
 
 import Me from 'factories/me'
+import static_url from 'src/resources/libs/static_url'
 
 
 export default {
@@ -63,7 +64,7 @@ export default {
 
     img_default(item) {
       if(_.has(item, 'avatar')) {
-        return STATIC_URL + item.avatar
+        return static_url + item.avatar
       }
 
       return IMG_AVATAR_DEFAULT

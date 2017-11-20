@@ -30,5 +30,12 @@ export default {
     show: false
   },
 
-  cache: {}
+  cache: {},
+
+  options: {
+    'base_url': `${window.location .protocol}//${window.location.host}`,
+    'api_url': document.head.querySelector("[name=api_url]").content || 'http://localhost:8888',
+    'static_url': document.head.querySelector("[name=static_url]").content || '/uploads/',
+    'api_timeout': document.head.querySelector("[name=api_timeout]").content || 5000
+  }
 }

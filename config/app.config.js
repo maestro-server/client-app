@@ -5,27 +5,16 @@
  *
  * You maybe using this variables in especific environment, dev, prod and test.
  *
- * @type {{API_TIMEOUT: number, BASE_URL, API_URL, STATIC_URL}}
+ * @type {{IMG_AVATAR_DEFAULT: string, VERSION: string}}
  */
 
 
 module.exports = {
   all: {
-    'API_TIMEOUT': 5000,
-    'BASE_URL': JSON.stringify("http://localhost:8880"),
-    'API_URL': JSON.stringify("http://localhost:8888/"),
-    'DISCOVERY_URL': JSON.stringify("http://localhost:5000/"),
-    'STATIC_URL': JSON.stringify('https://maestroserver.s3.amazonaws.com/'),
     'IMG_AVATAR_DEFAULT': JSON.stringify('/static/imgs/avatar_default.jpeg'),
     'VERSION': JSON.stringify(require("../package.json").version)
   },
-  dev: {
-
-  },
-  prod: {
-    'BASE_URL': JSON.stringify("http://localhost:9999")
-  },
-  test: {
-
-  }
+  dev: {},
+  prod: {},
+  test: {}
 }

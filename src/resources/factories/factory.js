@@ -7,6 +7,7 @@ import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'
 
 import Login from 'services/login'
+import api_url from 'src/resources/libs/api_url'
 
 class Factory {
 
@@ -22,7 +23,7 @@ class Factory {
     return this.constructor.name.toLowerCase()
   }
 
-  getUrl(path=API_URL) {
+  getUrl(path=api_url) {
     return `${path}${this.entity}`
   }
 

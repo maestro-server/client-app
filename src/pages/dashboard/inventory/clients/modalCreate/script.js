@@ -8,6 +8,7 @@ import verifyDuplicate from 'mixins/verify_duplicate'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabChannel from 'src/pages/dashboard/_modules/tabs/tab_channel'
+import api_url from 'src/resources/libs/api_url'
 
 export default {
   mixins: [Modals, verifyDuplicate],
@@ -19,7 +20,7 @@ export default {
 
   data () {
     return {
-      URL_SYSTEM: `${API_URL}/system?query=`,
+      URL_SYSTEM: `${api_url}/system?query=`,
       template: "<b>{{item.name}}</b>",
       data: {
         name: null, description: null,

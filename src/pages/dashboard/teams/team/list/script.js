@@ -2,6 +2,7 @@
 
 import Teams from 'factories/teams'
 import ListBox from 'mixins/list-boxs'
+import static_url from 'src/resources/libs/static_url'
 
 export default {
   mixins: [ListBox],
@@ -20,7 +21,7 @@ export default {
   methods: {
     make_avatar(src) {
       if(src.avatar) {
-        return `${STATIC_URL}${src.avatar}`
+        return `${static_url}${src.avatar}`
       }
 
       return this.defaultImg

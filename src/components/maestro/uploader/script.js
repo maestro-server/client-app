@@ -1,6 +1,7 @@
 'use strict'
 import validImage from './libs/validImage'
 import Uploader from './libs/uploader'
+import static_url from 'src/resources/libs/static_url'
 
 export default {
   props: {
@@ -23,7 +24,7 @@ export default {
   computed: {
     showAvatar() {
       if(this.file) {
-        return `${STATIC_URL}${this.file}`
+        return `${static_url}${this.file}`
       }
 
       return this.defaultImg
