@@ -1,6 +1,5 @@
 'use strict'
-import static_url from 'src/resources/libs/static_url'
-
+import store from 'src/store'
 export default {
   props: {
     src: {type: String},
@@ -10,7 +9,7 @@ export default {
   computed: {
     path () {
       if(this.src) {
-        return `${static_url}${this.src}`
+        return `${_.get(store.getters, 'get_options.static_url')}${this.src}`
       }
     }
   }

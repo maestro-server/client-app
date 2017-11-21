@@ -38,7 +38,7 @@ export default {
     commit('CALL_CACHE', {...args})
   },
 
-  getOptions ({commit}, args) {
+  setOptions ({commit}, args) {
     commit('CALL_OPTIONS', {...args})
   }
 
