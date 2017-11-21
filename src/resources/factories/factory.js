@@ -24,7 +24,7 @@ class Factory {
   }
 
   getUrl(path=api_url) {
-    return `${path}${this.entity}`
+    return `${path}/${this.entity}`
   }
 
   setEntity(e) {
