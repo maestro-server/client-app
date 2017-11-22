@@ -26,8 +26,6 @@
     computed: {
       getMost() {
         if(this.results.length > 0) {
-          console.log("==========================", this.fielder)
-
           const calculate = _(this.results)
             .filter(e=>_.isArray(e[this.fielder]))
             .map(e=>_.get(e, this.fielder))

@@ -3,10 +3,9 @@
 import _ from 'lodash'
 import Teams from 'factories/teams'
 import FectherEntity from 'services/fetchEntity'
-import store from 'src/store'
 
 import Me from 'factories/me'
-
+import store from 'src/store'
 
 export default {
   data: function () {
@@ -63,7 +62,7 @@ export default {
 
     img_default(item) {
       if(_.has(item, 'avatar')) {
-        return STATIC_URL + item.avatar
+        return _.get(store.getters, 'get_options.static_url') + item.avatar
       }
 
       return IMG_AVATAR_DEFAULT

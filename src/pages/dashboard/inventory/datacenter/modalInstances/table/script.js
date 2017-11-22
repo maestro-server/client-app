@@ -2,6 +2,7 @@
 
 import _ from 'lodash'
 import VueTable from 'mixins/vue-table'
+import api_url from 'src/resources/libs/api_url'
 
 export default {
   mixins: [VueTable],
@@ -12,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      urlServers: `${API_URL}datacenters/${this.dc_id}/servers/`,
+      urlServers: `${api_url}datacenters/${this.dc_id}/servers/`,
       columns: ['hostname', 'ipv4_private', 'os', 'environment', 'role', 'actions'],
       options: {
         filterable: false,

@@ -1,15 +1,19 @@
 'use strict'
 
-import Providers from 'factories/providers'
-import ListBox from 'mixins/list-boxs'
+import svTable from './table/table'
+import ListTable from 'mixins/list-table'
 
 export default {
-  mixins: [ListBox],
+  mixins: [ListTable],
+
+  components: {
+    svTable
+  },
 
   data: function () {
     return {
-      entity: Providers,
-      name: "Connection",
+      name: "Connection"
     }
   }
 }
+

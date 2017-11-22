@@ -2,6 +2,7 @@
 
 import Modals from 'mixins/modals'
 import Providers from 'factories/providers'
+import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
@@ -10,7 +11,7 @@ export default {
   data: function() {
     return {
       provider: '',
-      data: {conn:{}, provider: null},
+      data: {conn:{}, name: null, provider: null, regions: [], actived: null},
       providers: [
         {
           name: 'AWS',
@@ -29,11 +30,10 @@ export default {
           ]
         }
       ],
-      permission: {
-        'AWS': [
-          {name: 'Describe Instance', desc: 'List and update EC2 informations', used: 'Require to auto discovery servers'}
-        ]
-      }
+      zones: [],
+      regions: [],
+      options: [],
+      dcs: []
     }
   },
 
@@ -50,7 +50,14 @@ export default {
 
     setupModel () {
       this.model = _.pickBy(this.data, _.identity)
-      this.model.name = this.provider
+      this.model.name = `${this.model.dc} - ${this.reduceRegions(this.model.regions)}`
+      this.model.provider = this.provider
+    },
+
+    reduceRegions(arr) {
+      if(_.isArray(arr)) {
+        return arr.reduce((e, f)=>`${e} ${f}`, '')
+      }
     },
 
     createLoad () {
@@ -60,13 +67,26 @@ export default {
 
     createSave () {
       this.setupModel()
+
       FectherEntity(Providers)()
-        .create(this.finishJob, this.model)
+        .create(this.redirectConn, this.model)
+    },
+
+    redirectConn(result) {
+      const id = _.get(result, 'data._id')
+
+      if(id) {
+        const path = {name: 'providers.single', params: {id}}
+        this.$router.push(path)
+      }
+
+      this.finishJob(result)
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.$set(this, 'provider', this.model.name)
+      this.$set(this, 'provider', this.model.provider)
+      this.fetchData(this.provider)
     },
 
     editSave () {
@@ -77,7 +97,25 @@ export default {
 
     callStep(prv) {
       this.provider = prv.key
+      this.fetchData(prv.key)
+    },
+
+    fetchData: function (provider) {
+      FectherEntity(Datacenters)()
+        .find(this.fetchDatacenter, {provider})
+    },
+
+    fetchDatacenter(e) {
+      const data = _.get(e, 'data.items')
+      if (!_.isEmpty(data)) {
+        this.options = data.map(item => ({value: item, label: item.name}))
+        this.dcs = this.options.map(d => d.label)
+      }
+    },
+
+    updateProvider(val){
+      const dc = _.head(this.options.filter(d => d.label == val))
+      this.regions = _.get(dc, 'value.regions', [])
     }
   }
-
 }

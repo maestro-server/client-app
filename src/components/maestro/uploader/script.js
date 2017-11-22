@@ -1,7 +1,7 @@
 'use strict'
 import validImage from './libs/validImage'
 import Uploader from './libs/uploader'
-
+import store from 'src/store'
 export default {
   props: {
     refs: {type: String, default: "teams"},
@@ -23,7 +23,7 @@ export default {
   computed: {
     showAvatar() {
       if(this.file) {
-        return `${STATIC_URL}${this.file}`
+        return `${_.get(store.getters, 'get_options.static_url')}${this.file}`
       }
 
       return this.defaultImg

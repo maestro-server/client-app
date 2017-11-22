@@ -1,7 +1,7 @@
 <div>
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
-    <template v-if="create">
+    <template>
       <p>
         Configure yours connections, <br>you able to use multiple connections with single datacenter.
         <button class="btn btn-warning btn-sm pull-right" @click="createLoad" v-if="provider">Back</button>
@@ -22,11 +22,25 @@
               Please add your AWS Access Key ID and Secret Access Key.
             </p>
 
-            <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
-                      v-validate.initial="'required'" :error="makeError('access')"></bs-input>
+            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
+                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
+                       ref="s_provider"></bs-select>
 
-            <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
-                      v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
+                       label="Regions" placeholder="Select Regions" multiple></bs-select>
+
+            <div class="well" v-if="!create">
+              If you like to update the access provider, please delete this connection and create a new one.
+            </div>
+
+            <template v-if="create">
+              <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
+                        v-validate.initial="'required'" :error="makeError('access')"></bs-input>
+
+              <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
+                        v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+            </template>
+
           </div>
           <div class="col-xs-6">
             <p>
@@ -56,41 +70,54 @@
               </small>
             </div>
           </div>
-          <div class="col-xs-12">
-            <h4>Permission required</h4>
-            <table class="table table-striped">
-              <tbody>
-              <tr v-for="perm in permission.AWS">
-                <th>{{perm.name}}</th>
-                <td>{{perm.desc}}</td>
-                <td>{{perm.used}}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
         </template>
 
         <template v-if="provider == 'OpenStack'">
+          <div class="col-xs-6">
+            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
+                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
+                       ref="s_provider"></bs-select>
 
+            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
+                       label="Regions" placeholder="Select Regions" multiple></bs-select>
+          </div>
+
+          <div class="col-xs-6">
+            <template v-if="create">
+              <bs-input name="username" label="Username*" v-model="data.conn.username"
+                        v-validate.initial="'required'" :error="makeError('username')"></bs-input>
+
+              <bs-input type="password" class="mt20" name="password" label="Password*" v-model="data.conn.password"
+                        v-validate.initial="'required'" :error="makeError('password')"></bs-input>
+            </template>
+
+            <div class="well" v-if="!create">
+              If you like to update or password, please delete this connection and create a new one.
+            </div>
+          </div>
+
+
+          <div class="col-xs-12">
+            <bs-input name="url" label="Auth URL*" v-model="data.url"
+                      v-validate.initial="'required'" :error="makeError('url')"
+                      help="Its a keystone url"
+                      placeholder="https://keystone.br-maestro-server.com.br:5000/v2.0"
+            ></bs-input>
+
+            <bs-input class="mt10" name="project" label="Project Name*" v-model="data.project"
+                      v-validate.initial="'required'" :error="makeError('project')"></bs-input>
+
+              <p>Hit: All information may be found in Access & Security page inside of GUI OpenStack</p>
+          </div>
         </template>
 
 
       </form>
     </template>
 
-    <div class="well" v-if="!create">
-      This connection use
-      <i :class="toIcon"></i>
-      <strong>{{provider}} provider</strong>, created at {{model.created_at}},
-      if you like to update, please delete this connection and create a new one.
-      <br>Don't forget to update any entity associated with this connection like datacenters.
-    </div>
-
-
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick"
-              :disabled="!create">Save
+      <button type="button" class="btn btn-primary" @click="actionClick">Save
       </button>
     </div>
 

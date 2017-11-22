@@ -8,7 +8,6 @@ import auth from 'src/pages/auth/router'
 
 import Login from 'services/login'
 
-
 Vue.use(Router)
 
  let router = new Router({
@@ -18,6 +17,7 @@ Vue.use(Router)
     auth
   ]
 })
+
 
 // Dont worry, each request api verify if token is valid,
 

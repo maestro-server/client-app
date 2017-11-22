@@ -1,0 +1,60 @@
+<div>
+  <div class="pb10">
+    <header-view-entity label="Connection" :name="model.dc" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+  </div>
+
+  <div class="col-xs-4">
+    <h4>Access user/team owner</h4>
+    <p>The crawler uses this user/team to find, insert and update entities.</p>
+
+    <bs-select :options="formatOwnerUsers" options-label="name" value-label="_id"
+               label="User/Teams" placeholder="Select ACL Owner" v-model="owner_user"></bs-select>
+    <div class="text-right">
+      <button class="btn btn-primary" @click="saveOwner">Save</button>
+    </div>
+
+    <hr>
+
+    <h4>Templates ACL</h4>
+    <p>When crawler create a new entity, they copy this acl template.</p>
+    <button class="btn btn-primary" @click="acl">ACL template</button>
+
+    <hr>
+
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-8">
+    <h3><i class="fa fa-key" aria-hidden="true"></i> Tasks and Permissions</h3>
+
+    <ul class="list-group">
+      <li class="list-group-item" v-for="item, key in permissions">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <h4 class="text-capitalize">{{key}}
+              <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">Disabled</label>
+            </h4>
+          </div>
+          <div class="col-xs-6 text-right">
+            <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
+              <i class="fa fa-hourglass-end"></i>
+              Sync
+            </button>
+          </div>
+        </div>
+
+        <div v-if="item.msg" class="alert" :class="'alert-'+item.state">
+          {{item.msg}}
+        </div>
+
+
+        <strong class="row col-xs-12 mt10">Permissions Required:</strong>
+        <template v-for="req in item">
+          <bs-label type="default">{{req.command}} {{req.access}}</bs-label>&nbsp;
+        </template>
+      </li>
+    </ul>
+  </div>
+
+</div>

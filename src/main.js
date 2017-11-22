@@ -22,7 +22,7 @@ Vue.use(Notifications)
 Vue.use(VueClipboard)
 Vue.use(Vuebar);
 
-/* eslint-disable no-new */
+
 new Vue({
   store,
   el: '#app',
@@ -30,3 +30,6 @@ new Vue({
   template: '<App/>',
   components: {App}
 })
+
+/* eslint-disable no-new */
+

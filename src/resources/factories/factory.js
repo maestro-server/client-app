@@ -1,27 +1,30 @@
 'use strict'
 
-import Requester from '../requests/request'
+import DRequester from '../requests/request'
 import store from 'src/store'
 
 import fsuccess from '../callbacks/request_success'
 import frejected from '../callbacks/request_rejected'
 
 import Login from 'services/login'
+import api_url from 'src/resources/libs/api_url'
 
 class Factory {
 
-  constructor (model={}, e) {
+  constructor (model={}, e, Requester = DRequester) {
     this.entity = e
     this.header = {}
     this.model =  model
+
+    this.requester = Requester
   }
 
   getName() {
     return this.constructor.name.toLowerCase()
   }
 
-  getUrl(path=API_URL) {
-    return `${path}${this.entity}`
+  getUrl(path=api_url) {
+    return `${path}/${this.entity}`
   }
 
   setEntity(e) {
@@ -40,63 +43,52 @@ class Factory {
     return this
   }
 
-  list (success = fsuccess) {
-    this.get(success)
-  }
-
   getID (id, success=fsuccess) {
-    this.entity += "/"+id
+    this.setEntity(`${this.entity}/${id}`)
     this.get(success)
   }
 
   get (call_success = fsuccess, call_rejected = frejected) {
     const params = this.model
-
-    Requester()
-      .get(this.entity, {params}, this.header)
-      .then((e) => this.finishCallback(e, call_success))
-      .catch((e) => this.finishCallback(e, call_rejected))
+    this.factoryRequest('get', {params}, call_success, call_rejected)
   }
 
   create (call_success = fsuccess, call_rejected = frejected) {
-    Requester()
-      .post(this.entity, this.model, this.header)
-      .then((e) => this.finishCallback(e, call_success))
-      .catch((e) => this.finishCallback(e, call_rejected))
+    this.factoryRequest('post', this.model, call_success, call_rejected)
   }
 
-  updateID (id, call_success = fsuccess) {
-    this.entity += "/"+id
-    this.update(call_success)
+  updateID (id, call_success = fsuccess, call_rejected = frejected) {
+    this.setEntity(`${this.entity}/${id}`)
+    this.update(call_success, call_rejected)
   }
 
   update (call_success = fsuccess, call_rejected = frejected) {
-    Requester()
-      .put(this.entity, this.model, this.header)
-      .then((e) => this.finishCallback(e, call_success))
-      .catch((e) => this.finishCallback(e, call_rejected))
+    this.factoryRequest('put', this.model, call_success, call_rejected)
   }
 
   patchID (id, call_success = fsuccess) {
-    this.entity += "/"+id
+    this.setEntity(`${this.entity}/${id}`)
     this.patch(call_success)
   }
 
   patch (call_success = fsuccess, call_rejected = frejected) {
-    Requester()
-      .patch(this.entity, this.model, this.header)
-      .then((e) => this.finishCallback(e, call_success))
-      .catch((e) => this.finishCallback(e, call_rejected))
+    this.factoryRequest('patch', this.model, call_success, call_rejected)
   }
 
   deleteID (id, success=fsuccess) {
-    this.entity += "/"+id
+    this.setEntity(`${this.entity}/${id}`)
     this.delete(success)
   }
 
   delete (call_success = fsuccess, call_rejected = frejected) {
-    Requester()
-      .delete(this.entity, this.model, this.header)
+    const data = this.model
+    this.factoryRequest('delete', {data}, call_success, call_rejected)
+  }
+
+  factoryRequest (caller, args, call_success, call_rejected) {
+    store.dispatch('onSpinner')
+
+    this.requester(this.header, this.timeout)[caller](this.entity, args)
       .then((e) => this.finishCallback(e, call_success))
       .catch((e) => this.finishCallback(e, call_rejected))
   }

@@ -12,15 +12,15 @@
       <template v-for="item, ok in items">
         <div>
           <strong>{{ok}}: </strong>
-          <span :class="{'tree-view-item-leaf': !isString(item)}">
+          <span :class="{'tree-view-item-leaf': !isValue(item)}">
             <tree-view :items="item"></tree-view>
           </span>
         </div>
       </template>
     </template>
 
-    <template v-if="isString(items)">
-      {{ items }}
+    <template v-if="isValue(items)">
+      <span class="stringColor">{{ items }}</span>
     </template>
   </span>
 </template>
@@ -45,8 +45,8 @@
         return _.isArray(value);
       },
 
-      isString: function (value) {
-        return _.isString(value);
+      isValue: function (value) {
+        return _.isString(value) || _.isInteger(value);
       }
     }
   };
@@ -55,7 +55,11 @@
 <style>
   .tree-view-item-leaf {
     display: block;
-    white-space: nowrap;
+    white-space: normal;
     padding-left: 15px;
+  }
+
+  .stringColor {
+    color: #005550;
   }
 </style>

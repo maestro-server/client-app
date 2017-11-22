@@ -28,5 +28,9 @@ export default {
 
   CALL_CACHE (state, args) {
     state.cache = Object.assign(state.cache, args)
+  },
+
+  CALL_OPTIONS (state, args) {
+    state.options = Object.assign(state.options, args)
   }
 }

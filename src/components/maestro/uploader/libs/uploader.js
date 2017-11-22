@@ -4,6 +4,8 @@ import store from 'src/store'
 import Login from 'services/login'
 import axios from 'axios'
 
+import api_url from 'src/resources/libs/api_url'
+
 class Uploader {
 
   constructor(ref = null) {
@@ -18,7 +20,7 @@ class Uploader {
   }
 
   getSignedRequest(file) {
-    const URL = `${API_URL}${this.ref}/upload?filetype=${file.type}`
+    const URL = `${api_url}${this.ref}/upload?filetype=${file.type}`
 
     axios.get(URL, {headers: {"Authorization": Login.Authorization()}})
       .then((result) => {

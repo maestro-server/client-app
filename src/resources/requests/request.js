@@ -1,38 +1,18 @@
 'use strict'
-import caxios from './caxios'
+
+import axios from 'axios'
+import api_url from 'src/resources/libs/api_url'
 import store from 'src/store'
+const req = (headers = {}, dtimeout) => {
+  const timeout = dtimeout || _.get(store.getters, 'get_options.api_timeout')
 
-const req = () => {
+  console.log()
 
-  store.dispatch('onSpinner')
-
-  return {
-    get: (entity, data={}, headers={}) => {
-      return caxios(headers)
-        .get(entity, data)
-    },
-
-    post: (entity, data={}, headers={}) => {
-      return caxios(headers)
-        .post(entity, data)
-    },
-
-    put: (entity, data={}, headers={}) => {
-      return caxios(headers)
-        .put(entity, data)
-    },
-
-    patch: (entity, data={}, headers={}) => {
-      return caxios(headers)
-        .patch(entity, data)
-    },
-
-    delete: (entity, data={}, headers={}) => {
-      return caxios(headers)
-        .delete(entity, {data})
-    }
-  }
-
+  return axios.create({
+    baseURL: api_url,
+    timeout: timeout,
+    headers
+  })
 }
 
 export default req

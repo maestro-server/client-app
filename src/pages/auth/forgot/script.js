@@ -1,5 +1,6 @@
 'use strict'
 import Auth from 'factories/auth'
+import base_url from 'src/resources/libs/base_url'
 
 export default {
   name: 'forgot',
@@ -16,7 +17,7 @@ export default {
     forgot: function () {
 
       this.$validator.validateAll().then(() => {
-        const callback_url = `${BASE_URL}#/changepass`
+        const callback_url = `${base_url}#/changepass`
         const data = Object.assign({}, this.model, {callback_url});
 
         new Auth(data, '/users/forgot')

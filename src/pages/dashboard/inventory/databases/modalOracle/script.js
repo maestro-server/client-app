@@ -17,6 +17,10 @@ export default {
     tabCdbs
   },
 
+  computed: {
+    tab_app_dc() {return this.$refs.tab_app_dc}
+  },
+
   data () {
     return {
       cdb: 0,

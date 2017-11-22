@@ -5,5 +5,6 @@ export default {
   get_me: state => state.me,
   get_tenant: state => state.tenant,
   get_spinner: state => state.spinner,
-  get_cache: state => state.cache
+  get_cache: state => state.cache,
+  get_options: state => state.options
 }

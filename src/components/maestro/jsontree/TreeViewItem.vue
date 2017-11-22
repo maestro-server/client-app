@@ -115,7 +115,7 @@
   .tree-view-item-node {
     cursor: pointer;
     position: relative;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .tree-view-item-leaf {

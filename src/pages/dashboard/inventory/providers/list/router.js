@@ -2,6 +2,7 @@
 import comp from './list'
 
 export default {
-  path: 'list',
+  name: 'providers',
+  path: '/',
   component: comp
 }
