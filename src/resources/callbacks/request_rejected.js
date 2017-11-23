@@ -23,9 +23,13 @@ const mapper = {
     title: (e) => `${_.get(e, 'err.errors[0].failed')}`,
     msg: () => "This data is duplicate (Conflict)"
   },
+  501: {
+    title: () => "Missing configuration or connection problems",
+    msg: (e) => `${_.get(e, 'err.name')} ${_.get(e, 'err.errors')}`
+  },
   500: {
     title: () => "Error occur",
-    msg: (e) => `${_.get(e, 'err.errors.msg')}`
+    msg: () => ""
   }
 }
 

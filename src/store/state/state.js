@@ -35,7 +35,7 @@ export default {
   options: {
     'base_url': `${window.location .protocol}//${window.location.host}`,
     'api_url': document.head.querySelector("[name=api_url]").content || 'http://localhost:8888',
-    'static_url': '/upload/',
+    'static_url': document.head.querySelector("[name=static_url]").content || '/upload/',
     'api_timeout': 5000
   }
 }

@@ -14,6 +14,7 @@ import {ServerTable} from 'maestro-vue-tables-2'
 import Vuebar from 'vuebar';
 import VueClipboard from 'vue-clipboard2'
 
+
 Vue.use(bootue)
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
@@ -22,7 +23,6 @@ Vue.use(Notifications)
 Vue.use(VueClipboard)
 Vue.use(Vuebar);
 
-
 new Vue({
   store,
   el: '#app',
@@ -30,6 +30,3 @@ new Vue({
   template: '<App/>',
   components: {App}
 })
-
-/* eslint-disable no-new */
-
