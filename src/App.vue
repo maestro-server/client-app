@@ -19,7 +19,6 @@
     created() {
       new Maestro()
         .get(e => {
-          console.log(e)
           store.dispatch('setOptions', _.get(e, 'data'))
         })
     }

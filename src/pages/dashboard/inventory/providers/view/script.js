@@ -48,7 +48,6 @@ export default {
         .authorization()
         .updateID(
           `${this.model._id}/task/${key}`,
-          this.logTask,
           this.logTask
         )
     },

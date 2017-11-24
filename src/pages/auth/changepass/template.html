@@ -21,6 +21,7 @@
     <bs-input
       type="password"
       label="Verify password"
+      v-model="model.verypassword"
       v-validate.initial="'required|min:4|confirmed:password'"
       name="verypassword"
       :error="makeError('verypassword')"

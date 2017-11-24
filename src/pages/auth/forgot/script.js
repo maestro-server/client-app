@@ -17,7 +17,7 @@ export default {
     forgot: function () {
 
       this.$validator.validateAll().then(() => {
-        const callback_url = `${base_url}#/changepass`
+        const callback_url = `${base_url}#/auth/changepass`
         const data = Object.assign({}, this.model, {callback_url});
 
         new Auth(data, '/users/forgot')
