@@ -6,8 +6,6 @@ import store from 'src/store'
 const req = (headers = {}, dtimeout) => {
   const timeout = dtimeout || _.get(store.getters, 'get_options.api_timeout')
 
-  console.log()
-
   return axios.create({
     baseURL: api_url,
     timeout: timeout,
