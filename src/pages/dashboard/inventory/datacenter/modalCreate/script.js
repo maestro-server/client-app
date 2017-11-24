@@ -86,8 +86,10 @@ export default {
     },
 
     clearItems() {
-      this.$set(this, 'zones', [])
-      this.$set(this, 'regions', [])
+      if(this.create) {
+        this.$set(this, 'zones', [])
+        this.$set(this, 'regions', [])
+      }
     },
 
     addItemToTmpList(path, value) {
