@@ -37,7 +37,7 @@ export default {
       const id = _.get(data, '_id')
       if(id) {
         return {
-          'name': `${_.get(data, 'refs')} - ${_.get(data, 'email')} (${_.get(data, '_id')})`,
+          'name': `${_.get(data, 'refs', '')} - ${_.get(data, 'email', '')} (${_.get(data, '_id', '')})`,
           '_id': id
         }
       }

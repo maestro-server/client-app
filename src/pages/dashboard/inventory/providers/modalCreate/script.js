@@ -101,7 +101,7 @@ export default {
     },
 
     fetchData: function (provider) {
-      FectherEntity(Datacenters)()
+      FectherEntity(Datacenters)({force: true})
         .find(this.fetchDatacenter, {provider})
     },
 
