@@ -9,7 +9,7 @@
 
     <template slot="name" scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
-      <router-link :to="{name: 'system.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+      <router-link :to="{name: 'clients.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
 
     <template slot="actions" scope="props">
