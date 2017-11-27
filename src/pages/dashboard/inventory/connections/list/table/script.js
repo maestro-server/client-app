@@ -1,7 +1,7 @@
 'use strict'
 
 import VueTable from 'mixins/vue-table'
-import Providers from 'factories/providers'
+import Connections from 'factories/connections'
 
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
   data: function () {
     return {
-      entity: new Providers(),
+      entity: new Connections(),
       columns: ['name', 'dc', 'updated_at', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'dc'],

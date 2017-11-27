@@ -1,7 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Providers from 'factories/providers'
+import Connections from 'factories/connections'
 import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
 
@@ -68,7 +68,7 @@ export default {
     createSave () {
       this.setupModel()
 
-      FectherEntity(Providers)()
+      FectherEntity(Connections)()
         .create(this.redirectConn, this.model)
     },
 
@@ -76,7 +76,7 @@ export default {
       const id = _.get(result, 'data._id')
 
       if(id) {
-        const path = {name: 'providers.single', params: {id}}
+        const path = {name: 'connections.single', params: {id}}
         this.$router.push(path)
       }
 
@@ -91,7 +91,7 @@ export default {
 
     editSave () {
       this.setupModel()
-      FectherEntity(Providers)()
+      FectherEntity(Connections)()
         .update(this.finishJob, this.model)
     },
 

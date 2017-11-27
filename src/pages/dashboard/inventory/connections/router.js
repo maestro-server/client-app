@@ -1,11 +1,11 @@
 'use strict'
-import comp from './provider'
+import comp from './connection'
 import tlist from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'providers',
-  redirect: 'providers/list',
+  path: 'connections',
+  redirect: 'connections/list',
   component: comp,
   children: [
     tlist,

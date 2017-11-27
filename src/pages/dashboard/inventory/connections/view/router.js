@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'providers.single',
+  name: 'connections.single',
   path: 'single/:id',
   component: comp
 }

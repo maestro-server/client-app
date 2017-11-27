@@ -1,6 +1,6 @@
 'use strict'
 import modalCreate from './modalCreate/create'
-import Providers from 'factories/providers'
+import Connections from 'factories/connections'
 
 export default {
 
@@ -10,7 +10,7 @@ export default {
 
   data() {
     return {
-      entity: Providers
+      entity: Connections
     }
   }
 

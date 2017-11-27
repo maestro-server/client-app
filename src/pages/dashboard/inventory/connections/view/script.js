@@ -1,7 +1,7 @@
 'use strict'
 import _ from 'lodash'
 
-import Providers from 'factories/providers'
+import Connections from 'factories/connections'
 import ViewSingle from 'mixins/view-single'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
@@ -13,7 +13,7 @@ export default {
   data: function () {
     return {
       owner_user: null,
-      entity: Providers,
+      entity: Connections,
       model: {},
       permissions: []
     }
@@ -44,7 +44,7 @@ export default {
     },
 
     task(key) {
-      new Providers()
+      new Connections()
         .authorization()
         .updateID(
           `${this.model._id}/task/${key}`,
@@ -63,7 +63,7 @@ export default {
       }
 
       FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.setOptions, {key: 'providers'})
+        .find(this.setOptions, {key: 'connections'})
     },
 
     setOptions(data) {
@@ -98,7 +98,7 @@ export default {
         const old = _.pick(this.model, ['_id', 'name', 'dc', 'provider', 'regions', 'conn'])
         const post = _.assign(old, {owner_user})
 
-        FectherEntity(Providers)()
+        FectherEntity(Connections)()
           .patch(this.redirectConn, post)
       }
     }
