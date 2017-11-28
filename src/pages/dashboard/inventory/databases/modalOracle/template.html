@@ -108,7 +108,7 @@
 
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
-        <tab header="Cluster/Servers" :disabled="own == 1">
+        <tab header="Servers" :disabled="own == 1">
           <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Database">
             <template slot="label">
               Select one or more servers belongs database.

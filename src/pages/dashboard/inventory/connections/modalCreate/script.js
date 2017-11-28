@@ -11,7 +11,7 @@ export default {
   data: function() {
     return {
       provider: '',
-      data: {conn:{}, name: null, provider: null, regions: [], actived: null},
+      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null},
       providers: [
         {
           name: 'AWS',
@@ -116,6 +116,7 @@ export default {
     updateProvider(val){
       const dc = _.head(this.options.filter(d => d.label == val))
       this.regions = _.get(dc, 'value.regions', [])
+      this.data.dc_id = _.get(dc, 'value._id', [])
     }
   }
 }
