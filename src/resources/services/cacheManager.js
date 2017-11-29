@@ -5,6 +5,16 @@ import storage from '../repositories/storage'
 
 
 const CacheManager = (opts = {}) => {
+  const prefix = _.get(opts, 'prefix', false)
+
+  if(prefix === true) {
+    const {_id} = CacheManager({k: 'me_list', persistence: 'local'}).find(['_id'])
+
+    if(_id) {
+      const {k} = opts
+      _.assign(opts, {k: _id + '_' + k})
+    }
+  }
 
   return {
     find (filter) {

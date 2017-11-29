@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-xs-6">
             <h4 class="text-capitalize">{{key}}
-              <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">Disabled</label>
+              <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">{{item.state}}</label>
             </h4>
           </div>
           <div class="col-xs-6 text-right">

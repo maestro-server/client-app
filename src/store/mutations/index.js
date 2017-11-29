@@ -11,7 +11,7 @@ export default {
 
   SET_TENANT (state, tn) {
     state.tenant = tn
-    CacheManager({k: 'tenant', persistence: 'local'}).set(tn)
+    CacheManager({k: 'tenant', persistence: 'local', prefix: true}).set(tn)
   },
 
   CHANGE_PAGE (state, [key, val]) {
