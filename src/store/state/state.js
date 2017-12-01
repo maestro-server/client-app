@@ -24,8 +24,6 @@ export default {
 
   me: CacheManager({k: 'me_list', persistence: 'local'}).find(['_id', 'email', 'name', 'avatar']),
 
-  tenant: CacheManager({k: 'tenant', persistence: 'local', prefix: true}).find(),
-
   spinner: {
     show: false
   },

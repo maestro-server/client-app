@@ -6,6 +6,7 @@ import FectherEntity from 'services/fetchEntity'
 
 import Me from 'factories/me'
 import store from 'src/store'
+import tenantMananger from 'services/tenantManager'
 
 export default {
   data: function () {
@@ -71,7 +72,7 @@ export default {
     changeTenant(team, refs='teams') {
       const tn = _.assign({}, team, {refs})
 
-      store.dispatch('setTenant', tn)
+      tenantMananger.set(tn)
       this.updateViewTenant(tn)
       this.$router.go()
     },
@@ -106,7 +107,7 @@ export default {
 
   computed: {
     storageTeam() {
-      return this.$store.getters.get_tenant
+      return tenantMananger.get()
     },
     hasTeams() {
       const total = _.get(this.teams, 'items', [])

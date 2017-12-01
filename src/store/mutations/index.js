@@ -9,11 +9,6 @@ export default {
     CacheManager({k: 'me_list', persistence: 'local'}).set(state.me)
   },
 
-  SET_TENANT (state, tn) {
-    state.tenant = tn
-    CacheManager({k: 'tenant', persistence: 'local', prefix: true}).set(tn)
-  },
-
   CHANGE_PAGE (state, [key, val]) {
     state.viewer[key] = val
   },

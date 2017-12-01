@@ -2,12 +2,11 @@
 
 import _ from 'lodash'
 import CacheRequester from './cacheRequester'
-import store from 'src/store'
-
+import tenantMananger from 'services/tenantManager'
 
 const FetcherData = (Entity) => (opts = {}) => {
 
-  const tenant = store.getters.get_tenant
+  const tenant = tenantMananger.get()
   const k = _.get(Entity, 'name').toLowerCase()
 
   return {

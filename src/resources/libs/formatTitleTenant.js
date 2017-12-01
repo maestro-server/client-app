@@ -1,9 +1,9 @@
 'use strict'
 
-import store from 'src/store'
+import tenantMananger from 'services/tenantManager'
 
 const format = (ttenant, tsingle) => {
-  const tenant = store.getters.get_tenant
+  const tenant = tenantMananger.get()
   const ifShow = _.get(tenant, 'refs', 'users')
   return ifShow !== 'users' ? `${_.get(tenant, 'name')} ${ttenant}` : tsingle
 }

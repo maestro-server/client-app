@@ -1,7 +1,5 @@
 'use strict'
 
-import _ from 'lodash'
-
 
 export default {
   setPage ({commit}, [title, subtitle = null, icon = null]) {
@@ -16,10 +14,6 @@ export default {
 
   setUser ({commit}, args) {
     commit('SET_USER', args)
-  },
-
-  setTenant ({commit}, tenant) {
-    commit('SET_TENANT', _.pick(tenant, ['name', '_id', 'email', 'avatar', 'refs']))
   },
 
   onSpinner ({commit}) {
