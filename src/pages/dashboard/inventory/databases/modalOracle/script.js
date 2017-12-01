@@ -28,11 +28,12 @@ export default {
       foptions: 'Oracle',
       modal: 'oracle',
       initialData: {
-        name: null, description: null, provider:null, storage_types:null, asm_groups: [],
+        name: null, status: 'Active', description: null, provider:null, storage_types:null, asm_groups: [],
         tags: [], pdbs: [], cluster: null, crs_version: null, type: null,
         role: {port: null, endpoint: null}
       },
       options: {
+        status:[],
         third: [],
         own: [],
         oracle: {
@@ -47,6 +48,7 @@ export default {
         {name: 'version', label: 'Version', validate: 'min:2'},
         {name: 'patch', label: 'Patch Level', validate: 'min:2'},
         {name: 'port', label: 'Port', validate: 'alpha_num'},
+        {name: 'unique', label: 'unique Name', validate: 'min:2'},
         {name: 'dns', label: 'DNS', validate: 'min:2'},
         {name: 'tns', label: 'TNS', type: 'textarea', validate: 'min:2'},
         {name: 'extra_config', label: 'Extra Configs', type: 'textarea', validate: 'min:2'}

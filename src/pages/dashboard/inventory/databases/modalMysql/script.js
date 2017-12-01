@@ -32,12 +32,13 @@ export default {
         role: {healthcheck: null, endpoint: null}
       },
       options: {
+        status:[],
         cluster: [],
         third: [],
         own: []
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
+        {name: 'endpoint', label: 'Endpoint', validate: 'min:2'},
         {name: 'version', label: 'Version', validate: 'min:2'},
         {name: 'patch', label: 'Patch', validate: 'min:2'},
         {name: 'port', label: 'Port', validate: 'alpha_num'},

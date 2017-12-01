@@ -7,8 +7,7 @@
         <bs-select class="mt20" form-type="horizontal" :options="findServices" v-model="service"
                    name="service" label="Service installed" :help="serviceMsg" @input="setService"></bs-select>
 
-        <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Hostname*" v-model="data.db_hostname"
-                  v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+        <bs-input class="mt20" form-type="horizontal" name="db_name" label="DB Hostname*" v-model="data.db_hostname"></bs-input>
 
         <template v-if="provider.modal === 'oracle'">
           <bs-select class="mt20" form-type="horizontal" :options="options.oracle.role" v-model="data.dataguard"
@@ -70,7 +69,7 @@
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick">Save</button>
     </div>
 
   </modal>

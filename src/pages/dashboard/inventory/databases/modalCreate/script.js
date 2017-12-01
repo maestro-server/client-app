@@ -31,6 +31,7 @@ export default {
         role: {healthcheck: null, endpoint: null}
       },
       options: {
+        status:[],
         third: [],
         own: [],
         types: [],

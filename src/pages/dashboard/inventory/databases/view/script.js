@@ -29,6 +29,7 @@ export default {
     viewDisplayer() {
       return [
         {val: this.model.environment, type: 'primary'},
+        {val: this.model.status},
         {val: this.model.provider},
         {val: this.model.cluster},
         {val: this.model.dataguard}
@@ -61,6 +62,10 @@ export default {
       this.MCreateConfigServer
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(item)
+    },
+
+    recalculateIndex(idx) {
+      return this.model.modal == 'oracle' ? idx+1 : idx
     }
   },
 

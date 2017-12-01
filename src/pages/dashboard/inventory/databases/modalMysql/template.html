@@ -9,6 +9,19 @@
         <!-- ================= General ================= -->
         <!-- ============================================== -->
         <tab header="General">
+
+          <div class="row">
+            <div class="col-xs-3 text-right mt5">
+              <label>Status</label>
+            </div>
+            <div class="col-xs-9">
+              <button-group v-model="data.status" type="primary">
+                <bs-radio v-for="sts, i in options.status" :key="sts" :selected-value="sts">{{sts}}</bs-radio>
+              </button-group>
+            </div>
+          </div>
+
+
           <div class="row">
 
             <div class="col-xs-12">
