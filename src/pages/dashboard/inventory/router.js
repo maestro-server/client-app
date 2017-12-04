@@ -28,6 +28,10 @@ import cicd from './ci-cd/router'
 import auth from './auth/router'
 import nas from './nas/router'
 import repository from './repository/router'
+import images from './images/router'
+import network from './network/router'
+import volumes from './volumes/router'
+import snapshot from './snapshot/router'
 
 export default {
   name: 'inventory',
@@ -60,6 +64,10 @@ export default {
     cicd,
     auth,
     repository,
-    nas
+    nas,
+    images,
+    network,
+    volumes,
+    snapshot
   ]
 }

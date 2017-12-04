@@ -1,0 +1,24 @@
+<div>
+  <v-server-table
+    name="network-list"
+    :url="url"
+    :columns="columns"
+    :options="options"
+    ref="vTable"
+  >
+
+    <template slot="name" scope="props">
+      <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
+      <router-link :to="{name: 'network.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+    </template>
+
+    <template slot="actions" scope="props">
+      <div class="min-table">
+        <router-link :to="{name: 'network.single', params: { id: props.row._id }}"
+                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
+        <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
+        <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
+      </div>
+    </template>
+  </v-server-table>
+</div>

@@ -1,0 +1,16 @@
+<div>
+  <div class="pb10">
+    <header-view-entity label="Snapshot" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+  </div>
+
+  <div class="col-xs-8">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-4">
+
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="4" icons="fa-tags"></creater-config-list>
+
+  </div>
+
+</div>

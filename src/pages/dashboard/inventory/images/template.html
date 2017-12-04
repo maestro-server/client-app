@@ -1,4 +1,4 @@
-<div>
+<div >
   <div class="col-xs-12 mt10">
     <ul class="list-unstyled list-inline col-xs-12">
       <li><router-link :to="{name: 'volumes'}">Volumes</router-link></li>
@@ -10,8 +10,5 @@
 
   <router-view></router-view>
 
-  <modal-create class="mt15" ref="modal_create"></modal-create>
-  <modal-delete class="mt15" ref="modal_delete" :entity="entity"></modal-delete>
-  <modal-instances class="mt15" ref="modal_instances"></modal-instances>
   <modal-acl class="mt15" ref="modal_acl" :entity="entity"></modal-acl>
 </div>

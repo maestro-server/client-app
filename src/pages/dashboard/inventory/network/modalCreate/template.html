@@ -1,0 +1,48 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= General ================= -->
+        <!-- ============================================== -->
+        <tab header="General">
+          <div class="row">
+
+            <div class="col-xs-12">
+
+              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
+                        v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+
+            </div>
+          </div>
+
+        </tab>
+
+
+        <!-- ================= Datacenters ================= -->
+        <!-- ============================================== -->
+        <tab header="Datacenters">
+          <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
+        </tab>
+
+        <!-- ================= Tags ================= -->
+        <!-- ============================================== -->
+        <tab header="Tags">
+          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
+        </tab>
+      </tabs>
+
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>
