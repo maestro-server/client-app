@@ -23,6 +23,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
+        d.name = d.name || d.unique_id
         d.datacenter = _.get(d, 'datacenters.name', '-')
         return d
       })
