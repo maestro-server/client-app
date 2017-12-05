@@ -12,6 +12,7 @@ export default {
 
   data: function () {
     return {
+      status: 'enabled',
       owner_user: null,
       entity: Connections,
       model: {},
@@ -33,6 +34,21 @@ export default {
   },
 
   methods: {
+    enable(status) {
+      this.status = status
+      const data = _.set(this.model, `status`, status)
+
+      FectherEntity(Connections)()
+        .patch(this.finishJob, data)
+    },
+
+    processEnable(key, state) {
+      const data = _.set(this.model, `process.${key}.state`, state)
+
+      FectherEntity(Connections)()
+        .patch(this.logTask, data)
+    },
+
     formatOwnerUser(data) {
       const id = _.get(data, '_id')
       if(id) {

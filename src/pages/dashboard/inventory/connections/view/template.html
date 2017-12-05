@@ -4,6 +4,18 @@
   </div>
 
   <div class="col-xs-4">
+    <h4>Status</h4>
+    <button class="btn btn-success" :disabled="status == 'enabled'" @click="enable('enabled')">
+      <i class="fa fa-toggle-on"></i>
+      Enabled
+    </button>
+    <button class="btn btn-danger" :disabled="status == 'disabled'" @click="enable('disabled')">
+      <i class="fa fa-toggle-off"></i>
+      Disabled
+    </button>
+
+    <hr>
+
     <h4>Access user/team owner</h4>
     <p>The crawler uses this user/team to find, insert and update entities.</p>
 
@@ -32,10 +44,21 @@
 
         <div class="row">
           <div class="col-xs-6">
-            <h4 class="text-capitalize">{{key}}
+
+            <h4 class="text-capitalize">
+              <button class="btn btn-xs btn-success" v-if="item.state != 'danger'" @click="processEnable(key, 'danger')">
+                <i class="fa fa-toggle-on"></i>
+                On
+              </button>
+              <button class="btn btn-xs btn-danger" v-if="item.state == 'danger'" @click="processEnable(key, 'success')">
+                <i class="fa fa-toggle-off"></i>
+                Off
+              </button>
+              {{key}}
               <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">{{item.state}}</label>
             </h4>
           </div>
+
           <div class="col-xs-6 text-right">
             <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
               <i class="fa fa-hourglass-end"></i>
@@ -47,7 +70,6 @@
         <div v-if="item.msg" class="alert" :class="'alert-'+item.state">
           {{item.msg}}
         </div>
-
 
         <strong class="row col-xs-12 mt10">Permissions Required:</strong>
         <template v-for="req in item">
