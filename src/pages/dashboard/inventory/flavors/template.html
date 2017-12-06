@@ -5,7 +5,6 @@
       <li><router-link :to="{name: 'snapshots'}">Snapshot</router-link></li>
       <li><router-link :to="{name: 'images'}">Images</router-link></li>
       <li><router-link :to="{name: 'network'}">Network</router-link></li>
-      <li><router-link :to="{name: 'flavors'}">Flavors</router-link></li>
     </ul>
   </div>
 
@@ -13,6 +12,5 @@
 
   <modal-create class="mt15" ref="modal_create"></modal-create>
   <modal-delete class="mt15" ref="modal_delete" :entity="entity"></modal-delete>
-  <modal-instances class="mt15" ref="modal_instances"></modal-instances>
   <modal-acl class="mt15" ref="modal_acl" :entity="entity"></modal-acl>
 </div>

@@ -32,6 +32,7 @@ import images from './images/router'
 import network from './network/router'
 import volumes from './volumes/router'
 import snapshot from './snapshot/router'
+import flavors from './flavors/router'
 
 export default {
   name: 'inventory',
@@ -68,6 +69,7 @@ export default {
     images,
     network,
     volumes,
-    snapshot
+    snapshot,
+    flavors
   ]
 }
