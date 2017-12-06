@@ -2,10 +2,12 @@
 
 import modalCreate from './modalCreate/create'
 import Flavors from 'factories/flavors'
+import dcMenu from '../../_modules/dcMenu/menu.vue'
 
 export default {
   components: {
-    modalCreate
+    modalCreate,
+    dcMenu
   },
 
   data() {
