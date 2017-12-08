@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - '7'
+env:
+  - NODE_ENV=production
+cache:
+  directories:
+    - node_modules
+services:
+  - docker
+before_install:
+  - npm install
+script:
+  - npm run build
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=signorini/client-maestro
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker push $REPO
