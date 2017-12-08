@@ -6,11 +6,15 @@ cache:
     - node_modules
 services:
   - docker
-script:
-  - npm run build
-after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker push $REPO
+jobs:
+  include:
+    - stage: build docker image
+      script:
+        - npm run build
+      after_success:
+        - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+        - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+        - docker build -f Dockerfile -t $REPO:$COMMIT .
+        - docker tag $REPO:$COMMIT $DOCKER_USER/$REPO:$TAG
+        - docker push $DOCKER_USER/$REPO
+
