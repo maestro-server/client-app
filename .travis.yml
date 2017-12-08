@@ -1,8 +1,6 @@
 language: node_js
 node_js:
   - '6'
-env:
-  - NODE_ENV=production
 cache:
   directories:
     - node_modules
