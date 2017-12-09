@@ -14,7 +14,7 @@ jobs:
         - docker build -f Dockerfile -t client-maestro .
       after_success:
         - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-        - export TAG="if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-        - docker tag client-maestro $DOCKER_USER/$REPO:$TAG
-        - docker images
-        - docker push $DOCKER_USER/$REPO:$TAG
+        - docker tag client-maestro $DOCKER_USER/$REPO:latest
+        - docker tag client-maestro $DOCKER_USER/$REPO:$TRAVIS_BRANCH
+        - docker push $DOCKER_USER/$REPO:latest
+        - docker push $DOCKER_USER/$REPO:$TRAVIS_BRANCH
