@@ -8,13 +8,22 @@ services:
   - docker
 jobs:
   include:
-    - stage: build docker image
+    - stage: build docker image - base
+      if: branch != master
+      script:
+        - npm run build
+        - docker build -f Dockerfile -t client-maestro .
+      after_success:
+        - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+        - docker tag client-maestro $DOCKER_USER/$REPO:$TRAVIS_BRANCH
+        - docker push $DOCKER_USER/$REPO:$TRAVIS_BRANCH
+
+    - stage: build docker image - latets
+      if: branch = master
       script:
         - npm run build
         - docker build -f Dockerfile -t client-maestro .
       after_success:
         - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
         - docker tag client-maestro $DOCKER_USER/$REPO:latest
-        - docker tag client-maestro $DOCKER_USER/$REPO:$TRAVIS_BRANCH
         - docker push $DOCKER_USER/$REPO:latest
-        - docker push $DOCKER_USER/$REPO:$TRAVIS_BRANCH
