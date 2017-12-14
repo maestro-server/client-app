@@ -4,7 +4,8 @@ import titleTenant from 'src/resources/libs/formatTitleTenant'
 
 export default {
   props: {
-    label: {type: String}
+    label: {type: String},
+    showAddBtn: {type: Boolean, default: true},
   },
 
   computed: {

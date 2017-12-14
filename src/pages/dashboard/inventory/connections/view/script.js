@@ -111,7 +111,7 @@ export default {
                           .omit('_links')
                           .value()
 
-        const old = _.pick(this.model, ['_id', 'name', 'dc', 'provider', 'regions', 'conn'])
+        const old = _.pick(this.model, ['_id', 'name', 'dc', 'dc_id', 'provider', 'regions', 'conn'])
         const post = _.assign(old, {owner_user})
 
         FectherEntity(Connections)()

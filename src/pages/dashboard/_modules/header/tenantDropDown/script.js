@@ -13,7 +13,7 @@ export default {
     return {
       menu: {
         teams: ['Teams', 'fa-users'],
-        providers: ['Providers', 'fa-wrench'],
+        connections: ['Connections', 'fa-wrench'],
         events: ['Events', 'fa-bell'],
         hr: true,
         access_manager: ['Access Manager', 'fa-key'],

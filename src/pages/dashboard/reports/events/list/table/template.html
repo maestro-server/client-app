@@ -1,6 +1,6 @@
 <div>
   <v-server-table
-    name="client-list"
+    name="events-list"
     :url="url"
     :columns="columns"
     :options="options"
@@ -9,9 +9,6 @@
 
     <template slot="actions" scope="props">
       <div class="min-table">
-        <router-link :to="{name: 'events.single', params: { id: props.row._id }}"
-                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
-        <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
       </div>
     </template>

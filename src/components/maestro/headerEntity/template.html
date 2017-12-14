@@ -2,7 +2,7 @@
   <h3 class="col-xs-8 pb10 text-capitalize">
     {{title}}
   </h3>
-  <div class="col-xs-4 pb10 mt20">
+  <div class="col-xs-4 pb10 mt20" v-if="showAddBtn">
     <button class="btn btn-primary pull-right" @click.prevent="add"><i class="fa fa-plus-circle"></i> New {{label}}</button>
   </div>
 </div>
