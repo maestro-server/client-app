@@ -11,7 +11,9 @@
 
     <creater-config-list label="System" :basket="list_system" @edit="editM" icons="fa-briefcase">
       <template slot="view" scope="props">
-        <b class="text-capitalize">{{props.item.name}}</b>
+        <router-link :to="{name: 'system.single', params: { id: props.item._id }}">
+          <b class="text-capitalize">{{props.item.name}}</b>
+        </router-link>
       </template>
     </creater-config-list>
 
