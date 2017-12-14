@@ -10,7 +10,10 @@
   <div class="col-xs-6">
     <creater-config-list label="Application" :basket="list_apps" @edit="editM" icons="fa-code">
       <template slot="view" scope="props">
-        <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+        <router-link :to="{name: 'applications.single', params: { id: props.item._id }}">
+          <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+        </router-link>
+
         <h5 class='ft15 inline'>
           <bs-label type='default' v-if='props.item.family'>{{props.item.family}}</bs-label>
           <bs-label type='default' v-if='props.item.spec'>{{props.item.spec.role}}</bs-label>
@@ -20,7 +23,10 @@
 
     <creater-config-list label="Client" :basket="model.clients" @edit="edit" :index="2" icons="fa-user-o">
       <template slot="view" scope="props">
-        <strong>{{props.item.name}}</strong>
+        <router-link :to="{name: 'clients.single', params: { id: props.item._id }}">
+          <strong>{{props.item.name}}</strong>
+        </router-link>
+
       </template>
     </creater-config-list>
 
