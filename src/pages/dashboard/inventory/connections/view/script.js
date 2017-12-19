@@ -78,6 +78,8 @@ export default {
         this.owner_user = ouser
       }
 
+      this.status = _.get(this.model, 'status')
+
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.setOptions, {key: 'connections'})
     },

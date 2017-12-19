@@ -11,7 +11,8 @@ export default {
       entity: new Events(),
       columns: ['msg', 'context', 'created_at', 'actions'],
       options: {
-        sortable: [],
+        orderBy: {column: 'created_at', ascending: false},
+        sortable: ['created_at'],
         filterable: ['msg', 'context'],
         headings: {
           created_at: 'Created At'
