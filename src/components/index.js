@@ -1,8 +1,8 @@
 'use strict'
-import ComponentsB from './bootue/index'
+
 import ComponentsM from './maestro/index'
 
-const Components = Object.assign(ComponentsB, ComponentsM)
+const Components = Object.assign(ComponentsM)
 
 function plugin (Vue) {
   if (plugin.installed) return
