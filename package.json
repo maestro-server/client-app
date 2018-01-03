@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "axios": "~0.16.1",
-    "bootue": "^0.1.36",
+    "bootue": "^0.1.40",
     "chart.js": "~2.7.0",
     "lodash": "~4.17.4",
     "store": "~2.0.12",

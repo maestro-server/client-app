@@ -17,6 +17,7 @@
                  form-type="horizontal"
                  :on-hit="onHit"
                  class="mt10"
+                 :headers="headers"
       ></typeahead>
     </template>
 
@@ -34,6 +35,7 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import Modals from 'mixins/modals'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
     mixins: [Modals, TabCreaterList],
@@ -47,6 +49,7 @@
 
     data: function () {
       return {
+        headers: headerLogin,
         type: "Application",
         URL: `${new this.entity().getUrl()}?query=`,
         template: "<b>{{item.name}}</b>",

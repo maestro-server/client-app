@@ -17,6 +17,7 @@
                  form-type="horizontal"
                  :on-hit="onHit"
                  class="mt10"
+                 :headers="headers"
       ></typeahead>
     </template>
 
@@ -34,12 +35,14 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import System from 'factories/system'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
     mixins: [TabCreaterList],
 
     data: function () {
       return {
+        headers: headerLogin,
         URL_SYSTEM: `${new System().getUrl()}?query=`,
         template: "<b>{{item.name}}</b>",
         filter: ['_id', 'name']

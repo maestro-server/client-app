@@ -3,6 +3,7 @@
 import Modals from 'mixins/modals'
 import Users from 'factories/users'
 import Teams from 'factories/teams'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
 import FectherEntity from 'services/fetchEntity'
 
@@ -18,6 +19,7 @@ export default {
 
   data() {
     return {
+      headers: headerLogin,
       label: 'Member',
       value: [],
       defaultRole: 1,

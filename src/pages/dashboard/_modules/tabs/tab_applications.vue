@@ -20,6 +20,7 @@
                    :template="template"
                    :on-hit="onHit"
                    class="col-xs-12"
+                   :headers="headers"
         ></typeahead>
       </div>
     </template>
@@ -43,6 +44,7 @@
   import Applications from 'factories/applications'
   import Adminer from 'factories/adminer'
   import FectherEntity from 'services/fetchEntity'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
     mixins: [Modals, TabCreaterList],
@@ -59,7 +61,8 @@
         template: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>",
         options: {
           role: []
-        }
+        },
+        headers: headerLogin
       }
     },
 

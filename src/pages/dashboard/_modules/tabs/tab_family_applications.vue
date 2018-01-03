@@ -21,6 +21,7 @@
                    :template="template_apps"
                    :on-hit="onHit"
                    class="col-xs-12"
+                   :headers="headers"
         ></typeahead>
       </div>
     </template>
@@ -42,6 +43,7 @@
 
   import Applications from 'factories/applications'
   import Adminer from 'factories/adminer'
+  import headerLogin from 'src/resources/libs/headerAuthorization'
   import FectherEntity from 'services/fetchEntity'
 
   import Modals from 'mixins/modals'
@@ -52,6 +54,7 @@
 
     data() {
       return {
+        headers: headerLogin,
         URL: `${new Applications().getUrl()}?query=`,
         label: Applications.name,
         options: {

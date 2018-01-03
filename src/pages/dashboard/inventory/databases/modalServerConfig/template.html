@@ -32,6 +32,7 @@
                      form-type="horizontal"
                      v-model="data.asm_name"
                      v-if="data.asm && !data.asm.name"
+                     :headers="headers"
           ></typeahead>
 
           <div class="row" v-if="data.asm && data.asm.name">
