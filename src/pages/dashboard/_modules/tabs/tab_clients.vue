@@ -20,7 +20,7 @@
       ></typeahead>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.name}}</b>
     </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="item in items">
         <router-link :to="{name: 'system.single', params: { id: item._id }}">
           <b>{{item.name}}</b>
@@ -13,7 +13,7 @@
           </router-link>
         </template>
       </li>
-    </ul>
+    </bs-list>
   </div>
 </template>
 

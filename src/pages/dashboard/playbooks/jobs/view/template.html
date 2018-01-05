@@ -10,7 +10,7 @@
   <div class="col-xs-6">
 
     <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="2" icons="fa-tags">
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         <bs-label>{{props.item.key}}</bs-label>
         - {{props.item.value}}
       </template>

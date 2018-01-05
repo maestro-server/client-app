@@ -16,7 +16,7 @@
   <div class="col-xs-6">
 
     <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server" v-if="list_servers.length > 0">
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
         <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
@@ -24,7 +24,7 @@
     </creater-config-list>
 
     <creater-config-list label="System" :basket="model.system" @edit="edit" :index="3" icons="fa-briefcase">
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>
         <router-link :to="{name: 'system.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
       </template>

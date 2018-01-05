@@ -8,7 +8,7 @@
         <div class="col-xs-12">
           <bs-input form-type="horizontal" label="Name" name="name"
                     v-model="model.name" v-validate.initial="'required'"
-                    data-vv-scope="modals" :error="makeError('name', 'modals')"
+                    data-vv-slot-scope="modals" :error="makeError('name', 'modals')"
           ></bs-input>
         </div>
 
@@ -83,7 +83,7 @@
         </form>
       </template>
 
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         {{props.item}}
       </template>
 
@@ -118,7 +118,7 @@
         </form>
       </template>
 
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         {{props.item}}
       </template>
 

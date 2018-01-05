@@ -1,12 +1,12 @@
+'use strict'
 // This is the webpack config used for unit tests.
 
-var utils = require('./utils')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const utils = require('./utils')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
 
-var webpackConfig = merge(baseConfig, {
+const webpackConfig = merge(baseWebpackConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
     rules: utils.styleLoaders()
@@ -20,19 +20,11 @@ var webpackConfig = merge(baseConfig, {
     }
   },
   plugins: [
-    new webpack.DefinePlugin(
-      Object.assign({
-          'process.env': require('../config/env/test.env')
-        },
-        config.dev.appConfig.test,
-        config.dev.appConfig.all
-      )
-    ),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    }),
+    new webpack.DefinePlugin({
+      'process.env': require('../config/test.env'),
+      'IMG_AVATAR_DEFAULT': JSON.stringify('/static/imgs/avatar_default.jpeg'),
+      'VERSION': JSON.stringify(require("../package.json").version)
+    })
   ]
 })
 

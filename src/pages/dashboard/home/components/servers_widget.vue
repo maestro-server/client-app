@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="server in servers">
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">
           <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
@@ -12,7 +12,7 @@
         <bs-label type='success'>{{server.role}}</bs-label>
         <bs-label type='success'>{{server.environment}}</bs-label>
       </li>
-    </ul>
+    </bs-list>
   </div>
 </template>
 

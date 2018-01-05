@@ -39,7 +39,7 @@
   <div class="col-xs-8">
     <h3><i class="fa fa-key" aria-hidden="true"></i> Tasks and Permissions</h3>
 
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="item, key in permissions">
 
         <div class="row">
@@ -76,7 +76,7 @@
           <bs-label type="default">{{req.command}} {{req.access}}</bs-label>&nbsp;
         </template>
       </li>
-    </ul>
+    </bs-list>
   </div>
 
 </div>

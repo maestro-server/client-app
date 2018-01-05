@@ -4,13 +4,13 @@
       <bs-label type="default" class="pull-right" v-if="basket">{{basket.length}}</bs-label>
     </h3>
 
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="item, i in basket">
         <slot name="view" :index="i" :item="item">
           <bs-label>{{item.key}}</bs-label> - {{item.value}}
         </slot>
       </li>
-    </ul>
+    </bs-list>
 
     <button class="btn btn-primary pull-right" @click.prevent="callEdit"><i
       class="fa" :class="icons" aria-hidden="true"></i> Manage {{label}}

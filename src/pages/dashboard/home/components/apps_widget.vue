@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="app in apps">
         <router-link :to="{name: 'applications.single', params: { id: app._id }}">
           <b>{{app.name}}</b>
@@ -11,7 +11,7 @@
         <bs-label type='default'>{{app.cluster}}</bs-label>
         <bs-label type='success'>{{app.provider}}</bs-label>
       </li>
-    </ul>
+    </bs-list>
   </div>
 </template>
 

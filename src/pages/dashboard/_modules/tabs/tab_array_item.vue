@@ -15,7 +15,7 @@
     </template>
 
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       {{props.item}}
     </template>
 

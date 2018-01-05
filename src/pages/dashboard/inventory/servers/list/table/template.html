@@ -7,16 +7,16 @@
     ref="vTable"
   >
 
-    <template slot="hostname" scope="props">
+    <template slot="hostname" slot-scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.hostname"></button>
       <router-link :to="{name: 'servers.single', params: { id: props.row._id }}">{{props.row.hostname}}</router-link>
     </template>
 
-    <template slot="ipv4_private" scope="props">
+    <template slot="ipv4_private" slot-scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.ipv4_private"></button> {{props.row.ipv4_private}}
     </template>
 
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div class="min-table">
         <router-link :to="{name: 'servers.single', params: { id: props.row._id }}"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>

@@ -9,7 +9,7 @@
 
 
     <tab-items @update="val => regions = val" label="Region" fielder="region" ref="tab_items">
-      <template slot="list" scope="props">
+      <template slot="list" slot-scope="props">
 
         <div class="listRegions">
           <accordion type="default">

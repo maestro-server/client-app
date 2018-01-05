@@ -1,13 +1,13 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="link in links">
         <router-link :to="link.route">
           <i class="fa" :class="link.icon"></i>
           <b>{{link.name}}</b>
         </router-link>
       </li>
-    </ul>
+    </bs-list>
   </div>
 </template>
 

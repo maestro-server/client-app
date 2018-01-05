@@ -11,7 +11,7 @@
       <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Notes" v-model="single.notes"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       {{props.item.type}} <bs-label>{{props.item.provider}}</bs-label>
     </template>
 

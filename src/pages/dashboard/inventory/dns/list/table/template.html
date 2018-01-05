@@ -7,10 +7,10 @@
     ref="vTable"
   >
 
-    <template slot="qtdserver" scope="props">
+    <template slot="qtdserver" slot-scope="props">
       <bs-label>{{props.row.qtdserver}}</bs-label>
     </template>
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div class="min-table">
         <router-link :to="{name: 'dns.single', params: { id: props.row._id }}"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>

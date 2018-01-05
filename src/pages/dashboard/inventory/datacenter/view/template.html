@@ -10,13 +10,13 @@
   <div class="col-xs-6">
 
     <creater-config-list label="Region" :basket="model.regions" @edit="edit" :index="1" icons="fa-cloud-upload">
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         {{props.item}}
       </template>
     </creater-config-list>
 
     <creater-config-list label="Zone" :basket="model.zones" @edit="edit" :index="1" icons="fa-bullseye">
-      <template slot="view" scope="props">
+      <template slot="view" slot-scope="props">
         {{props.item}}
       </template>
     </creater-config-list>

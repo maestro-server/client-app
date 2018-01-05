@@ -21,7 +21,7 @@
       <bs-input class="mt20" form-type="horizontal" label="Username" v-model="single.username"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <bs-label>{{props.item.type}}</bs-label>
       {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
     </template>

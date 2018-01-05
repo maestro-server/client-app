@@ -26,7 +26,7 @@
       </div>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
       <span class='ft15 inline'>
             <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>

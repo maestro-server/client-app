@@ -1,5 +1,5 @@
 <div>
-  <ul class="list-group" v-if="showList">
+  <bs-list v-if="showList">
     <li class="list-group-item row" v-for="regions, provider in model.value.baser">
       <div class="row">
         <div class="col-xs-6">{{provider}}</div>
@@ -11,7 +11,7 @@
         </div>
       </div>
     </li>
-  </ul>
+  </bs-list>
 
   <modal-regions ref="modal_regions" @update="editSave"></modal-regions>
 </div>

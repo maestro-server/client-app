@@ -7,7 +7,7 @@
     ref="vTable"
   >
 
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div class="min-table">
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
       </div>

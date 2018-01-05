@@ -8,7 +8,7 @@
       <bs-input form-type="horizontal" v-model="single.version" name="version" label="Version"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       {{props.item.name}} <span v-if="props.item.version">-></span>
       <bs-label>{{props.item.version}}</bs-label>
     </template>

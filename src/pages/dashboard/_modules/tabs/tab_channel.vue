@@ -16,7 +16,7 @@
                 v-validate.initial="'required'"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <bs-label>{{props.item.channel}}</bs-label>
       - {{props.item.value}}
     </template>

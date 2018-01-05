@@ -46,7 +46,7 @@
       <div class="col-xs-12">
         <creater-list :basket.sync="value" :label="label" :showAddBtn="false">
 
-          <template slot="view" scope="props">
+          <template slot="view" slot-scope="props">
             <b>{{props.item.email}}</b>
             <span v-if='props.item.name' class="text-capitalize">({{props.item.name}})</span>
             <bs-label>{{props.item.refs}}</bs-label><br/>

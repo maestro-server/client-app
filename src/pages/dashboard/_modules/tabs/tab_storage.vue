@@ -21,7 +21,7 @@
      </div>
    </template>
 
-   <template slot="view" scope="props">
+   <template slot="view" slot-scope="props">
         {{props.item.name}} -
        <bs-label>{{props.item.size}} GB</bs-label>
        <bs-label type="danger" v-if="props.item.root == 'root'">root</bs-label>

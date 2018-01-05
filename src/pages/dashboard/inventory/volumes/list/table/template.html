@@ -7,12 +7,12 @@
     ref="vTable"
   >
 
-    <template slot="name" scope="props">
+    <template slot="name" slot-scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
       <router-link :to="{name: 'volumes.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
 
-    <template slot="actions" scope="props">
+    <template slot="actions" slot-scope="props">
       <div class="min-table">
         <router-link :to="{name: 'volumes.single', params: { id: props.row._id }}"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>

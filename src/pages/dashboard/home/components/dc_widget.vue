@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <ul class="list-group">
+    <bs-list>
       <li class="list-group-item" v-for="item in items">
         <router-link :to="{name: 'datacenters.single', params: { id: item._id }}">
           <i :class="toLower(item.provider, 'icon-')"></i>
@@ -22,7 +22,7 @@
         <bs-label type="warning" class="btn-xs" v-if="item.sucessed === undefined">Disconnected</bs-label>
         <bs-label type="danger" class="btn-xs" v-if="item.sucessed === false">Disconnected</bs-label>
       </li>
-    </ul>
+    </bs-list>
   </div>
 </template>
 

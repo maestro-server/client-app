@@ -12,14 +12,14 @@
               @edit="editE"
               @del="deleteE">
 
-      <template slot="header" scope="props">
+      <template slot="header" slot-scope="props">
         <img :src="make_avatar(props.item)" class="img-circle img-responsive-center mini-avatar pull-left"/>
         <h3 class="mt0">
           {{props.item.name}}
         </h3>
       </template>
 
-      <template slot="info" scope="props">
+      <template slot="info" slot-scope="props">
         <button class="btn btn-default btn-xs" @click.stop="aclE(props.item)">
           <i class="fa fa-users" aria-hidden="true"></i> Users <span class="badge">{{props.item.members.length}}</span>
         </button>

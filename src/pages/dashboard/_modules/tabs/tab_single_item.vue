@@ -6,7 +6,7 @@
                 v-validate.initial="'required'"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <slot name="list" :item="props">
         {{props.item[fielder]}}
       </slot>

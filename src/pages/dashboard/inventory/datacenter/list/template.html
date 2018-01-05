@@ -13,7 +13,7 @@
               @edit="editE"
               @del="deleteE">
 
-      <template slot="header" scope="props">
+      <template slot="header" slot-scope="props">
         <h3 class="mt0">
           <i :class="toLower(props.item.provider, 'icon-')"></i>
           {{props.item.name}}
@@ -23,7 +23,7 @@
         </h3>
       </template>
 
-      <template slot="info" scope="props">
+      <template slot="info" slot-scope="props">
         <button class="btn btn-default btn-xs" @click.stop="seeInstances(props.item)">
           <i class="fa fa-server" aria-hidden="true"></i> Instances
         </button>

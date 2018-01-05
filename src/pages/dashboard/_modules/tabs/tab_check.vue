@@ -9,7 +9,7 @@
                 v-validate.initial="'required'"></bs-input>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       {{props.item.key}} <span v-if="props.item.value">-></span>
       <bs-label>{{props.item.value}}</bs-label>
     </template>

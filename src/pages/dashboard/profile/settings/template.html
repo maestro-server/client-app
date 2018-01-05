@@ -83,7 +83,7 @@
 
     <h3>Change account email</h3>
 
-    <form action="get" class="row" data-vv-scope="femail">
+    <form action="get" class="row" data-vv-slot-scope="femail">
       <bs-input
         label="Current email"
         v-model="model.email"
@@ -97,7 +97,7 @@
         label="New Email"
         v-model="cemail"
         v-validate.initial="'required|email'"
-        data-vv-scope="femail"
+        data-vv-slot-scope="femail"
         name="email"
         class="col-xs-6"
         :error="makeError('email', 'femail')"
@@ -128,7 +128,7 @@
     <h3>Change or password</h3>
     Change your password or recover your current one.
     <br/><br/>
-    <form action="get" class="row" data-vv-scope="fpassword">
+    <form action="get" class="row" data-vv-slot-scope="fpassword">
 
       <bs-input
         type="password"
@@ -136,7 +136,7 @@
         v-model="cpass.password"
         v-validate.initial="'required'"
         name="password"
-        data-vv-scope="fpassword"
+        data-vv-slot-scope="fpassword"
         :error="makeError('password', 'fpassword')"
         class="col-xs-12"
       ></bs-input>
@@ -147,7 +147,7 @@
         v-model="cpass.newpass"
         v-validate.initial="'required'"
         name="newpassword"
-        data-vv-scope="fpassword"
+        data-vv-slot-scope="fpassword"
         :error="makeError('newpassword', 'fpassword')"
         class="col-xs-6"
       ></bs-input>
@@ -157,7 +157,7 @@
         label="Verify password"
         v-validate.initial="'required|confirmed:newpassword'"
         name="verypassword"
-        data-vv-scope="fpassword"
+        data-vv-slot-scope="fpassword"
         v-model="cpass.vpass"
         :error="makeError('verypassword', 'fpassword')"
         class="col-xs-6"

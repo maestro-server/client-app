@@ -38,7 +38,7 @@
       </div>
     </template>
 
-    <template slot="view" scope="props">
+    <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.hostname}}</b> <span v-if='props.item.os'>({{props.item.os.base}})</span><span v-if='props.item.datacenters'> - {{props.item.datacenters.name}}</span><br/>
       <span class='ft15'>
           <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
