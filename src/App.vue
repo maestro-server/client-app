@@ -5,8 +5,6 @@
 
     <callback></callback>
     <loader></loader>
-
-    <notifications group="foo" />
   </div>
 </template>
 

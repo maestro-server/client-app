@@ -9,16 +9,16 @@
 
   <div class="clearfix"></div>
 
-  <div class="well row mt20">
+  <div class="well mt20">
 
-    <ul v-if="basket.length > 0" class="list-group">
+    <bs-list v-if="basket.length > 0">
       <li class="list-group-item" v-for="item, i in basket">
         <slot name="view" :item="item"></slot>
 
         <button class="btn btn-danger btn-xs pull-right" @click.prevent.stop="del(i)"><i
           class="fa fa-trash" aria-hidden="true"></i></button>
       </li>
-    </ul>
+    </bs-list>
 
     <span v-if="basket.length <= 0" class="col-xs-12 text-center">None {{label}}</span>
     <bs-label v-if="basket.length > 0" type="default">{{basket.length}} {{label}}<span
