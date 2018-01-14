@@ -3,7 +3,7 @@
 export default {
   props: {
     single: {},
-    basket: {default: []},
+    basket: {default: ()=>[]},
     label: {type: String},
     fielder: {default: 'name'},
     showAddBtn: {default: true, type: Boolean}

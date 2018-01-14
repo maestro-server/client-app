@@ -9,35 +9,21 @@
         <!-- ================= General ================= -->
         <!-- ============================================== -->
         <tab header="General">
-          <div class="row">
-
-            <div class="col-xs-12">
-
-              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
-                        v-validate.initial="'required'" :error="makeError('name')"></bs-input>
-
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="data.description"
-              ></bs-input>
-
-            </div>
-
-          </div>
-
+          <tab-general @update="val => data.role = val" ref="tab_general"></tab-general>
         </tab>
 
-        <!-- ================= Tags ================= -->
+        <!-- ================= Pivot Relational ================= -->
         <!-- ============================================== -->
-        <tab header="Tags">
-          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
+        <tab header="Pivot/Relactional">
+          <tab-pivot @update="val => data.role = val" ref="tab_general"></tab-pivot>
         </tab>
+
       </tabs>
-
     </form>
-
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>
-      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Generate</button>
     </div>
 
   </modal>

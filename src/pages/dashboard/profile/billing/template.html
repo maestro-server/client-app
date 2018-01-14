@@ -5,19 +5,19 @@
 
     <div class="row">
       <div class="col-xs-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading text-center"><h4><i class="fa fa-free-code-camp" aria-hidden="true"></i> FREE</h4>
-          </div>
-          <div class="panel-body">
-            <bs-list>
-              <li class="list-group-item">Manager servers - Aws, Digital Ocean, Open stack and others</li>
-              <li class="list-group-item">Create unlimited server</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </bs-list>
-          </div>
-        </div>
+        <panel class="panel panel-primary">
+          <template slot="header">
+            <h4 class="text-center"><i class="fa fa-free-code-camp" aria-hidden="true"></i> FREE</h4>
+          </template>
+
+          <bs-list>
+            <li class="list-group-item">Manager servers - Aws, Digital Ocean, Open stack and others</li>
+            <li class="list-group-item">Create unlimited server</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </bs-list>
+        </panel>
       </div>
     </div>
 
@@ -28,9 +28,9 @@
     <h3>Payment information</h3>
     Maestro will store payment method for you.<br/><br/>
 
-    <div class="well">
+    <well>
       Your plan is free.
-    </div>
+    </well>
 
   </div>
 
@@ -39,9 +39,9 @@
     <h3>Invoices</h3>
     Check your invoices.<br/><br/>
 
-    <div class="well">
+    <well>
       Your plan is free.
-    </div>
+    </well>
 
   </div>
 

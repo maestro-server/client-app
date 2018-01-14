@@ -9,7 +9,7 @@
     <div class="mt10 clearfix col-xs-12"></div>
 
     <bs-select v-if="options.length > 0" :disabled="updated" form-type="horizontal" :options="providers" v-model="value.name"
-               label="Datacenter" placnewereholder="Select Datacenter" @input="updateProvider"
+               label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
                ref="s_provider"></bs-select>
 
     <div class="row" v-if="options.length == 0">

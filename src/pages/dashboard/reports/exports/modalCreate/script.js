@@ -4,27 +4,28 @@ import Modals from 'mixins/modals'
 import Reports from 'factories/reports'
 import FectherEntity from 'services/fetchEntity'
 
-import tabTags from './tab_tags'
+import tabGeneral from './tabs/tab_general'
+import tabPivot from './tabs/tab_pivot'
 
 export default {
   mixins: [Modals],
 
   components: {
-    tabTags,
+    tabGeneral,
+    tabPivot
   },
 
   data () {
     return {
       data: {
-        name: null, description: null,
-        tags: []
-      },
-      options: {}
+        table: "Servers"
+      }
     }
   },
 
   computed: {
-    tab_tags() {return this.$refs.tab_tags}
+    tab_general() {return this.$refs.tab_general},
+    tab_pivot() {return this.$refs.tab_pivot}
   },
 
   methods: {
@@ -35,12 +36,10 @@ export default {
     createLoad () {
       this.tabShow=0
       this.data = {}
-      this.tab_tags.reset()
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_tags.updaterEdit(this.model.tags)
     },
 
     setupModel () {
@@ -59,6 +58,10 @@ export default {
 
       FectherEntity(Reports)()
         .update(this.finishJob, this.model)
+    },
+
+    updaterFilters() {
+
     }
   }
 
