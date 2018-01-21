@@ -5,8 +5,8 @@
     <p>General reports is a single table if you need to join data, use a pivot type report.</p>
 
     <div class="col-xs-12">
-      <bs-select v-model="type" :options="tables" name="table" label="Component" @input="updateFilters"></bs-select>
-
+      <bs-select v-model="submit.type" :options="tables" name="table" label="Component"
+                 @input="updateFilters"></bs-select>
       <hr>
     </div>
 
@@ -15,30 +15,39 @@
         <h4>Filters</h4>
       </div>
 
-      <div class="col-xs-4">
-        <div class="col-xs-12">
-          <bs-select v-model="field" :options="options.filters" name="field" placeholder="Field"></bs-select>
-          <bs-select v-model="comparer" :options="options.comparer" name="comparer" placeholder="Equal"></bs-select>
-          <bs-input v-model="filter" name="filter" placeholder="Value"></bs-input>
-        </div>
+      <div class="col-xs-5">
 
-        <button class="btn btn-primary btn-sm" @click.stop.prevent="addFilter">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Filters
-        </button>
+        <report-filter ref="compfilters" @submit="addFilter" @del="delItem"></report-filter>
+
       </div>
 
       <div class="col-xs-1">
         <i class="fa fa-chevron-right text-center general-point"></i>
       </div>
 
-      <div class="col-xs-7">
+      <div class="col-xs-6">
 
         <bs-list>
-          <li class="list-group-item" v-for="filter in filters">
-            <b>{{filter.field}}</b> -> <span>{{filter.value}}</span>
-            <small class="pull-right">{{filter.type}}</small>
+          <li class="list-group-item list-group-item-warning" v-for="filter, index in submit.filters">
+            <b class="primary">{{filter.field}}</b> <i>{{filter.comparer}}</i> <span>{{filter.filter}}</span>
+
+            <ul v-if="filter.subfilter">
+              <li class="text-wrapper">
+                <b class="primary">{{filter.subfield}}</b> <i>{{filter.comparer}}</i> <span>{{filter.subfilter}}</span>
+              </li>
+            </ul>
+
+            <div class="text-right">
+              <bs-label type="info">{{filter.typ}}</bs-label>
+              <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="delItem(index)"></a>
+            </div>
           </li>
         </bs-list>
+
+        <div class="pull-right" v-if="submit.filters">
+          <bs-label type="primary">{{submit.filters.length}}</bs-label>
+        </div>
+
 
       </div>
     </div>
@@ -50,51 +59,54 @@
 <script>
   'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
+  import _ from 'lodash'
   import Modals from 'mixins/modals'
   import Adminer from 'factories/adminer'
   import FectherEntity from 'services/fetchEntity'
 
+  import reportFilter from '../modules/reportFilter/ReportFilter';
+
   export default {
-    mixins: [Modals, TabCreaterList],
+    mixins: [Modals],
+
+    components: {
+      reportFilter
+    },
 
     data: function () {
       return {
-        type: "Servers",
-        field: null,
-        comparer: null,
-        filter: null,
-        filters: [],
-        options: {
-          tables: false,
+        submit: {
+          type: "Servers",
           filters: [],
-          comparer: ['equal', 'contain', 'not contain']
+        },
+        options: {
+          tables: false
         }
       }
     },
 
     computed: {
-      tables () {
-        if(this.options.tables) {
-          return this.options.tables.map(data=>data.name)
+      tables() {
+        if (this.options.tables) {
+          return this.options.tables.map(data => data.name)
         }
       }
     },
 
     methods: {
       updateFilters() {
-        this.field = ""
-        this.filter = ""
-        const items = this.options.tables.filter(data=>this.type === data.name);
-        this.options.filters = _.head(items).filters.map(e=>e.key)
+        const items = this.options.tables.filter(data => this.submit.type === data.name)
+        this.$refs.compfilters.updateFilters(_.head(items))
       },
 
-      addFilter() {
-
+      addFilter(picks) {
+        if(picks) {
+          this.submit.filters.push(picks)
+        }
       },
 
-      updaterEdit() {
-
+      delItem(index) {
+        delete this.submit.filters.splice( index, 1 )
       },
 
       fetchData() {
@@ -110,8 +122,16 @@
 
 </script>
 
-<style>
+<style lang="scss">
   .general-point {
     margin-top: 57px;
+  }
+
+  .text-wrapper {
+    overflow-wrap: break-word;
+
+    .italic {
+      font-style: italic;
+    }
   }
 </style>

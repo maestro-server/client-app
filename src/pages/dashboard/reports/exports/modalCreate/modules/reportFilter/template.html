@@ -1,0 +1,28 @@
+<div>
+  <div class="col-xs-12">
+    <bs-select v-model="field" :options="options.fields" name="field" placeholder="Field"
+               @input="updateTypeFilter"></bs-select>
+    <bs-select v-model="comparer" :options="options.comparer" name="comparer" placeholder="Equal"
+               :disabled="isArrOrObj"></bs-select>
+
+    <div class="ml10">
+      <bs-input v-model="filter" name="filter" placeholder="Value" v-if="isString"></bs-input>
+      <bs-input type="number" v-model="filter" name="filter" placeholder="Value" v-if="isNumber"></bs-input>
+    </div>
+
+    <div class="ml10" v-if="isArrOrObj">
+      <bs-select v-model="subfield" :options="options.subfield" name="subfield" placeholder="Field" :disabled="subfield === 'value'"></bs-select>
+      <bs-input v-model="subfilter" name="subfilter" placeholder="Value"></bs-input>
+    </div>
+
+    <div class="ml10" v-if="isDate">
+      <datepicker v-model="subfilter" name="date" lang="en" class="row"></datepicker>
+      <div class="col-xs-12 mt10"></div>
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary btn-sm pull-right" @click.stop.prevent="addFilter">
+    <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Filters
+  </button>
+</div>
