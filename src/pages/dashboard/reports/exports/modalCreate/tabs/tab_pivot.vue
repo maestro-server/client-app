@@ -5,134 +5,49 @@
       <p>You can create relational reports, select each filter of each table.</p>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-3" v-for="item, key in filters">
 
       <div class="text-center">
-        <button class="btn btn-success btn-xs">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Enable
+        <button class="btn btn-xs" :class="{'btn-success': !item.enabled, 'btn-danger': item.enabled}"
+                @click.prevent="toggleEnable(key)">
+          <i class="fa" :class="{'fa-plus-circle': !item.enabled, 'fa-minus-circle': item.enabled}"
+             aria-hidden="true"></i>
+          {{textEnabled(item.enabled)}}
         </button>
 
-        <i class="fa fa-chevron-right pull-right pivot-point"></i>
+        <i class="fa fa-chevron-right pull-right pivot-point" v-if="item.arrowhidden !== true"></i>
       </div>
 
-      <panel class="panel-default mt5">
+      <panel class="panel-default mt5" :class="{'panel-primary': item.enabled}">
         <template slot="header">
-          <h5 class="text-center"><i class="fa fa-user-o" aria-hidden="true"></i> Clients</h5>
+          <h5 class="text-center"><i class="fa" :class="item.icon" aria-hidden="true"></i> {{item.title}}</h5>
         </template>
 
-        <bs-list class="row"></bs-list>
-      </panel>
+        <div v-if="item.enabled">
+          <bs-list class="row">
+            <li class="list-group-item" v-for="filter, index in item.filters">
+              <b>{{filter.field}}</b>
+              <small>{{filter.comparer}}</small>
+              <bs-label>{{filter.filter}}</bs-label>
 
-    </div>
+              <ul v-if="filter.subfilter">
+                <li class="text-wrapper">
+                  <b class="primary">{{filter.subfield}}</b> <i>{{filter.comparer}}</i>
+                  <span>{{filter.subfilter}}</span>
+                </li>
+              </ul>
+            </li>
+          </bs-list>
 
-
-    <div class="col-xs-3">
-
-      <div class="text-center">
-        <button class="btn btn-danger btn-xs">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Disable
-        </button>
-
-        <i class="fa fa-chevron-right pull-right pivot-point"></i>
-      </div>
-
-      <panel class="panel-primary mt5">
-        <template slot="header">
-          <h5 class="text-center"><i class="fa fa-briefcase" aria-hidden="true"></i> System</h5>
-        </template>
-
-        <bs-list class="row">
-          <li class="list-group-item">
-            <b>Ipv4_private</b>
-            <small>=</small> <bs-label>127.0.0.7</bs-label>
-          </li>
-          <li class="list-group-item">
-            <b>Hostname</b>
-            <small>%s%</small> <bs-label>Api</bs-label>
-          </li>
-        </bs-list>
-
-        <div class="text-center">
-          <button class="btn btn-primary btn-xs">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters
-          </button>
+          <div class="text-center">
+            <button class="btn btn-primary btn-xs">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters
+            </button>
+          </div>
         </div>
       </panel>
 
     </div>
-
-
-
-    <div class="col-xs-3">
-
-      <div class="text-center">
-        <button class="btn btn-danger btn-xs">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Disable
-        </button>
-
-        <i class="fa fa-chevron-right pull-right pivot-point"></i>
-      </div>
-
-      <panel class="panel-primary mt5">
-        <template slot="header">
-          <h5 class="text-center"><i class="fa fa-code" aria-hidden="true"></i> Apps</h5>
-        </template>
-
-        <bs-list class="row">
-          <li class="list-group-item">
-            <b>Ipv4_private</b>
-            <small>=</small> <bs-label>127.0.0.7</bs-label>
-          </li>
-          <li class="list-group-item">
-            <b>Hostname</b>
-            <small>%s%</small> <bs-label>Api</bs-label>
-          </li>
-        </bs-list>
-
-        <div class="text-center">
-          <button class="btn btn-primary btn-xs">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters
-          </button>
-        </div>
-      </panel>
-
-    </div>
-
-    <div class="col-xs-3">
-
-      <div class="text-center">
-        <button class="btn btn-danger btn-xs">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Disable
-        </button>
-      </div>
-
-      <panel class="panel-primary mt5">
-        <template slot="header">
-          <h5 class="text-center"><i class="fa fa-server" aria-hidden="true"></i> Servers</h5>
-        </template>
-
-        <bs-list class="row">
-          <li class="list-group-item">
-            <b>Ipv4_private</b>
-            <small>=</small> <bs-label>127.0.0.7</bs-label>
-          </li>
-          <li class="list-group-item">
-            <b>Hostname</b>
-            <small>%s%</small> <bs-label>Api</bs-label>
-          </li>
-        </bs-list>
-
-        <div class="text-center">
-          <button class="btn btn-primary btn-xs">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters
-          </button>
-        </div>
-      </panel>
-    </div>
-
-
-
-
   </div>
 
 </template>
@@ -142,8 +57,6 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import Modals from 'mixins/modals'
-  import Adminer from 'factories/adminer'
-  import FectherEntity from 'services/fetchEntity'
 
   export default {
     mixins: [Modals, TabCreaterList],
@@ -155,30 +68,44 @@
 
     data: function () {
       return {
-        type: "Servers",
-        field: null,
-        comparer: null,
-        filter: null,
-        options: {
-          tables: []
+        filters: {
+          clients: {
+            title: 'Clients',
+            icon: 'fa-user-o',
+            enabled: true,
+            filters: []
+          },
+          system: {
+            title: 'System',
+            icon: 'fa-briefcase',
+            enabled: false,
+            filters: []
+          },
+          apps: {
+            title: 'Apps',
+            icon: 'fa-code',
+            enabled: false,
+            filters: []
+          },
+          server: {
+            title: 'Servers',
+            icon: 'fa-server',
+            enabled: false,
+            filters: [],
+            arrowhidden: true
+          }
         }
       }
     },
 
     methods: {
-      updaterEdit() {
-
+      textEnabled(enabled) {
+        return enabled ? 'Disabled' : 'Enable'
       },
 
-      fetchData() {
-        FectherEntity(Adminer)({persistence: 'local'})
-          .find(this.fetchAdminer, {key: 'application_options'})
+      toggleEnable(key) {
+        this.filters[key].enabled = !this.filters[key].enabled
       }
-    },
-
-    created() {
-      this.type = this.defaultType
-      this.fetchData()
     }
   }
 
