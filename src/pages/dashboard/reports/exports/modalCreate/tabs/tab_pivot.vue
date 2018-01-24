@@ -5,25 +5,30 @@
       <p>You can create relational reports, select each filter of each table.</p>
     </div>
 
-    <div class="col-xs-3" v-for="item, key in filters">
+    <div class="col-xs-12" v-for="item, key in filters">
 
-      <div class="text-center">
-        <button class="btn btn-xs" :class="{'btn-success': !item.enabled, 'btn-danger': item.enabled}"
-                @click.prevent="toggleEnable(key)">
-          <i class="fa" :class="{'fa-plus-circle': !item.enabled, 'fa-minus-circle': item.enabled}"
-             aria-hidden="true"></i>
-          {{textEnabled(item.enabled)}}
-        </button>
-
-        <i class="fa fa-chevron-right pull-right pivot-point" v-if="item.arrowhidden !== true"></i>
+      <div class="mt10">
+        <div class="text-left">
+          <button class="btn btn-xs" :class="{'btn-success': !item.enabled, 'btn-danger': item.enabled}"
+                  @click.prevent="toggleEnable(key)">
+            <i class="fa" :class="{'fa-plus-circle': !item.enabled, 'fa-minus-circle': item.enabled}"
+               aria-hidden="true"></i>
+            {{textEnabled(item.enabled)}}
+          </button>
+        </div>
       </div>
 
-      <panel class="panel-default mt5" :class="{'panel-primary': item.enabled}">
-        <template slot="header">
-          <h5 class="text-center"><i class="fa" :class="item.icon" aria-hidden="true"></i> {{item.title}}</h5>
-        </template>
 
-        <div v-if="item.enabled">
+
+      <div>
+        <div class="col-xs-4 title-padding mt10" :class="{'bg-primary': item.enabled, 'bg-info': !item.enabled}">
+          <h5 class="text-center">
+            <i aria-hidden="true" class="fa fa-briefcase"></i>
+            {{item.title}}
+          </h5>
+        </div>
+
+        <div class="col-xs-8 mt10">
           <bs-list class="row">
             <li class="list-group-item" v-for="filter, index in item.filters">
               <b>{{filter.field}}</b>
@@ -36,18 +41,51 @@
                   <span>{{filter.subfilter}}</span>
                 </li>
               </ul>
+
+              <a class="fa fa-trash btn btn-danger btn-xs pull-right" @click.stop="delItem(index)"></a>
+            </li>
+
+            <li class="list-group-item list-group-item-default" v-if="item.filters.length == 0">
+              No Filter
             </li>
           </bs-list>
 
-          <div class="text-center">
-            <button class="btn btn-primary btn-xs">
+          <div class="row mnt10">
+            <a class="btn btn-primary btn-xs pull-right" @click.stop="sModal(item.title)" v-if="item.enabled">
               <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters
-            </button>
+            </a>
           </div>
+
         </div>
-      </panel>
+
+
+
+      </div>
+
+      <div class="text-center col-xs-12">
+        <i class="fa fa-chevron-down" v-if="item.arrowhidden !== true"></i>
+      </div>
 
     </div>
+
+    <modal title="Add Filter" effect="fade" v-model="showModal" @opened="reset" sub-modal small>
+
+      <div class="row pivot-modal">
+        <div class="col-xs-12">
+          <report-filter ref="compfilters" @submit="addFilter" @del="delItem"></report-filter>
+        </div>
+
+        <div class="col-xs-12">
+          <hr>
+          <p class="text-center">You can add multiple filter in the same field. Maestro will use AND in multiple filters.</p>
+        </div>
+
+
+      </div>
+
+      <div slot="modal-footer" class="modal-footer"></div>
+
+    </modal>
   </div>
 
 </template>
@@ -57,6 +95,9 @@
 
   import TabCreaterList from 'mixins/tab-creater-list'
   import Modals from 'mixins/modals'
+  import Adminer from 'factories/adminer'
+  import FectherEntity from 'services/fetchEntity'
+  import reportFilter from '../modules/reportFilter/ReportFilter';
 
   export default {
     mixins: [Modals, TabCreaterList],
@@ -66,8 +107,14 @@
       defaultType: {default: 'Application'}
     },
 
+    components: {
+      reportFilter
+    },
+
     data: function () {
       return {
+        showModal: false,
+        entity: false,
         filters: {
           clients: {
             title: 'Clients',
@@ -87,13 +134,16 @@
             enabled: false,
             filters: []
           },
-          server: {
+          servers: {
             title: 'Servers',
             icon: 'fa-server',
             enabled: false,
             filters: [],
             arrowhidden: true
           }
+        },
+        options: {
+          tables: false
         }
       }
     },
@@ -105,15 +155,55 @@
 
       toggleEnable(key) {
         this.filters[key].enabled = !this.filters[key].enabled
+      },
+
+      sModal(table) {
+        this.entity = table.toLowerCase()
+
+        const items = this.options.tables.filter(data => table === data.name)
+        this.$refs.compfilters.updateFilters(_.head(items))
+
+        this.showModal = !this.showModal
+      },
+
+      addFilter(picks) {
+        if(picks) {
+          this.filters[this.entity].filters.push(picks)
+        }
+      },
+
+      delItem(index) {
+        delete this.filters[this.entity].filters.splice( index, 1 )
+      },
+
+      reset() {
+
+      },
+
+      fetchData() {
+        FectherEntity(Adminer)({persistence: 'local'})
+          .find(this.fetchAdminer, {key: 'reports_options'})
       }
+    },
+
+    created() {
+      this.fetchData()
     }
   }
 
 </script>
 
-<style>
-  .pivot-point {
-    margin-right: -20px;
-    margin-top: 4px;
+<style lang="scss">
+  .pivot-modal {
+    min-height: 280px;
+  }
+
+  .title-padding {
+    padding: 3px 0;
+    border-radius: 10px 0px 0 10px;
+  }
+
+  .mnt10 {
+    margin-top: -10px;
   }
 </style>

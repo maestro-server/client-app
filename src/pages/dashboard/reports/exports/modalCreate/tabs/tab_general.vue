@@ -44,9 +44,13 @@
           </li>
         </bs-list>
 
-        <div class="pull-right" v-if="submit.filters">
+        <div class="pull-right" v-if="submit.filters && submit.filters.length > 0">
           <bs-label type="primary">{{submit.filters.length}}</bs-label>
         </div>
+
+        <well class="pull-right col-xs-12 mt10" v-if="submit.filters.length == 0">
+          No filter
+        </well>
 
 
       </div>
