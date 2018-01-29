@@ -107,6 +107,8 @@
         if(picks) {
           this.submit.filters.push(picks)
         }
+
+        this.$emit('update', this.submit)
       },
 
       delItem(index) {

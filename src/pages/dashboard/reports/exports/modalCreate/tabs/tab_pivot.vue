@@ -176,10 +176,6 @@
         delete this.filters[this.entity].filters.splice( index, 1 )
       },
 
-      reset() {
-
-      },
-
       fetchData() {
         FectherEntity(Adminer)({persistence: 'local'})
           .find(this.fetchAdminer, {key: 'reports_options'})

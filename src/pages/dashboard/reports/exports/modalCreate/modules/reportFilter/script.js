@@ -44,6 +44,7 @@ export default {
         comparer: [],
         cdate: ['after', 'same', 'before'],
         cstring: ['equal', 'contain', 'not contain'],
+        cnumber: ['greater', 'equal', 'less'],
         subfield: []
       }
     }
@@ -83,6 +84,10 @@ export default {
             return this.setupDateFilter(field, val)
           }
 
+          if (typ === 'number') {
+            return this.setupNumberFilter(field, val)
+          }
+
           this.options.comparer = this.options.cstring
           this.comparer = this.options.cstring[0]
         }
@@ -120,6 +125,11 @@ export default {
     setupDateFilter() {
       this.options.comparer = this.options.cdate
       this.comparer = this.options.cdate[1]
+    },
+
+    setupNumberFilter() {
+      this.options.comparer = this.options.cnumber
+      this.comparer = this.options.cnumber[1]
     },
 
     delItem(index) {
