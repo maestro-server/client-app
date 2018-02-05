@@ -5,8 +5,8 @@
     <p>General reports is a single table if you need to join data, use a pivot type report.</p>
 
     <div class="col-xs-12">
-      <bs-select v-model="submit.type" :options="tables" name="table" label="Component"
-                 @input="updateFilters"></bs-select>
+      <bs-select v-model="submit.component" :options="tables" name="table" label="Component"
+                 @input="updateFilters" placeholder="Choose primary component"></bs-select>
       <hr>
     </div>
 
@@ -80,7 +80,8 @@
     data: function () {
       return {
         submit: {
-          type: "Servers",
+          report: "general",
+          component: null,
           filters: [],
         },
         options: {
@@ -99,8 +100,10 @@
 
     methods: {
       updateFilters() {
-        const items = this.options.tables.filter(data => this.submit.type === data.name)
+        const items = this.options.tables.filter(data => this.submit.component === data.name)
         this.$refs.compfilters.updateFilters(_.head(items))
+
+        this.updatEvent()
       },
 
       addFilter(picks) {
@@ -108,11 +111,17 @@
           this.submit.filters.push(picks)
         }
 
-        this.$emit('update', this.submit)
+        this.updatEvent()
       },
 
       delItem(index) {
         delete this.submit.filters.splice( index, 1 )
+
+        this.updatEvent()
+      },
+
+      updatEvent() {
+        this.$emit('update', this.submit)
       },
 
       fetchData() {

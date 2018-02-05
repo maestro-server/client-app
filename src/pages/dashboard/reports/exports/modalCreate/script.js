@@ -1,8 +1,12 @@
 'use strict'
 
+import FectherEntity from 'services/fetchEntity'
 import Modals from 'mixins/modals'
 import tabGeneral from './tabs/tab_general'
 import tabPivot from './tabs/tab_pivot'
+import Reports from 'factories/reports'
+
+import _ from 'lodash'
 
 export default {
   mixins: [Modals],
@@ -10,6 +14,12 @@ export default {
   components: {
     tabGeneral,
     tabPivot
+  },
+
+  data: function() {
+    return {
+      tabShow: 0
+    }
   },
 
   computed: {
@@ -22,8 +32,16 @@ export default {
       this.text.title =  this.create ? 'Create new Report' : `Edit ${this.model.name} reports`
     },
 
+    setupModel () {
+      this.model.name = `${_.get(this, 'model.report')} ${Date.now()}`
+      this.model.status = 'process'
+    },
+
     createSave () {
-      console.log(this.model)
+      this.setupModel()
+
+      FectherEntity(Reports)()
+        .create(console.log, this.model)
     }
   }
 

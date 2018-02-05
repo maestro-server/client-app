@@ -170,10 +170,18 @@
         if(picks) {
           this.filters[this.entity].filters.push(picks)
         }
+
+        upddateEvent()
       },
 
       delItem(index) {
         delete this.filters[this.entity].filters.splice( index, 1 )
+
+        upddateEvent()
+      },
+
+      upddateEvent() {
+        this.$emit('update', this.submit)
       },
 
       fetchData() {
