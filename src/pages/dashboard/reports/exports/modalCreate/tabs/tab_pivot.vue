@@ -5,7 +5,7 @@
       <p>You can create relational reports, select each filter of each table.</p>
     </div>
 
-    <div class="col-xs-12" v-for="item, key in filters">
+    <div class="col-xs-12" v-for="item, key in submit.filters">
 
       <div class="mt10">
         <div class="text-left">
@@ -115,31 +115,34 @@
       return {
         showModal: false,
         entity: false,
-        filters: {
-          clients: {
-            title: 'Clients',
-            icon: 'fa-user-o',
-            enabled: true,
-            filters: []
-          },
-          system: {
-            title: 'System',
-            icon: 'fa-briefcase',
-            enabled: false,
-            filters: []
-          },
-          apps: {
-            title: 'Apps',
-            icon: 'fa-code',
-            enabled: false,
-            filters: []
-          },
-          servers: {
-            title: 'Servers',
-            icon: 'fa-server',
-            enabled: false,
-            filters: [],
-            arrowhidden: true
+        submit: {
+          report: "pivot",
+          filters: {
+            clients: {
+              title: 'Clients',
+              icon: 'fa-user-o',
+              enabled: true,
+              filters: []
+            },
+            system: {
+              title: 'System',
+              icon: 'fa-briefcase',
+              enabled: false,
+              filters: []
+            },
+            apps: {
+              title: 'Apps',
+              icon: 'fa-code',
+              enabled: false,
+              filters: []
+            },
+            servers: {
+              title: 'Servers',
+              icon: 'fa-server',
+              enabled: false,
+              filters: [],
+              arrowhidden: true
+            }
           }
         },
         options: {
@@ -154,7 +157,7 @@
       },
 
       toggleEnable(key) {
-        this.filters[key].enabled = !this.filters[key].enabled
+        this.submit.filters[key].enabled = !this.submit.filters[key].enabled
       },
 
       sModal(table) {
@@ -168,16 +171,16 @@
 
       addFilter(picks) {
         if(picks) {
-          this.filters[this.entity].filters.push(picks)
+          this.submit.filters[this.entity].filters.push(picks)
         }
 
-        upddateEvent()
+        this.upddateEvent()
       },
 
       delItem(index) {
-        delete this.filters[this.entity].filters.splice( index, 1 )
+        delete this.submit.filters[this.entity].filters.splice( index, 1 )
 
-        upddateEvent()
+        this.upddateEvent()
       },
 
       upddateEvent() {

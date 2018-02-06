@@ -10,7 +10,6 @@
         <!-- ============================================== -->
         <tab header="General/Single">
           <tab-general @update="val => model = val" ref="tab_general"></tab-general>
-          {{model}}
         </tab>
 
         <!-- ================= Pivot Relational ================= -->
@@ -20,6 +19,7 @@
         </tab>
 
       </tabs>
+      {{model}}
     </form>
 
     <div slot="modal-footer" class="modal-footer">
