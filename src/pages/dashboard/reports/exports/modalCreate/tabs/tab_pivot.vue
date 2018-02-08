@@ -124,14 +124,14 @@
               enabled: true,
               filters: []
             },
-            system: {
+            systems: {
               title: 'System',
               icon: 'fa-briefcase',
               enabled: false,
               filters: []
             },
-            apps: {
-              title: 'Apps',
+            applications: {
+              title: 'Applications',
               icon: 'fa-code',
               enabled: false,
               filters: []
@@ -158,6 +158,8 @@
 
       toggleEnable(key) {
         this.submit.filters[key].enabled = !this.submit.filters[key].enabled
+
+        this.updateEvent()
       },
 
       sModal(table) {
@@ -174,16 +176,16 @@
           this.submit.filters[this.entity].filters.push(picks)
         }
 
-        this.upddateEvent()
+        this.updateEvent()
       },
 
       delItem(index) {
         delete this.submit.filters[this.entity].filters.splice( index, 1 )
 
-        this.upddateEvent()
+        this.updateEvent()
       },
 
-      upddateEvent() {
+      updateEvent() {
         this.$emit('update', this.submit)
       },
 

@@ -4,7 +4,7 @@
 
     <form class="row form-horizontal" @submit.prevent="createSave">
 
-      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12" @input="changeTab">
 
         <!-- ================= General ================= -->
         <!-- ============================================== -->
@@ -15,7 +15,7 @@
         <!-- ================= Pivot Relational ================= -->
         <!-- ============================================== -->
         <tab header="Pivot/Relational">
-          <tab-pivot @update="val => model = val" ref="tab_general"></tab-pivot>
+          <tab-pivot @update="val => model = val" ref="tab_pivot"></tab-pivot>
         </tab>
 
       </tabs>

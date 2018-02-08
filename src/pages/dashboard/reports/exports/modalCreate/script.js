@@ -37,11 +37,22 @@ export default {
       this.model.status = 'process'
     },
 
+    changeTab(tab) {
+      switch(tab) {
+        case 0:
+          this.tab_general.updateEvent()
+        break;
+        case 1:
+          this.tab_pivot.updateEvent()
+        break;
+      }
+    },
+
     createSave () {
       this.setupModel()
 
       FectherEntity(Reports)()
-        .create(console.log, this.model)
+        .create(this.finishJob, this.model)
     }
   }
 

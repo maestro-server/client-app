@@ -103,7 +103,7 @@
         const items = this.options.tables.filter(data => this.submit.component === data.name)
         this.$refs.compfilters.updateFilters(_.head(items))
 
-        this.updatEvent()
+        this.updateEvent()
       },
 
       addFilter(picks) {
@@ -111,16 +111,16 @@
           this.submit.filters.push(picks)
         }
 
-        this.updatEvent()
+        this.updateEvent()
       },
 
       delItem(index) {
         delete this.submit.filters.splice( index, 1 )
 
-        this.updatEvent()
+        this.updateEvent()
       },
 
-      updatEvent() {
+      updateEvent() {
         this.$emit('update', this.submit)
       },
 
