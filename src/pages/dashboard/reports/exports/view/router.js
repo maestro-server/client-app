@@ -1,8 +1,14 @@
 'use strict'
 import comp from './view'
 
+import home from './home/router'
+import table from './table/router'
+
 export default {
-  name: 'reports.single',
   path: 'single/:id',
-  component: comp
+  component: comp,
+  children: [
+    home,
+    table
+  ]
 }

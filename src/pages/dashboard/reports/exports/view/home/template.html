@@ -1,0 +1,62 @@
+<div>
+
+  <div class="col-xs-6">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-xs-6">
+
+    <div class="col-xs-12">
+
+      <h3>
+        Status
+        <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'"><i class="fa fa-check-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'"><i class="fa fa-times-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'"><i class="fa fa-circle-o"></i> {{model.status}}</span>
+      </h3>
+
+      <div class="alert alert-danger" v-if="model.status == 'error'">
+        {{model.msg}}
+      </div>
+
+    </div>
+
+    <div class="col-xs-12">
+
+      <hr>
+
+
+      <h3>Results</h3>
+      <router-link :to="{name: 'reports.single.table', params: { id: model._id }}"
+                   class="btn btn-primary btn" :disabled="model.status != 'finished'" >
+        <i class="fa fa-area-chart"></i> Report Results
+      </router-link>
+
+      <hr>
+
+      <h3>Export to</h3>
+
+      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+        <i class="fa fa-file-text"></i> Json
+      </button>
+
+      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+        <i class="fa fa-align-justify"></i> XML
+      </button>
+
+      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+        <i class="fa fa-align-justify"></i> CSV
+      </button>
+
+      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+        <i class="fa fa-font"></i> TXT
+      </button>
+
+      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+        <i class="icon-ansible"></i> Ansible Inventory
+      </button>
+    </div>
+
+  </div>
+
+</div>

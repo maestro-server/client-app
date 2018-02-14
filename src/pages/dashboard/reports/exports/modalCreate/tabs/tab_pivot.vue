@@ -58,8 +58,6 @@
 
         </div>
 
-
-
       </div>
 
       <div class="text-center col-xs-12">
