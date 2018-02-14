@@ -26,7 +26,6 @@ export default {
   computed: {
     url() {
       if (_.has(this.model, '_id')) {
-        console.log(_.get(this.model, '_id'), this.model)
         return `${new this.entity().getUrl()}/${_.get(this.model, '_id')}/result`
       }
     }
