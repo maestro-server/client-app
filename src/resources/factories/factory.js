@@ -39,7 +39,7 @@ class Factory {
   }
 
   headers (objs) {
-    this.header = objs
+    Object.assign(this.header, objs)
     return this
   }
 

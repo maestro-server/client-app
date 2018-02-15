@@ -4,7 +4,7 @@ import _ from 'lodash'
 import CacheRequester from './cacheRequester'
 import tenantMananger from 'services/tenantManager'
 
-const FetcherData = (Entity) => (opts = {}) => {
+const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   const tenant = tenantMananger.get()
   const k = _.get(Entity, 'name').toLowerCase()
@@ -18,6 +18,7 @@ const FetcherData = (Entity) => (opts = {}) => {
         .process((end) => {
           new Entity(query)
             .authorization()
+            .headers(headers)
             .get(end)
         });
     },
@@ -29,6 +30,7 @@ const FetcherData = (Entity) => (opts = {}) => {
         .process((end) => {
           new Entity({})
             .authorization()
+            .headers(headers)
             .getID(_id, end)
         });
     },

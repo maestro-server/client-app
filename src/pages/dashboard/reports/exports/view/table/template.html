@@ -1,13 +1,73 @@
 <div>
 
-  <bs-table-server
-    v-if="model._id"
-    name="report-result"
-    :url="url"
-    :columns="columns"
-    :options="options"
-    ref="vTable"
-  >
+  <div class="col-xs-12 text-right">
 
-  </bs-table-server>
+    <router-link v-if="model._id" :to="{name: 'reports.single', params: { id: model._id }}"
+                 class="btn btn-primary btn-sm pull-left">Home
+    </router-link>
+
+    <b>Export to:</b>
+    <button class="btn btn-primary btn-sm" @click.stop="download('application', 'json')">
+      <i class="fa fa-file-text"></i> Json
+    </button>
+
+    <button class="btn btn-primary btn-sm" @click.stop="download('application', 'xml')">
+      <i class="fa fa-align-justify"></i> XML
+    </button>
+
+    <button class="btn btn-primary btn-sm" @click.stop="download('text', 'csv')">
+      <i class="fa fa-align-justify"></i> CSV
+    </button>
+
+    <button class="btn btn-primary btn-sm" @click.stop="download('text', 'plain', 'txt')">
+      <i class="fa fa-font"></i> TXT
+    </button>
+
+    <button class="btn btn-primary btn-sm" @click.stop="download('text', 'inventory', 'txt')">
+      <i class="icon-ansible"></i> Ansible Inventory
+    </button>
+  </div>
+
+  <div class="col-xs-12">
+    <hr>
+
+    <bs-table-server
+      v-if="model._id"
+      :name="'report_'+model._id"
+      :url="url"
+      :columns="columns"
+      :options="options"
+      ref="vTable"
+    >
+
+      <template slot="active" slot-scope="props">
+
+        <span class="btn btn-success btn-xs" v-if="props.row.active == true"><i class="fa fa-power-off"></i></span>
+        <span class="btn btn-danger btn-xs" v-if="props.row.active == false"><i
+          class="fa fa-trash"></i></span>
+
+      </template>
+
+      <template slot="status" slot-scope="props">
+
+        <span class="btn btn-success btn-xs" v-if="props.row.status == 'Active'"><i class="fa fa-check-circle-o"></i></span>
+        <span class="btn btn-danger btn-xs" v-if="props.row.status == 'Stopped'"><i
+          class="fa fa-times-circle-o"></i></span>
+        <span class="btn btn-warning btn-xs" v-if="props.row.status == 'Avaliable'"><i class="fa fa-circle-o"></i></span>
+
+        {{props.row.status}}
+
+      </template>
+
+      <template slot="-" slot-scope="props">
+        <div class="min-table">
+          <button @click.stop="singleE(props.row)"
+                       class="fa fa-eye btn btn-primary btn-xs"></button>
+        </div>
+      </template>
+
+    </bs-table-server>
+  </div>
+
+  <modal-single class="mt15" ref="modal_single"></modal-single>
 </div>

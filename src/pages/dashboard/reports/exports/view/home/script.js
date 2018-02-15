@@ -2,11 +2,11 @@
 import _ from 'lodash'
 
 import Reports from 'factories/reports'
-
 import ViewSingle from 'mixins/view-single'
+import SingleReport from 'mixins/single-report'
 
 export default {
-  mixins: [ViewSingle],
+  mixins: [ViewSingle, SingleReport],
 
   data: function () {
     return {
@@ -24,7 +24,5 @@ export default {
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
     }
-  },
-
-  methods: {}
+  }
 }

@@ -36,23 +36,23 @@
 
       <h3>Export to</h3>
 
-      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+      <button class="btn btn-primary" :disabled="model.status != 'finished'" @click.stop="download('application', 'json')">
         <i class="fa fa-file-text"></i> Json
       </button>
 
-      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+      <button class="btn btn-primary" :disabled="model.status != 'finished'" @click.stop="download('application', 'xml')">
         <i class="fa fa-align-justify"></i> XML
       </button>
 
-      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+      <button class="btn btn-primary" :disabled="model.status != 'finished'" @click.stop="download('text', 'csv')">
         <i class="fa fa-align-justify"></i> CSV
       </button>
 
-      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+      <button class="btn btn-primary" :disabled="model.status != 'finished'" @click.stop="download('text', 'plain', 'txt')">
         <i class="fa fa-font"></i> TXT
       </button>
 
-      <button class="btn btn-primary" :disabled="model.status != 'finished'">
+      <button class="btn btn-primary" :disabled="model.status != 'finished'" @click.stop="download('text', 'inventory', 'txt')">
         <i class="icon-ansible"></i> Ansible Inventory
       </button>
     </div>

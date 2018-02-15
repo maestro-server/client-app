@@ -1,0 +1,13 @@
+<div>
+
+  <modal title="Report detail" effect="fade" width="800" v-model="showModal">
+
+    <info-view :data="model"></info-view>
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Close</button>
+    </div>
+
+  </modal>
+
+</div>

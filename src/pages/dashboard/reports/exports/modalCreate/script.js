@@ -33,7 +33,7 @@ export default {
     },
 
     setupModel () {
-      this.model.name = `${_.get(this, 'model.report')} ${Date.now()}`
+      this.model.name = `${_.get(this, 'model.report')} ${_.get(this, 'model.component')} ${new Date().toLocaleString("en-US")}`
       this.model.status = 'process'
     },
 
