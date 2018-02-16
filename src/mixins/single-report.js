@@ -12,9 +12,11 @@ export default {
       const fileName = `${_.get(this.model, '_id')}.${ext}`
       const headers = {'Accept': reps}
 
-      FectherEntity(this.entity)({force: true, responseType: 'blob'}, headers)
+      FectherEntity(this.entity)({force: true}, headers)
         .findOne((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data], {type: reps}));
+          const result = type == 'json' ? JSON.stringify(response.data) : response.data
+
+          const url = window.URL.createObjectURL(new Blob([result], {type: reps}));
           const link = document.createElement('a');
           link.href = url;
           link.setAttribute('download', fileName);

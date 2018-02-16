@@ -41,6 +41,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
         .remove((end) => {
           new Entity(model)
             .authorization()
+            .headers(headers)
             .create(end)
         })
     },
@@ -53,6 +54,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
         .remove((end) => {
           new Entity(model)
             .authorization()
+            .headers(headers)
             .updateID(key, end)
         });
 
