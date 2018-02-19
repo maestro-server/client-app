@@ -26,7 +26,8 @@ export default {
       teams: {},
       tenant: {name: null, _id: null},
       avatar: IMG_AVATAR_DEFAULT,
-      users: {}
+      users: {},
+      vBarOptions: {preventParentScroll: true, resizeRefresh: false, scrollThrottle: 30}
     }
   },
 

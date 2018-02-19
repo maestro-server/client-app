@@ -33,7 +33,7 @@
 
         <h4 class="white ml10 mt20" v-if="hasTeams">Teams</h4>
 
-        <div v-bar="{preventParentScroll: true}" class="twrapper">
+        <div v-bar="vBarOptions" class="twrapper">
           <div>
             <ul v-if="hasTeams">
               <li v-for="team in teams.items" :key="team._id">
