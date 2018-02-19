@@ -4,12 +4,12 @@
   </div>
 
   <div class="col-xs-4">
-    <h4>Status</h4>
-    <button class="btn btn-success" :disabled="status == 'enabled'" @click="enable('enabled')">
+    <h4>Status ({{status}})</h4>
+    <button class="btn btn-success" v-if="status !== 'enabled'" @click="enable('enabled')">
       <i class="fa fa-toggle-on"></i>
       Enabled
     </button>
-    <button class="btn btn-danger" :disabled="status == 'disabled'" @click="enable('disabled')">
+    <button class="btn btn-danger" v-if="status !== 'disabled'" @click="enable('disabled')">
       <i class="fa fa-toggle-off"></i>
       Disabled
     </button>

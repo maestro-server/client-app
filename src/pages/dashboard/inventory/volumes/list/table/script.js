@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       entity: new Volumes(),
-      columns: ['name', 'size', 'iops', 'volume_id', 'datacenter', 'status', 'actions'],
+      columns: ['name', 'size', 'iops', 'volume_id', 'datacenter', 'status', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'vpc_id', 'family'],
       }

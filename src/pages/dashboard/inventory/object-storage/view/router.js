@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'object.single',
+  name: 'object-storage.single',
   path: 'single/:id',
   component: comp
 }

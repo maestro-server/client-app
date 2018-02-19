@@ -30,10 +30,11 @@ export default {
   methods: {
     afterShow () {
       this.text.title =  this.create ? 'Create new Report' : `Edit ${this.model.name} reports`
+      this.changeTab(this.tabShow)
     },
 
     setupModel () {
-      this.model.name = `${_.get(this, 'model.report')} ${_.get(this, 'model.component')} ${new Date().toLocaleString("en-US")}`
+      this.model.name = `${_.get(this, 'model.report', '-')} ${_.get(this, 'model.component', '-')} ${new Date().toLocaleString("en-US")}`
       this.model.status = 'process'
     },
 
@@ -55,5 +56,4 @@ export default {
         .create(this.finishJob, this.model)
     }
   }
-
 }

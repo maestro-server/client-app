@@ -4,7 +4,7 @@ import list from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'brokers',
+  path: 'broker',
   component: comp,
   children: [
     list,

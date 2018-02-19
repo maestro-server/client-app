@@ -2,7 +2,7 @@
   <div class="col-sm-3 col-xs-6">
     <bs-list>
       <li class="list-group-item" v-for="app in apps">
-        <router-link :to="{name: 'applications.single', params: { id: app._id }}">
+        <router-link :to="{name: 'application.single', params: { id: app._id }}">
           <b>{{app.name}}</b>
           <span v-if='app.environment'>({{app.environment}})</span>
         </router-link>

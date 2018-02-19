@@ -56,6 +56,25 @@
       </div>
     </div>
 
+    <hr>
+
+    <div>
+      <h5>Tips</h5>
+      <table class="table table-responsive table-striped">
+        <tbody>
+        <tr>
+          <th>Status</th>
+          <td>Used in pontual situation to sign some state. (EX: active, stopped servers)</td>
+        </tr>
+        <tr>
+          <th>Active</th>
+          <td>Boolean value used when delete item (in reports you can recover deleted items)</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
   </div>
 
 </template>
@@ -81,8 +100,8 @@
       return {
         submit: {
           report: "general",
-          component: null,
-          filters: [],
+          component: 'Servers',
+          filters: [{ "field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
         },
         options: {
           tables: false
@@ -92,7 +111,7 @@
 
     computed: {
       tables() {
-        if (this.options.tables) {
+        if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
           return this.options.tables.map(data => data.name)
         }
       }

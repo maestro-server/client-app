@@ -8,6 +8,8 @@ import Me from 'factories/me'
 import store from 'src/store'
 import tenantMananger from 'services/tenantManager'
 
+import { EventBus } from 'src/resources/bus/bus-general.js';
+
 export default {
   data: function () {
     return {
@@ -121,5 +123,11 @@ export default {
 
     const tn = this.storageTeam || this.users
     this.updateViewTenant(tn)
+
+    EventBus.$on('update-teams', this.fetchData);
+  },
+
+  destroyed() {
+    EventBus.$off('update-teams', this.fetchData)
   }
 }

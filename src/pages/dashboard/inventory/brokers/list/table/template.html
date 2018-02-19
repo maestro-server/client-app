@@ -1,6 +1,6 @@
 <div>
   <bs-table-server
-    name="brokers-list"
+    name="broker-list"
     :url="url"
     :columns="columns"
     :options="options"
@@ -20,7 +20,7 @@
     </template>
     <template slot="actions" slot-scope="props">
       <div class="min-table">
-        <router-link :to="{name: 'brokers.single', params: { id: props.row._id }}"
+        <router-link :to="{name: 'broker.single', params: { id: props.row._id }}"
                      class="fa fa-eye btn btn-primary btn-xs"></router-link>
         <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>

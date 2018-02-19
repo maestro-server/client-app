@@ -19,16 +19,16 @@ export default {
     return {
       model: {},
       entity: Reports,
-      columns: ['active', 'name', 'hostname', 'created_at', 'status', '-'],
       options: {
-        sortable: [],
-        filterable: false,
+        listColumns: {
+          status: [{text: 'Active'}, {text: 'Avaliable'}, {text: 'Stopped'}]
+        },
+        filterable: ['status', 'name', 'hostname', 'environment', 'ipv4_private', 'ipv4_public', 'family', 'servers', 'role', 'language', 'deploy', 'contacts', 'provider', '_id', 'region', 'zone', 'type', 'instance', 'instance_id', 'subnet_id', 'tags'],
         headings: {
-          updated_at: 'Updated At',
           created_at: 'Created At'
         },
-        perPage: 200,
-        perPageValues: [200, 400, 600, 800, 1000, 1500, 2000, 3000]
+        perPage: 50,
+        perPageValues: [50, 100, 200, 400, 800, 1600]
       }
     }
   },
@@ -36,6 +36,13 @@ export default {
   computed: {
     MSingle() {
       return this.$refs.modal_single
+    },
+
+    columns() {
+      if (_.has(this.model, '_id')) {
+        this.model.columns.unshift('-')
+        return this.model.columns || ['-', 'active', 'name', 'hostname', 'created_at', 'status']
+      }
     },
 
     url() {
@@ -57,6 +64,12 @@ export default {
     singleE: function (data) {
       this.MSingle
         .show(data)
+    },
+
+    tinyFilter(data) {
+      if (_.has(this, 'options.filterable'))
+        return _.pick(data, this.options.filterable)
     }
   }
 }
+

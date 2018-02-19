@@ -24,7 +24,6 @@ Vue.use(Notifications)
 Vue.use(VueClipboard)
 Vue.use(Vuebar);
 
-
 new Vue({
   store,
   el: '#app',

@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'databases.single',
+  name: 'database.single',
   path: 'single/:id',
   component: comp
 }

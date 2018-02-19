@@ -25,6 +25,14 @@ export default {
       return this.typ === 'string'
     },
 
+    isBoolean() {
+      return this.typ === 'boolean'
+    },
+
+    isSelect() {
+      return this.typ === 'select'
+    },
+
     isDate() {
       return this.typ === 'date'
     }
@@ -38,6 +46,7 @@ export default {
       comparer: null,
       subfield: null,
       subfilter: null,
+      opts: null,
       options: {
         filters: [],
         fields: [],
@@ -45,6 +54,7 @@ export default {
         cdate: ['after', 'same', 'before'],
         cstring: ['equal', 'contain', 'not contain'],
         cnumber: ['greater', 'equal', 'less'],
+        cequal: ['equal'],
         subfield: []
       }
     }
@@ -71,6 +81,7 @@ export default {
           const field = result[1]
 
           this.typ = typ
+          this.field = field
 
           if (typ === 'object') {
             return this.setupObjectFilter(field, val)
@@ -88,24 +99,32 @@ export default {
             return this.setupNumberFilter(field, val)
           }
 
+          if (typ === 'boolean') {
+            return this.setupBooleanFilter(field, val)
+          }
+
+          if (typ === 'select') {
+            return this.setupSelectFilter(field, val)
+          }
+
           this.options.comparer = this.options.cstring
           this.comparer = this.options.cstring[0]
         }
       }
     },
 
-    setupArrOrObject(field) {
+    getInternalField(field, len = '[0].leaf') {
       this.comparer = this.options.comparer[1]
 
       const items = this.options.filters.filters.filter(
         data => data.key === field
       )
 
-      return _.get(items, '[0].leaf')
+      return _.get(items, len)
     },
 
     setupArrFilter(field) {
-      const item = this.setupArrOrObject(field)
+      const item = this.getInternalField(field)
       const type = _.get(item, 'type')
 
       if (type === 'object') {
@@ -118,7 +137,7 @@ export default {
     },
 
     setupObjectFilter(field) {
-      const item = this.setupArrOrObject(field)
+      const item = this.getInternalField(field)
       this.options.subfield = item
     },
 
@@ -130,6 +149,18 @@ export default {
     setupNumberFilter() {
       this.options.comparer = this.options.cnumber
       this.comparer = this.options.cnumber[1]
+    },
+
+    setupSelectFilter(field) {
+      const item = this.getInternalField(field, '[0].opts')
+      this.opts = item
+      this.options.comparer = this.options.cequal
+      this.comparer = this.options.cequal[0]
+    },
+
+    setupBooleanFilter() {
+      this.options.comparer = this.options.cequal
+      this.comparer = this.options.cequal[0]
     },
 
     delItem(index) {

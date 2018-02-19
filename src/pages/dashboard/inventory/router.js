@@ -33,6 +33,7 @@ import network from './network/router'
 import volumes from './volumes/router'
 import snapshot from './snapshot/router'
 import flavors from './flavors/router'
+import serviceMesh from './service-mesh/router'
 
 export default {
   name: 'inventory',
@@ -56,6 +57,7 @@ export default {
     cdn,
     objectStorage,
     containersOrchestration,
+    serviceMesh,
     monitor,
     logs,
     smtp,

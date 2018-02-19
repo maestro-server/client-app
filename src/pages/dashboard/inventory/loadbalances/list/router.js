@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'loadbalances',
+  name: 'loadbalance',
   path: '/',
   component: comp
 }

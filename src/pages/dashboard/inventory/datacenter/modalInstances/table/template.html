@@ -8,12 +8,12 @@
   >
 
     <template slot="hostname" slot-scope="props">
-      <router-link :to="{name: 'servers.single', params: { id: props.row._id }}">{{props.row.hostname}}</router-link>
+      <a href="#" @click.prevent.stop="linkSingle(props.row._id)">{{props.row.hostname}}</a>
     </template>
     <template slot="actions" slot-scope="props">
       <div>
-        <router-link :to="{name: 'servers.single', params: { id: props.row._id }}"
-                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
+        <a @click.stop="linkSingle(props.row._id)"
+                     class="fa fa-eye btn btn-primary btn-xs"></a>
       </div>
     </template>
   </bs-table-server>

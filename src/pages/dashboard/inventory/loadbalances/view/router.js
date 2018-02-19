@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'loadbalances.single',
+  name: 'loadbalance.single',
   path: 'single/:id',
   component: comp
 }

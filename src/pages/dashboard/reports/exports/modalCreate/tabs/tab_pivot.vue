@@ -19,7 +19,6 @@
       </div>
 
 
-
       <div>
         <div class="col-xs-4 title-padding mt10" :class="{'bg-primary': item.enabled, 'bg-info': !item.enabled}">
           <h5 class="text-center">
@@ -75,7 +74,8 @@
 
         <div class="col-xs-12">
           <hr>
-          <p class="text-center">You can add multiple filter in the same field. Maestro will use AND in multiple filters.</p>
+          <p class="text-center">You can add multiple filter in the same field. Maestro will use AND in multiple
+            filters.</p>
         </div>
 
 
@@ -120,25 +120,25 @@
               title: 'Clients',
               icon: 'fa-user-o',
               enabled: true,
-              filters: []
+              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
             },
             systems: {
               title: 'System',
               icon: 'fa-briefcase',
-              enabled: false,
-              filters: []
+              enabled: true,
+              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
             },
             applications: {
               title: 'Applications',
               icon: 'fa-code',
-              enabled: false,
-              filters: []
+              enabled: true,
+              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
             },
             servers: {
               title: 'Servers',
               icon: 'fa-server',
-              enabled: false,
-              filters: [],
+              enabled: true,
+              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
               arrowhidden: true
             }
           }
@@ -161,16 +161,18 @@
       },
 
       sModal(table) {
-        this.entity = table.toLowerCase()
+        if (_.has(this, 'options.tables')) {
+          this.entity = table.toLowerCase()
 
-        const items = this.options.tables.filter(data => table === data.name)
-        this.$refs.compfilters.updateFilters(_.head(items))
+          const items = this.options.tables.filter(data => table === data.name)
+          this.$refs.compfilters.updateFilters(_.head(items))
 
-        this.showModal = !this.showModal
+          this.showModal = !this.showModal
+        }
       },
 
       addFilter(picks) {
-        if(picks) {
+        if (picks) {
           this.submit.filters[this.entity].filters.push(picks)
         }
 
@@ -178,7 +180,7 @@
       },
 
       delItem(index) {
-        delete this.submit.filters[this.entity].filters.splice( index, 1 )
+        delete this.submit.filters[this.entity].filters.splice(index, 1)
 
         this.updateEvent()
       },

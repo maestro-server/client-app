@@ -33,7 +33,7 @@
 
         <h4 class="white ml10 mt20" v-if="hasTeams">Teams</h4>
 
-        <div v-bar class="twrapper">
+        <div v-bar="{preventParentScroll: true}" class="twrapper">
           <div>
             <ul v-if="hasTeams">
               <li v-for="team in teams.items" :key="team._id">
@@ -41,7 +41,7 @@
                   <span class="c-1">
                     <img :src="img_default(team)" class="img-circle img-responsive-center square-avatar">
                   </span>
-                      <span class="c-2">
+                  <span class="c-2">
                     {{team.name}}
                   </span>
                 </a>
@@ -49,16 +49,19 @@
             </ul>
 
             <div class="col-xs-12 text-right" @click="toggle('all')">
-              <router-link :to="{name: 'teams'}" class="white"><i class="fa fa-plus-circle mt10"></i> New Team</router-link>
+              <router-link :to="{name: 'teams'}" class="white"><i class="fa fa-plus-circle mt10"></i> New Team
+              </router-link>
             </div>
 
           </div>
+          <!-- dragger will be automatically added here -->
         </div>
+
+
       </div>
     </transition>
 
   </div>
-
 
 
   <div class="wrapper-maestro-menu wrapper-settings pull-left">
@@ -69,7 +72,8 @@
           <i class="fa fa-cog pull-right" aria-hidden="true"></i>
         </span>
         <span class="c-2">
-          <i class="fa pull-right" :class="{'fa-chevron-up': showDrop.settings, 'fa-chevron-down': !showDrop.settings}" aria-hidden="true"></i>
+          <i class="fa pull-right" :class="{'fa-chevron-up': showDrop.settings, 'fa-chevron-down': !showDrop.settings}"
+             aria-hidden="true"></i>
         </span>
       </a>
     </div>

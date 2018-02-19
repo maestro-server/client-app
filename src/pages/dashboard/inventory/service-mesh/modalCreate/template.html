@@ -1,0 +1,106 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= General ================= -->
+        <!-- ============================================== -->
+        <tab header="General">
+          <div class="row">
+
+            <div class="col-xs-12">
+
+              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
+                        v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+
+              <div class="row">
+                <div class="col-xs-3 text-right mt5">
+                  <label>Third Party?</label>
+                </div>
+                <div class="col-xs-9">
+                  <button-group v-model="own" type="primary">
+                    <bs-radio :selected-value="1">Yes</bs-radio>
+                    <bs-radio :selected-value="0">No</bs-radio>
+                  </button-group>
+                </div>
+              </div>
+
+              <div class="text-right mt5">
+                <a class="btn btn-xs" :class="changeType" v-html="labelBtnChangeProvider" @click.stop="changeProvider"></a>
+              </div>
+
+              <template v-if="!other">
+                <bs-select form-type="horizontal" :options="providers" v-model="data.provider" name="provider"
+                           :label="labelPService" v-validate.initial="'required'" class="mt5"
+                           :error="makeError('provider')"
+                ></bs-select>
+              </template>
+
+              <template v-if="other">
+                <bs-input form-type="horizontal" name="provider" :label="labelPService"
+                          v-model="data.provider"  class="mt5" v-validate.initial="'required'" :error="makeError('provider')"
+                ></bs-input>
+              </template>
+
+              <hr>
+
+              <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment"
+                         name="environment" label="Environment*" v-validate.initial="'required'"
+                         :error="makeError('environment')"></bs-select>
+
+              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
+                        v-model="data.description"></bs-input>
+            </div>
+          </div>
+
+        </tab>
+
+        <!-- ================= Spec ================= -->
+        <!-- ============================================== -->
+        <tab header="Spec">
+          <tab-role @update="val => data.role = val" ref="tab_role" :mapper="mapper"></tab-role>
+        </tab>
+
+        <!-- ================= Datacenters ================= -->
+        <!-- ============================================== -->
+        <tab header="Datacenters" :disabled="own !== 1">
+          <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
+        </tab>
+
+        <!-- ================= Servers ================= -->
+        <!-- ============================================== -->
+        <tab header="Servers" :disabled="own == 1">
+          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Container">
+            <template slot="label">
+              List all servers behond the cluster, using the form below to search in servers.
+            </template>
+          </tab-servers>
+        </tab>
+
+        <!-- ================= System ================= -->
+        <!-- ============================================== -->
+        <tab header="System">
+          <tab-system @update="val => data.system = val" ref="tab_system"></tab-system>
+        </tab>
+
+        <!-- ================= Tags ================= -->
+        <!-- ============================================== -->
+        <tab header="Tags">
+          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
+        </tab>
+      </tabs>
+
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

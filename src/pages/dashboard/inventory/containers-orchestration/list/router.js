@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'containers-orchestration',
+  name: 'container-orchestration',
   path: '/',
   component: comp
 }

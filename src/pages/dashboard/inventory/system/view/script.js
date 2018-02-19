@@ -47,6 +47,10 @@ export default {
             this.$set(this, 'list_apps', _.get(e, 'data.items', []))
           }, {"system._id": this.id})
       }
+    },
+
+    slugApps(str) {
+      return _.kebabCase(str)
     }
   },
 

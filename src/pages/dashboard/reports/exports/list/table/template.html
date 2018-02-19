@@ -8,7 +8,6 @@
   >
 
     <template slot="name" slot-scope="props">
-      <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
       <router-link :to="{name: 'reports.single.table', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
 
@@ -16,7 +15,8 @@
 
       <span class="btn btn-success btn-xs" v-if="props.row.status == 'finished'"><i class="fa fa-check-circle-o"></i></span>
       <span class="btn btn-danger btn-xs" v-if="props.row.status == 'error'"><i class="fa fa-times-circle-o"></i></span>
-      <span class="btn btn-warning btn-xs" v-if="props.row.status == 'process'"><i class="fa fa-circle-o"></i></span>
+      <span class="btn btn-info btn-xs" v-if="props.row.status == 'process'"><i class="fa fa-circle-o"></i></span>
+      <span class="btn btn-warning btn-xs" v-if="props.row.status == 'warning'"><i class="fa fa-clock-o"></i></span>
 
       {{props.row.status}}
 

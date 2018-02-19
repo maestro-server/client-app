@@ -10,7 +10,7 @@
   <div class="col-xs-6">
     <creater-config-list label="Application" :basket="list_apps" @edit="editM" icons="fa-code">
       <template slot="view" slot-scope="props">
-        <router-link :to="{name: 'applications.single', params: { id: props.item._id }}">
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
           <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
         </router-link>
 

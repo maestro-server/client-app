@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'databases',
+  name: 'database',
   path: '/',
   component: comp
 }

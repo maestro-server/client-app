@@ -1,11 +1,13 @@
 <div>
-  <modal v-if="showModal" :title="text.title" effect="fade" v-model="showModal" @closed="closed">
-    <p>List of all servers.</p>
+  <modal :title="text.title" effect="fade" v-model="showModal" @closed="closed">
+    <template v-if="showModal">
+      <p>List of all servers.</p>
 
       <sv-table ref="svTable" :dc_id="model._id"></sv-table>
 
       <div slot="modal-footer" class="modal-footer">
         <button type="button" class="btn btn-default" @click="closed">Close</button>
       </div>
+    </template>
   </modal>
 </div>

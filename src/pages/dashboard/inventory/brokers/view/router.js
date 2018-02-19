@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'brokers.single',
+  name: 'broker.single',
   path: 'single/:id',
   component: comp
 }

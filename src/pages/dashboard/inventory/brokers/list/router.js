@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'brokers',
+  name: 'broker',
   path: '/',
   component: comp
 }

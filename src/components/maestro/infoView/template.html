@@ -4,10 +4,16 @@
   <table class="table table-striped">
     <tbody>
 
-    <tr v-for="item, key in data">
+    <tr v-for="item, key in data" v-if="!isString(data)">
       <th width="30%" class="text-capitalize">{{key}}:</th>
       <td>
         <tree-view :items="item"></tree-view>
+      </td>
+    </tr>
+
+    <tr v-if="isString(data)">
+      <td>
+        {{data}}
       </td>
     </tr>
     </tbody>

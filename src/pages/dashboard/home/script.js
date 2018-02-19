@@ -34,14 +34,15 @@ export default {
 
   data () {
     return {
+      limit: 300,
       result: {servers:[], applications:[], datacenters: [], system: []},
       load:{system: false, applications: false, datacenters: false, servers:false},
       links: [
         {route: {name: 'servers'}, name: 'Server list', icon: 'fa-server'},
-        {route: {name: 'applications'}, name: 'Apps list', icon: 'fa-code'},
-        {route: {name: 'loadbalances'}, name: 'Loadbalances list', icon: 'fa-tasks'},
-        {route: {name: 'databases'}, name: 'Databases list', icon: 'icon-database'},
-        {route: {name: 'brokers'}, name: 'Brokers/Streams list', icon: 'fa-magic'},
+        {route: {name: 'application'}, name: 'Apps list', icon: 'fa-code'},
+        {route: {name: 'loadbalance'}, name: 'Loadbalances list', icon: 'fa-tasks'},
+        {route: {name: 'database'}, name: 'Databases list', icon: 'icon-database'},
+        {route: {name: 'broker'}, name: 'Brokers/Streams list', icon: 'fa-magic'},
         {route: {name: 'ci-cd'}, name: 'CI/CD list', icon: 'fa-briefcase'},
         {route: {name: 'monitor'}, name: 'Monitoring list', icon: 'fa-bullhorn'},
         {route: {name: 'system'}, name: 'System list', icon: 'fa-briefcase'}
@@ -69,7 +70,7 @@ export default {
 
     fetchData (entity, force=true) {
       FectherEntity(entity)({force})
-        .find(e=>this.makeChart(e, entity))
+        .find(e=>this.makeChart(e, entity), {limit: this.limit})
     },
   },
 

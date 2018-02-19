@@ -27,7 +27,7 @@
 
 
       <h3>Results</h3>
-      <router-link :to="{name: 'reports.single.table', params: { id: model._id }}"
+      <router-link v-if="model._id" :to="{name: 'reports.single.table', params: { id: model._id }}"
                    class="btn btn-primary btn" :disabled="model.status != 'finished'" >
         <i class="fa fa-area-chart"></i> Report Results
       </router-link>

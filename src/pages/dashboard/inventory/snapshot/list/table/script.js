@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       entity: new Snapshots(),
-      columns: ['name', 'datacenter', 'volume_id', 'volume_size', 'status', 'snapshot_id', 'progress', 'actions'],
+      columns: ['name', 'datacenter', 'volume_id', 'volume_size', 'status', 'snapshot_id', 'progress', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'vpc_id', 'family'],
       }
