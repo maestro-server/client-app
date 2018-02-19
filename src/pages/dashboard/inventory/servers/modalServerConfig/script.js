@@ -48,7 +48,7 @@ export default {
 
   methods: {
     afterShow() {
-      this.text.title = `Host Config \"${this.model.name}\"`
+      this.text.title = `Host Config "${this.model.name}"`
     },
 
     createLoad () {

@@ -148,7 +148,6 @@
     top: 3px;
     transition: -webkit-transform .1s ease;
     transition: transform .1s ease;
-    transition: transform .1s ease, -webkit-transform .1s ease;
     -webkit-transition: -webkit-transform .1s ease;
   }
 

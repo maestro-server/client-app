@@ -71,7 +71,7 @@ export default {
 
   methods: {
     afterShow() {
-      this.text.title = `DB Config \"${this.model.hostname}\"`
+      this.text.title = `DB Config "${this.model.hostname}"`
     },
 
     editLoad () {

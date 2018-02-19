@@ -2,9 +2,6 @@
 import _ from 'lodash'
 
 import Applications from 'factories/applications'
-import Servers from 'factories/servers'
-import FectherEntity from 'services/fetchEntity'
-
 import ViewSingle from 'mixins/view-single'
 
 export default {
