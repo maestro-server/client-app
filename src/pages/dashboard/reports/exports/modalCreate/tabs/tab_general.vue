@@ -119,10 +119,12 @@
 
     methods: {
       updateFilters() {
-        const items = this.options.tables.filter(data => this.submit.component === data.name)
-        this.$refs.compfilters.updateFilters(_.head(items))
+        if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
+          const items = this.options.tables.filter(data => this.submit.component === data.name)
+          this.$refs.compfilters.updateFilters(_.head(items))
 
-        this.updateEvent()
+          this.updateEvent()
+        }
       },
 
       addFilter(picks) {
