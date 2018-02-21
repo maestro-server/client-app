@@ -13,7 +13,7 @@ jobs:
       if: branch != master
       script:
         - npm run build
-        - docker build -f Dockerfile -t client-maestro .
+        - docker build -f Dockerfile -t $REPO .
         - docker login -u $DOCKER_USER -p $DOCKER_PASS
         - docker tag $REPO $DOCKER_USER/$REPO:$TRAVIS_BRANCH
         - docker push $DOCKER_USER/$REPO:$TRAVIS_BRANCH
