@@ -6,10 +6,8 @@
       <h3 class="col-xs-3">Quick Links</h3>
 
       <template v-if="load.servers && result.servers.items.length > 0">
-        <most-multi :results="result.servers.items" fielder="services" :ptitle="`Most services installed (last ${this.limit} server)`"></most-multi>
-
+        <most-multi :results="result.servers.items" fielder="services" :ptitle="`Most services installed (last ${this.limit} server)`" pfail="No service registered inside of yours servers"></most-multi>
         <server-widget :servers="getLast('servers')"></server-widget>
-
         <server-widget :servers="getLast('servers', 5)"></server-widget>
       </template>
 

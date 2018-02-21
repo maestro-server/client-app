@@ -1,6 +1,8 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <doughnut-chart :data="getMost" :options="options"></doughnut-chart>
+    <doughnut-chart :data="getMost" :options="options"  v-if="getMost.data"></doughnut-chart>
+
+    <well>{{pfail}}</well>
   </div>
 </template>
 
@@ -16,7 +18,8 @@
     props: {
       results: {default: () => []},
       fielder: {},
-      ptitle: {}
+      ptitle: {},
+      pfail: {default: "Empty data"}
     },
 
     components: {
