@@ -1,10 +1,11 @@
 # docker.nginx
-FROM nginx:alpine
+FROM nginx
 MAINTAINER Felipe Signorini <felipe.signorini@maestroserver.io>
 
 EXPOSE 80 443
 
-RUN apk add --no-cache tini
+ENV TINI_VERSION v0.10.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY ./dist /var/www
