@@ -2,5 +2,5 @@
 export default {
   path: '/',
   name: 'Home',
-  redirect: '/dashboard'
+  redirect: '/auth/login'
 }
