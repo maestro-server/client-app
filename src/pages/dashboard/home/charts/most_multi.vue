@@ -1,8 +1,9 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <doughnut-chart :data="getMost" :options="options"  v-if="getMost.data"></doughnut-chart>
+    <doughnut-chart :data="getMost" :options="options"  v-if="hasThis"></doughnut-chart>
 
-    <well>{{pfail}}</well>
+    {{hasThis}}
+    <well v-if="!hasThis">{{pfail}}</well>
   </div>
 </template>
 
@@ -42,6 +43,9 @@
             _.get(calculate, 'info')
           )
         }
+      },
+      hasThis() {
+        return _.has(this.getMost, 'datasets[0].data') && !_.isEmpty(this.getMost.datasets[0].data)
       }
     },
 
