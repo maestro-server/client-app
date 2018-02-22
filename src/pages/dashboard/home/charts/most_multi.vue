@@ -1,8 +1,7 @@
 <template>
   <div class="col-sm-3 col-xs-6">
-    <doughnut-chart :data="getMost" :options="options"  v-if="getMost.data"></doughnut-chart>
-
-    <well>{{pfail}}</well>
+    <doughnut-chart :data="getMost" :options="options"  v-if="hasThis"></doughnut-chart>
+    <well v-if="!hasThis">{{pfail}}</well>
   </div>
 </template>
 
