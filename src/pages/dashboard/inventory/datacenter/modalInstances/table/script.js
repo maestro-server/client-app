@@ -14,7 +14,7 @@ export default {
   data: function () {
     return {
       urlServers: `${new Datacenters().getUrl()}/${this.dc_id}/servers/`,
-      columns: ['hostname', 'ipv4_private', 'os', 'environment', 'role', 'actions'],
+      columns: ['hostname', 'ipv4_private', 'environment', 'actions'],
       options: {
         filterable: false,
         headings: {
