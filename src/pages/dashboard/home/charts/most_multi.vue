@@ -41,6 +41,9 @@
             _.get(calculate, 'info')
           )
         }
+      },
+      hasThis() {
+        return _.has(this.getMost, 'datasets[0].data') && !_.isEmpty(this.getMost.datasets[0].data)
       }
     },
 
