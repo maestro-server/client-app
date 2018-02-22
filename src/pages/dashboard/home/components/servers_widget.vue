@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-3 col-xs-6">
     <bs-list>
-      <li class="list-group-item" v-for="server in servers">
+      <li class="list-group-item word-break" v-for="server in servers" :key>
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">
           <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
           <span v-if="server.datacenters"> - {{server.datacenters.name}}</span>
@@ -25,3 +25,10 @@
     }
   }
 </script>
+
+<style lang="scss">
+.word-break {
+  word-wrap: break-word;
+}
+</style>
+

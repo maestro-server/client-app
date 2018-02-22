@@ -1,5 +1,5 @@
 # docker.nginx
-FROM nginx:alpine
+FROM nginx:stable-alpine
 MAINTAINER Felipe Signorini <felipe.signorini@maestroserver.io>
 
 EXPOSE 80 443

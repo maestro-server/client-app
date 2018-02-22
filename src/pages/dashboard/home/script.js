@@ -74,7 +74,7 @@ export default {
     },
   },
 
-  created () {
+  mounted () {
     this.setPage([
       'Overview',
       'A simple application to manage an IT operations team servers, including systems, applications and services.',

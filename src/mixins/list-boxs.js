@@ -28,7 +28,7 @@ export default {
       return app + _.kebabCase(str.toLowerCase())
     },
 
-    fetchData (force=false) {
+    fetchData (force=true) {
       FectherEntity(this.entity)({force})
         .find((e) => this.result = e.data)
     },
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     this.fetchData()
   }
 }
