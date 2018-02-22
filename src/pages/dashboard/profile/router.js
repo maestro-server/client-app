@@ -1,6 +1,5 @@
 'use strict'
 import comp from './settings'
-import billing from './billing/router'
 import accdelete from './delete/router'
 import profile from './settings/router'
 
@@ -10,7 +9,6 @@ export default {
   redirect: 'profile/settings',
   component: comp,
   children: [
-    billing,
     accdelete,
     profile
   ]
