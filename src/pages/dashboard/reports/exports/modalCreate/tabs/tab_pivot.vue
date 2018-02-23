@@ -123,7 +123,7 @@
               filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
             },
             systems: {
-              title: 'System',
+              title: 'Systems',
               icon: 'fa-briefcase',
               enabled: true,
               filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
