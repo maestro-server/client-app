@@ -10,12 +10,12 @@ class Uploader {
 
   constructor(ref = null) {
     this.ref = ref
-    this.callback = () => {
-    }
+    this.callback = () => {}
+    this.callbackErr = null
   }
 
-  setFinishUpload(callback) {
-    this.callback = callback
+  setFinishUpload(callback, method='callback') {
+    this[method] = callback
     return this
   }
 
@@ -27,21 +27,22 @@ class Uploader {
         this.uploadFile(file, result.data)
       })
       .catch(() => {
-        Uploader.uploadError("We accept only jpg or png")
+        Uploader.uploadError("We accept only jpg or png", this.callbackErr)
       });
   }
 
   uploadFile(file, resp) {
-    axios.put(resp.signedRequest, file, {headers: {"Content-Type": file.type}})
+    const {signedRequest, headers} = resp;
+    axios.put(signedRequest, file, {headers})
       .then(() => {
         this.callback(file, resp)
       })
       .catch(() => {
-        Uploader.uploadError('Could not upload file.')
+        Uploader.uploadError('Could not upload file.', this.callbackErr)
       });
   }
 
-  static uploadError(title) {
+  static uploadError(title, cb = null) {
     const data = {
       show: true,
       title,
@@ -50,6 +51,7 @@ class Uploader {
     }
 
     store.dispatch('callAlert', {...data})
+    if (cb) cb()
   }
 
 }

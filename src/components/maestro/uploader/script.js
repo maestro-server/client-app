@@ -41,7 +41,7 @@ export default {
     upload (files) {
       const file = files[0]
       if (file == null) {
-        Uploader.uploadError('No file selected.')
+        Uploader.uploadError('No file selected.', this.finishWithError)
         return;
       }
 
@@ -51,12 +51,13 @@ export default {
 
         new Uploader(this.refs)
           .setFinishUpload(this.finishCallBack)
+          .setFinishUpload(this.finishWithError, 'callbackErr')
           .getSignedRequest(file)
         return;
       }
 
       const text = check.error.reduce((a, b) => `${a}, ${b}`)
-      Uploader.uploadError(text)
+      Uploader.uploadError(text, this.finishWithError)
     },
 
     finishCallBack(data, file) {
@@ -67,6 +68,10 @@ export default {
 
       this.$nextTick()
       this.$emit('input', this.file)
+    },
+
+    finishWithError() {
+      this.spinner = false
     }
   }
 }
