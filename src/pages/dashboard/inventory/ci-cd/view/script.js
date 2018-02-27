@@ -14,7 +14,8 @@ export default {
       label: 'Brokers',
       model: {tags: [], servers:[]},
       list_servers: [],
-      list_targets: []
+      list_targets: [],
+      rollbackRoute: 'ci-cd'
     }
   },
 

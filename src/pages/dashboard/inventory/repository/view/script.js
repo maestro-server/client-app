@@ -12,7 +12,8 @@ export default {
       entity: Applications,
       label: 'Repository',
       model: {tags: [], servers:[]},
-      list_servers: []
+      list_servers: [],
+      rollbackRoute: 'repository'
     }
   },
 

@@ -11,7 +11,8 @@ export default {
       entity: Applications,
       label: 'NAS',
       model: {tags: [], servers:[]},
-      list_servers: []
+      list_servers: [],
+      rollbackRoute: 'nas'
     }
   },
 

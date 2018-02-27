@@ -13,7 +13,8 @@ export default {
       label: 'Monitor',
       model: {tags: [], servers:[], targets:[]},
       list_servers: [],
-      list_targets: []
+      list_targets: [],
+      rollbackRoute: 'monitor'
     }
   },
 

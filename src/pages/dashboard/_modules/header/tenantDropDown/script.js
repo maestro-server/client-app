@@ -7,7 +7,6 @@ import FectherEntity from 'services/fetchEntity'
 import Me from 'factories/me'
 import store from 'src/store'
 import tenantMananger from 'services/tenantManager'
-
 import { EventBus } from 'src/resources/bus/bus-general.js';
 
 export default {
@@ -105,6 +104,10 @@ export default {
       this.$set(this, 'users', e.data)
 
       this.changeTenant(e.data, 'users')
+    },
+  
+    updateProfile(data){
+      this.avatar = this.img_default(data)
     }
   },
 
@@ -126,6 +129,7 @@ export default {
     this.updateViewTenant(tn)
 
     EventBus.$on('update-teams', this.fetchData);
+    EventBus.$on('update-profile', this.updateProfile);
   },
 
   destroyed() {
