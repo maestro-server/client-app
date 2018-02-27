@@ -43,7 +43,6 @@ export default {
     del: function () {
       const call = this.rollbackRoute || this.entity.name.toLowerCase()
 
-      console.log(call)
       this.MDelete
         .onFinishCallBack(() => this.$router.push({name: call}))
         .show(this.model)
