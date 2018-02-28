@@ -12,7 +12,8 @@ export default {
       entity: Applications,
       label: 'Auth',
       model: {tags: [], servers:[]},
-      list_servers: []
+      list_servers: [],
+      rollbackRoute: 'auth'
     }
   },
 

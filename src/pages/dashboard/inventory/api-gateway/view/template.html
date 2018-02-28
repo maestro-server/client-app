@@ -22,7 +22,7 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
+    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server" v-if="!model.own">
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
