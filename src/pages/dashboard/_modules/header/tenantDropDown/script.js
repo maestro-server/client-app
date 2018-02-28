@@ -105,7 +105,7 @@ export default {
 
       this.changeTenant(e.data, 'users')
     },
-  
+
     updateProfile(data){
       this.avatar = this.img_default(data)
     }
