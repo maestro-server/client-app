@@ -2,6 +2,8 @@
 
 import Networks from 'factories/networks'
 import VueTable from 'mixins/vue-table'
+import Datacenters from 'factories/datacenters'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [VueTable],
@@ -9,9 +11,12 @@ export default {
   data: function () {
     return {
       entity: new Networks(),
-      columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'datacenter', 'status', 'actions'],
+      columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'datacenters', 'status', 'actions'],
       options: {
-        filterable: ['name', 'vpc_id', 'family'],
+        filterable: ['name', 'datacenters', 'vpc_id', 'family'],
+        listColumns: {
+          datacenters: []
+        },
         headings: {
           updated_at: 'Updated At',
           created_at: 'Created At'
@@ -24,9 +29,14 @@ export default {
     prepared(data) {
       return data.map((d) => {
         d.name = d.name || d.unique_id
-        d.datacenter = _.get(d, 'datacenters.name', '-')
+        d.datacenters = _.get(d, 'datacenters.name', '-')
         return d
       })
     }
+  },
+
+  created() {
+    FectherEntity(Datacenters)()
+      .find(this.fetchData('datacenters'))
   }
 }

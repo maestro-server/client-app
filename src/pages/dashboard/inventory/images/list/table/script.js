@@ -2,6 +2,8 @@
 
 import Images from 'factories/images'
 import VueTable from 'mixins/vue-table'
+import Datacenters from 'factories/datacenters'
+import FectherEntity from 'services/fetchEntity'
 
 export default {
   mixins: [VueTable],
@@ -11,7 +13,10 @@ export default {
       entity: new Images(),
       columns: ['name', 'datacenters', 'image_id', 'image_type', 'image_location', 'actions'],
       options: {
-        filterable: ['name'],
+        filterable: ['name', 'datacenters'],
+        listColumns: {
+          datacenters: []
+        },
         headings: {
           lcontact: 'Contacts',
           updated_at: 'Updated At',
@@ -31,5 +36,10 @@ export default {
         return d
       })
     }
+  },
+
+  created() {
+    FectherEntity(Datacenters)()
+      .find(this.fetchData('datacenters'))
   }
 }
