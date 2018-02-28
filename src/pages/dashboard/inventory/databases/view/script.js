@@ -18,7 +18,8 @@ export default {
       entity: Applications,
       label: 'DataBases',
       model: {tags: [], servers:[], modal: null},
-      list_servers: []
+      list_servers: [],
+      rollbackRoute: 'database'
     }
   },
 

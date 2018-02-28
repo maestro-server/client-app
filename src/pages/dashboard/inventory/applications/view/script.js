@@ -14,7 +14,8 @@ export default {
     return {
       entity: Applications,
       model: {tags: [], servers:[], deploy:[]},
-      list_servers: []
+      list_servers: [],
+      rollbackRoute: 'application'
     }
   },
 

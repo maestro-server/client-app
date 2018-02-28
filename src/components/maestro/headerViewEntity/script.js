@@ -3,7 +3,8 @@
 export default {
   props: {
     name: {type: String},
-    label: {type: String}
+    label: {type: String},
+    visibility: {type: Object, default: () => ({"create": true, "edit": true, "delete": true})}
   },
 
   methods: {

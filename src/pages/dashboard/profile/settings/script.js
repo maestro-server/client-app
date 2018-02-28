@@ -6,6 +6,7 @@ import Me from 'factories/me'
 import Auth from 'factories/auth'
 import FectherEntity from 'services/fetchEntity'
 
+import {EventBus} from 'src/resources/bus/bus-general.js';
 
 export default {
   data: function () {
@@ -34,7 +35,7 @@ export default {
       const data = _.omit(this.model, 'email')
 
       FectherEntity(Me)()
-        .patch(this.finishJob, data, '?')
+        .patch(() => EventBus.$emit('update-profile', this.model), data, '?')
     },
 
     updateEmail () {

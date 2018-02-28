@@ -13,7 +13,8 @@ export default {
       label: 'LoadBalance',
       model: {tags: [], servers:[], targets:[]},
       list_servers: [],
-      list_targets: []
+      list_targets: [],
+      rollbackRoute: 'loadbalance'
     }
   },
 
