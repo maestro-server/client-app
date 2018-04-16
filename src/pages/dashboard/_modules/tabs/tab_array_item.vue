@@ -3,7 +3,7 @@
 
     <template slot="forms">
       <form>
-        <bs-input form-type="horizontal" v-model="item" name="item" label="Name"
+        <bs-input :type="inputType" form-type="horizontal" v-model="item" name="item" :label="inputLabel"
                   v-validate.initial="'required'"></bs-input>
 
 
@@ -32,6 +32,8 @@
   export default {
     props: {
       label: {},
+      inputLabel: {type: String, default: "Name"},
+      inputType: {type: String, default: "text"},
       defaultValue: {default: () => []}
     },
 

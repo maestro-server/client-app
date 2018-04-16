@@ -4,33 +4,124 @@
 
     <form class="row form-horizontal" @submit.prevent="createSave">
 
-      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+        <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
 
-        <!-- ================= General ================= -->
-        <!-- ============================================== -->
-        <tab header="General">
-          <div class="row">
+          <!-- ================= General ================= -->
+          <!-- ============================================== -->
+          <tab header="General">
+            <div class="row">
+  
+              <div class="col-xs-12">
+  
+                <div class="row">
+                    <div class="col-xs-9 col-xs-offset-3">
+                        <button class="btn btn-sm btn-success" v-if="status" @click.prevent="status = false">
+                          <i class="fa fa-toggle-on"></i>
+                          Enabled
+                        </button>
+                        <button class="btn btn-sm btn-danger" v-if="!status" @click.prevent="status = true">
+                          <i class="fa fa-toggle-off"></i>
+                          Disabled
+                        </button>
+                    </div>
+                  </div>
+          
+                  <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
+                            v-validate.initial="'required'" :error="makeError('name')"></bs-input>
+          
+                  <hr>
 
-            <div class="col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-3 text-right mt5">
+                      <label>Module</label>
+                    </div>
+                    <div class="col-xs-9" v-if="options.period_type">
+                        <button-group v-model="module" type="primary" class="mt5" >
+                            <template v-for="mod in options.modules">
+                              <bs-radio  :selected-value="mod.name" class="btn-sm capitalize">{{mod.name}}</bs-radio>
+                            </template>
+                          </button-group>      
+                    </div>
+                  </div>
 
-              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
-                        v-validate.initial="'required'" :error="makeError('name')"></bs-input>
-
-              <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition" v-model="data.description"
-              ></bs-input>
-
+                  <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method" v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>    
+                  
+                  <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
+                  
+                  <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
+            
+                  <hr>
+          
+                  <div class="row">
+                    <div class="col-xs-3 text-right mt5">
+                      <label>Time</label>
+                    </div>
+                    <div class="col-xs-9" v-if="options.period_type">
+                        <button-group v-model="period_type" type="primary" class="mt5" >
+                          <template v-for="pitem in options.period_type">
+                            <bs-radio  :selected-value="pitem" class="btn-sm capitalize">{{pitem}}</bs-radio>
+                          </template>
+                        </button-group>       
+                    </div>
+                  </div>
+          
+                  <template v-if="period_type === 'interval'">
+                      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="every" label="Every*" v-model="interval.every"></bs-input>
+          
+                      <bs-select form-type="horizontal" :options="options.period" v-model="interval.period" name="Period" label="Period*"></bs-select>    
+                  </template>
+                  
+                  <div class="row mt20" v-if="period_type === 'crontab'">
+                      <div class="col-xs-3 text-right mt5">
+                        <label>Crontab</label>
+                      </div>
+                      <div class="col-xs-9" v-if="options.period_type">
+                          <div class="row">
+                            <div class="col-xs-4">
+                                <bs-input class="col-xs-12" name="minute" label="Minute" v-model="crontab.minute" help="*/3 | 1,2,10"></bs-input>
+                            </div>
+                            <div class="col-xs-4">
+                                <bs-input class="col-xs-12" name="hour" label="Hour" v-model="crontab.hour" help="*/3"></bs-input>
+                            </div>
+                            <div class="col-xs-4">
+                                <bs-input class="col-xs-12" name="day_of_week" label="Day of week" v-model="crontab.day_of_week" help="sunday or sun"></bs-input>
+                            </div>
+                            <div class="col-xs-6">
+                                <bs-input class="col-xs-12" name="day_of_month" label="Day of month" v-model="crontab.day_of_month" help="1-7,15-21"></bs-input>
+                            </div>
+                            <div class="col-xs-6">
+                                <bs-input class="col-xs-12" name="month_of_year" label="Month of year" v-model="crontab.month_of_year" help="'*/3'"></bs-input>
+                            </div>
+                          </div>
+                          <a href="#rules" class="text-right" @click.prevent="showCron = true">See all crontab rules</a>
+                          
+                      </div>
+                    </div>
+          
+              </div>
+  
             </div>
+  
+          </tab>
+  
+          <!-- ================= Args ================= -->
+          <!-- ============================================== -->
+          <tab header="Args">
+            <tab-tags @update="val => data.tags = val" ref="tab_tags" label="Create arg"></tab-tags>
+          </tab>
 
-          </div>
+          <!-- ================= Config ================= -->
+          <!-- ============================================== -->
+          <tab header="Configs">
+            <tab-role @update="val => data.kwargs = val" ref="tab_role" :mapper="mapper"></tab-role>
+          </tab>
 
-        </tab>
-
-        <!-- ================= Tags ================= -->
-        <!-- ============================================== -->
-        <tab header="Tags">
-          <tab-tags @update="val => data.tags = val" ref="tab_tags"></tab-tags>
-        </tab>
-      </tabs>
+          <!-- ================= Chains ================= -->
+          <!-- ============================================== -->
+          <tab header="Chains">
+            <tab-chains @update="val => data.chains = val" ref="tab_chains"></tab-chains>  
+          </tab>
+        </tabs>
 
     </form>
 
@@ -42,4 +133,9 @@
 
   </modal>
 
+  <modal title="Crontab rules" effect="fade" v-model="showCron" @closed="showCron = false" sub-modal>
+      <crontab-rules></crontab-rules>
+      <a href="http://celery.readthedocs.io/en/latest/reference/celery.schedules.html#celery.schedules.crontab" target="_blank">See celery.schedules.crontab for more documentation.</a>
+    <div slot="modal-footer" class="modal-footer"></div>
+  </modal>
 </div>

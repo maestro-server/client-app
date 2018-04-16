@@ -2,29 +2,61 @@
 
 import Modals from 'mixins/modals'
 import Scheduler from 'factories/scheduler'
+import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
+import CrontabRules from './tabs/crontab_rules.vue'
 
-import tabTags from './tab_tags'
+import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
+import tabChains from 'src/pages/dashboard/_modules/tabs/tab_chains'
+import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 
 export default {
   mixins: [Modals],
 
   components: {
+    CrontabRules,
     tabTags,
+    tabChains,
+    tabRole
+  },
+
+  computed: {
+    tab_tags() {return this.$refs.tab_tags},
+    tab_chains() {return this.$refs.tab_chains},
+    tab_role() {return this.$refs.tab_role}
   },
 
   data () {
     return {
-      data: {
-        name: null, description: null,
-        tags: []
+      status: true,
+      period_type: "interval",
+      module: 'webhook',
+      interval: {
+        period: 'minutes',
+        every: 30
       },
-      options: {}
+      crontab: {
+        minute: 30,
+        hour: '*',
+        day_of_week: '*',
+        day_of_month: '*',
+        month_of_year: '*'
+      },
+      data: {
+        name: null,
+        method: 'GET',
+        endpoint: null,
+        args: [],
+        kwargs: {},
+        chain: []
+      },
+      options: {},
+      showCron: false,
+      mapper: [
+        {name: 'max_retries', label: 'Max Retry', validate: 'min:1', help: 'Default is 3'},
+        {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
+      ]
     }
-  },
-
-  computed: {
-    tab_tags() {return this.$refs.tab_tags}
   },
 
   methods: {
@@ -35,12 +67,10 @@ export default {
     createLoad () {
       this.tabShow=0
       this.data = {}
-      this.tab_tags.reset()
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_tags.updaterEdit(this.model.tags)
     },
 
     setupModel () {
@@ -59,7 +89,15 @@ export default {
 
       FectherEntity(Scheduler)()
         .update(this.finishJob, this.model)
-    }
-  }
+    },
 
+    fetchData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'scheduler_options'})
+    }
+  },
+
+  created() {
+    this.fetchData()
+  }
 }
