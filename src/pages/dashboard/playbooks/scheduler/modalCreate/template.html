@@ -10,9 +10,9 @@
           <!-- ============================================== -->
           <tab header="General">
             <div class="row">
-  
+
               <div class="col-xs-12">
-  
+
                 <div class="row">
                     <div class="col-xs-9 col-xs-offset-3">
                         <button class="btn btn-sm btn-success" v-if="status" @click.prevent="status = false">
@@ -25,10 +25,10 @@
                         </button>
                     </div>
                   </div>
-          
+
                   <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                             v-validate.initial="'required'" :error="makeError('name')"></bs-input>
-          
+
                   <hr>
 
                   <div class="row">
@@ -40,18 +40,36 @@
                             <template v-for="mod in options.modules">
                               <bs-radio  :selected-value="mod.name" class="btn-sm capitalize">{{mod.name}}</bs-radio>
                             </template>
-                          </button-group>      
+                          </button-group>
                     </div>
                   </div>
 
-                  <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method" v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>    
-                  
-                  <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
-                  
-                  <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
-            
+                  <template v-if="module === 'webhook'">
+                    <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method" v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>
+
+                    <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
+
+                    <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
+                  </template>
+
+                  <template v-if="module === 'connections'">
+                    <typeahead label="Connection" placeholder="Select Connection"
+                               :async="URL"
+                               async-key="items"
+                               :onSearch="requestSearch"
+                               :template="template"
+                               form-type="horizontal"
+                               :on-hit="onHit"
+                               class="mt20"
+                               :headers="headers"
+                    ></typeahead>
+
+                    <bs-select form-type="horizontal" :options="getOptions()" v-model="modules.connections.task" name="task" label="Task*"></bs-select>
+
+                  </template>
+
                   <hr>
-          
+
                   <div class="row">
                     <div class="col-xs-3 text-right mt5">
                       <label>Time</label>
@@ -61,16 +79,16 @@
                           <template v-for="pitem in options.period_type">
                             <bs-radio  :selected-value="pitem" class="btn-sm capitalize">{{pitem}}</bs-radio>
                           </template>
-                        </button-group>       
+                        </button-group>
                     </div>
                   </div>
-          
+
                   <template v-if="period_type === 'interval'">
                       <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="every" label="Every*" v-model="interval.every"></bs-input>
-          
-                      <bs-select form-type="horizontal" :options="options.period" v-model="interval.period" name="Period" label="Period*"></bs-select>    
+
+                      <bs-select form-type="horizontal" :options="options.period" v-model="interval.period" name="Period" label="Period*"></bs-select>
                   </template>
-                  
+
                   <div class="row mt20" v-if="period_type === 'crontab'">
                       <div class="col-xs-3 text-right mt5">
                         <label>Crontab</label>
@@ -94,16 +112,16 @@
                             </div>
                           </div>
                           <a href="#rules" class="text-right" @click.prevent="showCron = true">See all crontab rules</a>
-                          
+
                       </div>
                     </div>
-          
+
               </div>
-  
+
             </div>
-  
+
           </tab>
-  
+
           <!-- ================= Args ================= -->
           <!-- ============================================== -->
           <tab header="Args">
@@ -119,7 +137,7 @@
           <!-- ================= Chains ================= -->
           <!-- ============================================== -->
           <tab header="Chains">
-            <tab-chains @update="val => data.chains = val" ref="tab_chains"></tab-chains>  
+            <tab-chains @update="val => data.chains = val" ref="tab_chains"></tab-chains>
           </tab>
         </tabs>
 

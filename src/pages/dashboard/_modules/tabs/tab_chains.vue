@@ -18,11 +18,11 @@
                   :headers="headers"
       ></typeahead>
 
-      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="countdown" label="Countdown" 
+      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="countdown" label="Countdown"
         v-model="single.countdown" placeholder="5" help="Waiting time in seconds before start."></bs-input>
-      
-      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="order" 
-        label="Order" v-model="single.order" placeholder="http://myrul:8080/webhook" help="The lower number have more priority"></bs-input> 
+
+      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="order"
+        label="Order" v-model="single.order" placeholder="http://myrul:8080/webhook" help="The lower number have more priority"></bs-input>
     </template>
 
     <hr>
@@ -55,7 +55,7 @@
         countdown: 0,
         order: 1,
         URL:  `${new Scheduler().getUrl()}?query=`,
-        template: "<b>{{item.name}}</b></h5>",
+        template: "<h5><b>{{item.name}}</b></h5>",
         headers: headerLogin,
         single: {
           name: null,
@@ -71,9 +71,7 @@
         return `${async}%7B"${key}":"${val}"%7D`
       },
 
-      onHit(item) {
-        
-      },
+      onHit(item) {return item},
 
       updaterEdit(data) {
         this.$set(this, 'value', data || [])

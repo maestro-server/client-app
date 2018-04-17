@@ -1,14 +1,18 @@
 'use strict'
 
+import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Scheduler from 'factories/scheduler'
+import Connections from 'factories/connections'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
-import CrontabRules from './tabs/crontab_rules.vue'
 
+import CrontabRules from './tabs/crontab_rules.vue'
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabChains from 'src/pages/dashboard/_modules/tabs/tab_chains'
 import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
+
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
 export default {
   mixins: [Modals],
@@ -50,12 +54,20 @@ export default {
         kwargs: {},
         chain: []
       },
+      modules:{
+        connections: {
+          task: null
+        }
+      },
       options: {},
       showCron: false,
       mapper: [
         {name: 'max_retries', label: 'Max Retry', validate: 'min:1', help: 'Default is 3'},
         {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
-      ]
+      ],
+      URL:  `${new Connections().getUrl()}?query=`,
+      template: '<b>{{item.name}}</b>',
+      headers: headerLogin
     }
   },
 
@@ -94,6 +106,22 @@ export default {
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key: 'scheduler_options'})
+    },
+
+    getOptions() {
+      return _.chain(this.options.modules)
+        .filter(e => e.name == this.module)
+        .head()
+        .get('options')
+        .value()
+    },
+
+    requestSearch(async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}"%7D`
+    },
+
+    onHit(item) {
+      return item.name
     }
   },
 
