@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <template v-for="form in mapper">
+    <template v-for="form, i in mapper" v-key="i">
       <bs-input class="mt20" form-type="horizontal"
                 :name="form.name"
                 :label="form.label"
@@ -44,7 +44,6 @@
       updaterEdit(data = {}) {
         this.$set(this, 'data', data)
         const dpp = _.pickBy(data, _.identity)
-
         this.$emit('update', dpp)
       },
 

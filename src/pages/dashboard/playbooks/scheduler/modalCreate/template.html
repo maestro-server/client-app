@@ -15,11 +15,11 @@
 
                 <div class="row">
                     <div class="col-xs-9 col-xs-offset-3">
-                        <button class="btn btn-sm btn-success" v-if="status" @click.prevent="status = false">
+                        <button class="btn btn-sm btn-success" v-if="enabled" @click.prevent="enabled = false">
                           <i class="fa fa-toggle-on"></i>
                           Enabled
                         </button>
-                        <button class="btn btn-sm btn-danger" v-if="!status" @click.prevent="status = true">
+                        <button class="btn btn-sm btn-danger" v-if="!enabled" @click.prevent="enabled = true">
                           <i class="fa fa-toggle-off"></i>
                           Disabled
                         </button>
@@ -46,10 +46,6 @@
 
                   <template v-if="module === 'webhook'">
                     <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method" v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>
-
-                    <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
-
-                    <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
                   </template>
 
                   <template v-if="module === 'connections'">
@@ -65,9 +61,13 @@
                     ></typeahead>
 
                     <bs-select form-type="horizontal" :options="getOptions()" v-model="modules.connections.task" name="task" label="Task*"></bs-select>
-
+                    
                   </template>
 
+                  <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
+
+                  <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
+                  
                   <hr>
 
                   <div class="row">
@@ -125,7 +125,7 @@
           <!-- ================= Args ================= -->
           <!-- ============================================== -->
           <tab header="Args">
-            <tab-tags @update="val => data.tags = val" ref="tab_tags" label="Create arg"></tab-tags>
+            <tab-tags @update="val => data.args = val" ref="tab_tags" label="Create arg"></tab-tags>
           </tab>
 
           <!-- ================= Config ================= -->
@@ -137,7 +137,7 @@
           <!-- ================= Chains ================= -->
           <!-- ============================================== -->
           <tab header="Chains">
-            <tab-chains @update="val => data.chains = val" ref="tab_chains"></tab-chains>
+            <tab-chains @update="val => data.chain = val" ref="tab_chains"></tab-chains>
           </tab>
         </tabs>
 

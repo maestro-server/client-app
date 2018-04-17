@@ -31,8 +31,17 @@ export default {
   },
 
   data () {
+    const initData = {
+      name: null,
+      method: 'GET',
+      endpoint: null,
+      args: [],
+      kwargs: {},
+      chain: []
+    }
+
     return {
-      status: true,
+      enabled: true,
       period_type: "interval",
       module: 'webhook',
       interval: {
@@ -46,14 +55,8 @@ export default {
         day_of_month: '*',
         month_of_year: '*'
       },
-      data: {
-        name: null,
-        method: 'GET',
-        endpoint: null,
-        args: [],
-        kwargs: {},
-        chain: []
-      },
+      initialData: initData,
+      data: initData,
       modules:{
         connections: {
           task: null
@@ -66,7 +69,7 @@ export default {
         {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
       ],
       URL:  `${new Connections().getUrl()}?query=`,
-      template: '<b>{{item.name}}</b>',
+      template: "<b>{{item.name}}</b>",
       headers: headerLogin
     }
   },
@@ -78,15 +81,33 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.data = {}
+      this.data = _.clone(this.initialData)
+
+      this.tab_tags.reset()
+      this.tab_chains.reset()
+      this.tab_role.reset()
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
+      this.$set(this, 'enabled', this.model.enabled)
+      this.$set(this, 'period_type', this.model.period_type)
+      this.$set(this, 'module', this.model.module)
+      this.$set(this, this.period_type, _.get(this.model, this.period_type))
+
+      this.tab_tags.updaterEdit(this.model.args)
+      this.tab_chains.updaterEdit(this.model.chain)
+      this.tab_role.updaterEdit(this.model.kwargs)
     },
 
     setupModel () {
+      console.log(this.model)
       this.model = _.pickBy(this.data, _.identity)
+      this.$set(this.model, 'module', this.module)
+      this.$set(this.model, 'enabled', this.enabled)
+      this.$set(this.model, 'period_type', this.period_type)
+      this.$set(this.model, 'kwargs', _.pickBy(_.get(this, 'data.kwargs'), _.identity))
+      this.$set(this.model, this.period_type, _.get(this, this.period_type))
     },
 
     createSave () {
