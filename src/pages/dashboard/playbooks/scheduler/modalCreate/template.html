@@ -36,7 +36,7 @@
                       <label>Module</label>
                     </div>
                     <div class="col-xs-9" v-if="options.period_type">
-                        <button-group v-model="module" type="primary" class="mt5" >
+                        <button-group v-model="data.link.refs" type="primary" class="mt5" >
                             <template v-for="mod in options.modules">
                               <bs-radio  :selected-value="mod.name" class="btn-sm capitalize">{{mod.name}}</bs-radio>
                             </template>
@@ -44,11 +44,11 @@
                     </div>
                   </div>
 
-                  <template v-if="module === 'webhook'">
+                  <template v-if="data.link.refs === 'webhook'">
                     <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method" v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>
                   </template>
 
-                  <template v-if="module === 'connections'">
+                  <template v-if="data.link.refs === 'connections'">
                     <typeahead label="Connection" placeholder="Select Connection"
                                :async="URL"
                                async-key="items"
@@ -58,16 +58,15 @@
                                :on-hit="onHit"
                                class="mt20"
                                :headers="headers"
+                               v-model="data.link.name"
                     ></typeahead>
 
-                    <bs-select form-type="horizontal" :options="getOptions()" v-model="modules.connections.task" name="task" label="Task*"></bs-select>
-                    
+                    <bs-select form-type="horizontal" :options="getOptions()" v-model="data.link.task" name="task" label="Task*" @input="connectionSwap"></bs-select>
+
                   </template>
 
                   <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint" placeholder="http://myrul:8080/webhook"></bs-input>
 
-                  <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
-                  
                   <hr>
 
                   <div class="row">
@@ -75,7 +74,7 @@
                       <label>Time</label>
                     </div>
                     <div class="col-xs-9" v-if="options.period_type">
-                        <button-group v-model="period_type" type="primary" class="mt5" >
+                        <button-group v-model="data.period_type" type="primary" class="mt5" >
                           <template v-for="pitem in options.period_type">
                             <bs-radio  :selected-value="pitem" class="btn-sm capitalize">{{pitem}}</bs-radio>
                           </template>
@@ -83,13 +82,13 @@
                     </div>
                   </div>
 
-                  <template v-if="period_type === 'interval'">
+                  <template v-if="data.period_type === 'interval'">
                       <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="every" label="Every*" v-model="interval.every"></bs-input>
 
                       <bs-select form-type="horizontal" :options="options.period" v-model="interval.period" name="Period" label="Period*"></bs-select>
                   </template>
 
-                  <div class="row mt20" v-if="period_type === 'crontab'">
+                  <div class="row mt20" v-if="data.period_type === 'crontab'">
                       <div class="col-xs-3 text-right mt5">
                         <label>Crontab</label>
                       </div>
@@ -115,6 +114,11 @@
 
                       </div>
                     </div>
+
+                <hr>
+
+                <bs-input class="mt10" form-type="horizontal" name="max_execution" label="Max Execution" v-model="data.max_execution" placeholder="0" help="Can limit many times this job will run, 0 is infinity"></bs-input>
+
 
               </div>
 

@@ -35,15 +35,22 @@ export default {
       name: null,
       method: 'GET',
       endpoint: null,
+      period_type: "interval",
       args: [],
+      link:{
+        name: '',
+        _id: '',
+        refs: 'webhook',
+        task: null
+      },
       kwargs: {},
       chain: []
     }
 
     return {
       enabled: true,
-      period_type: "interval",
-      module: 'webhook',
+      initialData: initData,
+      data: initData,
       interval: {
         period: 'minutes',
         every: 30
@@ -54,13 +61,6 @@ export default {
         day_of_week: '*',
         day_of_month: '*',
         month_of_year: '*'
-      },
-      initialData: initData,
-      data: initData,
-      modules:{
-        connections: {
-          task: null
-        }
       },
       options: {},
       showCron: false,
@@ -91,8 +91,6 @@ export default {
     editLoad () {
       this.$set(this, 'data', this.model)
       this.$set(this, 'enabled', this.model.enabled)
-      this.$set(this, 'period_type', this.model.period_type)
-      this.$set(this, 'module', this.model.module)
       this.$set(this, this.period_type, _.get(this.model, this.period_type))
 
       this.tab_tags.updaterEdit(this.model.args)
@@ -101,11 +99,8 @@ export default {
     },
 
     setupModel () {
-      console.log(this.model)
       this.model = _.pickBy(this.data, _.identity)
-      this.$set(this.model, 'module', this.module)
       this.$set(this.model, 'enabled', this.enabled)
-      this.$set(this.model, 'period_type', this.period_type)
       this.$set(this.model, 'kwargs', _.pickBy(_.get(this, 'data.kwargs'), _.identity))
       this.$set(this.model, this.period_type, _.get(this, this.period_type))
     },
@@ -131,7 +126,7 @@ export default {
 
     getOptions() {
       return _.chain(this.options.modules)
-        .filter(e => e.name == this.module)
+        .filter(e => e.name == this.data.link.refs)
         .head()
         .get('options')
         .value()
@@ -142,7 +137,29 @@ export default {
     },
 
     onHit(item) {
+      this.$set(this.data.link, '_id', _.get(item, '_id'))
+      this.$set(this.data.link, 'provider', _.get(item, 'provider'))
+      this.connectionSwap()
       return item.name
+    },
+
+    connectionSwap() {
+      const pre = _.pickBy(this.data.link, _.identity)
+
+      if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task')) {
+        let conn = _.chain(this.options.modules)
+          .filter(e => e.name == this.data.link.refs)
+          .head()
+          .pick(['url', 'method'])
+          .value()
+
+        this.data.endpoint = _.chain(this.data.link)
+                .pick(['provider', '_id', 'task'])
+                .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
+                .value()
+
+        this.data.method = _.get(conn, 'method')
+      }
     }
   },
 
