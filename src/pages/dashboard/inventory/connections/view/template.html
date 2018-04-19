@@ -46,14 +46,19 @@
           <div class="col-xs-6">
 
             <h4 class="text-capitalize">
-              <button class="btn btn-xs btn-success" v-if="item.state != 'danger'" @click="processEnable(key, 'danger')">
-                <i class="fa fa-toggle-on"></i>
-                On
-              </button>
-              <button class="btn btn-xs btn-danger" v-if="item.state == 'danger'" @click="processEnable(key, 'success')">
-                <i class="fa fa-toggle-off"></i>
-                Off
-              </button>
+              <tooltip effect="scale" placement="bottom" content="Scheduler">
+                <button class="btn btn-xs btn-success" v-if="item.state != 'danger'" @click="processEnable(key, 'danger')">
+                  <i class="fa fa-toggle-on"></i>
+                  On
+                </button>
+                <button class="btn btn-xs btn-danger" v-if="item.state == 'danger'" @click="processEnable(key, 'success')">
+                  <i class="fa fa-toggle-off"></i>
+                  Off
+                </button>
+              </tooltip>
+
+
+
               {{key}}
               <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">{{item.state}}</label>
             </h4>

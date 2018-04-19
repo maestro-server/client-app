@@ -2,6 +2,7 @@
 import _ from 'lodash'
 
 import Connections from 'factories/connections'
+import Scheduler from 'factories/scheduler'
 import ViewSingle from 'mixins/view-single'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
@@ -84,6 +85,17 @@ export default {
         .find(this.setOptions, {key: 'connections'})
     },
 
+    fetchScheduler() {
+      const data = {
+        'link._id': _.get(this.model, '_id')
+      }
+
+      FectherEntity(Scheduler)({force: true})
+        .find((e) => {
+          console.log(e.data)
+        }, data)
+    },
+
     setOptions(data) {
       const adminer = formatAdminer(data)
       this.prepareProcessData(adminer)
@@ -101,6 +113,10 @@ export default {
     mergeLog(data, key) {
       const process = _.get(this.model, `process.${key}`, null)
       return _.assign({}, data, process)
+    },
+
+    mergeScheduler() {
+
     },
 
     saveOwner() {
@@ -124,5 +140,6 @@ export default {
 
   created() {
     this.$on('finishFetchData', this.fetchAdminer)
+    this.$on('finishFetchData', this.fetchScheduler)
   }
 }
