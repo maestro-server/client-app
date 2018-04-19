@@ -81,28 +81,42 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.data = _.clone(this.initialData)
+      this.$set(this, 'data', _.clone(this.initialData))
+      this.$set(this, 'enabled', true)
 
       this.tab_tags.reset()
       this.tab_chains.reset()
       this.tab_role.reset()
+      this.$nextTick()
     },
 
     editLoad () {
-      this.$set(this, 'data', this.model)
+      this.tabShow=0
+      this.$set(this, 'data', _.assign({}, this.initialData, this.model))
       this.$set(this, 'enabled', this.model.enabled)
-      this.$set(this, this.period_type, _.get(this.model, this.period_type))
+      this.$set(this, this.data.period_type, _.get(this.model, this.data.period_type))
 
       this.tab_tags.updaterEdit(this.model.args)
       this.tab_chains.updaterEdit(this.model.chain)
       this.tab_role.updaterEdit(this.model.kwargs)
+      this.$nextTick()
     },
 
     setupModel () {
+      const period = this.data.period_type
+
       this.model = _.pickBy(this.data, _.identity)
       this.$set(this.model, 'enabled', this.enabled)
       this.$set(this.model, 'kwargs', _.pickBy(_.get(this, 'data.kwargs'), _.identity))
-      this.$set(this.model, this.period_type, _.get(this, this.period_type))
+      this.$set(this.model, 'link', _.pickBy(_.get(this, 'data.link'), _.identity))
+      this.$set(this.model, period, _.get(this, period))
+
+      const remove = _.chain(this.options)
+        .get('period_type')
+        .filter(e=>e!=period)
+        .value()
+
+      this.$set(this, 'model', _.omit(this.model, remove))
     },
 
     createSave () {
@@ -126,7 +140,7 @@ export default {
 
     getOptions() {
       return _.chain(this.options.modules)
-        .filter(e => e.name == this.data.link.refs)
+        .filter(e => e.name == _.get(this.data, 'link.refs'))
         .head()
         .get('options')
         .value()
@@ -148,7 +162,7 @@ export default {
 
       if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task')) {
         let conn = _.chain(this.options.modules)
-          .filter(e => e.name == this.data.link.refs)
+          .filter(e => e.name == _.get(this.data, 'link.refs'))
           .head()
           .pick(['url', 'method'])
           .value()

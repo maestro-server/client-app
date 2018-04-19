@@ -35,7 +35,7 @@
                     <div class="col-xs-3 text-right mt5">
                       <label>Module</label>
                     </div>
-                    <div class="col-xs-9" v-if="options.period_type">
+                    <div class="col-xs-9" v-if="options.period_type && data.link && data.link.refs">
                         <button-group v-model="data.link.refs" type="primary" class="mt5" >
                             <template v-for="mod in options.modules">
                               <bs-radio  :selected-value="mod.name" class="btn-sm capitalize">{{mod.name}}</bs-radio>
