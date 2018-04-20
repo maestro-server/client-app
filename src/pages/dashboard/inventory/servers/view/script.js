@@ -29,11 +29,11 @@ export default {
     viewDisplayer() {
       return [
         {val: this.model.active ? "Active" : "Terminated", type: this.model.active ? "success" : "danger"},
-        {val: this.model.environment},
-        {val: this.model.role},
+        {val: _.get(this.model, 'environment')},
+        {val: _.get(this.model, 'role')},
         {val: _.get(this.model, 'os.base', false)},
         {val: _.get(this.model, 'datacenters.name', false)},
-        {val: this.model.ipv4_private}
+        {val: _.get(this.model, 'ipv4_private')}
       ]
     }
   },

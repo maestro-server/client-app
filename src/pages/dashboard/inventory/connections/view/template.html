@@ -46,33 +46,41 @@
           <div class="col-xs-6">
 
             <h4 class="text-capitalize">
-              <tooltip effect="scale" placement="bottom" content="Scheduler">
-                <button class="btn btn-xs btn-success" v-if="item.state != 'danger'" @click="processEnable(key, 'danger')">
-                  <i class="fa fa-toggle-on"></i>
-                  On
-                </button>
-                <button class="btn btn-xs btn-danger" v-if="item.state == 'danger'" @click="processEnable(key, 'success')">
-                  <i class="fa fa-toggle-off"></i>
-                  Off
-                </button>
-              </tooltip>
-
-
-
               {{key}}
               <label v-if="item.msg" class="label btn-sm" :class="'label-'+item.state">{{item.state}}</label>
             </h4>
           </div>
 
           <div class="col-xs-6 text-right">
-            <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
-              <i class="fa fa-hourglass-end"></i>
-              Sync
-            </button>
+            <template v-for="job in schedulers[key]" v-key="job._id">
+              <tooltip effect="scale" placement="bottom" :content="`Job: ${job.name} (${job._id})`">
+                <button class="btn btn-xs btn-success" v-if="job.enabled" @click="processEnable(job, false)">
+                  <i class="fa fa-toggle-on"></i>
+                  On
+                </button>
+                <button class="btn btn-xs btn-danger" v-if="!job.enabled" @click="processEnable(job, true)">
+                  <i class="fa fa-toggle-off"></i>
+                  Off
+                </button>
+              </tooltip>
+            </template>
+            <template v-if="!schedulers[key]">
+              <button class="btn btn-xs btn-warning" @click="processEnable(job, true)">
+                <i class="fa fa-toggle-off"></i>
+                Missing job
+              </button>
+            </template>
+            |
+            <tooltip effect="scale" placement="bottom" content="Force to sync">
+              <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
+                <i class="fa fa-hourglass-end"></i>
+                Sync
+              </button>
+            </tooltip>
           </div>
         </div>
 
-        <div v-if="item.msg" class="alert" :class="'alert-'+item.state">
+        <div v-if="item.msg" class="alert mt5" :class="'alert-'+item.state">
           {{item.msg}}
         </div>
 

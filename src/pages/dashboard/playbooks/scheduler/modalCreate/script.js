@@ -47,21 +47,27 @@ export default {
       chain: []
     }
 
+    const initCronTab = {
+      minute: 30,
+      hour: '*',
+      day_of_week: '*',
+      day_of_month: '*',
+      month_of_year: '*'
+    }
+
+    const initInterval = {
+      period: 'minutes',
+      every: 30
+    }
+
     return {
       enabled: true,
       initialData: initData,
-      data: initData,
-      interval: {
-        period: 'minutes',
-        every: 30
-      },
-      crontab: {
-        minute: 30,
-        hour: '*',
-        day_of_week: '*',
-        day_of_month: '*',
-        month_of_year: '*'
-      },
+      initialCron: initCronTab,
+      initialInterval: initInterval,
+      data: _.clone(initData),
+      interval: _.clone(initInterval),
+      crontab: _.clone(initCronTab),
       options: {},
       showCron: false,
       mapper: [
@@ -82,6 +88,8 @@ export default {
     createLoad () {
       this.tabShow=0
       this.$set(this, 'data', _.clone(this.initialData))
+      this.$set(this, 'crontab', _.clone(this.initialCron))
+      this.$set(this, 'interval', _.clone(this.initialInterval))
       this.$set(this, 'enabled', true)
 
       this.tab_tags.reset()
@@ -139,7 +147,7 @@ export default {
     },
 
     getOptions() {
-      return _.chain(this.options.modules)
+      return _.chain(this.options.configs)
         .filter(e => e.name == _.get(this.data, 'link.refs'))
         .head()
         .get('options')
@@ -161,7 +169,7 @@ export default {
       const pre = _.pickBy(this.data.link, _.identity)
 
       if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task')) {
-        let conn = _.chain(this.options.modules)
+        let conn = _.chain(this.options.configs)
           .filter(e => e.name == _.get(this.data, 'link.refs'))
           .head()
           .pick(['url', 'method'])

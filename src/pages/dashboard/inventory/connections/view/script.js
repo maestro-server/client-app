@@ -17,7 +17,8 @@ export default {
       owner_user: null,
       entity: Connections,
       model: {},
-      permissions: []
+      permissions: [],
+      schedulers: {}
     }
   },
 
@@ -43,11 +44,10 @@ export default {
         .patch(this.finishJob, data)
     },
 
-    processEnable(key, state) {
-      const data = _.set(this.model, `process.${key}.state`, state)
-
-      FectherEntity(Connections)()
-        .patch(this.logTask, data)
+    processEnable(data, enabled) {
+      _.set(data, 'enabled', enabled)
+      FectherEntity(Scheduler)()
+        .patch(this.finishJob, data)
     },
 
     formatOwnerUser(data) {
@@ -65,19 +65,14 @@ export default {
         .authorization()
         .updateID(
           `${this.model._id}/task/${key}`,
-          this.logTask
+          this.fetchData
         )
-    },
-
-    logTask() {
-      this.fetchData()
     },
 
     fetchAdminer() {
       const ouser = this.formatOwnerUser(_.get(this.model, 'owner_user'))
-      if(ouser) {
+      if(ouser)
         this.owner_user = ouser
-      }
 
       this.status = _.get(this.model, 'status')
 
@@ -91,9 +86,7 @@ export default {
       }
 
       FectherEntity(Scheduler)({force: true})
-        .find((e) => {
-          console.log(e.data)
-        }, data)
+        .find(this.prepareScheduler, data)
     },
 
     setOptions(data) {
@@ -115,8 +108,24 @@ export default {
       return _.assign({}, data, process)
     },
 
-    mergeScheduler() {
+    prepareScheduler(result) {
+      const scheduler = _.chain(result)
+                  .get('data.items', [])
+                  .reduce(this.mergeScheduler, {})
+                  .value()
 
+      this.$set(this, 'schedulers', scheduler)
+    },
+
+    mergeScheduler(result, value) {
+      const sched = _.pick(value, ['_id', 'link', 'enabled', 'name'])
+      const task = _.get(sched, 'link.task')
+
+      if(!_.isArray(result[task]))
+        result[task] = []
+
+      result[task].push(sched)
+      return result
     },
 
     saveOwner() {
