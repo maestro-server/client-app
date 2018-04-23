@@ -10,6 +10,10 @@
     </displayer>
   </div>
 
+  <div>
+    <div class="mt20 col-xs-12 alert alert-danger text-center" v-if="model.msg">{{model.msg}}</div>
+  </div>
+
   <div class="col-xs-6">
     <info-view :data="filtered"></info-view>
   </div>

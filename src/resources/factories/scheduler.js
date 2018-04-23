@@ -4,8 +4,8 @@ import FactoryTenant from './factoryTenant'
 
 class Scheduler extends FactoryTenant {
 
-  constructor(model={}, tenant=false) {
-    super(model, "scheduler", tenant)
+  constructor(model={}, path='', tenant=false) {
+    super(model, `scheduler${path}`, tenant)
   }
 }
 

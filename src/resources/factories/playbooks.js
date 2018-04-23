@@ -4,8 +4,8 @@ import FactoryTenant from './factoryTenant'
 
 class Playbooks extends FactoryTenant {
 
-  constructor(model={}, tenant=false) {
-    super(model, "playbooks", tenant)
+  constructor(model={}, path='', tenant=false) {
+    super(model, "playbooks"+path, tenant)
   }
 }
 

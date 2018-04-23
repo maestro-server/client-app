@@ -25,7 +25,7 @@ export default {
       return [
         {val: _.get(this.model, 'enabled') ? "Active" : "Disabled", type: _.get(this.model, 'enabled') ? "success" : "danger"},
         {val: _.get(this.model, 'period_type')},
-        {val: _.get(this.model, 'link.refs')},
+        {val: _.get(this.model, 'task')},
         {val: _.get(this.model, 'total_run_count', 0)}
       ]
     }

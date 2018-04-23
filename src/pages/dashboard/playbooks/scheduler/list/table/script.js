@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: new Scheduler(),
-      columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'created_at', 'actions'],
+      columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'last_run_at', 'actions'],
       options: {
         filterable: ['name', 'modules', 'period_type'],
         listColumns: {
@@ -19,8 +19,7 @@ export default {
           modules: []
         },
         headings: {
-          updated_at: 'Updated At',
-          created_at: 'Created At'
+          last_run_at: 'Last run At'
         }
       }
     }
@@ -29,9 +28,9 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.modules = _.get(d, 'link.refs')
-        d.updated_at = new Date(d.updated_at).toLocaleString()
-        d.created_at = new Date(d.created_at).toLocaleString()
+        d.modules = _.get(d, 'task')
+
+        d.last_run_at = _.has(d, 'last_run_at') ? new Date(d.last_run_at).toLocaleString() : ''
         return d
       })
     }

@@ -4,7 +4,7 @@
 
     <template slot="forms">
       <slot name="label">
-        <p>Can create a chain task, this task will be executed after run a main task.</p>
+        <p>Can create a chain task, this task will be executed after run a main task. Order isn't guaranteed.</p>
       </slot>
 
       <typeahead label="Scheduler" placeholder="Scheduler name (Must be valid scheduler)"
@@ -26,18 +26,15 @@
           <span class="btn btn-danger btn-xs" v-if="!this.single._id"><i class="fa fa-times-circle-o"></i> Select a valid Scheduler</span>
         </div>
       </div>
-      
+
       <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="countdown" label="Countdown"
         v-model="single.countdown" placeholder="5" help="Waiting time in seconds before start."></bs-input>
-
-      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="order"
-        label="Order" v-model="single.order" placeholder="http://myrul:8080/webhook" help="The lower number have more priority"></bs-input>
     </template>
 
     <hr>
 
     <template slot="view" slot-scope="props">
-      <b class="text-capitalize">{{props.item.name}}</b> ({{props.item.order}}) 
+      <b class="text-capitalize">{{props.item.name}}</b>
       <span v-if="props.item.countdown"><br/>Countdown: {{props.item.countdown}}</span>
     </template>
 
@@ -69,8 +66,7 @@
         single: {
           _id: null,
           name: null,
-          countdown: 0,
-          order: 1
+          countdown: 0
         }
       }
     },

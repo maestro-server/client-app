@@ -44,10 +44,23 @@ export default {
         .patch(this.finishJob, data)
     },
 
-    processEnable(data, enabled) {
-      _.set(data, 'enabled', enabled)
+    processEnable(job, enabled) {
+      _.set(job, 'enabled', enabled)
       FectherEntity(Scheduler)()
-        .patch(this.finishJob, data)
+        .patch(this.finishJob, job)
+    },
+
+    createJob(task) {
+      const data = {
+        name: _.get(this.model, 'name'),
+        _id: _.get(this.model, '_id'),
+        provider: _.get(this.model, 'provider'),
+        refs: 'connections',
+        task
+      };
+
+      FectherEntity(Scheduler)({path: '/template'})
+        .create(this.fetchScheduler, data)
     },
 
     formatOwnerUser(data) {

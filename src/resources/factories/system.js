@@ -3,8 +3,8 @@
 import FactoryTenant from './factoryTenant'
 
 class System extends FactoryTenant {
-  constructor(model={}, tenant=false) {
-    super(model, "system", tenant)
+  constructor(model={}, path='', tenant=false) {
+    super(model, "system"+path, tenant)
   }
 }
 

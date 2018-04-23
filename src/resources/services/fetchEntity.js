@@ -8,6 +8,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   const tenant = tenantMananger.get()
   const k = _.get(Entity, 'name').toLowerCase()
+  const {path} = opts
 
   return {
     find (fn, query = {}) {
@@ -16,7 +17,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
       CacheRequester(fk)(opts)(tenant)(fn)
         .process((end) => {
-          new Entity(query)
+          new Entity(query, path)
             .authorization()
             .headers(headers)
             .get(end)
@@ -28,7 +29,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
       CacheRequester(fk)(opts)(tenant)(fn)
         .process((end) => {
-          new Entity({})
+          new Entity({}, path)
             .authorization()
             .headers(headers)
             .getID(_id, end)
@@ -36,23 +37,22 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
     },
 
     create (fn, model) {
-
       CacheRequester(k)(opts)(tenant)(fn)
         .remove((end) => {
-          new Entity(model)
+          new Entity(model, path)
             .authorization()
             .headers(headers)
             .create(end)
         })
     },
 
-    update (fn, model, path) {
-      const key = path || model._id
+    update (fn, model, gid) {
+      const key = gid || model._id
       const fk = `${k}_${key}`
 
       CacheRequester(fk)(opts)(tenant)(fn)
         .remove((end) => {
-          new Entity(model)
+          new Entity(model, path)
             .authorization()
             .headers(headers)
             .updateID(key, end)
@@ -61,27 +61,27 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
       CacheRequester(fk)(opts)(tenant)(fn)
     },
 
-    patch (fn, model, path) {
-      const key = path || model._id
+    patch (fn, model, gid) {
+      const key = gid || model._id
       const fk = `${k}_${key}`
 
       CacheRequester(fk)(opts)(tenant)(fn)
         .remove((end) => {
-          new Entity(model)
+          new Entity(model, path)
             .authorization()
             .patchID(key, end)
         });
     },
 
-    remove (fn, model, path) {
-      const key = path || model._id
+    remove (fn, model, gid) {
+      const key = gid || model._id
       const list_k = `${k}_list`
       const fk = `${k}_${key}`
 
       CacheRequester(fk)(opts)(tenant)(fn)
         .remove((end) => {
 
-          new Entity(model)
+          new Entity(model, path)
             .authorization()
             .deleteID(key, end)
         });

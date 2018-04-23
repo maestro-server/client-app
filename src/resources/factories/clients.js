@@ -4,8 +4,8 @@ import FactoryTenant from './factoryTenant'
 
 class Clients extends FactoryTenant {
 
-  constructor(model={}, tenant=false) {
-    super(model, "clients", tenant)
+  constructor(model={}, path='', tenant=false) {
+    super(model, "clients"+path, tenant)
   }
 }
 

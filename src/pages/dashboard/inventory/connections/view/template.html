@@ -65,7 +65,7 @@
               </tooltip>
             </template>
             <template v-if="!schedulers[key]">
-              <button class="btn btn-xs btn-warning" @click="processEnable(job, true)">
+              <button class="btn btn-xs btn-warning" @click="createJob(key)">
                 <i class="fa fa-toggle-off"></i>
                 Missing job
               </button>

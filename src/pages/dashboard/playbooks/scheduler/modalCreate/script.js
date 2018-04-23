@@ -10,7 +10,6 @@ import FectherEntity from 'services/fetchEntity'
 import CrontabRules from './tabs/crontab_rules.vue'
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
 import tabChains from 'src/pages/dashboard/_modules/tabs/tab_chains'
-import tabRole from 'src/pages/dashboard/_modules/tabs/tab_input'
 
 import headerLogin from 'src/resources/libs/headerAuthorization'
 
@@ -20,8 +19,7 @@ export default {
   components: {
     CrontabRules,
     tabTags,
-    tabChains,
-    tabRole
+    tabChains
   },
 
   computed: {
@@ -37,14 +35,14 @@ export default {
       endpoint: null,
       period_type: "interval",
       args: [],
+      task: 'webhook',
       link:{
         name: '',
         _id: '',
-        refs: 'webhook',
         task: null
       },
-      kwargs: {},
-      chain: []
+      chain: [],
+      max_run_count: 0
     }
 
     const initCronTab = {
@@ -94,7 +92,6 @@ export default {
 
       this.tab_tags.reset()
       this.tab_chains.reset()
-      this.tab_role.reset()
       this.$nextTick()
     },
 
@@ -106,7 +103,6 @@ export default {
 
       this.tab_tags.updaterEdit(this.model.args)
       this.tab_chains.updaterEdit(this.model.chain)
-      this.tab_role.updaterEdit(this.model.kwargs)
       this.$nextTick()
     },
 
@@ -115,7 +111,6 @@ export default {
 
       this.model = _.pickBy(this.data, _.identity)
       this.$set(this.model, 'enabled', this.enabled)
-      this.$set(this.model, 'kwargs', _.pickBy(_.get(this, 'data.kwargs'), _.identity))
       this.$set(this.model, 'link', _.pickBy(_.get(this, 'data.link'), _.identity))
       this.$set(this.model, period, _.get(this, period))
 
@@ -148,9 +143,10 @@ export default {
 
     getOptions() {
       return _.chain(this.options.configs)
-        .filter(e => e.name == _.get(this.data, 'link.refs'))
+        .filter(e => e.name == _.get(this.data, 'task'))
         .head()
         .get('options')
+        .keys()
         .value()
     },
 
@@ -170,7 +166,7 @@ export default {
 
       if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task')) {
         let conn = _.chain(this.options.configs)
-          .filter(e => e.name == _.get(this.data, 'link.refs'))
+          .filter(e => e.name == _.get(this.data, 'task'))
           .head()
           .pick(['url', 'method'])
           .value()
