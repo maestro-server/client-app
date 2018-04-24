@@ -11,11 +11,14 @@ export default {
   data: function () {
     return {
       entity: new Volumes(),
-      columns: ['name', 'size', 'iops', 'unique_id', 'datacenters', 'status', 'created_at', 'actions'],
+      columns: ['status', 'name', 'size', 'iops', 'unique_id', 'fdatacenters', 'created_at', 'actions'],
       options: {
-        filterable: ['name', 'unique_id', 'datacenters', 'vpc_id', 'family'],
+        filterable: ['name', 'unique_id', 'fdatacenters', 'vpc_id', 'family'],
         listColumns: {
           datacenters: []
+        },
+        headings: {
+          fdatacenters: "Datacenters"
         }
       }
     }
@@ -24,7 +27,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.datacenters = _.get(d, 'datacenters.name', '-')
+        d.fdatacenters = _.get(d, 'datacenters.name', '-')
         return d
       })
     }

@@ -44,12 +44,32 @@
         {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
       </template>
     </creater-config-list>
-
+{{list_volumes}}
     <creater-config-list label="Storage" :basket="model.storage" @edit="edit" :index="2" icons="fa-hdd-o">
       <template slot="view" slot-scope="props">
-        {{props.item.name}} -
-        <bs-label>{{props.item.size}} GB</bs-label>
-        <bs-label type="danger" v-if="props.item.root == 'root'">root</bs-label>
+
+          <accordion type="warning" class="row">
+            <panel>
+                <span slot="header">
+                  <i class="fa fa-genderless text-center w18"></i>
+                  {{props.item.name}} -
+                  <bs-label v-if="props.item.size">{{props.item.size}} GB</bs-label>
+                  <bs-label type="danger" v-if="props.item.root == 'root'">root</bs-label>
+                  <bs-label v-if="props.item.unique_id">Attached</bs-label>
+                  <bs-label v-if="!props.item.unique_id">Plugged</bs-label>
+                  <bs-label type="default" v-if="props.item.unique_id">{{props.item.unique_id}}</bs-label>  
+                  <i class="fa fa-arrow-down"></i>
+                  
+                  <div class="pull-right">
+                    <button class="btn btn-success btn-xs" @click.prevent.stop="callConfig(props)"><i
+                      class="fa  fa-cog" aria-hidden="true"></i></button>
+                  </div>
+                </span>
+  
+              <info-view :data="props.item" :title="false"></info-view>
+            </panel>
+          </accordion>
+           
       </template>
     </creater-config-list>
 

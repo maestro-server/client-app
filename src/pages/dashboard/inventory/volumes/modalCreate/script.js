@@ -2,14 +2,16 @@
 
 import Modals from 'mixins/modals'
 import Volumes from 'factories/volumes'
+import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
+import verifyDuplicate from 'mixins/verify_duplicate'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
-import tabAppDc from 'src/pages/dashboard/_modules/tabs/tab_app_datacenter.vue'
+import tabAppDc from 'src/pages/dashboard/_modules/tabs/tab_app_datacenter'
 
 
 export default {
-  mixins: [Modals],
+  mixins: [Modals, verifyDuplicate],
 
   components: {
     tabTags,
@@ -26,10 +28,24 @@ export default {
   },
 
   data () {
+    const defaultVolume = {
+      name: null,
+      unique_id: "",
+      iops: null,
+      size: null,
+      status: "Active",
+      encrypted: false,
+      tags: [],
+      datacenters: {}
+    }
+
     return {
-      data: {
-        name: null, tags: [], datacenters: {}
-      },
+      entity: Volumes,
+      initialData: _.clone(defaultVolume),
+      data: _.clone(defaultVolume),
+      options: {
+        status:[]
+      }
     }
   },
 
@@ -40,7 +56,7 @@ export default {
 
     createLoad () {
       this.tabShow=0
-      this.data = {}
+      this.data = _.clone(this.initialData)
       this.tab_app_dc.reset()
       this.tab_tags.reset()
     },
@@ -54,6 +70,17 @@ export default {
 
     setupModel () {
       this.model = _.pickBy(this.data, _.identity)
+      this.defaultUniqueId()
+    },
+
+    defaultUniqueId() {
+      if(_.isEmpty(this.data.unique_id)) {
+        const {name, size} = _.pick(this.data, ['name', 'size'])
+        const now = Date.now()
+        const random = Math.random()
+        const unique_id = `${name}${size}${random}${now}`
+        this.$set(this.model, 'unique_id', unique_id)
+      }
     },
 
     createSave () {
@@ -68,6 +95,15 @@ export default {
       FectherEntity(Volumes)()
         .update(this.finishJob, this.model)
     },
+  
+    fetchData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+      .find(this.fetchAdminer, {key: 'server_options'})
+    }
   },
+
+  created() {
+    this.fetchData()
+  }
 
 }

@@ -13,9 +13,45 @@
 
             <div class="col-xs-12">
 
-              <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
+            <div class="row">
+                <div class="col-xs-3 text-right mt5">
+                  <label>Status</label>
+                </div>
+                <div class="col-xs-9">
+                  <button-group v-model="data.status" type="primary">
+                    <bs-radio v-for="sts, i in options.status" :key="sts" :selected-value="sts">{{sts}}</bs-radio>
+                  </button-group>
+                </div>
+              </div>
+
+              <bs-input class="mt10" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
+              <bs-input type="number" class="mt10" form-type="horizontal" name="size" label="Size*" v-model="data.size"
+              v-validate.initial="'required'" :error="makeError('size')"></bs-input>
+              
+              <bs-input type="number" class="mt10" form-type="horizontal" name="iops" label="Iops" v-model="data.iops" help="Per second"></bs-input>
+
+              <hr>
+
+              <div class="row" id="baseStorage">
+                <div class="col-xs-3 text-right mt5">
+                  <label>Encrypted</label>
+                </div>
+                <div class="col-xs-9">
+                  <button-group v-model="data.encrypted" type="default">
+                    <bs-radio selected-value="true">Yes</bs-radio>
+                    <bs-radio selected-value="false">No</bs-radio>
+                  </button-group>
+                </div>
+              </div>
+
+              <bs-input class="mt10" form-type="horizontal" name="unique_id" label="Unique ID*" v-model="data.unique_id"
+              help="Unique name, normally used for UUID provided by providers" @blur="verifyDuplicate"></bs-input>
+
+              <template v-if="duplicate.unique_id">
+                <span class="btn btn-danger btn-xs col-xs-12">{{duplicate.unique_id}}</span>
+              </template>
             </div>
           </div>
 
