@@ -16,9 +16,18 @@ export default {
 
   data: function () {
     return {
-      list_volumes: [],
+      list_volumes: {},
       entity: Servers,
-      model: {tags: [], auth:[], services:[], storage: [], logs: [], os:{base:null}, datacenters:{name:null}, active:true}
+      model: {
+        tags: [],
+        auth: [],
+        services: [],
+        storage: [],
+        logs: [],
+        os: {base: null},
+        datacenters: {name: null},
+        active: true
+      }
     }
   },
 
@@ -48,18 +57,31 @@ export default {
         .show(item)
     },
 
+    showListVolumes(vol, len="") {
+      if (_.has(vol, 'unique_id') && _.has(this.list_volumes, vol.unique_id)) {
+        return _.get(this.list_volumes, `${vol.unique_id}${len}`)
+      }
+      return vol
+    },
+
     fetchVolumes(force = true) {
       if (this.model) {
         const uniques = _.chain(this.model)
-                        .get('storage')
-                        .filter(e => _.has(e, 'unique_id'))
-                        .map(e => e.unique_id)
-                        .value()
-        
+          .get('storage')
+          .filter(e => _.has(e, 'unique_id'))
+          .map(e => e.unique_id)
+          .value()
+
         FectherEntity(Volumes)({force})
           .find((e) => {
-            console.log(e.data.items)
-            this.$set(this, 'list_volumes', _.get(e, 'data.items', []))
+            this.list_volumes = _.chain(e)
+              .get('data.items')
+              .reduce((result, value) => {
+                result[value.unique_id] = value
+                return result
+              }, {})
+              .value();
+
           }, {"unique_id": uniques})
       }
     }

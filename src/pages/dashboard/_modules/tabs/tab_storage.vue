@@ -37,8 +37,8 @@
           </div>
         </tab>
 
-        <tab header="Plugged">
-          <h4 class="col-xs-12">Plugged Volumes</h4>
+        <tab header="Built-In">
+          <h4 class="col-xs-12">Built-In Volumes</h4>
 
           <div class="col-xs-12">
             <bs-input class="mt10" form-type="horizontal" label="Mount" v-model="single.name" name="mount"
@@ -60,7 +60,7 @@
                 </div>
             </div>
           </div>
-          
+
         </tab>
       </tabs>
 
@@ -71,7 +71,7 @@
        <bs-label v-if="props.item.size">{{props.item.size}} GB</bs-label>
        <bs-label type="danger" v-if="props.item.root == 'root'">root</bs-label>
        <bs-label v-if="props.item.unique_id">Attached</bs-label>
-       <bs-label v-if="!props.item.unique_id">Plugged</bs-label>
+       <bs-label v-if="!props.item.unique_id">Built-In</bs-label>
        <bs-label type="default" v-if="props.item.unique_id">{{props.item.unique_id}}</bs-label>
    </template>
 
