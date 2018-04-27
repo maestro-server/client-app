@@ -35,6 +35,7 @@ export default {
       size: null,
       status: "Active",
       encrypted: false,
+      volume_type: null,
       tags: [],
       datacenters: {}
     }
@@ -95,7 +96,7 @@ export default {
       FectherEntity(Volumes)()
         .update(this.finishJob, this.model)
     },
-  
+
     fetchData() {
       FectherEntity(Adminer)({persistence: 'local'})
       .find(this.fetchAdminer, {key: 'server_options'})

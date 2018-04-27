@@ -1,0 +1,50 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+
+        <!-- ================= Setup ================= -->
+        <!-- ============================================== -->
+        <tab header="Setup">
+
+          <bs-input class="mt20" form-type="horizontal" name="mount" label="Mount Path" v-model="data.mount" placeholder="/dev/sda1"></bs-input>
+          <bs-input class="mt20" form-type="horizontal" name="ftype" label="File Type" v-model="data.ftype" placeholder="ext4"></bs-input>
+
+          <hr>
+
+          <div class="col-xs-12">
+            <h5>LVM - Logical volume mananger</h5>
+          </div>
+
+          <div class="row">
+            <div class="mt10 col-xs-9 col-xs-offset-3">
+              <button class="btn btn-sm btn-success" v-if="enabled" @click.prevent="enabled = false">
+                <i class="fa fa-toggle-on"></i>
+                Enabled
+              </button>
+              <button class="btn btn-sm btn-danger" v-if="!enabled" @click.prevent="enabled = true">
+                <i class="fa fa-toggle-off"></i>
+                Disabled
+              </button>
+            </div>
+          </div>
+
+          <bs-input class="mt20" form-type="horizontal" name="pv" label="PV name" v-model="data.pv" placeholder="pv-name"></bs-input>
+          <bs-input class="mt20" form-type="horizontal" name="vg" label="VG comprises" v-model="data.vg" placeholder="vg-group"></bs-input>
+
+        </tab>
+
+      </tabs>
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

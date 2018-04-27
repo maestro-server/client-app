@@ -6,12 +6,14 @@ import Volumes from 'factories/volumes'
 import ViewSingle from 'mixins/view-single'
 import FectherEntity from 'services/fetchEntity'
 import modalConfig from '../modalServerConfig/create'
+import modalVolumes from '../modalVolumesConfig/create'
 
 export default {
   mixins: [ViewSingle],
 
   components: {
-    modalConfig
+    modalConfig,
+    modalVolumes
   },
 
   data: function () {
@@ -35,6 +37,9 @@ export default {
     MCreateConfigServer() {
       return this.$refs.modal_config
     },
+    MCreateVolumesServer() {
+      return this.$refs.modal_volumes
+    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
     },
@@ -53,6 +58,12 @@ export default {
   methods: {
     callConfig(item) {
       this.MCreateConfigServer
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(item)
+    },
+
+    callVolumes(item) {
+      this.MCreateVolumesServer
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(item)
     },

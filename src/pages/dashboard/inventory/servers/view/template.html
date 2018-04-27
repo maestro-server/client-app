@@ -16,8 +16,6 @@
 
   <div class="col-xs-6 mt10 wrapperServer">
 
-    {{MCreateConfigServer}}
-
     <creater-config-list label="Service" :basket="model.services" @edit="edit" :index="4">
       <template slot="view" slot-scope="props">
 
@@ -67,7 +65,7 @@
                   <i class="fa fa-arrow-down"></i>
 
                   <div class="pull-right">
-                    <button class="btn btn-success btn-xs" @click.prevent.stop="callConfig(props)"><i
+                    <button class="btn btn-success btn-xs" @click.prevent.stop="callVolumes(props)"><i
                       class="fa  fa-cog" aria-hidden="true"></i></button>
                   </div>
                 </span>
@@ -89,4 +87,5 @@
   </div>
 
   <modal-config class="mt15" ref="modal_config" :provider="model"></modal-config>
+  <modal-volumes class="mt15" ref="modal_volumes" :provider="model"></modal-volumes>
 </div>
