@@ -36,11 +36,13 @@ export default {
 
     setupModel () {
       const {index} = this.model
-      const data = _.pickBy(this.data, e=>!_.isEmpty(e))
+      const {data} = this
       this.$set(data, 'lvm', this.enabled)
 
       const merged = _.assign(_.get(this.provider, `storage[${index}]`, {}), data)
-      _.set(this.provider, `storage[${index}]`, merged)
+      const clean = _.pickBy(merged, _.identity)
+
+      _.set(this.provider, `storage[${index}]`, clean)
     },
 
     createSave () {

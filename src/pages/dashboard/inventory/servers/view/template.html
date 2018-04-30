@@ -53,21 +53,32 @@
                 <span slot="header">
                   <i class="fa fa-hdd-o text-center w18"></i>
                   {{props.item.name}} -
+                  <bs-label type="info" v-if="props.item.unique_id">{{showListVolumes(props.item, '.status')}}</bs-label>
+
                   <bs-label v-if="props.item.unique_id">Attached</bs-label>
                   <bs-label v-if="!props.item.unique_id">Built-In</bs-label>
 
                   <bs-label v-if="props.item.size">{{props.item.size}} GB</bs-label>
                   <bs-label v-if="props.item.unique_id">{{showListVolumes(props.item, '.size')}} GB</bs-label>
 
-                  <bs-label type="info" v-if="props.item.unique_id">{{showListVolumes(props.item, '.status')}}</bs-label>
-
                   <bs-label type="danger" v-if="props.item.root == 'root'">root</bs-label>
+
+                  <bs-label type="primary" v-if="props.item.mount">{{props.item.mount}}</bs-label>
+
                   <i class="fa fa-arrow-down"></i>
 
                   <div class="pull-right">
                     <button class="btn btn-success btn-xs" @click.prevent.stop="callVolumes(props)"><i
                       class="fa  fa-cog" aria-hidden="true"></i></button>
                   </div>
+
+                  <br>
+                  <div v-if="props.item.lvm == true" class="mt10">
+                    LVM:
+                    <bs-label type="info" v-if="props.item.pv">PV: {{props.item.pv}}</bs-label>
+                    <bs-label type="info" v-if="props.item.vg">VG: {{props.item.vg}}</bs-label>
+                  </div>
+
                 </span>
 
               <info-view :data="showListVolumes(props.item)" :title="false"></info-view>

@@ -3,6 +3,13 @@
     <dc-menu></dc-menu>
   </div>
 
+  <div class="col-xs-6 mt10">
+    <router-link :to="{name: 'flavors'}" class="btn btn-primary col-xs-12">Flavors</router-link>
+  </div>
+  <div class="col-xs-6 mt10">
+    <router-link :to="{name: 'flavors_public'}" class="btn btn-default col-xs-12">Public Flavors</router-link>
+  </div>
+
   <router-view></router-view>
 
   <modal-create class="mt15" ref="modal_create"></modal-create>

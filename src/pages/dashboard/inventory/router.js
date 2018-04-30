@@ -33,6 +33,7 @@ import network from './network/router'
 import volumes from './volumes/router'
 import snapshot from './snapshot/router'
 import flavors from './flavors/router'
+import flavorsPublic from './flavors-public/router'
 import serviceMesh from './service-mesh/router'
 
 export default {
@@ -72,6 +73,7 @@ export default {
     network,
     volumes,
     snapshot,
-    flavors
+    flavors,
+    flavorsPublic
   ]
 }
