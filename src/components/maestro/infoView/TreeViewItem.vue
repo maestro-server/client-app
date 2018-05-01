@@ -22,6 +22,14 @@
     <template v-if="isValue(items)">
       <span class="stringColor">{{ items }}</span>
     </template>
+
+    <template v-if="isBoolean(items)">
+      <span class="booleanColor">{{ items }}</span>
+    </template>
+
+    <template v-if="isNumber(items)">
+      <span class="numberColor">{{ items }}</span>
+    </template>
   </span>
 </template>
 
@@ -46,7 +54,15 @@
       },
 
       isValue: function (value) {
-        return _.isString(value) || _.isInteger(value);
+        return _.isString(value);
+      },
+
+      isNumber: function (value) {
+        return _.isInteger(value);
+      },
+
+      isBoolean: function (value) {
+        return _.isBoolean(value);
       }
     }
   };
@@ -60,6 +76,14 @@
   }
 
   .stringColor {
-    color: #005550;
+    color: #06867e;
+  }
+
+  .booleanColor {
+    color: #e84f48;
+  }
+
+  .numberColor {
+    color: #2c2e86;
   }
 </style>

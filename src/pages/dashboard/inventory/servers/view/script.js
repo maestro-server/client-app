@@ -68,11 +68,13 @@ export default {
         .show(item)
     },
 
-    showListVolumes(vol, len="") {
+    showListVolumes(vol, len="", def=null) {
       if (_.has(vol, 'unique_id') && _.has(this.list_volumes, vol.unique_id)) {
         return _.get(this.list_volumes, `${vol.unique_id}${len}`)
       }
-      return vol
+
+      if (def == true)
+        return vol
     },
 
     fetchVolumes(force = true) {
