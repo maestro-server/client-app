@@ -1,5 +1,5 @@
-@import '../../_variables/variables';
-
+@import '~bootue/src/_core/variables';
+@import '~bootue/src/_core/mixins';
 
 .navbar-main .navbar-nav {
   margin-bottom: 20px;
@@ -23,5 +23,9 @@
   li a.router-link-active {
     background-color: $brand-primary;
     color: $white;
+
+    @include themify($themes) {
+      background-color: themed('brand-primary');
+    }
   }
 }

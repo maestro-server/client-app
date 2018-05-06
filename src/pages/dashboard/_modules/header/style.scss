@@ -1,5 +1,5 @@
-@import '../_variables/variables';
-@import '../_mixins/mixins';
+@import '~bootue/src/_core/variables';
+@import '~bootue/src/_core/mixins';
 
 header {
   background: $gray-lighter;
@@ -26,8 +26,12 @@ header {
     content: " ";
     width: 25px;
     height: 80px;
-    border-top: 55px solid $brand-primary;
     border-right: 24px solid transparent;
     left: -10px;
+
+    border-top: 55px solid $brand-primary;
+    @include themify($themes) {
+      border-top: 55px solid themed('brand-primary');
+    }
   }
 }

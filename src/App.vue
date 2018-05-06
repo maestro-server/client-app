@@ -1,10 +1,12 @@
 <template>
-  <div id="app" class="bg-purple">
-    <bootue></bootue>
-    <router-view></router-view>
+  <div class="theme-wine">
+    <div class="bg-main">
+      <bootue></bootue>
+      <router-view></router-view>
 
-    <callback></callback>
-    <loader></loader>
+      <callback></callback>
+      <loader></loader>
+    </div>
   </div>
 </template>
 
