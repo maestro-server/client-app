@@ -1,23 +1,21 @@
 'use strict'
-import store from 'src/store'
+
+import {EventBus} from "../../../resources/bus/bus-general";
 
 export default {
 
-  computed: {
-    title: () => store.getters.call_alert.title,
+  methods: {
+    callNotify({type, title, msg}) {
+      this.$refs.coToaster.callToast(type, title, msg)
 
-    msg: () => store.getters.call_alert.msg,
-
-    type: () => store.getters.call_alert.type,
-
-    showTop: {
-      get () {
-        return store.getters.call_alert.show
-      },
-      set (show) {
-        store.dispatch('callAlert', {show})
-      }
     }
+  },
 
+  created() {
+    EventBus.$on('call-notify', this.callNotify);
+  },
+
+  destroyed() {
+    EventBus.$off('call-notify', this.callNotify)
   }
 }

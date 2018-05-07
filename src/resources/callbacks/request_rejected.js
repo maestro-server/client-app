@@ -1,6 +1,7 @@
 'use strict'
-import store from 'src/store'
+
 import _ from 'lodash'
+import {EventBus} from 'src/resources/bus/bus-general.js';
 
 const mapper = {
   422: {
@@ -62,5 +63,5 @@ export default (e) => {
     Object.assign(data, ch)
   }
 
-  store.dispatch('callAlert', {...data})
+  EventBus.$emit('call-notify', data)
 }
