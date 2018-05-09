@@ -15,13 +15,6 @@ export default {
     subtitle: null
   },
 
-  alert: {
-    show: false,
-    title: null,
-    msg: null,
-    type: null
-  },
-
   me: CacheManager({k: 'me_list', persistence: 'local'}).find(['_id', 'email', 'name', 'avatar']),
 
   spinner: {

@@ -1,10 +1,10 @@
 'use strict';
 
-import store from 'src/store'
 import Login from 'services/login'
 import axios from 'axios'
 
 import api_url from 'src/resources/libs/api_url'
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 class Uploader {
 
@@ -50,7 +50,7 @@ class Uploader {
       type: "danger"
     }
 
-    store.dispatch('callAlert', {...data})
+    EventBus.$emit('call-notify', data)
     if (cb) cb()
   }
 

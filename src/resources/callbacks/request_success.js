@@ -1,5 +1,5 @@
 'use strict'
-import store from 'src/store'
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 export default () => {
   let data = {
@@ -9,5 +9,5 @@ export default () => {
     type: "success"
   }
 
-  store.dispatch('callAlert', {...data})
+  EventBus.$emit('call-notify', data)
 }

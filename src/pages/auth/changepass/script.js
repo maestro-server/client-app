@@ -1,7 +1,7 @@
 'use strict'
 import Auth from 'factories/auth'
 import api_url from 'src/resources/libs/api_url'
-import store from 'src/store/index'
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 export default {
   name: 'changepass',
@@ -30,7 +30,7 @@ export default {
         type: "success"
       }
 
-      store.dispatch('callAlert', {...data})
+      EventBus.$emit('call-notify', data)
       this.$router.push({name: 'login'})
     }
   },

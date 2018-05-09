@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import {EventBus} from 'src/resources/bus/bus-general.js';
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 const mapper = {
   422: {

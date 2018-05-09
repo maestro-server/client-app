@@ -1,7 +1,7 @@
 'use strict'
 
 import User from 'factories/users'
-import store from 'src/store/index'
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 export default {
   name: 'login',
@@ -35,7 +35,7 @@ export default {
         type: "success"
       }
 
-      store.dispatch('callAlert', {...data})
+      EventBus.$emit('call-notify', data)
       this.$router.push({name: 'login'})
     }
   }
