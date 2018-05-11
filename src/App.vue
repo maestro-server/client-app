@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-wine">
+  <div>
     <div class="bg-main">
       <bootue></bootue>
       <router-view></router-view>
