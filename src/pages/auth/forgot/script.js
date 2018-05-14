@@ -2,8 +2,16 @@
 import Auth from 'factories/auth'
 import base_url from 'src/resources/libs/base_url'
 
+import store from 'src/store'
+
 export default {
   name: 'forgot',
+
+  computed: {
+    logo_url() {
+      return _.get(store.getters, 'get_options.logo_url')
+    }
+  },
 
   data: function () {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-main">
+    <div class="bg-main" :class="theme">
       <bootue></bootue>
       <router-view></router-view>
 
@@ -17,6 +17,12 @@
   import store from 'src/store'
 
   export default {
+    computed: {
+      theme() {
+        return _.get(store.getters, 'get_options.theme')
+      }
+    },
+
     created() {
       new Maestro()
         .get(e => {

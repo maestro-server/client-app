@@ -3,8 +3,16 @@
 import User from 'factories/users'
 import {EventBus} from 'src/resources/bus/bus-general.js'
 
+import store from 'src/store'
+
 export default {
   name: 'login',
+
+  computed: {
+    logo_url() {
+      return _.get(store.getters, 'get_options.logo_url')
+    }
+  },
 
   data: function () {
     return {
