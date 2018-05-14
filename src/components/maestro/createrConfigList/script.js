@@ -4,7 +4,8 @@ export default {
     basket: {},
     label: {type: String},
     icons: {type: String, default: 'fa-cogs'},
-    index: {default: 0}
+    index: {default: 0},
+    showManangerBTN: {type: Boolean, default: true}
   },
 
   methods: {

@@ -11,7 +11,7 @@ export default {
     return {
       family: 'Loadbalance',
       initialData: {
-        name: null, description: null, provider:null,
+        name: null, description: null, provider:null, datacenters: {},
         tags: [], servers: [], targets: [],
         role: {healthcheck: null, endpoint: null}
       },

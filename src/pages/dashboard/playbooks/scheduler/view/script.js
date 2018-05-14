@@ -2,7 +2,6 @@
 import _ from 'lodash'
 
 import Scheduler from 'factories/scheduler'
-import Events from 'factories/events'
 import ViewSingle from 'mixins/view-single'
 import FectherEntity from 'services/fetchEntity'
 
@@ -12,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: Scheduler,
-      model: {tags: []}
+      model: {tags: [], events: []}
     }
   },
 
@@ -35,16 +34,17 @@ export default {
 
   methods: {
     fetchEvents() {
-      const filter = {
-        'event': _.get(this.model, '_id')
-      }
 
-      FectherEntity(Events)({force: true})
-        .find(this.prepareEvents, filter)
+      FectherEntity(Scheduler)({force: true})
+        .findOne(this.prepareEvents, `${_.get(this.model, '_id')}/events`)
     },
 
-    prepareEvents(events) {
-      console.log(events)
+    prepareEvents(result) {
+      const events = _.chain(result)
+                      .get('data.items', [])
+                      .value()
+
+      this.$set(this.model, 'events', events)
     }
   },
 

@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import Servers from 'factories/servers'
 import Volumes from 'factories/volumes'
+import Applications from 'factories/applications'
 import ViewSingle from 'mixins/view-single'
 import FectherEntity from 'services/fetchEntity'
 import modalConfig from '../modalServerConfig/create'
@@ -19,6 +20,7 @@ export default {
   data: function () {
     return {
       list_volumes: {},
+      list_applications: [],
       entity: Servers,
       model: {
         tags: [],
@@ -97,10 +99,24 @@ export default {
 
           }, {"unique_id": uniques})
       }
+    },
+
+    fetchApplications(force = true) {
+      if (this.model) {
+        FectherEntity(Applications)({force})
+          .find((e) => {
+            this.list_applications = _.get(e, 'data.items');
+          }, {"servers": [_.get(this.model, '_id')]})
+      }
+    },
+
+    slugApps(str) {
+      return _.kebabCase(str)
     }
   },
 
   created() {
     this.$on('finishFetchData', this.fetchVolumes)
+    this.$on('finishFetchData', this.fetchApplications)
   }
 }

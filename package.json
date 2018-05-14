@@ -18,7 +18,7 @@
     "autoprefixer": "^7.2.6",
     "axios": "^0.17.1",
     "babel-plugin-transform-vue-jsx": "^3.5.1",
-    "bootue": "^0.5.3",
+    "bootue": "^0.5.4",
     "chalk": "^2.3.1",
     "chart.js": "^2.7.1",
     "chromedriver": "^2.35.0",

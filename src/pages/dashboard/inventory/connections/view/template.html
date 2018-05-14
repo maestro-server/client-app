@@ -80,9 +80,9 @@
           </div>
         </div>
 
-        <div v-if="item.msg" class="alert mt5" :class="'alert-'+item.state">
+        <alert v-if="item.msg" class="alert mt5" :class="'alert-'+item.state">
           {{item.msg}}
-        </div>
+        </alert>
 
         <strong class="row col-xs-12 mt10">Permissions Required:</strong>
         <template v-for="req in item">

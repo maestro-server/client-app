@@ -18,7 +18,7 @@ export default {
       family: 'CDN',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null,
+        name: null, description: null, provider:null, datacenters: {},
         tags: [], servers: [], targets: [],
         role: {healthcheck: null, endpoint: null}
       },

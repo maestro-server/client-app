@@ -114,7 +114,6 @@ export default {
     },
 
     setupModel () {
-
       this.model = _(this.data)
         .set('role', _.pickBy(this.data.role, _.identity))
         .set('family', this.family)

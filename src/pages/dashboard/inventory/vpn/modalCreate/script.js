@@ -12,6 +12,7 @@ export default {
       family: 'VPN',
       initialData: {
         name: null, description: null, provider:null,
+        datacenters: {},
         tags: [], servers: [],
         role: {endpoint: null}
       },

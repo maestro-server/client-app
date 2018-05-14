@@ -95,6 +95,66 @@
       </template>
     </creater-config-list>
 
+    <creater-config-list label="Application" :basket="list_applications" :showManangerBTN="false" icons="fa-code">
+      <template slot="view" slot-scope="props">
+        <div class="row">
+          <div class="col-xs-7">
+            <h4>
+              <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+                {{props.item.name}}
+                <i class="fa  fa-eye" aria-hidden="true"></i>
+              </router-link>
+            </h4>
+            <bs-label>{{props.item.family}}</bs-label>
+            <bs-label>{{props.item.environment}}</bs-label>
+            <bs-label>{{props.item.provider}}</bs-label>
+            <bs-label>{{props.item.language}}</bs-label>
+
+            <info-view :data="props.item.role" :title="false" class="mt10"></info-view>
+          </div>
+          <div class="col-xs-5">
+
+            <template v-if="props.item.system && props.item.system.length > 0">
+              <h5>System</h5>
+              <ul>
+                <li v-for="system in props.item.system">
+                  <router-link :to="{name: 'system.single', params: { id: system._id }}">
+                    {{system.name}}
+                  </router-link>
+                </li>
+              </ul>
+            </template>
+            <template v-if="props.item.targets">
+              <h5>Targets</h5>
+              <ul>
+                <li v-for="target in props.item.targets">
+                  <router-link :to="{name: 'servers.single', params: { id: target }}">
+                    {{target}}
+                  </router-link>
+                </li>
+              </ul>
+            </template>
+            <template v-if="props.item.servers">
+              <h5>Servers</h5>
+              <ul>
+                <li v-for="server in props.item.servers">
+                  <router-link :to="{name: 'servers.single', params: { id: server }}">
+                    {{server}}
+                  </router-link>
+                </li>
+              </ul>
+            </template>
+          </div>
+        </div>
+
+
+
+
+
+
+      </template>
+    </creater-config-list>
+
   </div>
 
   <modal-config class="mt15" ref="modal_config" :provider="model"></modal-config>

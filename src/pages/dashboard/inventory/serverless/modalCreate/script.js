@@ -11,7 +11,7 @@ export default {
       family: 'Serverless',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null,
+        name: null, description: null, provider:null, datacenters: {},
         tags: [], servers: [], targets: [],
         role: {language: null}
       },

@@ -18,7 +18,7 @@ export default {
       family: 'ObjectStorage',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null,
+        name: null, description: null, provider:null, datacenters: {},
         tags: [], servers: [], targets: [],
         role: {domain: null, endpoint: null, extra_config:null}
       },

@@ -131,7 +131,7 @@ export default {
     },
 
     mergeScheduler(result, value) {
-      const sched = _.pick(value, ['_id', 'link', 'enabled', 'name'])
+      const sched = _.pick(value, ['_id', 'link', 'enabled', 'name', 'task', 'method'])
       const task = _.get(sched, 'link.task')
 
       if(!_.isArray(result[task]))

@@ -11,7 +11,7 @@ export default {
     return {
       family: 'ServiceMesh',
       initialData: {
-        name: null, description: null, provider:null,
+        name: null, description: null, provider:null, datacenters: {},
         tags: [], servers: [],
         role: {endpoint: null}
       },

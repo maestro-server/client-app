@@ -35,6 +35,26 @@
       </template>
     </creater-config-list>
 
+    <creater-config-list label="Event" :basket="model.events" icons="fa-info-circle" :showManangerBTN="false">
+      <template slot="view" slot-scope="props">
+
+        <accordion type="warning" class="row">
+          <panel>
+              <span slot="header">
+                <bs-label>{{props.item.context}}</bs-label>
+                <bs-label :type="props.item.status">{{props.item.status}}</bs-label>
+                <bs-label type="info">{{props.item.created_at}}</bs-label>
+                <i class="fa fa-arrow-down"></i>
+
+                <br>Message: {{props.item.msg}}
+              </span>
+
+            {{props.item.description}}
+          </panel>
+        </accordion>
+      </template>
+    </creater-config-list>
+
 
   </div>
 

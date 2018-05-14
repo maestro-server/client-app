@@ -98,7 +98,8 @@ export default {
     editLoad () {
       this.tabShow=0
       this.$set(this, 'data', _.assign({}, this.initialData, this.model))
-      this.$set(this, 'enabled', this.model.enabled)
+      this.$set(this.data, 'endpoint', _.get(this.model, 'endpoint'))
+      this.$set(this, 'enabled', _.get(this.model, 'enabled'))
       this.$set(this, this.data.period_type, _.get(this.model, this.data.period_type))
 
       this.tab_tags.updaterEdit(this.model.args)
@@ -117,6 +118,7 @@ export default {
       const remove = _.chain(this.options)
         .get('period_type')
         .filter(e=>e!=period)
+        .push('msg')
         .value()
 
       this.$set(this, 'model', _.omit(this.model, remove))

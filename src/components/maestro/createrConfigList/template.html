@@ -12,7 +12,7 @@
       </li>
     </bs-list>
 
-    <button class="btn btn-primary pull-right" @click.prevent="callEdit"><i
+    <button class="btn btn-primary pull-right" @click.prevent="callEdit" v-if="showManangerBTN"><i
       class="fa" :class="icons" aria-hidden="true"></i> Manage {{label}}
     </button>
   </div>
