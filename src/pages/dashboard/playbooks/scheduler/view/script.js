@@ -11,7 +11,8 @@ export default {
   data: function () {
     return {
       entity: Scheduler,
-      model: {tags: [], events: []}
+      model: {tags: []},
+      events: []
     }
   },
 
@@ -44,7 +45,7 @@ export default {
                       .get('data.items', [])
                       .value()
 
-      this.$set(this.model, 'events', events)
+      this.$set(this, 'events', events)
     }
   },
 
