@@ -28,7 +28,7 @@ export default {
     'api_url': document.head.querySelector("[name=api_url]").content || 'http://localhost:8888',
     'static_url': document.head.querySelector("[name=static_url]").content || '/upload/',
     'logo_url': document.head.querySelector("[name=logo_url]").content || '/static/imgs/logo300.png',
-    'theme': document.head.querySelector("[name=theme]").content || 'theme-lotus',
+    'theme': document.head.querySelector("[name=theme]").content || 'lotus',
     'api_timeout': 5000
   }
 }

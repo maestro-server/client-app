@@ -19,7 +19,7 @@
   export default {
     computed: {
       theme() {
-        return _.get(store.getters, 'get_options.theme')
+        return 'theme-' + _.get(store.getters, 'get_options.theme')
       }
     },
 
