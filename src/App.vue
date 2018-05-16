@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="bg-main" :class="theme">
+  <div :class="theme">
+    <div class="bg-main">
       <bootue></bootue>
       <router-view></router-view>
 
