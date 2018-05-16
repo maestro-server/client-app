@@ -24,13 +24,25 @@
       </template>
 
       <template slot="info" slot-scope="props">
-        <button class="btn btn-default btn-xs" @click.stop="seeInstances(props.item)">
-          <i class="fa fa-server" aria-hidden="true"></i> Instances
-        </button>
 
-        <bs-label type="primary"><i :class="toLower(props.item.provider, 'icon-')"></i> {{ props.item.provider }}</bs-label>
-        <bs-label type="success"><i class="fa fa-cloud-upload"></i> {{ props.item.regions.length }} Regions</bs-label>
-        <bs-label type="success"><i class="fa fa-bullseye"></i> {{ props.item.zones.length }} Zones</bs-label>
+        <div class="row">
+          <div class="col-xs-12 mt10">
+            <button class="btn btn-default btn-xs" @click.stop="seeInstances(props.item)">
+              <i class="fa fa-server" aria-hidden="true"></i> Instances
+            </button>
+
+            <button class="btn btn-warning btn-xs" @click.stop="seeOrphans(props.item)">
+              <i class="fa fa-server" aria-hidden="true"></i> Orphans
+            </button>
+          </div>
+
+          <div class="col-xs-12 mt10">
+            <bs-label type="primary"><i :class="toLower(props.item.provider, 'icon-')"></i> {{ props.item.provider }}</bs-label>
+            <bs-label type="success"><i class="fa fa-cloud-upload"></i> {{ props.item.regions.length }} Regions</bs-label>
+            <bs-label type="success"><i class="fa fa-bullseye"></i> {{ props.item.zones.length }} Zones</bs-label>
+          </div>
+        </div>
+
       </template>
 
     </list-box>

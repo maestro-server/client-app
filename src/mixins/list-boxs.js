@@ -62,6 +62,11 @@ export default {
         .show(entity)
     },
 
+    seeOrphans (entity) {
+      this.MOrphans
+        .show(entity)
+    },
+
     changePage (page) {
       this.fetchData({page})
     }

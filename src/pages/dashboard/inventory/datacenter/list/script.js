@@ -16,6 +16,9 @@ export default {
   computed: {
     MInstances () {
       return this.$parent.$refs.modal_instances
+    },
+    MOrphans () {
+      return this.$parent.$refs.modal_orphans
     }
   }
 }

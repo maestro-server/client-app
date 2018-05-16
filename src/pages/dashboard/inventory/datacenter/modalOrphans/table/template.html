@@ -1,0 +1,20 @@
+<div>
+  <bs-table-server
+    name="dc-orphans-list"
+    :url="urlServers"
+    :columns="columns"
+    :options="options"
+    ref="vTable"
+  >
+
+    <template slot="hostname" slot-scope="props">
+      <a href="#" @click.prevent.stop="linkSingle(props.row._id)">{{props.row.hostname}}</a>
+    </template>
+    <template slot="actions" slot-scope="props">
+      <div>
+        <a @click.stop="linkSingle(props.row._id)"
+                     class="fa fa-eye btn btn-primary btn-xs"></a>
+      </div>
+    </template>
+  </bs-table-server>
+</div>
