@@ -13,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      urlServers: `${new Datacenters().getUrl()}/${this.dc_id}/servers/`,
+      urlServers: `${new Datacenters().getUrl()}/${this.dc_id}/orphans/`,
       columns: ['hostname', 'ipv4_private', 'environment', 'actions'],
       options: {
         filterable: false,

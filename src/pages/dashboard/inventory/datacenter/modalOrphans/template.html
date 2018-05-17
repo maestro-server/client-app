@@ -1,7 +1,7 @@
 <div>
   <modal :title="text.title" effect="fade" v-model="showModal" @closed="closed">
     <template v-if="showModal">
-      <p>List of all orphans servers, actived in maestro but don't exist in account provider.</p>
+      <p>List of all orphans servers, actived in maestro but maybe don't exist in account provider.</p>
 
       <sv-table ref="svTable" :dc_id="model._id"></sv-table>
 
