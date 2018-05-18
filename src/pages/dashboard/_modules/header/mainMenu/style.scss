@@ -3,12 +3,13 @@
 
 .navbar-main .navbar-nav {
   margin-bottom: 20px;
-  height: 65px;
+  height: 6px;
   background: $gray-lighter2;
   border: none;
 
   li a {
     color: $gray-darker;
+    padding: 15px 14px;
   }
 
   li:hover {

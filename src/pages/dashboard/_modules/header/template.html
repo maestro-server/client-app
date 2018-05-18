@@ -1,7 +1,7 @@
 <header>
 
   <router-link :to="{name: 'dashboard'}">
-    <div class="col-xs-2 logo">
+    <div class="col-md-2 col-sm-3 col-xs-6 logo">
       <div class="pull-left">
         <h1><i class="fa" :class="[icon]" aria-hidden="true"></i> {{ title }}</h1>
         <p :if="subtitle">{{subtitle}}</p>
@@ -9,11 +9,11 @@
     </div>
   </router-link>
 
-  <div class="col-xs-6">
+  <div class="col-md-6 col-sm-8 col-xs-3">
     <main-menu></main-menu>
   </div>
 
-  <div class="col-xs-4">
+  <div class="col-md-4 col-sm-1 col-xs-3">
     <tenant-drop-down class="pull-right"></tenant-drop-down>
   </div>
 

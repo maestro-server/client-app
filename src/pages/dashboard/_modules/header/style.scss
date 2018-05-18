@@ -11,10 +11,18 @@ header {
   display: inline-block;
 
   h1 {
-    font-size: 18px;
-    color: #250c49;
-    paddgin: 0;
+    font-size: 16px;
+    padding: 0;
     margin: 15px 0 5px;
+
+    color: #250c49;
+    @include themify($themes) {
+      color: 55px solid themed('brand-primary-darker');
+    }
+  }
+
+  p{
+    font-size: $font-size-small;
   }
 
   .logo {
@@ -32,6 +40,36 @@ header {
     border-top: 55px solid $brand-primary;
     @include themify($themes) {
       border-top: 55px solid themed('brand-primary');
+    }
+  }
+
+
+  @media only screen and (max-width: $screen-xs-max) {
+    .navbar-toggle.collapsed {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 2;
+      background: $brand-primary;
+      @include themify($themes) {
+        background: themed('brand-primary');
+      }
+    }
+  
+    .navbar-collapse {
+      position: fixed;
+      left: 5%;
+      bottom: 0;
+      width: 100%;
+      background: #f0f0f0;
+      z-index: 1;
+  
+      .nav > li {
+        position: relative;
+        display: block;
+        width: 100%;
+        float: left;
+      }
     }
   }
 }

@@ -28,6 +28,10 @@ export default {
           ipv4_private: 'IP Private',
           updated_at: 'Updated At',
           created_at: 'Created At'
+        },
+        columnsDisplay: {
+          'role': 'min_desktop',
+          'auth': 'min_desktop'
         }
       }
     }

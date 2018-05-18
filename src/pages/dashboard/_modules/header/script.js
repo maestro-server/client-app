@@ -12,7 +12,7 @@ export default {
   data: function () {
     return {
       title: 'Cloud Inventory',
-      subtitle: 'Database of all yours infra',
+      subtitle: 'Analytics infrastructure',
       icon: 'fa-th'
     }
   }
