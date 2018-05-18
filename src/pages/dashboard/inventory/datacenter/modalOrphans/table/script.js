@@ -41,6 +41,10 @@ export default {
         const path = {name: 'servers.single', params: { id }}
         this.$router.push(path)
       }, 500);
-    }
+    },
+
+    deleteP(data) {
+      this.$parent.$parent.deleteServer(data)
+    },
   }
 }

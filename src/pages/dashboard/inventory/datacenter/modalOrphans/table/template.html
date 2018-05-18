@@ -14,6 +14,8 @@
       <div>
         <a @click.stop="linkSingle(props.row._id)"
                      class="fa fa-eye btn btn-primary btn-xs"></a>
+
+        <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
       </div>
     </template>
   </bs-table-server>
