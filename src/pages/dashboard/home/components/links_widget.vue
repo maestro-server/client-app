@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-3 col-xs-6">
+  <div class="col-sm-3 col-xs-12">
     <bs-list>
       <li class="list-group-item" v-for="link in links">
         <router-link :to="link.route">

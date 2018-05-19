@@ -33,10 +33,10 @@
                label="Zones" placeholder="Select Zone" refs="s_zones"></bs-select>
 
     <div class="row mt20">
-      <div class="col-xs-3 text-right mt5">
+      <div class="col-sm-3 col-xs-12 control-label">
         <label>Type</label>
       </div>
-      <div class="col-xs-9">
+      <div class="col-sm-9 col-xs-12">
         <button-group v-model="value.type" type="primary">
           <bs-radio v-for="stc, i in serverType" :key="stc" :selected-value="stc">{{stc}}</bs-radio>
         </button-group>

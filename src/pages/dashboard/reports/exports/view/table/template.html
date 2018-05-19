@@ -1,11 +1,12 @@
 <div>
 
-  <div class="col-xs-12 text-right">
+  <div class="col-sm-4 col-xs-12">
 
     <router-link v-if="model._id" :to="{name: 'reports.single', params: { id: model._id }}"
-                 class="btn btn-primary btn-sm pull-left">Home
+                 class="btn btn-primary btn-sm">Home
     </router-link>
-
+  </div>
+  <div class="col-sm-8 col-xs-12 text-right hidden-xs">
     <b>Export to:</b>
     <button class="btn btn-primary btn-sm" @click.stop="download('application', 'json')">
       <i class="fa fa-file-text"></i> Json

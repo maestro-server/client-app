@@ -7,8 +7,8 @@ export default {
     refs: {type: String, default: "teams"},
     defaultImg: {type: String, default: IMG_AVATAR_DEFAULT},
     value: {default: null},
-    imgSize: {type: String, default: "col-xs-12 col-sm-3"},
-    inputSize: {type: String, default: "col-xs-12 col-sm-9"}
+    imgSize: {type: String, default: "col-xs-3"},
+    inputSize: {type: String, default: "col-xs-9"}
   },
 
   data () {

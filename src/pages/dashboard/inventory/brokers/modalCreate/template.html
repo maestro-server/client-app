@@ -17,10 +17,10 @@
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
               <div class="row">
-                <div class="col-xs-3 text-right mt5">
+                <div class="col-sm-3 col-xs-12 control-label">
                   <label>Third Party?</label>
                 </div>
-                <div class="col-xs-9">
+                <div class="col-sm-9 col-xs-12">
                   <button-group v-model="own" type="primary">
                     <bs-radio :selected-value="1">Yes</bs-radio>
                     <bs-radio :selected-value="0">No</bs-radio>

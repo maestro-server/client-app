@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-3 col-xs-6">
+  <div class="col-sm-3 col-xs-12">
     <pie-chart :data="getMostFamilies" :options="options"></pie-chart>
   </div>
 </template>

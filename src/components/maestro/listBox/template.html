@@ -1,23 +1,23 @@
 <div>
   <panel v-for="item, i in items" :key="i">
-    <div class="col-xs-4">
+    <div class="col-sm-7 col-xs-12">
       <slot name="header" :item="item">
-        <h3 class="mt0">
+        <h3 class="mt0 mb0">
           {{item.name}}
         </h3>
       </slot>
 
-      <button class="btn btn-primary btn-xs" @click.stop="event('edit', item)">
+      <button class="btn btn-primary btn-xs mt10" @click.stop="event('edit', item)">
         <i class="fa fa-pencil" aria-hidden="true"></i> Edit {{label}}
       </button>
-      <button class="btn btn-primary btn-xs" @click.stop="event('acl', item)">
+      <button class="btn btn-primary btn-xs mt10" @click.stop="event('acl', item)">
         <i class="fa fa-key" aria-hidden="true"></i> Edit Access
       </button>
-      <button class="btn btn-danger btn-xs" @click.stop="event('del', item)">
+      <button class="btn btn-danger btn-xs mt10" @click.stop="event('del', item)">
         <i class="fa fa-trash" aria-hidden="true"></i> Delete {{label}}
       </button>
     </div>
-    <div class="col-xs-8 text-right">
+    <div class="col-sm-5 col-xs-12 text-right">
       <slot name="info" :item="item"></slot>
     </div>
   </panel>

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-3 col-xs-6">
+  <div class="col-sm-3 col-xs-12">
     <doughnut-chart :data="getMost" :options="options"  v-if="hasThis"></doughnut-chart>
     <well v-if="!hasThis">{{pfail}}</well>
   </div>

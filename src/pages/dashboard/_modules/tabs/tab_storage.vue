@@ -49,10 +49,10 @@
                     v-validate.initial="'required|decimal'"></bs-input>
 
             <div class="row" id="baseStorage">
-                <div class="col-xs-3 text-right mt5">
+                <div class="col-sm-3 col-xs-12 control-label">
                   <label>Root device</label>
                 </div>
-                <div class="col-xs-9">
+                <div class="col-sm-9 col-xs-12">
                 <button-group v-model="single.root" type="default">
                   <bs-radio selected-value="root">Yes</bs-radio>
                   <bs-radio selected-value="secondary">No</bs-radio>

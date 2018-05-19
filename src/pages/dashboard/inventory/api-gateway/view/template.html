@@ -3,17 +3,17 @@
     <header-view-entity :label="label" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
-  <div class="col-xs-12 mt10 row">
-    <displayer class="col-sm-2 col-xs-4 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'" v-if="item.val">
+  <div class="col-xs-12 mt10 bg-gray-lighter">
+    <displayer class="col-sm-2 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'" v-if="item.val">
       <h4 class="white">{{item.val}}</h4>
     </displayer>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
     <info-view :data="filtered"></info-view>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
 
     <creater-config-list label="Application" :basket="list_targets" @edit="edit" :index="2" icons="fa-code">
       <template slot="view" slot-scope="props">

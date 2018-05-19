@@ -4,17 +4,17 @@
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">
-    <displayer class="col-sm-2 col-xs-4 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
+    <displayer class="col-sm-2 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
                v-if="item.val">
       <h4 class="white">{{item.val}}</h4>
     </displayer>
   </div>
 
-  <div class="col-xs-6 mt10">
+  <div class="col-sm-6 col-xs-12 mt10">
     <info-view :data="filtered"></info-view>
   </div>
 
-  <div class="col-xs-6 mt10 wrapperServer">
+  <div class="col-sm-6 col-xs-12 mt10 wrapperServer">
 
     <creater-config-list label="Service" :basket="model.services" @edit="edit" :index="4">
       <template slot="view" slot-scope="props">
@@ -98,7 +98,7 @@
     <creater-config-list label="Application" :basket="list_applications" :showManangerBTN="false" icons="fa-code">
       <template slot="view" slot-scope="props">
         <div class="row">
-          <div class="col-xs-7">
+          <div class="col-sm-7 col-xs-12">
             <h4>
               <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
                 {{props.item.name}}
@@ -112,7 +112,7 @@
 
             <info-view :data="props.item.role" :title="false" class="mt10"></info-view>
           </div>
-          <div class="col-xs-5">
+          <div class="col-sm-5 col-xs-12">
 
             <template v-if="props.item.system && props.item.system.length > 0">
               <h5>System</h5>
@@ -146,10 +146,6 @@
             </template>
           </div>
         </div>
-
-
-
-
 
 
       </template>

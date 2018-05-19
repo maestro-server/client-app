@@ -3,11 +3,11 @@
     <header-view-entity label="System" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
     <info-view :data="filtered"></info-view>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
     <creater-config-list label="Application" :basket="list_apps" @edit="editM" icons="fa-code">
       <template slot="view" slot-scope="props">
         <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">

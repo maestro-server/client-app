@@ -4,10 +4,10 @@
     <template slot="forms">
 
       <div class="row">
-        <div class="col-xs-3 text-right mt5">
+        <div class="col-sm-3 col-xs-12 control-label">
           <label>Auth type</label>
         </div>
-        <div class="col-xs-9">
+        <div class="col-sm-9 col-xs-12">
           <button-group v-model="single.type" type="primary" v-validate.initial="'required'">
             <bs-radio v-for="atp in options" :key="atp" :selected-value="atp">{{atp}}</bs-radio>
           </button-group>

@@ -3,11 +3,11 @@
     <header-view-entity label="Client" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
     <info-view :data="filtered"></info-view>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-sm-6 col-xs-12">
 
     <creater-config-list label="System" :basket="list_system" @edit="editM" icons="fa-briefcase">
       <template slot="view" slot-scope="props">

@@ -21,7 +21,7 @@
       ></typeahead>
 
       <div class="row">
-        <div class="col-xs-9 col-xs-offset-3">
+        <div class="col-sm-9 col-sm-offset-3">
           <span class="btn btn-success btn-xs" v-if="this.single._id"><i class="fa fa-check-circle-o"></i> Valid ({{single.name}})</span>
           <span class="btn btn-danger btn-xs" v-if="!this.single._id"><i class="fa fa-times-circle-o"></i> Select a valid Scheduler</span>
         </div>

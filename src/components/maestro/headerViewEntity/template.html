@@ -1,12 +1,22 @@
-<div>
-  <h3 class="col-xs-6 pb10">
-    {{label}} - <span class="text-capitalize">{{name}}</span>
+<div class="mt20 pb10">
+  <h3 class="col-sm-6 col-xs-12 mt0">
+    <span class="hidden-xs">{{label}} - </span><span class="text-capitalize">{{name}}</span>
   </h3>
-  <div class="col-xs-6 pb10 mt20 text-right">
-    <button v-if="visibility.create" class="btn btn-warning" @click="event('acl')"><i aria-hidden="true" class="fa fa-code"></i> Edit ACL</button>
-    <button v-if="visibility.edit" class="btn btn-success text-limit" @click="event('edit')"><i class="fa fa-edit"></i> Edit <span class="text-capitalize">{{name}}</span>
+  <div class="col-sm-6 col-xs-12 text-right">
+    <button v-if="visibility.create" class="btn btn-warning" @click="event('acl')">
+      <i aria-hidden="true" class="fa fa-code"></i>
+      <span class="hidden-xs">Edit</span> ACL
     </button>
-    <button v-if="visibility.delete" class="btn btn-danger" @click="event('del')"><i class="fa fa-trash"></i> Delete {{label}}</button>
+
+    <button v-if="visibility.edit" class="btn btn-success text-limit" @click="event('edit')">
+      <i class="fa fa-edit"></i> Edit
+      <span class="text-capitalize hidden-xs">{{name}}</span>
+    </button>
+
+    <button v-if="visibility.delete" class="btn btn-danger" @click="event('del')">
+      <i class="fa fa-trash"></i>
+      Delete <span class="hidden-xs">{{label}}</span>
+    </button>
   </div>
 
   <div class="clearfix"></div>

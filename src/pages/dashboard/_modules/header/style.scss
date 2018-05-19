@@ -1,6 +1,7 @@
 @import '~bootue/src/_core/variables';
 @import '~bootue/src/_core/mixins';
 
+
 header {
   background: $gray-lighter;
   @include gradient-vertical($start-color: $gray-lighter, $end-color: $gray-lighter2, $start-percent: 0%, $end-percent: 100%);
@@ -46,6 +47,7 @@ header {
 
   @media only screen and (max-width: $screen-xs-max) {
     .navbar-toggle.collapsed {
+      color: $white;
       position: fixed;
       bottom: 10px;
       right: 10px;
@@ -55,15 +57,16 @@ header {
         background: themed('brand-primary');
       }
     }
-  
+
     .navbar-collapse {
       position: fixed;
-      left: 5%;
+      left: 2%;
       bottom: 0;
-      width: 100%;
+      width: 102%;
       background: #f0f0f0;
       z-index: 1;
-  
+      box-sizing: border-box;
+
       .nav > li {
         position: relative;
         display: block;

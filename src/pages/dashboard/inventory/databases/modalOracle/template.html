@@ -10,10 +10,10 @@
         <!-- ============================================== -->
         <tab header="General">
             <div class="row">
-              <div class="col-xs-3 text-right mt5">
+              <div class="col-sm-3 col-xs-12 control-label">
                 <label>Status</label>
               </div>
-              <div class="col-xs-9">
+              <div class="col-sm-9 col-xs-12">
                 <button-group v-model="data.status" type="primary">
                   <bs-radio v-for="sts, i in options.status" :key="sts" :selected-value="sts">{{sts}}</bs-radio>
                 </button-group>
@@ -53,10 +53,10 @@
                 <hr>
 
                 <div class="row">
-                  <div class="col-xs-3 text-right mt5">
+                  <div class="col-sm-3 col-xs-12 control-label">
                     <label>Third Party?</label>
                   </div>
-                  <div class="col-xs-9">
+                  <div class="col-sm-9 col-xs-12">
                     <button-group v-model="own" type="primary">
                       <bs-radio :selected-value="1">Yes</bs-radio>
                       <bs-radio :selected-value="0">No</bs-radio>
