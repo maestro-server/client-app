@@ -166,7 +166,7 @@ export default {
     connectionSwap() {
       const pre = _.pickBy(this.data.link, _.identity)
 
-      if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task')) {
+      if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task') && !_.get(this, 'data.endpoint')) {
         let conn = _.chain(this.options.configs)
           .filter(e => e.name == _.get(this.data, 'task'))
           .head()
