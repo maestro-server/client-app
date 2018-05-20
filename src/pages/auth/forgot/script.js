@@ -17,7 +17,8 @@ export default {
     return {
       model: {
         email: undefined
-      }
+      },
+      sended: false
     }
   },
 
@@ -29,7 +30,7 @@ export default {
         const data = Object.assign({}, this.model, {callback_url});
 
         new Auth(data, '/users/forgot')
-          .create()
+          .create(() => this.sended = true)
 
       }).catch();
 

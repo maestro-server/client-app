@@ -17,7 +17,13 @@
       name="email"
       @keydown.enter="forgot"
       :error="makeError('email')"
+      v-if="!sended"
     ></bs-input>
+
+    <alert v-if="sended" class="alert-success">
+      We just sent an email to you with a link to reset your password!
+    </alert>
+
 
     <div class="text-right">
       <router-link :to="{name: 'login'}" class="btn btn-default">Back</router-link>
