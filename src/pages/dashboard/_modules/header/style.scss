@@ -44,7 +44,6 @@ header {
     }
   }
 
-
   @media only screen and (max-width: $screen-xs-max) {
     .navbar-toggle.collapsed {
       color: $white;
@@ -60,7 +59,7 @@ header {
 
     .navbar-collapse {
       position: fixed;
-      left: 2%;
+      left: 3%;
       bottom: 0;
       width: 102%;
       background: #f0f0f0;

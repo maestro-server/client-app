@@ -1,7 +1,7 @@
-<nav>
-  <ul class="nav nav-tabs">
+<nav class="menu-second">
+  <navbar class="mb10">
     <template v-for="link, key in list">
-      <router-link tag="li" :to="url(key)" active-class="active">
+      <router-link class="nav-item" tag="li" :to="url(key)" active-class="active">
         <a>{{ link }}</a>
       </router-link>
     </template>
@@ -11,5 +11,6 @@
         <a>{{ item }}</a>
       </router-link>
     </dropdown>
-  </ul>
+  </navbar>
+
 </nav>

@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">
-    <displayer class="col-sm-2 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
+    <displayer class="col-md-2 col-sm-3 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
                v-if="item.val">
       <h4 class="white">{{item.val}}</h4>
     </displayer>

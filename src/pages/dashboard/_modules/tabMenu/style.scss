@@ -1,0 +1,28 @@
+@import '~bootue/src/_core/variables';
+@import '~bootue/src/_core/mixins';
+
+.menu-second  {
+
+
+  .container-fluid {
+    @media only screen and (min-width: $screen-sm-min) {
+      margin: 0;
+      padding: 0;
+
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .navbar-nav {
+
+    li a {
+      color: $brand-primary;
+
+      @include themify($themes) {
+        color: themed('brand-primary');
+      }
+    }
+  }
+
+}

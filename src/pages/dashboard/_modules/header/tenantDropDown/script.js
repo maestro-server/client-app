@@ -14,8 +14,9 @@ export default {
     return {
       menu: {
         teams: ['Teams', 'fa-users'],
-        connections: ['Connections', 'fa-wrench'],
+        connections: ['Connections', 'fa fa-circle-o-notch'],
         events: ['Events', 'fa-bell'],
+        settings: ['Settings', 'fa-cog'],
         hr: true,
         access_manager: ['Access Manager', 'fa-key'],
         profile: ['Profile', 'fa-user'],

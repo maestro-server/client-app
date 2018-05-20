@@ -2,7 +2,7 @@
 import comp from './single'
 
 export default {
-  name: 'inventory.settings',
+  name: 'settings',
   path: '/',
   component: comp
 }

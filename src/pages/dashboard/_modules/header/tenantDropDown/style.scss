@@ -4,80 +4,27 @@
 @import '~bootue/src/_core/variables';
 @import '~bootue/src/_core/mixins';
 
-$base-height: 35px;
+$base-height: 65px;
 $min-dropdown-menu: 206px;
 
-.wrapper-maestro-menu {
-  position: relative;
-  max-width: $min-dropdown-menu;
-  margin-right: 2px;
+.menu {
+  float: left;
 
-  .c-1 {
+  box-shadow: 0 1px 10px $brand-primary-darker;
+  background: $brand-primary;
+  @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
+  @include themify($themes) {
+    box-shadow: 0 1px 10px themed('brand-primary-darker');
+    background: themed('brand-primary');
+    @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color: themed('brand-secondary'), $start-percent: 0%, $end-percent: 100%);
+  }
+
+  .item {
     float: left;
-    width: 35px;
-    height: $base-height;
-  }
-
-  .c-2 {
-    padding: 0 10px;
-    line-height: $base-height;
-    max-width: 170px;
-    display: inline-block;
-    overflow: hidden;
-    height: $base-height;
-  }
-
-  img {
-    box-shadow: 1px 1px 3px $brand-primary-darker;
-    @include themify($themes) {
-      box-shadow: 1px 1px 3px themed('brand-primary-darker');
-    }
-  }
-
-  .square-avatar {
-    height: $base-height;
-  }
-
-  .slide-fade-enter-active {
-    transition: all .2s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .2s ease;
-
-  }
-  .slide-fade-enter, .slide-fade-leave-to {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-
-  i {
-    line-height: 30px;
-  }
-
-  .maestro-menu {
+    padding: 0 3px;
     position: relative;
-    min-width: $min-dropdown-menu;
-    z-index: 5;
 
-    box-shadow: 0 1px 10px $brand-primary-darker;
-    background: $brand-primary;
-    @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-secondary, $start-percent: 0%, $end-percent: 100%);
-    @include themify($themes) {
-      box-shadow: 0 1px 10px themed('brand-primary-darker');
-      background: themed('brand-primary');
-      @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color: themed('brand-secondary'), $start-percent: 0%, $end-percent: 100%);
-    }
-
-    a {
-      padding: 20px 15px 8px;
-      display: inline-block;
-      width: 100%;
-      color: $white;
-      font-size: $font-size-large;
-      text-transform: capitalize;
-    }
-
-    a:hover {
+    &:hover {
       cursor: pointer;
       text-decoration: none;
       color: $white;
@@ -89,51 +36,51 @@ $min-dropdown-menu: 206px;
     }
   }
 
+  .entity {
+    display: block;
+    font-size: 17px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    line-height: $base-height;
+  }
+
+  a {
+    float: left;
+    width: 100%;
+  }
+
   .maestro-dropdown {
     position: absolute;
-    min-width: $min-dropdown-menu;
     padding: 0;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     overflow: hidden;
-    box-shadow: 1px 2px 10px #b4b4b4;
+    box-shadow: 1px 20px 10px #b4b4b4;
     z-index: 3;
-
-    @media only screen and (max-width: $screen-sm-max) {
-      top: 66px;
-      right: 0;
-      position: absolute;
-    }
+    top: $base-height;
+    right: 0;
 
     background: $brand-primary;
-    @include gradient-vertical($start-color: $brand-primary, $end-color: $brand-secondary);
+    @include gradient-vertical($start-color: $brand-primary, $end-color: $brand-primary-darker);
     @include themify($themes) {
       background: themed('brand-primary');
-      @include gradient-vertical($start-color: themed('brand-primary'), $end-color: themed('brand-secondary'));
+      @include gradient-vertical($start-color: themed('brand-primary'), $end-color: themed('brand-primary-darker'));
     }
 
     ul {
-      padding: 0;
-      margin: 0;
       width: 100%;
     }
 
     li {
-      padding: 0;
-      list-style: none;
       cursor: pointer;
 
-      @include themify($themes) {
-        @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color: themed('brand-secondary'), $start-percent: 0%, $end-percent: 100%);
-      }
-
       a {
-        padding: 10px 10px 0;
+        padding: 0 10px 0;
         display: inline-block;
-        width: 100%;
-        color: #fff;
+        color: $white;
         text-decoration: none;
-        font-size: $font-size-medium;
         text-transform: capitalize;
 
         box-shadow: 0 0 2px $brand-primary-darker;
@@ -145,58 +92,78 @@ $min-dropdown-menu: 206px;
       a:hover {
         @include gradient-horizontal($start-color: $brand-secondary, $end-color: $brand-primary-darker, $start-percent: 0%, $end-percent: 30%);
         @include themify($themes) {
-          @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color:themed('brand-primary-darker'), $start-percent: 0%, $end-percent: 30%);
+          @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color: themed('brand-primary-darker'), $start-percent: 0%, $end-percent: 30%);
         }
       }
     }
   }
-}
 
-.wrapper-settings {
-  margin-right: 0;
 
-  .c-1 {
-    font-size: 28px;
-    padding-top: 3px;
+  .main {
+    float: left;
+    width: 80%;
+
+    .avatar {
+      float: left;
+      width: 20%;
+    }
+
+    img {
+      padding: 4px;
+      max-height: 120px;
+      margin-top: 8px;
+    }
   }
 
-  .c-2 {
-    padding: 0 2px;
-    line-height: $base-height;
-  }
+  .complementary {
+    float: left;
+    width: 20%;
 
-  .maestro-menu {
-    min-width: 50px;
-  }
+    .maestro-dropdown {
+      right: 0;
+      min-width: 160px;
 
-  .maestro-dropdown {
-    right: 0;
-    min-width: 160px;
+      ul {
+        padding: 6px 0 3px;
 
-    ul {
-      padding: 6px 0 3px;
-
-      li a {
-        cursor: pointer;
-        padding: 4px 15px;
-        font-size: $font-size-base;
+        li a {
+          box-shadow: none;
+          padding: 10px 15px;
+          font-size: $font-size-base;
+        }
       }
+    }
+  }
+
+  @media only screen and (min-width: $screen-md-min) {
+    width: 318px;
+  }
+
+  @media only screen and (max-width: $screen-sm-max) {
+    max-width: 158px;
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    max-width: 118px;
+
+    .entity {
+      font-size: 15px;
+    }
+
+    .main {
+      width: 70%;
+    }
+    .complementary {
+      width: 30%;
+    }
+
+    .fix-mobile {
+      width: 100%;
     }
   }
 }
 
-.menu-mobile {
-  height: 70px;
-  line-height: 70px;
-  background: $brand-primary;
-  min-width: 90px;
 
-  a {
-    color: $white;
-    font-size: $font-size-large;
-    padding:0 6px;
-  }
-}
 
 .twrapper {
   max-height: 350px;

@@ -15,13 +15,13 @@
         <h4>Filters</h4>
       </div>
 
-      <div class="col-xs-5">
+      <div class="col-sm-5 col-xs-6">
 
         <report-filter ref="compfilters" @submit="addFilter" @del="delItem"></report-filter>
 
       </div>
 
-      <div class="col-xs-1">
+      <div class="col-sm-1 hidden-xs">
         <i class="fa fa-chevron-right text-center general-point"></i>
       </div>
 

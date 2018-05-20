@@ -29,4 +29,14 @@
       background-color: themed('brand-primary');
     }
   }
+
+  @media only screen and (max-width: 881px) and (min-width: 768px) {
+    small {
+      display: none;
+    }
+    li a {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
 }

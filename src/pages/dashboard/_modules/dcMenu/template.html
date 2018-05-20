@@ -1,7 +1,14 @@
-<ul class="list-unstyled list-inline col-xs-12">
+<ul class="list-unstyled list-inline">
   <li><router-link :to="{name: 'volumes'}">Volumes</router-link></li>
   <li><router-link :to="{name: 'snapshots'}">Snapshot</router-link></li>
   <li><router-link :to="{name: 'images'}">Images</router-link></li>
   <li><router-link :to="{name: 'network'}">Network</router-link></li>
   <li><router-link :to="{name: 'flavors'}">Flavors</router-link></li>
+
+  <div class="pull-right hidden-xs">
+    <router-link :to="{name: 'connections'}" class="btn btn-primary btn-xs"><i aria-hidden="true" class="fa fa-circle-o-notch"></i> Connections</router-link>
+    <router-link :to="{name: 'settings'}" class="btn btn-primary btn-xs"><i aria-hidden="true" class="fa fa-cog"></i> Settings</router-link>
+
+  </div>
+
 </ul>

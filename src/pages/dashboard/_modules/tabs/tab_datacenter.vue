@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearfix">
-      <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
+      <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right hidden-xs" target="_blank">
         <i class="fa fa-plus-circle"></i> Datacenter
       </router-link>
     </div>
@@ -12,7 +12,7 @@
                label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
                ref="s_provider"></bs-select>
 
-    <div class="row" v-if="options.length == 0">
+    <div class="row hidden-xs" v-if="options.length == 0">
       <div class="col-xs-3 text-right">
         <label>Datacenter</label>
       </div>

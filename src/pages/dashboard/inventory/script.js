@@ -1,6 +1,7 @@
 'use strict'
 import {mapActions} from 'vuex'
 import tabMenu from '../_modules/tabMenu/tab-menu.vue'
+import dcMenu from '../_modules/dcMenu/menu.vue'
 
 export default {
   data () {
@@ -38,7 +39,8 @@ export default {
   },
 
   components: {
-    tabMenu
+    tabMenu,
+    dcMenu
   },
 
   methods: {

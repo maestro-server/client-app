@@ -1,6 +1,6 @@
-<div>
-  <navbar type="main">
-    <li>
+<div class="pull-left">
+  <navbar type="main" ref="nav">
+    <li @click.stop="collapse">
       <router-link :to="{ name: 'inventory' }">
         <span class="figure">
           <i class="fa fa-th" aria-hidden="true"></i>
@@ -11,7 +11,7 @@
       </router-link>
     </li>
 
-    <li>
+    <li @click.stop="collapse">
       <router-link :to="{ name: 'playbooks' }">
         <span class="figure">
           <i class="icon-ansible" aria-hidden="true"></i>
@@ -21,7 +21,7 @@
       </router-link>
     </li>
 
-    <li>
+    <li @click.stop="collapse">
       <router-link :to="{ name: 'exports' }">
         <span class="figure">
           <i class="fa fa-map" aria-hidden="true"></i>

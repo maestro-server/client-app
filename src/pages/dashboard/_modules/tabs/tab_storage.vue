@@ -30,7 +30,7 @@
                       :headers="headers"
             ></typeahead>
           </div>
-          <div class="col-xs-12">
+          <div class="col-xs-12 hidden-xs">
             <router-link :to="{name: 'volumes'}" class="btn btn-primary btn-xs pull-right" target="_blank">
               <i class="fa fa-plus-circle"></i> Create Volume
             </router-link>

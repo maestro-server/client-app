@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">
-    <displayer class="col-sm-2 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
+    <displayer class="col-md-2 col-sm-3 col-xs-12 mt20" v-for="item, i in viewDisplayer" :key="i" :type="item.type || 'info'"
                v-if="item.val">
       <h4 class="white">{{item.val}}</h4>
     </displayer>
@@ -118,7 +118,7 @@
               <h5>System</h5>
               <ul>
                 <li v-for="system in props.item.system">
-                  <router-link :to="{name: 'system.single', params: { id: system._id }}">
+                  <router-link :to="{name: 'system.single', params: { id: system._id }}" class="break">
                     {{system.name}}
                   </router-link>
                 </li>
@@ -128,7 +128,7 @@
               <h5>Targets</h5>
               <ul>
                 <li v-for="target in props.item.targets">
-                  <router-link :to="{name: 'servers.single', params: { id: target }}">
+                  <router-link :to="{name: 'servers.single', params: { id: target }}" class="break">
                     {{target}}
                   </router-link>
                 </li>
@@ -138,7 +138,7 @@
               <h5>Servers</h5>
               <ul>
                 <li v-for="server in props.item.servers">
-                  <router-link :to="{name: 'servers.single', params: { id: server }}">
+                  <router-link :to="{name: 'servers.single', params: { id: server }}" class="break">
                     {{server}}
                   </router-link>
                 </li>
