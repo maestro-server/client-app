@@ -5,6 +5,7 @@ import {mapActions} from 'vuex'
 import Me from 'factories/me'
 import Auth from 'factories/auth'
 import FectherEntity from 'services/fetchEntity'
+import fsuccess from 'src/resources/callbacks/request_success'
 
 import {EventBus} from 'src/resources/bus/bus-general.js';
 
@@ -26,26 +27,34 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
-    me (force = true) {
+    me(force = true) {
       FectherEntity(Me)({force})
         .find((e) => _.merge(this.model, e.data))
     },
 
-    updateProfile () {
+    updateProfile() {
       const data = _.omit(this.model, 'email')
 
       FectherEntity(Me)()
-        .patch(() => EventBus.$emit('update-profile', this.model), data, '?')
+        .patch(() => {
+          EventBus.$emit('update-profile', this.model)
+          fsuccess()
+        }, data, '?')
     },
 
-    updateEmail () {
+    updateEmail() {
       const email = this.cemail
 
-      FectherEntity(Me)()
-        .patch(() => this.model.email = email, {email}, '?')
+      if (email) {
+        FectherEntity(Me)()
+          .patch(() => {
+            this.model.email = email
+            fsuccess()
+          }, {email}, '?')
+      }
     },
 
-    updatePassWord () {
+    updatePassWord() {
       const {email} = this.model
       this.cpass = _.merge(this.cpass, {email})
 
@@ -55,7 +64,7 @@ export default {
     }
   },
 
-  mounted () {
+  mounted() {
     this.me()
   }
 }

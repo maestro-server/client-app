@@ -104,8 +104,8 @@
       ></bs-input>
 
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" :disabled="errors.any('femail')" @click="updateEmail">
-          Update a new password
+        <button type="button" class="btn btn-primary pull-right" :disabled="!cemail" @click="updateEmail">
+          Update a new email
         </button>
       </div>
 
