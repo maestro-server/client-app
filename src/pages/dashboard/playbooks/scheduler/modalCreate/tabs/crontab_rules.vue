@@ -1,173 +1,70 @@
 <template>
-    <table border="1" class="table table-striped table-bordered">
+  <table border="1" class="table table-striped table-bordered">
     <colgroup>
-        <col width="48%" />
-        <col width="52%" />
+      <col width="13%">
+      <col width="5%">
+      <col width="82%">
     </colgroup>
-
+    <thead valign="bottom">
+    <tr class="row-odd">
+      <th class="head">Expression</th>
+      <th class="head">Field</th>
+      <th class="head">Description</th>
+    </tr>
+    </thead>
     <tbody valign="top">
-        <tr class="row-odd">
-        <td><strong>Example</strong></td>
-
-        <td><strong>Meaning</strong></td>
-        </tr>
-
-        <tr class="row-even">
-        <td><code class="docutils literal"><span class="pre">minute=*, hour=*, day_of_week=*,  day_of_month=* and month_of_year=*</span></code></td>
-
-        <td>Execute every minute.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td><code class="docutils literal"><span class="pre">minute=0,</span>
-        <span class="pre">hour=0</span></code></td>
-
-        <td>Execute daily at midnight.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td><code class="docutils literal"><span class="pre">minute=0,</span>
-        <span class="pre">hour='*/3'</span></code></td>
-
-        <td>Execute every three hours: midnight, 3am, 6am, 9am, noon, 3pm, 6pm, 9pm.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class=
-            "pre">minute=0,</span></code></dt>
-
-            <dd><code class="docutils literal"><span class=
-            "pre">hour='0,3,6,9,12,15,18,21'</span></code></dd>
-            </dl>
-        </td>
-
-        <td>Same as previous.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td><code class="docutils literal"><span class=
-        "pre">minute='*/15'</span></code></td>
-
-        <td>Execute every 15 minutes.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td><code class="docutils literal"><span class=
-        "pre">day_of_week='sunday'</span></code></td>
-
-        <td>Execute every minute (!) at Sundays.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class=
-            "pre">minute='*',</span></code></dt>
-
-            <dd><code class="docutils literal"><span class="pre">hour='*',</span></code>
-            <code class="docutils literal"><span class=
-            "pre">day_of_week='sun'</span></code></dd>
-            </dl>
-        </td>
-
-        <td>Same as previous.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class=
-            "pre">minute='*/10',</span></code></dt>
-
-            <dd><code class="docutils literal"><span class=
-            "pre">hour='3,17,22',</span></code> <code class=
-            "docutils literal"><span class=
-            "pre">day_of_week='thu,fri'</span></code></dd>
-            </dl>
-        </td>
-
-        <td>Execute every ten minutes, but only between 3-4 am, 5-6 pm, and 10-11 pm on
-        Thursdays or Fridays.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td><code class="docutils literal"><span class="pre">minute=0,</span>
-        <span class="pre">hour='*/2,*/3'</span></code></td>
-
-        <td>Execute every even hour, and every hour divisible by three. This means: at
-        every hour <em>except</em>: 1am, 5am, 7am, 11am, 1pm, 5pm, 7pm, 11pm</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td><code class="docutils literal"><span class="pre">minute=0,</span>
-        <span class="pre">hour='*/5'</span></code></td>
-
-        <td>Execute hour divisible by 5. This means that it is triggered at 3pm, not 5pm
-        (since 3pm equals the 24-hour clock value of &ldquo;15&rdquo;, which is divisible
-        by 5).</td>
-        </tr>
-
-        <tr class="row-even">
-        <td><code class="docutils literal"><span class="pre">minute=0,</span>
-        <span class="pre">hour='*/3,8-17'</span></code></td>
-
-        <td>Execute every hour divisible by 3, and every hour during office hours
-        (8am-5pm).</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td><code class="docutils literal"><span class="pre">day_of_month='2'</span>
-        </code></td>
-
-        <td>Execute on the second day of every month.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class="pre">day_of_month='2-30/3'</span></code></dt>
-            </dl>
-        </td>
-
-        <td>Execute on every even numbered day.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class="pre">day_of_month='1-7,15-21'</span></code></dt>
-            </dl>
-        </td>
-
-        <td>Execute on the first and third weeks of the month.</td>
-        </tr>
-
-        <tr class="row-even">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class="pre">day_of_month='11',</span></code></dt>
-
-            <dd><code class="docutils literal"><span class=
-            "pre">month_of_year='5'</span></code></dd>
-            </dl>
-        </td>
-
-        <td>Execute on the eleventh of May every year.</td>
-        </tr>
-
-        <tr class="row-odd">
-        <td>
-            <dl class="first last docutils">
-            <dt><code class="docutils literal"><span class="pre">month_of_year='*/3'</span></code></dt>
-            </dl>
-        </td>
-
-        <td>Execute on the first month of every quarter.</td>
-        </tr>
+    <tr class="row-even">
+      <td><code class="docutils literal notranslate"><span class="pre">*</span></code></td>
+      <td>any</td>
+      <td>Fire on every value</td>
+    </tr>
+    <tr class="row-odd">
+      <td><code class="docutils literal notranslate"><span class="pre">*/a</span></code></td>
+      <td>any</td>
+      <td>Fire every <code class="docutils literal notranslate"><span class="pre">a</span></code> values, starting from
+        the minimum
+      </td>
+    </tr>
+    <tr class="row-even">
+      <td><code class="docutils literal notranslate"><span class="pre">a-b</span></code></td>
+      <td>any</td>
+      <td>Fire on any value within the <code class="docutils literal notranslate"><span class="pre">a-b</span></code>
+        range (a must be smaller than b)
+      </td>
+    </tr>
+    <tr class="row-odd">
+      <td><code class="docutils literal notranslate"><span class="pre">a-b/c</span></code></td>
+      <td>any</td>
+      <td>Fire every <code class="docutils literal notranslate"><span class="pre">c</span></code> values within the
+        <code class="docutils literal notranslate"><span class="pre">a-b</span></code> range
+      </td>
+    </tr>
+    <tr class="row-even">
+      <td><code class="docutils literal notranslate"><span class="pre">xth</span> <span class="pre">y</span></code></td>
+      <td>day</td>
+      <td>Fire on the <code class="docutils literal notranslate"><span class="pre">x</span></code> -th occurrence of
+        weekday <code class="docutils literal notranslate"><span class="pre">y</span></code> within the month
+      </td>
+    </tr>
+    <tr class="row-odd">
+      <td><code class="docutils literal notranslate"><span class="pre">last</span> <span class="pre">x</span></code>
+      </td>
+      <td>day</td>
+      <td>Fire on the last occurrence of weekday <code class="docutils literal notranslate"><span
+        class="pre">x</span></code> within the month
+      </td>
+    </tr>
+    <tr class="row-even">
+      <td><code class="docutils literal notranslate"><span class="pre">last</span></code></td>
+      <td>day</td>
+      <td>Fire on the last day within the month</td>
+    </tr>
+    <tr class="row-odd">
+      <td><code class="docutils literal notranslate"><span class="pre">x,y,z</span></code></td>
+      <td>any</td>
+      <td>Fire on any matching expression; can combine any number of any of the above expressions</td>
+    </tr>
     </tbody>
-    
-    </table>
-    
+  </table>
+
 </template>

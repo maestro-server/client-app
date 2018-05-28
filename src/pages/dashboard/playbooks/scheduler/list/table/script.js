@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: new Scheduler(),
-      columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'last_run_at', 'actions'],
+      columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'updated_at', 'actions'],
       options: {
         filterable: ['name', 'modules', 'period_type'],
         listColumns: {
@@ -29,8 +29,7 @@ export default {
     prepared(data) {
       return data.map((d) => {
         d.modules = _.get(d, 'task')
-
-        d.last_run_at = _.has(d, 'last_run_at') ? new Date(d.last_run_at).toLocaleString() : ''
+        d.updated_at = new Date(d.updated_at).toLocaleString()
         return d
       })
     }

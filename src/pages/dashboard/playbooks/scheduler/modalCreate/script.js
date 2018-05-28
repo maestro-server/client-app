@@ -41,16 +41,11 @@ export default {
         _id: '',
         task: null
       },
-      chain: [],
-      max_run_count: 0
+      chain: []
     }
 
     const initCronTab = {
-      minute: 30,
-      hour: '*',
-      day_of_week: '*',
-      day_of_month: '*',
-      month_of_year: '*'
+      minute: 30
     }
 
     const initInterval = {
@@ -65,7 +60,7 @@ export default {
       initialInterval: initInterval,
       data: _.clone(initData),
       interval: _.clone(initInterval),
-      crontab: _.clone(initCronTab),
+      cron: _.clone(initCronTab),
       options: {},
       showCron: false,
       mapper: [
@@ -86,7 +81,7 @@ export default {
     createLoad () {
       this.tabShow=0
       this.$set(this, 'data', _.clone(this.initialData))
-      this.$set(this, 'crontab', _.clone(this.initialCron))
+      this.$set(this, 'cron', _.clone(this.initialCron))
       this.$set(this, 'interval', _.clone(this.initialInterval))
       this.$set(this, 'enabled', true)
 
