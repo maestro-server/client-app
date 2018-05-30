@@ -52,15 +52,13 @@
                   </a>
                 </li>
               </ul>
-
-              <div class="col-xs-12 text-right mb5" @click="toggle('all')">
-                <router-link :to="{name: 'teams'}" class="white"><i class="fa fa-plus-circle mt10"></i> New Team</router-link>
-              </div>
-
             </div>
             <!-- dragger will be automatically added here -->
           </div>
 
+          <div class="col-xs-12 text-right mb5" @click="toggle('all')">
+            <router-link :to="{name: 'teams'}" class="btn-link"><i class="fa fa-plus-circle mt10"></i> New Team</router-link>
+          </div>
 
         </div>
       </transition>

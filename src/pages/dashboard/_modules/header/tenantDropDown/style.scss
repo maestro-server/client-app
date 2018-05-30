@@ -51,7 +51,12 @@ $min-dropdown-menu: 206px;
     width: 100%;
   }
 
+  h4 {
+    display: inline-block;
+  }
+
   .maestro-dropdown {
+    min-width: 254px;
     position: absolute;
     padding: 0;
     border-bottom-right-radius: 10px;
@@ -95,6 +100,10 @@ $min-dropdown-menu: 206px;
           @include gradient-horizontal($start-color: themed('brand-secondary'), $end-color: themed('brand-primary-darker'), $start-percent: 0%, $end-percent: 30%);
         }
       }
+    }
+
+    .btn-link {
+      color: $white;
     }
   }
 

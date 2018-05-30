@@ -5,6 +5,7 @@ import store from 'src/store'
 export default {
   props: {
     refs: {type: String, default: "teams"},
+    helper: {type: String, default: ""},
     defaultImg: {type: String, default: IMG_AVATAR_DEFAULT},
     value: {default: null},
     imgSize: {type: String, default: "col-xs-3"},
