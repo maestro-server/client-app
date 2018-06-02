@@ -37,7 +37,8 @@
               <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
                         v-validate.initial="'required'" :error="makeError('access')"></bs-input>
 
-              <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*" v-model="data.conn.secret"
+              <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*"
+                        v-model="data.conn.secret"
                         v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
             </template>
 
@@ -96,21 +97,30 @@
             </div>
           </div>
 
+          <div class="col-xs-6">
+            <bs-select :options="opt_versions" v-model="data.api_version" label="API Version"
+                       placeholder="Select API Version"></bs-select>
 
-          <div class="col-xs-12">
             <bs-input name="url" label="Auth URL*" v-model="data.url"
                       v-validate.initial="'required'" :error="makeError('url')"
                       help="Its a keystone url"
                       placeholder="https://keystone.br-maestro-server.com.br:5000/v2.0"
             ></bs-input>
 
-            <bs-input class="mt10" name="project" label="Project Name*" v-model="data.project"
-                      v-validate.initial="'required'" :error="makeError('project')"></bs-input>
+          </div>
 
-              <p>Hit: All information may be found in Access & Security page inside of GUI OpenStack</p>
+          <div class="col-xs-6">
+            <bs-input class="mt10" name="project" label="Project Id*" v-model="data.project"
+                      v-validate.initial="'required'" :error="makeError('project')"
+                      placeholder="33aa1afc-03fe-43b8-8201-4e0d3b4b8ab5"></bs-input>
+
+            <bs-input class="mt10" name="user_domain_id" label="User Domain Id*" v-model="data.user_domain_id"
+                      v-validate.initial="'required'" :error="makeError('user_domain_id')"
+                      placeholder="default"></bs-input>
+
+            <p>Hit: All information may be found in Access & Security page inside of GUI OpenStack</p>
           </div>
         </template>
-
 
       </form>
     </template>

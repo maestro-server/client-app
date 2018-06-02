@@ -11,7 +11,7 @@ export default {
   data: function() {
     return {
       provider: '',
-      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null},
+      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null, api_version: 2},
       providers: [
         {
           name: 'AWS',
@@ -33,7 +33,8 @@ export default {
       zones: [],
       regions: [],
       options: [],
-      dcs: []
+      dcs: [],
+      opt_versions: ['2', '3']
     }
   },
 

@@ -56,7 +56,6 @@ $min-dropdown-menu: 206px;
   }
 
   .maestro-dropdown {
-    min-width: 254px;
     position: absolute;
     padding: 0;
     border-bottom-right-radius: 10px;
@@ -66,6 +65,7 @@ $min-dropdown-menu: 206px;
     z-index: 3;
     top: $base-height;
     right: 0;
+    min-width: 254px;
 
     background: $brand-primary;
     @include gradient-vertical($start-color: $brand-primary, $end-color: $brand-primary-darker);
