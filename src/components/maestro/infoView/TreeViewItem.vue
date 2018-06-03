@@ -58,7 +58,7 @@
       },
 
       isNumber: function (value) {
-        return _.isInteger(value);
+        return _.isNumber(value);
       },
 
       isBoolean: function (value) {
