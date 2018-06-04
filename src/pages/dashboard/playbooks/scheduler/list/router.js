@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'schedulers',
+  name: 'scheduler',
   path: '/',
   component: comp
 }

@@ -15,7 +15,7 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Cluster/Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
+    <creater-config-list label="Cluster/Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server" v-if="!model.own">
       <template slot="view" slot-scope="props">
 
         <view-app-server :data="props.item" :provider="model.provider" @manage="callConfig"></view-app-server>
