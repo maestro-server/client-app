@@ -5,8 +5,7 @@ import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'jobs': 'Jobs', 'playbook': 'Playbooks', 'task-template': 'Task Template',
-        'projects':'Projects', 'scheduler': 'Schedule', 'access-manager':'Access Manager'},
+      submenu: {'scheduler': 'Schedule'},
       reference: null
     }
   },
@@ -23,9 +22,9 @@ export default {
 
   mounted() {
     this.setPage([
-      'Cloud Playbooks',
-      'Setup, run, schedule and audit playbooks.',
-      'icon-ansible'
+      'Schedulers',
+      'Setup, run, schedulers and jobs.',
+      'fa fa-calendar'
     ])
   }
 }
