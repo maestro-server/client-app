@@ -11,7 +11,7 @@ import accessManager from './accessManager/router'
 export default {
   name: 'playbooks',
   path: 'playbooks',
-  redirect: 'playbooks/jobs',
+  redirect: 'playbooks/scheduler',
   component: comp,
   children: [
     project,
