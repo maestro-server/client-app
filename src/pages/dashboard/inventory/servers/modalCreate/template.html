@@ -47,9 +47,9 @@
 
 
           <bs-input form-type="horizontal" name="cpu" label="CPU (cores)" v-model="data.cpu"
-                    v-validate="'numeric|decimal'" :error="makeError('cpu')"></bs-input>
+                    v-validate="'decimal'" :error="makeError('cpu')"></bs-input>
           <bs-input form-type="horizontal" name="memory" label="Memory (GB)" v-model="data.memory"
-                    v-validate="'numeric|decimal'" :error="makeError('memory')"></bs-input>
+                    v-validate="'decimal'" :error="makeError('memory')"></bs-input>
           <hr/>
 
           <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment" name="environment"
