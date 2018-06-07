@@ -72,7 +72,7 @@ A single folder structure components normally use:
 | API_URL       | http://localhost:8888    | Server App Url                  |
 | STATIC_URL    | /upload/                 | Relative path of static content |
 | LOGO          | /static/imgs/logo300.png | Image Logotype, (login page)    |
-| THEME         | lotus                    | Themes (gold|wine|blue|green)   |
+| THEME         | lotus                    | Themes (gold, wine, blue, green)|
 
 
 ### Contribute ###
