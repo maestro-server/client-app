@@ -47,15 +47,15 @@
 
 
           <bs-input form-type="horizontal" name="cpu" label="CPU (cores)" v-model="data.cpu"
-                    v-validate="'numeric'" :error="makeError('cpu')"></bs-input>
+                    v-validate="'numeric|decimal'" :error="makeError('cpu')"></bs-input>
           <bs-input form-type="horizontal" name="memory" label="Memory (GB)" v-model="data.memory"
-                    v-validate="'numeric'" :error="makeError('memory')"></bs-input>
+                    v-validate="'numeric|decimal'" :error="makeError('memory')"></bs-input>
           <hr/>
 
           <bs-select form-type="horizontal" :options="options.environment" v-model="data.environment" name="environment"
-                     label="Environment*" v-validate.initial="'required'" :error="makeError('environment')"></bs-select>
+                     label="Environment*" :error="makeError('environment')"></bs-select>
           <bs-select form-type="horizontal" :options="options.role" v-model="data.role" name="role"
-                     label="Role*" v-validate.initial="'required'" :error="makeError('role')"></bs-select>
+                     label="Role*" :error="makeError('role')"></bs-select>
 
           <div class="row">
             <div class="col-xs-3 text-right mt5">
@@ -63,8 +63,7 @@
             </div>
             <div class="col-xs-9">
               <bs-select form-type="horizontal" :options="options.os" v-model="os.base" name="OS Base"
-                         placeholder="Operational System" v-validate.initial="'required'"
-                         :error="makeError('OS Base')"></bs-select>
+                         placeholder="Operational System" :error="makeError('OS Base')"></bs-select>
               <bs-input form-type="horizontal" v-if="os.base" v-model="os.dist" name="OS Dist"
                         placeholder="Distro"></bs-input>
               <bs-input form-type="horizontal" v-if="os.base" v-model="os.version" name="OS Version"
