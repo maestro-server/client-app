@@ -67,10 +67,13 @@ A single folder structure components normally use:
 
 ### Env variables ###
 
-| Env Variables | Example               | Description                     |
-|---------------|-----------------------|---------------------------------|
-| API_URL       | http://localhost:8888 | Server App Url                  |
-| STATIC_URL    | /upload/              | Relative path of static content |
+| Env Variables | Example                  | Description                     |
+|---------------|--------------------------|---------------------------------|
+| API_URL       | http://localhost:8888    | Server App Url                  |
+| STATIC_URL    | /upload/                 | Relative path of static content |
+| LOGO          | /static/imgs/logo300.png | Image Logotype, (login page)    |
+| THEME         | lotus                    | Themes (gold|wine|blue|green)   |
+
 
 ### Contribute ###
 
