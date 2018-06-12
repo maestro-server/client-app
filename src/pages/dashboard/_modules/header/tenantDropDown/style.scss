@@ -155,13 +155,17 @@ $min-dropdown-menu: 206px;
   @media only screen and (max-width: $screen-xs-max) {
     max-width: 118px;
 
-    .entity {
-      font-size: 15px;
-    }
-
     .main {
       width: 70%;
     }
+
+    .maestro-dropdown {
+      .entity {
+        font-size: 16px;
+        margin-top: 9px;
+      }
+    }
+
     .complementary {
       width: 30%;
     }
