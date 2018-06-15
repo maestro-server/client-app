@@ -18,4 +18,7 @@ ratings:
   - src/**.js
 exclude_paths:
 - "test/"
+- "build/"
 - "node_modules/"
+- "config/"
+- "static/"
