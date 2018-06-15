@@ -1,8 +1,9 @@
 
-import App from '@/App'
+import App from 'src/App'
 
 describe('App.vue', () => {
-  it('has a created hook', () => {
-    expect(typeof App.created).toBe('function')
+  it('Created function', () => {
+    const ty = typeof App['created']
+    expect(ty).to.equal('function')
   })
 })
