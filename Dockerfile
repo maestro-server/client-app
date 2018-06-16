@@ -6,7 +6,7 @@ EXPOSE 80 443
 
 RUN apk add --no-cache tini
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./dist /var/www
 COPY ./static /var/www/static
 

@@ -23,6 +23,10 @@
         color: themed('brand-primary');
       }
     }
+
+    .router-link-exact-active a {
+      color: $white;
+    }
   }
 
 }
