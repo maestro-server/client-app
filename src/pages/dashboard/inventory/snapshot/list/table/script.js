@@ -16,6 +16,9 @@ export default {
         filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
           ldatacenters: []
+        },
+        headings: {
+          ldatacenters: "Datacenters"
         }
       }
     }
