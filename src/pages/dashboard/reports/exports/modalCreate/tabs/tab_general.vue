@@ -100,7 +100,7 @@
       return {
         submit: {
           report: "general",
-          component: 'Servers',
+          component: null,
           filters: [{ "field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
         },
         options: {
