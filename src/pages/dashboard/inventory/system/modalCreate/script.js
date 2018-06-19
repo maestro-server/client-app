@@ -8,7 +8,7 @@ import FectherEntity from 'services/fetchEntity'
 import verifyDuplicate from 'mixins/verify_duplicate'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
-import tabCheck from 'src/pages/dashboard/_modules/tabs/tab_check'
+import tabEndpoint from 'src/pages/dashboard/_modules/tabs/tab_endpoint'
 import tabClients from 'src/pages/dashboard/_modules/tabs/tab_clients'
 
 export default {
@@ -16,7 +16,7 @@ export default {
 
   components: {
     tabTags,
-    tabCheck,
+    tabEndpoint,
     tabClients
   },
 
@@ -32,7 +32,7 @@ export default {
   },
 
   computed: {
-    tab_check() {return this.$refs.tab_check},
+    tab_endpoint() {return this.$refs.tab_endpoint},
     tab_clients() {return this.$refs.tab_clients},
     tab_tags() {return this.$refs.tab_tags}
   },
@@ -48,12 +48,12 @@ export default {
       this.clearDuplicate()
       this.tab_tags.reset()
       this.tab_clients.reset()
-      this.tab_check.reset()
+      this.tab_endpoint.reset()
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_check.updaterEdit(this.model.check)
+      this.tab_endpoint.updaterEdit(this.model.check)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_clients.updaterEdit(this.model.clients)
     },
