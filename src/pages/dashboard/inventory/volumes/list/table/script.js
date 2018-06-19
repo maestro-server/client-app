@@ -11,14 +11,14 @@ export default {
   data: function () {
     return {
       entity: new Volumes(),
-      columns: ['status', 'name', 'size', 'iops', 'unique_id', 'fdatacenters', 'created_at', 'actions'],
+      columns: ['status', 'name', 'size', 'iops', 'unique_id', 'ldatacenters', 'created_at', 'actions'],
       options: {
-        filterable: ['name', 'unique_id', 'fdatacenters', 'vpc_id', 'family'],
+        filterable: ['name', 'unique_id', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
-          datacenters: []
+          ldatacenters: []
         },
         headings: {
-          fdatacenters: "Datacenters"
+          ldatacenters: "Datacenters"
         }
       }
     }
@@ -27,7 +27,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.fdatacenters = _.get(d, 'datacenters.name', '-')
+        d.ldatacenters = _.get(d, 'datacenters.name', '-')
         return d
       })
     }
@@ -35,6 +35,6 @@ export default {
 
   created() {
     FectherEntity(Datacenters)()
-      .find(this.fetchData('datacenters'))
+      .find(this.fetchData('ldatacenters'))
   }
 }

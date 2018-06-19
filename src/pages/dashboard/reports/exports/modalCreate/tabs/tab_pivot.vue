@@ -41,7 +41,7 @@
                 </li>
               </ul>
 
-              <a class="fa fa-trash btn btn-danger btn-xs pull-right" @click.stop="delItem(index)"></a>
+              <a class="fa fa-trash btn btn-danger btn-xs pull-right" @click.stop="delItem(index, item.title)"></a>
             </li>
 
             <li class="list-group-item list-group-item-default" v-if="item.filters.length == 0">
@@ -179,8 +179,8 @@
         this.updateEvent()
       },
 
-      delItem(index) {
-        delete this.submit.filters[this.entity].filters.splice(index, 1)
+      delItem(index, item) {
+        delete this.submit.filters[item.toLowerCase()].filters.splice(index, 1)
 
         this.updateEvent()
       },
