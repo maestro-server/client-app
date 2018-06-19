@@ -14,15 +14,16 @@ export default {
   data: function () {
     return {
       entity: new Applications(),
-      columns: ['name', 'provider', 'datacenters', 'lsystem', 'environment', 'qtdtargets', 'qtdserver', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'provider', 'ldatacenters', 'lsystem', 'environment', 'qtdtargets', 'qtdserver', 'updated_at', 'created_at', 'actions'],
       options: {
-        filterable: ['name', 'provider', 'datacenters', 'environment', 'lsystem'],
+        filterable: ['name', 'provider', 'ldatacenters', 'environment', 'lsystem'],
         listColumns: {
           lsystem: [],
-          datacenters: []
+          ldatacenters: []
         },
         headings: {
           updated_at: 'Updated At',
+          ldatacenters: "Datacenters",
           lsystem: "System",
           qtdserver: 'Servers',
           qtdtargets: 'Applications',
@@ -43,7 +44,7 @@ export default {
       return data.map((d) => {
         d.qtdserver = _.size(d.servers)
         d.qtdtargets = _.size(d.targets)
-        d.datacenters = _.get(d, 'datacenters.name', '-')
+        d.ldatacenters = _.get(d, 'datacenters.name', '-')
 
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
 
@@ -59,7 +60,7 @@ export default {
       .find(this.fetchData('lsystem'))
 
     FectherEntity(Datacenters)()
-      .find(this.fetchData('datacenters'))
+      .find(this.fetchData('ldatacenters'))
   }
 }
 

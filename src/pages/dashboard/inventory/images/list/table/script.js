@@ -11,14 +11,15 @@ export default {
   data: function () {
     return {
       entity: new Images(),
-      columns: ['name', 'datacenters', 'image_id', 'image_type', 'image_location', 'actions'],
+      columns: ['name', 'ldatacenters', 'image_id', 'image_type', 'image_location', 'actions'],
       options: {
-        filterable: ['name', 'datacenters'],
+        filterable: ['name', 'ldatacenters'],
         listColumns: {
-          datacenters: []
+          ldatacenters: []
         },
         headings: {
           lcontact: 'Contacts',
+          ldatacenters: "Datacenters",
           updated_at: 'Updated At',
           created_at: 'Created At'
         }
@@ -29,7 +30,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.datacenters = _.get(d, 'datacenters.name', '-')
+        d.ldatacenters = _.get(d, 'datacenters.name', '-')
 
         d.updated_at = new Date(d.updated_at).toLocaleString()
         d.created_at = new Date(d.created_at).toLocaleString()
@@ -40,6 +41,6 @@ export default {
 
   created() {
     FectherEntity(Datacenters)()
-      .find(this.fetchData('datacenters'))
+      .find(this.fetchData('ldatacenters'))
   }
 }

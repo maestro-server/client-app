@@ -11,14 +11,15 @@ export default {
   data: function () {
     return {
       entity: new Networks(),
-      columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'datacenters', 'status', 'actions'],
+      columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'ldatacenters', 'status', 'actions'],
       options: {
-        filterable: ['name', 'datacenters', 'vpc_id', 'family'],
+        filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
-          datacenters: []
+          ldatacenters: []
         },
         headings: {
           updated_at: 'Updated At',
+          ldatacenters: "Datacenters",
           created_at: 'Created At'
         }
       }
@@ -29,7 +30,7 @@ export default {
     prepared(data) {
       return data.map((d) => {
         d.name = d.name || d.unique_id
-        d.datacenters = _.get(d, 'datacenters.name', '-')
+        d.ldatacenters = _.get(d, 'datacenters.name', '-')
         return d
       })
     }
@@ -37,6 +38,6 @@ export default {
 
   created() {
     FectherEntity(Datacenters)()
-      .find(this.fetchData('datacenters'))
+      .find(this.fetchData('ldatacenters'))
   }
 }

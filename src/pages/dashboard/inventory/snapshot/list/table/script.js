@@ -11,11 +11,11 @@ export default {
   data: function () {
     return {
       entity: new Snapshots(),
-      columns: ['name', 'datacenters', 'volume_id', 'volume_size', 'status', 'snapshot_id', 'progress', 'created_at', 'actions'],
+      columns: ['name', 'ldatacenters', 'volume_id', 'volume_size', 'status', 'snapshot_id', 'progress', 'created_at', 'actions'],
       options: {
-        filterable: ['name', 'datacenters', 'vpc_id', 'family'],
+        filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
-          datacenters: []
+          ldatacenters: []
         }
       }
     }
@@ -24,7 +24,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.datacenters = _.get(d, 'datacenters.name', '-')
+        d.ldatacenters = _.get(d, 'datacenters.name', '-')
         return d
       })
     }
@@ -32,6 +32,6 @@ export default {
 
   created() {
     FectherEntity(Datacenters)()
-      .find(this.fetchData('datacenters'))
+      .find(this.fetchData('ldatacenters'))
   }
 }
