@@ -1,9 +1,15 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="Endpoints" @update="updaterEdit">
+  <creater-list :single.sync="single" :basket="value" label="Application" @update="updaterEdit" fielder="dps">
 
     <template slot="forms">
+       <slot name="label">
+        <p>You can insert all types of applications, like databases, cache servers, brokers and more.</p>
+      </slot>
+
+      <hr>
+
       <bs-select form-type="horizontal" :options="types" v-model="single.endpoint" name="type"
-                 label="Type*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
+                 label="Protocol*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
 
       <typeahead label="Application"
                  placeholder="MyWebApp"
@@ -14,10 +20,11 @@
                  :on-hit="onHit"
                  form-type="horizontal"
                  :headers="headers"
-                 v-model="single.app"
+                 v-model="single.name"
                  v-validate.initial="'required'"
                  :error="makeError('application')"
       ></typeahead>
+      
     </template>
 
     <template slot="view" slot-scope="props">
@@ -49,7 +56,7 @@
         URL: `${new Applications().getUrl()}?query=`,
         template: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>",
         headers: headerLogin,
-        single: {app:null, endpoint: null, _id: null, family: null, name: null}
+        single: {endpoint: null, _id: null, family: null, name: null}
       }
     },
 
@@ -66,8 +73,8 @@
 
       updaterEdit(data) {
         this.$set(this, 'value', data || [])
-        const m = data.map(e=>e._id)
-        this.$emit('update', m)
+        data = _.uniqBy(data, (e) => e.name + e.endpoint)
+        this.$emit('update', data)
       }
     }
   }

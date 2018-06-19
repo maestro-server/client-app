@@ -22,9 +22,9 @@ export default {
 
   data () {
     return {
-      data: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []},
+      data: {name: null, description: null, links: [], applications:null, tags: [], entry: [], clients: []},
       options: {
-        check:[],
+        entry:[],
         apps: []
       },
       entity: System
@@ -53,7 +53,7 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_endpoint.updaterEdit(this.model.check)
+      this.tab_endpoint.updaterEdit(this.model.entry)
       this.tab_tags.updaterEdit(this.model.tags)
       this.tab_clients.updaterEdit(this.model.clients)
     },
@@ -80,7 +80,6 @@ export default {
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key: 'system_options'})
     }
-
   },
 
   created() {

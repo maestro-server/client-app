@@ -7,7 +7,7 @@ import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
 import tabDeploy from 'src/pages/dashboard/_modules/tabs/tab_deploy'
-import tabRole from 'src/pages/dashboard/_modules/tabs/tab_role'
+import tabRole from 'src/pages/dashboard/_modules/tabs/tab_apps_role'
 
 
 export default {

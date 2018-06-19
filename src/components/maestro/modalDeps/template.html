@@ -1,0 +1,20 @@
+<div>
+
+  <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed" @opened="reset">
+
+    <form class="row form-horizontal" @submit.prevent="createSave">
+
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+        <tab-endpoint :types="options.protocol" @update="val => model.deps = val" ref="tab_endpoint"></tab-endpoint>
+      </tabs>   
+    </form>
+
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Cancel</button>
+      <button type="button" class="btn btn-primary" @click="actionClick" :disabled="errors.any()">Save</button>
+    </div>
+
+  </modal>
+
+</div>

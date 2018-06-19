@@ -13,6 +13,7 @@
                 :label="form.label"
                 :type="form.type"
                 v-model="data[form.name]"
+                :placeholder="form.placeholder"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"
                 @blur="updaterEdit"
@@ -42,6 +43,7 @@
         mapper: {
           'Application': [
             {name: 'endpoint', label: 'Endpoint', validate: 'url'},
+            {name: 'ports', label: 'Port', type: 'number', validate: 'integer'},
             {name: 'path', label: 'Code Path', placeholder: '/var/www/myapp', validate: 'min:2'},
             {name: 'code', label: 'Command', placeholder: 'java -jar myapp.jar', validate: 'min:2'},
             {name: 'description', label: 'Notes', type: 'textarea', validate: 'min:2'}

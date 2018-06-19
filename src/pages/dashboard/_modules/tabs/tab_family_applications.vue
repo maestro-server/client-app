@@ -24,6 +24,7 @@
                    :headers="headers"
         ></typeahead>
       </div>
+      
     </template>
 
     <template slot="view" slot-scope="props">
