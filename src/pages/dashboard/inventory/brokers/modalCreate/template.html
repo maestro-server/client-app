@@ -75,11 +75,7 @@
         <!-- ================= Targets ================= -->
         <!-- ============================================== -->
         <tab header="Consumers">
-          <tab-applications @update="val => data.targets = val" ref="tab_targets" label="Consumer" default-type="Worker">
-            <template slot="label">
-              List all consumers, using the form below to search in servers.
-            </template>
-          </tab-applications>
+          <tab-endpoint :types="options.protocol_broker" @update="val => model.deps = val" ref="tab_endpoint" label="Consumer"></tab-endpoint>
         </tab>
 
         <!-- ================= Servers ================= -->

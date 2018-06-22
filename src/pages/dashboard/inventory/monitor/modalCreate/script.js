@@ -12,7 +12,7 @@ export default {
       family: 'Monitor',
       initialData: {
         name: null, description: null, provider:null, datacenters: {},
-        tags: [], servers: [], targets: [],
+        tags: [], servers: [],
         role: {healthcheck: null, endpoint: null}
       },
       mapper: [
@@ -20,15 +20,5 @@ export default {
         {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
       ]
     }
-  },
-
-  methods: {
-    hookCreateLoad() {
-      this.tab_targets.reset()
-    },
-
-    hookEditLoad() {
-      this.editLoadEntities('targets')
-    },
   }
 }

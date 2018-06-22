@@ -71,20 +71,6 @@
           <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
         </tab>
 
-        <!-- ================= Targets ================= -->
-        <!-- ============================================== -->
-        <tab header="Applications">
-          <tab-family-apps @update="val => data.targets = val" ref="tab_targets" label="Application">
-            <template slot="label">
-              <p>
-                List all applications has been used by this Object Storage
-              </p>
-            </template>
-          </tab-family-apps>
-        </tab>
-
-
-
         <!-- ================= Servers ================= -->
         <!-- ============================================== -->
         <tab header="Servers" :disabled="own == 1">

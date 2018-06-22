@@ -23,6 +23,20 @@
       </template>
     </creater-config-list>
 
+    <creater-config-list label="Dependencie" :basket="model.deps" @edit="editM" icons="fa-chain">
+      <template slot="view" slot-scope="props">
+        <b>{{props.item.name}}</b> by {{props.item.endpoint}}
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+          <i class="fa  fa-eye" aria-hidden="true"></i>
+        </router-link> <br>
+
+        <bs-label>{{props.item.family}}</bs-label>
+        <bs-label>{{props.item.endpoint}}</bs-label>
+        <bs-label>{{props.item.environment}}</bs-label>
+
+      </template>
+    </creater-config-list>
+
     <creater-config-list label="System" :basket="model.system" @edit="edit" :index="4" icons="fa-briefcase">
       <template slot="view" slot-scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>

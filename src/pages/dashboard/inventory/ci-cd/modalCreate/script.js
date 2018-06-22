@@ -1,16 +1,15 @@
 'use strict'
 
-import Applications from 'factories/applications'
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
-import tabApplications from 'src/pages/dashboard/_modules/tabs/tab_applications'
+import tabFamilyApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
 
 export default {
   mixins: [Modals, ModalsApps],
 
   components: {
-    tabApplications
+    tabFamilyApps
   },
 
   data () {
@@ -40,8 +39,8 @@ export default {
     },
 
     hookEditLoad() {
-      this.editLoadEntities('targets', Applications)
-    },
+      this.tab_targets.updaterEdit(this.data.targets)
+    }
   }
 
 }

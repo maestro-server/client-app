@@ -24,6 +24,9 @@ export default {
   },
 
   computed: {
+    MDeps() {
+      return this.$parent.$refs.modal_deps
+    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
     },
@@ -42,6 +45,11 @@ export default {
   },
 
   methods: {
+    editM: function () {
+      this.MDeps
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
+    },
     fetchServers() {
       this.fetchServersF('servers')
     },
