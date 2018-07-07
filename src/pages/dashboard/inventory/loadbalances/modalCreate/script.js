@@ -3,9 +3,16 @@
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+import tabEndpoint from 'src/pages/dashboard/_modules/tabs/tab_endpoint'
 
 export default {
   mixins: [Modals, ModalsApps],
+
+  components: {
+    tabEndpoint
+  },
 
   data () {
     return {
@@ -22,13 +29,23 @@ export default {
     }
   },
 
+  computed: {
+    tab_endpoint() {return this.$refs.tab_endpoint},
+  },
+
   methods: {
+    fetchData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'deps_options'})
+    },
+
     hookCreateLoad() {
-      this.tab_targets.reset()
+      this.tab_endpoint.reset()
+      this.fetchData()
     },
 
     hookEditLoad() {
-      this.editLoadEntities('targets')
-    },
+      this.tab_endpoint.updaterEdit(this.data.deps)
+    }
   }
 }

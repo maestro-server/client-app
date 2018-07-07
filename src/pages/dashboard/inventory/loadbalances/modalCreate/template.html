@@ -69,12 +69,7 @@
         <!-- ================= Targets ================= -->
         <!-- ============================================== -->
         <tab header="Targets">
-          <tab-servers @update="val => data.targets = val" ref="tab_targets" label="Target">
-            <template slot="label">
-              List all targets behond the loadbalance, using the form below to search in servers.
-            </template>
-            <template slot="footer"></template>
-          </tab-servers>
+          <tab-endpoint :types="options.protocol" @update="val => model.deps = val" ref="tab_endpoint" label="Targets"></tab-endpoint>
         </tab>
 
         <!-- ================= Datacenters ================= -->
