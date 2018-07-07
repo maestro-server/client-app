@@ -1,5 +1,6 @@
 'use strict'
 
+import _ from 'lodash'
 import Modals from 'mixins/modals'
 import ModalsForeignRelation from 'mixins/modals-foreign-relation'
 
@@ -30,5 +31,14 @@ export default {
       type: "Application"
     }
   },
+
+  methods: {
+    transformValue(val) {
+      if (_.isArray(val)) {
+        const tval = val.map(e=>e._id)
+        this.$set(this, 'value', tval)
+      }
+    }
+  }
 
 }
