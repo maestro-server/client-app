@@ -35,14 +35,10 @@ export default {
   },
 
   methods: {
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'deps_options'})
-    },
-
     hookCreateLoad() {
       this.tab_endpoint.reset()
-      this.fetchData()
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'deps_options'})
     },
 
     hookEditLoad() {

@@ -18,7 +18,7 @@ export default {
     return {
       family: 'Loadbalance',
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
+        name: null, description: null, providers:null, datacenters: {},
         tags: [], servers: [], targets: [],
         role: {healthcheck: null, endpoint: null}
       },
@@ -34,14 +34,10 @@ export default {
   },
 
   methods: {
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'deps_options'})
-    },
-
     hookCreateLoad() {
       this.tab_endpoint.reset()
-      this.fetchData()
+      FectherEntity(Adminer)({persistence: 'local'})
+        .find(this.fetchAdminer, {key: 'deps_options'})
     },
 
     hookEditLoad() {
