@@ -18,7 +18,6 @@ export default {
         events: ['Events', 'fa-bell'],
         settings: ['Settings', 'fa-cog'],
         hr: true,
-        access_manager: ['Access Manager', 'fa-key'],
         profile: ['Profile', 'fa-user'],
         logout: ['Logout', 'fa-sign-out']
       },
