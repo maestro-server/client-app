@@ -41,7 +41,7 @@ export default {
     },
 
     hookEditLoad() {
-      this.editLoadEntities('targets', Applications)
-    },
+      this.tab_targets.updaterEdit(this.data.deps)
+    }
   }
 }

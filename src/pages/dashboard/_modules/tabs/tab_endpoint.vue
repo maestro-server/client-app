@@ -1,5 +1,5 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="Application" @update="updaterEdit" fielder="dps">
+  <creater-list :single.sync="single" :basket="value" :label="label" @update="updaterEdit" fielder="dps">
 
     <template slot="forms">
        <slot name="label">
@@ -11,7 +11,7 @@
       <bs-select form-type="horizontal" :options="types" v-model="single.endpoint" name="type"
                  label="Protocol*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
 
-      <typeahead label="Application"
+      <typeahead :label="label"
                  placeholder="MyWebApp"
                  :async="URL"
                  async-key="items"
@@ -24,7 +24,7 @@
                  v-validate.initial="'required'"
                  :error="makeError('application')"
       ></typeahead>
-      
+
     </template>
 
     <template slot="view" slot-scope="props">
@@ -48,7 +48,8 @@
     mixins: [TabCreaterList],
 
     props: {
-      types: {}
+      types: {},
+      label: {default: 'Application'}
     },
 
     data: function () {

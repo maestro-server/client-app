@@ -15,10 +15,17 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Consumer" :basket="list_targets" @edit="edit" :index="3" icons="fa-code">
+    <creater-config-list label="Consumer" :basket="model.deps" @edit="edit" :index="3" icons="fa-chain">
       <template slot="view" slot-scope="props">
-        <b>{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
-        <bs-label type='default' v-if='props.item.role'>{{props.item.role.role}}</bs-label>
+        <b>{{props.item.name}}</b> by {{props.item.endpoint}}
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+          <i class="fa  fa-eye" aria-hidden="true"></i>
+        </router-link> <br>
+
+        <bs-label>{{props.item.family}}</bs-label>
+        <bs-label>{{props.item.endpoint}}</bs-label>
+        <bs-label>{{props.item.environment}}</bs-label>
+
       </template>
     </creater-config-list>
 

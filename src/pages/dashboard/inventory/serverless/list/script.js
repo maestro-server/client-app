@@ -13,7 +13,7 @@ export default {
 
   data: function () {
     return {
-      name: "Serverless"
+      name: "Serverles"
     }
   }
 }

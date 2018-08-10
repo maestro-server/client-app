@@ -7,7 +7,8 @@ export default {
     return {
       tmp: {created: [], deleted: []},
       value: [],
-      mirrorValue: []
+      mirrorValue: [],
+      cFinish: false
     }
   },
 
@@ -40,6 +41,7 @@ export default {
 
       this.tmp.created = _.difference(newv, oldv)
       this.tmp.deleted = _.difference(oldv, newv)
+      this.cFinish = false
     },
 
     editSave() {
@@ -53,7 +55,7 @@ export default {
       if (!_.isEmpty(id)) {
         const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)({force: true})
-          .patch(this.finishJob, {id}, _id)
+          .patch(this.coordenateCallbackFinish, {id}, _id)
       }
     },
 
@@ -61,7 +63,14 @@ export default {
       if (!_.isEmpty(id)) {
         const _id =  `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)()
-          .remove(this.finishJob, {id}, _id)
+          .remove(this.coordenateCallbackFinish, {id}, _id)
+      }
+    },
+
+    coordenateCallbackFinish(response) {
+      if (!this.cFinish) {
+        this.cFinish = true
+        return this.finishJob(response)
       }
     },
 

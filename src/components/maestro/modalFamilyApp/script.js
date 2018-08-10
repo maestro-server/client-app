@@ -3,16 +3,16 @@
 import Modals from 'mixins/modals'
 import Applications from 'factories/applications'
 
-import Adminer from 'factories/adminer'
+
 import FectherEntity from 'services/fetchEntity'
 
-import tabEndpoint from 'src/pages/dashboard/_modules/tabs/tab_endpoint'
+import tabFamilyApp from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
 
 export default {
   mixins: [Modals],
 
   components: {
-    tabEndpoint
+    tabFamilyApp
   },
 
   data () {
@@ -26,7 +26,7 @@ export default {
   },
 
   computed: {
-    tab_endpoint() {return this.$refs.tab_endpoint}
+    tab_targets() {return this.$refs.tab_targets}
   },
 
   methods: {
@@ -36,7 +36,7 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_endpoint.updaterEdit(this.model.deps)
+      this.tab_targets.updaterEdit(this.model.deps)
     },
 
     setupModel () {
@@ -48,17 +48,7 @@ export default {
 
       FectherEntity(this.entity)()
         .update(this.finishJob, this.model)
-    },
-
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'deps_options'})
     }
-
-  },
-
-  created() {
-    this.fetchData()
   }
 
 }

@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: Applications,
-      label: 'Brokers',
+      label: 'Ci/CD',
       model: {tags: [], servers:[]},
       list_servers: [],
       list_targets: [],
@@ -20,6 +20,9 @@ export default {
   },
 
   computed: {
+    MDeps() {
+      return this.$parent.$refs.modal_deps
+    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers', 'targets'])
     },
@@ -32,9 +35,13 @@ export default {
   },
 
   methods: {
+    editM: function () {
+      this.MDeps
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
+    },
     fetchServers() {
       this.fetchServersF('servers')
-      this.fetchServersF('targets', Applications)
     }
   },
 

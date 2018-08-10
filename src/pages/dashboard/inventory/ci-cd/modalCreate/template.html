@@ -72,14 +72,16 @@
           <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
         </tab>
 
-        <!-- ================= Targets ================= -->
+        <!-- ================= Deps ================= -->
         <!-- ============================================== -->
         <tab header="Applications">
-          <tab-applications @update="val => data.targets = val" ref="tab_targets" label="Consumer" default-type="Application">
+          <tab-family-apps @update="val => data.targets = val" ref="tab_targets" label="Application">
             <template slot="label">
-              List all consumers, using the form below to search in servers.
+              <p>
+                List all applications deployed by CI.
+              </p>
             </template>
-          </tab-applications>
+          </tab-family-apps>
         </tab>
 
         <!-- ================= Servers ================= -->

@@ -15,7 +15,7 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Target" :basket="list_targets" @edit="edit" :index="3" icons="fa-server" v-if="!model.own">
+    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="4" icons="fa-server">
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
@@ -23,11 +23,17 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="4" icons="fa-server">
+    <creater-config-list label="Dependencie" :basket="model.deps" @edit="editM" icons="fa-chain">
       <template slot="view" slot-scope="props">
-        <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
+        <b>{{props.item.name}}</b> by {{props.item.endpoint}}
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+          <i class="fa  fa-eye" aria-hidden="true"></i>
+        </router-link> <br>
 
-        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
+        <bs-label>{{props.item.family}}</bs-label>
+        <bs-label>{{props.item.endpoint}}</bs-label>
+        <bs-label>{{props.item.environment}}</bs-label>
+
       </template>
     </creater-config-list>
 
