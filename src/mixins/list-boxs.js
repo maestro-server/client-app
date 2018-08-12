@@ -28,9 +28,9 @@ export default {
       return app + _.kebabCase(str.toLowerCase())
     },
 
-    fetchData (force=true) {
+    fetchData (page=1, force=true) {
       FectherEntity(this.entity)({force})
-        .find((e) => this.result = e.data)
+        .find((e) => this.result = e.data, {page})
     },
 
     addE () {
@@ -68,7 +68,7 @@ export default {
     },
 
     changePage (page) {
-      this.fetchData({page})
+      this.fetchData(page)
     }
   },
 
