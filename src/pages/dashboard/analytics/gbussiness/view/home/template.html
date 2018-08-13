@@ -1,0 +1,38 @@
+<div>
+
+  <div class="col-sm-6 col-xs-12">
+    <info-view :data="filtered"></info-view>
+  </div>
+
+  <div class="col-sm-6 col-xs-12">
+
+    <div class="col-xs-12">
+
+      <h3>
+        Status
+        <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'"><i class="fa fa-check-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'"><i class="fa fa-times-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'"><i class="fa fa-circle-o"></i> {{model.status}}</span>
+      </h3>
+
+      <div class="alert alert-danger" v-if="model.status == 'error'">
+        {{model.msg}}
+      </div>
+
+    </div>
+
+    <div class="col-xs-12">
+
+      <hr>
+
+      <h3>Results</h3>
+      <router-link v-if="model._id" :to="{name: 'graphs.single.graph', params: { id: model._id }}"
+                   class="btn btn-primary btn" :disabled="model.status != 'finished'" >
+        <i class="fa fa-sitemap"></i> View graph
+      </router-link>
+
+    </div>
+
+  </div>
+
+</div>

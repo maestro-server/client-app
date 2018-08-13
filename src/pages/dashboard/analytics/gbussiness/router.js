@@ -1,13 +1,13 @@
 'use strict'
 import comp from './gbussiness'
 import tlist from './list/router'
+import single from './view/router'
 
 export default {
-  name: 'graph-bussiness',
   path: 'graph-bussiness',
-  redirect: 'graph-bussiness/list',
   component: comp,
   children: [
-    tlist
+    tlist,
+    single
   ]
 }

@@ -1,8 +1,8 @@
 'use strict'
-import comp from './list'
+import comp from './view'
 
 export default {
-  name: 'graph-bussiness',
+  name: 'graphs.single',
   path: '/',
   component: comp
 }

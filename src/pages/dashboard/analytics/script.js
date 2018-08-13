@@ -27,7 +27,7 @@ export default {
     this.setPage([
       'Analytics',
       'Create bussiness graphs, visualize depedencies.',
-      'fa fa-sitemap'
+      'fa-sitemap'
     ])
   }
 }

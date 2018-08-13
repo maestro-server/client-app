@@ -72,9 +72,11 @@
       },
 
       updaterEdit(data) {
-        this.$set(this, 'value', data || [])
-        const m = data.map(e=>e._id)
-        this.$emit('update', m)
+        if (data) {
+          this.$set(this, 'value', data || [])
+          const m = data.map(e=>e._id)
+          this.$emit('update', m)
+        }
       },
 
       fetchData() {

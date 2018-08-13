@@ -1,0 +1,39 @@
+<div>
+  <bs-table-server
+    name="graph-list"
+    :url="url"
+    :columns="columns"
+    :options="options"
+    ref="vTable"
+  >
+
+    <template slot="name" slot-scope="props">
+      <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
+      <router-link :to="{name: 'graphs.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+    </template>
+
+    <template slot="status" slot-scope="props">
+
+      <span class="btn btn-success btn-xs" v-if="props.row.status == 'finished'"><i class="fa fa-check-circle-o"></i></span>
+      <span class="btn btn-danger btn-xs" v-if="props.row.status == 'error'"><i class="fa fa-times-circle-o"></i></span>
+      <span class="btn btn-info btn-xs" v-if="props.row.status == 'process'"><i class="fa fa-circle-o"></i></span>
+      <span class="btn btn-warning btn-xs" v-if="props.row.status == 'warning'"><i class="fa fa-clock-o"></i></span>
+
+      {{props.row.status}}
+
+    </template>
+
+    <template slot="actions" slot-scope="props">
+      <div class="min-table">
+        <router-link :to="{name: 'graphs.single', params: { id: props.row._id }}"
+                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
+
+        <router-link :to="{name: 'graphs.single.graph', params: { id: props.row._id }}"
+                     class="fa fa fa-sitemap btn btn-primary btn-xs"></router-link>
+
+        <a class="fa fa-edit btn btn-warning btn-xs" @click.stop="editP(props.row)"></a>
+        <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
+      </div>
+    </template>
+  </bs-table-server>
+</div>

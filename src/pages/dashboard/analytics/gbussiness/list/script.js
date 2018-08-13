@@ -1,15 +1,19 @@
 'use strict'
 
-import Graphs from 'factories/graphs'
-import ListBox from 'mixins/list-boxs'
+import svTable from './table/table'
+import ListTable from 'mixins/list-table'
+
 
 export default {
-  mixins: [ListBox],
+  mixins: [ListTable],
+
+  components: {
+    svTable
+  },
 
   data: function () {
     return {
-      entity: Graphs,
-      name: "Bussiness Graph",
+      name: "Graph"
     }
   }
 }

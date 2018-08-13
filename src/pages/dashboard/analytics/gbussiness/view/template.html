@@ -1,0 +1,8 @@
+<div>
+  <div class="pb10">
+    <header-view-entity :label="entity.name" :name="model.name" @del="del" @acl="acl" :visibility="{edit: false, create: true, delete:true}"></header-view-entity>
+  </div>
+
+  <router-view></router-view>
+
+</div>

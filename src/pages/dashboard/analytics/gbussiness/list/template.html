@@ -4,14 +4,6 @@
   </div>
 
   <div class="col-xs-12">
-
-    <list-box :items="result.items" :total_pages="result.total_pages" :label="name"
-              @changePage="changePage"
-              @add="addE"
-              @acl="aclE"
-              @edit="editE"
-              @del="deleteE">
-    </list-box>
-
+    <sv-table ref="svTable"></sv-table>
   </div>
 </div>

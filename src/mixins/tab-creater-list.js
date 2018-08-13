@@ -9,8 +9,10 @@ export default {
 
   methods: {
     updaterEdit(data) {
-      this.$set(this, 'value', data || [])
-      this.$emit('update', this.value)
+      if (data) {
+        this.$set(this, 'value', data || [])
+        this.$emit('update', this.value)
+      }
     },
 
     onHit(item) {
