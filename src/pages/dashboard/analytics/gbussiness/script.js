@@ -1,6 +1,6 @@
 'use strict'
 import modalCreate from './modalCreate/create'
-import Reports from 'factories/reports'
+import Graphs from 'factories/graphs'
 
 export default {
 
@@ -10,7 +10,7 @@ export default {
 
   data() {
     return {
-      entity: Reports
+      entity: Graphs
     }
   }
 

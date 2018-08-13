@@ -1,7 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Reports from 'factories/reports'
+import Graphs from 'factories/graphs'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
@@ -13,12 +13,12 @@ export default {
     },
 
     createSave () {
-      FectherEntity(Reports)()
+      FectherEntity(Graphs)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
-      FectherEntity(Reports)()
+      FectherEntity(Graphs)()
         .update(this.finishJob, this.model)
     }
 

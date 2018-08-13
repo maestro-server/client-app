@@ -1,6 +1,6 @@
 'use strict'
 
-import Reports from 'factories/reports'
+import Graphs from 'factories/graphs'
 import ListBox from 'mixins/list-boxs'
 
 export default {
@@ -8,7 +8,7 @@ export default {
 
   data: function () {
     return {
-      entity: Reports,
+      entity: Graphs,
       name: "Bussiness Graph",
     }
   }
