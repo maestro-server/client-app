@@ -13,7 +13,7 @@ export default {
   data: function () {
     return {
       entity: new Graphs(),
-      columns: ['name', 'lsystem', 'updated_at', 'created_at', 'actions'],
+      columns: ['status', 'name', 'lsystem', 'updated_at', 'created_at', 'actions'],
       options: {
         filterable: ['name', 'lsystem'],
         listColumns: {
@@ -37,7 +37,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
+        d.lsystem = _.reduce(d.systems, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
         d.updated_at = new Date(d.updated_at).toLocaleString()
         d.created_at = new Date(d.created_at).toLocaleString()
         return d
