@@ -77,7 +77,7 @@ export default {
       this.setupModel()
 
       FectherEntity(Graphs)()
-        .create({}, this.model)
+        .create(this.finishJob, this.model)
     },
 
     editSave () {
