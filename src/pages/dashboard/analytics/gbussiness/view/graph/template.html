@@ -1,4 +1,29 @@
 <div>
 
-  Graph
+  <div class="pb10">
+    <div class="mt20 pb10">
+      <h3 class="col-sm-6 col-xs-12 mt0">
+        <span class="hidden-xs">{{entity.name}} - </span><span class="text-capitalize">{{model.name}}</span>
+      </h3>
+      <div class="col-sm-6 col-xs-12 text-right">
+        <b>Export to:</b>
+        <template v-for="item in dwn" v-key="item">
+            <button class="btn btn-primary btn-xs" @click="event(item)">
+              <i class="fa fa-download"></i> {{item}}
+            </button> | 
+        </template>
+        |
+        <b>Shared:</b>
+        <button class="btn btn-primary btn-xs" @click="event(item)">
+          <i class="fa fa-share"></i> Embed
+        </button>
+      </div>
+    
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+      <iframe :src="src"></iframe>
+  </div>
 </div>

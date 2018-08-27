@@ -16,13 +16,12 @@ export default {
 
   computed: {
     typeStatus() {
-    console.log(this.model)
       const mapp = {'finished': 'success', 'error': 'danger', 'process': 'warning'}
       return _.get(mapp, this.model.status, 'info')
     },
 
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'ifamilies', 'isystems', 'iclients', 'iservers', 'info.histograms'])
     }
   }
 }

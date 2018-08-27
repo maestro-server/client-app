@@ -2,6 +2,8 @@
 
 VURL=${API_URL:='http://localhost:8888'}
 sed -i "s#api_url content=[[:alnum:]\/:\.]*#api_url content=$VURL#" /var/www/index.html
+VAL=${ANALYTICS_URL:='http://localhost:9999'}
+sed -i "s#analytics_url content=[[:alnum:]\/:\.]*#analytics_url content=$VAL#" /var/www/index.html
 VSTATIC=${STATIC_URL:='/upload/'}
 sed -i "s#static_url content=[[:alnum:]\/:\.]*#static_url content=$VSTATIC#" /var/www/index.html
 VLOGO=${LOGO:='/static/imgs/logo300.png'}
