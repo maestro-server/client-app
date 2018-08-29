@@ -5,6 +5,13 @@
 
     <div class="row">
       <tab-menu :list="submenu" base="dashboard/analytics" class="col-xs-12"></tab-menu>
+
+      <div class="col-xs-12">
+        <div class="pull-right hidden-xs">
+          <router-link :to="{name: 'dependency'}" class="btn btn-primary btn-xs">
+            <i aria-hidden="true" class="fa fa-circle-o-notch"></i> Dependency Maker</router-link>
+        </div>
+      </div>
     </div>
 
     <div class="row">

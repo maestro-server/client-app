@@ -1,13 +1,8 @@
 'use strict'
-import comp from './gbussiness'
-import tlist from './list/router'
-import single from './view/router'
+import comp from './dependencies'
 
 export default {
-  path: 'graph-bussiness',
-  component: comp,
-  children: [
-    tlist,
-    single
-  ]
+  name: 'dependency',
+  path: 'dependency-maker',
+  component: comp
 }

@@ -23,7 +23,19 @@
     </div>
   </div>
 
-  <div class="col-xs-12">
+  <div class="col-xs-12" v-if="model.status == 'finished'">
       <iframe :src="src"></iframe>
+  </div>
+
+  <div class="col-xs-12" v-if="model.status != 'finished'">
+      <well>
+        The graph its not complete -
+        <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'">
+          <i class="fa fa-check-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'">
+          <i class="fa fa-times-circle-o"></i> {{model.status}}</span>
+        <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'">
+          <i class="fa fa-circle-o"></i> {{model.status}}</span>
+      </well>
   </div>
 </div>

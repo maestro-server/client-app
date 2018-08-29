@@ -20,7 +20,6 @@ export default {
   computed: {
     src() {
       const jwt = Login.getToken();
-      console.log(jwt)
       return `${analytics_url}/graphs/${this.id}?jwt=${jwt}`;
     }
   },

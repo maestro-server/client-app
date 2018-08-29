@@ -1,42 +1,180 @@
 <div>
 
   <div class="pb10">
-    <header-view-entity :label="entity.name" :name="model.name" @del="del" @acl="acl" :visibility="{edit: false, create: true, delete:true}"></header-view-entity>
+    <header-view-entity :label="entity.name" :name="model.name" @del="$parent.del" @acl="$parent.acl" @edit="$parent.edit()"></header-view-entity>
   </div>
 
-  <div class="col-sm-6 col-xs-12">
-    <info-view :data="filtered"></info-view>
-  </div>
+  <div class="col-xs-12">
 
-  <div class="col-sm-6 col-xs-12">
+    <h3>
+      Status
+      <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'">
+        <i class="fa fa-check-circle-o"></i> {{model.status}}</span>
+      <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'">
+        <i class="fa fa-times-circle-o"></i> {{model.status}}</span>
+      <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'">
+        <i class="fa fa-circle-o"></i> {{model.status}}</span>
 
-    <div class="col-xs-12">
-
-      <h3>
-        Status
-        <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'"><i class="fa fa-check-circle-o"></i> {{model.status}}</span>
-        <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'"><i class="fa fa-times-circle-o"></i> {{model.status}}</span>
-        <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'"><i class="fa fa-circle-o"></i> {{model.status}}</span>
-      </h3>
-
-      <div class="alert alert-danger" v-if="model.status == 'error'">
-        {{model.msg}}
-      </div>
-
-    </div>
-
-    <div class="col-xs-12">
-
-      <hr>
-
-      <h3>Results</h3>
-      <router-link v-if="model._id" :to="{name: 'graphs.single.graph', params: { id: model._id }}"
-                   class="btn btn-primary btn" :disabled="model.status != 'finished'" >
+      |
+      <router-link v-if="model.status == 'finished'" :to="{name: 'graphs.single.graph', params: { id: model._id }}" class="btn btn-primary btn-sm"
+        :disabled="model.status != 'finished'">
         <i class="fa fa-sitemap"></i> View graph
       </router-link>
+    </h3>
 
+    <div class="alert alert-danger" v-if="model.status == 'error'">
+      {{model.msg}}
     </div>
 
   </div>
+
+  <template v-if="model.status == 'finished'">
+      <div class="col-sm-6 col-xs-12">
+
+        <template v-if="model.info">
+          <h3>Graph</h3>
+          <table class="table table-bordered table-striped">
+            <tbody>
+              <tr>
+                <th>Density</th>
+                <td>{{model.info.density}}</td>
+              </tr>
+              <tr>
+                <th>Conections</th>
+                <td>{{model.info.conections}}</td>
+              </tr>
+              <tr>
+                <th>Histogram</th>
+                <td>
+                  <div class="hist flex">
+                    <template v-for="key, item in hist">
+                      <div :style="mHeight(key)" class="hist-bar">
+                        <p class="text-center">{{key}}</p>
+                      </div>
+                    </template>
+                  </div>
+                  <div class="label flex">
+                    <template v-for="key, item in hist">
+                      <p class="text-center hist-label">{{item}}</p>
+                    </template>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    
+          <hr>
+        </template>
+    
+        <template v-if="model.ifamilies">
+          <h3>Families</h3>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Group</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="key, value in model.ifamilies.items">
+                <td>{{value}}</td>
+                <th>{{key}}</th>
+              </tr>
+              <tr class="info">
+                <th>Total</th>
+                <th>{{model.ifamilies.total}}</th>
+              </tr>
+            </tbody>
+          </table>
+    
+          <hr>
+        </template>
+    
+        <template v-if="model.isystems">
+          <h3>Systems</h3>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="key, value in model.isystems.items">
+                <th>
+                  <router-link :to="{name: 'system.single', params: { id: key._id }}">
+                    {{key.name}}
+                    <i class="fa  fa-eye" aria-hidden="true"></i>
+                  </router-link>
+                </th>
+              </tr>
+              <tr class="info">
+                <th>Total {{model.isystems.total}}</th>
+              </tr>
+            </tbody>
+          </table>
+    
+          <hr>
+        </template>
+      </div>
+    
+      <div class="col-sm-6 hidden-xs">
+          <iframe :src="src" class="mini-frame"></iframe>
+    
+          <router-link v-if="model._id" :to="{name: 'graphs.single.graph', params: { id: model._id }}" class="btn btn-primary btn-xs pull-right"
+            :disabled="model.status != 'finished'">
+            <i class="fa fa-sitemap"></i> Expand Graph
+          </router-link>
+      </div>
+    
+      <div class="col-sm-6 col-xs-12">
+        <hr>
+    
+        <template v-if="model.iclients">
+    
+          <h3>Clients</h3>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="key, value in model.iclients.items">
+                <th>
+                  <router-link :to="{name: 'clients.single', params: { id: key._id }}">
+                    {{key.name}}
+                    <i class="fa  fa-eye" aria-hidden="true"></i>
+                  </router-link>
+                </th>
+              </tr>
+              <tr class="info">
+                <th>Total {{model.iclients.total}}</th>
+              </tr>
+            </tbody>
+          </table>
+    
+        </template>
+    
+      </div>
+  </template>
+
+  <template v-if="model.status != 'finished'">
+      <div class="col-sm-6 col-xs-12">
+        <info-view :data="filtered"></info-view>
+      </div>
+
+      <div class="col-sm-6 col-xs-12">
+          <well>
+            The graph its not complete -
+            <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'">
+              <i class="fa fa-check-circle-o"></i> {{model.status}}</span>
+            <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'">
+              <i class="fa fa-times-circle-o"></i> {{model.status}}</span>
+            <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'">
+              <i class="fa fa-circle-o"></i> {{model.status}}</span>
+          </well>
+      </div>
+
+  </template>
 
 </div>

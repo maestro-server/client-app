@@ -1,0 +1,59 @@
+
+@import '~bootue/src/_core/variables';
+@import '~bootue/src/_core/mixins';
+
+.dp-container {
+    display: flex;
+    justify-content: center;
+    background: #f9f9f9;
+    flex-direction: column;
+
+    .dp-row {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-grow: 1;
+        background: #d6d6d6;
+        margin-bottom: 10px;
+
+        .dp-item {   
+            flex-grow: 1;
+            max-width: 90px;
+            color: #fff;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 6px;
+            box-shadow: 1px 1px 20px #848484;
+
+            background: $brand-primary;
+            @include themify($themes) {
+              background: themed('brand-primary');
+            }
+        } 
+    }
+
+    .more {
+        text-align: center;
+        width: 30px;
+        line-height: 30px;
+        margin: auto;
+        position: relative;
+        display: inline-block;
+        background: #fff;
+        border-radius: 20px;
+
+        font-weight: bold;
+        box-shadow: 0 0 20px #848484;
+        cursor: pointer;
+        text-decoration: none;
+
+        color: $brand-primary;
+        @include themify($themes) {
+            color: themed('brand-primary');
+        }
+    }
+
+    .more:hover {
+        background: #ededed;
+    }
+}
