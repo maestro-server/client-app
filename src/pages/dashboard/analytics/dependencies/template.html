@@ -5,111 +5,13 @@
   </div>
 
   <div class="col-xs-8 dp-container">
-    <div class="dp-row dp-row-no">
-      <a class="more more-left">+</a>
-    </div>
 
-    <div class="dp-row">
-      <div class="dp-item">
-        <h4>App</h4>
-        <p><span class="label label-primary">Application</span></p>
-      </div>
+    <dprow v-for="item, k in grid" :key="item._id" :apps="item" :step="k" @add="addBags"></dprow>
 
-      <div class="dp-item">
-        <h4>App</h4>
-        <p><span class="label label-primary">Application</span></p>
-      </div>
-
-      <a class="more more-right">+</a>
-    </div>
-
-    <div class="dp-row dp-row-no">
-      <a class="more more-left">+</a>
-    </div>
-
-    <div class="dp-row">
-
-      <div class="dp-item">
-        <h4>App</h4>
-        <p><span class="label label-primary">Application</span></p>
-      </div>
-
-      <div class="dp-item">
-        <h4>App</h4>
-        <p><span class="label label-primary">Application</span></p>
-      </div>
-
-      <a class="more more-right">+</a>
-    </div>
-
-    <div class="dp-row dp-row-no">
-      <a class="more more-left">+</a>
-    </div>
-
-
-    <div class="dp-row">
- 
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-  
-        <div class="dp-item">
-          <h4>App</h4>
-          <p><span class="label label-primary">Application</span></p>
-        </div>
-
-        <a class="more more-right">+</a>
-      </div>
-  
-      <div class="dp-row dp-row-no">
-        <a class="more more-left">+</a>
-      </div>
   </div>
 
   <div class="col-xs-4">
-    
+    <info-view :data="app" :title="false"></info-view>
   </div>
-
 
 </div>

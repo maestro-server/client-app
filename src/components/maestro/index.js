@@ -9,13 +9,16 @@ import headerEntity from './headerEntity/HeaderEntity.vue'
 import listOptions from './listOptions/listOptions.vue'
 import createrList from './createrList/CreaterList.vue'
 import modalDelete from './modalDelete/delete.vue'
+import tableinfo from './tableinfo/TableInfo.vue'
 import infoView from './infoView/InfoView.vue'
 import callback from './callback/Callback.vue'
 import uploader from './uploader/Uploader.vue'
 import modalAcl from './modalACL/create.vue'
 import listBox from './listBox/ListBox.vue'
 import loader from './loader/Loader.vue'
+import status from './status/Status.vue'
 import imager from './imager/Imager.vue'
+
 
 
 let components = {
@@ -26,6 +29,7 @@ let components = {
   headerEntity,
   listOptions,
   modalDelete,
+  tableinfo,
   createrList,
   infoView,
   callback,
@@ -33,6 +37,7 @@ let components = {
   modalAcl,
   listBox,
   loader,
+  status,
   imager
 }
 

@@ -10,9 +10,7 @@
 
       <h3>
         Status
-        <span class="btn btn-success btn-xs text-capitalize" v-if="model.status == 'finished'"><i class="fa fa-check-circle-o"></i> {{model.status}}</span>
-        <span class="btn btn-danger btn-xs text-capitalize" v-if="model.status == 'error'"><i class="fa fa-times-circle-o"></i> {{model.status}}</span>
-        <span class="btn btn-warning btn-xs text-capitalize" v-if="model.status== 'process'"><i class="fa fa-circle-o"></i> {{model.status}}</span>
+        <status :status="model.status"></status>
       </h3>
 
       <div class="alert alert-danger" v-if="model.status == 'error'">

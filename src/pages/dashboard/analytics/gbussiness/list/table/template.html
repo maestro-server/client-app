@@ -14,12 +14,7 @@
 
     <template slot="status" slot-scope="props">
 
-      <span class="btn btn-success btn-xs" v-if="props.row.status == 'finished'"><i class="fa fa-check-circle-o"></i></span>
-      <span class="btn btn-danger btn-xs" v-if="props.row.status == 'error'"><i class="fa fa-times-circle-o"></i></span>
-      <span class="btn btn-info btn-xs" v-if="props.row.status == 'process'"><i class="fa fa-circle-o"></i></span>
-      <span class="btn btn-warning btn-xs" v-if="props.row.status == 'warning'"><i class="fa fa-clock-o"></i></span>
-
-      {{props.row.status}}
+      <status :status="props.row.status"></status>
 
     </template>
 
