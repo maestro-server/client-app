@@ -4,14 +4,22 @@
     <header-view-entity label="Dependency Maker" name="Applications" :visibility="{edit: false, create: false, delete:false}"></header-view-entity>
   </div>
 
-  <div class="col-xs-8 dp-container">
+  <template v-if="grid.length > 0">
+    <div class="col-xs-8 dp-container">
+      <dprow v-for="item, k in grid" :key="item._id" :apps="item" :step="k" @add="addBags"></dprow>
+    </div>
+  
+    <div class="col-xs-4">
+      <info-view :data="app" :title="false"></info-view>
+    </div>
+  </template>
+  
 
-    <dprow v-for="item, k in grid" :key="item._id" :apps="item" :step="k" @add="addBags"></dprow>
-
-  </div>
-
-  <div class="col-xs-4">
-    <info-view :data="app" :title="false"></info-view>
+  <div class="col-xs-12" v-if="grid.length == 0">
+    <well>
+        <h4>Choose any system or app to be entry point</h4>
+        
+    </well>
   </div>
 
 </div>

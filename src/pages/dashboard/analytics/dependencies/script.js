@@ -14,9 +14,7 @@ export default {
     return {
       entity: Graphs,
       app: {},
-      grid: [
-        []
-      ]
+      grid: []
     }
   },
 
