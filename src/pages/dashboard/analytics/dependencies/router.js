@@ -1,8 +1,13 @@
 'use strict'
 import comp from './dependencies'
+import choose from "./choose/router";
+import single from "./single/router";
 
 export default {
-  name: 'dependency',
   path: 'dependency-maker',
-  component: comp
+  component: comp,
+  children: [
+    choose,
+    single
+  ]
 }

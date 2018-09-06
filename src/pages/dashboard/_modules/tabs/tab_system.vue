@@ -19,10 +19,16 @@
                  class="mt10"
                  :headers="headers"
       ></typeahead>
+
     </template>
 
     <template slot="view" slot-scope="props">
       <b class="text-capitalize">{{props.item.name}}</b>
+    </template>
+
+    <template slot="footer" v-if="isFull">
+      <hr>
+      <bs-label type='danger' class="mt10">Max {{limit}} items</bs-label>
     </template>
 
   </creater-list>

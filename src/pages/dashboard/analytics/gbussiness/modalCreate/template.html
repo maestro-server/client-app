@@ -40,7 +40,13 @@
             <!-- ================= App ================= -->
             <!-- ============================================== -->
             <tab header="by App">
-                <tab-apps @update="val => data.apps = val" ref="tab_apps"></tab-apps>
+                <tab-apps @update="val => data.apps = val" ref="tab_apps">
+                  <template slot="label">
+                    <p>
+                      Select any specific application.
+                    </p>
+                  </template>
+                </tab-apps>
             </tab>
 
           </tabs>

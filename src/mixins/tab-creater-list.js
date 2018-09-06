@@ -1,9 +1,19 @@
 'use strict'
 
 export default {
+  props: {
+    limit: {type: Number, default: 30},
+  },
+
   data: function () {
     return {
       value: []
+    }
+  },
+
+  computed: {
+    isFull() {
+      return this.limit <= this.value.length;
     }
   },
 
@@ -18,7 +28,7 @@ export default {
     onHit(item) {
       const exist = _.find(this.value, ['_id', item._id])
 
-      if (!exist) {
+      if (!exist && !this.isFull) {
         const getters = _.isArray(this.filter) ? _.pick(item, this.filter) : item
         this.value.push(getters)
         this.updaterEdit(this.value)
