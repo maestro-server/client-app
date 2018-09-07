@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="col-xs-8 dp-container">
-      <dprow v-for="item, k in grid" :key="item._id" :apps="item" :step="k" @add="addBags"></dprow>
+      <dprow v-for="item, k in grid" 
+        :key="item.lenght" 
+        :apps="item" 
+        :step="k" 
+        :parent_id="item.parent_id"
+        @add="addBags"
+        @sync="syncBags">
+        </dprow>
     </div>
 
     <div class="col-xs-4">
@@ -32,7 +39,8 @@
       return {
         entity: Graphs,
         app: {},
-        grid: []
+        grid: [],
+        nseleted: null
       }
     },
 
@@ -41,7 +49,13 @@
         this.grid[step].push(app)
       },
 
+      syncBags(apps, step) {
+        this.$set(this.grid, step, apps)
+        this.grid[step].push() //vuebug, force view update
+      },
+
       addRow(deps, step) {
+        this.nseleted = step
         this.grid.splice(step+1)
         this.grid.push(deps)
       },
@@ -55,7 +69,6 @@
     created() {
       const entries = _.get(this.$route.params, 'apps', [])
       this.grid.push(entries);
-      console.log(this.$route.params);
     }
   }
 

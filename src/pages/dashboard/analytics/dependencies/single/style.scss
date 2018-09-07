@@ -2,6 +2,8 @@
 @import '~bootue/src/_core/variables';
 @import '~bootue/src/_core/mixins';
 
+$dp-item-width: 110px;
+
 .dp-container {
     display: flex;
     justify-content: center;
@@ -17,18 +19,20 @@
         justify-content: center;
         flex-direction: row;
         background: #d6d6d6;
-        margin-bottom: 35px;
+        
         padding: 6px 0;
         overflow-x: auto;
+        overflow-y: hidden;
 
         .dp-item {
-            max-width: 115px;
+            width: $dp-item-width;
             color: #fff;
             padding: 10px 8px;
             margin: 5px;
             cursor: pointer;
             border-radius: 6px;
             box-shadow: 1px 1px 20px #848484;
+            position: relative;
 
             background: $brand-primary;
             @include themify($themes) {
@@ -40,7 +44,69 @@
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.3);
           }
+
+          &:before {
+            content: "";
+            display: inline-block;
+            width: 2px;
+            height: 12px;
+            position: absolute;
+            top: -11px;
+            left: ($dp-item-width/2)-1;
+
+            background: $brand-primary;
+            @include themify($themes) {
+              background: themed('brand-primary');
+            }
+          }
+
+          &:after {
+            content: "";
+            display: inline-block;
+            width: 2px;
+            height: 12px;
+            position: absolute;
+            bottom: -11px;
+            left: ($dp-item-width/2)-1;
+
+            background: $brand-primary;
+            @include themify($themes) {
+              background: themed('brand-primary');
+            }
+          }
         }
+
+        .dp-select {
+          box-shadow: 1px 1px 20px #000;
+          border: 2px solid #fff;
+
+          background: $brand-primary-darker;
+          @include themify($themes) {
+            background: themed('brand-primary-darker');
+          }
+        }
+    }
+
+    .dp-lines-t {
+      display: block;
+      margin: 0 auto;
+      height: 2px;
+      background: $brand-primary;
+          @include themify($themes) {
+            background: themed('brand-primary');
+          }
+    }
+
+    .dp-lines-b {
+      display: block;
+
+      margin: 0 auto 35px;
+
+      height: 2px;
+      background: $brand-primary;
+          @include themify($themes) {
+            background: themed('brand-primary');
+          }
     }
 
     .dp-row-no {
@@ -52,7 +118,7 @@
         width: 30px;
         line-height: 30px;
         height: 30px;
-        margin: auto 15px;
+        margin: auto 10px;
         position: relative;
         display: inline-block;
         background: #fff;

@@ -25,7 +25,6 @@
             </tab-apps>
           </div>
         </well>
-
       </div>
 
       <a href="#" class="btn btn-primary" @click.prevent="selItems">Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
@@ -38,6 +37,8 @@
 <script>
   'use strict'
 
+  import Applications from 'factories/applications'
+  import FectherEntity from 'services/fetchEntity'
   import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
@@ -62,16 +63,27 @@
 
     methods: {
       selItems() {
-        let apps = this.apps;
-
-        if (this.show == 'system')
-          apps = this.getAppsBySystem();
-
-        this.$router.push({name: 'dependency.tree', params: {apps}})
+        if (this.show == 'system') {
+          this.getAppsBySystem(this.systems);
+        } else {
+          this.routePage(this.apps);
+        }
       },
 
-      getAppsBySystem() {
+      getAppsBySystem(dsystems) {
+        const systems = dsystems.map(e => _.get(e, '_id'));
 
+        FectherEntity(Applications)({force: true})
+          .find(this.fetchApps, {'system._id': systems})
+      },
+
+      fetchApps(data) {
+        const apps = _.get(data, 'data.items', []);
+        this.routePage(apps);
+      },
+
+      routePage(apps) {
+        this.$router.push({name: 'dependency.tree', params: {apps}})
       }
     }
   }
