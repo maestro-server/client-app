@@ -4,22 +4,31 @@
     <div class="dp-lines-t" :style="wLine"></div>
 
     <div class="dp-row">
-      <div class="dp-item" :class="{'dp-select': app._id == selected}" @click="add(app._id)" v-for="app, k in apps" :key="app._id">
-        <h5>{{app.name}}</h5>
-        <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
-        <p v-if="app.environment"><span class="dst">{{app.environment}}</span></p>
 
-        <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
-      </div>
+        <div class="dp-item" 
+            :class="{'dp-select': app._id == selected}" 
+            @click="add(app._id)" 
+            v-for="app, k in apps" 
+            :key="app._id">
+            
+          <h5>{{app.name}}</h5>
+          <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
+          <p v-if="app.environment"><span class="dst">{{app.environment}}</span></p>
+
+          <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
+        </div>
 
       <well class="bg-white" v-if="apps.length == 0">
           Select the first dependency
       </well>
+
     </div>
+
+    <bs-label type="default" class="pull-right mt5">{{step}}</bs-label>
 
     <div class="dp-lines-b" :style="wLine"></div>
 
-    <popover effect="scale" placement="bottom" title="Add Application" :ref="'pop_' + step">
+    <popover effect="scale" placement="top" title="Add Dependecy" :ref="'pop_' + step">
 
       <template slot="content">
 
@@ -71,7 +80,12 @@
 
     computed: {
       wLine() {
-        const wid = ((this.apps.length -1) * 120) + 2
+         let wid = 0
+
+        if (this.apps.length) {
+          wid = ((this.apps.length -1) * 120) + 2
+        }
+
         return `width: ${wid}px`
       }
     },

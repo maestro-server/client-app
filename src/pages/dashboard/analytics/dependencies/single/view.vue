@@ -1,17 +1,33 @@
 <template>
   <div>
+
+    <p class="col-xs-12 no-margin">Entry point</p>
+
     <div class="col-xs-8 dp-container">
-      <dprow v-for="item, k in grid" 
-        :key="item.lenght" 
-        :apps="item" 
-        :step="k" 
-        :parent_id="item.parent_id"
-        @add="addBags"
-        @sync="syncBags">
-        </dprow>
+        <dprow v-for="item, k in grid" 
+          :key="k" 
+          :apps="item" 
+          :step="k" 
+          :parent_id="item.parent_id"
+          @add="addBags"
+          @sync="syncBags">
+          </dprow>
     </div>
 
     <div class="col-xs-4">
+      <well v-if="isEmpty">
+        <h4 class="primary">
+          <i class="fa fa-question-circle" aria-hidden="true"></i> 
+          <strong>Tips</strong>
+        </h4>
+
+        <ul class="no-pad">
+          <li>Can create a dependency tree between all applications.</li>
+          <li>Select and active any app, after clicking on the plus and add any dependency.</li>
+          <li>Dependency tree its used to created business graphs, a relation between apps and services.</li>
+        </ul>
+      </well>
+
       <info-view :data="app" :title="false"></info-view>
     </div>
   </div>
@@ -41,6 +57,12 @@
         app: {},
         grid: [],
         nseleted: null
+      }
+    },
+
+    computed: {
+      isEmpty() {
+        return _.isEmpty(this.app)
       }
     },
 
