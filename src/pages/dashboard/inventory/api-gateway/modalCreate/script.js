@@ -36,12 +36,19 @@ export default {
   },
 
   methods: {
+    fetchProtocolData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+      .find(this.fetchAdminer, {key: 'deps_options'})
+    },
+
     hookCreateLoad() {
       this.tab_targets.reset()
+      this.fetchProtocolData()
     },
 
     hookEditLoad() {
       this.tab_targets.updaterEdit(this.data.deps)
+      this.fetchProtocolData()
     }
   }
 }

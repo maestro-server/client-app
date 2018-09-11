@@ -58,7 +58,6 @@ export default {
 
     fetchOptions() {
       const key = `database_options`
-
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.fetchAdminer, {key})
     }

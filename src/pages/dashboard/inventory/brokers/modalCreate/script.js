@@ -35,14 +35,19 @@ export default {
   },
 
   methods: {
+    fetchProtocolData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+      .find(this.fetchAdminer, {key: 'deps_options'})
+    },
+
     hookCreateLoad() {
       this.tab_endpoint.reset()
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'deps_options'})
+      this.fetchProtocolData()
     },
 
     hookEditLoad() {
       this.tab_endpoint.updaterEdit(this.data.deps)
+      this.fetchProtocolData()
     }
   }
 

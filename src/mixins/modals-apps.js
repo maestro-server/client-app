@@ -33,7 +33,8 @@ export default {
       data: {},
       options: {
         third: [],
-        own: []
+        own: [],
+        protocol: []
       },
       entity: Applications,
       other: false,

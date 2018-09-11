@@ -7,9 +7,9 @@
       </h3>
       <div class="col-sm-6 col-xs-12 text-right">
         <b>Export to:</b>
-        <template v-for="item in dwn" v-key="item">
-            <button class="btn btn-primary btn-xs" @click="event(item)">
-              <i class="fa fa-download"></i> {{item}}
+        <template v-for="item in dwn" v-key="item" v-if="dwn">
+            <button class="btn btn-primary btn-xs"  @click="down(item.link)">
+              <i class="fa fa-download"></i> {{item.label}}
             </button> |
         </template>
         |
