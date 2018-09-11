@@ -50,7 +50,7 @@
       return {
         updated: false,
         options: [],
-        value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null},
+        value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null, provider: null},
         providers: [],
         zones: [],
         regions: []
@@ -78,6 +78,7 @@
         this.regions = _.get(dc, 'value.regions', [])
         this.zones = _.get(dc, 'value.zones', [])
         this.value._id = _.get(dc, 'value._id')
+        this.value.provider = _.get(dc, 'value.provider')
 
         this.updateModel()
       },

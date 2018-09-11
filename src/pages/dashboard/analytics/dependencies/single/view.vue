@@ -3,21 +3,21 @@
 
     <p class="col-xs-12 no-margin">Entry point</p>
 
-    <div class="col-xs-8 dp-container">
-        <dprow v-for="item, k in grid" 
-          :key="k" 
-          :apps="item" 
-          :step="k" 
+    <div class="col-xs-12 col-sm-8 dp-container">
+        <dprow v-for="item, k in grid"
+          :key="k"
+          :apps="item"
+          :step="k"
           :parent_id="item.parent_id"
           @add="addBags"
           @sync="syncBags">
           </dprow>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-sm-4 hidden-xs">
       <well v-if="isEmpty">
         <h4 class="primary">
-          <i class="fa fa-question-circle" aria-hidden="true"></i> 
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
           <strong>Tips</strong>
         </h4>
 
