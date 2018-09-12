@@ -1,10 +1,11 @@
 'use strict'
 
-import axios from 'axios'
+
 import Login from 'services/login'
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
 import analytics_url from 'src/resources/libs/analytics_url'
+import download_file from 'src/resources/requests/download_request'
 
 export default {
   mixins: [ViewSingle],
@@ -32,18 +33,7 @@ export default {
 
     down({url, type, ext}) {
       const name = `${this.id}.${ext}`
-
-      axios({
-        url,
-        responseType: 'arraybuffer'
-      })
-        .then(function (response) {
-          let blob = new Blob([response.data], {type})
-          let link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.setAttribute('download', name);
-          link.click()
-        });
+      download_file(name, url, type)
     },
 
     setUrls() {

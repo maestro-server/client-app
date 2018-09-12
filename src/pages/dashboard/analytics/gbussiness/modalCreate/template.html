@@ -3,53 +3,53 @@
 
     <form class="row">
 
-        <section class="col-xs-12">
-          <p>Choose one type of filter, you can filter by client, system or application.</p>
-        </section>
+      <section class="col-xs-12">
+        <p>Choose one type of filter, you can filter by client, system or application.</p>
+      </section>
 
-        <section class="col-sm-8">
+      <section class="col-sm-8">
 
-          <bs-input
-            label="Graph Name"
-            v-model="data.name"
-            v-validate.initial="'required'"
-            name="name"
-            :error="makeError('name')"
-          ></bs-input>
+        <bs-input
+          label="Graph Name"
+          v-model="data.name"
+          v-validate.initial="'required'"
+          name="name"
+          :error="makeError('name')"
+        ></bs-input>
 
 
-        </section>
+      </section>
 
-        <section class="col-xs-12">
-          <hr>
-        </section>
+      <section class="col-xs-12">
+        <hr>
+      </section>
 
-        <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
-            <!-- ================= System ================= -->
-            <!-- ============================================== -->
-            <tab header="by System">
-                <tab-system @update="val => data.systems = val" ref="tab_system"></tab-system>
-            </tab>
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+        <!-- ================= System ================= -->
+        <!-- ============================================== -->
+        <tab header="by System">
+          <tab-system @update="val => data.systems = val" ref="tab_system"></tab-system>
+        </tab>
 
-            <!-- ================= Client ================= -->
-            <!-- ============================================== -->
-            <tab header="by Client">
-                <tab-clients @update="val => data.clients = val" ref="tab_clients"></tab-clients>
-            </tab>
+        <!-- ================= Client ================= -->
+        <!-- ============================================== -->
+        <tab header="by Client">
+          <tab-clients @update="val => data.clients = val" ref="tab_clients"></tab-clients>
+        </tab>
 
-            <!-- ================= App ================= -->
-            <!-- ============================================== -->
-            <tab header="by App">
-                <tab-apps @update="val => data.apps = val" ref="tab_apps">
-                  <template slot="label">
-                    <p>
-                      Select any specific application.
-                    </p>
-                  </template>
-                </tab-apps>
-            </tab>
+        <!-- ================= App ================= -->
+        <!-- ============================================== -->
+        <tab header="by App">
+          <tab-apps @update="val => data.apps = val" ref="tab_apps">
+            <template slot="label">
+              <p>
+                Select any specific application.
+              </p>
+            </template>
+          </tab-apps>
+        </tab>
 
-          </tabs>
+      </tabs>
 
     </form>
 

@@ -1,0 +1,21 @@
+<div>
+  <modal :title="text.title" effect="fade" v-model="showModal" @closed="closed" small>
+
+    <form class="row text-center">
+
+      <section class="col-xs-12">
+        <p>Link sharing on. <br/>Anyone with the link <strong>can view.</strong></p>
+      </section>
+
+      <section class="col-xs-12">
+        <button class="btn btn-primary">Turn ON</button>
+      </section>
+
+    </form>
+
+    <div slot="modal-footer" class="modal-footer">
+      <button type="button" class="btn btn-default" @click="closed">Close</button>
+    </div>
+
+  </modal>
+</div>
