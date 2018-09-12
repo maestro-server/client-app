@@ -34,7 +34,8 @@ export default {
       options: {
         third: [],
         own: [],
-        protocol: []
+        protocol: [],
+        size: []
       },
       entity: Applications,
       other: false,
