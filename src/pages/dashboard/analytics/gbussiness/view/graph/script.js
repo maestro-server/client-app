@@ -19,38 +19,48 @@ export default {
   },
 
   computed: {
-    src() {
-      const jwt = Login.getToken();
-      return `${analytics_url}/graphs/${this.id}?jwt=${jwt}`;
+    base_url() {
+      return `${analytics_url}/graphs`;
     }
   },
 
   methods: {
-    down(url) {
+    make_request(path = '') {
+      const jwt = Login.getToken();
+      return `${this.base_url}${path}/${this.id}?jwt=${jwt}`;
+    },
+
+    down({url, type, ext}) {
+      const name = `${this.id}.${ext}`
+
       axios({
-        url:url,
-        responseType:'arraybuffer'
+        url,
+        responseType: 'arraybuffer'
       })
-        .then(function(response) {
-          let blob = new Blob([response.data], { type:   'application/pdf' } )
+        .then(function (response) {
+          let blob = new Blob([response.data], {type})
           let link = document.createElement('a')
           link.href = window.URL.createObjectURL(blob)
+          link.setAttribute('download', name);
           link.click()
-      });
-    }, 
+        });
+    },
 
     setUrls() {
       this.dwn = [{
         'label': 'svg',
-        'link': this.src + '&ext=svg',
+        'ext': 'svg',
+        'url': this.make_request() + '&ext=svg',
         'type': 'application/svg+xml'
       }, {
         'label': 'graph.io',
-        'link': this.src + '&ext=xml',
+        'ext': 'xml',
+        'url': this.make_request() + '&ext=xml',
         'type': 'application/xml'
       }, {
         'label': 'png',
-        'link': this.src + '&ext=png',
+        'ext': 'png',
+        'url': this.make_request('/png'),
         'type': 'image/png'
       }]
     }
