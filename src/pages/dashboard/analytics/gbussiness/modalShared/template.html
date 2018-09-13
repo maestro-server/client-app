@@ -7,8 +7,19 @@
         <p>Link sharing on. <br/>Anyone with the link <strong>can view.</strong></p>
       </section>
 
-      <section class="col-xs-12">
-        <button class="btn btn-primary">Turn ON</button>
+      <section class="col-xs-12" v-if="!url">
+        <button class="btn btn-primary" @click.prevent="getURL">Turn ON</button>
+      </section>
+
+      <section class="col-xs-12" v-if="url">
+        <well class="copylink"> 
+          <button class="btn btn-default btn-xs fa fa-copy pull-left" v-clipboard="url"></button> 
+          <p>{{url}}</p>
+
+          <a class="btn btn-primary btn-xs" :href="url" target="_blank">Go to</a>
+        </well>
+
+        <button class="btn btn-danger btn-xs" @click.prevent="getURL">Turn OFF</button>
       </section>
 
     </form>

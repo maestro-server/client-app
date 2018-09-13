@@ -1,0 +1,11 @@
+
+@import '~bootue/src/_core/variables';
+@import '~bootue/src/_core/mixins';
+
+.copylink {
+  word-wrap: break-word;
+
+  p {
+    overflow: hidden;
+  }
+}
