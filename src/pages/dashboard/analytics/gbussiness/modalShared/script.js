@@ -19,6 +19,10 @@ export default {
   computed: {
     base_url() {
       return `${analytics_url}/graphs`;
+    },
+
+    status() {
+      return _.get(this.model, 'spublic') ? 'on' : 'off'
     }
   },
 
@@ -31,20 +35,29 @@ export default {
       return `${this.base_url}/public/${this.id}?token=${token}`
     },
 
-    getURL() {
+    putOn() {
+      this.requestT({}, (e) => {
+        const url = this.makeToken(_.get(e, 'data.token'))
+        this.$set(this, 'url', url)
+      })
+    },
+
+    putOff() {
+      this.requestT({'public': false}, () => {
+        this.$set(this, 'url', null)
+        this.$set(this, 'model.spublic', false)
+      })
+    },
+
+    requestT(body, fnc) {
       const path = `/${this.id}/public`
 
       FectherEntity(Graphs)({path})
-      .create((e) => {
-        const data = _.get(e, 'data', [])
-        const url = this.makeToken(_.get(data, 'token'))
-        this.$set(this, 'url', url)
-      })
+        .create(fnc, body)
     }
   },
 
   created() {
-    
     this.id = this.$route.params.id
   }
 
