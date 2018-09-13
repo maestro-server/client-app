@@ -5,12 +5,12 @@
 
     <div class="dp-row">
 
-        <div class="dp-item" 
-            :class="{'dp-select': app._id == selected}" 
-            @click="add(app._id)" 
-            v-for="app, k in apps" 
+        <div class="dp-item"
+            :class="{'dp-select': app._id == selected}"
+            @click="add(app._id)"
+            v-for="app, k in apps"
             :key="app._id">
-            
+
           <h5>{{app.name}}</h5>
           <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
           <p v-if="app.environment"><span class="dst">{{app.environment}}</span></p>
@@ -28,7 +28,7 @@
 
     <div class="dp-lines-b" :style="wLine"></div>
 
-    <popover effect="scale" placement="top" title="Add Dependecy" :ref="'pop_' + step">
+    <popover effect="scale" placement="top" title="Add Dependecy" :ref="'pop_' + step" @toggle="singleOpen">
 
       <template slot="content">
 
@@ -148,6 +148,10 @@
               CacheManager({k: `applications_${this.parent_id}`}).remove()
             }, app);
         }
+      },
+
+      singleOpen(state, refs) {
+        console.log(state, refs)
       }
     },
 
