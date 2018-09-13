@@ -10,7 +10,9 @@
           :step="k"
           :parent_id="item.parent_id"
           @add="addBags"
-          @sync="syncBags">
+          @sync="syncBags"
+          :ref="'line_' + k"
+          >
           </dprow>
     </div>
 
@@ -56,7 +58,8 @@
         entity: Graphs,
         app: {},
         grid: [],
-        nseleted: null
+        nseleted: null,
+        spopover: 0
       }
     },
 
@@ -85,6 +88,14 @@
       activedApp(app) {
         let napp = _.omit(app, ['_links', 'deps', 'roles', 'owner']);
         this.$set(this, 'app', napp);
+      },
+
+      activedPopover(step) {
+        const opop = this.spopover
+        this.spopover = step
+
+        if(opop != step)
+          this.$refs['line_'+opop][0].$refs['pop'].toggle()
       }
     },
 

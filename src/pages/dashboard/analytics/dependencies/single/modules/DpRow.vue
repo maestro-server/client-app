@@ -28,7 +28,7 @@
 
     <div class="dp-lines-b" :style="wLine"></div>
 
-    <popover effect="scale" placement="top" title="Add Dependecy" :ref="'pop_' + step" @toggle="singleOpen">
+    <popover effect="scale" placement="top" title="Add Dependecy" ref="pop" @toggle="singleOpen">
 
       <template slot="content">
 
@@ -150,8 +150,10 @@
         }
       },
 
-      singleOpen(state, refs) {
-        console.log(state, refs)
+      singleOpen(state) {
+        if(state) {
+          this.$parent.activedPopover(this.step)
+        }
       }
     },
 
