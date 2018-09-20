@@ -43,11 +43,6 @@ export default {
         'url': this.make_request() + '&ext=svg',
         'type': 'application/svg+xml'
       }, {
-        'label': 'graph.io',
-        'ext': 'xml',
-        'url': this.make_request() + '&ext=xml',
-        'type': 'application/xml'
-      }, {
         'label': 'png',
         'ext': 'png',
         'url': this.make_request('/png'),
