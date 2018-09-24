@@ -4,6 +4,7 @@
     <template slot="forms">
       <typeahead
         label="Channel"
+        name="channel"
         placeholder="Email, Hipchat"
         :data="types"
         v-model="single.channel"

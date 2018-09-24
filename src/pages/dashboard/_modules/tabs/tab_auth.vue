@@ -8,7 +8,7 @@
           <label>Auth type</label>
         </div>
         <div class="col-sm-9 col-xs-12">
-          <button-group v-model="single.type" type="primary" v-validate.initial="'required'">
+          <button-group v-model="single.type" type="primary" v-validate.initial="'required'" name="type">
             <bs-radio v-for="atp in options" :key="atp" :selected-value="atp">{{atp}}</bs-radio>
           </button-group>
         </div>

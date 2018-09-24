@@ -21,6 +21,7 @@
                  form-type="horizontal"
                  :headers="headers"
                  v-model="single.name"
+                 name="endpoint"
                  v-validate.initial="'required'"
                  :error="makeError('application')"
       ></typeahead>
