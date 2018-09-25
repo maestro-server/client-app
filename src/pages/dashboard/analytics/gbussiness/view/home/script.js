@@ -1,7 +1,7 @@
 'use strict'
 import _ from 'lodash'
 import Login from 'services/login'
-import analytics_url from 'src/resources/libs/analytics_url'
+import AnalyticsFront from 'factories/analyticsFront'
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
 
@@ -31,7 +31,8 @@ export default {
 
     src() {
       const jwt = Login.getToken();
-      return `${analytics_url}/graphs/${this.id}?jwt=${jwt}`;
+      const base = new AnalyticsFront().getUrl();
+      return `${base}/${this.id}?jwt=${jwt}`;
     }
   },
 

@@ -8,9 +8,10 @@
       <div class="col-sm-6 col-xs-12 text-right">
         <b>Export to:</b>
         <template v-for="item in dwn" v-key="item" v-if="dwn">
-            <button class="btn btn-primary btn-xs"  @click="down(item)">
-              <i class="fa fa-download"></i> {{item.label}}
-            </button> |
+          <button class="btn btn-primary btn-xs" @click="down(item)">
+            <i class="fa fa-download"></i> {{item.label}}
+          </button>
+          |
         </template>
         |
         <b>Shared:</b>
@@ -24,13 +25,15 @@
   </div>
 
   <div class="col-xs-12" v-if="model.status == 'finished'">
-      <iframe :src="make_request()"></iframe>
+    <iframe :src="make_request()"></iframe>
+
+    <a :href="make_request()" target="_blank" class="btn btn-primary btn-xs pull-right">Open in new tab</a>
   </div>
 
   <div class="col-xs-12" v-if="model.status != 'finished'">
-      <well>
-        The graph its not complete -
-        <status :status="model.status"></status>
-      </well>
+    <well>
+      The graph its not complete -
+      <status :status="model.status"></status>
+    </well>
   </div>
 </div>

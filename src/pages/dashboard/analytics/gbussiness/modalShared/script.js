@@ -3,7 +3,7 @@
 import Modals from 'mixins/modals'
 import Graphs from 'factories/graphs'
 import FectherEntity from 'services/fetchEntity'
-import analytics_url from 'src/resources/libs/analytics_url'
+import AnalyticsFront from 'factories/analyticsFront'
 
 export default {
   mixins: [Modals],
@@ -18,7 +18,7 @@ export default {
 
   computed: {
     base_url() {
-      return `${analytics_url}/graphs`;
+      return new AnalyticsFront().setEntity('graphs').getUrl();
     },
 
     status() {

@@ -4,7 +4,7 @@
 import Login from 'services/login'
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
-import analytics_url from 'src/resources/libs/analytics_url'
+import AnalyticsFront from 'factories/analyticsFront'
 import download_file from 'src/resources/requests/download_request'
 
 export default {
@@ -21,7 +21,7 @@ export default {
 
   computed: {
     base_url() {
-      return `${analytics_url}/graphs`;
+      return new AnalyticsFront().getUrl();
     }
   },
 

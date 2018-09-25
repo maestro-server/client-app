@@ -16,10 +16,6 @@
       </router-link>
     </h3>
 
-    <div class="alert alert-danger" v-if="model.status == 'error'">
-      {{model.msg}}
-    </div>
-
   </div>
 
   <template v-if="model.status == 'finished'">
@@ -140,8 +136,11 @@
 
       <div class="col-sm-6 col-xs-12">
           <well>
+            <template v-if="model.msg">
+              {{model.msg}}
+              <hr>
+            </template>
             The graph its not complete -
-
             <status :status="model.status"></status>
           </well>
       </div>
