@@ -51,6 +51,9 @@
                          name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
+              <bs-select form-type="horizontal" :options="options.size" v-model="data.size"
+                         name="size" label="Size"></bs-select>
+
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
                         v-model="data.description"></bs-input>
 
@@ -75,11 +78,7 @@
         <!-- ================= Targets ================= -->
         <!-- ============================================== -->
         <tab header="Consumers">
-          <tab-applications @update="val => data.targets = val" ref="tab_targets" label="Consumer" default-type="Worker">
-            <template slot="label">
-              List all consumers, using the form below to search in servers.
-            </template>
-          </tab-applications>
+          <tab-endpoint :types="options.protocol_broker" @update="val => model.deps = val" ref="tab_endpoint" label="Consumer"></tab-endpoint>
         </tab>
 
         <!-- ================= Servers ================= -->

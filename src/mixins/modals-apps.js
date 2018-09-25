@@ -33,7 +33,9 @@ export default {
       data: {},
       options: {
         third: [],
-        own: []
+        own: [],
+        protocol: [],
+        size: []
       },
       entity: Applications,
       other: false,
@@ -65,7 +67,7 @@ export default {
     hookCreateLoad() {},
     hookEditLoad() {},
     afterShow () {
-      this.text.title =  this.create ? `Create new ${this.family}s` : `Edit ${this.model.name} ${this.family.toLowerCase()}s`
+      this.text.title =  this.create ? `Create new ${this.family}` : `Edit ${this.model.name} ${this.family.toLowerCase()}`
     },
 
     createLoad () {

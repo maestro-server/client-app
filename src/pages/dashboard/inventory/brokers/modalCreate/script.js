@@ -1,16 +1,17 @@
 'use strict'
 
-import Applications from 'factories/applications'
 import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
-import tabApplications from 'src/pages/dashboard/_modules/tabs/tab_applications'
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+import tabEndpoint from 'src/pages/dashboard/_modules/tabs/tab_endpoint'
 
 export default {
   mixins: [Modals, ModalsApps],
 
   components: {
-    tabApplications
+    tabEndpoint
   },
 
   data () {
@@ -30,19 +31,24 @@ export default {
   },
 
   computed: {
-    tab_targets() {
-      return this.$refs.tab_targets
-    },
+    tab_endpoint() {return this.$refs.tab_endpoint},
   },
 
   methods: {
+    fetchProtocolData() {
+      FectherEntity(Adminer)({persistence: 'local'})
+      .find(this.fetchAdminer, {key: 'deps_options'})
+    },
+
     hookCreateLoad() {
-      this.tab_targets.reset()
+      this.tab_endpoint.reset()
+      this.fetchProtocolData()
     },
 
     hookEditLoad() {
-      this.editLoadEntities('targets', Applications)
-    },
+      this.tab_endpoint.updaterEdit(this.data.deps)
+      this.fetchProtocolData()
+    }
   }
 
 }

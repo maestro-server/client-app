@@ -1,0 +1,39 @@
+<div>
+
+  <div class="pb10">
+    <div class="mt20 pb10">
+      <h3 class="col-sm-6 col-xs-12 mt0">
+        <span class="hidden-xs">{{entity.name}} - </span><span class="text-capitalize">{{model.name}}</span>
+      </h3>
+      <div class="col-sm-6 col-xs-12 text-right">
+        <b>Export to:</b>
+        <template v-for="item in dwn" v-key="item" v-if="dwn">
+          <button class="btn btn-primary btn-xs" @click="down(item)">
+            <i class="fa fa-download"></i> {{item.label}}
+          </button>
+          |
+        </template>
+        |
+        <b>Shared:</b>
+        <button class="btn btn-primary btn-xs" @click="$parent.editS()">
+          <i class="fa fa-share"></i> Embed
+        </button>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="col-xs-12" v-if="model.status == 'finished'">
+    <iframe :src="make_request()"></iframe>
+
+    <a :href="make_request()" target="_blank" class="btn btn-primary btn-xs pull-right">Open in new tab</a>
+  </div>
+
+  <div class="col-xs-12" v-if="model.status != 'finished'">
+    <well>
+      The graph its not complete -
+      <status :status="model.status"></status>
+    </well>
+  </div>
+</div>

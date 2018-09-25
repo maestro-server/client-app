@@ -23,6 +23,10 @@ export default {
   },
 
   methods: {
+    slugApps(str) {
+      return _.kebabCase(str)
+    },
+
     toLower(str, app = '') {
       return app + _.kebabCase(str.toLowerCase())
     },

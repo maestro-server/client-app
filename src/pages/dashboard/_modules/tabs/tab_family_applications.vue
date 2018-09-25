@@ -24,6 +24,7 @@
                    :headers="headers"
         ></typeahead>
       </div>
+
     </template>
 
     <template slot="view" slot-scope="props">
@@ -61,7 +62,8 @@
           families: []
         },
         type: "Application",
-        template_apps: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>"
+        template_apps: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>",
+        filter: ['_id', 'name', 'family', 'environment']
       }
     },
 
@@ -72,8 +74,7 @@
 
       updaterEdit(data) {
         this.$set(this, 'value', data || [])
-        const m = data.map(e=>e._id)
-        this.$emit('update', m)
+        this.$emit('update', data)
       },
 
       fetchData() {

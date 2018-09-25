@@ -26,7 +26,7 @@ export default {
           ldatacenters: "Datacenters",
           lsystem: "System",
           qtdserver: 'Servers',
-          qtdtargets: 'Consumers',
+          qtdtargets: 'Applications',
           created_at: 'Created At'
         }
       }

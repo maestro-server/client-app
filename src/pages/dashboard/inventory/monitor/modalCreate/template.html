@@ -51,6 +51,9 @@
                          name="environment" label="Environment*" v-validate.initial="'required'"
                          :error="makeError('environment')"></bs-select>
 
+              <bs-select form-type="horizontal" :options="options.size" v-model="data.size"
+                         name="size" label="Size"></bs-select>
+
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
                         v-model="data.description"></bs-input>
 
@@ -69,17 +72,6 @@
         <!-- ============================================== -->
         <tab header="Datacenters" :disabled="own !== 1">
           <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
-        </tab>
-
-        <!-- ================= Targets ================= -->
-        <!-- ============================================== -->
-        <tab header="Targets">
-          <tab-servers @update="val => data.targets = val" ref="tab_targets" label="Target">
-            <template slot="label">
-              List all targets have monitor.
-            </template>
-            <template slot="footer"></template>
-          </tab-servers>
         </tab>
 
         <!-- ================= Servers ================= -->

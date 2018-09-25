@@ -1,0 +1,16 @@
+<div>
+  <template v-if="items">
+    <h3>{{title}}</h3>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <slot name="header"></slot>
+      </thead>
+      <tbody>
+        <slot name="body" :items="items"></slot>
+      </tbody>
+    </table>
+
+    <hr>
+  </template>
+
+</div>

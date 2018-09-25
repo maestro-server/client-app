@@ -1,0 +1,150 @@
+<div>
+
+  <div class="pb10">
+    <header-view-entity :label="entity.name" :name="model.name" @del="$parent.del" @acl="$parent.acl" @edit="$parent.edit()"></header-view-entity>
+  </div>
+
+  <div class="col-xs-12">
+
+    <h3>
+      Status
+      <status :status="model.status"></status>
+      |
+      <router-link v-if="model.status == 'finished'" :to="{name: 'graphs.single.graph', params: { id: model._id }}" class="btn btn-primary btn-sm"
+        :disabled="model.status != 'finished'">
+        <i class="fa fa-sitemap"></i> View graph
+      </router-link>
+    </h3>
+
+  </div>
+
+  <template v-if="model.status == 'finished'">
+      <div class="col-sm-6 col-xs-12">
+
+        <tableinfo :items="model.info" title="Graph">
+
+          <template slot="body" slot-scope="props">
+            <tr>
+              <th>Density</th>
+              <td>{{props.items.density}}</td>
+            </tr>
+            <tr>
+              <th>Conections</th>
+              <td>{{props.items.conections}}</td>
+            </tr>
+            <tr>
+              <th>Histogram</th>
+              <td>
+                <div class="hist flex">
+                  <template v-for="key, item in hist">
+                    <div :style="mHeight(key)" class="hist-bar">
+                      <p class="text-center">{{key}}</p>
+                    </div>
+                  </template>
+                </div>
+                <div class="label flex">
+                  <template v-for="key, item in hist">
+                    <p class="text-center hist-label">{{item}}</p>
+                  </template>
+                </div>
+              </td>
+            </tr>
+          </template>
+
+        </tableinfo>
+
+        <tableinfo :items="model.ifamilies" title="Families">
+
+          <template slot="header">
+            <tr>
+              <th>Group</th>
+              <th>Total</th>
+            </tr>
+          </template>
+
+          <template slot="body" slot-scope="props">
+            <tr v-for="key, value in props.items.items">
+              <td>{{value}}</td>
+              <th>{{key}}</th>
+            </tr>
+            <tr class="info">
+              <th>Total</th>
+              <th>{{props.items.total}}</th>
+            </tr>
+          </template>
+
+        </tableinfo>
+
+
+        <tableinfo :items="model.isystems" title="Systems">
+
+          <template slot="body" slot-scope="props">
+            <tr v-for="key, value in props.items.items">
+              <th>
+                <router-link :to="{name: 'system.single', params: { id: key._id }}">
+                  {{key.name}}
+                  <i class="fa  fa-eye" aria-hidden="true"></i>
+                </router-link>
+              </th>
+            </tr>
+            <tr class="info">
+              <th>Total {{props.items.total}}</th>
+            </tr>
+          </template>
+
+        </tableinfo>
+
+      </div>
+
+      <div class="col-sm-6 hidden-xs">
+          <iframe :src="src" class="mini-frame"></iframe>
+
+          <router-link v-if="model._id" :to="{name: 'graphs.single.graph', params: { id: model._id }}" class="btn btn-primary btn-xs pull-right"
+            :disabled="model.status != 'finished'">
+            <i class="fa fa-sitemap"></i> Expand Graph
+          </router-link>
+      </div>
+
+      <div class="col-sm-6 col-xs-12">
+        <hr>
+
+        <tableinfo :items="model.iclients" title="Clients">
+
+          <template slot="body" slot-scope="props">
+            <tr v-for="key, value in props.items.items">
+              <th>
+                <router-link :to="{name: 'system.single', params: { id: key._id }}">
+                  {{key.name}}
+                  <i class="fa  fa-eye" aria-hidden="true"></i>
+                </router-link>
+              </th>
+            </tr>
+            <tr class="info">
+              <th>Total {{props.items.total}}</th>
+            </tr>
+          </template>
+
+        </tableinfo>
+
+      </div>
+  </template>
+
+  <template v-if="model.status != 'finished'">
+      <div class="col-sm-6 col-xs-12">
+        <info-view :data="filtered"></info-view>
+      </div>
+
+      <div class="col-sm-6 col-xs-12">
+          <well>
+            <template v-if="model.msg">
+              {{model.msg}}
+              <hr>
+            </template>
+            The graph its not complete -
+            <status :status="model.status"></status>
+          </well>
+      </div>
+
+  </template>
+
+</div>

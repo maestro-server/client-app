@@ -1,0 +1,32 @@
+
+.mini-frame {
+    width: 100%;
+    min-height: 350px; 
+    border: none;
+  }
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hist-bar {
+    background: #f00;
+    margin:2px;
+    flex-wrap: wrap;
+
+    height: 10px;
+    flex-grow: 1;
+    background: rgba(103, 32, 100, 0.6);
+    border: 1px solid #672064;
+    color: #fff;
+    align-self: flex-end;
+    position: relative;
+}
+
+.hist-label {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-self: flex-end;
+}

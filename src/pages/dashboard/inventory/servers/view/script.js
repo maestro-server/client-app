@@ -108,10 +108,6 @@ export default {
             this.list_applications = _.get(e, 'data.items');
           }, {"servers": [_.get(this.model, '_id')]})
       }
-    },
-
-    slugApps(str) {
-      return _.kebabCase(str)
     }
   },
 

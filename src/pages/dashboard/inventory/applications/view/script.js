@@ -13,13 +13,16 @@ export default {
   data: function () {
     return {
       entity: Applications,
-      model: {tags: [], servers:[], deploy:[]},
+      model: {tags: [], servers:[], deploy:[], targets: []},
       list_servers: [],
       rollbackRoute: 'application'
     }
   },
 
   computed: {
+    MDeps() {
+      return this.$parent.$refs.modal_deps
+    },
     filtered() {
       return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
     },
@@ -33,15 +36,14 @@ export default {
   },
 
   methods: {
+    editM: function () {
+      this.MDeps
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
+    },
+
     fetchServers() {
-      if (!_.isEmpty(this.model.servers)) {
-        FectherEntity(Servers)({force: true})
-          .find((e) => {
-            this.$set(this, 'list_servers', _.get(e, 'data.items', []))
-          }, {_id: this.model.servers})
-      } else {
-        this.$set(this, 'list_servers', [])
-      }
+      this.fetchServersF('servers')
     }
   },
 

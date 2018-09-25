@@ -30,16 +30,16 @@
           </div>
         </tab>
 
-        <!-- ================= Links ================= -->
+        <!-- ================= Endpoints ================= -->
         <!-- ============================================== -->
-        <tab header="Links">
-          <tab-check :types="options.check" @update="val => data.check = val" ref="tab_check"></tab-check>
+        <tab header="Endpoints">
+          <tab-endpoint :types="options.check" @update="val => data.entry = val" ref="tab_endpoint"></tab-endpoint>
         </tab>
 
         <!-- ================= Clients ================= -->
         <!-- ============================================== -->
         <tab header="Clients">
-          <tab-clients :types="options.check" @update="val => data.clients = val" ref="tab_clients"></tab-clients>
+          <tab-clients @update="val => data.clients = val" ref="tab_clients"></tab-clients>
         </tab>
 
 

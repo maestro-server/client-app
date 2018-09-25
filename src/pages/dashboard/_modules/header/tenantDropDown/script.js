@@ -17,8 +17,8 @@ export default {
         connections: ['Connections', 'fa fa-circle-o-notch'],
         events: ['Events', 'fa-bell'],
         settings: ['Settings', 'fa-cog'],
+        dependency: ['Dependency', 'fa-cog'],
         hr: true,
-        access_manager: ['Access Manager', 'fa-key'],
         profile: ['Profile', 'fa-user'],
         logout: ['Logout', 'fa-sign-out']
       },

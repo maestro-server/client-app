@@ -12,16 +12,15 @@ export default {
     return {
       entity: Applications,
       label: 'Brokers',
-      model: {tags: [], servers:[], targets:[]},
+      model: {tags: [], servers:[]},
       list_servers: [],
-      list_targets: [],
       rollbackRoute: 'broker'
     }
   },
 
   computed: {
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers', 'targets'])
+      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers', 'deps'])
     },
     viewDisplayer() {
       return [
@@ -34,7 +33,6 @@ export default {
   methods: {
     fetchServers() {
       this.fetchServersF('servers')
-      this.fetchServersF('targets', Applications)
     }
   },
 
