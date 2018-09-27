@@ -13,6 +13,7 @@ export default {
       entity: new Volumes(),
       columns: ['status', 'name', 'size', 'iops', 'unique_id', 'ldatacenters', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'unique_id', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
           ldatacenters: []

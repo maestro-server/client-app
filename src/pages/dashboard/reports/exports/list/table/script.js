@@ -11,6 +11,7 @@ export default {
       entity: new Reports(),
       columns: ['status', 'name', 'report', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'created_at', ascending: false},
         filterable: ['name'],
         headings: {
           updated_at: 'Updated At',

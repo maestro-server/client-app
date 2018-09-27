@@ -14,6 +14,7 @@ export default {
       entity: new System(),
       columns: ['name', 'lclients','updated_at', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'lclients'],
         listColumns: {
           lclients: []

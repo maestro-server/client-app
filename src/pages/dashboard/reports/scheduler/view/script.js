@@ -37,7 +37,7 @@ export default {
     fetchEvents() {
 
       FectherEntity(Scheduler)({force: true})
-        .findOne(this.prepareEvents, `${_.get(this.model, '_id')}/events`)
+        .findOne(this.prepareEvents, `${_.get(this.model, '_id')}/events?orderBy=created_at`)
     },
 
     prepareEvents(result) {

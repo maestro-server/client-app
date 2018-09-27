@@ -13,6 +13,7 @@ export default {
       entity: new Images(),
       columns: ['name', 'ldatacenters', 'image_id', 'image_type', 'image_location', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'ldatacenters'],
         listColumns: {
           ldatacenters: []

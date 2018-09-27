@@ -13,6 +13,7 @@ export default {
       entity: new Scheduler(),
       columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'updated_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'modules', 'period_type'],
         listColumns: {
           period_type: [],

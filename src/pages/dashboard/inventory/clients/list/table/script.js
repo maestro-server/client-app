@@ -11,6 +11,7 @@ export default {
       entity: new Clients(),
       columns: ['name', 'lcontact','updated_at', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name'],
         headings: {
           lcontact: 'Contacts',

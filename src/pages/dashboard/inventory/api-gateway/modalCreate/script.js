@@ -1,10 +1,10 @@
 'use strict'
 
 import Modals from 'mixins/modals'
+import Adminer from 'factories/adminer'
 import ModalsApps from 'mixins/modals-apps'
-
+import FectherEntity from 'services/fetchEntity'
 import tabFamilyApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
-import Applications from 'factories/applications'
 
 export default {
   mixins: [Modals, ModalsApps],

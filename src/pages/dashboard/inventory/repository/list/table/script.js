@@ -15,6 +15,7 @@ export default {
       entity: new Applications(),
       columns: ['name', 'provider', 'lsystem', 'environment', 'qtdserver', 'updated_at', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'provider', 'environment', 'lsystem'],
         listColumns: {
           lsystem: []

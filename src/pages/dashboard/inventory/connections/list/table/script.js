@@ -12,6 +12,7 @@ export default {
       entity: new Connections(),
       columns: ['name', 'dc', 'updated_at', 'created_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'dc'],
         headings: {
           updated_at: 'Updated At',

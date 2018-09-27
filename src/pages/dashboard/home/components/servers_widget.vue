@@ -3,7 +3,7 @@
     <bs-list>
       <li class="list-group-item word-break" v-for="server in servers" :key>
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">
-          <b>{{server.hostname}}</b> <span v-if='server.os'>({{server.os.base}})</span>
+          <b>{{server.hostname}}</b> <span v-if='server.os.base'>({{server.os.base}})</span>
           <span v-if="server.datacenters"> - {{server.datacenters.name}}</span>
         </router-link>
         <br/>

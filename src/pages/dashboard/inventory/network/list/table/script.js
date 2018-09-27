@@ -13,6 +13,7 @@ export default {
       entity: new Networks(),
       columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'ldatacenters', 'status', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
           ldatacenters: []

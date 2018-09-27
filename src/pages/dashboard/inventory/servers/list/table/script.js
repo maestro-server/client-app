@@ -16,6 +16,7 @@ export default {
       entity: new Servers(),
       columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'auth', 'updated_at', 'actions'],
       options: {
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['hostname', 'ipv4_private', 'os', 'datacenters', 'role', 'environment', 'auth'],
         listColumns: {
           role: [],
