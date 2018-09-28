@@ -56,6 +56,7 @@ export default {
         _id: _.get(this.model, '_id'),
         provider: _.get(this.model, 'provider'),
         refs: 'connections',
+        source: 'discovery',
         task
       };
 
