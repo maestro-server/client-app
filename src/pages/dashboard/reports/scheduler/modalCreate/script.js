@@ -165,7 +165,7 @@ export default {
         let conn = _.chain(this.options.configs)
           .filter(e => e.name == _.get(this.data, 'task'))
           .head()
-          .pick(['url', 'method'])
+          .pick(['url', 'method', 'source'])
           .value()
 
         this.data.endpoint = _.chain(this.data.link)
@@ -174,6 +174,7 @@ export default {
                 .value()
 
         this.data.method = _.get(conn, 'method')
+        this.data.source = _.get(conn, 'source')
       }
     }
   },
