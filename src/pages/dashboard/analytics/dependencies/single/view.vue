@@ -98,10 +98,6 @@
         if(isShow && opop != step) {
           this.$refs['line_'+opop][0].$refs['pop'].toggle()
         }
-      },
-
-      resetPopover() {
-        this.spopover = 0
       }
     },
 
