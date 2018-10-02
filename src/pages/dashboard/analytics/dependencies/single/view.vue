@@ -93,9 +93,15 @@
       activedPopover(step) {
         const opop = this.spopover
         this.spopover = step
+        const isShow = _.get(this.$refs['line_'+opop][0].$refs['pop'], 'show', false)
 
-        if(opop != step)
+        if(isShow && opop != step) {
           this.$refs['line_'+opop][0].$refs['pop'].toggle()
+        }
+      },
+
+      resetPopover() {
+        this.spopover = 0
       }
     },
 
