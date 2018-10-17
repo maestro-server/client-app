@@ -36,6 +36,8 @@ import flavors from './flavors/router'
 import flavorsPublic from './flavors-public/router'
 import serviceMesh from './service-mesh/router'
 
+import autoscaling from './autoscaling/router'
+
 export default {
   name: 'inventory',
   path: 'inventory',
@@ -74,6 +76,7 @@ export default {
     volumes,
     snapshot,
     flavors,
+    autoscaling,
     flavorsPublic
   ]
 }

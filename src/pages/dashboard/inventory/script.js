@@ -23,6 +23,7 @@ export default {
         'service-discovery': 'Services Discovery',
         'api-gateway': 'Api Gateway',
         'cdn': 'CDNs',
+        'autoscaling': 'Auto Scaling',
         'object-storage': 'Object Storages',
         'container-orchestration': 'Containers Orchestration',
         'service-mesh': 'Service Mesh',

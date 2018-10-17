@@ -17,6 +17,9 @@
         <h3 class="mt0">
           <i :class="toLower(props.item.provider, 'icon-')"></i>
           {{props.item.name}}
+          <router-link :to="{name: 'datacenters.single', params: { id: props.item._id }}"
+                       class="fa fa-eye btn btn-info btn-xs"></router-link>
+
           <bs-label type="success" class="btn-xs" v-if="props.item.sucessed === true">Connected</bs-label>
           <bs-label type="warning" class="btn-xs" v-if="props.item.sucessed === undefined">Disconnected</bs-label>
           <bs-label type="danger" class="btn-xs" v-if="props.item.sucessed === false">Disconnected</bs-label>
