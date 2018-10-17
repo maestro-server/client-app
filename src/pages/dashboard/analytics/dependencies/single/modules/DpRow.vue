@@ -7,7 +7,7 @@
 
         <div class="dp-item"
             :class="{'dp-select': app._id == selected}"
-            @click="add(app._id)"
+            @click="addItem(app._id)"
             v-for="app, k in apps"
             :key="app._id">
 
@@ -56,8 +56,6 @@
 
   import _ from 'lodash'
   import Applications from 'factories/applications'
-  import FectherEntity from 'services/fetchEntity'
-  import CacheManager from 'services/cacheManager'
   import headerLogin from 'src/resources/libs/headerAuthorization'
 
   export default {
@@ -80,40 +78,19 @@
 
     computed: {
       wLine() {
-         let wid = 0
-
-        if (this.apps.length) {
-          wid = ((this.apps.length -1) * 120) + 2
-        }
-
+        const wid = this.apps.length ? ((this.apps.length -1) * 120) + 2 : 0
         return `width: ${wid}px`
       }
     },
 
     methods: {
-      changeSelected(id) {
+      addItem(id) {
+        this.$emit('addRow', id, this.step)
         this.$set(this, 'selected', id)
       },
 
-      add(id) {
-        this.changeSelected(id)
-
-        FectherEntity(Applications)()
-          .findOne((e) => {
-            const data = _.get(e, 'data', [])
-            this.addRow(data)
-          }, id)
-      },
-
-      delItem(_id) {
-        const uri = `/${this.parent_id}/deps`;
-
-        FectherEntity(Applications)({path: uri})
-          .remove(() => {
-            _.remove(this.bags, e => e._id == _id)
-            this.$emit('sync', this.bags, this.step)
-            CacheManager({k: `applications_${this.parent_id}`}).remove()
-          }, {_id});
+      delItem(id) {
+        this.$emit('deleteRow', id, this.step)
       },
 
       requestSearch(async, val, key = 'name') {
@@ -125,28 +102,7 @@
 
         if (!exist) {
           const app = _.pick(item, ['_id', 'name', 'family', 'environment'])
-          this.$emit('add', app, this.step)
-          this.commitItem(app)
-        }
-      },
-
-      addRow(data) {
-        let obj = _.get(data, 'deps', [])
-        obj['parent_id'] = _.get(data, '_id')
-
-        this.$parent.addRow(obj, this.step)
-        this.$parent.activedApp(data)
-      },
-
-      commitItem(app) {
-
-        if(this.parent_id) {
-          const uri = `/${this.parent_id}/deps`;
-
-          FectherEntity(Applications)({path: uri})
-            .create(() => {
-              CacheManager({k: `applications_${this.parent_id}`}).remove()
-            }, app);
+          this.$emit('commitItem', app, this.step)
         }
       },
 

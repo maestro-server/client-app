@@ -8,10 +8,11 @@
           :key="k"
           :apps="item"
           :step="k"
-          :parent_id="item.parent_id"
-          @add="addBags"
-          @sync="syncBags"
           :ref="'line_' + k"
+          :parent_id="item.parent_id"
+          @addRow="addRow"
+          @deleteRow="deleteRow"
+          @commitItem="commitItem"
           >
           </dprow>
     </div>
@@ -32,6 +33,10 @@
 
       <info-view :data="app" :title="false"></info-view>
     </div>
+
+    <div class="btn-fixed text-center" :class="{'btn-fixed-hidden': isEmpty}">
+      <button class="btn btn-primary" @click="save">Commit - Tree Dependency</button>
+    </div>
   </div>
 </template>
 
@@ -42,6 +47,8 @@
   import _ from 'lodash'
   import Graphs from 'factories/graphs'
   import dprow from './modules/DpRow'
+  import FectherEntity from 'services/fetchEntity'
+  import Applications from 'factories/applications'
   import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
@@ -58,8 +65,8 @@
         entity: Graphs,
         app: {},
         grid: [],
-        nseleted: null,
-        spopover: 0
+        spopover: 0,
+        tracker: {}
       }
     },
 
@@ -70,19 +77,42 @@
     },
 
     methods: {
-      addBags(app, step) {
-        this.grid[step].push(app)
+      addRow(id, step) {
+        FectherEntity(Applications)()
+          .findOne((e) => {
+            const data = _.get(e, 'data', [])
+            this.activedApp(data)
+            const deps = this.getDeps(id, data)
+            this.appendRow(deps, step)
+          }, id)
       },
 
-      syncBags(apps, step) {
-        this.$set(this.grid, step, apps)
-        this.grid[step].push() //vuebug, force view update
+      getDeps(id, data={}) {
+        if(!_.has(this.tracker, id)) {
+          return _.get(data, 'deps', [])
+        }
+        return _.get(this.tracker, id)
       },
 
-      addRow(deps, step) {
-        this.nseleted = step
+      appendRow(deps, step) {
         this.grid.splice(step+1)
         this.grid.push(deps)
+      },
+
+      deleteRow(id, step) {
+        _.remove(this.grid[step], e => e._id == id)
+        this.grid[step].push() //vuebug, force view update
+        this.updateTracker(step, this.grid[step])
+      },
+
+      commitItem(app, step) {
+        this.grid[step].push(app)
+        this.updateTracker(step, this.grid[step])
+      },
+
+      updateTracker(step, row) {
+        const id = _.get(this.app, '_id', 'root')
+        this.tracker[id] = row
       },
 
       activedApp(app) {
@@ -98,6 +128,12 @@
         if(isShow && opop != step) {
           this.$refs['line_'+opop][0].$refs['pop'].toggle()
         }
+      },
+
+      save() {
+        const uri = `/deps`;
+        FectherEntity(Applications)({path: uri})
+            .create(this.finishJob, this.tracker);
       }
     },
 
@@ -110,4 +146,3 @@
 </script>
 
 <style src="./style.scss" lang="scss"></style>
-
