@@ -27,10 +27,10 @@
     <div class="col-xs-12 mt10"></div>
 
     <bs-select form-type="horizontal" :options="regions" v-model="value.region"
-               label="Region" placeholder="Select Region" ref="s_regions"></bs-select>
+               label="Region" placeholder="Select Region" ref="s_regions" @input="updateModel"></bs-select>
 
     <bs-select form-type="horizontal" :options="zones" v-model="value.zone"
-               label="Zones" placeholder="Select Zone" refs="s_zones"></bs-select>
+               label="Zones" placeholder="Select Zone" refs="s_zones" @input="updateModel"></bs-select>
 
     <div class="row mt20">
       <div class="col-sm-3 col-xs-12 control-label">
