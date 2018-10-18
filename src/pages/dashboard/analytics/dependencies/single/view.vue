@@ -62,6 +62,7 @@
 
     data() {
       return {
+        show: 'app',
         entity: Graphs,
         app: {},
         grid: [],
@@ -78,7 +79,7 @@
 
     methods: {
       addRow(id, step) {
-        FectherEntity(Applications)()
+        FectherEntity(Applications)({persistence: 'vuex'})
           .findOne((e) => {
             const data = _.get(e, 'data', [])
             this.activedApp(data)
@@ -106,8 +107,11 @@
       },
 
       commitItem(app, step) {
-        this.grid[step].push(app)
-        this.updateTracker(step, this.grid[step])
+        const exist = _.find(this.grid[step], ['_id', app._id])
+        if (!exist) {
+          this.grid[step].push(app)
+          this.updateTracker(step, this.grid[step])
+        }
       },
 
       updateTracker(step, row) {
@@ -133,13 +137,14 @@
       save() {
         const uri = `/deps`;
         FectherEntity(Applications)({path: uri})
-            .create(this.finishJob, this.tracker);
+            .create(this.finishJob, {'tree': this.tracker, 'systems': this.systems});
       }
     },
 
     created() {
       const entries = _.get(this.$route.params, 'apps', [])
-      this.grid.push(entries);
+      this.grid.push(entries)
+      this.systems = _.get(this.$route.params, 'systems')
     }
   }
 

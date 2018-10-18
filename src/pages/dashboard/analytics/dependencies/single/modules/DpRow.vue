@@ -98,12 +98,8 @@
       },
 
       onHit(item) {
-        const exist = _.find(this.bags, ['_id', item._id])
-
-        if (!exist) {
-          const app = _.pick(item, ['_id', 'name', 'family', 'environment'])
-          this.$emit('commitItem', app, this.step)
-        }
+        const app = _.pick(item, ['_id', 'name', 'family', 'environment'])
+        this.$emit('commitItem', app, this.step)
       },
 
       singleOpen(state) {

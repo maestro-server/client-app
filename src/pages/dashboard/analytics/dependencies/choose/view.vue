@@ -73,8 +73,10 @@
       getAppsBySystem(dsystems) {
         const systems = dsystems.map(e => _.get(e, '_id'));
 
-        FectherEntity(Applications)({force: true})
-          .find(this.fetchApps, {'system._id': systems})
+        if(systems.length > 0) {
+          FectherEntity(Applications)({force: true})
+            .find(this.fetchApps, {'system._id': systems})
+        }
       },
 
       fetchApps(data) {
@@ -83,10 +85,10 @@
       },
 
       routePage(apps) {
-        this.$router.push({name: 'dependency.tree', params: {apps}})
+        const systems = this.systems
+        this.$router.push({name: 'dependency.tree', params: {systems, apps}})
       }
     }
   }
 
 </script>
-
