@@ -22,7 +22,7 @@ export default {
     },
 
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'ifamilies', 'isystems', 'iclients', 'iservers', 'info.histograms'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'ifamilies', 'isystems', 'iclients', 'iservers', 'info.histograms'])
     },
 
     hist() {

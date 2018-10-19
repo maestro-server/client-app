@@ -24,7 +24,7 @@ export default {
 
   computed: {
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'conn'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'conn'])
     },
 
     formatOwnerUsers() {

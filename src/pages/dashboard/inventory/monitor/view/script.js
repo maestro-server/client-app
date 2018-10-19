@@ -23,7 +23,7 @@ export default {
       return this.$parent.$refs.modal_deps
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers', 'targets'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'servers', 'targets'])
     },
     viewDisplayer() {
       return [

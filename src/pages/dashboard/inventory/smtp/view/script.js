@@ -20,7 +20,7 @@ export default {
 
   computed: {
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'servers'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'servers'])
     },
     viewDisplayer() {
       return [

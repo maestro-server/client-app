@@ -43,7 +43,7 @@ export default {
       return this.$refs.modal_volumes
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links'])
+      return _.omit(this.model, ['owner', 'roles', '_links'])
     },
     viewDisplayer() {
       return [

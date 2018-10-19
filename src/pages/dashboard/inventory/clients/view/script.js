@@ -24,7 +24,7 @@ export default {
       return this.$parent.$refs.modal_members
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', 'active', '_links', 'contacts', 'list_system', 'team'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'contacts', 'list_system', 'team'])
     }
   },
 
