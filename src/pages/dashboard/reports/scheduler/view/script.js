@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Scheduler from 'factories/scheduler'
 import ViewSingle from 'mixins/view-single'
 import FectherEntity from 'services/fetchEntity'
+import {EventBus} from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ViewSingle],
@@ -51,5 +52,9 @@ export default {
 
   created() {
     this.$on('finishFetchData', this.fetchEvents)
+  },
+
+  destroyed() {
+    this.$off('finishFetchData', this.fetchEvents)
   }
 }

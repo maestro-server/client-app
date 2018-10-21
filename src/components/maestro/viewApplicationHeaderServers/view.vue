@@ -1,8 +1,10 @@
 <template>
   <div>
-    <b>{{data.hostname}}</b> <span v-if='data.os'>({{data.os.base}})</span>
+    <b>{{data.hostname}}</b> <span v-if='data.os && data.os.base'>({{data.os.base}})</span>
     <span v-if="data.datacenters"> - {{data.datacenters.name}}</span>
-    <router-link :to="{name: 'servers.single', params: { id: data._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
+    <router-link :to="{name: 'servers.single', params: { id: data._id }}">
+      <i class="fa  fa-eye" aria-hidden="true"></i>
+    </router-link>
     <br/>
     <bs-label type='default'>{{data.ipv4_private}}</bs-label>
     <bs-label type='default'>{{data.ipv4_public}}</bs-label>

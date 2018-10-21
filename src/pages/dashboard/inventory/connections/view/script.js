@@ -7,6 +7,7 @@ import ViewSingle from 'mixins/view-single'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
+import {EventBus} from 'src/resources/bus/bus-general.js'
 
 export default {
   mixins: [ViewSingle],
@@ -164,5 +165,12 @@ export default {
   created() {
     this.$on('finishFetchData', this.fetchAdminer)
     this.$on('finishFetchData', this.fetchScheduler)
+    EventBus.$on('connection-update', this.fetchData)
+  },
+
+  destroyed() {
+    this.$off('finishFetchData', this.fetchAdminer)
+    this.$off('finishFetchData', this.fetchScheduler)
+    EventBus.$off('connection-update', this.fetchData)
   }
 }

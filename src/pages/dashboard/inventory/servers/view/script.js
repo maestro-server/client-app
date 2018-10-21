@@ -114,5 +114,10 @@ export default {
   created() {
     this.$on('finishFetchData', this.fetchVolumes)
     this.$on('finishFetchData', this.fetchApplications)
+  },
+
+  destroyed() {
+    this.$off('finishFetchData', this.fetchVolumes)
+    this.$off('finishFetchData', this.fetchApplications)
   }
 }

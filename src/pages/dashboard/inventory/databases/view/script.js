@@ -80,5 +80,9 @@ export default {
 
   created() {
     this.$on('finishFetchData', this.fetchServers)
+  },
+
+  destroyed() {
+    this.$off('finishFetchData', this.fetchServers)
   }
 }

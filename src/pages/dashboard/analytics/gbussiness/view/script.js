@@ -2,6 +2,7 @@
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
 import modalShared from '../modalShared/shared'
+import {EventBus} from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ViewSingle],
@@ -29,5 +30,13 @@ export default {
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(this.model)
     }
+  },
+
+  created() {
+    EventBus.$on('analytics-update', this.fetchData)
+  },
+
+  destroyed() {
+    EventBus.$off('analytics-update', this.fetchData)
   }
 }

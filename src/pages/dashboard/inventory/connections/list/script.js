@@ -2,6 +2,7 @@
 
 import svTable from './table/table'
 import ListTable from 'mixins/list-table'
+import {EventBus} from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ListTable],
