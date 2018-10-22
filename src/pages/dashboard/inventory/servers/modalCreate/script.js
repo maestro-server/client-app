@@ -24,7 +24,10 @@ export default {
   },
 
   data: function () {
-    const defaultServer = {status: "Active", role: null, storage:[], auth:[], services: [], tags: [], datacenters: {}}
+    const defaultServer = {
+      status: "Active", role: null, storage:[],
+      auth:[], services: [], tags: [], datacenters: {}, os: {base: null, dist: null, version: null}
+    }
 
     return {
       zone: null,

@@ -165,12 +165,12 @@ export default {
   created() {
     this.$on('finishFetchData', this.fetchAdminer)
     this.$on('finishFetchData', this.fetchScheduler)
-    EventBus.$on('connection-update', this.fetchData)
+    EventBus.$on('connections-update', this.fetchData)
   },
 
   destroyed() {
     this.$off('finishFetchData', this.fetchAdminer)
     this.$off('finishFetchData', this.fetchScheduler)
-    EventBus.$off('connection-update', this.fetchData)
+    EventBus.$off('connections-update', this.fetchData)
   }
 }

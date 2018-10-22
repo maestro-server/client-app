@@ -64,9 +64,9 @@
             <div class="col-xs-9">
               <bs-select form-type="horizontal" :options="options.os" v-model="os.base" name="OS Base"
                          placeholder="Operational System" :error="makeError('OS Base')"></bs-select>
-              <bs-input form-type="horizontal" v-if="os.base" v-model="os.dist" name="OS Dist"
+              <bs-input form-type="horizontal" v-model="os.dist" name="OS Dist"
                         placeholder="Distro"></bs-input>
-              <bs-input form-type="horizontal" v-if="os.base" v-model="os.version" name="OS Version"
+              <bs-input form-type="horizontal" v-model="os.version" name="OS Version"
                         placeholder="Version"></bs-input>
             </div>
 
