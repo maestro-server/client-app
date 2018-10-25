@@ -4,6 +4,7 @@ import Login from 'services/login'
 import AnalyticsFront from 'factories/analyticsFront'
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
+import {EventBus} from "../../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ViewSingle],
@@ -45,5 +46,10 @@ export default {
 
   created() {
     this.id = this.$route.params.id
+    EventBus.$on('analytics-update', this.fetchData)
+  },
+
+  destroyed() {
+    EventBus.$off('analytics-update', this.fetchData)
   }
 }

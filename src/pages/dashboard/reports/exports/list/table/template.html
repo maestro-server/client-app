@@ -8,7 +8,15 @@
   >
 
     <template slot="name" slot-scope="props">
-      <router-link :to="{name: 'reports.single.table', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+
+      <template v-if="props.row.status === 'finished'">
+        <router-link :to="{name: 'reports.single.table', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+      </template>
+
+      <template v-if="props.row.status !== 'finished'">
+        {{props.row.name}}
+      </template>
+
     </template>
 
     <template slot="status" slot-scope="props">

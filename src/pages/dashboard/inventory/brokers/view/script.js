@@ -24,6 +24,7 @@ export default {
     },
     viewDisplayer() {
       return [
+        {val: this.model.active ? "Active" : "Desactive", type: this.model.active ? "success" : "danger"},
         {val: this.model.environment, type: 'primary'},
         {val: this.model.provider}
       ]

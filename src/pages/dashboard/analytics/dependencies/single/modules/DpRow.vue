@@ -43,6 +43,8 @@
                    :headers="headers"
         ></typeahead>
 
+        <bs-select :options="types" v-model="endpoint" name="type" placeholder="Protocol" class="col-xs-12"></bs-select>
+
       </template>
 
       <a class="more more-right">+</a>
@@ -62,7 +64,8 @@
     props: {
       step: {type: Number, default: 0},
       parent_id: {type: String},
-      apps: {type: Array, default: () => []}
+      apps: {type: Array, default: () => []},
+      types: {type: Array, default: () => []}
     },
 
     data: function () {
@@ -72,7 +75,11 @@
         template: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>",
         headers: headerLogin,
         bags: [],
-        selected: null
+        selected: null,
+        endpoint: null,
+        options: {
+          protocol:[]
+        }
       }
     },
 

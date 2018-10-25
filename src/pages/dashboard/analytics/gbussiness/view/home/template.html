@@ -138,9 +138,10 @@
           <well>
             <template v-if="model.msg">
               {{model.msg}}
-              <hr>
             </template>
-            The graph its not complete -
+            <template v-if="!model.msg">
+              The graph its not complete -
+            </template>
             <status :status="model.status"></status>
           </well>
       </div>

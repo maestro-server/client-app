@@ -30,13 +30,5 @@ export default {
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(this.model)
     }
-  },
-
-  created() {
-    EventBus.$on('analytics-update', this.fetchData)
-  },
-
-  destroyed() {
-    EventBus.$off('analytics-update', this.fetchData)
   }
 }

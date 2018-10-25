@@ -10,6 +10,7 @@
           :step="k"
           :ref="'line_' + k"
           :parent_id="item.parent_id"
+          :types="options.protocol"
           @addRow="addRow"
           @deleteRow="deleteRow"
           @commitItem="commitItem"
@@ -47,10 +48,12 @@
   import _ from 'lodash'
   import Graphs from 'factories/graphs'
   import dprow from './modules/DpRow'
+  import Adminer from 'factories/adminer'
   import FectherEntity from 'services/fetchEntity'
   import Applications from 'factories/applications'
   import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
+  import formatAdminer from 'src/resources/libs/formatAdminerData'
 
   export default {
 
@@ -67,7 +70,10 @@
         app: {},
         grid: [],
         spopover: 0,
-        tracker: {}
+        tracker: {},
+        options: {
+          protocol:[]
+        }
       }
     },
 
@@ -138,6 +144,15 @@
         const uri = `/deps`;
         FectherEntity(Applications)({path: uri})
             .create(this.finishJob, {'tree': this.tracker, 'systems': this.systems});
+      },
+
+      fetchData() {
+        FectherEntity(Adminer)({persistence: 'local'})
+          .find(this.fetchAdminer, {key: 'deps_options'})
+      },
+
+      fetchAdminer (e) {
+        _.assign(this.options, formatAdminer(e))
       }
     },
 
@@ -145,6 +160,7 @@
       const entries = _.get(this.$route.params, 'apps', [])
       this.grid.push(entries)
       this.systems = _.get(this.$route.params, 'systems')
+      this.fetchData();
     }
   }
 

@@ -32,6 +32,7 @@ export default {
     },
     viewDisplayer() {
       return [
+        {val: this.model.active ? "Up" : "Down", type: this.model.active ? "success" : "danger"},
         {val: this.model.environment, type: 'primary'},
         {val: this.model.status},
         {val: this.model.provider},
