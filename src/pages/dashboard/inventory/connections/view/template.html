@@ -3,6 +3,8 @@
     <header-view-entity label="Connection" :name="model.dc" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
+  <active-btn :act="model.active"></active-btn>
+
   <div class="col-sm-4 col-xs-12">
     <h4>Status ({{status}})</h4>
     <button class="btn btn-success" v-if="status !== 'enabled'" @click="enable('enabled')">

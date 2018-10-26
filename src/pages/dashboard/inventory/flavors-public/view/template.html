@@ -1,7 +1,11 @@
 <div>
+
+  <hr>
   <div class="pb10">
     <header-view-entity label="Public Flavor" :visibility="{create: false, acl: false, edit: false }"></header-view-entity>
   </div>
+
+  <active-btn :act="model.active"></active-btn>
 
   <div class="col-xs-12">
     <info-view :data="filtered"></info-view>
