@@ -105,7 +105,7 @@
       },
 
       onHit(item) {
-        const app = _.pick(item, ['_id', 'name', 'family', 'environment'])
+        let app = _.pick(item, ['_id', 'name', 'family', 'environment'])
         this.$emit('commitItem', app, this.step)
       },
 
