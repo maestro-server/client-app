@@ -4,6 +4,8 @@
     <header-view-entity :label="entity.name" :name="model.name" @del="$parent.del" @acl="$parent.acl" @edit="$parent.edit()"></header-view-entity>
   </div>
 
+  <active-btn :act="model.active"></active-btn>
+
   <div class="col-xs-12">
 
     <h3>

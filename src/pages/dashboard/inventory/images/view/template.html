@@ -3,6 +3,8 @@
     <h3 class="col-xs-12">Images - {{model.name}}</h3>
   </div>
 
+  <active-btn :act="model.active"></active-btn>
+
   <div class="col-xs-12">
     <info-view :data="filtered"></info-view>
   </div>

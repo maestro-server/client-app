@@ -3,6 +3,8 @@
     <header-view-entity label="Datacenter" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
+  <active-btn :act="model.active"></active-btn>
+
   <div class="col-sm-6 col-xs-12">
     <info-view :data="filtered"></info-view>
   </div>

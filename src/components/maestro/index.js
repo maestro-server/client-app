@@ -14,10 +14,12 @@ import infoView from './infoView/InfoView.vue'
 import callback from './callback/Callback.vue'
 import uploader from './uploader/Uploader.vue'
 import modalAcl from './modalACL/create.vue'
+import activeBtn from './activeBtn/view.vue'
 import listBox from './listBox/ListBox.vue'
 import loader from './loader/Loader.vue'
 import status from './status/Status.vue'
 import imager from './imager/Imager.vue'
+
 
 
 
@@ -35,6 +37,7 @@ let components = {
   callback,
   uploader,
   modalAcl,
+  activeBtn,
   listBox,
   loader,
   status,

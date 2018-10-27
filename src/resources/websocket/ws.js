@@ -25,7 +25,8 @@ class WSocket {
   }
 
   subChannel(channel, callback) {
-    this.centr.subscribe(channel, callback);
+    this.centr.subscribe(channel, callback)
+    .on("error", console.log);
   }
 
   notify(result) {

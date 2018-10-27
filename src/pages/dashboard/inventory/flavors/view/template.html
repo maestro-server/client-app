@@ -3,6 +3,8 @@
     <header-view-entity label="Flavor" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
+  <active-btn :act="model.active"></active-btn>
+
   <div class="col-xs-8">
     <info-view :data="filtered"></info-view>
   </div>
