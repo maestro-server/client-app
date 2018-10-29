@@ -12,6 +12,7 @@
           :parent_id="item.parent_id"
           :types="options.protocol"
           @addRow="addRow"
+          @deleteItem="deleteItem"
           @deleteRow="deleteRow"
           @commitItem="commitItem"
           >
@@ -106,10 +107,14 @@
         this.grid.push(deps)
       },
 
-      deleteRow(id, step) {
+      deleteItem(id, step) {
         _.remove(this.grid[step], e => e._id == id)
         this.grid[step].push() //vuebug, force view update
         this.updateTracker(step, this.grid[step])
+      },
+
+      deleteRow(step) {
+        this.grid = _.slice(this.grid, 0, step);
       },
 
       commitItem(app, step) {

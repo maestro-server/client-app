@@ -5,16 +5,17 @@
 
     <div class="dp-row">
 
-        <div class="dp-item"
+        <div class="dp-item text-center"
             :class="{'dp-select': app._id == selected}"
             @click="addItem(app._id)"
             v-for="app, k in apps"
             :key="app._id">
 
           <h5>{{app.name}}</h5>
-          <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
+          <p v-if="app.endpoint"><span class="dst">{{app.endpoint}}</span></p>
           <p v-if="app.environment"><span class="dst">{{app.environment}}</span></p>
-
+          <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
+          
           <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
         </div>
 
@@ -43,8 +44,31 @@
                    :headers="headers"
         ></typeahead>
 
-        <bs-select :options="types" v-model="endpoint" name="type" placeholder="Protocol" class="col-xs-12"></bs-select>
+        <div v-if="app._id" class="col-xs-12 pb10">
+          <span class="btn btn-primary btn-large col-xs-12 text-right bkline">
+            {{app.name}}<br>
 
+            <label class="label label-info">{{app.family}}</label>
+            <label class="label label-info">{{app.environment}}</label>
+          </span>
+        </div>
+
+        <bs-select 
+          :options="types" 
+          v-model="endpoint" 
+          name="type" 
+          placeholder="Protocol" 
+          class="col-xs-12"
+          v-if="this.step > 0 "
+          >
+        </bs-select>
+
+        <div class="col-xs-12 text-center pb10">
+          <button class="btn btn-primary" @click.stop="onCommit">Add Dep</button>
+        </div>
+
+        <hr>
+        
       </template>
 
       <a class="more more-right">+</a>
@@ -75,6 +99,7 @@
         template: "<b>{{item.name}}</b> <span v-if='item.environment'>({{item.environment}})</span> <h5 class='ft15 inline'><bs-label type='default' v-if='item.role'>{{item.role.role}}</bs-label></h5>",
         headers: headerLogin,
         bags: [],
+        app: {},
         selected: null,
         endpoint: null,
         options: {
@@ -97,7 +122,11 @@
       },
 
       delItem(id) {
-        this.$emit('deleteRow', id, this.step)
+        this.$emit('deleteItem', id, this.step)
+
+        if(id === this.selected) {
+          this.$emit('deleteRow', this.step + 1)
+        }
       },
 
       requestSearch(async, val, key = 'name') {
@@ -106,14 +135,27 @@
 
       onHit(item) {
         let app = _.pick(item, ['_id', 'name', 'family', 'environment'])
-        this.$emit('commitItem', app, this.step)
+        this.$set(this, 'app', app)
+      },
+
+      onCommit() {
+        const tapp = _.assign(this.app, {'endpoint': this.endpoint})
+        this.$emit('commitItem', tapp, this.step)
+        this.$refs['pop'].toggle()
+        this.clear()
       },
 
       singleOpen(state) {
         if(state) {
           this.$parent.activedPopover(this.step)
         }
+      },
+
+      clear() {
+        this.app = {}
+        this.endpoint = null
       }
+
     },
 
     created() {
@@ -121,3 +163,10 @@
     }
   }
 </script>
+
+<style>
+.bkline {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+</style>
