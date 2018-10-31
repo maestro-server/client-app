@@ -4,19 +4,19 @@
     <p class="col-xs-12 no-margin">Entry point</p>
 
     <div class="col-xs-12 col-sm-8 dp-container">
-        <dprow v-for="item, k in grid"
-          :key="k"
-          :apps="item"
-          :step="k"
-          :ref="'line_' + k"
-          :parent_id="item.parent_id"
-          :types="options.protocol"
-          @addRow="addRow"
-          @deleteItem="deleteItem"
-          @deleteRow="deleteRow"
-          @commitItem="commitItem"
-          >
-          </dprow>
+      <dprow v-for="item, k in grid"
+             :key="k"
+             :apps="item"
+             :step="k"
+             :ref="'line_' + k"
+             :parent_id="item.parent_id"
+             :types="options.protocol"
+             @addRow="addRow"
+             @deleteItem="deleteItem"
+             @deleteRow="deleteRow"
+             @commitItem="commitItem"
+      >
+      </dprow>
     </div>
 
     <div class="col-sm-4 hidden-xs">
@@ -73,7 +73,9 @@
         spopover: 0,
         tracker: {},
         options: {
-          protocol:[]
+          protocol: [],
+          protocol_broker: [],
+          protocol_default: []
         }
       }
     },
@@ -95,15 +97,15 @@
           }, id)
       },
 
-      getDeps(id, data={}) {
-        if(!_.has(this.tracker, id)) {
+      getDeps(id, data = {}) {
+        if (!_.has(this.tracker, id)) {
           return _.get(data, 'deps', [])
         }
         return _.get(this.tracker, id)
       },
 
       appendRow(deps, step) {
-        this.grid.splice(step+1)
+        this.grid.splice(step + 1)
         this.grid.push(deps)
       },
 
@@ -138,17 +140,20 @@
       activedPopover(step) {
         const opop = this.spopover
         this.spopover = step
-        const isShow = _.get(this.$refs['line_'+opop][0].$refs['pop'], 'show', false)
+        const line = `line_${opop}[0].$refs.pop`
 
-        if(isShow && opop != step) {
-          this.$refs['line_'+opop][0].$refs['pop'].toggle()
+        const refs = _.get(this.$refs, line)
+        if (refs && opop != step) {
+          const isShow = _.get(refs, 'show', false)
+          if (isShow)
+            refs.toggle()
         }
       },
 
       save() {
         const uri = `/deps`;
         FectherEntity(Applications)({path: uri})
-            .create(this.finishJob, {'tree': this.tracker, 'systems': this.systems});
+          .create(this.finishJob, {'tree': this.tracker, 'systems': this.systems});
       },
 
       fetchData() {
@@ -156,8 +161,10 @@
           .find(this.fetchAdminer, {key: 'deps_options'})
       },
 
-      fetchAdminer (e) {
-        _.assign(this.options, formatAdminer(e))
+      fetchAdminer(e) {
+        const opts = formatAdminer(e)
+        const protocol = _.reduce(opts, (opt, val) => opt.concat(val), [])
+        this.$set(this.options, 'protocol', _.uniq(protocol))
       }
     },
 

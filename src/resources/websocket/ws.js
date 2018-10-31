@@ -39,8 +39,23 @@ class WSocket {
   events(result) {
     const event = _.get(result, 'data.event');
     if(event) {
-      EventBus.$emit(_.get(event, 'caller'), event);
+      const callers = _.get(event, 'caller');
+      this.iterEvents(callers);
     }
+  }
+
+  iterEvents(callers) {
+    if(callers.constructor === Array) {
+      _.forEach(callers, this.disparEvent)
+    }
+
+    if(callers.constructor === String) {
+      this.disparEvent(callers)
+    }
+  }
+
+  disparEvent(caller) {
+    EventBus.$emit(caller, event)
   }
 }
 

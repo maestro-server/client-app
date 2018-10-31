@@ -46,10 +46,10 @@ export default {
 
   created() {
     this.id = this.$route.params.id
-    EventBus.$on('analytics-update', this.fetchData)
+    EventBus.$on(`analytics-${this.id}`, this.fetchData)
   },
 
   destroyed() {
-    EventBus.$off('analytics-update', this.fetchData)
+    EventBus.$off(`analytics-${this.id}`, this.fetchData)
   }
 }

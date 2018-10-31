@@ -5,7 +5,7 @@
       <h3 class="col-sm-6 col-xs-12 mt0">
         <span class="hidden-xs">{{entity.name}} - </span><span class="text-capitalize">{{model.name}}</span>
       </h3>
-      <div class="col-sm-6 col-xs-12 text-right">
+      <div class="col-sm-6 col-xs-12 text-right hidden-xs">
         <b>Export to:</b>
         <template v-for="item in dwn" v-key="item" v-if="dwn">
           <button class="btn btn-primary btn-xs" @click="down(item)">

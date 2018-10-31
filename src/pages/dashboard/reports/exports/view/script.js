@@ -20,10 +20,11 @@ export default {
   },
 
   created() {
-    EventBus.$on('reports-update', this.fetchData)
+    this.id = this.$route.params.id
+    EventBus.$on(`reports-${this.id}`, this.fetchData)
   },
 
   destroyed() {
-    EventBus.$off('reports-update', this.fetchData)
+    EventBus.$off(`reports-${this.id}`, this.fetchData)
   }
 }

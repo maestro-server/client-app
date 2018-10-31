@@ -14,6 +14,7 @@ export default {
 
   data: function () {
     return {
+      id: null,
       status: 'enabled',
       owner_user: null,
       entity: Connections,
@@ -165,12 +166,14 @@ export default {
   created() {
     this.$on('finishFetchData', this.fetchAdminer)
     this.$on('finishFetchData', this.fetchScheduler)
-    EventBus.$on('connections-update', this.fetchData)
+
+    this.id = this.$route.params.id
+    EventBus.$on(`connections-${this.id}`, this.fetchData)
   },
 
   destroyed() {
     this.$off('finishFetchData', this.fetchAdminer)
     this.$off('finishFetchData', this.fetchScheduler)
-    EventBus.$off('connections-update', this.fetchData)
+    EventBus.$off(`connections-${this.id}`, this.fetchData)
   }
 }

@@ -78,7 +78,7 @@
         headers: headerLogin,
         filter: true,
         URL: `${new Servers().getUrl()}?query=`,
-        template: "<b>{{item.hostname}}</b> <span v-if='item.os.base'>({{item.os.base}})</span> <span v-if='item.datacenters.name'> - {{item.datacenters.name}}</span><br/> " +
+        template: "<b>{{item.hostname}}</b> <span v-if='item.os && item.os.base'>({{item.os.base}})</span> <span v-if='item.datacenters.name'> - {{item.datacenters.name}}</span><br/> " +
         "<h5 class='ft15'><bs-label type='default'>{{item.ipv4_private}}</bs-label> <bs-label type='default'>{{item.ipv4_public}}</bs-label> <bs-label type='success'>{{item.role}}</bs-label> <bs-label type='success'>{{item.environment}}</bs-label></h5>"
       }
     },

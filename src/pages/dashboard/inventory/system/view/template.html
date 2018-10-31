@@ -13,7 +13,20 @@
     <creater-config-list label="Application" :basket="list_apps" @edit="editM" icons="fa-code">
       <template slot="view" slot-scope="props">
         <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
-          <b class="text-capitalize">{{props.item.name}}</b> <span v-if='props.item.environment'>({{props.item.environment}})</span>
+          <b class="text-capitalize">{{props.item.name}}</b><span v-if='props.item.environment'>({{props.item.environment}})</span>
+        </router-link>
+
+        <h5 class='ft15 inline'>
+          <bs-label type='default' v-if='props.item.family'>{{props.item.family}}</bs-label>
+          <bs-label type='default' v-if='props.item.spec'>{{props.item.spec.role}}</bs-label>
+        </h5>
+      </template>
+    </creater-config-list>
+
+    <creater-config-list label="Entry Point" :basket="model.entry" @edit="edit" :index="1" icons="fa-code">
+      <template slot="view" slot-scope="props">
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+          <b class="text-capitalize">{{props.item.name}}</b><span v-if='props.item.environment'>({{props.item.environment}})</span>
         </router-link>
 
         <h5 class='ft15 inline'>

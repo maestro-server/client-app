@@ -15,7 +15,7 @@
           <p v-if="app.endpoint"><span class="dst">{{app.endpoint}}</span></p>
           <p v-if="app.environment"><span class="dst">{{app.environment}}</span></p>
           <p v-if="app.family"><span class="dst">{{app.family}}</span></p>
-          
+
           <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
         </div>
 
@@ -53,11 +53,11 @@
           </span>
         </div>
 
-        <bs-select 
-          :options="types" 
-          v-model="endpoint" 
-          name="type" 
-          placeholder="Protocol" 
+        <bs-select
+          :options="types"
+          v-model="endpoint"
+          name="type"
+          placeholder="Protocol"
           class="col-xs-12"
           v-if="this.step > 0 "
           >
@@ -68,7 +68,7 @@
         </div>
 
         <hr>
-        
+
       </template>
 
       <a class="more more-right">+</a>
@@ -139,10 +139,12 @@
       },
 
       onCommit() {
-        const tapp = _.assign(this.app, {'endpoint': this.endpoint})
-        this.$emit('commitItem', tapp, this.step)
-        this.$refs['pop'].toggle()
-        this.clear()
+        if (_.has(this.app, '_id')) {
+          const tapp = _.assign(this.app, {'endpoint': this.endpoint})
+          this.$emit('commitItem', tapp, this.step)
+          this.$refs['pop'].toggle()
+          this.clear()
+        }
       },
 
       singleOpen(state) {
