@@ -3,6 +3,7 @@ import Centrifuge from 'centrifuge';
 import Login from 'services/login'
 import {EventBus} from 'src/resources/bus/bus-general.js'
 import websocket_url from 'src/resources/libs/websocket_url'
+import tenantMananger from 'services/tenantManager'
 
 
 class WSocket {
@@ -13,8 +14,8 @@ class WSocket {
 
   connect() {
     const token = Login.getToken();
-    const id = Login.getID();
-    const channel = `maestro#${id}`;
+    const id = _.get(tenantMananger.get(), '_id');
+    const channel = `maestro-${id}`;
 
     this.centr.setToken(token);
     this.subChannel(channel, (result) => {
