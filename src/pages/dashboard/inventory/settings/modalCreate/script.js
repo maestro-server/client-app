@@ -4,6 +4,7 @@ import Adminer from 'factories/adminer'
 import Modals from 'mixins/modals'
 import Services from 'factories/services'
 import FectherEntity from 'services/fetchEntity'
+import CacheManager from 'services/cacheManager'
 
 import tabItems from 'src/pages/dashboard/_modules/tabs/tab_array_item'
 
@@ -62,7 +63,10 @@ export default {
       this.setupModel()
 
       FectherEntity(Services)()
-        .create(this.finishJob, this.model)
+        .create((e) => {
+          CacheManager({persistence: 'local'}).clearReg('services')
+          this.finishJob(e)
+        }, this.model)
     },
 
     editSave () {

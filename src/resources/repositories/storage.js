@@ -29,6 +29,11 @@ const Storage = ({k, time, persistence}) => {
     clear() {
       return new Repository()
         .clearStore();
+    },
+
+    each(fn) {
+      return new Repository()
+        .eachStore(fn)
     }
 
   };

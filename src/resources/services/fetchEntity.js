@@ -36,8 +36,10 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
         });
     },
 
-    create (fn, model) {
-      CacheRequester(k)(opts)(tenant)(fn)
+    create (fn, model, kcache = 'list') {
+      const fk = `${k}_${kcache}`
+
+      CacheRequester(fk)(opts)(tenant)(fn)
         .remove((end) => {
           new Entity(model, path)
             .authorization()

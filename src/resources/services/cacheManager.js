@@ -24,6 +24,17 @@ const CacheManager = (opts = {}) => {
       storage(opts).clear()
     },
 
+    clearReg(search) {
+      storage(opts).each((vl, ky) => {
+        const regex = new RegExp(`${search}`);
+
+        if(regex.test(ky)) {
+          const topts = _.assign(opts, {k: ky})
+          storage(topts).delete()
+        }
+      });
+    },
+
     clearAll () {
       storage({}).clear()
       storage({persistence: 'local'}).clear()

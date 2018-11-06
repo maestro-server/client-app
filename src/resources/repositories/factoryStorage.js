@@ -31,6 +31,10 @@ class FactoryStorage {
     this.store.remove(this.ACCESS)
   }
 
+  eachStore(fn) {
+    this.store.each(fn)
+  }
+
   clearStore() {
     this.store.clearAll()
   }
