@@ -4,6 +4,13 @@ import _ from 'lodash'
 import CacheRequester from './cacheRequester'
 import tenantMananger from 'services/tenantManager'
 
+const queryBuilder = (or, rr, kr) => {
+  if (rr) {
+    return `${or}_${rr}_${kr}`
+  }
+  return or
+}
+
 const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   const tenant = tenantMananger.get()
@@ -12,7 +19,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   return {
     find (fn, query = {}) {
-      const queryRer =_.reduce(query, (or, rr, kr)=>`${or}_${rr}_${kr}`, '') || 'list'
+      const queryRer =_.reduce(query, queryBuilder, '') || 'list'
       const fk = `${k}_${queryRer}`
 
       CacheRequester(fk)(opts)(tenant)(fn)

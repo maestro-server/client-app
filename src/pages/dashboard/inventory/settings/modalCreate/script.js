@@ -63,10 +63,9 @@ export default {
       this.setupModel()
 
       FectherEntity(Services)()
-        .create((e) => {
-          CacheManager({persistence: 'local'}).clearReg('services')
-          this.finishJob(e)
-        }, this.model)
+        .create(this.finishJob, this.model)
+
+      CacheManager({persistence: 'local'}).clearReg('services')
     },
 
     editSave () {

@@ -15,7 +15,6 @@ export default {
       menu: {
         teams: ['Teams', 'fa-users'],
         connections: ['Connections', 'fa fa-circle-o-notch'],
-        events: ['Events', 'fa-bell'],
         settings: ['Settings', 'fa-cog'],
         dependency: ['Dependency', 'fa-cog'],
         hr: true,
@@ -72,6 +71,15 @@ export default {
       return IMG_AVATAR_DEFAULT
     },
 
+    imgBackStr(img) {
+      const dim = this.img_default(img)
+      return this.ctUrl(dim)
+    },
+
+    ctUrl(dim) {
+      return `url(${dim})`
+    },
+
     changeTenant(team, refs='teams') {
       const tn = _.assign({}, team, {refs})
 
@@ -109,6 +117,31 @@ export default {
 
     updateProfile(data){
       this.avatar = this.img_default(data)
+    },
+
+    eventActiveProfile(entity, refs='teams') {
+      const id1 = _.get(entity, '_id')
+      const id2 = _.get(this.tenant, '_id')
+
+      if(id1 === id2) {
+        const tn = _.assign({}, entity, {refs})
+        this.$set(this, 'tenant', tn)
+        tenantMananger.set(tn)
+        this.updateProfile(tn)
+      }
+    },
+
+    eventUpdateUser(user) {
+      const data = _.pick(user, ['name', 'avatar', 'email', '_id'])
+      store.dispatch('setUser',  data)
+      this.$set(this, 'users', data)
+      this.eventActiveProfile(data, 'users') //check if is this user the actived profile
+    },
+
+    eventUpdateTeams(teams) {
+      const data = _.pick(teams, ['name', 'avatar', 'email', '_id'])
+      this.fetchData()
+      this.eventActiveProfile(data, 'teams')
     }
   },
 
@@ -129,11 +162,12 @@ export default {
     const tn = this.storageTeam || this.users
     this.updateViewTenant(tn)
 
-    EventBus.$on('update-teams', this.fetchData);
-    EventBus.$on('update-profile', this.updateProfile);
+    EventBus.$on('update-teams', this.eventUpdateTeams)
+    EventBus.$on('update-profile', this.eventUpdateUser)
   },
 
   destroyed() {
-    EventBus.$off('update-teams', this.fetchData)
+    EventBus.$off('update-teams', this.eventUpdateTeams)
+    EventBus.$off('update-profile', this.eventUpdateUser)
   }
 }

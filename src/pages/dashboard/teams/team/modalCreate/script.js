@@ -25,16 +25,16 @@ export default {
     createSave() {
       FectherEntity(Teams)()
         .create(() => {
-          this.finishJob()
           EventBus.$emit('update-teams')
+          this.finishJob()
         }, this.model)
     },
 
     editSave() {
       FectherEntity(Teams)()
         .update(() => {
+          EventBus.$emit('update-teams', this.model)
           this.finishJob()
-          EventBus.$emit('update-teams')
         }, this.model)
     }
   }

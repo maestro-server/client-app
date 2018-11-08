@@ -5,7 +5,7 @@
     <div class="item main">
       <a @click.stop="toggle('tenants')">
         <span class="avatar hidden-xs hidden-sm">
-          <img :src="avatar" class="img-circle img-responsive-center">
+          <div class="mask-circle mt10" :style="{ 'background-image': ctUrl(avatar)}"></div>
         </span>
         <span class="main fix-mobile">
           <div class="entity text-capitalize white ml5">
@@ -23,7 +23,7 @@
             <li>
               <a @click="changeTenant(users, 'users')">
                 <span class="complementary">
-                  <img :src="img_default(users)" class="img-circle img-responsive-center mt10">
+                  <div class="mask-circle mt10" :style="{ 'background-image': imgBackStr(users)}"></div>
                 </span>
                 <span class="main">
                   <div class="entity text-capitalize white ml5">
@@ -42,7 +42,7 @@
                 <li v-for="team in teams.items" :key="team._id">
                   <a @click="changeTenant(team, 'teams')">
                     <span class="complementary">
-                      <img :src="img_default(team)" class="img-circle img-responsive-center square-avatar mt10">
+                      <div class="mask-circle mt10" :style="{ 'background-image': imgBackStr(team)}"></div>
                     </span>
                     <span class="main">
                       <div class="entity text-capitalize white ml5">
