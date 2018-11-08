@@ -10,7 +10,7 @@
 
       <div class="row">
 
-        <well class="col-xs-offset-3 col-xs-6 mt20 bg-white">
+        <well class="col-sm-offset-3 col-sm-6 col-xs-12 mt20 bg-white">
           <div v-if="show == 'system'">
             <tab-system @update="val => systems = val" ref="tab_system" :limit="3"></tab-system>
           </div>

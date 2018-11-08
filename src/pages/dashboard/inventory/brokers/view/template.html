@@ -18,7 +18,7 @@
     <creater-config-list label="Consumer" :basket="model.deps" @edit="edit" :index="3" icons="fa-chain">
       <template slot="view" slot-scope="props">
         <b>{{props.item.name}}</b> by {{props.item.endpoint}}
-        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}">
+        <router-link :to="{name: `${slugApps(props.item.family)}.single`, params: { id: props.item._id }}" target="_blank">
           <i class="fa  fa-eye" aria-hidden="true"></i>
         </router-link> <br>
 
