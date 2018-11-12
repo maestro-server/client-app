@@ -55,6 +55,7 @@
   import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
   import formatAdminer from 'src/resources/libs/formatAdminerData'
+  import fsuccess from 'src/resources/callbacks/request_success'
 
   export default {
 
@@ -72,6 +73,7 @@
         grid: [],
         spopover: 0,
         tracker: {},
+        actived: [],
         options: {
           protocol: [],
           protocol_broker: [],
@@ -91,7 +93,7 @@
         FectherEntity(Applications)({persistence: 'vuex'})
           .findOne((e) => {
             const data = _.get(e, 'data', [])
-            this.activedApp(data)
+            this.activedApp(data, step)
             const deps = this.getDeps(id, data)
             this.appendRow(deps, step)
           }, id)
@@ -127,14 +129,16 @@
         }
       },
 
-      updateTracker(step, row) {
-        const id = _.get(this.app, '_id', 'root')
-        this.tracker[id] = row
+      updateTracker(step, app) {
+        const id = _.get(this.actived, `[${step-1}]._id`, 'root')
+        console.log(step, this.actived, id)
+        this.tracker[id] = app
       },
 
-      activedApp(app) {
-        let napp = _.omit(app, ['_links', 'deps', 'roles', 'owner']);
-        this.$set(this, 'app', napp);
+      activedApp(app, step) {
+        let napp = _.omit(app, ['_links', 'deps', 'roles', 'owner'])
+        this.$set(this, 'app', napp)
+        this.actived[step] = napp
       },
 
       activedPopover(step) {
@@ -152,8 +156,9 @@
 
       save() {
         const uri = `/deps`;
+        console.log(this.tracker)
         FectherEntity(Applications)({path: uri})
-          .create(this.finishJob, {'tree': this.tracker, 'systems': this.systems});
+          .create(fsuccess, {'tree': this.tracker, 'systems': this.systems})
       },
 
       fetchData() {

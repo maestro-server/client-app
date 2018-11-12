@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'graph-bussiness',
+  name: 'graphs',
   path: '/',
   component: comp
 }

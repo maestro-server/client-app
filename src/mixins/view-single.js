@@ -70,7 +70,7 @@ export default {
       FectherEntity(this.entity)({force})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
-          this.$emit('finishFetchData')
+          this.$emit('finishFetchData', e.data)
         }, this.id)
     }
   },

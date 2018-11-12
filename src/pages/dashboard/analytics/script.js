@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       submenu: {
-        'graph-bussiness': 'Bussiness Graph',
+        'graphs': 'Bussiness Graph',
         'projects': 'Projects'
       },
       reference: null

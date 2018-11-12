@@ -4,7 +4,7 @@ import tlist from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'graph-bussiness',
+  path: 'graphs',
   component: comp,
   children: [
     tlist,

@@ -1,7 +1,7 @@
 <div>
 
   <div class="pb10">
-    <header-view-entity :label="entity.name" :name="model.name" @del="$parent.del" @acl="$parent.acl" @edit="$parent.edit()"></header-view-entity>
+    <header-view-entity :label="entity.name" :name="model.name" @del="$parent.del()" @acl="$parent.acl()" @edit="$parent.edit()"></header-view-entity>
   </div>
 
   <active-btn :act="model.active"></active-btn>
@@ -99,7 +99,7 @@
       </div>
 
       <div class="col-sm-6 hidden-xs">
-          <iframe :src="src" class="mini-frame"></iframe>
+          <iframe v-if="src" :src="src" class="mini-frame"></iframe>
 
           <router-link v-if="model._id" :to="{name: 'graphs.single.graph', params: { id: model._id }}" class="btn btn-primary btn-xs pull-right"
             :disabled="model.status != 'finished'">

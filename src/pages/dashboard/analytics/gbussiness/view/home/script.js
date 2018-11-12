@@ -12,6 +12,7 @@ export default {
   data: function () {
     return {
       entity: Graphs,
+      src: null,
       model: {name: null}
     }
   },
@@ -28,12 +29,6 @@ export default {
 
     hist() {
       return _.get(this.model, 'info.histograms', {});
-    },
-
-    src() {
-      const jwt = Login.getToken();
-      const base = new AnalyticsFront().getUrl();
-      return `${base}/${this.id}?jwt=${jwt}`;
     }
   },
 
@@ -41,15 +36,28 @@ export default {
     mHeight(h) {
       const height = 10 + (h * 10);
       return `height: ${height}px`;
+    },
+
+    createUrl(ext='') {
+      const jwt = Login.getToken();
+      const base = new AnalyticsFront().getUrl();
+      return `${base}/${this.id}?jwt=${jwt}&tmp=${ext}`;
+    },
+
+    autoRefreshSrc(data) {
+      const src = this.createUrl(_.get(data, 'updated_at'))
+      this.$set(this, 'src', src)
     }
   },
 
   created() {
     this.id = this.$route.params.id
     EventBus.$on(`analytics-${this.id}`, this.fetchData)
+    this.$on('finishFetchData', this.autoRefreshSrc)
   },
 
   destroyed() {
     EventBus.$off(`analytics-${this.id}`, this.fetchData)
+    this.$off('finishFetchData', this.autoRefreshSrc)
   }
 }

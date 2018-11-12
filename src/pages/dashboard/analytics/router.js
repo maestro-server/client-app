@@ -8,7 +8,7 @@ import gbussiness from './gbussiness/router'
 export default {
   name: 'analytics',
   path: 'analytics',
-  redirect: 'analytics/graph-bussiness',
+  redirect: 'analytics/graphs',
   component: comp,
   children: [
     project,
