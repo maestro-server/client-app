@@ -90,9 +90,10 @@ export default {
       this.editSwapVars('own')
 
       this.$set(this, 'data', this.model)
-      this.tab_role.updaterEdit(_.get(this.model, 'role'))
-      this.tab_tags.updaterEdit(_.get(this.model, 'tags'))
-      this.tab_system.updaterEdit(_.get(this.model, 'system'))
+
+      this.tab_role.updaterEdit(_.get(this.model, 'role', {}))
+      this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
+      this.tab_system.updaterEdit(_.get(this.model, 'system', []))
 
       if(this.tab_app_dc) {
         this.tab_app_dc.updaterEdit(_.get(this.model, 'datacenters'))

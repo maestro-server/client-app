@@ -64,7 +64,7 @@ export default {
     },
 
     img_default(item) {
-      if(_.has(item, 'avatar')) {
+      if(_.get(item, 'avatar')) {
         return _.get(store.getters, 'get_options.static_url') + item.avatar
       }
 

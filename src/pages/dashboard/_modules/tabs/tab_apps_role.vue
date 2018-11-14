@@ -34,7 +34,7 @@
     },
 
     data: function () {
-      const resetData = {role:null, name: null, id:null, link: null, notes:null}
+      const resetData = {role: 'Application', name: null, id:null, link: null, notes:null}
 
       return {
         role: 'Application',

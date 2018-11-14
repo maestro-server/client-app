@@ -11,13 +11,13 @@ function vuexData() {
 function read(key) {
   const cache = vuexData()
 
-  if(cache.hasOwnProperty(key)) {
+  if (cache.hasOwnProperty(key)) {
     return cache[key]
   }
 }
 
 function write(key, data) {
-  if(_.isString(key) && !_.isEmpty(data)) {
+  if (_.isString(key) && !_.isEmpty(data)) {
     const prep = {[key]: data}
     return vuexStore.dispatch('callCache', prep)
   }
@@ -38,6 +38,7 @@ function remove(key) {
 }
 
 function clearAll() {
+  vuexStore.dispatch('setUser', {_id: null, avatar: null, email: null, name: null})
   return vuexStore.dispatch('callCache', {})
 }
 

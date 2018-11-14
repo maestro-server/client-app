@@ -38,19 +38,20 @@ export default {
   },
 
   computed: {
-    tab_role() {return this.$refs.tab_role},
     tab_deploy() {return this.$refs.tab_deploy}
   },
 
   methods: {
     hookCreateLoad() {
-      this.tab_role.reset()
       this.tab_deploy.reset()
     },
 
     hookEditLoad() {
-      this.tab_role.updaterEdit(this.data.role)
-      this.tab_deploy.updaterEdit(this.model.deploy)
+      const role = _.get(this.data, 'role', _.clone(this.tab_role.resetData))
+      const deploy = _.get(this.model, 'deploy', [])
+
+      this.tab_role.updaterEdit(role)
+      this.tab_deploy.updaterEdit(deploy)
     },
 
     fetchOptions() {
