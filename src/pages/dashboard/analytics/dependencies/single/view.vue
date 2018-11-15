@@ -156,7 +156,6 @@
 
       save() {
         const uri = `/deps`;
-        console.log(this.tracker)
         FectherEntity(Applications)({path: uri})
           .create(fsuccess, {'tree': this.tracker, 'systems': this.systems})
       },

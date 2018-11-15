@@ -37,7 +37,7 @@
 <script>
   'use strict'
 
-  import Applications from 'factories/applications'
+  import System from 'factories/system'
   import FectherEntity from 'services/fetchEntity'
   import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
@@ -71,16 +71,18 @@
       },
 
       getAppsBySystem(dsystems) {
-        const systems = dsystems.map(e => _.get(e, '_id'));
+        const _id = dsystems.map(e => _.get(e, '_id'));
 
-        if(systems.length > 0) {
-          FectherEntity(Applications)({force: true})
-            .find(this.fetchApps, {'system._id': systems})
+        if(_id.length > 0) {
+          FectherEntity(System)({force: true})
+            .find(this.fetchApps, {_id});
         }
       },
 
       fetchApps(data) {
-        const apps = _.get(data, 'data.items', []);
+        const items = _.get(data, 'data.items', []);
+        const entries = items.reduce((arr, sys) => _.concat(arr, _.get(sys, 'entry', [])), []);
+        const apps = _.uniqBy(entries, '_id');
         this.routePage(apps);
       },
 
