@@ -51,7 +51,7 @@ export default {
     editLoad () {
       this.$set(this, 'data', this.model)
       this.$set(this, 'families', _.get(this.model, 'family', []))
-      this.tab_items.updaterEdit(this.model.tags)
+      this.tab_items.updaterEdit(_.get(this.model, 'tags', []))
     },
 
     setupModel () {

@@ -25,7 +25,8 @@ export default {
         name: null, description: null,
         environment: null, system: [],
         language: null, cluster: null,
-        deploy: [], tags: [], servers: [], role: {}
+        deploy: [], tags: [], servers: [],
+        role: {role: 'Application'}
       },
       options: {
         environment:[],
@@ -43,11 +44,12 @@ export default {
 
   methods: {
     hookCreateLoad() {
+      this.tab_role.reset()
       this.tab_deploy.reset()
     },
 
     hookEditLoad() {
-      const role = _.get(this.data, 'role', _.clone(this.tab_role.resetData))
+      const role = _.get(this.data, 'role')
       const deploy = _.get(this.model, 'deploy', [])
 
       this.tab_role.updaterEdit(role)

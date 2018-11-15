@@ -97,8 +97,8 @@ export default {
       this.$set(this, 'enabled', _.get(this.model, 'enabled'))
       this.$set(this, this.data.period_type, _.get(this.model, this.data.period_type))
 
-      this.tab_tags.updaterEdit(this.model.args)
-      this.tab_chains.updaterEdit(this.model.chain)
+      this.tab_tags.updaterEdit(_.get(this.model, 'args', []))
+      this.tab_chains.updaterEdit(_.get(this.model, 'chain', []))
       this.$nextTick()
     },
 

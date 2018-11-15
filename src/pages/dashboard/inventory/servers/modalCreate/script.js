@@ -96,11 +96,11 @@ export default {
 
         this.$set(this, 'os', _.defaults(this.model.os, this.os))
 
-        this.tab_dc.updaterEdit(this.model.datacenters)
-        this.tab_storage.updaterEdit(this.model.storage)
-        this.tab_auth.updaterEdit(this.model.auth)
-        this.tab_services.updaterEdit(this.model.services)
-        this.tab_tags.updaterEdit(this.model.tags)
+        this.tab_dc.updaterEdit(_.get(this.model, 'datacenters', {}))
+        this.tab_storage.updaterEdit(_.get(this.model, 'storage', []))
+        this.tab_auth.updaterEdit(_.get(this.model, 'auth', []))
+        this.tab_services.updaterEdit(_.get(this.model, 'services', []))
+        this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
       }, _id)
     },
 

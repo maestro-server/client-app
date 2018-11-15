@@ -16,7 +16,7 @@
                 :placeholder="form.placeholder"
                 v-validate.initial="form.validate"
                 :error="makeError(form.name)"
-                @blur="updaterEdit"
+                @blur="commitChange"
       ></bs-input>
     </template>
 
@@ -75,20 +75,27 @@
     },
 
     methods: {
-      updaterEdit() {
-        _.set(this.data, 'role', this.role)
-        const dpp = _.pickBy(this.data, _.identity)
+      updaterEdit(data=null) {
+        if(!data)
+          data = this.resetData
 
+        this.$set(this, 'data', data)
+        this.$set(this, 'role', _.get(data, 'role', 'Application'))
+        this.commitChange()
+      },
+
+      commitChange() {
+        const dpp = _.pickBy(this.data, _.identity)
         this.$emit('update', dpp)
       },
 
       changeData() {
-        this.updaterEdit()
-        this.reset()
+        this.$set(this.data, 'role', this.role)
+        this.commitChange()
       },
 
       reset() {
-        this.$set(this, 'data', _.clone(this.resetData))
+        this.updaterEdit(null)
       }
     },
 

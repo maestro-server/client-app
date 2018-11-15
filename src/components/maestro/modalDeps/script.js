@@ -36,7 +36,7 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_endpoint.updaterEdit(this.model.deps)
+      this.tab_endpoint.updaterEdit(_.get(this.model, 'deps', []))
     },
 
     setupModel () {

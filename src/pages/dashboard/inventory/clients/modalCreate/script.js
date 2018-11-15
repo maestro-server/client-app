@@ -57,8 +57,8 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_channel.updaterEdit(this.model.contacts)
-      this.tab_tags.updaterEdit(this.model.tags)
+      this.tab_channel.updaterEdit(_.get(this.model, 'contacts', []))
+      this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
     },
 
     setupModel () {

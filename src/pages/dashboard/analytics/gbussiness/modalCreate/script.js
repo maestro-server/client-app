@@ -59,9 +59,9 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_apps.updaterEdit(this.model.apps)
-      this.tab_system.updaterEdit(this.model.systems)
-      this.tab_clients.updaterEdit(this.model.clients)
+      this.tab_apps.updaterEdit(_.get(this.model, 'apps', []))
+      this.tab_system.updaterEdit(_.get(this.model, 'systems', []))
+      this.tab_clients.updaterEdit(_.get(this.model, 'clients', []))
 
       this.$set(this, 'tabShow', this.model.tab)
     },

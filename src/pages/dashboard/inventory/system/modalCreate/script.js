@@ -53,9 +53,9 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_endpoint.updaterEdit(this.model.entry)
-      this.tab_tags.updaterEdit(this.model.tags)
-      this.tab_clients.updaterEdit(this.model.clients)
+      this.tab_endpoint.updaterEdit(_.get(this.model, 'entry', []))
+      this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
+      this.tab_clients.updaterEdit(_.get(this.model, 'clients', []))
     },
 
     setupModel () {

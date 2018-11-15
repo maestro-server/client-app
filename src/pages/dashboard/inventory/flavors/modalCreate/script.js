@@ -47,8 +47,8 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_app_dc.updaterEdit(_.get(this.model, 'datacenters'))
-      this.tab_tags.updaterEdit(this.model.tags)
+      this.tab_app_dc.updaterEdit(_.get(this.model, 'datacenters', {}))
+      this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
     },
 
 
