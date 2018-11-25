@@ -12,8 +12,7 @@ export default {
       own: 1,
       initialData: {
         name: null, description: null, provider:null, datacenters: {},
-        tags: [], servers: [], targets: [],
-        role: {language: null}
+        tags: [], role: {language: null}
       },
       mapper: [
         {name: 'memory', label: 'Memory (MB)', validate: 'alpha_num'},

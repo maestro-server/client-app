@@ -6,6 +6,7 @@ import Servers from 'factories/servers'
 import FectherEntity from 'services/fetchEntity'
 
 import ViewSingle from 'mixins/view-single'
+import CacheManager from 'services/cacheManager'
 
 export default {
   mixins: [ViewSingle],
@@ -13,7 +14,7 @@ export default {
   data: function () {
     return {
       entity: Applications,
-      model: {tags: [], servers:[], deploy:[], targets: []},
+      model: {tags: [], deploy:[]},
       list_servers: [],
       rollbackRoute: 'application'
     }
@@ -23,8 +24,11 @@ export default {
     MDeps() {
       return this.$parent.$refs.modal_deps
     },
+    MMembers() {
+      return this.$parent.$refs.modal_members
+    },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', '_links', 'servers'])
+      return _.omit(this.model, ['owner', 'roles', '_links'])
     },
     viewDisplayer() {
       return [
@@ -43,16 +47,28 @@ export default {
         .show(this.model)
     },
 
-    fetchServers() {
-      this.fetchServersF('servers')
+    editMS: function () {
+      const {list_servers} = this
+
+      this.MMembers
+        .onFinishCallBack((e)=>{
+          this.$set(this, 'list_servers', _.get(e, 'list_servers', []))
+          CacheManager({k: `servers_${this.model._id}_application._id`}).remove()
+        })
+        .show(_.merge(this.model, {list_servers}))
+    },
+
+    fetchServers(force = true) {
+      if (this.id) {
+        FectherEntity(Servers)({force})
+          .find((e) => {
+            this.$set(this, 'list_servers', _.get(e, 'data.items', []))
+          }, {"applications._id": this.id})
+      }
     }
   },
 
   created() {
-    this.$on('finishFetchData', this.fetchServers)
-  },
-
-  destroyed() {
-    this.$off('finishFetchData', this.fetchServers)
+    this.fetchServers()
   }
 }

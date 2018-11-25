@@ -11,6 +11,12 @@ import tabFamilyApp from 'src/pages/dashboard/_modules/tabs/tab_family_applicati
 export default {
   mixins: [Modals],
 
+  props: {
+    field: {default: "deps"},
+    label: {default: "dependencies"},
+    entity: {default: () => Applications}
+  },
+
   components: {
     tabFamilyApp
   },
@@ -20,8 +26,7 @@ export default {
       data: {deps: []},
       options: {
         protocol:[]
-      },
-      entity: Applications
+      }
     }
   },
 
@@ -31,12 +36,12 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new dependencies' : `Edit ${this.model.name} dependencies`
+      this.text.title =  this.create ? `Create new ${this.label}`: `Edit ${this.model.name} ${this.label}`
     },
 
     editLoad () {
       this.$set(this, 'data', this.model)
-      this.tab_targets.updaterEdit(_.get(this.model, 'deps', []))
+      this.tab_targets.updaterEdit(_.get(this.model, this.field, []))
     },
 
     setupModel () {
@@ -48,6 +53,10 @@ export default {
 
       FectherEntity(this.entity)()
         .update(this.finishJob, this.model)
+    },
+
+    updateData(val) {
+      this.$set(this.data, this.field, val)
     }
   }
 

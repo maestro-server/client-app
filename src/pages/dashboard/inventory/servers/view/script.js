@@ -36,6 +36,9 @@ export default {
   },
 
   computed: {
+    MApps() {
+      return this.$parent.$refs.modal_apps
+    },
     MCreateConfigServer() {
       return this.$refs.modal_config
     },
@@ -43,7 +46,7 @@ export default {
       return this.$refs.modal_volumes
     },
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', '_links'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'applications', 'tags'])
     },
     viewDisplayer() {
       return [
@@ -79,6 +82,12 @@ export default {
         return vol
     },
 
+    editM: function () {
+      this.MApps
+        .onFinishCallBack(() => this.fetchData(this.id))
+        .show(this.model)
+    },
+
     fetchVolumes(force = true) {
       if (this.model) {
         const uniques = _.chain(this.model)
@@ -102,11 +111,13 @@ export default {
     },
 
     fetchApplications(force = true) {
-      if (this.model) {
+      const apps = _.get(this.model, 'applications', [])
+
+      if (this.model && apps.length > 0) {
         FectherEntity(Applications)({force})
           .find((e) => {
             this.list_applications = _.get(e, 'data.items');
-          }, {"servers": [_.get(this.model, '_id')]})
+          }, {"_id": apps.map(e=>e._id)})
       }
     }
   },

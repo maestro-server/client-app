@@ -12,8 +12,7 @@ export default {
       family: 'Auth',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [],
-        role: {endpoint: null}
+        tags: [], role: {endpoint: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'}

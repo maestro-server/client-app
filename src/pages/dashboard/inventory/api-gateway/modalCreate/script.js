@@ -19,8 +19,7 @@ export default {
       own: 1,
       initialData: {
         name: null, description: null, provider:null, datacenters: {},
-        tags: [], servers: [], targets: [],
-        role: {healthcheck: null, endpoint: null}
+        tags: [], deps: [], role: {healthcheck: null, endpoint: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},

@@ -11,9 +11,7 @@
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
       <router-link :to="{name: 'application.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
-    <template slot="qtdserver" slot-scope="props">
-      <bs-label>{{props.row.qtdserver}}</bs-label>
-    </template>
+
     <template slot="qtddeploy" slot-scope="props">
       <bs-label>{{props.row.qtddeploy}}</bs-label>
     </template>

@@ -19,8 +19,7 @@ export default {
       family: 'Loadbalance',
       initialData: {
         name: null, description: null, providers:null, datacenters: {},
-        tags: [], servers: [], targets: [],
-        role: {healthcheck: null, endpoint: null}
+        tags: [], role: {healthcheck: null, endpoint: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},

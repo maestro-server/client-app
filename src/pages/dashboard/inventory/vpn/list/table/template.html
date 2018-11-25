@@ -12,9 +12,6 @@
       <router-link :to="{name: 'vpn.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
     </template>
 
-    <template slot="qtdserver" slot-scope="props">
-      <bs-label>{{props.row.qtdserver}}</bs-label>
-    </template>
     <template slot="actions" slot-scope="props">
       <div class="min-table">
         <router-link :to="{name: 'vpn.single', params: { id: props.row._id }}"

@@ -75,7 +75,6 @@ export default {
       this.resetData()
       this.clearDuplicate()
       this.tab_role.reset()
-      this.tab_servers.reset()
       this.tab_tags.reset()
       this.tab_system.reset()
 
@@ -86,7 +85,6 @@ export default {
     },
 
     editLoad () {
-      this.editLoadEntities('servers')
       this.editSwapVars('own')
 
       this.$set(this, 'data', this.model)

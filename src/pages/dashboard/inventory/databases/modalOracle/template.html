@@ -120,19 +120,6 @@
           <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
         </tab>
 
-        <!-- ================= Servers ================= -->
-        <!-- ============================================== -->
-        <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Database">
-            <template slot="label">
-              Select one or more servers belongs database.
-            </template>
-            <template slot="footer">
-              After, you have possibility to insert a db name and especific role in each instance
-            </template>
-          </tab-servers>
-        </tab>
-
         <!-- ================= Storage ================= -->
         <!-- ============================================== -->
         <tab header="CDBs">

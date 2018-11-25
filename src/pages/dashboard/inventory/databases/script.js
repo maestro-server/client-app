@@ -3,9 +3,10 @@
 import modalCreate from './modalCreate/create'
 import modalMysql from './modalMysql/create'
 import modalOracle from './modalOracle/create'
-import modalFamilyApps from 'components/maestro/modalFamilyApp/app'
 import modalCreateChoose from './modalCreateChoose/create'
 import Applications from 'factories/applications'
+import modalFamilyApps from 'components/maestro/modalFamilyApp/app'
+import modalForeignRelation from 'components/maestro/modalServersForeign/create'
 
 export default {
   components: {
@@ -13,7 +14,8 @@ export default {
     modalMysql,
     modalOracle,
     modalCreateChoose,
-    modalFamilyApps
+    modalFamilyApps,
+    modalForeignRelation
   },
 
   data() {

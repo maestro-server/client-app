@@ -81,12 +81,6 @@
           <tab-endpoint :types="options.protocol_broker" @update="val => model.deps = val" ref="tab_endpoint" label="Consumer"></tab-endpoint>
         </tab>
 
-        <!-- ================= Servers ================= -->
-        <!-- ============================================== -->
-        <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
-        </tab>
-
         <!-- ================= System ================= -->
         <!-- ============================================== -->
         <tab header="System">

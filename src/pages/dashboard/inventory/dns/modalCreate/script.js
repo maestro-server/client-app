@@ -11,8 +11,7 @@ export default {
       family: 'DNS',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [], targets: [],
-        role: {endpoint: null, extra_config: null}
+        tags: [], role: {endpoint: null, extra_config: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},

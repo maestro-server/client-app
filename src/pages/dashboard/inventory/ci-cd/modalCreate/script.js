@@ -17,30 +17,12 @@ export default {
       family: 'CI/CD',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [],
-        role: {endpoint: null, extra_config: null}
+        tags: [], role: {endpoint: null, extra_config: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},
         {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
       ]
     }
-  },
-
-  computed: {
-    tab_targets() {
-      return this.$refs.tab_targets
-    },
-  },
-
-  methods: {
-    hookCreateLoad() {
-      this.tab_targets.reset()
-    },
-
-    hookEditLoad() {
-      this.tab_targets.updaterEdit(this.data.targets)
-    }
   }
-
 }

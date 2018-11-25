@@ -53,7 +53,7 @@
 
               <bs-select form-type="horizontal" :options="options.size" v-model="data.size"
                          name="size" label="Size"></bs-select>
-                         
+
               <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Descripition"
                         v-model="data.description"></bs-input>
 
@@ -86,14 +86,6 @@
               </p>
             </template>
           </tab-family-apps>
-        </tab>
-
-
-
-        <!-- ================= Servers ================= -->
-        <!-- ============================================== -->
-        <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers"></tab-servers>
         </tab>
 
         <!-- ================= System ================= -->

@@ -28,8 +28,7 @@ export default {
       modal: 'mysql',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [], targets: [],
-        role: {healthcheck: null, endpoint: null}
+        tags: [], role: {healthcheck: null, endpoint: null}
       },
       options: {
         status:[],

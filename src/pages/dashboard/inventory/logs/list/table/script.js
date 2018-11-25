@@ -14,7 +14,7 @@ export default {
   data: function () {
     return {
       entity: new Applications(),
-      columns: ['name', 'provider', 'ldatacenters', 'lsystem', 'environment', 'qtdtargets', 'qtdserver', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'provider', 'ldatacenters', 'lsystem', 'environment', 'updated_at', 'created_at', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'provider', 'ldatacenters', 'environment', 'lsystem'],
@@ -26,8 +26,6 @@ export default {
           updated_at: 'Updated At',
           ldatacenters: "Datacenters",
           lsystem: "System",
-          qtdserver: 'Servers',
-          qtdtargets: 'Targets',
           created_at: 'Created At'
         }
       }
@@ -43,8 +41,6 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.qtdserver = _.size(d.servers)
-        d.qtdtargets = _.size(d.targets)
         d.ldatacenters = _.get(d, 'datacenters.name', '-')
 
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")

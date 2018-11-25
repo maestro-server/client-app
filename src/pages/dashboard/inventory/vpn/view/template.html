@@ -15,11 +15,11 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="2" icons="fa-server" v-if="!model.own">
+    <creater-config-list label="Server" :basket="list_servers" @edit="editMS" icons="fa-server"  v-if="!model.own">
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
-        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
+        <service-accordion :data="props.item" :provider="model.language"></service-accordion>
       </template>
     </creater-config-list>
 

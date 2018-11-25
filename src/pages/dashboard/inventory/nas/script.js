@@ -1,13 +1,15 @@
 'use strict'
 
+import Applications from 'factories/applications'
 import modalCreate from './modalCreate/create'
 import modalFamilyApps from 'components/maestro/modalFamilyApp/app'
-import Applications from 'factories/applications'
+import modalForeignRelation from 'components/maestro/modalServersForeign/create'
 
 export default {
   components: {
     modalCreate,
-    modalFamilyApps
+    modalFamilyApps,
+    modalForeignRelation
   },
 
   data() {

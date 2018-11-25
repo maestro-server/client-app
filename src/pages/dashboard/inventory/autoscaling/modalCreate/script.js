@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       family: 'AutoScaling',
+      own: 1,
       initialData: {
         name: null, description: null, provider:null,
         datacenters: {},

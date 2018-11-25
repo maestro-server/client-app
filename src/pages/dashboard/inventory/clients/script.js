@@ -1,8 +1,8 @@
 'use strict'
 
 import modalCreate from './modalCreate/create'
-import modalForeignRelation from './modalForeignRel/create'
 import Clients from 'factories/clients'
+import modalForeignRelation from 'components/maestro/modalClientsForeign/create'
 
 export default {
   components: {

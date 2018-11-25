@@ -38,13 +38,6 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Account" :basket="model.auth" @edit="edit" :index="3" icons="fa-cog">
-      <template slot="view" slot-scope="props">
-        <bs-label>{{props.item.type}}</bs-label>
-        {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
-      </template>
-    </creater-config-list>
-
     <creater-config-list label="Storage" :basket="model.storage" @edit="edit" :index="2" icons="fa-hdd-o">
       <template slot="view" slot-scope="props">
 
@@ -88,6 +81,13 @@
       </template>
     </creater-config-list>
 
+    <creater-config-list label="Account" :basket="model.auth" @edit="edit" :index="3" icons="fa-cog">
+      <template slot="view" slot-scope="props">
+        <bs-label>{{props.item.type}}</bs-label>
+        {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
+      </template>
+    </creater-config-list>
+
     <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags">
       <template slot="view" slot-scope="props">
         <bs-label>{{props.item.key}}</bs-label>
@@ -95,7 +95,7 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Application" :basket="list_applications" :showManangerBTN="false" icons="fa-code">
+    <creater-config-list label="Application" :basket="list_applications" @edit="editM" icons="fa-code">
       <template slot="view" slot-scope="props">
         <div class="row">
           <div class="col-sm-7 col-xs-12">
@@ -146,8 +146,6 @@
             </template>
           </div>
         </div>
-
-
       </template>
     </creater-config-list>
 
