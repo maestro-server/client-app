@@ -15,7 +15,7 @@ export default {
       label: 'AutoScaling',
       model: {tags: []},
       list_servers: [],
-      rollbackRoute: 'vpn'
+      rollbackRoute: 'auto-scaling'
     }
   },
 

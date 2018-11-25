@@ -2,7 +2,7 @@
 import comp from './list'
 
 export default {
-  name: 'autoscaling',
+  name: 'auto-scaling',
   path: '/',
   component: comp
 }
