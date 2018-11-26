@@ -30,7 +30,9 @@
   </div>
 
   <div class="col-xs-12 mt20" v-if="model.status !== 'finished'">
-    <p class="well">{{model.msg}}</p>
+    <alert v-if="model.msg" class="alert mt5" :class="'alert-'+model.status">
+      {{model.msg}}
+    </alert>
   </div>
 
   <div class="col-xs-12 table-report" v-if="model.status === 'finished'">
