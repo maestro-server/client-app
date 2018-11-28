@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'autoscaling.single',
+  name: 'auto-scaling.single',
   path: 'single/:id',
   component: comp
 }

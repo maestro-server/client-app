@@ -19,8 +19,7 @@ export default {
       family: 'Broker',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [], targets: [],
-        role: {endpoint_zookeeper: null, endpoint: null, extra_config: null}
+        tags: [], role: {endpoint_zookeeper: null, endpoint: null, extra_config: null}
       },
       mapper: [
         {name: 'endpoint', label: 'Endpoint', validate: 'url'},

@@ -15,7 +15,7 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="3" icons="fa-server">
+    <creater-config-list label="Server" :basket="list_servers" @edit="editMS" icons="fa-server">
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
@@ -23,7 +23,7 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Deploy" :basket="model.deploy" @edit="edit" :index="4" icons="fa-code-fork">
+    <creater-config-list label="Deploy" :basket="model.deploy" @edit="edit" :index="3" icons="fa-code-fork">
       <template slot="view" slot-scope="props">
         {{props.item.type}}
         <bs-label>{{props.item.provider}}</bs-label>
@@ -51,7 +51,7 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="5" icons="fa-tags"></creater-config-list>
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="4" icons="fa-tags"></creater-config-list>
 
   </div>
 

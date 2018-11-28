@@ -41,7 +41,6 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.qtdserver = _.size(d.servers)
         d.ldatacenters = _.get(d, 'datacenters.name', '-')
 
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")

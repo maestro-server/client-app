@@ -27,8 +27,7 @@ export default {
       family: 'Database',
       initialData: {
         name: null, description: null, provider:null,
-        tags: [], servers: [],
-        role: {healthcheck: null, endpoint: null}
+        tags: [], role: {healthcheck: null, endpoint: null}
       },
       options: {
         status:[],

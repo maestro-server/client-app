@@ -15,11 +15,11 @@
 
   <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Server" :basket="list_servers" @edit="edit" :index="4" icons="fa-server">
+    <creater-config-list label="Server" :basket="list_servers" @edit="editMS" icons="fa-server"  v-if="!model.own">
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
-        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
+        <service-accordion :data="props.item" :provider="model.language"></service-accordion>
       </template>
     </creater-config-list>
 
@@ -37,14 +37,14 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="5" icons="fa-briefcase">
+    <creater-config-list label="System" :basket="model.system" @edit="edit" :index="3" icons="fa-briefcase">
       <template slot="view" slot-scope="props">
         <b class="text-capitalize">{{props.item.name}}</b>
         <router-link :to="{name: 'system.single', params: { id: props.item._id }}"><i class="fa  fa-eye" aria-hidden="true"></i></router-link>
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="6" icons="fa-tags"></creater-config-list>
+    <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="4" icons="fa-tags"></creater-config-list>
 
   </div>
 

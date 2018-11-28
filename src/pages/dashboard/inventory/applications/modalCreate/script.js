@@ -39,6 +39,7 @@ export default {
   },
 
   computed: {
+    tab_role() {return this.$refs.tab_role},
     tab_deploy() {return this.$refs.tab_deploy}
   },
 

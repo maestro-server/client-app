@@ -13,7 +13,7 @@ export default {
   data: function () {
     return {
       entity: new Applications(),
-      columns: ['name', 'lsystem', 'language', 'environment', 'qtdserver', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
+      columns: ['name', 'lsystem', 'language', 'environment', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'language', 'environment', 'lsystem'],
@@ -23,7 +23,6 @@ export default {
         headings: {
           updated_at: 'Updated At',
           lsystem: "System",
-          qtdserver: 'Servers',
           qtddeploy: 'Deploys',
           created_at: 'Created At'
         }
@@ -40,9 +39,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.qtdserver = _.size(d.servers)
         d.qtddeploy = _.size(d.deploy)
-
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
 
         d.updated_at = new Date(d.updated_at).toLocaleString()

@@ -73,16 +73,6 @@
           <tab-app-dc @update="val => data.datacenters = val" ref="tab_app_dc"></tab-app-dc>
         </tab>
 
-        <!-- ================= Servers ================= -->
-        <!-- ============================================== -->
-        <tab header="Servers" :disabled="own == 1">
-          <tab-servers @update="val => data.servers = val" ref="tab_servers" family="Standard">
-            <template slot="label">
-              List all servers behond the cluster, using the form below to search in servers.
-            </template>
-          </tab-servers>
-        </tab>
-
         <!-- ================= System ================= -->
         <!-- ============================================== -->
         <tab header="System">

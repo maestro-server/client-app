@@ -4,7 +4,7 @@ import list from './list/router'
 import single from './view/router'
 
 export default {
-  path: 'autoscaling',
+  path: 'auto-scaling',
   component: comp,
   children: [
     list,

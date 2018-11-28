@@ -15,9 +15,9 @@
         <status :status="model.status"></status>
       </h3>
 
-      <div class="alert alert-danger" v-if="model.status == 'error'">
+      <alert v-if="model.msg" class="alert mt5" :class="'alert-'+model.status">
         {{model.msg}}
-      </div>
+      </alert>
 
     </div>
 
