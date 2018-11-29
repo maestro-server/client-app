@@ -23,7 +23,7 @@ export default {
         listColumns: {
           status: [{text: 'Active'}, {text: 'Avaliable'}, {text: 'Stopped'}]
         },
-        filterable: ['status', 'name', 'hostname', 'environment', 'ipv4_private', 'ipv4_public', 'family', 'servers', 'role', 'language', 'deploy', 'contacts', 'provider', '_id', 'region', 'zone', 'type', 'instance', 'instance_id', 'subnet_id', 'tags'],
+        filterable: ['status', 'name', 'hostname', 'environment', 'ipv4_private', 'ipv4_public', 'family', 'role', 'language', 'deploy', 'contacts', 'provider', '_id', 'region', 'zone', 'type', 'instance', 'instance_id', 'subnet_id', 'tags'],
         headings: {
           created_at: 'Created At'
         },
