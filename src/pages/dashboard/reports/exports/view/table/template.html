@@ -73,10 +73,8 @@
         <info-view :data="props.row.storage" :title="false"></info-view>
       </template>
 
-      <template slot="applications" slot-scope="props">
-        {{props.row.applications}}
-
-        <info-view :data="props.row.applications" :title="false"></info-view>
+      <template slot="servers" slot-scope="props">
+        <info-view :data="tinyFilter(props.row.servers)" :title="false"></info-view>
       </template>
 
       <template slot="systems" slot-scope="props">
