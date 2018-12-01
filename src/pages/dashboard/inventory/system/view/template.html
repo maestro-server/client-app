@@ -45,12 +45,6 @@
       </template>
     </creater-config-list>
 
-    <creater-config-list label="Link" :basket="model.check" @edit="edit" :index="1" icons="fa-link">
-      <template slot="view" slot-scope="props">
-        <bs-label>{{props.item.key}}</bs-label> - {{props.item.value}}
-      </template>
-    </creater-config-list>
-
     <creater-config-list label="Tag" :basket="model.tags" @edit="edit" :index="3" icons="fa-tags"></creater-config-list>
 
   </div>
