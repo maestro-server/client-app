@@ -18,6 +18,7 @@ export default {
 
   data: function() {
     return {
+      data: {},
       tabShow: 0
     }
   },
@@ -32,6 +33,16 @@ export default {
       this.text.title =  this.create ? 'Create new Report' : `Edit ${this.model.name} reports`
       this.changeTab(this.tabShow)
     },
+
+    editLoad () {
+      this.tabShow=0
+      this.$set(this, 'data', this.model)
+
+      this.tab_tags.updaterEdit(_.get(this.model, 'args', []))
+      this.tab_chains.updaterEdit(_.get(this.model, 'chain', []))
+      this.$nextTick()
+    },
+
 
     setupModel () {
       this.model.name = `${_.get(this, 'model.report', '-')} ${_.get(this, 'model.component', '-')} ${new Date().toLocaleString("en-US")}`
