@@ -34,12 +34,28 @@ export default {
       this.changeTab(this.tabShow)
     },
 
-    editLoad () {
+    createLoad () {
       this.tabShow=0
+      this.data = {}
+
+      this.tab_general.reset()
+      this.tab_pivot.reset()
+    },
+
+    editLoad () {
+      const {report, filters, component} = this.model
       this.$set(this, 'data', this.model)
 
-      this.tab_tags.updaterEdit(_.get(this.model, 'args', []))
-      this.tab_chains.updaterEdit(_.get(this.model, 'chain', []))
+      if(report === 'pivot') {
+
+        this.tabShow = 1;
+        this.tab_pivot.updaterEdit({report, filters})
+      } else {
+
+        this.tabShow = 0;
+        this.tab_general.updaterEdit({report, filters, component})
+      }
+
       this.$nextTick()
     },
 
@@ -65,6 +81,18 @@ export default {
 
       FectherEntity(Reports)()
         .create(this.finishJob, this.model)
+    },
+
+    editSave () {
+      this.setupModel()
+
+      FectherEntity(Reports)()
+        .update(this.finishJob, this.model)
+    },
+
+    updateData(val) {
+      const nval = _.merge(this.data, val)
+      this.$set(this, 'data', nval)
     }
   }
 }

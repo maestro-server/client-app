@@ -110,39 +110,42 @@
     },
 
     data: function () {
+      const defaultPivot = {
+        report: "pivot",
+        filters: {
+          clients: {
+            title: 'Clients',
+            icon: 'fa-user-o',
+            enabled: true,
+            filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
+          },
+          systems: {
+            title: 'Systems',
+            icon: 'fa-briefcase',
+            enabled: true,
+            filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
+          },
+          applications: {
+            title: 'Applications',
+            icon: 'fa-code',
+            enabled: true,
+            filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
+          },
+          servers: {
+            title: 'Servers',
+            icon: 'fa-server',
+            enabled: true,
+            filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
+            arrowhidden: true
+          }
+        }
+      }
+
       return {
         showModal: false,
         entity: false,
-        submit: {
-          report: "pivot",
-          filters: {
-            clients: {
-              title: 'Clients',
-              icon: 'fa-user-o',
-              enabled: true,
-              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
-            },
-            systems: {
-              title: 'Systems',
-              icon: 'fa-briefcase',
-              enabled: true,
-              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
-            },
-            applications: {
-              title: 'Applications',
-              icon: 'fa-code',
-              enabled: true,
-              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}]
-            },
-            servers: {
-              title: 'Servers',
-              icon: 'fa-server',
-              enabled: true,
-              filters: [{"field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
-              arrowhidden: true
-            }
-          }
-        },
+        initialData: _.clone(defaultPivot),
+        submit: _.clone(defaultPivot),
         options: {
           tables: false
         }
@@ -192,6 +195,14 @@
       fetchData() {
         FectherEntity(Adminer)({persistence: 'local'})
           .find(this.fetchAdminer, {key: 'reports_options'})
+      },
+
+      updaterEdit(data) {
+        this.$set(this, 'submit', data)
+      },
+
+      reset() {
+        this.$set(this, 'submit', _.clone(this.initialData))
       }
     },
 
