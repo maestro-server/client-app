@@ -6,12 +6,12 @@ import {mapActions} from 'vuex'
 import mostMulti from './charts/most_multi.vue'
 import mostSingle from './charts/most_single.vue'
 
-import serverWidget from './components/servers_widget.vue'
-import appsWidget from './components/apps_widget.vue'
-import linksWidget from './components/links_widget.vue'
+import serverWidget from 'components/charts/servers_widget.vue'
+import appsWidget from 'components/charts/apps_widget.vue'
+import linksWidget from 'components/charts/links_widget.vue'
 
-import systemWidget from './components/system_widget.vue'
-import dcWidget from './components/dc_widget.vue'
+import systemWidget from 'components/charts/system_widget.vue'
+import dcWidget from 'components/charts/dc_widget.vue'
 
 import FectherEntity from 'services/fetchEntity'
 import Servers from 'factories/servers'

@@ -1,0 +1,32 @@
+<div>
+  <template v-for="chart in charts">
+
+    <div class="wrapper-charts" :class="size(chart)">
+
+      <div class="bg-charts">
+          <template v-if="type(chart) == 'pie'">
+              <pie-chart :data="transfData(chart)" :options="transfOptions(chart)"></pie-chart>
+          </template>
+    
+          <template v-if="type(chart) == 'doughnut'">
+              <doughnut-chart :data="transfData(chart)" :options="transfOptions(chart)"></doughnut-chart>
+          </template>
+    
+          <template v-if="type(chart) == 'bar'">
+              <bar-chart :data="transfData(chart)" :options="transfOptions(chart)"></bar-chart>
+          </template>
+    
+          <template v-if="type(chart) == 'table'">
+              <table-chart :data="transfData(chart)" :options="transfOptions(chart)"></table-chart>
+          </template>
+    
+          <template v-if="type(chart) == 'polar'">
+              <polar-chart :data="transfData(chart)" :options="transfOptions(chart)"></polar-chart>
+          </template>
+      </div>
+
+      
+
+    </div>
+  </template>
+</div>
