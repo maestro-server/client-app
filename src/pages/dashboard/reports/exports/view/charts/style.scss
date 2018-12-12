@@ -6,8 +6,9 @@
   .bg-charts {
     background: #f2f2f4;
     border-radius: 20px;
-    min-height: 416px;
+    height: 416px;
 
     padding: 8px;
+    overflow: hidden;
   }
 }

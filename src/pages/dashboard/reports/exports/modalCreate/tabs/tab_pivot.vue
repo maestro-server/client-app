@@ -112,6 +112,7 @@
     data: function () {
       const defaultPivot = {
         report: "pivot",
+        component: "pivot",
         filters: {
           clients: {
             title: 'Clients',

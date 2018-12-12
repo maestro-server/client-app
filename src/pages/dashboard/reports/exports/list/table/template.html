@@ -10,7 +10,7 @@
     <template slot="name" slot-scope="props">
 
       <template v-if="props.row.status === 'finished'">
-        <router-link :to="{name: 'reports.single.table', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+        <router-link :to="{name: 'reports.single.charts', params: { id: props.row._id }}">{{props.row.name}}</router-link>
       </template>
 
       <template v-if="props.row.status !== 'finished'">
@@ -27,11 +27,11 @@
 
     <template slot="actions" slot-scope="props">
       <div class="min-table">
-        <router-link :to="{name: 'reports.single', params: { id: props.row._id }}"
-                     class="fa fa-eye btn btn-primary btn-xs"></router-link>
+        <router-link :to="{name: 'reports.single.charts', params: { id: props.row._id }}"
+                     class="fa fa-area-chart btn btn-primary btn-xs"></router-link>
 
         <router-link :to="{name: 'reports.single.table', params: { id: props.row._id }}"
-                     class="fa fa-area-chart btn btn-primary btn-xs"></router-link>
+                     class="fa fa-table btn btn-primary btn-xs"></router-link>
 
         <a class="fa fa-trash btn btn-danger btn-xs" @click.stop="deleteP(props.row)"></a>
       </div>

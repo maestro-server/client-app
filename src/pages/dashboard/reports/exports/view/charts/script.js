@@ -5,7 +5,7 @@ import Reports from 'factories/reports'
 import ViewSingle from 'mixins/view-single'
 import pieChart from 'components/charts/pie_chart.vue'
 import doughnutChart from 'components/charts/doughnut_chart.vue'
-import tableChart from 'components/charts/table_chart.vue'
+import totalChart from 'components/charts/total_chart.vue'
 import polarChart from 'components/charts/polar_chart.vue'
 import barChart from 'components/charts/bar_chart.vue'
 import charts from 'mixins/charts'
@@ -18,7 +18,7 @@ export default {
 
   components: {
     pieChart,
-    tableChart,
+    totalChart,
     doughnutChart,
     polarChart,
     barChart
@@ -42,7 +42,7 @@ export default {
       return this.factoryData(
         _.get(data, 'aggr.label'),
         _.get(data, 'aggr.data'),
-        _.get(data, 'opts.limit', 10),
+        _.get(data, 'opts.limit', 15),
       )
     },
 

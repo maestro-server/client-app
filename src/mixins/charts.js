@@ -3,7 +3,7 @@
 export default {
   data: function () {
     return {
-      colors: ["#2B8B7E", "#FCDA0E", "#2B69AC", "#0E0184", "#5B5DC2", "#D21E94", "#8CA445", "#280AF0", "#3F6DEC", "#91FC1A", "#41923C", "#9B04BD", "#FF7920", "#89DD6E", "#6F7C71", "#F2F1A2"]
+      colors: ["rgba(43, 139, 126, 0.8)", "rgba(252, 218, 14, 0.8)", "#2B69AC", "#0E0184", "#5B5DC2", "#D21E94", "#8CA445", "#280AF0", "#3F6DEC", "#91FC1A", "#41923C", "#9B04BD", "#FF7920", "#89DD6E", "#6F7C71", "#F2F1A2"]
     }
   },
 

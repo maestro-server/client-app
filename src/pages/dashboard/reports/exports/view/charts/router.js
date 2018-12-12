@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'reports.charts',
+  name: 'reports.single.charts',
   path: 'charts',
   component: comp
 }
