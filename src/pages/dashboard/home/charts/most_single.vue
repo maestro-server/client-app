@@ -8,7 +8,7 @@
   'use strict'
 
   import charts from 'mixins/charts'
-  import pieChart from '../components/pie_chart.vue'
+  import pieChart from 'components/charts/pie_chart.vue'
 
   export default {
     mixins: [charts],

@@ -9,13 +9,13 @@
         <!-- ================= General ================= -->
         <!-- ============================================== -->
         <tab header="General/Single">
-          <tab-general @update="val => model = val" ref="tab_general"></tab-general>
+          <tab-general @update="updateData" ref="tab_general"></tab-general>
         </tab>
 
         <!-- ================= Pivot Relational ================= -->
         <!-- ============================================== -->
         <tab header="Pivot/Relational">
-          <tab-pivot @update="val => model = val" ref="tab_pivot"></tab-pivot>
+          <tab-pivot @update="updateData" ref="tab_pivot"></tab-pivot>
         </tab>
 
       </tabs>

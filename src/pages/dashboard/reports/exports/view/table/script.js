@@ -7,6 +7,7 @@ import ViewSingle from 'mixins/view-single'
 import SingleReport from 'mixins/single-report'
 
 import modalSingle from './modalSingle/single'
+import {EventBus} from "../../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [VueTable, ViewSingle, SingleReport],
@@ -69,7 +70,20 @@ export default {
     tinyFilter(data) {
       if (_.has(this, 'options.filterable'))
         return _.pick(data, this.options.filterable)
+    },
+
+    updateTable() {
+      this.$refs.vTable.refresh();
     }
+  },
+
+  created() {
+    this.id = this.$route.params.id
+    EventBus.$on(`reports-${this.id}`, this.updateTable)
+  },
+
+  destroyed() {
+    EventBus.$off(`reports-${this.id}`, this.updateTable)
   }
 }
 
