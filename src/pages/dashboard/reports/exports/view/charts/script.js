@@ -35,7 +35,7 @@ export default {
   methods: {
     makeCharts(data) {
       const {aggr} = data
-      this.$set(this, 'charts', aggr)
+      this.$set(this, 'charts', _.orderBy(aggr, ['opts.order']))
     },
 
     transfData(data) {
