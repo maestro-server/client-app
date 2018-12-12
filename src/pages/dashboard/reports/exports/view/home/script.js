@@ -22,7 +22,7 @@ export default {
     },
 
     filtered() {
-      return _.omit(this.model, ['owner', 'roles', '_links'])
+      return _.omit(this.model, ['owner', 'roles', '_links', 'aggr'])
     }
   }
 }

@@ -97,12 +97,15 @@
     },
 
     data: function () {
+      const defaultGeneral = {
+        report: "general",
+        component: null,
+        filters: [{ "field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
+      }
+
       return {
-        submit: {
-          report: "general",
-          component: null,
-          filters: [{ "field": "active", "filter": "true", "comparer": "equal", "typ": "boolean"}],
-        },
+        initialData: _.clone(defaultGeneral),
+        submit: _.clone(defaultGeneral),
         options: {
           tables: false
         }
@@ -145,9 +148,17 @@
         this.$emit('update', this.submit)
       },
 
+      updaterEdit(data) {
+        this.$set(this, 'submit', data)
+      },
+
       fetchData() {
         FectherEntity(Adminer)({persistence: 'local'})
           .find(this.fetchAdminer, {key: 'reports_options'})
+      },
+
+      reset() {
+        this.$set(this, 'submit', _.clone(this.initialData))
       }
     },
 

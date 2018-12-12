@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Modals from 'mixins/modals'
 import Scheduler from 'factories/scheduler'
 import Connections from 'factories/connections'
+import Reports from 'factories/reports'
 import Adminer from 'factories/adminer'
 import FectherEntity from 'services/fetchEntity'
 
@@ -68,6 +69,7 @@ export default {
         {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
       ],
       URL:  `${new Connections().getUrl()}?query=`,
+      URL_REPORTS:  `${new Reports().getUrl()}?query=`,
       template: "<b>{{item.name}}</b>",
       headers: headerLogin
     }
@@ -152,30 +154,57 @@ export default {
     },
 
     onHit(item) {
-      this.$set(this.data.link, '_id', _.get(item, '_id'))
-      this.$set(this.data.link, 'provider', _.get(item, 'provider'))
+      const field = _.pick(item, ['_id', 'provider', 'report', 'owner'])
+      _.merge(this.data.link, field)
+
       this.connectionSwap()
       return item.name
     },
 
     connectionSwap() {
       const pre = _.pickBy(this.data.link, _.identity)
+      const methd = _.capitalize(this.data.task)
 
-      if(_.has(pre, 'provider') && _.has(pre, '_id') &&  _.has(pre, 'task') && !_.get(this, 'data.endpoint')) {
-        let conn = _.chain(this.options.configs)
+      let conn = _.chain(this.options.configs)
           .filter(e => e.name == _.get(this.data, 'task'))
           .head()
           .pick(['url', 'method', 'source'])
           .value()
 
-        this.data.endpoint = _.chain(this.data.link)
-                .pick(['provider', '_id', 'task'])
-                .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
-                .value()
+      if(_.has(pre, '_id')) {
+        this[`change${methd}`](conn)
 
         this.data.method = _.get(conn, 'method')
         this.data.source = _.get(conn, 'source')
       }
+    },
+
+    changeConnections(conn) {
+      this.changeEndpoint(['provider', '_id', 'task'], conn)
+    },
+
+    changeReports(conn) {
+      this.changeEndpoint(['report'], conn)
+
+      const args = [
+        {'key': 'report_id', 'value':  _.get(this.data, 'link._id')},
+        {'key': 'owner_user', 'value':  _.get(this.data, 'link.owner._id')}
+      ]
+      this.tab_tags.updaterEdit(args)
+    },
+
+    changeEndpoint(lst, conn) {
+      this.data.endpoint = _.chain(this.data.link)
+                .pick(lst)
+                .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
+                .value()
+    },
+
+    clearVal() {
+      this.data.method = _.get(this.initData, 'method')
+      this.data.source = _.get(this.initData, 'source')
+      this.data.endpoint = _.get(this.initData, 'endpoint')
+      this.data.link.name = _.get(this.initData, 'link.name')
     }
   },
 

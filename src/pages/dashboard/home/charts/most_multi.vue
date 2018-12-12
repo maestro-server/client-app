@@ -9,7 +9,7 @@
   'use strict'
 
   import charts from 'mixins/charts'
-  import doughnutChart from '../components/doughnut_chart.vue'
+  import doughnutChart from 'components/charts/doughnut_chart.vue'
 
   export default {
     mixins: [charts],

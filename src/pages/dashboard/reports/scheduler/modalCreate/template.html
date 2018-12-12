@@ -38,7 +38,7 @@
                 <div class="col-sm-9 col-xs-12" v-if="options.period_type && data.link && data.task">
                   <button-group v-model="data.task" type="primary" class="mt5">
                     <template v-for="mod in options.modules">
-                      <bs-radio :selected-value="mod" class="btn-sm capitalize">{{mod}}</bs-radio>
+                      <bs-radio :selected-value="mod" class="btn-sm capitalize" @checked="clearVal">{{mod}}</bs-radio>
                     </template>
                   </button-group>
                 </div>
@@ -64,6 +64,22 @@
 
                 <bs-select form-type="horizontal" :options="getOptions()" v-model="data.link.task" name="task"
                            label="Task*" @input="connectionSwap"></bs-select>
+
+              </template>
+
+
+              <template v-if="data.task === 'reports'">
+                <typeahead label="Reports" placeholder="Select Report"
+                           :async="URL_REPORTS"
+                           async-key="items"
+                           :onSearch="requestSearch"
+                           :template="template"
+                           form-type="horizontal"
+                           :on-hit="onHit"
+                           class="mt20"
+                           :headers="headers"
+                           v-model="data.link.name"
+                ></typeahead>
 
               </template>
 
