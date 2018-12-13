@@ -1,10 +1,15 @@
 <div>
 
-  <div class="pb20">
+  <div class="">
     <header-view-entity :label="entity.name" :name="model.name" @edit="edit" @del="del" @acl="acl"></header-view-entity>
   </div>
 
+  <div class="text-right col-xs-12 pb20">
+    <b>Last Update {{formatDate(model.updated_at)}}</b>
+  </div>
+
   <div class="col-xs-12 pb10 text-center" v-if="model._id">
+
     <router-link :to="{name: 'reports.single.table', params: { id: model._id }}" class="btn btn-primary btn-xs">
       <i aria-hidden="true" class="fa fa-table"></i> Table Data</router-link>
 
@@ -14,7 +19,6 @@
     <router-link :to="{name: 'reports.single', params: { id: model._id }}" class="btn btn-primary btn-xs">
       <i aria-hidden="true" class="fa fa-eye"></i> Info</router-link>
   </div>
-
 
   <router-view></router-view>
 

@@ -4,6 +4,11 @@
 
     <form class="row form-horizontal" @submit.prevent="createSave">
 
+      <div class="col-xs-12">
+        <bs-input form-type="horizontal" name="name" label="Report name" v-model="data.name"></bs-input>
+        <hr>
+      </div>
+
       <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12" @input="changeTab">
 
         <!-- ================= General ================= -->

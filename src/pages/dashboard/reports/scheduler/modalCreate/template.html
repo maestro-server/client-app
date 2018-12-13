@@ -47,9 +47,18 @@
               <template v-if="data.task === 'webhook'">
                 <bs-select class="mt20" v-if="options.method" form-type="horizontal" :options="options.method"
                            v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>
+
+                <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint"
+                          placeholder="http://myrul:8080/webhook" v-validate="'url'" :error="makeError('endpoint')"></bs-input>
               </template>
 
               <template v-if="data.task === 'connections'">
+                <div class="row mt10" v-if="data.endpoint">
+                  <div class="col-sm-offset-3 col-sm-9 col-xs-12" v-if="options.period_type">
+                    Select one connection and resource for periodic update.
+                  </div>
+                </div>
+
                 <typeahead label="Connection" placeholder="Select Connection"
                            :async="URL"
                            async-key="items"
@@ -57,7 +66,7 @@
                            :template="template"
                            form-type="horizontal"
                            :on-hit="onHit"
-                           class="mt20"
+                           class="mt10"
                            :headers="headers"
                            v-model="data.link.name"
                 ></typeahead>
@@ -69,22 +78,26 @@
 
 
               <template v-if="data.task === 'reports'">
-                <typeahead label="Reports" placeholder="Select Report"
+                <div class="row mt10" v-if="data.endpoint">
+                  <div class="col-sm-offset-3 col-sm-9 col-xs-12" v-if="options.period_type">
+                    Select one report to schedule the update for periodic update.
+                  </div>
+                </div>
+
+                <typeahead label="Selete Report"
+                           placeholder="Select Report"
                            :async="URL_REPORTS"
                            async-key="items"
                            :onSearch="requestSearch"
                            :template="template"
                            form-type="horizontal"
                            :on-hit="onHit"
-                           class="mt20"
+                           class="mt10"
                            :headers="headers"
                            v-model="data.link.name"
                 ></typeahead>
 
               </template>
-
-              <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint"
-                        placeholder="http://myrul:8080/webhook"></bs-input>
 
               <hr>
 

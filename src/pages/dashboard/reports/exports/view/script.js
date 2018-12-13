@@ -19,6 +19,12 @@ export default {
     }
   },
 
+  methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleString()
+    }
+  },
+
   created() {
     this.id = this.$route.params.id
     EventBus.$on(`reports-${this.id}`, this.fetchData)

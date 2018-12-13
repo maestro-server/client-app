@@ -25,15 +25,6 @@
 
       <hr>
 
-
-      <h3>Results</h3>
-      <router-link v-if="model._id" :to="{name: 'reports.single.table', params: { id: model._id }}"
-                   class="btn btn-primary btn" :disabled="model.status != 'finished'" >
-        <i class="fa fa-area-chart"></i> Report Results
-      </router-link>
-
-      <hr>
-
       <h3>Export to</h3>
 
       <button class="btn btn-primary btn-xs mt5" :disabled="model.status != 'finished'" @click.stop="download('application', 'json')">

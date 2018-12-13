@@ -24,12 +24,18 @@ export default {
   },
 
   computed: {
-    tab_tags() {return this.$refs.tab_tags},
-    tab_chains() {return this.$refs.tab_chains},
-    tab_role() {return this.$refs.tab_role}
+    tab_tags() {
+      return this.$refs.tab_tags
+    },
+    tab_chains() {
+      return this.$refs.tab_chains
+    },
+    tab_role() {
+      return this.$refs.tab_role
+    }
   },
 
-  data () {
+  data() {
     const initData = {
       name: null,
       method: 'GET',
@@ -37,7 +43,7 @@ export default {
       period_type: "interval",
       args: [],
       task: 'webhook',
-      link:{
+      link: {
         name: '',
         _id: '',
         task: null
@@ -68,20 +74,20 @@ export default {
         {name: 'max_retries', label: 'Max Retry', validate: 'min:1', help: 'Default is 3'},
         {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
       ],
-      URL:  `${new Connections().getUrl()}?query=`,
-      URL_REPORTS:  `${new Reports().getUrl()}?query=`,
+      URL: `${new Connections().getUrl()}?query=`,
+      URL_REPORTS: `${new Reports().getUrl()}?query=`,
       template: "<b>{{item.name}}</b>",
       headers: headerLogin
     }
   },
 
   methods: {
-    afterShow () {
-      this.text.title =  this.create ? 'Create new Scheduler' : `Edit ${this.model.name} scheduler`
+    afterShow() {
+      this.text.title = this.create ? 'Create new Scheduler' : `Edit ${this.model.name} scheduler`
     },
 
-    createLoad () {
-      this.tabShow=0
+    createLoad() {
+      this.tabShow = 0
       this.$set(this, 'data', _.clone(this.initialData))
       this.$set(this, 'cron', _.clone(this.initialCron))
       this.$set(this, 'interval', _.clone(this.initialInterval))
@@ -92,8 +98,8 @@ export default {
       this.$nextTick()
     },
 
-    editLoad () {
-      this.tabShow=0
+    editLoad() {
+      this.tabShow = 0
       this.$set(this, 'data', _.assign({}, this.initialData, this.model))
       this.$set(this.data, 'endpoint', _.get(this.model, 'endpoint'))
       this.$set(this, 'enabled', _.get(this.model, 'enabled'))
@@ -104,7 +110,7 @@ export default {
       this.$nextTick()
     },
 
-    setupModel () {
+    setupModel() {
       const period = this.data.period_type
 
       this.model = _.pickBy(this.data, _.identity)
@@ -114,21 +120,21 @@ export default {
 
       const remove = _.chain(this.options)
         .get('period_type')
-        .filter(e=>e!=period)
+        .filter(e => e != period)
         .push('msg')
         .value()
 
       this.$set(this, 'model', _.omit(this.model, remove))
     },
 
-    createSave () {
+    createSave() {
       this.setupModel()
 
       FectherEntity(Scheduler)()
         .create(this.finishJob, this.model)
     },
 
-    editSave () {
+    editSave() {
       this.setupModel()
 
       FectherEntity(Scheduler)()
@@ -166,12 +172,12 @@ export default {
       const methd = _.capitalize(this.data.task)
 
       let conn = _.chain(this.options.configs)
-          .filter(e => e.name == _.get(this.data, 'task'))
-          .head()
-          .pick(['url', 'method', 'source'])
-          .value()
+        .filter(e => e.name == _.get(this.data, 'task'))
+        .head()
+        .pick(['url', 'method', 'source'])
+        .value()
 
-      if(_.has(pre, '_id')) {
+      if (_.has(pre, '_id')) {
         this[`change${methd}`](conn)
 
         this.data.method = _.get(conn, 'method')
@@ -187,23 +193,21 @@ export default {
       this.changeEndpoint(['report'], conn)
 
       const args = [
-        {'key': 'report_id', 'value':  _.get(this.data, 'link._id')},
-        {'key': 'owner_user', 'value':  _.get(this.data, 'link.owner._id')}
+        {'key': 'report_id', 'value': _.get(this.data, 'link._id')},
+        {'key': 'owner_user', 'value': _.get(this.data, 'link.owner._id')}
       ]
       this.tab_tags.updaterEdit(args)
     },
 
     changeEndpoint(lst, conn) {
       this.data.endpoint = _.chain(this.data.link)
-                .pick(lst)
-                .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
-                .value()
+        .pick(lst)
+        .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
+        .value()
     },
 
     clearVal() {
-      this.data.method = _.get(this.initData, 'method')
       this.data.source = _.get(this.initData, 'source')
-      this.data.endpoint = _.get(this.initData, 'endpoint')
       this.data.link.name = _.get(this.initData, 'link.name')
     }
   },
