@@ -160,15 +160,18 @@ export default {
     },
 
     onHit(item) {
-      const field = _.pick(item, ['_id', 'provider', 'report', 'owner'])
-      _.merge(this.data.link, field)
+      this.data.link = _.pick(item, ['_id', 'provider', 'report'])
 
-      this.connectionSwap()
+      this.connectionSwap(item)
       return item.name
     },
 
-    connectionSwap() {
-      const pre = _.pickBy(this.data.link, _.identity)
+    changeConnectionsServers(item) {
+      this.$set(this.data.link, 'task', item)
+      this.connectionSwap()
+    },
+
+    connectionSwap(item={}) {
       const methd = _.capitalize(this.data.task)
 
       let conn = _.chain(this.options.configs)
@@ -177,24 +180,24 @@ export default {
         .pick(['url', 'method', 'source'])
         .value()
 
-      if (_.has(pre, '_id')) {
-        this[`change${methd}`](conn)
+      if (_.has(this.data, 'link')) {
+        this[`change${methd}`](item, conn)
 
         this.data.method = _.get(conn, 'method')
         this.data.source = _.get(conn, 'source')
       }
     },
 
-    changeConnections(conn) {
+    changeConnections(item, conn) {
       this.changeEndpoint(['provider', '_id', 'task'], conn)
     },
 
-    changeReports(conn) {
+    changeReports(item, conn) {
       this.changeEndpoint(['report'], conn)
 
       const args = [
-        {'key': 'report_id', 'value': _.get(this.data, 'link._id')},
-        {'key': 'owner_user', 'value': _.get(this.data, 'link.owner._id')}
+        {'key': 'report_id', 'value': _.get(item, '_id')},
+        {'key': 'owner_user', 'value': _.get(item, 'owner._id')}
       ]
       this.tab_tags.updaterEdit(args)
     },
@@ -207,7 +210,6 @@ export default {
     },
 
     clearVal() {
-      this.data.source = _.get(this.initData, 'source')
       this.data.link.name = _.get(this.initData, 'link.name')
     }
   },

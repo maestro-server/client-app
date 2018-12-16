@@ -72,7 +72,7 @@
                 ></typeahead>
 
                 <bs-select form-type="horizontal" :options="getOptions()" v-model="data.link.task" name="task"
-                           label="Task*" @input="connectionSwap"></bs-select>
+                           label="Task*" @input="changeConnectionsServers"></bs-select>
 
               </template>
 
@@ -98,6 +98,13 @@
                 ></typeahead>
 
               </template>
+
+              <div class="row" v-if="data.link && data.task !== 'webhook'">
+                <div class="col-sm-offset-3 col-sm-9 col-xs-12 mt5">
+                  <label>Schedule: {{data.task}}</label>
+                  <info-view :data="data.link" :title="false"></info-view>
+                </div>
+              </div>
 
               <hr>
 
