@@ -65,13 +65,13 @@ export default {
     },
 
     setupModel () {
-      _.merge(this.model[this.fielder], this.value)
+      this.model[this.fielder] = this.value
     },
 
     editSave() {
       this.setupModel()
-
       const cleanArr = this.model[this.fielder].map(e=>_.pick(e, ['_id', 'email', 'name', 'refs', 'role']))
+
       FectherEntity(this.entity)()
         .update(this.finishJob, cleanArr, this.model._id+'/'+this.fielder)
     },
