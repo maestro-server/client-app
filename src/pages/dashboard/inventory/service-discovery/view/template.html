@@ -1,6 +1,6 @@
 <div>
   <div class="pb10">
-    <header-view-entity :label="label" :name="model.name" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+    <header-view-entity :label="label" :name="model.name" :id="model._id" :entity="getName" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
   <div class="col-xs-12 mt10 bg-gray-lighter">

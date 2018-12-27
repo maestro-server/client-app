@@ -86,4 +86,9 @@
   .numberColor {
     color: #2c2e86;
   }
+
+  .emptyColor {
+    color: #ff00;
+    text-decoration: underline;
+  }
 </style>

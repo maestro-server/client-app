@@ -4,18 +4,23 @@
   <table class="table table-striped">
     <tbody>
 
-    <tr v-for="item, key in data" v-if="!isString(data)">
-      <th width="30%" class="text-capitalize">{{key}}:</th>
-      <td>
-        <tree-view :items="item"></tree-view>
-      </td>
-    </tr>
+    <template v-if="!isString(data)">
+      <tr v-for="item, key in data">
+        <th class="text-capitalize">{{key}}:</th>
+        <td>
+          <tree-view :items="item"></tree-view>
+        </td>
+      </tr>
+    </template>
 
-    <tr v-if="isString(data)">
-      <td>
-        {{data}}
-      </td>
-    </tr>
+    <template v-if="isString(data)">
+      <tr>
+        <td>
+          {{data}}
+        </td>
+      </tr>
+    </template>
+
     </tbody>
   </table>
 </div>

@@ -1,0 +1,37 @@
+<div>
+  <div class="pb10">
+    <h3 class="col-xs-8 pb10">
+      History of {{getName}}
+    </h3>
+  </div>
+
+  <div class="col-xs-12 tracking-mask">
+    <div class="row tracking-grid">
+
+      <div class="tracking-table" v-for="item in history">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th colspan="2" class="text-capitalize">{{formatDate(item.updated_at)}}:</th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <template v-for="(subitem, key, index) in sortRow(item.body)">
+            <tr :class="{'isEmpty': isEmpty(subitem)}">
+              <th width="30%" class="text-capitalize">{{key}}:</th>
+              <td>
+                <tree-view :items="subitem"></tree-view>
+              </td>
+            </tr>
+          </template>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -7,6 +7,7 @@ import profile from './profile/router'
 import inventory from './inventory/router'
 import analytics from './analytics/router'
 import reports from './reports/router'
+import tracking from './tracking/router'
 
 export default {
   path: '/dashboard',
@@ -17,6 +18,7 @@ export default {
     teams,
     inventory,
     analytics,
-    reports
+    reports,
+    tracking
   ]
 }

@@ -11,6 +11,10 @@ export default {
   },
 
   computed: {
+    getName() {
+      const ety = new this.entity()
+      return ety.getName()
+    },
     MCreate() {
       return this.$parent.$refs.modal_create
     },

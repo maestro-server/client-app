@@ -25,6 +25,15 @@
 
       <hr>
 
+      <h3>Miscellaneous</h3>
+
+      <router-link v-if="model._id" :to="{name: 'tracking.single', params: { id: model._id, entity: 'reports' }}" class="btn btn-primary btn-xs">
+        <i class="fa fa-history"></i>
+        Aggregation track
+      </router-link>
+
+      <hr>
+
       <h3>Export to</h3>
 
       <button class="btn btn-primary btn-xs mt5" :disabled="model.status != 'finished'" @click.stop="download('application', 'json')">

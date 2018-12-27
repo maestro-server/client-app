@@ -1,7 +1,17 @@
 <div class="mt20 pb10">
-  <h3 class="col-sm-6 col-xs-12 mt0">
-    <span class="hidden-xs">{{label}} - </span><span class="text-capitalize">{{name}}</span>
-  </h3>
+
+  <div class="col-sm-6 col-xs-12 mt0">
+    <h3>
+      <span class="hidden-xs">{{label}} - </span><span class="text-capitalize">{{name}}</span>
+    </h3>
+
+    <router-link :to="{name: 'tracking.single', params: { id: id, entity: entity }}" v-if="id" class="btn btn-primary btn-xs">
+      <i class="fa fa-history"></i>
+      History tracking
+    </router-link>
+  </div>
+
+
   <div class="col-sm-6 col-xs-12 text-right">
     <button v-if="visibility.create" class="btn btn-warning" @click="event('acl')">
       <i aria-hidden="true" class="fa fa-code"></i>

@@ -1,0 +1,36 @@
+
+.tracking-mask {
+  overflow: auto;
+  height: 100%;
+  max-height: 600px;
+
+  .tracking-grid {
+    display: flex;
+    align-items: center;
+    -webkit-overflow-scrolling: touch;
+
+    .tracking-table {
+      flex-grow: 1;
+      flex-wrap: nowrap;
+      align-self: flex-start;
+
+      padding: 0 10px;
+
+      border-right: 1px dotted #250c49;
+      width: 450px;
+      max-width: 33%;
+
+      &:last-child {
+        border: none;
+      }
+
+    }
+
+    .isEmpty {
+      text-decoration: line-through;
+      color: #fff;
+      background-color: #f00 !important;
+    }
+  }
+}
+
