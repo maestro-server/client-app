@@ -44,14 +44,14 @@ export default {
       return _(row).toPairs().sortBy(0).fromPairs().value()
     },
     fetchData: function () {
-      const path = `/${this.entity}`
+      const path = `${this.entity}`
       FectherEntity(FactoryTenant)({path})
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, this.id)
     },
     fetchHistory: function (force=true) {
-      const path = `/${this.entity}/${this.id}/audit`
+      const path = `${this.entity}/${this.id}/audit`
 
       FectherEntity(FactoryTenant)({path, force})
         .find((e) => {
