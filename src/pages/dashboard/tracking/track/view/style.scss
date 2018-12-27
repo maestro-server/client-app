@@ -19,6 +19,7 @@
       border-right: 1px dotted #250c49;
       width: 450px;
       max-width: 33%;
+      box-sizing: content-box;
 
       &:last-child {
         border: none;
