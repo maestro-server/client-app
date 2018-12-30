@@ -30,5 +30,14 @@ export default {
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(this.model)
     }
+  },
+
+  created() {
+    this.id = this.$route.params.id
+    EventBus.$on(`analytics-${this.id}`, this.fetchData)
+  },
+
+  destroyed() {
+    EventBus.$off(`analytics-${this.id}`, this.fetchData)
   }
 }

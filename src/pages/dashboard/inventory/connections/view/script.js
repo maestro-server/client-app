@@ -44,14 +44,30 @@ export default {
 
       FectherEntity(Connections)()
         .patch(this.finishJob, data)
-    },
 
+      this.batchSwitchEnabled(status)
+    },
+    batchSwitchEnabled(status) {
+      _.forEach(
+        this.schedulers,
+        this.executorBatchEnabled(status)
+      )
+    },
+    executorBatchEnabled(status) {
+      return (job) => {
+        const tjob = _.head(job)
+        const enabled = status === 'enabled'
+
+        if(_.get(tjob, 'enabled') !== enabled)
+          this.processEnable(tjob, enabled)
+
+      }
+    },
     processEnable(job, enabled) {
       _.set(job, 'enabled', enabled)
       FectherEntity(Scheduler)()
         .patch(this.finishJob, job)
     },
-
     createJob(task) {
       const data = {
         name: _.get(this.model, 'name'),
@@ -65,7 +81,6 @@ export default {
       FectherEntity(Scheduler)({path: '/template'})
         .create(this.fetchScheduler, data)
     },
-
     formatOwnerUser(data) {
       const id = _.get(data, '_id')
       if(id) {
@@ -75,7 +90,6 @@ export default {
         }
       }
     },
-
     task(key) {
       new Connections()
         .authorization()
@@ -84,7 +98,6 @@ export default {
           this.fetchData
         )
     },
-
     fetchAdminer() {
       const ouser = this.formatOwnerUser(_.get(this.model, 'owner_user'))
       if(ouser)
@@ -95,7 +108,6 @@ export default {
       FectherEntity(Adminer)({persistence: 'local'})
         .find(this.setOptions, {key: 'connections'})
     },
-
     fetchScheduler() {
       const data = {
         'link._id': _.get(this.model, '_id')
@@ -104,12 +116,10 @@ export default {
       FectherEntity(Scheduler)({force: true})
         .find(this.prepareScheduler, data)
     },
-
     setOptions(data) {
       const adminer = formatAdminer(data)
       this.prepareProcessData(adminer)
     },
-
     prepareProcessData(adminer) {
       const prm = _.chain(adminer)
         .get(`permissions.${this.model.provider}`)
@@ -118,12 +128,10 @@ export default {
 
       this.$set(this, 'permissions', prm)
     },
-
     mergeLog(data, key) {
       const process = _.get(this.model, `process.${key}`, null)
       return _.assign({}, data, process)
     },
-
     prepareScheduler(result) {
       const scheduler = _.chain(result)
                   .get('data.items', [])
@@ -132,7 +140,6 @@ export default {
 
       this.$set(this, 'schedulers', scheduler)
     },
-
     mergeScheduler(result, value) {
       const sched = _.pick(value, ['_id', 'link', 'enabled', 'name', 'task', 'method'])
       const task = _.get(sched, 'link.task')
@@ -143,7 +150,6 @@ export default {
       result[task].push(sched)
       return result
     },
-
     saveOwner() {
       const id_user = _.get(this.owner_user, '_id')
 

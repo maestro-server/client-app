@@ -15,6 +15,20 @@ export default {
     return {
       name: "Connection"
     }
+  },
+
+  methods:{
+    onUpdate() {
+      this.$refs.svTable.$refs.vTable.refresh();
+    }
+  },
+
+  created() {
+    EventBus.$on('connections-update', this.onUpdate)
+  },
+
+  destroyed() {
+    EventBus.$off('connections-update', this.onUpdate)
   }
 }
 

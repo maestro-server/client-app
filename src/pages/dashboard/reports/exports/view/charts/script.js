@@ -39,8 +39,13 @@ export default {
     },
 
     transfData(data) {
+      const labels = _.chain(data)
+        .get('aggr.label')
+        .map(_.truncate)
+        .value()
+
       return this.factoryData(
-        _.get(data, 'aggr.label'),
+        labels,
         _.get(data, 'aggr.data'),
         _.get(data, 'opts.limit', 15),
       )
@@ -56,7 +61,7 @@ export default {
           display: true,
           text: _.get(data, 'opts.txt', "")
         },
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       }
     },
 

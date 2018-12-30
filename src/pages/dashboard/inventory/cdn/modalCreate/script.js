@@ -4,7 +4,6 @@ import Modals from 'mixins/modals'
 import ModalsApps from 'mixins/modals-apps'
 
 import tabFamilyApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
-import Applications from 'factories/applications'
 
 export default {
   mixins: [Modals, ModalsApps],
