@@ -26,7 +26,8 @@ export default {
         },
         filterable: ['status', 'name', 'hostname', 'environment', 'ipv4_private', 'ipv4_public', 'family', 'role', 'language', 'deploy', 'contacts', 'provider', '_id', 'region', 'zone', 'type', 'instance', 'instance_id', 'subnet_id', 'tags'],
         headings: {
-          created_at: 'Created At'
+          created_at: 'Created At',
+          updated_at: 'Updated At'
         },
         perPage: 50,
         perPageValues: [50, 100, 200, 400, 800, 1600]

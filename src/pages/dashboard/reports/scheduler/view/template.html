@@ -43,7 +43,7 @@
               <span slot="header">
                 <bs-label>{{props.item.context}}</bs-label>
                 <bs-label :type="props.item.status">{{props.item.status}}</bs-label>
-                <bs-label type="info">{{props.item.created_at}}</bs-label>
+                <bs-label type="info">{{formatDate(props.item.created_at)}}</bs-label>
                 <i class="fa fa-arrow-down"></i>
 
                 <br>Message: {{props.item.msg}}

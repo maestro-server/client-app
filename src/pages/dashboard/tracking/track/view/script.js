@@ -1,11 +1,13 @@
 'use strict'
 
 import _ from 'lodash'
+import formatDate from 'mixins/formatDate'
 import FactoryTenant from 'factories/factoryTenant'
 import FectherEntity from 'services/fetchEntity'
 import treeView from 'components/maestro/infoView/TreeViewItem.vue'
 
 export default {
+  mixins: [formatDate],
 
   components: {
     treeView
@@ -36,9 +38,6 @@ export default {
         return _.isEmpty(value);
       }
       return value == null;
-    },
-    formatDate(date) {
-      return new Date(date).toLocaleString()
     },
     sortRow(row) {
       return _(row).toPairs().sortBy(0).fromPairs().value()

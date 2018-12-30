@@ -9,9 +9,9 @@ export default {
   data: function () {
     return {
       entity: new Reports(),
-      columns: ['status', 'name', 'report', 'created_at', 'actions'],
+      columns: ['status', 'name', 'report', 'updated_at', 'actions'],
       options: {
-        orderBy: {column: 'created_at', ascending: false},
+        orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name'],
         headings: {
           updated_at: 'Updated At',

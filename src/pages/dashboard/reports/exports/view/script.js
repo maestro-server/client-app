@@ -1,10 +1,12 @@
 'use strict'
+
 import Reports from 'factories/reports'
+import formatDate from 'mixins/formatDate'
 import ViewSingle from 'mixins/view-single'
 import {EventBus} from "../../../../../resources/bus/bus-general";
 
 export default {
-  mixins: [ViewSingle],
+  mixins: [ViewSingle, formatDate],
 
   data: function () {
     return {
@@ -16,12 +18,6 @@ export default {
   computed: {
     MMembers() {
       return this.$parent.$refs.modal_members
-    }
-  },
-
-  methods: {
-    formatDate(date) {
-      return new Date(date).toLocaleString()
     }
   },
 

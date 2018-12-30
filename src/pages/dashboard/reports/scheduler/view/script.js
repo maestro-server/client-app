@@ -3,11 +3,11 @@ import _ from 'lodash'
 
 import Scheduler from 'factories/scheduler'
 import ViewSingle from 'mixins/view-single'
+import formatDate from 'mixins/formatDate'
 import FectherEntity from 'services/fetchEntity'
-import {EventBus} from "../../../../../resources/bus/bus-general";
 
 export default {
-  mixins: [ViewSingle],
+  mixins: [ViewSingle, formatDate],
 
   data: function () {
     return {

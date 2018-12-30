@@ -9,13 +9,13 @@ export default {
   data: function () {
     return {
       entity: new Events(),
-      columns: ['msg', 'context', 'created_at', 'actions'],
+      columns: ['msg', 'context', 'updated_at', 'actions'],
       options: {
-        orderBy: {column: 'created_at', ascending: false},
+        orderBy: {column: 'updated_at', ascending: false},
         sortable: ['created_at'],
         filterable: ['msg', 'context'],
         headings: {
-          created_at: 'Created At'
+          updated_at: 'Updated At'
         }
       }
     }
@@ -24,7 +24,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map((d) => {
-        d.created_at = new Date(d.created_at).toLocaleString()
+        d.updated_at = new Date(d.updated_at).toLocaleString()
         return d
       })
     }
