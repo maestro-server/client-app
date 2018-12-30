@@ -7,12 +7,12 @@
       <slot name="label">
         <p>Insert all components of your system, applications, database, cache servers and more.</p>
       </slot>
-      <div class="col-xs-5">
+      <div class="col-sm-5 col-xs-12">
         <bs-select :options="options.families" v-model="type" name="type"
                    label="Component" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
       </div>
 
-      <div class="col-xs-7">
+      <div class="col-sm-7 col-xs-12">
         <typeahead :label="label"
                    placeholder="MyWebApp"
                    :async="URL"
