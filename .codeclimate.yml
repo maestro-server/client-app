@@ -2,8 +2,8 @@
 engines:
   eslint:
     enabled: true
+    channel: eslint-5
     config:
-      config: .eslintrc
       extensions:
       - .js
   duplication:
@@ -18,6 +18,8 @@ ratings:
   - src/**.js
 exclude_paths:
 - "test/"
+- "docs/"
+- "nginx/"
 - "build/"
 - "node_modules/"
 - "config/"
