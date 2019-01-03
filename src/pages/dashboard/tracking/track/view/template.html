@@ -12,9 +12,15 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th colspan="2" class="text-capitalize">{{formatDate(item.updated_at)}}:</th>
+            <th colspan="2">
+              <span class="text-capitalize">{{formatDate(item.updated_at)}}</span>
+              <br>
+              by {{item.user}}
+            </th>
           </tr>
           </thead>
+
+
 
           <tbody>
 
