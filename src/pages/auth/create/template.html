@@ -32,6 +32,7 @@
           v-model="model.password"
           v-validate.initial="'required|min:4'"
           name="password"
+          ref="password"
           :error="makeError('password')"
         ></bs-input>
 
