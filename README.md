@@ -97,4 +97,3 @@ The donation will be user to:
 - Maintenance libs, securities flaws, and technical points.
 
 <a href="https://www.buymeacoffee.com/9lVypB7WQ" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-If you could, you can help me, buy me a coffee, together we can keep the project up and create excited new features.
