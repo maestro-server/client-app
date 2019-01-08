@@ -16,92 +16,53 @@
           <span class="text-uppercase">{{provider}}</span>
         </h3>
 
-        <template v-if="provider == 'AWS'">
+        <template v-for="prov in providers" v-if="provider == prov.label">
+
           <div class="col-xs-6">
-            <p>
-              Please add your AWS Access Key ID and Secret Access Key.
+            <p v-if="prov.template.intro">
+              {{prov.template.intro}}
             </p>
 
-            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
-                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
+            <bs-select :options="dcs" v-model="data.dc"
+                       label="Datacenter" placeholder="Select Datacenter" @input="updateRegions"
                        ref="s_provider"></bs-select>
 
-            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
+            <bs-select :disabled="regions.length == 0" :options="regions" v-model="data.regions"
                        label="Regions" placeholder="Select Regions" multiple></bs-select>
 
-            <div class="well" v-if="!create">
+            <well v-if="!create">
               If you like to update the access provider, please delete this connection and create a new one.
-            </div>
+            </well>
 
             <template v-if="create">
-              <bs-input class="mt20" name="access" label="AWS AccessKey ID*" v-model="data.conn.access"
-                        v-validate.initial="'required'" :error="makeError('access')"></bs-input>
-
-              <bs-input type="password" class="mt20" name="secret" label="AWS SecretAccess Key*"
-                        v-model="data.conn.secret"
-                        v-validate.initial="'required'" :error="makeError('secret')"></bs-input>
+              <component
+                v-for="component in prov.template.conn"
+                :is="component.comp"
+                :key="component.metas.name"
+                v-bind="component.metas"
+                v-model="data.conn[component.metas.name]"
+                v-validate.initial="component.validate"
+                :error="makeError(component.metas.name)"
+              />
             </template>
-
-          </div>
-          <div class="col-xs-6">
-            <p>
-              Just copy the following code and paste it under your Policy Document at AWS Console.
-            </p>
-            <div class="well">
-              <small>
-                Maestro need only for read only access.
-                Use arn:aws:iam::aws:policy/ReadOnlyAccess.
-              </small>
-            </div>
-          </div>
-        </template>
-
-        <template v-if="provider == 'OpenStack'">
-          <div class="col-xs-6">
-            <bs-select v-if="dcs.length > 0" :options="dcs" v-model="data.dc"
-                       label="Datacenter" placeholder="Select Datacenter" @input="updateProvider"
-                       ref="s_provider"></bs-select>
-
-            <bs-select :disabled="this.regions.length == 0" :options="regions" v-model="data.regions"
-                       label="Regions" placeholder="Select Regions" multiple></bs-select>
           </div>
 
           <div class="col-xs-6">
-            <template v-if="create">
-              <bs-input name="username" label="Username*" v-model="data.conn.username"
-                        v-validate.initial="'required'" :error="makeError('username')"></bs-input>
+            <template v-for="component in prov.template.extra">
+              <template v-if="component.html">
+                <div v-html="component.html"/>
+              </template>
 
-              <bs-input type="password" class="mt20" name="password" label="Password*" v-model="data.conn.password"
-                        v-validate.initial="'required'" :error="makeError('password')"></bs-input>
+              <template v-if="!component.html">
+                <component
+                  :is="component.comp"
+                  v-bind="component.metas"
+                  v-model="data[component.metas.name]"
+                  v-validate.initial="component.validate"
+                  :error="makeError(component.metas.name)"
+                />
+              </template>
             </template>
-
-            <div class="well" v-if="!create">
-              If you like to update or password, please delete this connection and create a new one.
-            </div>
-          </div>
-
-          <div class="col-xs-6">
-            <bs-select :options="opt_versions" v-model="data.api_version" label="API Version"
-                       placeholder="Select API Version"></bs-select>
-
-            <bs-input name="url" label="Auth URL*" v-model="data.url"
-                      v-validate.initial="'required'" :error="makeError('url')"
-                      help="Its a keystone url"
-                      placeholder="https://keystone.br-maestro-server.com.br:5000/v2.0"
-            ></bs-input>
-
-          </div>
-
-          <div class="col-xs-6">
-            <bs-input class="mt10" name="project" label="Project Id*" v-model="data.project"
-                      v-validate.initial="'required'" :error="makeError('project')"
-                      placeholder="33aa1afc-03fe-43b8-8201-4e0d3b4b8ab5"></bs-input>
-
-            <bs-input class="mt10" name="user_domain_id" label="User Domain Id*" v-model="data.user_domain_id"
-                      v-validate.initial="'required'" :error="makeError('user_domain_id')"
-                      placeholder="default"></bs-input>
-
-            <p>Hit: All information may be found in Access & Security page inside of GUI OpenStack</p>
           </div>
         </template>
 

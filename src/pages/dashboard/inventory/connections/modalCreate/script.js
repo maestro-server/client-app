@@ -1,6 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
+import Providers from 'factories/providers'
 import Connections from 'factories/connections'
 import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
@@ -11,30 +12,12 @@ export default {
   data: function() {
     return {
       provider: '',
-      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null, api_version: 2},
-      providers: [
-        {
-          name: 'AWS',
-          icon: 'icon-aws',
-          key: 'AWS',
-          links: [
-            {label: "AWS Access Key (IAM)"}
-          ]
-        },
-        {
-          name: 'OpenStack',
-          key: 'OpenStack',
-          icon: 'icon-openstack',
-          links: [
-            {label: "API (Horizon)"}
-          ]
-        }
-      ],
+      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null},
+      providers: [],
       zones: [],
       regions: [],
       options: [],
-      dcs: [],
-      opt_versions: ['2', '3']
+      dcs: []
     }
   },
 
@@ -56,9 +39,9 @@ export default {
     },
 
     reduceRegions(arr) {
-      if(_.isArray(arr)) {
+
+      if(_.isArray(arr))
         return arr.reduce((e, f)=>`${e} ${f}`, '')
-      }
     },
 
     createLoad () {
@@ -97,8 +80,8 @@ export default {
     },
 
     callStep(prv) {
-      this.provider = prv.key
-      this.fetchData(prv.key)
+      this.provider = prv.label
+      this.fetchData(prv.label)
     },
 
     fetchData: function (provider) {
@@ -114,10 +97,23 @@ export default {
       }
     },
 
-    updateProvider(val){
+    updateRegions(val){
       const dc = _.head(this.options.filter(d => d.label == val))
       this.regions = _.get(dc, 'value.regions', [])
       this.data.dc_id = _.get(dc, 'value._id', [])
+    },
+
+    fetchProviders(){
+      FectherEntity(Providers)({force: true})
+        .find(this.optsProviders)
+    },
+
+    optsProviders(data){
+      this.providers = _.get(data, 'data.resources')
     }
+  },
+
+  created() {
+    this.fetchProviders()
   }
 }
