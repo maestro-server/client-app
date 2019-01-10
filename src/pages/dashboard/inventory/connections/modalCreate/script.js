@@ -12,12 +12,11 @@ export default {
   data: function() {
     return {
       provider: '',
-      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: null},
-      providers: [],
-      zones: [],
+      service: '',
+      data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: ""},
+      dcs: [],
       regions: [],
-      options: [],
-      dcs: []
+      options: {providers:[], dcs: []}
     }
   },
 
@@ -34,7 +33,8 @@ export default {
 
     setupModel () {
       this.model = _.pickBy(this.data, _.identity)
-      this.model.name = `${this.model.dc} - ${this.reduceRegions(this.model.regions)}`
+      this.model.name = `${this.service} - ${this.reduceRegions(this.model.regions)}`
+      this.model.service = this.service
       this.model.provider = this.provider
     },
 
@@ -45,6 +45,7 @@ export default {
     },
 
     createLoad () {
+      this.service = ''
       this.provider = ''
       this.data = {conn: {}}
     },
@@ -69,6 +70,7 @@ export default {
 
     editLoad () {
       this.$set(this, 'data', this.model)
+      this.$set(this, 'service', this.model.service)
       this.$set(this, 'provider', this.model.provider)
       this.fetchData(this.provider)
     },
@@ -80,8 +82,9 @@ export default {
     },
 
     callStep(prv) {
-      this.provider = prv.label
-      this.fetchData(prv.label)
+      this.provider = prv.dc
+      this.service = prv.label
+      this.fetchData(prv.dc)
     },
 
     fetchData: function (provider) {
@@ -92,24 +95,20 @@ export default {
     fetchDatacenter(e) {
       const data = _.get(e, 'data.items')
       if (!_.isEmpty(data)) {
-        this.options = data.map(item => ({value: item, label: item.name}))
-        this.dcs = this.options.map(d => d.label)
+        this.options.dcs = data.map(item => ({value: item, label: item.name}))
+        this.dcs = data.map(item => (item.name))
       }
     },
 
     updateRegions(val){
-      const dc = _.head(this.options.filter(d => d.label == val))
+      const dc = _.head(this.options.dcs.filter(d => d.label == val))
       this.regions = _.get(dc, 'value.regions', [])
-      this.data.dc_id = _.get(dc, 'value._id', [])
+      this.data.dc_id = _.get(dc, 'value._id', _.get(this.data, 'dc_id'))
     },
 
     fetchProviders(){
-      FectherEntity(Providers)({force: true})
-        .find(this.optsProviders)
-    },
-
-    optsProviders(data){
-      this.providers = _.get(data, 'data.resources')
+      FectherEntity(Providers)()
+        .find(this.fetchAdminer)
     }
   },
 

@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Connections from 'factories/connections'
 import Scheduler from 'factories/scheduler'
 import ViewSingle from 'mixins/view-single'
-import Adminer from 'factories/adminer'
+import Providers from 'factories/providers'
 import FectherEntity from 'services/fetchEntity'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
 import {EventBus} from 'src/resources/bus/bus-general.js'
@@ -73,6 +73,7 @@ export default {
         name: _.get(this.model, 'name'),
         _id: _.get(this.model, '_id'),
         provider: _.get(this.model, 'provider'),
+        service: _.get(this.model, 'service'),
         refs: 'connections',
         source: 'discovery',
         task
@@ -105,8 +106,8 @@ export default {
 
       this.status = _.get(this.model, 'status')
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.setOptions, {key: 'connections'})
+      FectherEntity(Providers)({persistence: 'local', path: '/rules'})
+        .find(this.setOptions);
     },
     fetchScheduler() {
       const data = {
@@ -122,7 +123,7 @@ export default {
     },
     prepareProcessData(adminer) {
       const prm = _.chain(adminer)
-        .get(`permissions.${this.model.provider}`)
+        .get(`permissions.${this.model.service}`)
         .mapValues(this.mergeLog)
         .value()
 
@@ -160,7 +161,7 @@ export default {
                           .omit('_links')
                           .value()
 
-        const old = _.pick(this.model, ['_id', 'name', 'dc', 'dc_id', 'provider', 'regions', 'conn'])
+        const old = _.pick(this.model, ['_id', 'name', 'dc', 'dc_id', 'provider', 'service', 'regions', 'conn'])
         const post = _.assign(old, {owner_user})
 
         FectherEntity(Connections)()

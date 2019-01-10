@@ -7,27 +7,28 @@
         <button class="btn btn-warning btn-sm pull-right" @click="createLoad" v-if="provider">Back</button>
       </p>
 
-      <list-options :lists="providers" @click="callStep" v-if="!provider"></list-options>
+      <list-options :lists="options.providers" @click="callStep" v-if="!service"></list-options>
 
       <form class="row">
 
-        <h3 class="col-xs-12" v-if="provider">
+        <h3 class="col-xs-12" v-if="service">
           <i :class="toIcon"></i>
           <span class="text-uppercase">{{provider}}</span>
         </h3>
 
-        <template v-for="prov in providers" v-if="provider == prov.label">
+        <template v-for="prov in options.providers" v-if="service == prov.label">
 
           <div class="col-xs-6">
             <p v-if="prov.template.intro">
               {{prov.template.intro}}
             </p>
 
-            <bs-select :options="dcs" v-model="data.dc"
+            <bs-select v-if="prov.template.dc[0]" :options="dcs" v-model="data.dc"
                        label="Datacenter" placeholder="Select Datacenter" @input="updateRegions"
                        ref="s_provider"></bs-select>
 
-            <bs-select :disabled="regions.length == 0" :options="regions" v-model="data.regions"
+
+            <bs-select v-if="prov.template.dc[1]" :options="regions" v-model="data.regions"
                        label="Regions" placeholder="Select Regions" multiple></bs-select>
 
             <well v-if="!create">

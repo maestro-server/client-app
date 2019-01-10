@@ -4,8 +4,8 @@ import Factory from './factory'
 
 class Providers extends Factory {
 
-  constructor(model={}) {
-    super(model, "providers")
+  constructor(model={}, path='') {
+    super(model, "providers"+path)
   }
 }
 
