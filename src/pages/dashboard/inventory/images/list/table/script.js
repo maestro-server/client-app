@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: new Images(),
-      columns: ['name', 'ldatacenters', 'image_id', 'image_type', 'image_location', 'actions'],
+      columns: ['name', 'ldatacenters', 'unique_id', 'size', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'ldatacenters'],

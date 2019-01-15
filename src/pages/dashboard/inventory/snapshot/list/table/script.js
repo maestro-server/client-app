@@ -11,7 +11,7 @@ export default {
   data: function () {
     return {
       entity: new Snapshots(),
-      columns: ['name', 'ldatacenters', 'volume_id', 'volume_size', 'status', 'snapshot_id', 'progress', 'created_at', 'actions'],
+      columns: ['name', 'ldatacenters', 'volume_id', 'size', 'status', 'created_at', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},
         filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],

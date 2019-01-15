@@ -16,6 +16,9 @@
               <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                         v-validate.initial="'required'" :error="makeError('name')"></bs-input>
 
+              <bs-input class="mt20" form-type="horizontal" name="size" label="Size*" v-model="data.size"
+                        v-validate.initial="'required'" :error="makeError('size')"></bs-input>
+
             </div>
           </div>
 
