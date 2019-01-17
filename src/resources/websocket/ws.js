@@ -1,4 +1,3 @@
-
 import Centrifuge from 'centrifuge';
 import Login from 'services/login'
 import {EventBus} from 'src/resources/bus/bus-general.js'
@@ -27,30 +26,30 @@ class WSocket {
 
   subChannel(channel, callback) {
     this.centr.subscribe(channel, callback)
-    .on("error", console.log);
+      .on("error", console.log);
   }
 
   notify(result) {
     const notify = _.get(result, 'data.notify');
-    if(notify) {
+    if (notify) {
       EventBus.$emit('call-notify', notify);
     }
   }
 
   events(result) {
     const event = _.get(result, 'data.event');
-    if(event) {
+    if (event) {
       const callers = _.get(event, 'caller');
       this.iterEvents(callers);
     }
   }
 
   iterEvents(callers) {
-    if(callers.constructor === Array) {
+    if (callers.constructor === Array) {
       _.forEach(callers, this.disparEvent)
     }
 
-    if(callers.constructor === String) {
+    if (callers.constructor === String) {
       this.disparEvent(callers)
     }
   }

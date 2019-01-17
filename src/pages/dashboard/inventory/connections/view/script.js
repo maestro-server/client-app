@@ -20,7 +20,8 @@ export default {
       entity: Connections,
       model: {},
       permissions: [],
-      schedulers: {}
+      schedulers: {},
+      lock: true
     }
   },
 
@@ -167,6 +168,17 @@ export default {
         FectherEntity(Connections)()
           .patch(this.redirectConn, post)
       }
+    },
+    wsUpdate() {
+      const force = true
+      if(this.lock) {
+        this.lock = false
+        FectherEntity(this.entity)({force})
+          .findOne((e) => {
+            this.$set(this, 'model', e.data)
+            this.lock = true
+          }, this.id)
+      }
     }
   },
 
@@ -175,12 +187,12 @@ export default {
     this.$on('finishFetchData', this.fetchScheduler)
 
     this.id = this.$route.params.id
-    EventBus.$on(`connections-${this.id}`, this.fetchData)
+    EventBus.$on(`connections-${this.id}`, this.wsUpdate)
   },
 
   destroyed() {
     this.$off('finishFetchData', this.fetchAdminer)
     this.$off('finishFetchData', this.fetchScheduler)
-    EventBus.$off(`connections-${this.id}`, this.fetchData)
+    EventBus.$off(`connections-${this.id}`, this.wsUpdate)
   }
 }

@@ -14,7 +14,7 @@ export default {
   data: function () {
     return {
       entity: new Servers(),
-      columns: ['hostname', 'ipv4_private', 'os', 'datacenters', 'environment', 'role', 'auth', 'updated_at', 'actions'],
+      columns: ['hostname', 'ipv4_private', 'ipv4_public', 'os', 'datacenters', 'environment', 'role', 'auth', 'updated_at', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},
         filterable: ['hostname', 'ipv4_private', 'os', 'datacenters', 'role', 'environment', 'auth'],
@@ -27,6 +27,7 @@ export default {
         },
         headings: {
           ipv4_private: 'IP Private',
+          ipv4_public: 'IP Public',
           updated_at: 'Updated At',
           created_at: 'Created At'
         },
