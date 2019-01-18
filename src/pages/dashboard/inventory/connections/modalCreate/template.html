@@ -16,19 +16,19 @@
           <span class="text-uppercase">{{provider}}</span>
         </h3>
 
-        <template v-for="prov in options.providers" v-if="service == prov.label">
+        <template v-if="template && template.dc">
 
           <div class="col-xs-6">
-            <p v-if="prov.template.intro">
-              {{prov.template.intro}}
+            <p v-if="template.template.intro">
+              {{template.template.intro}}
             </p>
 
-            <bs-select v-if="prov.template.dc[0]" :options="dcs" v-model="data.dc"
+            <bs-select v-if="template.template.dc[0]" :options="dcs" v-model="data.dc"
                        label="Datacenter" placeholder="Select Datacenter" @input="updateRegions"
                        ref="s_provider"></bs-select>
 
 
-            <bs-select v-if="prov.template.dc[1]" :options="regions" v-model="data.regions"
+            <bs-select v-if="template.template.dc[1]" :options="regions" v-model="data.regions"
                        label="Regions" placeholder="Select Regions" multiple></bs-select>
 
             <well v-if="!create">
@@ -37,7 +37,7 @@
 
             <template v-if="create">
               <component
-                v-for="component in prov.template.conn"
+                v-for="component in template.template.conn"
                 :is="component.comp"
                 :key="component.metas.name"
                 v-bind="component.metas"
@@ -49,9 +49,17 @@
           </div>
 
           <div class="col-xs-6">
-            <template v-for="component in prov.template.extra">
+            <template v-for="component in template.template.extra">
               <template v-if="component.html">
                 <div v-html="component.html"/>
+              </template>
+
+              <template v-if="component.panel">
+                <component :is="component.comp">
+                  <panel :header="item.header" v-for="item in component.panel">
+                    <div v-html="item.body"/>
+                  </panel>
+                </component>
               </template>
 
               <template v-if="!component.html">
@@ -65,6 +73,7 @@
               </template>
             </template>
           </div>
+
         </template>
 
       </form>

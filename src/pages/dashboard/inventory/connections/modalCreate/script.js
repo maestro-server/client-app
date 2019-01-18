@@ -13,6 +13,7 @@ export default {
     return {
       provider: '',
       service: '',
+      template: {},
       data: {conn:{}, name: null, provider: null, regions: [], actived: null, dc_id: ""},
       dcs: [],
       regions: [],
@@ -47,6 +48,7 @@ export default {
     createLoad () {
       this.service = ''
       this.provider = ''
+      this.template = {}
       this.data = {conn: {}}
     },
 
@@ -72,6 +74,7 @@ export default {
       this.$set(this, 'data', this.model)
       this.$set(this, 'service', this.model.service)
       this.$set(this, 'provider', this.model.provider)
+      this.setTemplate(this.model.service)
       this.fetchData(this.provider)
     },
 
@@ -85,6 +88,23 @@ export default {
       this.provider = prv.dc
       this.service = prv.label
       this.fetchData(prv.dc)
+      this.setTemplate(prv.label)
+    },
+
+    setTemplate(label) {
+      if(label) {
+        const obj = _.head(
+          this.options.providers.filter(e => e.label == label)
+        )
+        this.$set(this, 'template', obj)
+        this.checkAllRegion()
+      }
+    },
+
+    checkAllRegion() {
+      if (!_.get(this.template, 'template.dc[1]')) {
+        this.$set(this.data, 'regions',  ['all'])
+      }
     },
 
     fetchData: function (provider) {
