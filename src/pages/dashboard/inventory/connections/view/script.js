@@ -20,8 +20,7 @@ export default {
       entity: Connections,
       model: {},
       permissions: [],
-      schedulers: {},
-      lock: true
+      schedulers: {}
     }
   },
 
@@ -171,14 +170,10 @@ export default {
     },
     wsUpdate() {
       const force = true
-      if(this.lock) {
-        this.lock = false
-        FectherEntity(this.entity)({force})
-          .findOne((e) => {
-            this.$set(this, 'model', e.data)
-            this.lock = true
-          }, this.id)
-      }
+      FectherEntity(this.entity)({force})
+        .findOne((e) => {
+          this.$set(this, 'model', e.data)
+        }, this.id)
     }
   },
 

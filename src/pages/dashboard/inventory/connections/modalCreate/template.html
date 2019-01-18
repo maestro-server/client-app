@@ -56,7 +56,7 @@
 
               <template v-if="component.panel">
                 <component :is="component.comp">
-                  <panel :header="item.header" v-for="item in component.panel">
+                  <panel :header="item.header" v-for="item, key in component.panel" :key="key">
                     <div v-html="item.body"/>
                   </panel>
                 </component>
