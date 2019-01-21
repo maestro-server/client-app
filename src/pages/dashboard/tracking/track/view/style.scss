@@ -22,7 +22,10 @@
       width: 450px;
       max-width: 33%;
       box-sizing: content-box;
-      word-break: break-all;
+
+      td:last-child {
+        word-break: break-all;
+      }
 
       &:last-child {
         border: none;
