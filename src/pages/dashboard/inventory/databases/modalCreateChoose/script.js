@@ -10,19 +10,19 @@ export default {
     return {
       dbs: [
         {
-          name: 'Oracle Database',
+          label: 'Oracle Database',
           icon: 'icon-oracle',
           key: 'oracle',
-          links: [
+          method: [
             {label: "Oracle Database"},
             {label: "Database for Services (ASM, SOA)"}
           ]
         },
         {
-          name: 'MySQL',
+          label: 'MySQL',
           key: 'mysql',
           icon: 'icon-mysql-server',
-          links: [
+          method: [
             {label: "MySQL"},
             {label: "MariaDB"},
             {label: "Percona"},
@@ -30,10 +30,10 @@ export default {
           ]
         },
         {
-          name: 'Other Database',
+          label: 'Other Database',
           icon: 'fa fa-database',
           key: 'create',
-          links: [
+          method: [
             {label: "ElasticSearch"},
             {label: "Solr"},
             {label: "MongoDB"},
