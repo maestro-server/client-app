@@ -9,8 +9,14 @@ const TenantManager = {
   },
 
   get() {
-    const {_id} = CacheManager({k: 'me_list', persistence: 'local'}).find(['_id'])
-    return CacheManager({k: _id + '_tenant', persistence: 'local'}).find()
+    const owner = CacheManager({k: 'me_list', persistence: 'local'}).find()
+    const {_id} = owner
+    let tenant = CacheManager({k: _id + '_tenant', persistence: 'local'}).find()
+
+    if(!tenant)
+      tenant = owner
+
+    return tenant
   }
 };
 
