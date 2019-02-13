@@ -19,7 +19,6 @@
       v-model="model.password"
       v-validate.initial="'required|min:4'"
       name="password"
-      @keydown.enter="login"
       :error="makeError('password')"
     ></bs-input>
 
