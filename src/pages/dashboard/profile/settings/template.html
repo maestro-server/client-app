@@ -144,21 +144,22 @@
         type="password"
         label="New password"
         v-model="cpass.newpass"
-        v-validate.initial="'required'"
+        v-validate.initial="'required|min:4'"
         name="newpassword"
         data-vv-slot-scope="fpassword"
-        :error="makeError('newpassword', 'fpassword')"
+        :error="makeError('newpassword')"
+        ref="newpassword"
         class="col-xs-6"
       ></bs-input>
 
       <bs-input
         type="password"
         label="Verify password"
-        v-validate.initial="'required|confirmed:newpassword'"
+        v-validate="'required|min:4|confirmed:newpassword'"
         name="verypassword"
-        data-vv-slot-scope="fpassword"
         v-model="cpass.vpass"
-        :error="makeError('verypassword', 'fpassword')"
+        data-vv-slot-scope="fpassword"
+        :error="makeError('verypassword')"
         class="col-xs-6"
       ></bs-input>
 
