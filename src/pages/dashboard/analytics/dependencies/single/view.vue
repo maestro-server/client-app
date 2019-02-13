@@ -131,7 +131,6 @@
 
       updateTracker(step, app) {
         const id = _.get(this.actived, `[${step-1}]._id`, 'root')
-        console.log(step, this.actived, id)
         this.tracker[id] = app
       },
 
@@ -169,10 +168,19 @@
         const opts = formatAdminer(e)
         const protocol = _.reduce(opts, (opt, val) => opt.concat(val), [])
         this.$set(this.options, 'protocol', _.uniq(protocol))
+      },
+
+      resetTree() {
+        this.$set(this, 'tracker', {})
+        this.$set(this, 'actived', [])
+        this.$set(this, 'spopover', 0)
+        this.$set(this, 'grid', [])
+        this.$set(this, 'app', {})
       }
     },
 
     created() {
+      this.resetTree()
       const entries = _.get(this.$route.params, 'apps', [])
       this.grid.push(entries)
       this.systems = _.get(this.$route.params, 'systems')
