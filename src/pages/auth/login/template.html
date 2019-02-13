@@ -10,7 +10,6 @@
       v-model="model.email"
       v-validate.initial="'required|email'"
       name="email"
-      @keydown.enter="login"
       :error="makeError('email')"
     ></bs-input>
 
