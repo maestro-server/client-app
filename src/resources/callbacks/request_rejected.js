@@ -16,6 +16,10 @@ const mapper = {
     title: (e) => `${_.get(e, 'err.errors[0].message')}`,
     msg: () => "You not authorize to do this!"
   },
+  403: {
+    title: (e) => `${_.get(e, 'err.errors[0].message')}`,
+    msg: () => "You not authorize to do this!"
+  },
   404: {
     title: () => "The resource not exist.",
     msg: () => ""
@@ -48,7 +52,12 @@ export default (e) => {
 
     const hash = window.location.hash
 
-    if(response.status == 401 && hash!="#/login") {
+    if([401,403].includes(response.status) && hash!="#/login") {
+      window.location.hash = "/auth/logout"
+      return
+    }
+
+    if(response.status == 403) {
       window.location.hash = "/auth/logout"
       return
     }
