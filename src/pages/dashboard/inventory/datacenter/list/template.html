@@ -41,8 +41,8 @@
 
           <div class="col-xs-12 mt10">
             <bs-label type="primary"><i :class="toLower(props.item.provider, 'icon-')"></i> {{ props.item.provider }}</bs-label>
-            <bs-label type="success"><i class="fa fa-cloud-upload"></i> {{ props.item.regions.length }} Regions</bs-label>
-            <bs-label type="success"><i class="fa fa-bullseye"></i> {{ props.item.zones.length }} Zones</bs-label>
+            <bs-label type="success" v-if="props.item.regions"><i class="fa fa-cloud-upload"></i> {{ props.item.regions.length }} Regions</bs-label>
+            <bs-label type="success" v-if="props.item.zones"><i class="fa fa-bullseye"></i> {{ props.item.zones.length }} Zones</bs-label>
           </div>
         </div>
 

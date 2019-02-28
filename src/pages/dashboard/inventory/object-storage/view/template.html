@@ -19,7 +19,7 @@
       <template slot="view" slot-scope="props">
         <view-app-server :data="props.item" :provider="model.provider" hidden></view-app-server>
 
-        <service-accordion :data="props.item" :provider="model.language"></service-accordion>
+        <service-accordion :data="props.item" :provider="model.provider"></service-accordion>
       </template>
     </creater-config-list>
 
