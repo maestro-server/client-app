@@ -37,6 +37,7 @@ import flavorsPublic from './flavors-public/router'
 import serviceMesh from './service-mesh/router'
 
 import autoscaling from './autoscaling/router'
+import machineLearning from './machine-learning/router'
 
 export default {
   name: 'inventory',
@@ -60,6 +61,7 @@ export default {
     cdn,
     objectStorage,
     containersOrchestration,
+    machineLearning,
     serviceMesh,
     monitor,
     logs,

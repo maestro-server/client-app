@@ -26,6 +26,7 @@ export default {
         'auto-scaling': 'Auto Scaling',
         'object-storage': 'Object Storages',
         'container-orchestration': 'Containers Orchestration',
+        'machine-learning': 'Machine Learning',
         'service-mesh': 'Service Mesh',
         'repository': 'Repository',
         'monitor': 'Monitoring System',
