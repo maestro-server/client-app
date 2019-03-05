@@ -1,6 +1,6 @@
 {
   "name": "client-app",
-  "version": "0.14.8",
+  "version": "0.14.9",
   "description": "Client app server",
   "author": "Felipe Signorini <felipeklerk@yahoo.com.br>",
   "private": true,
