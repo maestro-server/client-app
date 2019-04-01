@@ -61,6 +61,7 @@ module.exports = {
     "vue/this-in-template": 0,
     "vue/valid-v-for": 0,
     "vue/valid-v-bind": 0, 
+    "vue/no-unused-components": 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

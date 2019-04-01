@@ -67,12 +67,16 @@ Commit - Tree Dependency
   import Adminer from 'factories/adminer'
   import FectherEntity from 'services/fetchEntity'
   import Applications from 'factories/applications'
+  import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
+  import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
   import formatAdminer from 'src/resources/libs/formatAdminerData'
   import fsuccess from 'src/resources/callbacks/request_success'
 
   export default {
 
     components: {
+      tabSystem,
+      tabApps,
       dprow
     },
 

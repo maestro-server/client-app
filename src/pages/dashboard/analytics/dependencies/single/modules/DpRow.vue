@@ -4,8 +4,7 @@
 
     <div class="dp-row">
       <div
-        v-for="app, k in apps"
-        :key="k"
+        v-for="app, k in apps" :key="k"
         class="dp-item text-center"
         :class="{'dp-select': app._id == selected}"
         @click="addItem(app._id)"
