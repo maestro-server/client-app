@@ -7,9 +7,10 @@
       <i class="fa fa-eye" aria-hidden="true"/>
     </router-link>
     <br>
-    <bs-label type="default">{{ data.ipv4_private }}</bs-label> 
-    <bs-label type="default">{{ data.ipv4_public }}</bs-label> 
-    <bs-label type="success">{{ data.role }}</bs-label> 
+    <bs-label type="default">{{ data.ipv4_private }}</bs-label>
+
+    <bs-label type="default">{{ data.ipv4_public }}</bs-label>
+    <bs-label type="success">{{ data.role }}</bs-label>
     <bs-label type="success">{{ data.environment }}</bs-label>
 
     <div v-if="provider && !hidden" class="pull-right">
