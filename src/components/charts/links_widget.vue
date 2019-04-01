@@ -1,10 +1,10 @@
 <template>
   <div class="col-sm-3 col-xs-12">
     <bs-list>
-      <li class="list-group-item" v-for="link in links">
+      <li v-for="link in links" :key="link.name" class="list-group-item">
         <router-link :to="link.route">
-          <i class="fa" :class="link.icon"></i>
-          <b>{{link.name}}</b>
+          <i class="fa" :class="link.icon"/>
+          <b>{{ link.name }}</b>
         </router-link>
       </li>
     </bs-list>
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-  'use strict'
+"use strict";
 
-  export default {
-    props: {
-      links: {}
-    }
+export default {
+  props: {
+    links: {}
   }
+};
 </script>

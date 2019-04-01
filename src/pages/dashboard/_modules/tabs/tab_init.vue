@@ -1,21 +1,47 @@
 <template>
   <div class="row">
-
-    <div class="col-xs-12">
-      <bs-select form-type="horizontal" :options="managers" v-model="data.init" name="init" clear-button
-                 label="Init System" @input="onHit"></bs-select>
+<div class="col-xs-12">
+      <bs-select
+v-model="data.init"
+form-type="horizontal"
+:options="managers"
+name="init"
+clear-button
+                 label="Init System"
+@input="onHit"
+/>
       <hr>
-      <bs-input class="mt10" form-type="horizontal"
-                name="start" label="Start Cmd" v-model="data.start" placeholder="systemctl httpd start" @blur="onHit"></bs-input>
+      <bs-input
+v-model="data.start"
+class="mt10"
+                form-type="horizontal"
+name="start"
+label="Start Cmd"
+placeholder="systemctl httpd start"
+@blur="onHit"
+/>
 
-      <bs-input class="mt10" form-type="horizontal"
-                name="stop" label="Stop Cmd" v-model="data.stop" placeholder="systemctl httpd stop" @blur="onHit"></bs-input>
+      <bs-input
+v-model="data.stop"
+class="mt10"
+                form-type="horizontal"
+name="stop"
+label="Stop Cmd"
+placeholder="systemctl httpd stop"
+@blur="onHit"
+/>
 
-      <bs-input class="mt10" form-type="horizontal"
-                name="restart" label="Restart Cmd" v-model="data.restart" placeholder="systemctl httpd restart" @blur="onHit"></bs-input>
+      <bs-input
+v-model="data.restart"
+class="mt10"
+                form-type="horizontal"
+name="restart"
+label="Restart Cmd"
+placeholder="systemctl httpd restart"
+@blur="onHit"
+/>
     </div>
-
-  </div>
+</div>
 </template>
 
 
@@ -43,6 +69,10 @@
       }
     },
 
+    mounted () {
+      this.updaterEdit()
+    },
+
     methods: {
       onHit() {
         this.$emit('update', this.data)
@@ -58,10 +88,6 @@
       reset() {
         this.$set(this, 'data', _.clone(this.resetData))
       }
-    },
-
-    mounted () {
-      this.updaterEdit()
     }
 
   }

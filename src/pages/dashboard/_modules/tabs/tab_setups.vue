@@ -1,19 +1,38 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="Setup" fielder="false" @update="updaterEdit">
+  <creater-list
+:single.sync="single"
+:basket="value"
+label="Setup"
+fielder="false"
+@update="updaterEdit"
+>
+<template slot="forms">
+      <bs-select
+v-model="single.name"
+v-validate.initial="'required'"
+form-type="horizontal"
+:options="options.own"
+                 name="name"
+label="Service"
+search
+/>
 
-    <template slot="forms">
-      <bs-select form-type="horizontal" :options="options.own" v-model="single.name" name="name"
-                 label="Service" v-validate.initial="'required'" search></bs-select>
-
-      <bs-input form-type="horizontal" v-model="single.version" name="version" label="Version"></bs-input>
+      <bs-input
+v-model="single.version"
+form-type="horizontal"
+name="version"
+label="Version"
+/>
     </template>
 
-    <template slot="view" slot-scope="props">
-      {{props.item.name}} <span v-if="props.item.version">-></span>
-      <bs-label>{{props.item.version}}</bs-label>
+    <template
+slot="view"
+slot-scope="props"
+>
+      {{ props.item.name }} <span v-if="props.item.version">-></span>
+      <bs-label>{{ props.item.version }}</bs-label>
     </template>
-
-  </creater-list>
+</creater-list>
 </template>
 
 

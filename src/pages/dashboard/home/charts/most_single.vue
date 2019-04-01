@@ -1,6 +1,9 @@
 <template>
   <div class="col-sm-3 col-xs-12">
-    <pie-chart :data="getMostFamilies" :options="options"></pie-chart>
+    <pie-chart
+:data="getMostFamilies"
+:options="options"
+/>
   </div>
 </template>
 
@@ -11,36 +14,16 @@
   import pieChart from 'components/charts/pie_chart.vue'
 
   export default {
+
+    components: {
+      pieChart
+    },
     mixins: [charts],
 
     props: {
       results: {default: () => []},
       fielder: {},
       ptitle: {}
-    },
-
-    components: {
-      pieChart
-    },
-
-    computed: {
-      getMostFamilies() {
-        if(this.results.length > 0) {
-
-          const calculate = _(this.results)
-            .filter(e=>_.has(e, this.fielder))
-            .map(e=>_.get(e, this.fielder))
-            .transform(this.splitCount, {labels: [], info: []})
-            .value()
-
-
-          return this.factoryData(
-            _.get(calculate, 'labels', 2),
-            _.get(calculate, 'info', 2),
-            5
-          )
-        }
-      }
     },
 
     data() {
@@ -51,6 +34,26 @@
             text: this.ptitle
           }
         }
+      }
+    },
+
+    computed: {
+      getMostFamilies() {
+        if(this.results.length > 0)
+          return []
+
+        const calculate = _(this.results)
+          .filter(e=>_.has(e, this.fielder))
+          .map(e=>_.get(e, this.fielder))
+          .transform(this.splitCount, {labels: [], info: []})
+          .value()
+
+
+        return this.factoryData(
+          _.get(calculate, 'labels', 2),
+          _.get(calculate, 'info', 2),
+          5
+        )
       }
     },
 

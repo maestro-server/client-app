@@ -1,41 +1,55 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" :label="label" @update="updaterEdit" fielder="dps">
-
-    <template slot="forms">
+  <creater-list
+:single.sync="single"
+:basket="value"
+:label="label"
+fielder="dps"
+@update="updaterEdit"
+>
+<template slot="forms">
        <slot name="label">
         <p>You can insert all types of applications, like databases, cache servers, brokers and more.</p>
       </slot>
 
       <hr>
 
-      <bs-select form-type="horizontal" :options="types" v-model="single.endpoint" name="type"
-                 label="Protocol*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
+      <bs-select
+v-model="single.endpoint"
+v-validate.initial="'required'"
+form-type="horizontal"
+:options="types"
+                 name="type"
+label="Protocol*"
+:error="makeError('type')"
+/>
 
-      <typeahead :label="label"
+      <typeahead
+v-model="single.name"
+                 v-validate.initial="'required'"
+                 :label="label"
                  placeholder="MyWebApp"
                  :async="URL"
                  async-key="items"
-                 :onSearch="requestSearch"
+                 :on-search="requestSearch"
                  :template="template"
                  :on-hit="onHit"
                  form-type="horizontal"
                  :headers="headers"
-                 v-model="single.name"
                  name="endpoint"
-                 v-validate.initial="'required'"
                  :error="makeError('application')"
-      ></typeahead>
+      />
+</template>
 
+    <template
+slot="view"
+slot-scope="props"
+>
+      {{ props.item.endpoint }} of <b>{{ props.item.name }}</b> <br>
+      <bs-label>{{ props.item.family }}</bs-label>
+      <bs-label>{{ props.item.endpoint }}</bs-label>
+      <bs-label>{{ props.item.environment }}</bs-label>
     </template>
-
-    <template slot="view" slot-scope="props">
-      {{props.item.endpoint}} of <b>{{props.item.name}}</b> <br>
-      <bs-label>{{props.item.family}}</bs-label>
-      <bs-label>{{props.item.endpoint}}</bs-label>
-      <bs-label>{{props.item.environment}}</bs-label>
-    </template>
-
-  </creater-list>
+</creater-list>
 </template>
 
 

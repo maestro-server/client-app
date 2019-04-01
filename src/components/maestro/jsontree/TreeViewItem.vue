@@ -1,29 +1,74 @@
 <template>
   <div class="tree-view-item">
-    <div v-if="isObject(data)" class="tree-view-item-leaf">
-      <div class="tree-view-item-node" @click.stop="toggleOpen()">
-        <span :class="{opened: isOpen()}"
-              class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length === 1">{{data.children.length}} property</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} properties</span>
+    <div
+v-if="isObject(data)"
+class="tree-view-item-leaf"
+>
+      <div
+class="tree-view-item-node"
+@click.stop="toggleOpen()"
+>
+        <span
+:class="{opened: isOpen()}"
+              class="tree-view-item-key tree-view-item-key-with-chevron"
+>{{ getKey(data) }}</span>
+        <span
+v-show="!isOpen() && data.children.length === 1"
+class="tree-view-item-hint"
+>{{ data.children.length }} property</span>
+        <span
+v-show="!isOpen() && data.children.length !== 1"
+class="tree-view-item-hint"
+>{{ data.children.length }} properties</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()"
-                      v-for="child in data.children" :data="child"></tree-view-item>
+      <tree-view-item
+v-for="child in data.children"
+v-show="isOpen()"
+:key="getKey(data)"
+:max-depth="maxDepth"
+                      :current-depth="currentDepth+1"
+:data="child"
+/>
     </div>
-    <div v-if="isArray(data)" class="tree-view-item-leaf">
-      <div class="tree-view-item-node" @click.stop="toggleOpen()">
-        <span :class="{opened: isOpen()}"
-              class="tree-view-item-key tree-view-item-key-with-chevron">{{getKey(data)}}</span>
-        <span class="tree-view-item-hint"
-              v-show="!isOpen() && data.children.length === 1">{{data.children.length}} item</span>
-        <span class="tree-view-item-hint" v-show="!isOpen() && data.children.length !== 1">{{data.children.length}} items</span>
+    <div
+v-if="isArray(data)"
+class="tree-view-item-leaf"
+>
+      <div
+class="tree-view-item-node"
+@click.stop="toggleOpen()"
+>
+        <span
+:class="{opened: isOpen()}"
+              class="tree-view-item-key tree-view-item-key-with-chevron"
+>{{ getKey(data) }}</span>
+        <span
+v-show="!isOpen() && data.children.length === 1"
+              class="tree-view-item-hint"
+>{{ data.children.length }} item</span>
+        <span
+v-show="!isOpen() && data.children.length !== 1"
+class="tree-view-item-hint"
+>{{ data.children.length }} items</span>
       </div>
-      <tree-view-item :key="getKey(data)" :max-depth="maxDepth" :current-depth="currentDepth+1" v-show="isOpen()"
-                      v-for="child in data.children" :data="child"></tree-view-item>
+      <tree-view-item
+v-for="child in data.children"
+v-show="isOpen()"
+:key="getKey(data)"
+:max-depth="maxDepth"
+                      :current-depth="currentDepth+1"
+:data="child"
+/>
     </div>
-    <div class="tree-view-item-leaf" v-if="isValue(data)">
-      <span class="tree-view-item-key">{{getKey(data)}}</span>
-      <span class="tree-view-item-value" :class="getValueType(data)">{{getValue(data)}}</span>
+    <div
+v-if="isValue(data)"
+class="tree-view-item-leaf"
+>
+      <span class="tree-view-item-key">{{ getKey(data) }}</span>
+      <span
+class="tree-view-item-value"
+:class="getValueType(data)"
+>{{ getValue(data) }}</span>
     </div>
   </div>
 </template>
@@ -33,8 +78,8 @@
   import _ from 'lodash'
 
   export default {
-    name: "tree-view-item",
-    props: ["data", "max-depth", "current-depth"],
+    name: "TreeViewItem",
+    props: ["data", "maxDepth", "currentDepth"],
     data: function () {
       return {
         open: this.currentDepth < this.maxDepth

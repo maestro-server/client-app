@@ -1,13 +1,13 @@
 <template>
   <div :class="theme">
     <div class="bg-main">
-      <router-view></router-view>
+      <router-view />
 
-      <callback></callback>
-      <loader></loader>
+      <callback />
+      <loader />
     </div>
 
-    <bootue></bootue>
+    <bootue />
   </div>
 </template>
 

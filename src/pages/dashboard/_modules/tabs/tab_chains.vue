@@ -1,45 +1,66 @@
 <template>
-
-  <creater-list :single.sync="single" :basket="value" :label="label" @update="updaterEdit">
-
-    <template slot="forms">
+<creater-list
+:single.sync="single"
+:basket="value"
+:label="label"
+@update="updaterEdit"
+>
+<template slot="forms">
       <slot name="label">
         <p>Can create a chain task, this task will be executed after run a main task. Order isn't guaranteed.</p>
       </slot>
 
-      <typeahead label="Scheduler" placeholder="Scheduler name (Must be valid scheduler)"
+      <typeahead
+v-model="single.name"
+label="Scheduler"
+                  placeholder="Scheduler name (Must be valid scheduler)"
                   :async="URL"
                   async-key="items"
-                  :onSearch="requestSearch"
+                  :on-search="requestSearch"
                   :template="template"
                   form-type="horizontal"
                   :on-hit="onHit"
                   class="mt20"
                   :headers="headers"
-                  v-model="single.name"
                   @input="updateSingle"
-      ></typeahead>
+      />
 
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
-          <span class="btn btn-success btn-xs" v-if="this.single._id"><i class="fa fa-check-circle-o"></i> Valid ({{single.name}})</span>
-          <span class="btn btn-danger btn-xs" v-if="!this.single._id"><i class="fa fa-times-circle-o"></i> Select a valid Scheduler</span>
+          <span
+v-if="this.single._id"
+class="btn btn-success btn-xs"
+><i class="fa fa-check-circle-o" /> Valid ({{ single.name }})</span>
+          <span
+v-if="!this.single._id"
+class="btn btn-danger btn-xs"
+><i class="fa fa-times-circle-o" /> Select a valid Scheduler</span>
         </div>
       </div>
 
-      <bs-input type="number" min="1" class="mt20" form-type="horizontal" name="countdown" label="Countdown"
-        v-model="single.countdown" placeholder="5" help="Waiting time in seconds before start."></bs-input>
+      <bs-input
+v-model="single.countdown"
+type="number"
+min="1"
+class="mt20"
+form-type="horizontal"
+name="countdown"
+        label="Countdown"
+placeholder="5"
+help="Waiting time in seconds before start."
+/>
     </template>
 
     <hr>
 
-    <template slot="view" slot-scope="props">
-      <b class="text-capitalize">{{props.item.name}}</b>
-      <span v-if="props.item.countdown"><br/>Countdown: {{props.item.countdown}}</span>
+    <template
+slot="view"
+slot-scope="props"
+>
+      <b class="text-capitalize">{{ props.item.name }}</b>
+      <span v-if="props.item.countdown"><br>Countdown: {{ props.item.countdown }}</span>
     </template>
-
-  </creater-list>
-
+</creater-list>
 </template>
 
 <script>

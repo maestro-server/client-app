@@ -1,22 +1,46 @@
 <template>
+<creater-list
+:single.sync="single"
+:basket="value"
+label="Deploy"
+fielder="key"
+@update="updaterEdit"
+>
+<template slot="forms">
+      <bs-select
+v-model="single.type"
+v-validate.initial="'required'"
+form-type="horizontal"
+:options="types"
+                 name="type"
+label="Type*"
+:error="makeError('type')"
+/>
 
-  <creater-list :single.sync="single" :basket="value" label="Deploy" fielder="key" @update="updaterEdit">
+      <bs-input
+v-model="single.provider"
+form-type="horizontal"
+name="provider"
+label="Provider"
+/>
 
-    <template slot="forms">
-      <bs-select form-type="horizontal" :options="types" v-model="single.type" name="type"
-                 label="Type*" v-validate.initial="'required'" :error="makeError('type')"></bs-select>
-
-      <bs-input form-type="horizontal" v-model="single.provider" name="provider" label="Provider"></bs-input>
-
-      <bs-input type="textarea" class="mt20" form-type="horizontal" name="description" label="Notes" v-model="single.notes"></bs-input>
+      <bs-input
+v-model="single.notes"
+type="textarea"
+class="mt20"
+form-type="horizontal"
+name="description"
+label="Notes"
+/>
     </template>
 
-    <template slot="view" slot-scope="props">
-      {{props.item.type}} <bs-label>{{props.item.provider}}</bs-label>
+    <template
+slot="view"
+slot-scope="props"
+>
+      {{ props.item.type }} <bs-label>{{ props.item.provider }}</bs-label>
     </template>
-
-  </creater-list>
-
+</creater-list>
 </template>
 
 

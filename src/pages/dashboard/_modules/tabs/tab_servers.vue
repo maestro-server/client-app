@@ -1,61 +1,80 @@
 <template>
-
-  <creater-list :basket="value" :label="label" :showAddBtn="false" @update="updaterEdit">
+<creater-list
+:basket="value"
+:label="label"
+:show-add-btn="false"
+@update="updaterEdit"
+>
     <template slot="forms">
-      <p class="col-xs-12" >
+      <p class="col-xs-12">
         <slot name="label">
           List all servers belongs to application, using the form below to search in servers.
         </slot>
       </p>
 
       <div class="col-xs-6">
-        <typeahead label="Search by Hostname"
+        <typeahead
+label="Search by Hostname"
                    placeholder="back0100"
                    :async="URL"
                    async-key="items"
-                   :onSearch="requestSearch"
+                   :on-search="requestSearch"
                    :template="template"
                    :on-hit="onHit"
                    class="col-xs-12"
                    :headers="headers"
-        ></typeahead>
+        />
       </div>
 
       <div class="col-xs-6">
-        <typeahead label="Search by Private IP" placeholder="10.150.0.0"
+        <typeahead
+label="Search by Private IP"
+placeholder="10.150.0.0"
                    :async="URL"
                    async-key="items"
-                   :onSearch="requestIpSearch"
+                   :on-search="requestIpSearch"
                    :template="template"
                    :on-hit="onHit"
                    class="col-xs-12"
                    :headers="headers"
-        ></typeahead>
+        />
       </div>
 
-      <div class="col-xs-12" v-if="family">
-        <bs-checkbox class="small pull-right" v-model="filter">Show only server with role {{family}}</bs-checkbox>
+      <div
+v-if="family"
+class="col-xs-12"
+>
+        <bs-checkbox
+v-model="filter"
+class="small pull-right"
+>
+Show only server with role {{ family }}
+</bs-checkbox>
       </div>
     </template>
 
-    <template slot="view" slot-scope="props">
-      <b class="text-capitalize">{{props.item.hostname}}</b> <span v-if='props.item.os && props.item.os.base'>({{props.item.os.base}})</span><span v-if='props.item.datacenters'> - {{props.item.datacenters.name}}</span><br/>
-      <span class='ft15'>
-          <bs-label type='default'>{{props.item.ipv4_private}}</bs-label>
-          <bs-label type='default'>{{props.item.ipv4_public}}</bs-label>
-          <bs-label type='success'>{{props.item.role}}</bs-label>
-          <bs-label type='success'>{{props.item.environment}}</bs-label>
+    <template
+slot="view"
+slot-scope="props"
+>
+      <b class="text-capitalize">{{ props.item.hostname }}</b> <span v-if="props.item.os && props.item.os.base">({{ props.item.os.base }})</span><span v-if="props.item.datacenters"> - {{ props.item.datacenters.name }}</span><br>
+      <span class="ft15">
+          <bs-label type="default">{{ props.item.ipv4_private }}</bs-label>
+          <bs-label type="default">{{ props.item.ipv4_public }}</bs-label>
+          <bs-label type="success">{{ props.item.role }}</bs-label>
+          <bs-label type="success">{{ props.item.environment }}</bs-label>
         </span>
     </template>
 
-    <small class="pull-right" slot="footer">
+    <small
+slot="footer"
+class="pull-right"
+>
       <slot name="footer">
         List all servers which that app stay, don't put dbs, cache, lbs or storage object
       </slot>
     </small>
-
-  </creater-list>
-
+</creater-list>
 </template>
 
 <script>

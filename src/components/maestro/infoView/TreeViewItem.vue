@@ -2,21 +2,19 @@
   <span>
     <template v-if="isArray(items)">
       <ul class="pl0">
-        <li v-for="item in items">
-          <tree-view :items="item"></tree-view>
+        <li v-for="item, k in items" :key="k">
+          <tree-view :items="item"/>
         </li>
       </ul>
     </template>
 
     <template v-if="isObject(items)">
-      <template v-for="item, ok in items">
-        <div>
-          <strong>{{ok}}: </strong>
-          <span :class="{'tree-view-item-leaf': !isValue(item)}">
-            <tree-view :items="item"></tree-view>
-          </span>
-        </div>
-      </template>
+      <div v-for="item, ok in items" :key="ok">
+        <strong>{{ ok }}:</strong>
+        <span :class="{'tree-view-item-leaf': !isValue(item)}">
+          <tree-view :items="item"/>
+        </span>
+      </div>
     </template>
 
     <template v-if="isValue(items)">
@@ -35,60 +33,59 @@
 
 
 <script>
+import _ from "lodash";
 
-  import _ from 'lodash'
+export default {
+  name: "TreeView",
+  props: {
+    items: {}
+  },
 
-  export default {
-    name: "tree-view",
-    props: {
-      items: {}
+  methods: {
+    isObject: function(value) {
+      return _.isPlainObject(value);
     },
 
-    methods: {
-      isObject: function (value) {
-        return _.isPlainObject(value);
-      },
+    isArray: function(value) {
+      return _.isArray(value);
+    },
 
-      isArray: function (value) {
-        return _.isArray(value);
-      },
+    isValue: function(value) {
+      return _.isString(value);
+    },
 
-      isValue: function (value) {
-        return _.isString(value);
-      },
+    isNumber: function(value) {
+      return _.isNumber(value);
+    },
 
-      isNumber: function (value) {
-        return _.isNumber(value);
-      },
-
-      isBoolean: function (value) {
-        return _.isBoolean(value);
-      }
+    isBoolean: function(value) {
+      return _.isBoolean(value);
     }
-  };
+  }
+};
 </script>
 
 <style>
-  .tree-view-item-leaf {
-    display: block;
-    white-space: normal;
-    padding-left: 15px;
-  }
+.tree-view-item-leaf {
+  display: block;
+  white-space: normal;
+  padding-left: 15px;
+}
 
-  .stringColor {
-    color: #06867e;
-  }
+.stringColor {
+  color: #06867e;
+}
 
-  .booleanColor {
-    color: #e84f48;
-  }
+.booleanColor {
+  color: #e84f48;
+}
 
-  .numberColor {
-    color: #2c2e86;
-  }
+.numberColor {
+  color: #2c2e86;
+}
 
-  .emptyColor {
-    color: #ff00;
-    text-decoration: underline;
-  }
+.emptyColor {
+  color: #ff00;
+  text-decoration: underline;
+}
 </style>

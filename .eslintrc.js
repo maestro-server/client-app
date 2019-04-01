@@ -2,17 +2,20 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+//  parser: "babel-eslint",
   parserOptions: {
+    "sourceType": "module",
+    "parser": "babel-eslint",
     "ecmaVersion": 6
   },
   env: {
     "node": true,
     "mocha": true
   },
-  extends: "eslint:recommended",
+  extends: 'plugin:vue/essential',
   // required to lint *.vue files
   plugins: [
+    'vue',
     'html'
   ],
   // add your custom rules here
@@ -52,6 +55,12 @@ module.exports = {
     "arrow-parens": 0,
     "generator-star-spacing": 0,
     "no-console": 0,
+    "vue/*": 0,
+    "vue/no-parsing-error": 0,
+    "vue/html-indent": 0,
+    "vue/this-in-template": 0,
+    "vue/valid-v-for": 0,
+    "vue/valid-v-bind": 0, 
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

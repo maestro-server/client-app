@@ -1,7 +1,11 @@
 <template>
   <div class="tree-view-wrapper">
-    <tree-view-item class="tree-view-item-root" :data="parsedData" :max-depth="allOptions.maxDepth"
-                    :current-depth="0"></tree-view-item>
+    <tree-view-item
+class="tree-view-item-root"
+:data="parsedData"
+:max-depth="allOptions.maxDepth"
+                    :current-depth="0"
+/>
   </div>
 </template>
 
@@ -10,11 +14,32 @@
   import TreeViewItem from './TreeViewItem.vue';
 
   export default {
+    name: "TreeView",
     components: {
       TreeViewItem
     },
-    name: "tree-view",
     props: ["data", "options"],
+    computed: {
+      allOptions: function () {
+        return _.extend({}, {
+          rootObjectKey: "root",
+          maxDepth: 4,
+        }, (this.options || {}))
+      },
+      parsedData: function () {
+        // Take the JSON data and transform
+        // it into the Tree View DSL
+
+        // Strings or Integers should not be attempted to be split, so we generate
+        // a new object with the string/number as the value
+        if (this.isValue(this.data)) {
+          return this.transformValue(this.data, this.allOptions.rootObjectKey);
+        }
+
+        // If it's an object or an array, transform as an object
+        return this.transformObject(this.data, this.allOptions.rootObjectKey, true);
+      }
+    },
     methods: {
 
       // Transformer for the non-Collection types,
@@ -74,27 +99,6 @@
 
       isValue: function (value) {
         return !this.isObject(value) && !this.isArray(value);
-      }
-    },
-    computed: {
-      allOptions: function () {
-        return _.extend({}, {
-          rootObjectKey: "root",
-          maxDepth: 4,
-        }, (this.options || {}))
-      },
-      parsedData: function () {
-        // Take the JSON data and transform
-        // it into the Tree View DSL
-
-        // Strings or Integers should not be attempted to be split, so we generate
-        // a new object with the string/number as the value
-        if (this.isValue(this.data)) {
-          return this.transformValue(this.data, this.allOptions.rootObjectKey);
-        }
-
-        // If it's an object or an array, transform as an object
-        return this.transformObject(this.data, this.allOptions.rootObjectKey, true);
       }
     }
   };

@@ -1,32 +1,58 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" label="Auth" @update="updaterEdit">
-
-    <template slot="forms">
-
-      <div class="row">
+  <creater-list
+:single.sync="single"
+:basket="value"
+label="Auth"
+@update="updaterEdit"
+>
+<template slot="forms">
+<div class="row">
         <div class="col-sm-3 col-xs-12 control-label">
           <label>Auth type</label>
         </div>
         <div class="col-sm-9 col-xs-12">
-          <button-group v-model="single.type" type="primary" v-validate.initial="'required'" name="type">
-            <bs-radio v-for="atp in options" :key="atp" :selected-value="atp">{{atp}}</bs-radio>
+          <button-group
+v-model="single.type"
+v-validate.initial="'required'"
+type="primary"
+name="type"
+>
+            <bs-radio
+v-for="atp in options"
+:key="atp"
+:selected-value="atp"
+>
+{{ atp }}
+</bs-radio>
           </button-group>
         </div>
       </div>
 
-      <hr/>
+      <hr>
 
-      <bs-input form-type="horizontal" name="name" label="Key name*" v-model="single.name"></bs-input>
+      <bs-input
+v-model="single.name"
+form-type="horizontal"
+name="name"
+label="Key name*"
+/>
 
-      <bs-input class="mt20" form-type="horizontal" label="Username" v-model="single.username"></bs-input>
+      <bs-input
+v-model="single.username"
+class="mt20"
+form-type="horizontal"
+label="Username"
+/>
     </template>
 
-    <template slot="view" slot-scope="props">
-      <bs-label>{{props.item.type}}</bs-label>
-      {{props.item.username}} <span v-if="props.item.name">({{props.item.name}})</span>
+    <template
+slot="view"
+slot-scope="props"
+>
+      <bs-label>{{ props.item.type }}</bs-label>
+      {{ props.item.username }} <span v-if="props.item.name">({{ props.item.name }})</span>
     </template>
-
-  </creater-list>
+</creater-list>
 </template>
 
 

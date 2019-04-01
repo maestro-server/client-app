@@ -1,18 +1,33 @@
 <template>
-  <creater-list :single.sync="single" :basket="value" :label="label" :fielder="fielder" @update="updaterEdit">
-
-    <template slot="forms">
-      <bs-input form-type="horizontal" v-model="single[fielder]" :name="fielder" label="Name"
-                v-validate.initial="'required'"></bs-input>
+  <creater-list
+:single.sync="single"
+:basket="value"
+:label="label"
+:fielder="fielder"
+@update="updaterEdit"
+>
+<template slot="forms">
+      <bs-input
+v-model="single[fielder]"
+v-validate.initial="'required'"
+form-type="horizontal"
+:name="fielder"
+                label="Name"
+/>
     </template>
 
-    <template slot="view" slot-scope="props">
-      <slot name="list" :item="props">
-        {{props.item[fielder]}}
+    <template
+slot="view"
+slot-scope="props"
+>
+      <slot
+name="list"
+:item="props"
+>
+        {{ props.item[fielder] }}
       </slot>
     </template>
-
-  </creater-list>
+</creater-list>
 </template>
 
 

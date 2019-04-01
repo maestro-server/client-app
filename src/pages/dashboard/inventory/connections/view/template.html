@@ -54,7 +54,7 @@
           </div>
 
           <div class="col-sm-6 col-xs-12 text-right">
-            <template v-for="job in schedulers[key]" v-key="job._id">
+            <span v-for="job in schedulers[key]" :key="job._id">
               <tooltip effect="scale" placement="bottom" :content="`Job: ${job.name} (${job._id})`">
                 <button class="btn btn-xs btn-success" v-if="job.enabled" @click="processEnable(job, false)">
                   <i class="fa fa-toggle-on"></i>
@@ -65,7 +65,7 @@
                   Off
                 </button>
               </tooltip>
-            </template>
+            </span>
             <template v-if="!schedulers[key]">
               <button class="btn btn-xs btn-warning" @click="createJob(key)">
                 <i class="fa fa-toggle-off"></i>

@@ -1,26 +1,43 @@
 <template>
-  <creater-list :single.sync="item" :basket.sync="items" :show-add-btn="false" :label="label" @update="updaterEdit">
-
-    <template slot="forms">
+  <creater-list
+:single.sync="item"
+:basket.sync="items"
+:show-add-btn="false"
+:label="label"
+@update="updaterEdit"
+>
+<template slot="forms">
       <form>
-        <bs-input :type="inputType" form-type="horizontal" v-model="item" name="item" :label="inputLabel"
-                  v-validate.initial="'required'"></bs-input>
+        <bs-input
+v-model="item"
+v-validate.initial="'required'"
+:type="inputType"
+form-type="horizontal"
+name="item"
+                  :label="inputLabel"
+/>
 
 
         <div class="text-center">
-          <a href="#" @click.prevent.stop="addItemTo" class="btn btn-primary btn-sm"><i
-            class="fa fa-plus-circle"></i> {{label}}</a>
+          <a
+href="#"
+class="btn btn-primary btn-sm"
+@click.prevent.stop="addItemTo"
+><i
+            class="fa fa-plus-circle"
+/> {{ label }}</a>
         </div>
       </form>
     </template>
 
 
-    <template slot="view" slot-scope="props">
-      {{props.item}}
+    <template
+slot="view"
+slot-scope="props"
+>
+      {{ props.item }}
     </template>
-
-  </creater-list>
-
+</creater-list>
 </template>
 
 

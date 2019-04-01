@@ -1,38 +1,55 @@
 <template>
-
-  <creater-list :basket="value" label="System" :showAddBtn="false" @update="updaterEdit">
-
-    <template slot="forms">
+<creater-list
+:basket="value"
+label="System"
+:show-add-btn="false"
+@update="updaterEdit"
+>
+<template slot="forms">
       <div class="text-right">
-        <router-link :to="{name: 'system'}" class="btn btn-primary btn-xs" target="_blank">
-          <i class="fa fa-plus-circle"></i> System
+        <router-link
+:to="{name: 'system'}"
+class="btn btn-primary btn-xs"
+target="_blank"
+>
+          <i class="fa fa-plus-circle" /> System
         </router-link>
       </div>
 
-      <typeahead label="System" placeholder="System name"
+      <typeahead
+label="System"
+placeholder="System name"
                  :async="URL_SYSTEM"
                  async-key="items"
-                 :onSearch="requestSearch"
+                 :on-search="requestSearch"
                  :template="template"
                  form-type="horizontal"
                  :on-hit="onHit"
                  class="mt10"
                  :headers="headers"
-      ></typeahead>
+      />
+</template>
 
+    <template
+slot="view"
+slot-scope="props"
+>
+      <b class="text-capitalize">{{ props.item.name }}</b>
     </template>
 
-    <template slot="view" slot-scope="props">
-      <b class="text-capitalize">{{props.item.name}}</b>
-    </template>
-
-    <template slot="footer" v-if="isFull">
+    <template
+v-if="isFull"
+slot="footer"
+>
       <hr>
-      <bs-label type='danger' class="mt10">Max {{limit}} items</bs-label>
+      <bs-label
+type="danger"
+class="mt10"
+>
+Max {{ limit }} items
+</bs-label>
     </template>
-
-  </creater-list>
-
+</creater-list>
 </template>
 
 

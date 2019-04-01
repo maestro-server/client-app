@@ -1,22 +1,36 @@
 <template>
-
-  <div class="col-xs-12 text-center">
+<div class="col-xs-12 text-center">
     <well>
+<h4>Choose a system/s or application to be entry point</h4>
 
-      <h4>Choose a system/s or application to be entry point</h4>
-
-      <a href="#" class="btn btn-default btn-sm" :class="{'btn-primary': show == 'system'}" @click.prevent="show = 'system'">by System</a>
-      <a href="#" class="btn btn-default btn-sm" :class="{'btn-primary': show == 'app'}" @click.prevent="show = 'app'">by Application</a>
+      <a
+href="#"
+class="btn btn-default btn-sm"
+:class="{'btn-primary': show == 'system'}"
+@click.prevent="show = 'system'"
+>by System</a>
+      <a
+href="#"
+class="btn btn-default btn-sm"
+:class="{'btn-primary': show == 'app'}"
+@click.prevent="show = 'app'"
+>by Application</a>
 
       <div class="row">
-
-        <well class="col-sm-offset-3 col-sm-6 col-xs-12 mt20 bg-white">
+<well class="col-sm-offset-3 col-sm-6 col-xs-12 mt20 bg-white">
           <div v-if="show == 'system'">
-            <tab-system @update="val => systems = val" ref="tab_system" :limit="3"></tab-system>
+            <tab-system
+ref="tab_system"
+:limit="3"
+@update="val => systems = val"
+/>
           </div>
 
           <div v-if="show == 'app'">
-            <tab-apps @update="val => apps = val" ref="tab_apps">
+            <tab-apps
+ref="tab_apps"
+@update="val => apps = val"
+>
               <template slot="label">
                 <p>
                   Select entry point applications.
@@ -27,11 +41,16 @@
         </well>
       </div>
 
-      <a href="#" class="btn btn-primary" @click.prevent="selItems">Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
-
-    </well>
+      <a
+href="#"
+class="btn btn-primary"
+@click.prevent="selItems"
+>Next <i
+class="fa fa-arrow-circle-o-right"
+aria-hidden="true"
+/></a>
+</well>
   </div>
-
 </template>
 
 <script>
@@ -43,17 +62,17 @@
   import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
   export default {
+
+    components: {
+      tabSystem,
+      tabApps
+    },
     data() {
       return {
         show: "system",
         systems: [],
         apps: []
       }
-    },
-
-    components: {
-      tabSystem,
-      tabApps
     },
 
     computed: {

@@ -1,18 +1,19 @@
 <template>
-
-  <div>
+<div>
     <bs-list>
       <li class="list-group-item word-break text-center">
-        <b>Total of {{options.title.text}}:</b>
-        <bs-label>{{total}}</bs-label>
+        <b>Total of {{ options.title.text }}:</b>
+        <bs-label>{{ total }}</bs-label>
       </li>
     </bs-list>
 
     <div class="col-sm-12">
-      <doughnut-chart :data="data" :options="transfOptions"></doughnut-chart>
+      <doughnut-chart
+:data="data"
+:options="transfOptions"
+/>
     </div>
   </div>
-
 </template>
 
 <style>
@@ -28,11 +29,11 @@
   import doughnutChart from 'components/charts/doughnut_chart.vue'
 
   export default {
-    props: ['data', 'options'],
 
     components: {
       doughnutChart
     },
+    props: ['data', 'options'],
 
     computed: {
       total() {

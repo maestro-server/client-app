@@ -7,12 +7,12 @@
       </h3>
       <div class="col-sm-6 col-xs-12 text-right hidden-xs">
         <b>Export to:</b>
-        <template v-for="item in dwn" v-key="item" v-if="dwn">
+        <span v-for="item in dwn" :key="item" v-if="dwn">
           <button class="btn btn-primary btn-xs" @click="down(item)">
             <i class="fa fa-download"></i> {{item.label}}
           </button>
           |
-        </template>
+        </span>
         |
         <b>Shared:</b>
         <button class="btn btn-primary btn-xs" @click="$parent.editS()">

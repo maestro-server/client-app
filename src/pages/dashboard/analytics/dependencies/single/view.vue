@@ -1,28 +1,32 @@
 <template>
   <div>
-
-    <p class="col-xs-12 no-margin">Entry point</p>
+<p class="col-xs-12 no-margin">
+Entry point
+</p>
 
     <div class="col-xs-12 col-sm-8 dp-container">
-      <dprow v-for="item, k in grid"
+      <dprow
+v-for="item, k in grid"
              :key="k"
+             :ref="'line_' + k"
              :apps="item"
              :step="k"
-             :ref="'line_' + k"
              :parent_id="item.parent_id"
              :types="options.protocol"
              @addRow="addRow"
              @deleteItem="deleteItem"
              @deleteRow="deleteRow"
              @commitItem="commitItem"
-      >
-      </dprow>
+      />
     </div>
 
     <div class="col-sm-4 hidden-xs">
       <well v-if="isEmpty">
         <h4 class="primary">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <i
+class="fa fa-question-circle"
+aria-hidden="true"
+/>
           <strong>Tips</strong>
         </h4>
 
@@ -33,11 +37,22 @@
         </ul>
       </well>
 
-      <info-view :data="app" :title="false"></info-view>
+      <info-view
+:data="app"
+:title="false"
+/>
     </div>
 
-    <div class="btn-fixed text-center" :class="{'btn-fixed-hidden': isEmpty}">
-      <button class="btn btn-primary" @click="save">Commit - Tree Dependency</button>
+    <div
+class="btn-fixed text-center"
+:class="{'btn-fixed-hidden': isEmpty}"
+>
+      <button
+class="btn btn-primary"
+@click="save"
+>
+Commit - Tree Dependency
+</button>
     </div>
   </div>
 </template>
@@ -52,16 +67,12 @@
   import Adminer from 'factories/adminer'
   import FectherEntity from 'services/fetchEntity'
   import Applications from 'factories/applications'
-  import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
-  import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
   import formatAdminer from 'src/resources/libs/formatAdminerData'
   import fsuccess from 'src/resources/callbacks/request_success'
 
   export default {
 
     components: {
-      tabSystem,
-      tabApps,
       dprow
     },
 
@@ -86,6 +97,14 @@
       isEmpty() {
         return _.isEmpty(this.app)
       }
+    },
+
+    created() {
+      this.resetTree()
+      const entries = _.get(this.$route.params, 'apps', [])
+      this.grid.push(entries)
+      this.systems = _.get(this.$route.params, 'systems')
+      this.fetchData();
     },
 
     methods: {
@@ -177,14 +196,6 @@
         this.$set(this, 'grid', [])
         this.$set(this, 'app', {})
       }
-    },
-
-    created() {
-      this.resetTree()
-      const entries = _.get(this.$route.params, 'apps', [])
-      this.grid.push(entries)
-      this.systems = _.get(this.$route.params, 'systems')
-      this.fetchData();
     }
   }
 

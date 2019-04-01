@@ -1,36 +1,70 @@
 <template>
   <div>
     <div class="clearfix">
-      <router-link :to="{name: 'datacenter'}" class="btn btn-primary btn-xs pull-right" target="_blank">
-        <i class="fa fa-plus-circle"></i> Datacenter
+      <router-link
+:to="{name: 'datacenter'}"
+class="btn btn-primary btn-xs pull-right"
+target="_blank"
+>
+        <i class="fa fa-plus-circle" /> Datacenter
       </router-link>
     </div>
 
-    <div class="mt10 clearfix col-xs-12"></div>
+    <div class="mt10 clearfix col-xs-12" />
 
-    <bs-select v-if="options.length > 0" :disabled="updated" form-type="horizontal" :options="providers" v-model="value.name"
-               label="Datacenter" placnewereholder="Select Datacenter" @input="updateProvider"
-               ref="s_provider"></bs-select>
+    <bs-select
+v-if="options.length > 0"
+ref="s_provider"
+v-model="value.name"
+:disabled="updated"
+form-type="horizontal"
+               :options="providers"
+label="Datacenter"
+placnewereholder="Select Datacenter"
+               @input="updateProvider"
+/>
 
-    <div class="row" v-if="options.length == 0">
+    <div
+v-if="options.length == 0"
+class="row"
+>
       <div class="col-xs-3 text-right">
         <label>Datacenter</label>
       </div>
       <div class="col-xs-9">
         <div class="pull-left">
-          <bs-label type="danger">None datacenter record.</bs-label>
-          <router-link :to="{name: 'datacenter'}">Do you like to create one?</router-link>
+          <bs-label type="danger">
+None datacenter record.
+</bs-label>
+          <router-link :to="{name: 'datacenter'}">
+Do you like to create one?
+</router-link>
         </div>
       </div>
     </div>
 
-    <div class="col-xs-12 mt10"></div>
+    <div class="col-xs-12 mt10" />
 
-    <bs-select form-type="horizontal" :options="regions" v-model="value.region"
-               label="Region" placeholder="Select Region" ref="s_regions" @input="updateModel"></bs-select>
+    <bs-select
+ref="s_regions"
+v-model="value.region"
+form-type="horizontal"
+               :options="regions"
+label="Region"
+placeholder="Select Region"
+@input="updateModel"
+/>
 
-    <bs-select form-type="horizontal" :options="zones" v-model="value.zone"
-               label="Zones" placeholder="Select Zone" refs="s_zones" multiple @input="updateModel"></bs-select>
+    <bs-select
+v-model="value.zone"
+form-type="horizontal"
+:options="zones"
+               label="Zones"
+placeholder="Select Zone"
+refs="s_zones"
+multiple
+@input="updateModel"
+/>
   </div>
 </template>
 
@@ -55,6 +89,10 @@
         zones: [],
         regions: []
       }
+    },
+
+    created() {
+      this.fetchData()
     },
 
 
@@ -96,10 +134,6 @@
         this.updated = false
         this.value = {}
       }
-    },
-
-    created() {
-      this.fetchData()
     }
   }
 
