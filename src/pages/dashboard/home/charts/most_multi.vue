@@ -39,7 +39,7 @@ v-if="hasThis"
 
     computed: {
       getMost() {
-        if(this.results.length > 0)
+        if(this.results.length <= 0)
           return []
 
         const calculate = _(this.results)
