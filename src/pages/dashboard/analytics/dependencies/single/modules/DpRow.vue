@@ -1,67 +1,67 @@
 <template>
   <div class="dp-wrapper">
-    <div class="dp-lines-t" :style="wLine"/>
+    <div class="dp-lines-t" :style="wLine"></div>
 
     <div class="dp-row">
       <div
-        v-for="app, k in apps" :key="k"
         class="dp-item text-center"
         :class="{'dp-select': app._id == selected}"
         @click="addItem(app._id)"
+        v-for="app, k in apps"
+        :key="app._id"
       >
-        <h5>{{ app.name }}</h5>
+        <h5>{{app.name}}</h5>
         <p v-if="app.endpoint">
-          <span class="dst">{{ app.endpoint }}</span>
+          <span class="dst">{{app.endpoint}}</span>
         </p>
         <p v-if="app.environment">
-          <span class="dst">{{ app.environment }}</span>
+          <span class="dst">{{app.environment}}</span>
         </p>
         <p v-if="app.family">
-          <span class="dst">{{ app.family }}</span>
+          <span class="dst">{{app.family}}</span>
         </p>
 
         <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
       </div>
 
-      <well v-if="apps.length == 0" class="bg-white">Select the first dependency</well>
+      <well class="bg-white" v-if="apps.length == 0">Select the first dependency</well>
     </div>
 
-    <bs-label type="default" class="pull-right mt5">{{ step }}</bs-label>
+    <bs-label type="default" class="pull-right mt5">{{step}}</bs-label>
 
-    <div class="dp-lines-b" :style="wLine"/>
+    <div class="dp-lines-b" :style="wLine"></div>
 
-    <popover ref="pop" effect="scale" placement="top" title="Add Dependecy" @toggle="singleOpen">
+    <popover effect="scale" placement="top" title="Add Dependecy" ref="pop" @toggle="singleOpen">
       <template slot="content">
         <typeahead
           label
           placeholder="MyWebApp"
           :async="URL"
           async-key="items"
-          :on-search="requestSearch"
+          :onSearch="requestSearch"
           :template="template"
           :on-hit="onHit"
           class="col-xs-12"
           :headers="headers"
-        />
+        ></typeahead>
 
         <div v-if="app._id" class="col-xs-12 pb10">
           <span class="btn btn-primary btn-large col-xs-12 text-right bkline">
-            {{ app.name }}
+            {{app.name}}
             <br>
-
-            <label class="label label-info">{{ app.family }}</label>
-            <label class="label label-info">{{ app.environment }}</label>
+            <label class="label label-info">{{app.family}}</label>
+            <label class="label label-info">{{app.environment}}</label>
           </span>
         </div>
 
         <bs-select
-          v-if="this.step > 0 "
-          v-model="endpoint"
           :options="types"
+          v-model="endpoint"
           name="type"
           placeholder="Protocol"
           class="col-xs-12"
-        />
+          v-if="this.step > 0 "
+        ></bs-select>
 
         <div class="col-xs-12 text-center pb10">
           <button class="btn btn-primary" @click.stop="onCommit">Add Dep</button>
@@ -69,9 +69,6 @@
 
         <hr>
       </template>
-    </popover>
-  </div>
-</template>
 
       <a class="more more-right">+</a>
     </popover>
@@ -88,7 +85,7 @@ import headerLogin from "src/resources/libs/headerAuthorization";
 export default {
   props: {
     step: { type: Number, default: 0 },
-    parentId: { type: String },
+    parent_id: { type: String },
     apps: { type: Array, default: () => [] },
     types: { type: Array, default: () => [] }
   },
@@ -115,10 +112,6 @@ export default {
       const wid = this.apps.length ? (this.apps.length - 1) * 120 + 2 : 0;
       return `width: ${wid}px`;
     }
-  },
-
-  created() {
-    this.$set(this, "bags", this.apps);
   },
 
   methods: {
@@ -163,6 +156,10 @@ export default {
       this.app = {};
       this.endpoint = null;
     }
+  },
+
+  created() {
+    this.$set(this, "bags", this.apps);
   }
 };
 </script>
