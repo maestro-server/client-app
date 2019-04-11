@@ -10,6 +10,12 @@ const TenantManager = {
 
   get() {
     const owner = CacheManager({k: 'me_list', persistence: 'local'}).find()
+
+    if(owner === undefined) {
+      window.location.hash = "/auth/logout"
+      return
+    }
+
     const {_id} = owner
     let tenant = CacheManager({k: _id + '_tenant', persistence: 'local'}).find()
 
