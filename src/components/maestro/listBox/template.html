@@ -8,6 +8,8 @@
           </h3>
         </slot>
 
+        <slot name="buttons" :item="item"></slot>
+
         <button class="btn btn-primary btn-xs mt10" @click.stop="event('edit', item)">
           <i class="fa fa-pencil" aria-hidden="true"></i> Edit {{label}}
         </button>

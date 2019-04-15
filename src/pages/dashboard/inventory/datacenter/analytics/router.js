@@ -2,7 +2,7 @@
 import comp from './view'
 
 export default {
-  name: 'datacenters.single',
-  path: 'single/:id',
+  name: 'datacenters.analytics',
+  path: 'analytics/:id',
   component: comp
 }

@@ -3,25 +3,14 @@
     <header-view-entity label="Datacenter" :name="model.name" :id="model._id" :entity="getName" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
   </div>
 
-  <active-btn :act="model.active"></active-btn>
+  <div class="col-xs-12">
 
-  <div class="col-sm-6 col-xs-12">
-    <info-view :data="filtered"></info-view>
-  </div>
+    <well class="col-sm-12 well-white text-center" v-if="!model.reports">
+      <p>You can activated datacenters analytics.</p>
+      <button type="button" class="btn btn-primary" @click="activateAnalytics()">Activate Datacenter Analytics</button>
+    </well>
 
-  <div class="col-sm-6 col-xs-12">
 
-    <creater-config-list label="Region" :basket="model.regions" @edit="edit" :index="1" icons="fa-cloud-upload">
-      <template slot="view" slot-scope="props">
-        {{props.item}}
-      </template>
-    </creater-config-list>
-
-    <creater-config-list label="Zone" :basket="model.zones" @edit="edit" :index="1" icons="fa-bullseye">
-      <template slot="view" slot-scope="props">
-        {{props.item}}
-      </template>
-    </creater-config-list>
 
   </div>
 
