@@ -27,7 +27,7 @@ export default {
     },
 
     finishReport(data) {
-      console.log(data)
+      this.finishJob(data);
     }
   }
 }
