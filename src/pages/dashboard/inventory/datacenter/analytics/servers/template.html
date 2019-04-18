@@ -1,14 +1,40 @@
 <div>
-  <h2>By {{component}}</h2>
+
+  <div class="text-right">
+      <button type="button" class="btn btn-primary btn-xs" @click="finishReportUpdate()">
+          <i class="fa fa-refresh"/> 
+        Update Report</button>
+
+      <button type="button" class="btn btn-danger btn-xs" @click="$parent.activateAnalytics()">
+          <i class="fa fa-trash"/> 
+        Force to recreate</button>
+  </div>
+
+  <div class="row" v-if="report.status == 'finished'">
+    <div class="col-xs-6 mt10">
+      <router-link :to="{name: 'datacenters.analytics' }" class="btn btn-info col-xs-12">By Servers</router-link>
+    </div>
+    <div class="col-xs-6 mt10">
+      <router-link :to="{ name: 'datacenters.analytics.apps' }" class="btn btn-info col-xs-12">By Applications
+      </router-link>
+    </div>
+  </div>
+
+
 
   <alert type="warning" class="col-sm-12 text-center " v-if="report.status == 'process'">
-    This report its no ready.<br/>
-    Report name: {{report.name}}<br/>
+    This report its no ready.<br />
+    Report name: {{report.name}}<br />
     Status: {{report.status}}
   </alert>
 
 
   <div v-if="report.status == 'finished'">
+
+    <hr>
+
+    <h2>By {{component}}</h2>
+
     <template v-for="chart in charts">
 
       <div class="wrapper-charts" :class="size(chart)">

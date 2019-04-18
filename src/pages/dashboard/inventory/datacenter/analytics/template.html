@@ -1,33 +1,23 @@
 <div>
   <div class="pb10">
-    <header-view-entity label="Datacenter" :name="model.name" :id="model._id" :entity="getName" @del="del" @edit="edit()" @acl="acl"></header-view-entity>
+    <header-view-entity label="Datacenter" 
+      :name="model.name" :id="model._id" :entity="getName" @del="del"
+      @edit="edit()" @acl="acl">
+    </header-view-entity>
   </div>
 
   <div class="col-xs-12">
 
-    <well class="col-sm-12 well-white text-center" v-if="!model.reports">
+    <alert type="warning" class="col-sm-12 well-white text-center mt10" v-if="!model.reports">
       <p>You can activated datacenters analytics.</p>
       <button type="button" class="btn btn-primary" @click="activateAnalytics()">Activate Datacenter Analytics</button>
-    </well>
+    </alert>
 
-    <div v-if="model.reports">
+    <alert type="warning" class="col-sm-12 well-white text-center mt10" v-if="waitMessage">
+        <p>All report are in process, being finishe we will notify, you can reload your browser.</p>
+    </alert>
 
-      <div class="row">
-        <div class="col-xs-6 mt10">
-          <router-link :to="{name: 'datacenters.analytics' }"
-                       class="btn btn-info col-xs-12">By Servers</router-link>
-        </div>
-        <div class="col-xs-6 mt10">
-          <router-link :to="{ name: 'datacenters.analytics.apps' }"
-                       class="btn btn-info col-xs-12">By Applications</router-link>
-        </div>
-      </div>
-
-      <hr>
-
-      <router-view />
-
-    </div>
+    <router-view />
 
   </div>
 
