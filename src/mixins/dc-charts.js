@@ -113,6 +113,10 @@ export default {
       }
     },
 
+    isEmpty(arr) {
+      return _.isEmpty(arr)
+    },
+
     updateAnalytics() {
       FectherEntity(Reports)()
         .update(this.$parent.finishReportUpdate, this.report)
