@@ -85,6 +85,6 @@ export default {
 
   destroyed() {
     this.$off('finishFetchData', this.makeCharts)
-    EventBus.$on(`reports-${this.id}`, this.updatePage)
+    EventBus.$off(`reports-${this.id}`, this.updatePage)
   }
 }

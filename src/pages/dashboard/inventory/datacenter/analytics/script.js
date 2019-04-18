@@ -26,7 +26,8 @@ export default {
     return {
       entity: Datacenters,
       model: {},
-      waitMessage: false
+      waitMessage: false,
+      event: null
     }
   },
 
@@ -43,7 +44,7 @@ export default {
     },
 
     finishReport(data) {
-      if(data.status <= 300) {
+      if (data.status <= 300) {
         this.showMessage()
         this.waitComplete(_.get(data, 'data[0].reports[0]._id'))
         this.$set(this.model, 'reports', _.get(data, 'data[0].reports'))
@@ -51,9 +52,8 @@ export default {
     },
 
     finishReportUpdate(data) {
-      if(data.status <= 300) {
+      if (data.status <= 300) {
         this.showMessage()
-        console.log(data)
         this.waitComplete(_.get(data, 'data._id'))
       }
     },
@@ -62,9 +62,19 @@ export default {
       this.waitMessage = true
     },
 
+    reloadPage() {
+      this.$router.go()
+      return
+    },
+
     waitComplete(id) {
-      console.log(id)
-      EventBus.$on(`reports-${id}`, this.updatePage)
+      this.event = id
+      EventBus.$on(`reports-${id}`, this.reloadPage)
     }
+  },
+
+  destroyed() {
+    if(this.event)
+      EventBus.$off(`reports-${this.event}`, this.reloadPage)
   }
 }

@@ -11,7 +11,6 @@ import doughnutChart from 'components/charts/doughnut_chart.vue'
 import totalChart from 'components/charts/total_chart.vue'
 import polarChart from 'components/charts/polar_chart.vue'
 import barChart from 'components/charts/bar_chart.vue'
-import {EventBus} from 'src/resources/bus/bus-general.js'
 
 export default {
   mixins: [ViewSingle, charts],
@@ -101,7 +100,6 @@ export default {
 
       if(report) {
         const id= _.get(report, '_id')
-        EventBus.$on(`reports-${id}`, this.updatePage)
 
         FectherEntity(Reports)({force: true})
           .findOne((response) => {
@@ -117,16 +115,11 @@ export default {
 
     updateAnalytics() {
       FectherEntity(Reports)()
-        .update(this.$parent.finishReport, this.report)
+        .update(this.$parent.finishReportUpdate, this.report)
     }
   },
 
   created () {
     this.$on('finishFetchData', this.updateAnalyticsInfo)
-  },
-
-  destroyed() {
-    const id = _.get(this.report, '_id')
-    EventBus.$on(`reports-${id}`, this.updatePage)
   }
 }
