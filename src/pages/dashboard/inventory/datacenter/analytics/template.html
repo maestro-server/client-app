@@ -10,17 +10,24 @@
       <button type="button" class="btn btn-primary" @click="activateAnalytics()">Activate Datacenter Analytics</button>
     </well>
 
-    <tabs nav-style="tabs" justified class="col-xs-12">
+    <div v-if="model.reports">
 
-      <tab header="Resources">
-        {{model}}
-      </tab>
-      <tab header="Servers">
-      </tab>
+      <div class="row">
+        <div class="col-xs-6 mt10">
+          <router-link :to="{name: 'datacenters.analytics' }"
+                       class="btn btn-info col-xs-12">By Servers</router-link>
+        </div>
+        <div class="col-xs-6 mt10">
+          <router-link :to="{ name: 'datacenters.analytics.apps' }"
+                       class="btn btn-info col-xs-12">By Applications</router-link>
+        </div>
+      </div>
 
-    </tabs> 
+      <hr>
 
+      <router-view />
 
+    </div>
 
   </div>
 

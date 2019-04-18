@@ -1,8 +1,13 @@
 'use strict'
 import comp from './view'
+import applications from './applications/router'
+import servers from './servers/router'
 
 export default {
-  name: 'datacenters.analytics',
   path: 'analytics/:id',
-  component: comp
+  component: comp,
+  children: [
+    servers,
+    applications
+  ]
 }

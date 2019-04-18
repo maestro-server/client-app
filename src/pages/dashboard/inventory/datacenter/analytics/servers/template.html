@@ -1,0 +1,40 @@
+<div>
+  <h2>By {{component}}</h2>
+
+  <alert type="warning" class="col-sm-12 text-center " v-if="report.status == 'process'">
+    This report its no ready.<br/>
+    Report name: {{report.name}}<br/>
+    Status: {{report.status}}
+  </alert>
+
+
+  <div v-if="report.status == 'finished'">
+    <template v-for="chart in charts">
+
+      <div class="wrapper-charts" :class="size(chart)">
+
+        <div class="bg-charts">
+          <template v-if="type(chart) == 'pie'">
+            <pie-chart :data="transfData(chart)" :options="transfOptions(chart)"></pie-chart>
+          </template>
+
+          <template v-if="type(chart) == 'doughnut'">
+            <doughnut-chart :data="transfData(chart)" :options="transfOptions(chart)"></doughnut-chart>
+          </template>
+
+          <template v-if="type(chart) == 'bar'">
+            <bar-chart :data="transfData(chart)" :options="transfOptions(chart)"></bar-chart>
+          </template>
+
+          <template v-if="type(chart) == 'total'">
+            <total-chart :data="transfData(chart)" :options="transfOptions(chart)"></total-chart>
+          </template>
+
+          <template v-if="type(chart) == 'polar'">
+            <polar-chart :data="transfData(chart)" :options="transfOptions(chart)"></polar-chart>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>

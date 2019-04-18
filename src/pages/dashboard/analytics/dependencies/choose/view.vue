@@ -1,36 +1,36 @@
 <template>
-<div class="col-xs-12 text-center">
+  <div class="col-xs-12 text-center">
     <well>
-<h4>Choose a system/s or application to be entry point</h4>
+      <h4>Choose a system/s or application to be entry point</h4>
 
       <a
-href="#"
-class="btn btn-default btn-sm"
-:class="{'btn-primary': show == 'system'}"
-@click.prevent="show = 'system'"
->by System</a>
+        href="#"
+        class="btn btn-default btn-sm"
+        :class="{'btn-primary': show == 'system'}"
+        @click.prevent="show = 'system'"
+      >by System</a>
       <a
-href="#"
-class="btn btn-default btn-sm"
-:class="{'btn-primary': show == 'app'}"
-@click.prevent="show = 'app'"
->by Application</a>
+        href="#"
+        class="btn btn-default btn-sm"
+        :class="{'btn-primary': show == 'app'}"
+        @click.prevent="show = 'app'"
+      >by Application</a>
 
       <div class="row">
-<well class="col-sm-offset-3 col-sm-6 col-xs-12 mt20 bg-white">
+        <well class="col-sm-offset-3 col-sm-6 col-xs-12 mt20 bg-white">
           <div v-if="show == 'system'">
             <tab-system
-ref="tab_system"
-:limit="3"
-@update="val => systems = val"
-/>
+              ref="tab_system"
+              :limit="3"
+              @update="val => systems = val"
+            />
           </div>
 
           <div v-if="show == 'app'">
             <tab-apps
-ref="tab_apps"
-@update="val => apps = val"
->
+              ref="tab_apps"
+              @update="val => apps = val"
+            >
               <template slot="label">
                 <p>
                   Select entry point applications.
@@ -42,14 +42,14 @@ ref="tab_apps"
       </div>
 
       <a
-href="#"
-class="btn btn-primary"
-@click.prevent="selItems"
->Next <i
-class="fa fa-arrow-circle-o-right"
-aria-hidden="true"
-/></a>
-</well>
+        href="#"
+        class="btn btn-primary"
+        @click.prevent="selItems"
+      >Next <i
+        class="fa fa-arrow-circle-o-right"
+        aria-hidden="true"
+      /></a>
+    </well>
   </div>
 </template>
 
@@ -76,8 +76,12 @@ aria-hidden="true"
     },
 
     computed: {
-      tab_system() {return this.$refs.tab_system},
-      tab_apps() {return this.$refs.tab_apps}
+      tab_system() {
+        return this.$refs.tab_system
+      },
+      tab_apps() {
+        return this.$refs.tab_apps
+      }
     },
 
     methods: {
@@ -92,7 +96,7 @@ aria-hidden="true"
       getAppsBySystem(dsystems) {
         const _id = dsystems.map(e => _.get(e, '_id'));
 
-        if(_id.length > 0) {
+        if (_id.length > 0) {
           FectherEntity(System)({force: true})
             .find(this.fetchApps, {_id});
         }

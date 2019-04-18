@@ -25,11 +25,7 @@ export default {
   data: function () {
     return {
       entity: Datacenters,
-      model: {},
-      analytics: {
-        servers: {},
-        applications: {}
-      }
+      model: {}
     }
   },
 
@@ -46,25 +42,9 @@ export default {
     },
 
     finishReport(data) {
-      this.finishJob(data);
-    },
-
-    updateAnalyticsInfo() {
-      const reports = _.get(this.model, 'reports')
-      if(reports) {
-
-        _.forEach(reports, (report) => {
-          FectherEntity(Reports)({force: true})
-            .findOne((response) => {
-              console.log(response)
-            }, _.get(report, '_id'))
-        })
-
+      if(data.status == 200) {
+        return
       }
     }
-  },
-
-  created () {
-    this.$on('finishFetchData', this.updateAnalyticsInfo)
   }
 }
