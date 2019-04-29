@@ -33,7 +33,10 @@
 
     <hr>
 
-    <h2>By {{component}}</h2>
+    <div class="col-xs-12">
+      <h2 class="pull-left mt0">By {{component}}</h2>
+      <p class="pull-right"><b>Last Update {{formatDate(model.updated_at)}}</b></p>
+    </div>
 
     <template v-for="chart in charts">
 

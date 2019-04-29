@@ -12,9 +12,10 @@ import totalChart from 'components/charts/total_chart.vue'
 import polarChart from 'components/charts/polar_chart.vue'
 import barChart from 'components/charts/bar_chart.vue'
 import {EventBus} from 'src/resources/bus/bus-general.js'
+import formatDate from 'mixins/formatDate'
 
 export default {
-  mixins: [ViewSingle, charts],
+  mixins: [ViewSingle, charts, formatDate],
 
   components: {
     pieChart,
