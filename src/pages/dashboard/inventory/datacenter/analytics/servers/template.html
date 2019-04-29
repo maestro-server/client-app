@@ -1,16 +1,16 @@
 <div>
 
-  <div class="text-right">
-      <button type="button" class="btn btn-primary btn-xs" @click="finishReportUpdate()">
-          <i class="fa fa-refresh"/> 
+  <div class="text-right" v-if="$parent.model && $parent.model.reports">
+      <button type="button" class="btn btn-primary btn-xs" @click="updateAnalytics()">
+          <i class="fa fa-refresh"/>
         Update Report</button>
 
       <button type="button" class="btn btn-danger btn-xs" @click="$parent.activateAnalytics()">
-          <i class="fa fa-trash"/> 
+          <i class="fa fa-trash"/>
         Force to recreate</button>
   </div>
 
-  <div class="row" v-if="report.status == 'finished'">
+  <div class="row" v-if="$parent.model && $parent.model.reports">
     <div class="col-xs-6 mt10">
       <router-link :to="{name: 'datacenters.analytics' }" class="btn btn-info col-xs-12">By Servers</router-link>
     </div>
@@ -21,11 +21,14 @@
   </div>
 
 
-
-  <alert type="warning" class="col-sm-12 text-center " v-if="report.status == 'process'">
+  <alert type="warning" class="col-sm-12 text-center mt10" v-if="report.status == 'process'">
     This report its no ready.<br />
     Report name: {{report.name}}<br />
     Status: {{report.status}}
+  </alert>
+
+  <alert type="warning" class="col-sm-12 well-white text-center mt10" v-if="isEmpty(report.aggr) && report.status != 'process'">
+    <p>Empty results.</p>
   </alert>
 
 
