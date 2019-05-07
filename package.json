@@ -12,7 +12,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "demo-deploy": "npm run build && node app_engine.js && gcloud app deploy"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -111,7 +112,7 @@
     "webpack-merge": "^4.2.1"
   },
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">=8.0.0",
     "npm": ">= 3.0.0"
   },
   "browserslist": [
