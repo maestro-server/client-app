@@ -31,4 +31,9 @@ package.json
 build/
 config/
 src/
+<<<<<<< HEAD
 test/   
+=======
+static/
+test/
+>>>>>>> ab692d98a78a367149728019d78c19174924eba0
