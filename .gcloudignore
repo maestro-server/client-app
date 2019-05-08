@@ -31,5 +31,4 @@ package.json
 build/
 config/
 src/
-static/
-test/
+test/   
