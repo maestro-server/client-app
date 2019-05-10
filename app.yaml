@@ -18,6 +18,9 @@ handlers:
 - url: /static/imgs/
   static_dir: dist/static/imgs/
 
+- url: /static/fonts/
+  static_dir: dist/static/fonts/
+
 # site root
 - url: /
   static_files: dist/index.html
