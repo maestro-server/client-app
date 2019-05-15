@@ -12,26 +12,19 @@ handlers:
   mime_type: text/js
   static_dir: dist/static/js/
   secure: always
-  http_headers:
-    Access-Control-Allow-Origin: "*"
 
 - url: /static/img/
   static_dir: dist/static/img/
   secure: always
-  http_headers:
-    Access-Control-Allow-Origin: "*"
 
 - url: /static/imgs/
   static_dir: dist/static/imgs/
   secure: always
-  http_headers:
-    Access-Control-Allow-Origin: "*"
 
 - url: /static/fonts/
   static_dir: dist/static/fonts/
   secure: always
-  http_headers:
-    Access-Control-Allow-Origin: "*"
+
 # site root
 - url: /
   static_files: dist/index.html
