@@ -15,6 +15,7 @@
       v-model="model.password"
       v-validate.initial="'required|min:4'"
       name="password"
+      ref="password"
       :error="makeError('password')"
     ></bs-input>
 
@@ -22,8 +23,9 @@
       type="password"
       label="Verify password"
       v-model="model.verypassword"
-      v-validate.initial="'required|min:4|confirmed:password'"
+      v-validate="'required|min:4|confirmed:password'"
       name="verypassword"
+      ref="verypassword"
       :error="makeError('verypassword')"
     ></bs-input>
 

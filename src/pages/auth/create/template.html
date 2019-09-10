@@ -34,6 +34,7 @@
           name="password"
           ref="password"
           :error="makeError('password')"
+          @keydown.enter="create"
         ></bs-input>
 
         <bs-input
@@ -43,6 +44,7 @@
           v-validate="'required|min:4|confirmed:password'"
           name="verypassword"
           :error="makeError('verypassword')"
+          @keydown.enter="create"
         ></bs-input>
 
       <div class="text-right">
