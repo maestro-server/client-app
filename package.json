@@ -28,7 +28,7 @@
     "postcss-import": "^11.1.0",
     "sass-loader": "^6.0.6",
     "store": "^2.0.12",
-    "vee-validate": "^2.2.0",
+    "vee-validate": "^2.2.15",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-clipboard2": "^0.1.1",

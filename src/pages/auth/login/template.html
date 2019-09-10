@@ -20,6 +20,7 @@
       v-validate.initial="'required|min:4'"
       name="password"
       :error="makeError('password')"
+      @keydown.enter="login"
     ></bs-input>
 
     <button type="button" class="btn btn-primary pull-right" @click="login">Sign in</button>
