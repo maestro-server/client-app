@@ -19,7 +19,7 @@
     "axios": "^0.18.0",
     "babel-plugin-transform-vue-jsx": "^3.5.1",
     "bootue": "^0.6.0",
-    "centrifuge": "^2.1.5",
+    "centrifuge": "^2.2.3",
     "chart.js": "^2.8.0",
     "css-loader": "^0.28.9",
     "lodash": "^4.17.11",
