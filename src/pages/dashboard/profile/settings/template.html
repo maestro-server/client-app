@@ -127,7 +127,7 @@
     <h3>Change or password</h3>
     Change your password or recover your current one.
     <br/><br/>
-    <form class="row" data-vv-slot-scope="fpassword">
+    <form class="row">
 
       <bs-input
         type="password"
@@ -135,8 +135,7 @@
         v-model="cpass.password"
         v-validate.initial="'required'"
         name="password"
-        data-vv-slot-scope="fpassword"
-        :error="makeError('password', 'fpassword')"
+        :error="makeError('password')"
         class="col-xs-12"
       ></bs-input>
 
@@ -146,7 +145,6 @@
         v-model="cpass.newpass"
         v-validate.initial="'required|min:4'"
         name="newpassword"
-        data-vv-slot-scope="fpassword"
         :error="makeError('newpassword')"
         ref="newpassword"
         class="col-xs-6"
@@ -155,16 +153,15 @@
       <bs-input
         type="password"
         label="Verify password"
-        v-validate="'required|min:4|confirmed:newpassword'"
+        v-validate.initial="'required|min:4|confirmed:newpassword'"
         name="verypassword"
         v-model="cpass.vpass"
-        data-vv-slot-scope="fpassword"
         :error="makeError('verypassword')"
         class="col-xs-6"
       ></bs-input>
 
       <div class="col-xs-12">
-        <button type="button" class="btn btn-primary pull-right" :disabled="errors.any('fpassword')" @click="updatePassWord">
+        <button type="button" class="btn btn-primary pull-right" :disabled="fields.verypassword && !fields.verypassword.valid" @click="updatePassWord">
           Save a new password
         </button>
       </div>

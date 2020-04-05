@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "bootue": "^0.6.0",
+    "bootue": "^0.6.4",
     "centrifuge": "^2.4.0",
     "chart.js": "^2.9.3",
     "lodash": "^4.17.15",
