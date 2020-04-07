@@ -5,7 +5,7 @@ import topmenu from '../_modules/tabMenu/tab-menu.vue'
 export default {
   data () {
     return {
-      submenu: {'settings': 'Profile', 'about': 'About'}
+      submenu: {'about': 'About'}
     }
   },
 
@@ -17,9 +17,9 @@ export default {
 
   mounted () {
     this.setPage([
-      'Settings',
-      'Profile, plan and billing',
-      'fa-user'
+      'Info',
+      'Service info',
+      'fa-cog'
     ])
   },
 

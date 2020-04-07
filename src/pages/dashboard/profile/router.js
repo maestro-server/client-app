@@ -2,6 +2,7 @@
 import comp from './settings'
 import accdelete from './delete/router'
 import profile from './settings/router'
+import about from './about/router'
 
 export default {
   name: 'profile',
@@ -10,6 +11,7 @@ export default {
   component: comp,
   children: [
     accdelete,
-    profile
+    profile,
+    about
   ]
 }

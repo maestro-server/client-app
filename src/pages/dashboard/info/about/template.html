@@ -1,0 +1,15 @@
+<div class="about">
+
+  <div class="pb10">
+    <h3 class="col-xs-8 pb10">
+      {{title}}
+    </h3>
+  </div>
+
+  <div class="col-xs-12 wrapper-infos">
+    <div v-for="service in services">
+      <info-view :data="service" :title="service.name"></info-view>
+    </div>
+  </div>
+
+</div>
