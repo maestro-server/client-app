@@ -7,7 +7,13 @@ export default {
   data: function () {
     return {
       title: "About",
-      services: []
+      services: [],
+      clients: {
+        name: 'Client',
+        description: 'Single page application',
+        version: this.$store.getters.get_version,
+        status: 'UP'
+      }
     }
   },
 
@@ -16,6 +22,7 @@ export default {
     fetchData() {
       FectherEntity(Maestro)({path: '/versions'})
         .find((e) => {
+          e.data.unshift(this.clients);
           this.$set(this, 'services', e.data)
         })
     }

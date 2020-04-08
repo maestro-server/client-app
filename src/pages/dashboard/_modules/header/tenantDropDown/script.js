@@ -19,6 +19,7 @@ export default {
         dependency: ['Dependency', 'fa-cog'],
         hr: true,
         profile: ['Profile', 'fa-user'],
+        info: ['About', 'fa-info-circle'],
         logout: ['Logout', 'fa-sign-out']
       },
       showDrop: {tenants: false, settings: false},
