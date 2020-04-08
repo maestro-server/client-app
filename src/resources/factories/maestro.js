@@ -4,8 +4,8 @@ import Factory from './factory'
 
 class Maestro extends Factory {
 
-  constructor(model={}) {
-    super(model, "/")
+  constructor(model={}, path='/') {
+    super(model, path)
   }
 }
 

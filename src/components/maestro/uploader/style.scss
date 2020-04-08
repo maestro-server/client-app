@@ -1,0 +1,33 @@
+//
+// Tenant DropDown
+// --------------------------------------------------
+@import '~components/bootue/_core/variables';
+@import '~components/bootue/_core/mixins';
+
+.wrapper-img {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+
+  @media only screen and (min-width: $screen-md-min) {
+    width: 70px;
+    height: 70px;
+  }
+
+  @media only screen and (max-width: $screen-sm-max) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media only screen and (max-width: $screen-xs-max) {
+    width: 70px;
+    height: 70px;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+

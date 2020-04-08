@@ -1,0 +1,23 @@
+@import '~components/bootue/_core/variables';
+
+.wrapper-infos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  div {
+    flex: 0 0 33.33%;
+    padding-right: 8px;
+    overflow: hidden;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      flex: 0 0 50%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      flex: 0 0 100%;
+    }
+  }
+}

@@ -32,8 +32,15 @@
 
         <!-- ================= Endpoints ================= -->
         <!-- ============================================== -->
-        <tab header="Endpoints">
-          <tab-endpoint :types="options.check" @update="val => data.entry = val" ref="tab_endpoint"></tab-endpoint>
+        <tab header="Entry points">
+          <tab-endpoint :types="options.check" @update="val => data.entry = val" ref="tab_endpoint">
+            <template slot="label">
+              <well size="sm">
+                Entry points are root access of the system represented as applications, can be cdns, proxies and loadbalances, vpns, file systems and webservices. Entry point it's used as a start point to make de dependency graph of the system. 
+                <a href="http://docs.maestroserver.io/en/latest/userguide/graphs/bussiness_graphs.html#entries-applications" target="_blank">See more</a>
+              </well>
+            </template>
+          </tab-endpoint>
         </tab>
 
         <!-- ================= Clients ================= -->

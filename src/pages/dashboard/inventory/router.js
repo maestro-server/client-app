@@ -13,6 +13,7 @@ import databases from './databases/router'
 import brokers from './brokers/router'
 
 import cache from './cache/router'
+import corporate from './corporate/router'
 import serverless from './serverless/router'
 import apiGateway from './api-gateway/router'
 import cdn from './cdn/router'
@@ -56,6 +57,7 @@ export default {
     databases,
     brokers,
     cache,
+    corporate,
     serverless,
     apiGateway,
     cdn,

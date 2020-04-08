@@ -32,6 +32,7 @@ export default {
         'monitor': 'Monitoring System',
         'logs': 'Logs System',
         'smtp': 'Emails (smtps/mtas)',
+        'corporate': 'Corporate (erp/financial)',
         'vpn': 'VPNs',
         'dns': 'DNS',
         'auth': 'Auth',

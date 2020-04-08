@@ -8,6 +8,7 @@ import inventory from './inventory/router'
 import analytics from './analytics/router'
 import reports from './reports/router'
 import tracking from './tracking/router'
+import info from './info/router'
 
 export default {
   path: '/dashboard',
@@ -19,6 +20,7 @@ export default {
     inventory,
     analytics,
     reports,
-    tracking
+    tracking,
+    info
   ]
 }

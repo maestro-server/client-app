@@ -1,6 +1,6 @@
 
-@import '~bootue/src/_core/variables';
-@import '~bootue/src/_core/mixins';
+@import '~components/bootue/_core/variables';
+@import '~components/bootue/_core/mixins';
 
 $dp-item-width: 110px;
 
@@ -43,7 +43,7 @@ $dp-item-width: 110px;
         justify-content: center;
         flex-direction: row;
         background: #d6d6d6;
-        
+
         padding: 6px 0;
         overflow-x: auto;
         overflow-y: hidden;

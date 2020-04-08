@@ -1,42 +1,43 @@
 <template>
   <creater-list
-:basket="value"
-label="Client"
-:show-add-btn="false"
-@update="updaterEdit"
->
-<template slot="forms">
+    :basket="value"
+    label="Client"
+    :show-add-btn="false"
+    @update="updaterEdit"
+  >
+    <template slot="forms">
       <div class="text-right">
         <router-link
-:to="{name: 'clients'}"
-class="btn btn-primary btn-xs"
-target="_blank"
->
-          <i class="fa fa-plus-circle" /> Clients
+          :to="{name: 'clients'}"
+          class="btn btn-primary btn-xs"
+          target="_blank"
+        >
+          <i class="fa fa-plus-circle"/> Clients
         </router-link>
       </div>
 
       <typeahead
-label="Clients"
-placeholder="Name of Client"
-                 :async="URL"
-                 async-key="items"
-                 :on-search="requestSearch"
-                 :template="template"
-                 form-type="horizontal"
-                 :on-hit="onHit"
-                 class="mt10"
-                 :headers="headers"
+        name="msclients"
+        label="Clients"
+        placeholder="Name of Client"
+        :async="URL"
+        async-key="items"
+        :on-search="requestSearch"
+        :template="template"
+        form-type="horizontal"
+        :on-hit="onHit"
+        class="mt10"
+        :headers="headers"
       />
     </template>
 
     <template
-slot="view"
-slot-scope="props"
->
+      slot="view"
+      slot-scope="props"
+    >
       <b class="text-capitalize">{{ props.item.name }}</b>
     </template>
-</creater-list>
+  </creater-list>
 </template>
 
 <script>
@@ -59,7 +60,7 @@ slot-scope="props"
     },
 
     methods: {
-      requestSearch(async, val, key='name') {
+      requestSearch(async, val, key = 'name') {
         return `${async}%7B"${key}":"${val}"%7D`
       }
     }

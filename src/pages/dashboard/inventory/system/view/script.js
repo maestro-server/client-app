@@ -40,6 +40,16 @@ export default {
         .show(_.merge(this.model, {list_apps}))
     },
 
+    edit: function (index=0) {
+      this.MCreate
+        .setTabShow(index)
+        .onFinishCallBack(() => {
+          this.fetchData(this.id)
+          this.fetchApps()
+        })
+        .show(this.model)
+    },
+
     fetchApps(force = true) {
       if (this.id) {
         FectherEntity(Applications)({force})
