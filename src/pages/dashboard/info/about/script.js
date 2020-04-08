@@ -17,7 +17,6 @@ export default {
     }
   },
 
-
   methods: {
     fetchData() {
       FectherEntity(Maestro)({path: '/versions'})
