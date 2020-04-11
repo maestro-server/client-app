@@ -8,6 +8,11 @@ import CacheManager from 'services/cacheManager'
  *
  */
 
+const ws_protocol = (protocol) => {
+  const map = {'http:': 'ws:', 'https:': 'wss:'};
+  return _.get(map, protocol, map['http:'])
+}
+
 export default {
   version: VERSION,
 
@@ -29,9 +34,9 @@ export default {
     'base_url': `${window.location.protocol}//${window.location.host}`,
     'api_url': _.get(document.head.querySelector("[name=api_url]"), 'content', `//${window.location.hostname}:8888`),
     'analytics_url': _.get(document.head.querySelector("[name=analytics_url]"), 'content', `//${window.location.hostname}:9999`),
-    'websocket_url': _.get(document.head.querySelector("[name=websocket_url]"), 'content', `ws://${window.location.hostname}:8000`),
+    'websocket_url': _.get(document.head.querySelector("[name=websocket_url]"), 'content', `${ws_protocol(window.location.protocol)}//${window.location.hostname}:8000`),
     'static_url': _.get(document.head.querySelector("[name=static_url]"), 'content', `//${window.location.hostname}:8888/static/`),
-    'logo_url': _.get(document.head.querySelector("[name=logo_url]"), 'content', `//${window.location.hostname}:8888/static/imgs/logo300.png`),
+    'logo_url': _.get(document.head.querySelector("[name=logo_url]"), 'content', '/static/imgs/logo300.png'),
     'theme': _.get(document.head.querySelector("[name=theme]"), 'content', 'lotus'),
     'api_timeout': 5000
   }
