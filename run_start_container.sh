@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 INDEX_PATH=/var/www/index.html
 VARS=('api_url' 'analytics_url' 'websocket_url' 'static_url' 'logo_url' 'theme')
