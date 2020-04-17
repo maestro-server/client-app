@@ -12,7 +12,7 @@ for i in "${!VARS[@]}"; do
     # If a env vars exit put the value on meta tag
     if [ -n "${!ENVS[$i]}" ];
     then
-        sed -i "s/<!-- ${VARS[$i]} -->/<meta name='${VARS[$i]}' content='${!ENVS[$i]}'>/" $INDEX_PATH
+        sed -i "s#<!-- ${VARS[$i]} -->#<meta name='${VARS[$i]}' content='${!ENVS[$i]}'>#" $INDEX_PATH
     fi
 done
 
