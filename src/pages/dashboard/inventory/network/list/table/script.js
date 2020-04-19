@@ -1,6 +1,6 @@
 'use strict'
 
-import Networks from 'factories/networks'
+import Network from 'factories/network'
 import VueTable from 'mixins/vue-table'
 import Datacenters from 'factories/datacenters'
 import FectherEntity from 'services/fetchEntity'
@@ -10,7 +10,7 @@ export default {
 
   data: function () {
     return {
-      entity: new Networks(),
+      entity: new Network(),
       columns: ['name',  'family', 'vpc_id', 'subnet_id', 'environment', 'ldatacenters', 'status', 'actions'],
       options: {
         orderBy: {column: 'updated_at', ascending: false},

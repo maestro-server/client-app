@@ -1,7 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Networks from 'factories/networks'
+import Network from 'factories/network'
 import FectherEntity from 'services/fetchEntity'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
@@ -59,13 +59,13 @@ export default {
     createSave () {
       this.setupModel()
 
-      FectherEntity(Networks)()
+      FectherEntity(Network)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
-      FectherEntity(Networks)()
+      FectherEntity(Network)()
         .update(this.finishJob, this.model)
     },
   },

@@ -2,11 +2,11 @@
 
 import FactoryTenant from './factoryTenant'
 
-class Networks extends FactoryTenant {
+class Network extends FactoryTenant {
 
   constructor(model={}, path='', tenant=false) {
     super(model, "network"+path, tenant)
   }
 }
 
-export default Networks
+export default Network

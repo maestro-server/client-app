@@ -1,7 +1,7 @@
 'use strict'
 import _ from 'lodash'
 
-import Networks from 'factories/networks'
+import Network from 'factories/network'
 import ViewSingle from 'mixins/view-single'
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
   data: function () {
     return {
-      entity: Networks,
+      entity: Network,
       model: {tags: []},
     }
   },
