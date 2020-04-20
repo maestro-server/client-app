@@ -4,25 +4,25 @@ import Login from 'services/login'
 import axios from 'axios'
 
 import api_url from 'src/resources/libs/api_url'
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 class Uploader {
 
-  constructor(ref = null) {
+  constructor (ref = null) {
     this.ref = ref
     this.callback = () => {}
     this.callbackErr = null
   }
 
-  setFinishUpload(callback, method='callback') {
+  setFinishUpload (callback, method = 'callback') {
     this[method] = callback
     return this
   }
 
-  getSignedRequest(file) {
+  getSignedRequest (file) {
     const URL = `${api_url}/${this.ref}/upload?filetype=${file.type}`
 
-    axios.get(URL, {headers: {"Authorization": Login.Authorization()}})
+    axios.get(URL, { headers: { Authorization: Login.Authorization() } })
       .then((result) => {
         this.uploadFile(file, result.data)
       })
@@ -31,9 +31,9 @@ class Uploader {
       });
   }
 
-  uploadFile(file, resp) {
-    const {signedRequest, headers} = resp;
-    axios.put(signedRequest, file, {headers})
+  uploadFile (file, resp) {
+    const { signedRequest, headers } = resp;
+    axios.put(signedRequest, file, { headers })
       .then(() => {
         this.callback(file, resp)
       })
@@ -42,7 +42,7 @@ class Uploader {
       });
   }
 
-  static uploadError(title, cb = null) {
+  static uploadError (title, cb = null) {
     const data = {
       show: true,
       title,

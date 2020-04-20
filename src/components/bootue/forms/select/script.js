@@ -186,7 +186,7 @@ export default {
       type: Function,
       default (newOption) {
         if (typeof this.mutableOptions[0] === 'object') {
-          newOption = {[this.optionsLabel]: newOption}
+          newOption = { [this.optionsLabel]: newOption }
         }
         this.$emit('option:created', newOption)
         return newOption
@@ -365,7 +365,7 @@ export default {
             ref = val
           }
         })
-        let index = this.mutableValue.indexOf(ref)
+        const index = this.mutableValue.indexOf(ref)
         this.mutableValue.splice(index, 1)
       } else {
         this.mutableValue = null
@@ -600,7 +600,7 @@ export default {
      * @return {array}
      */
     filteredOptions () {
-      let options = this.mutableOptions.filter((option) => {
+      const options = this.mutableOptions.filter((option) => {
         if (typeof option === 'object' && option.hasOwnProperty(this.optionsLabel)) {
           return option[this.optionsLabel].toLowerCase().indexOf(this.search.toLowerCase()) > -1
         } else if (typeof option === 'object' && !option.hasOwnProperty(this.optionsLabel)) {

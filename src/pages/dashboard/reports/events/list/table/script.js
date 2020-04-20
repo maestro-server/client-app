@@ -11,7 +11,7 @@ export default {
       entity: new Events(),
       columns: ['msg', 'context', 'updated_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         sortable: ['created_at'],
         filterable: ['msg', 'context'],
         headings: {
@@ -22,7 +22,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.updated_at = new Date(d.updated_at).toLocaleString()
         return d

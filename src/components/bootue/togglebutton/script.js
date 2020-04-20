@@ -2,11 +2,11 @@ import coerce from '../_core/_utils/coerce.js'
 
 export default {
   props: {
-    disabled: {default: null},
-    falseType: {default: null},
+    disabled: { default: null },
+    falseType: { default: null },
     name: null,
-    readonly: {default: null},
-    trueType: {default: 'primary'},
+    readonly: { default: null },
+    trueType: { default: 'primary' },
     value: false
   },
   data () {

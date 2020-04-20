@@ -4,8 +4,10 @@ import Factory from './factory'
 
 class Adminer extends Factory {
 
-  constructor(model={}) {
-    super(model, "adminer")
+  static ename = "adminer"
+
+  constructor (model = {}) {
+    super(model, Adminer.ename)
   }
 }
 

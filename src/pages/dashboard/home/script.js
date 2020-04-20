@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 import mostMulti from './charts/most_multi.vue'
 import mostSingle from './charts/most_single.vue'
@@ -35,32 +35,55 @@ export default {
   data () {
     return {
       limit: 300,
-      result: {servers:[], applications:[], datacenters: [], system: []},
-      load:{system: false, applications: false, datacenters: false, servers:false},
+      results: {
+        servers: {
+          entity: Servers,
+          items: [],
+          found: 0
+        },
+        applications: {
+          entity: Applications,
+          items: [],
+          found: 0
+        },
+        datacenters: {
+          entity: Datacenters,
+          items: [],
+          found: 0
+        },
+        system: {
+          entity: System,
+          items: [],
+          found: 0
+        }
+      },
+      page: [
+        'Overview',
+        'A simple application to manage an IT operations team servers, including systems, applications and services.',
+        'fa-cloud'],
       links: [
-        {route: {name: 'servers'}, name: 'Server list', icon: 'fa-server'},
-        {route: {name: 'application'}, name: 'Apps list', icon: 'fa-code'},
-        {route: {name: 'loadbalance'}, name: 'Loadbalances list', icon: 'fa-tasks'},
-        {route: {name: 'database'}, name: 'Databases list', icon: 'icon-database'},
-        {route: {name: 'broker'}, name: 'Brokers/Streams list', icon: 'fa-magic'},
-        {route: {name: 'ci-cd'}, name: 'CI/CD list', icon: 'fa-briefcase'},
-        {route: {name: 'monitor'}, name: 'Monitoring list', icon: 'fa-bullhorn'},
-        {route: {name: 'system'}, name: 'System list', icon: 'fa-briefcase'}
+        { route: { name: 'servers' }, name: 'Server list', icon: 'fa-server' },
+        { route: { name: 'application' }, name: 'Apps list', icon: 'fa-code' },
+        { route: { name: 'loadbalance' }, name: 'Loadbalances list', icon: 'fa-tasks' },
+        { route: { name: 'database' }, name: 'Databases list', icon: 'icon-database' },
+        { route: { name: 'broker' }, name: 'Brokers/Streams list', icon: 'fa-magic' },
+        { route: { name: 'ci-cd' }, name: 'CI/CD list', icon: 'fa-briefcase' },
+        { route: { name: 'monitor' }, name: 'Monitoring list', icon: 'fa-bullhorn' },
+        { route: { name: 'system' }, name: 'System list', icon: 'fa-briefcase' }
       ]
     }
   },
 
   methods: {
-    makeChart(post, entity) {
-      const {data} = post
-      this.result[entity.name.toLowerCase()] = data
-      this.load[entity.name.toLowerCase()] = true
+    makeChart (post, entity, key) {
+      const { data } = post
+      _.assign(this.results[key], data)
     },
 
-    getLast(entity, offset = 0, limit = 5) {
-      const result = _.get(this.result, entity+'.items', [])
-      if(_.isArray(result)) {
-        return  _.slice(result, offset, (offset+limit))
+    getLast (entity, offset = 0, limit = 5) {
+      const result = _.get(this.results[entity], 'items', [])
+      if (_.isArray(result)) {
+        return _.slice(result, offset, (offset + limit))
       }
     },
 
@@ -68,20 +91,17 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
-    fetchData (entity, force=true) {
-      FectherEntity(entity)({force})
-        .find(e=>this.makeChart(e, entity), {limit: this.limit})
-    },
+    fetchData (entity, force = true) {
+      _.forEach(this.results, (v, k) => {
+
+        FectherEntity(v.entity)({ force })
+          .find(e => this.makeChart(e, v.entity, k), { limit: this.limit })
+      });
+    }
   },
 
   mounted () {
-    this.setPage([
-      'Overview',
-      'A simple application to manage an IT operations team servers, including systems, applications and services.',
-      'fa-cloud'])
-    this.fetchData(Servers)
-    this.fetchData(Applications)
-    this.fetchData(Datacenters)
-    this.fetchData(System)
+    this.setPage(this.page)
+    this.fetchData()
   }
 }

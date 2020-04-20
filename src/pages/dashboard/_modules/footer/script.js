@@ -7,7 +7,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.version = this.$store.getters.get_version
   }
 }

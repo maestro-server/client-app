@@ -42,45 +42,45 @@ slot-scope="props"
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import Modals from 'mixins/modals'
-  import headerLogin from 'src/resources/libs/headerAuthorization'
+import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
-  export default {
-    mixins: [Modals, TabCreaterList],
+export default {
+  mixins: [Modals, TabCreaterList],
 
-    props: {
-      label: {default: 'Application'},
-      defaultType: {default: 'Application'},
-      entity: {},
-      relName: {}
-    },
+  props: {
+    label: { default: 'Application' },
+    defaultType: { default: 'Application' },
+    entity: {},
+    relName: {}
+  },
 
-    data: function () {
-      return {
-        headers: headerLogin,
-        type: "Application",
-        URL: `${new this.entity().getUrl()}?query=`,
-        template: "<b>{{item.name}}</b>",
-        options: {
-          role: []
-        }
-      }
-    },
-
-    methods: {
-      requestSearch(async, val, key='name') {
-        return `${async}%7B"${key}":"${val}"%7D`
-      },
-
-      updaterEdit(data) {
-        this.$set(this, 'value', data || [])
-        const m = data.map(e=>e._id)
-        this.$emit('update', m)
+  data: function () {
+    return {
+      headers: headerLogin,
+      type: "Application",
+      URL: `${new this.entity().getUrl()}?query=`,
+      template: "<b>{{item.name}}</b>",
+      options: {
+        role: []
       }
     }
+  },
+
+  methods: {
+    requestSearch (async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}"%7D`
+    },
+
+    updaterEdit (data) {
+      this.$set(this, 'value', data || [])
+      const m = data.map(e => e._id)
+      this.$emit('update', m)
+    }
   }
+}
 
 </script>

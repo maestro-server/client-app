@@ -40,6 +40,10 @@ a.label {
   }
 }
 
+.label + .label, .label + .fa {
+  margin-left: 3px;
+}
+
 // Colors
 // Contextual variations (linked labels get darker on :hover)
 

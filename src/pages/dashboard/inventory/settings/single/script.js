@@ -18,7 +18,7 @@ export default {
   },
 
   computed: {
-    MOptions() {
+    MOptions () {
       return this.$parent.$refs.modal_options
     }
   },
@@ -40,7 +40,7 @@ export default {
         .show(entity)
     },
 
-    fetchData() {
+    fetchData () {
       FectherEntity(Maestro)()
         .find((e) => {
           this.$set(this.options, 'info', e.data)
@@ -48,7 +48,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

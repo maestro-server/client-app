@@ -10,7 +10,7 @@
         <span class="main fix-mobile">
           <div class="entity text-capitalize white ml5">
             <strong>{{tenant.name}}</strong>
-            <i class="fa" :class="{'fa-chevron-up': showDrop.tenants, 'fa-chevron-down': !showDrop.tenants}"
+            <i class="fa ml5" :class="{'fa-chevron-up': showDrop.tenants, 'fa-chevron-down': !showDrop.tenants}"
                aria-hidden="true"></i>
           </div>
         </span>
@@ -52,7 +52,7 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div>f
             <!-- dragger will be automatically added here -->
           </div>
 
@@ -67,7 +67,7 @@
     <div class="item complementary text-center">
       <a @click.stop="toggle('settings')" class="entity">
           <i class="fa fa-cog white" aria-hidden="true"></i>
-          <i class="fa white hidden-xs hidden-sm" :class="{'fa-chevron-up': showDrop.settings, 'fa-chevron-down': !showDrop.settings}"
+          <i class="fa white hidden-xs hidden-sm ml5" :class="{'fa-chevron-up': showDrop.settings, 'fa-chevron-down': !showDrop.settings}"
            aria-hidden="true"></i>
       </a>
 

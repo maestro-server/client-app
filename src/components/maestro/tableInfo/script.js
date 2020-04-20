@@ -3,6 +3,6 @@
 export default {
   props: {
     items: {},
-    title: {type: String}
+    title: { type: String }
   }
 }

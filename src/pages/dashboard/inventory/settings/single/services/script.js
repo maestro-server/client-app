@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.lfamily = _.reduce(d.family, (o, f) => `${o} ${f}`, "")
         d.ltags = _.reduce(d.tags, (o, f) => `${o} ${f}`, "")

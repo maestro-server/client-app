@@ -1,13 +1,13 @@
 export default {
   props: {
-    button: {type: Boolean, default: false},
-    disabled: {type: Boolean, default: false},
-    falseValue: {default: false},
-    name: {type: String, default: null},
-    readonly: {type: Boolean, default: false},
-    trueValue: {default: true},
-    type: {type: String, default: "primary"},
-    value: {default: false}
+    button: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    falseValue: { default: false },
+    name: { type: String, default: null },
+    readonly: { type: Boolean, default: false },
+    trueValue: { default: true },
+    type: { type: String, default: "primary" },
+    value: { default: false }
   },
   data () {
     return {
@@ -24,7 +24,7 @@ export default {
   },
   watch: {
     checked (val) {
-      let value = val ? this.trueValue : this.falseValue
+      const value = val ? this.trueValue : this.falseValue
       this.$emit('checked', val)
       this.$emit('input', value);
       this.updateParent()
@@ -33,7 +33,7 @@ export default {
       this.updateFromParent();
     },
     value (val) {
-      let checked = val === this.trueValue
+      const checked = val === this.trueValue
       if (this.checked !== checked) {
         this.checked = checked
       }
@@ -54,14 +54,14 @@ export default {
     // sync our state with the $parent.val
     updateFromParent () {
       if (this.inGroup) {
-        let index = this.$parent.val.indexOf(this.trueValue)
+        const index = this.$parent.val.indexOf(this.trueValue)
         this.checked = ~index
       }
     },
     // called when our checked state changes
     updateParent () {
       if (this.inGroup) {
-        let index = this.$parent.val.indexOf(this.trueValue)
+        const index = this.$parent.val.indexOf(this.trueValue)
         if (this.checked && !~index) this.$parent.val.push(this.trueValue)
         if (!this.checked && ~index) this.$parent.val.splice(index, 1)
       }

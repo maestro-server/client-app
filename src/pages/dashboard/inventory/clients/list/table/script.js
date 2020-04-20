@@ -9,9 +9,9 @@ export default {
   data: function () {
     return {
       entity: new Clients(),
-      columns: ['name', 'lcontact','updated_at', 'created_at', 'actions'],
+      columns: ['name', 'lcontact', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name'],
         headings: {
           lcontact: 'Contacts',
@@ -23,7 +23,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.lcontact = _.reduce(d.contacts, (o, f, k) => this.viewReducer(o, f, k, 'channel'), "")
 

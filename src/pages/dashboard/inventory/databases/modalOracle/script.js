@@ -18,7 +18,7 @@ export default {
   },
 
   computed: {
-    tab_app_dc() {return this.$refs.tab_app_dc}
+    tab_app_dc () { return this.$refs.tab_app_dc }
   },
 
   data () {
@@ -28,12 +28,21 @@ export default {
       foptions: 'Oracle',
       modal: 'oracle',
       initialData: {
-        name: null, status: 'Active', description: null, provider:null, storage_types:null, asm_groups: [],
-        tags: [], pdbs: [], cluster: null, crs_version: null, type: null,
-        role: {port: null, endpoint: null}
+        name: null,
+        status: 'Active',
+        description: null,
+        provider: null,
+        storage_types: null,
+        asm_groups: [],
+        tags: [],
+        pdbs: [],
+        cluster: null,
+        crs_version: null,
+        type: null,
+        role: { port: null, endpoint: null }
       },
       options: {
-        status:[],
+        status: [],
         third: [],
         own: [],
         oracle: {
@@ -42,54 +51,54 @@ export default {
         }
       },
       mapper: [
-        {name: 'sga', label: 'SGA', validate: 'min:2'},
-        {name: 'pga', label: 'PGA', validate: 'min:2'},
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'version', label: 'Version', validate: 'min:2'},
-        {name: 'patch', label: 'Patch Level', validate: 'min:2'},
-        {name: 'port', label: 'Port', validate: 'alpha_num'},
-        {name: 'unique', label: 'unique Name', validate: 'min:2'},
-        {name: 'dns', label: 'DNS', validate: 'min:2'},
-        {name: 'tns', label: 'TNS', type: 'textarea', validate: 'min:2'},
-        {name: 'extra_config', label: 'Extra Configs', type: 'textarea', validate: 'min:2'}
+        { name: 'sga', label: 'SGA', validate: 'min:2' },
+        { name: 'pga', label: 'PGA', validate: 'min:2' },
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'version', label: 'Version', validate: 'min:2' },
+        { name: 'patch', label: 'Patch Level', validate: 'min:2' },
+        { name: 'port', label: 'Port', validate: 'alpha_num' },
+        { name: 'unique', label: 'unique Name', validate: 'min:2' },
+        { name: 'dns', label: 'DNS', validate: 'min:2' },
+        { name: 'tns', label: 'TNS', type: 'textarea', validate: 'min:2' },
+        { name: 'extra_config', label: 'Extra Configs', type: 'textarea', validate: 'min:2' }
       ]
     }
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = this.create ? `Create new Oracle DB` : `Edit ${this.model.name} Oracle DB`
     },
 
-    asmGroupChange(val) {
+    asmGroupChange (val) {
       this.$set(this.data, 'asm_groups', val)
     },
 
-    typeChange(val) {
+    typeChange (val) {
       this.$set(this.data, 'type', val)
       this.$forceUpdate()
     },
 
-    showModalGroups() {
+    showModalGroups () {
       this.$refs.modal_groups.showModal = true
     },
 
-    clearItems() {
+    clearItems () {
       this.data.asm_groups = []
     },
 
-    hookCreateLoad() {
+    hookCreateLoad () {
       this.$set(this.data, 'modal', this.modal)
     },
 
-    fetchOptions() {
+    fetchOptions () {
       const key = `database_options`
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key })
     }
   },
 
-  created() {
+  created () {
     this.fetchOptions()
   }
 }

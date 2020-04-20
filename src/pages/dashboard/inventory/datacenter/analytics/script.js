@@ -9,7 +9,7 @@ import doughnutChart from 'components/charts/doughnut_chart.vue'
 import totalChart from 'components/charts/total_chart.vue'
 import polarChart from 'components/charts/polar_chart.vue'
 import barChart from 'components/charts/bar_chart.vue'
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 export default {
   mixins: [ViewSingle, charts],
@@ -32,18 +32,18 @@ export default {
   },
 
   computed: {
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     }
   },
 
   methods: {
-    activateAnalytics() {
-      const {_id} = this.model
-      FectherEntity(Datacenters)({path: `/${_id}/analytics`}).create(this.finishReport, {_id})
+    activateAnalytics () {
+      const { _id } = this.model
+      FectherEntity(Datacenters)({ path: `/${_id}/analytics` }).create(this.finishReport, { _id })
     },
 
-    finishReport(data) {
+    finishReport (data) {
       if (data.status <= 300) {
         this.showMessage()
         this.waitComplete(_.get(data, 'data[0].reports[0]._id'))
@@ -51,30 +51,29 @@ export default {
       }
     },
 
-    finishReportUpdate(data) {
+    finishReportUpdate (data) {
       if (data.status <= 300) {
         this.showMessage()
         this.waitComplete(_.get(data, 'data._id'))
       }
     },
 
-    showMessage() {
+    showMessage () {
       this.waitMessage = true
     },
 
-    reloadPage() {
+    reloadPage () {
       this.$router.go()
-      return
+
     },
 
-    waitComplete(id) {
+    waitComplete (id) {
       this.event = id
       EventBus.$on(`reports-${id}`, this.reloadPage)
     }
   },
 
-  destroyed() {
-    if(this.event)
-      EventBus.$off(`reports-${this.event}`, this.reloadPage)
+  destroyed () {
+    if (this.event) { EventBus.$off(`reports-${this.event}`, this.reloadPage) }
   }
 }

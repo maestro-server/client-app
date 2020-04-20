@@ -4,34 +4,34 @@ import session from './sessionStorage'
 import local from './localStorage'
 import vuex from './vuexStorage'
 
-const avaliable = {session, local, vuex}
+const avaliable = { session, local, vuex }
 
-const Storage = ({k, time, persistence}) => {
+const Storage = ({ k, time, persistence }) => {
 
   const Repository = avaliable[persistence || 'session']
 
   return {
-    create(result) {
+    create (result) {
       return new Repository(k, time)
         .createStore(result);
     },
 
-    get() {
+    get () {
       return new Repository(k)
         .restoreStore();
     },
 
-    delete() {
+    delete () {
       return new Repository(k)
         .deleteStore();
     },
 
-    clear() {
+    clear () {
       return new Repository()
         .clearStore();
     },
 
-    each(fn) {
+    each (fn) {
       return new Repository()
         .eachStore(fn)
     }

@@ -33,15 +33,15 @@
             v-for="filter, index in submit.filters" :key="index"
             class="list-group-item list-group-item-warning"
           >
-            <b class="primary">{{ filter.field }}</b>
-            <i>{{ filter.comparer }}</i>
-            <span>{{ filter.filter }}</span>
+            <b class="primary"> {{ filter.field }}</b>
+            <i> {{ filter.comparer }}</i>
+            <span> {{ filter.filter }}</span>
 
             <ul v-if="filter.subfilter">
               <li class="text-wrapper">
-                <b class="primary">{{ filter.subfield }}</b>
-                <i>{{ filter.comparer }}</i>
-                <span>{{ filter.subfilter }}</span>
+                <b class="primary"> {{ filter.subfield }}</b>
+                <i> {{ filter.comparer }}</i>
+                <span> {{ filter.subfilter }}</span>
               </li>
             </ul>
 
@@ -66,14 +66,14 @@
       <h5>Tips</h5>
       <table class="table table-responsive table-striped">
         <tbody>
-          <tr>
-            <th>Status</th>
-            <td>Used in pontual situation to sign some state. (EX: active, stopped servers)</td>
-          </tr>
-          <tr>
-            <th>Active</th>
-            <td>Boolean value used when delete item (in reports you can recover deleted items)</td>
-          </tr>
+        <tr>
+          <th>Status</th>
+          <td>Used in pontual situation to sign some state. (EX: active, stopped servers)</td>
+        </tr>
+        <tr>
+          <th>Active</th>
+          <td>Boolean value used when delete item (in reports you can recover deleted items)</td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -81,14 +81,14 @@
 </template>
 
 <script>
-"use strict";
+'use strict'
 
-import _ from "lodash";
-import Modals from "mixins/modals";
-import Adminer from "factories/adminer";
-import FectherEntity from "services/fetchEntity";
+import _ from 'lodash'
+import Modals from 'mixins/modals'
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
 
-import reportFilter from "../modules/reportFilter/ReportFilter";
+import reportFilter from '../modules/reportFilter/ReportFilter'
 
 export default {
   components: {
@@ -96,14 +96,19 @@ export default {
   },
   mixins: [Modals],
 
-  data: function() {
+  data: function () {
     const defaultGeneral = {
-      report: "general",
+      report: 'general',
       component: null,
       filters: [
-        { field: "active", filter: "true", comparer: "equal", typ: "boolean" }
+        {
+          field: 'active',
+          filter: 'true',
+          comparer: 'equal',
+          typ: 'boolean'
+        }
       ]
-    };
+    }
 
     return {
       initialData: _.clone(defaultGeneral),
@@ -111,79 +116,79 @@ export default {
       options: {
         tables: false
       }
-    };
+    }
   },
 
   computed: {
-    tables() {
-      if (_.has(this, "options.tables") && _.isArray(this.options.tables)) {
-        return this.options.tables.map(data => data.name);
+    tables () {
+      if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
+        return this.options.tables.map(data => data.name)
       }
-      return [];
+      return []
     }
   },
 
-  created() {
-    this.fetchData();
+  created () {
+    this.fetchData()
   },
 
   methods: {
-    updateFilters() {
-      if (_.has(this, "options.tables") && _.isArray(this.options.tables)) {
+    updateFilters () {
+      if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
         const items = this.options.tables.filter(
           data => this.submit.component === data.name
-        );
-        this.$refs.compfilters.updateFilters(_.head(items));
+        )
+        this.$refs.compfilters.updateFilters(_.head(items))
 
-        this.updateEvent();
+        this.updateEvent()
       }
     },
 
-    addFilter(picks) {
+    addFilter (picks) {
       if (picks) {
-        this.submit.filters.push(picks);
+        this.submit.filters.push(picks)
       }
 
-      this.updateEvent();
+      this.updateEvent()
     },
 
-    delItem(index) {
-      delete this.submit.filters.splice(index, 1);
+    delItem (index) {
+      delete this.submit.filters.splice(index, 1)
 
-      this.updateEvent();
+      this.updateEvent()
     },
 
-    updateEvent() {
-      this.$emit("update", this.submit);
+    updateEvent () {
+      this.$emit('update', this.submit)
     },
 
-    updaterEdit(data) {
-      this.$set(this, "submit", data);
+    updaterEdit (data) {
+      this.$set(this, 'submit', data)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({ persistence: "local" }).find(this.fetchAdminer, {
-        key: "reports_options"
-      });
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
+        key: 'reports_options'
+      })
     },
 
-    reset() {
-      this.$set(this, "submit", _.clone(this.initialData));
+    reset () {
+      this.$set(this, 'submit', _.clone(this.initialData))
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
-.general-point {
-  margin-top: 57px;
-}
-
-.text-wrapper {
-  overflow-wrap: break-word;
-
-  .italic {
-    font-style: italic;
+  .general-point {
+    margin-top: 57px;
   }
-}
+
+  .text-wrapper {
+    overflow-wrap: break-word;
+
+    .italic {
+      font-style: italic;
+    }
+  }
 </style>

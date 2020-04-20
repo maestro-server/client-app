@@ -8,7 +8,7 @@ export default {
     callToast (type, title, message) {
       type = type.charAt(0).toUpperCase() + type.slice(1);
       const method = `show${type}Msg`
-      this[method]({title, message})
+      this[method]({ title, message })
     }
   },
 

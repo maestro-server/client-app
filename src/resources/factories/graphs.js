@@ -4,8 +4,12 @@ import FactoryTenant from './factoryTenant'
 
 class Graphs extends FactoryTenant {
 
-  constructor(model={}, path='', tenant=false) {
-    super(model, "graphs"+path, tenant)
+  static ename = 'graphs'
+
+  constructor (model = {}, path = '', tenant = false) {
+    const ename = Graphs.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

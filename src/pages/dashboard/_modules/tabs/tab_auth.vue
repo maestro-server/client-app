@@ -57,22 +57,22 @@ slot-scope="props"
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
+import TabCreaterList from 'mixins/tab-creater-list'
 
-  export default {
-    mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-    props: {
-      options: {}
-    },
+  props: {
+    options: {}
+  },
 
-    data: function () {
-      return {
-        single: {name: null, admin: null, type: null}
-      }
+  data: function () {
+    return {
+      single: { name: null, admin: null, type: null }
     }
   }
+}
 
 </script>

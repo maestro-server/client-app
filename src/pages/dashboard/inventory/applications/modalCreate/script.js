@@ -15,23 +15,28 @@ export default {
 
   components: {
     tabDeploy,
-    tabRole,
+    tabRole
   },
 
   data () {
     return {
       family: 'Application',
       initialData: {
-        name: null, description: null,
-        environment: null, system: [],
-        language: null, cluster: null,
-        deploy: [], tags: [], servers: [],
-        role: {role: 'Application'}
+        name: null,
+        description: null,
+        environment: null,
+        system: [],
+        language: null,
+        cluster: null,
+        deploy: [],
+        tags: [],
+        servers: [],
+        role: { role: 'Application' }
       },
       options: {
-        environment:[],
+        environment: [],
         role: [],
-        deploy:[],
+        deploy: [],
         own: [],
         clusters: []
       }
@@ -39,17 +44,17 @@ export default {
   },
 
   computed: {
-    tab_role() {return this.$refs.tab_role},
-    tab_deploy() {return this.$refs.tab_deploy}
+    tab_role () { return this.$refs.tab_role },
+    tab_deploy () { return this.$refs.tab_deploy }
   },
 
   methods: {
-    hookCreateLoad() {
+    hookCreateLoad () {
       this.tab_role.reset()
       this.tab_deploy.reset()
     },
 
-    hookEditLoad() {
+    hookEditLoad () {
       const role = _.get(this.data, 'role')
       const deploy = _.get(this.model, 'deploy', [])
 
@@ -57,15 +62,15 @@ export default {
       this.tab_deploy.updaterEdit(deploy)
     },
 
-    fetchOptions() {
+    fetchOptions () {
       const key = `application_options`
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key })
     }
   },
 
-  created() {
+  created () {
     this.fetchOptions()
   }
 }

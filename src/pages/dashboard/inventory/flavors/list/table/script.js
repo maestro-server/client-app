@@ -11,13 +11,13 @@ export default {
       entity: new Flavors(),
       columns: ['name', 'api_name', 'provider', 'actions'],
       options: {
-        filterable: ['name', 'api_name', 'provider'],
+        filterable: ['name', 'api_name', 'provider']
       }
     }
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         return d
       })

@@ -5,12 +5,12 @@ import Teams from 'factories/teams'
 import FectherEntity from 'services/fetchEntity'
 import api_url from 'src/resources/libs/api_url'
 
-import {EventBus} from 'src/resources/bus/bus-general.js';
+import { EventBus } from 'src/resources/bus/bus-general.js';
 
 export default {
   mixins: [Modals],
 
-  data() {
+  data () {
     return {
       URL: `${api_url}users/autocomplete?complete=`,
       templateMembers: "{{item.name}} - <small>{{item.email}}</small>"
@@ -18,11 +18,11 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = this.create ? 'Create new Team' : `Edit ${this.model.name} team`
     },
 
-    createSave() {
+    createSave () {
       FectherEntity(Teams)()
         .create(() => {
           EventBus.$emit('update-teams')
@@ -30,7 +30,7 @@ export default {
         }, this.model)
     },
 
-    editSave() {
+    editSave () {
       FectherEntity(Teams)()
         .update(() => {
           EventBus.$emit('update-teams', this.model)

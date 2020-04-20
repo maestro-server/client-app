@@ -5,13 +5,13 @@ import storage from '../repositories/storage'
 import acceptTenants from '../libs/acceptableTenants'
 
 
-const CacheRequester = (k) => ({time, persistence, force}) => ({refs, _id} = {}) => (fn = () => {}) => {
+const CacheRequester = (k) => ({ time, persistence, force }) => ({ refs, _id } = {}) => (fn = () => {}) => {
 
   const key = acceptTenants(refs) ? `${k}_${_id}` : k
 
   const callback = function (result) {
-    if (result.status == 200 && !_.isEmpty(result.data)) {
-      storage({k: key, time, persistence})
+    if (result.status === 200 && !_.isEmpty(result.data)) {
+      storage({ k: key, time, persistence })
         .create(_.pick(result, 'data', 'status'))
 
       fn(result)
@@ -19,8 +19,8 @@ const CacheRequester = (k) => ({time, persistence, force}) => ({refs, _id} = {})
   }
 
   return {
-    process(proc) {
-      let data = storage({k: key, time, persistence}).get()
+    process (proc) {
+      const data = storage({ k: key, time, persistence }).get()
 
       if (_.isEmpty(data) || force) {
         return proc(callback)
@@ -29,8 +29,8 @@ const CacheRequester = (k) => ({time, persistence, force}) => ({refs, _id} = {})
       fn(data)
     },
 
-    remove(proc) {
-      storage({k: key, persistence}).delete()
+    remove (proc) {
+      storage({ k: key, persistence }).delete()
 
       return proc(fn)
     }

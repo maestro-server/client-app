@@ -12,20 +12,20 @@ export default {
     },
     base: {
       type: String
-    },
+    }
   },
 
   methods: {
     url (last) {
-      return `/${this.base}/${  last}`
+      return `/${this.base}/${last}`
     },
     isStr (str) {
-      return typeof str == 'string'
+      return typeof str === 'string'
     }
   },
 
   computed: {
-    moreTitle() {
+    moreTitle () {
       const name = _
         .chain(this.$route.name)
         .split(".")

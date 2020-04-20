@@ -2,6 +2,6 @@
 
 export default {
   props: {
-    status: {type: String, default: "warning"}
+    status: { type: String, default: "warning" }
   }
 }

@@ -13,16 +13,16 @@ export default {
   },
 
   computed: {
-    MRegions() {
+    MRegions () {
       return this.$refs.modal_regions
     },
-    showList() {
+    showList () {
       return !_.isEmpty(this.model, 'value.baser')
     }
   },
 
   methods: {
-    optP(data) {
+    optP (data) {
       this.$parent.optE(data)
     },
 
@@ -31,25 +31,25 @@ export default {
         .show(entity)
     },
 
-    setupModel(data, provider) {
+    setupModel (data, provider) {
       this.$set(this.model.value.baser, provider, data)
     },
 
-    editSave(data, provider) {
+    editSave (data, provider) {
       this.setupModel(data, provider)
       FectherEntity(Adminer)()
-       .patch(this.$forceUpdate(), this.model)
+        .patch(this.$forceUpdate(), this.model)
     },
 
-    fetchData(force = true) {
-      FectherEntity(Adminer)({persistence: 'local', time: 42400, force})
-        .find(e=> {
+    fetchData (force = true) {
+      FectherEntity(Adminer)({ persistence: 'local', time: 42400, force })
+        .find(e => {
           this.$set(this, 'model', _.head(_.get(e, 'data.items', [])))
-        }, {key: 'datacenter_options'})
+        }, { key: 'datacenter_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

@@ -12,7 +12,7 @@ export default {
   },
 
   computed: {
-    MCreateChoose() {
+    MCreateChoose () {
       return this.$parent.$refs.modal_create2
     }
   },
@@ -24,7 +24,7 @@ export default {
   },
 
   methods: {
-    MModal(modal) {
+    MModal (modal) {
       return this.$parent.$refs[`modal_${modal}`]
     },
 

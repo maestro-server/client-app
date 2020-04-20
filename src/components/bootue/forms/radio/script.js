@@ -1,12 +1,12 @@
 export default {
   props: {
-    button: {type: Boolean, default: false},
-    disabled: {type: Boolean, default: false},
-    name: {type: String, default: null},
-    readonly: {type: Boolean, default: false},
-    selectedValue: {default: true},
-    type: {type: String, default: null},
-    value: {default: false}
+    button: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    name: { type: String, default: null },
+    readonly: { type: Boolean, default: false },
+    selectedValue: { default: true },
+    type: { type: String, default: null },
+    value: { default: false }
   },
   data () {
     return {

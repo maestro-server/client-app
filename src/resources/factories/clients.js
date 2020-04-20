@@ -4,8 +4,12 @@ import FactoryTenant from './factoryTenant'
 
 class Clients extends FactoryTenant {
 
-  constructor(model={}, path='', tenant=false) {
-    super(model, "clients"+path, tenant)
+  static ename = 'clients'
+
+  constructor (model = {}, path = '', tenant = false) {
+    const ename = Clients.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

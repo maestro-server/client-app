@@ -8,7 +8,7 @@ export default {
   name: 'login',
 
   computed: {
-    logo_url() {
+    logo_url () {
       return _.get(store.getters, 'get_options.logo_url')
     }
   },

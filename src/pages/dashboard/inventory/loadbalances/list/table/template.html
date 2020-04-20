@@ -9,7 +9,7 @@
 
     <template slot="name" slot-scope="props">
       <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
-      <router-link :to="{name: 'loadbalance.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+      <router-link :to="{name: 'loadbalance.single', params: { id: props.row._id }}"> {{props.row.name}}</router-link>
     </template>
     <template slot="qtdtargets" slot-scope="props">
       <bs-label>{{props.row.qtdtargets}}</bs-label>

@@ -24,42 +24,42 @@ export default {
   },
 
   computed: {
-    getName() {
+    getName () {
       return _.get(this.model, 'name', _.get(this.model, 'hostname', ''))
     }
   },
 
   methods: {
     isEmpty: function (value) {
-      if(_.isArray(value)) {
+      if (_.isArray(value)) {
         return value.length <= 0
       }
-      if(_.isObject(value)) {
+      if (_.isObject(value)) {
         return _.isEmpty(value);
       }
       return value == null;
     },
-    sortRow(row) {
+    sortRow (row) {
       return _(row).toPairs().sortBy(0).fromPairs().value()
     },
     fetchData: function () {
       const path = `${this.entity}`
-      FectherEntity(FactoryTenant)({path})
+      FectherEntity(FactoryTenant)({ path })
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, this.id)
     },
-    fetchHistory: function (force=true) {
+    fetchHistory: function (force = true) {
       const path = `${this.entity}/${this.id}/audit`
 
-      FectherEntity(FactoryTenant)({path, force})
+      FectherEntity(FactoryTenant)({ path, force })
         .find((e) => {
           this.$set(this, 'history', _.get(e, 'data.items', []))
         });
     }
   },
 
-  created() {
+  created () {
     this.control = 0
 
     this.id = this.$route.params.id

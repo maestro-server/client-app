@@ -3,10 +3,10 @@
 export default {
   props: {
     single: {},
-    basket: {default: ()=>[]},
-    label: {type: String},
-    fielder: {default: 'name'},
-    showAddBtn: {default: true, type: Boolean}
+    basket: { default: () => [] },
+    label: { type: String },
+    fielder: { default: 'name' },
+    showAddBtn: { default: true, type: Boolean }
   },
 
   data: function () {
@@ -16,7 +16,7 @@ export default {
   },
 
   methods: {
-    add() {
+    add () {
       const stg = _.pickBy(this.single, _.identity)
       const exist = _.find(this.basket, [this.fielder, stg[this.fielder]])
 
@@ -28,17 +28,17 @@ export default {
       }
     },
 
-    del(key) {
+    del (key) {
       this.basket.splice(key, 1)
       this.update()
     },
 
-    update() {
+    update () {
       this.$emit('update', this.basket)
     }
   },
 
-  mounted() {
+  mounted () {
     this.reseter = (_.clone(this.single))
   }
 }

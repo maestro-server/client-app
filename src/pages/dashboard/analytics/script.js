@@ -1,13 +1,13 @@
 'use strict'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 
 export default {
   data () {
     return {
       submenu: {
-        'graphs': 'Bussiness Graph',
-        'projects': 'Projects'
+        graphs: 'Bussiness Graph',
+        projects: 'Projects'
       },
       reference: null
     }
@@ -23,7 +23,7 @@ export default {
     ])
   },
 
-  mounted() {
+  mounted () {
     this.setPage([
       'Analytics',
       'Create bussiness graphs, visualize depedencies.',

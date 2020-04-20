@@ -17,28 +17,32 @@ export default {
       family: 'CDN',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {healthcheck: null, endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { healthcheck: null, endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2' }
       ]
     }
   },
 
   computed: {
-    tab_targets() {
+    tab_targets () {
       return this.$refs.tab_targets
     }
   },
 
   methods: {
-    hookCreateLoad() {
+    hookCreateLoad () {
       this.tab_targets.reset()
     },
 
-    hookEditLoad() {
+    hookEditLoad () {
       this.tab_targets.updaterEdit(this.data.deps)
     }
   }

@@ -13,27 +13,27 @@ export default {
     return {
       entity: Applications,
       label: 'Object Storage',
-      model: {tags: []},
+      model: { tags: [] },
       list_servers: [],
       rollbackRoute: 'object-storage'
     }
   },
 
   computed: {
-    MDeps() {
+    MDeps () {
       return this.$parent.$refs.modal_deps
     },
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'deps'])
     },
-    viewDisplayer() {
+    viewDisplayer () {
       return [
-        {val: this.model.active ? "Active" : "Desactive", type: this.model.active ? "success" : "danger"},
-        {val: this.model.environment, type: 'primary'},
-        {val: this.model.provider}
+        { val: this.model.active ? "Active" : "Desactive", type: this.model.active ? "success" : "danger" },
+        { val: this.model.environment, type: 'primary' },
+        { val: this.model.provider }
       ]
     }
   },
@@ -45,26 +45,26 @@ export default {
         .show(this.model)
     },
     editMS: function () {
-      const {list_servers} = this
+      const { list_servers } = this
 
       this.MMembers
-        .onFinishCallBack((e)=>{
+        .onFinishCallBack((e) => {
           this.$set(this, 'list_servers', _.get(e, 'list_servers', []))
-          CacheManager({k: `servers_${this.model._id}_application._id`}).remove()
+          CacheManager({ k: `servers_${this.model._id}_application._id` }).remove()
         })
-        .show(_.merge(this.model, {list_servers}))
+        .show(_.merge(this.model, { list_servers }))
     },
-    fetchServers(force = true) {
+    fetchServers (force = true) {
       if (this.id) {
-        FectherEntity(Servers)({force})
+        FectherEntity(Servers)({ force })
           .find((e) => {
             this.$set(this, 'list_servers', _.get(e, 'data.items', []))
-          }, {"applications._id": this.id})
+          }, { "applications._id": this.id })
       }
     }
   },
 
-  created() {
+  created () {
     this.fetchServers()
   }
 }

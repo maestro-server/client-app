@@ -10,10 +10,10 @@ export default {
   },
 
   computed: {
-    MCreate() {
+    MCreate () {
       return this.$parent.$refs.modal_create
     },
-    MDelete() {
+    MDelete () {
       return this.$parent.$refs.modal_delete
     }
   },

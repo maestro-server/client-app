@@ -2,7 +2,7 @@
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
 import modalShared from '../modalShared/shared'
-import {EventBus} from "../../../../../resources/bus/bus-general";
+import { EventBus } from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ViewSingle],
@@ -12,9 +12,9 @@ export default {
   },
 
   computed: {
-    MShared() {
+    MShared () {
       return this.$refs.modal_shared
-    },
+    }
   },
 
   data: function () {
@@ -32,12 +32,12 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.id = this.$route.params.id
     EventBus.$on(`analytics-${this.id}`, this.fetchData)
   },
 
-  destroyed() {
+  destroyed () {
     EventBus.$off(`analytics-${this.id}`, this.fetchData)
   }
 }

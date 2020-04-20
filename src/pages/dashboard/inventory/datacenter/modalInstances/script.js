@@ -11,7 +11,7 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `All servers into ${this.model.name}`
     }
   }

@@ -4,8 +4,12 @@ import Factory from './factory'
 
 class Services extends Factory {
 
-  constructor(model={}) {
-    super(model, "services")
+  static ename = 'services'
+
+  constructor (model = {}) {
+    const ename = Services.ename
+    super(model, ename)
+    this.setName(ename)
   }
 }
 

@@ -2,14 +2,14 @@ import translations from '../_texts/translations.js'
 
 export default {
   props: {
-    value: {type: String},
-    format: {default: 'MM/dd/yyyy'},
-    disabledDaysOfWeek: {type: Array, default () { return [] }},
-    width: {type: String},
-    clearButton: {type: Boolean, default: false},
-    lang: {type: String, default: navigator.language},
-    placeholder: {type: String},
-    iconsFont: {type: String, default: 'fa'}
+    value: { type: String },
+    format: { default: 'MM/dd/yyyy' },
+    disabledDaysOfWeek: { type: Array, default () { return [] } },
+    width: { type: String },
+    clearButton: { type: Boolean, default: false },
+    lang: { type: String, default: navigator.language },
+    placeholder: { type: String },
+    iconsFont: { type: String, default: 'fa' }
   },
   data () {
     return {
@@ -139,7 +139,7 @@ export default {
         year--
         month = 11
       }
-      return {year: year, month: month}
+      return { year: year, month: month }
     },
     stringifyDecadeHeader (date) {
       const yearStr = date.getFullYear().toString()
@@ -175,7 +175,7 @@ export default {
     },
     parse (str) {
       if (str === undefined || str === null) { str = this.val }
-      let date = str.length === 10 && (this.format === 'dd-MM-yyyy' || this.format === 'dd/MM/yyyy')
+      const date = str.length === 10 && (this.format === 'dd-MM-yyyy' || this.format === 'dd/MM/yyyy')
         ? new Date(str.substring(6, 10), str.substring(3, 5) - 1, str.substring(0, 2))
         : new Date(str)
       return isNaN(date.getFullYear()) ? new Date() : date
@@ -224,7 +224,7 @@ export default {
         if (i === this.setupRange.day && date.getFullYear() === this.setupRange.year && date.getMonth() === this.setupRange.month) {
           sclass = 'datepicker-dateRange-item-active'
         }
-        this.dateRange.push({text: i, date, sclass})
+        this.dateRange.push({ text: i, date, sclass })
       }
     },
     rangeMajor1 () {
@@ -253,7 +253,7 @@ export default {
           if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
             sclass = 'datepicker-item-disable'
           }
-          this.dateRange.push({text: i, date, sclass})
+          this.dateRange.push({ text: i, date, sclass })
         }
       }
     }

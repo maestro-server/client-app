@@ -11,12 +11,16 @@ export default {
     return {
       family: 'Logs',
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {healthcheck: null, endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { healthcheck: null, endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'healthcheck', label: 'Healthcheck', validate: 'min:2'},
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'healthcheck', label: 'Healthcheck', validate: 'min:2' }
       ]
     }
   }

@@ -38,23 +38,23 @@
 
 
 <script>
-  'use strict'
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import headerLogin from 'src/resources/libs/headerAuthorization'
+'use strict'
+import TabCreaterList from 'mixins/tab-creater-list'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
-  export default {
-    mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-    props: {
-      types: {}
-    },
+  props: {
+    types: {}
+  },
 
-    data: function () {
-      return {
-        headers: headerLogin,
-        single: {channel: null, value: null}
-      }
+  data: function () {
+    return {
+      headers: headerLogin,
+      single: { channel: null, value: null }
     }
   }
+}
 
 </script>

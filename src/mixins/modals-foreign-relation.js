@@ -3,9 +3,9 @@ import _ from 'lodash'
 import FectherEntity from 'services/fetchEntity'
 
 export default {
-  data() {
+  data () {
     return {
-      tmp: {created: [], deleted: []},
+      tmp: { created: [], deleted: [] },
       value: [],
       mirrorValue: [],
       cFinish: false
@@ -13,20 +13,20 @@ export default {
   },
 
   computed: {
-    URL() {
+    URL () {
       return `${new this.relation().getUrl()}?query=`
     },
-    relName() {
-      return this.relation.name.toLowerCase()
+    relName () {
+      return this.relation.ename
     }
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `Add news ${this.relName} into ${this.model.name}`
     },
 
-    editLoad() {
+    editLoad () {
       const list = _.get(this, `model.${this.fielder}`, [])
 
       this.$set(this, 'value', list)
@@ -35,7 +35,7 @@ export default {
       this.tabRef.updaterEdit(list)
     },
 
-    setupModel() {
+    setupModel () {
       const oldv = this.mirrorValue
       const newv = this.value
 
@@ -44,37 +44,37 @@ export default {
       this.cFinish = false
     },
 
-    editSave() {
+    editSave () {
       this.setupModel()
       this.createdItems(this.tmp.created)
       this.deletedItems(this.tmp.deleted)
     },
 
-    createdItems(id) {
+    createdItems (id) {
 
       if (!_.isEmpty(id)) {
-        const _id =  `${this.model._id}/${this.relName}`
-        FectherEntity(this.entity)({force: true})
-          .patch(this.coordenateCallbackFinish, {id}, _id)
+        const _id = `${this.model._id}/${this.relName}`
+        FectherEntity(this.entity)({ force: true })
+          .patch(this.coordenateCallbackFinish, { id }, _id)
       }
     },
 
-    deletedItems(id) {
+    deletedItems (id) {
       if (!_.isEmpty(id)) {
-        const _id =  `${this.model._id}/${this.relName}`
+        const _id = `${this.model._id}/${this.relName}`
         FectherEntity(this.entity)()
-          .remove(this.coordenateCallbackFinish, {id}, _id)
+          .remove(this.coordenateCallbackFinish, { id }, _id)
       }
     },
 
-    coordenateCallbackFinish(response) {
+    coordenateCallbackFinish (response) {
       if (!this.cFinish) {
         this.cFinish = true
         return this.finishJob(response)
       }
     },
 
-    deleteApp(key) {
+    deleteApp (key) {
       this.value.splice(key, 1)
     }
   }

@@ -7,7 +7,7 @@ import ViewSingle from 'mixins/view-single'
 import Providers from 'factories/providers'
 import FectherEntity from 'services/fetchEntity'
 import formatAdminer from 'src/resources/libs/formatAdminerData'
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 export default {
   mixins: [ViewSingle],
@@ -25,11 +25,11 @@ export default {
   },
 
   computed: {
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'conn'])
     },
 
-    formatOwnerUsers() {
+    formatOwnerUsers () {
       const roles = _.get(this.model, 'roles')
       if (roles) {
         return roles.map(this.formatOwnerUser)
@@ -38,7 +38,7 @@ export default {
   },
 
   methods: {
-    enable(status) {
+    enable (status) {
       this.status = status
       const data = _.set(this.model, `status`, status)
 
@@ -47,28 +47,27 @@ export default {
 
       this.batchSwitchEnabled(status)
     },
-    batchSwitchEnabled(status) {
+    batchSwitchEnabled (status) {
       _.forEach(
         this.schedulers,
         this.executorBatchEnabled(status)
       )
     },
-    executorBatchEnabled(status) {
+    executorBatchEnabled (status) {
       return (job) => {
         const tjob = _.head(job)
         const enabled = status === 'enabled'
 
-        if(_.get(tjob, 'enabled') !== enabled)
-          this.processEnable(tjob, enabled)
+        if (_.get(tjob, 'enabled') !== enabled) { this.processEnable(tjob, enabled) }
 
       }
     },
-    processEnable(job, enabled) {
+    processEnable (job, enabled) {
       _.set(job, 'enabled', enabled)
       FectherEntity(Scheduler)()
         .patch(this.finishJob, job)
     },
-    createJob(task) {
+    createJob (task) {
       const data = {
         name: _.get(this.model, 'name'),
         _id: _.get(this.model, '_id'),
@@ -79,19 +78,19 @@ export default {
         task
       };
 
-      FectherEntity(Scheduler)({path: '/template'})
+      FectherEntity(Scheduler)({ path: '/template' })
         .create(this.fetchScheduler, data)
     },
-    formatOwnerUser(data) {
+    formatOwnerUser (data) {
       const id = _.get(data, '_id')
-      if(id) {
+      if (id) {
         return {
-          'name': `${_.get(data, 'refs', '')} - ${_.get(data, 'email', '')} (${_.get(data, '_id', '')})`,
-          '_id': id
+          name: `${_.get(data, 'refs', '')} - ${_.get(data, 'email', '')} (${_.get(data, '_id', '')})`,
+          _id: id
         }
       }
     },
-    task(key) {
+    task (key) {
       new Connections()
         .authorization()
         .updateID(
@@ -99,29 +98,28 @@ export default {
           this.fetchData
         )
     },
-    fetchAdminer() {
+    fetchAdminer () {
       const ouser = this.formatOwnerUser(_.get(this.model, 'owner_user'))
-      if(ouser)
-        this.owner_user = ouser
+      if (ouser) { this.owner_user = ouser }
 
       this.status = _.get(this.model, 'status')
 
-      FectherEntity(Providers)({persistence: 'local', path: '/rules'})
+      FectherEntity(Providers)({ persistence: 'local', path: '/rules' })
         .find(this.setOptions);
     },
-    fetchScheduler() {
+    fetchScheduler () {
       const data = {
         'link._id': _.get(this.model, '_id')
       }
 
-      FectherEntity(Scheduler)({force: true})
+      FectherEntity(Scheduler)({ force: true })
         .find(this.prepareScheduler, data)
     },
-    setOptions(data) {
+    setOptions (data) {
       const adminer = formatAdminer(data)
       this.prepareProcessData(adminer)
     },
-    prepareProcessData(adminer) {
+    prepareProcessData (adminer) {
       const prm = _.chain(adminer)
         .get(`permissions.${this.model.service}`)
         .mapValues(this.mergeLog)
@@ -129,55 +127,54 @@ export default {
 
       this.$set(this, 'permissions', prm)
     },
-    mergeLog(data, key) {
+    mergeLog (data, key) {
       const process = _.get(this.model, `process.${key}`, null)
       return _.assign({}, data, process)
     },
-    prepareScheduler(result) {
+    prepareScheduler (result) {
       const scheduler = _.chain(result)
-                  .get('data.items', [])
-                  .reduce(this.mergeScheduler, {})
-                  .value()
+        .get('data.items', [])
+        .reduce(this.mergeScheduler, {})
+        .value()
 
       this.$set(this, 'schedulers', scheduler)
     },
-    mergeScheduler(result, value) {
+    mergeScheduler (result, value) {
       const sched = _.pick(value, ['_id', 'link', 'enabled', 'name', 'task', 'method'])
       const task = _.get(sched, 'link.task')
 
-      if(!_.isArray(result[task]))
-        result[task] = []
+      if (!_.isArray(result[task])) { result[task] = [] }
 
       result[task].push(sched)
       return result
     },
-    saveOwner() {
+    saveOwner () {
       const id_user = _.get(this.owner_user, '_id')
 
-      if(id_user) {
-        let owner_user = _.chain(this.model.roles)
-                          .filter(e=>id_user == e._id)
-                          .head()
-                          .omit('_links')
-                          .value()
+      if (id_user) {
+        const owner_user = _.chain(this.model.roles)
+          .filter(e => id_user === e._id)
+          .head()
+          .omit('_links')
+          .value()
 
         const old = _.pick(this.model, ['_id', 'name', 'dc', 'dc_id', 'provider', 'service', 'regions', 'conn'])
-        const post = _.assign(old, {owner_user})
+        const post = _.assign(old, { owner_user })
 
         FectherEntity(Connections)()
           .patch(this.redirectConn, post)
       }
     },
-    wsUpdate() {
+    wsUpdate () {
       const force = true
-      FectherEntity(this.entity)({force})
+      FectherEntity(this.entity)({ force })
         .findOne((e) => {
           this.$set(this, 'model', e.data)
         }, this.id)
     }
   },
 
-  created() {
+  created () {
     this.$on('finishFetchData', this.fetchAdminer)
     this.$on('finishFetchData', this.fetchScheduler)
 
@@ -185,7 +182,7 @@ export default {
     EventBus.$on(`connections-${this.id}`, this.wsUpdate)
   },
 
-  destroyed() {
+  destroyed () {
     this.$off('finishFetchData', this.fetchAdminer)
     this.$off('finishFetchData', this.fetchScheduler)
     EventBus.$off(`connections-${this.id}`, this.wsUpdate)

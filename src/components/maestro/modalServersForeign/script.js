@@ -17,10 +17,10 @@ export default {
   },
 
   computed: {
-    tabRef() {return this.$refs.tab_servers}
+    tabRef () { return this.$refs.tab_servers }
   },
 
-  data() {
+  data () {
     return {
       entity: Applications,
       relation: Servers,
@@ -30,7 +30,7 @@ export default {
   },
 
   methods: {
-    transformValue(val) {
+    transformValue (val) {
       this.$set(this, 'value', val)
     }
   }

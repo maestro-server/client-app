@@ -2,17 +2,17 @@ import getScrollBarWidth from '../_core/_utils/getScrollBarWidth.js'
 
 export default {
   props: {
-    backdrop: {type: Boolean, default: true},
-    callback: {type: Function, default: null},
-    cancelText: {type: String, default: 'Close'},
-    effect: {type: String, default: null},
-    large: {type: Boolean, default: false},
-    okText: {type: String, default: 'Save changes'},
-    small: {type: Boolean, default: false},
-    title: {type: String, default: ''},
-    value: {type: Boolean, required: true},
-    width: {default: null},
-    subModal: {type: Boolean, default: false}
+    backdrop: { type: Boolean, default: true },
+    callback: { type: Function, default: null },
+    cancelText: { type: String, default: 'Close' },
+    effect: { type: String, default: null },
+    large: { type: Boolean, default: false },
+    okText: { type: String, default: 'Save changes' },
+    small: { type: Boolean, default: false },
+    title: { type: String, default: '' },
+    value: { type: Boolean, required: true },
+    width: { default: null },
+    subModal: { type: Boolean, default: false }
   },
   data () {
     return {

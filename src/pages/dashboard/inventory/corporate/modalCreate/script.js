@@ -12,12 +12,16 @@ export default {
       family: 'Corporate',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'extra_config', label: 'Extra Configs', type: "textarea", validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'extra_config', label: 'Extra Configs', type: "textarea", validate: 'min:2' }
       ]
     }
   }

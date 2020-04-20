@@ -1,32 +1,32 @@
 
 export default {
   props: {
-    clearButton: {type: Boolean, default: false},
-    cols: {type: Number, default: null},
-    disabled: {type: Boolean, default: false},
-    help: {type: String, default: null},
-    error: {type: String, default: null},
-    icon: {type: Boolean, default: false},
-    label: {type: String, default: null},
-    state: {type: String, default: null},
-    name: {type: String, default: null},
-    placeholder: {type: String, default: null},
-    readonly: {type: Boolean, default: false},
-    rows: {type: Number, default: 3},
-    type: {type: String, default: 'text'},
-    value: {default: null},
-    formType: {type: String, default: null},
-    horizontalWrapper: {type: String, default: 'col-sm-9'},
-    horizontalLabelWrapper: {type: String, default: 'col-sm-3'}
+    clearButton: { type: Boolean, default: false },
+    cols: { type: Number, default: null },
+    disabled: { type: Boolean, default: false },
+    help: { type: String, default: null },
+    error: { type: String, default: null },
+    icon: { type: Boolean, default: false },
+    label: { type: String, default: null },
+    state: { type: String, default: null },
+    name: { type: String, default: null },
+    placeholder: { type: String, default: null },
+    readonly: { type: Boolean, default: false },
+    rows: { type: Number, default: 3 },
+    type: { type: String, default: 'text' },
+    value: { default: null },
+    formType: { type: String, default: null },
+    horizontalWrapper: { type: String, default: 'col-sm-9' },
+    horizontalLabelWrapper: { type: String, default: 'col-sm-3' }
   },
   data () {
     return {
       inState: this.state,
       inFormType: this.formType,
       constants: {
-        SUCCESS: {name: 'success', icon: 'check'},
-        WARNING: {name: 'warning', icon: 'exclamation'},
-        ERROR: {name: 'error', icon: 'times'}
+        SUCCESS: { name: 'success', icon: 'check' },
+        WARNING: { name: 'warning', icon: 'exclamation' },
+        ERROR: { name: 'error', icon: 'times' }
       }
     }
   },
@@ -36,7 +36,7 @@ export default {
     showHelp () { return this.help && (!this.showError) },
     title () { return this.error || this.help || '' },
     showState () { return this.inState ? `has-${this.inState}` : '' },
-    labelFeedback () { return this.$slots['label'] || this.label },
+    labelFeedback () { return this.$slots.label || this.label },
     showIcon () { return this.inState ? this.constants[this.inState.toUpperCase()].icon : null }
   },
   watch: {
@@ -113,7 +113,7 @@ export default {
   },
   beforeDestroy () {
     if (this._parent) {
-      let index = this._parent.children.indexOf(this)
+      const index = this._parent.children.indexOf(this)
       this._parent.children.splice(index, 1)
     }
   }

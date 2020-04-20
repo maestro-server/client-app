@@ -9,11 +9,11 @@ export default (name, url, type) => {
     responseType: 'arraybuffer'
   })
     .then(function (response) {
-      let blob = new Blob([response.data], {type})
-      let link = document.createElement('a')
+      const blob = new Blob([response.data], { type })
+      const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
       link.setAttribute('download', name);
       link.click()
     })
-   .catch(frejected);
+    .catch(frejected);
 }

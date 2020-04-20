@@ -19,33 +19,33 @@ export default {
     return {
       entity: Applications,
       label: 'DataBases',
-      model: {tags: [], modal: null},
+      model: { tags: [], modal: null },
       list_servers: [],
       rollbackRoute: 'database'
     }
   },
 
   computed: {
-    MDeps() {
+    MDeps () {
       return this.$parent.$refs.modal_deps
     },
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     },
-    viewDisplayer() {
+    viewDisplayer () {
       return [
-        {val: this.model.active ? "Up" : "Down", type: this.model.active ? "success" : "danger"},
-        {val: this.model.environment, type: 'primary'},
-        {val: this.model.status},
-        {val: this.model.provider},
-        {val: this.model.cluster},
-        {val: this.model.dataguard}
+        { val: this.model.active ? "Up" : "Down", type: this.model.active ? "success" : "danger" },
+        { val: this.model.environment, type: 'primary' },
+        { val: this.model.status },
+        { val: this.model.provider },
+        { val: this.model.cluster },
+        { val: this.model.dataguard }
       ]
     },
-    MCreateConfigServer() {
+    MCreateConfigServer () {
       return this.$refs.modal_config
     }
   },
@@ -57,11 +57,11 @@ export default {
         .show(this.model)
     },
 
-    MModal(modal) {
+    MModal (modal) {
       return this.$parent.$refs[`modal_${modal}`]
     },
 
-    edit: function (index=0) {
+    edit: function (index = 0) {
       const type = _.get(this.model, 'modal', 'create')
 
       this.MModal(type)
@@ -70,38 +70,38 @@ export default {
         .show(this.model)
     },
 
-    callConfig(item) {
+    callConfig (item) {
       this.MCreateConfigServer
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(item)
     },
 
-    recalculateIndex(idx) {
-      return this.model.modal == 'oracle' ? idx+1 : idx
+    recalculateIndex (idx) {
+      return this.model.modal === 'oracle' ? idx + 1 : idx
     },
 
     editMS: function () {
-      const {list_servers} = this
+      const { list_servers } = this
 
       this.MMembers
-        .onFinishCallBack((e)=>{
+        .onFinishCallBack((e) => {
           this.$set(this, 'list_servers', _.get(e, 'list_servers', []))
-          CacheManager({k: `servers_${this.model._id}_application._id`}).remove()
+          CacheManager({ k: `servers_${this.model._id}_application._id` }).remove()
         })
-        .show(_.merge(this.model, {list_servers}))
+        .show(_.merge(this.model, { list_servers }))
     },
 
-    fetchServers(force = true) {
+    fetchServers (force = true) {
       if (this.id) {
-        FectherEntity(Servers)({force})
+        FectherEntity(Servers)({ force })
           .find((e) => {
             this.$set(this, 'list_servers', _.get(e, 'data.items', []))
-          }, {"applications._id": this.id})
+          }, { "applications._id": this.id })
       }
     }
   },
 
-  created() {
+  created () {
     this.fetchServers()
   }
 }

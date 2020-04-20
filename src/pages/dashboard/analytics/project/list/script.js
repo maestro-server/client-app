@@ -9,7 +9,7 @@ export default {
   data: function () {
     return {
       entity: Projects,
-      name: "Project",
+      name: "Project"
     }
   }
 }

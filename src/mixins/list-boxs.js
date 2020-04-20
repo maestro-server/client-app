@@ -12,25 +12,25 @@ export default {
   },
 
   computed: {
-    MCreate() {
+    MCreate () {
       return this.$parent.$refs.modal_create
     },
-    MAcl() {
+    MAcl () {
       return this.$parent.$refs.modal_acl
     },
-    MDelete() {
+    MDelete () {
       return this.$parent.$refs.modal_delete
     }
   },
 
   methods: {
-    toLower(str, app = '') {
+    toLower (str, app = '') {
       return app + _.kebabCase(str.toLowerCase())
     },
 
-    fetchData (page=1, force=true) {
-      FectherEntity(this.entity)({force})
-        .find((e) => this.result = e.data, {page})
+    fetchData (page = 1, force = true) {
+      FectherEntity(this.entity)({ force })
+        .find((e) => this.result = e.data, { page })
     },
 
     addE () {

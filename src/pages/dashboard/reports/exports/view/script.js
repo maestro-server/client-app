@@ -3,7 +3,7 @@
 import Reports from 'factories/reports'
 import formatDate from 'mixins/formatDate'
 import ViewSingle from 'mixins/view-single'
-import {EventBus} from "../../../../../resources/bus/bus-general";
+import { EventBus } from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ViewSingle, formatDate],
@@ -11,22 +11,22 @@ export default {
   data: function () {
     return {
       entity: Reports,
-      model: {tags: []}
+      model: { tags: [] }
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     }
   },
 
-  created() {
+  created () {
     this.id = this.$route.params.id
     EventBus.$on(`reports-${this.id}`, this.fetchData)
   },
 
-  destroyed() {
+  destroyed () {
     EventBus.$off(`reports-${this.id}`, this.fetchData)
   }
 }

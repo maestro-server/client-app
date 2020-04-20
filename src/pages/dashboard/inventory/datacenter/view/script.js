@@ -17,7 +17,7 @@ export default {
   },
 
   computed: {
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     }
   }

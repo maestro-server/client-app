@@ -4,18 +4,18 @@ import _ from 'lodash'
 
 export default {
   methods: {
-    findServicesBy(model, provider) {
+    findServicesBy (model, provider) {
       return _.chain(model)
         .get('services', [])
-        .filter(e=>e.name.toLowerCase() === provider.toLowerCase())
+        .filter(e => e.name.toLowerCase() === provider.toLowerCase())
         .value()
     },
 
-    wrapperReduce(e) {
+    wrapperReduce (e) {
       return _.reduce(e, this.reduceBy)
     },
 
-    reduceBy(f,l) {
+    reduceBy (f, l) {
       const bef = _.isString(l) ? l : ''
       return `${f} ${bef}`
     }

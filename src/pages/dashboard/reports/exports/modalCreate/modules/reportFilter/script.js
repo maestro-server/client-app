@@ -4,7 +4,7 @@ import Datepicker from 'vue2-datepicker';
 
 export default {
   props: {
-    ofilters: {default: ()=>[]}
+    ofilters: { default: () => [] }
   },
 
   components: {
@@ -12,28 +12,28 @@ export default {
   },
 
   computed: {
-    isArrOrObj() {
+    isArrOrObj () {
       const ty = this.typ
       return ty === 'array' || ty === 'object'
     },
 
-    isNumber() {
+    isNumber () {
       return this.typ === 'number'
     },
 
-    isString() {
+    isString () {
       return this.typ === 'string'
     },
 
-    isBoolean() {
+    isBoolean () {
       return this.typ === 'boolean'
     },
 
-    isSelect() {
+    isSelect () {
       return this.typ === 'select'
     },
 
-    isDate() {
+    isDate () {
       return this.typ === 'date'
     }
   },
@@ -61,18 +61,18 @@ export default {
   },
 
   methods: {
-    updateFilters(items) {
-      if(items) {
+    updateFilters (items) {
+      if (items) {
         this.clearAll()
         this.options.filters = items
         this.options.fields = this.options.filters.filters.map(e => `${e.key} (${e.type})`)
       }
     },
 
-    updateTypeFilter(val) {
+    updateTypeFilter (val) {
       this.clearFilter()
 
-      if(val) {
+      if (val) {
         const re = /^(.*) \((.*)\)/
         const result = val.match(re)
 
@@ -113,7 +113,7 @@ export default {
       }
     },
 
-    getInternalField(field, len = '[0].leaf') {
+    getInternalField (field, len = '[0].leaf') {
       this.comparer = this.options.comparer[1]
 
       const items = this.options.filters.filters.filter(
@@ -123,7 +123,7 @@ export default {
       return _.get(items, len)
     },
 
-    setupArrFilter(field) {
+    setupArrFilter (field) {
       const item = this.getInternalField(field)
       const type = _.get(item, 'type')
 
@@ -136,50 +136,50 @@ export default {
       }
     },
 
-    setupObjectFilter(field) {
+    setupObjectFilter (field) {
       const item = this.getInternalField(field)
       this.options.subfield = item
     },
 
-    setupDateFilter() {
+    setupDateFilter () {
       this.options.comparer = this.options.cdate
       this.comparer = this.options.cdate[1]
     },
 
-    setupNumberFilter() {
+    setupNumberFilter () {
       this.options.comparer = this.options.cnumber
       this.comparer = this.options.cnumber[1]
     },
 
-    setupSelectFilter(field) {
+    setupSelectFilter (field) {
       const item = this.getInternalField(field, '[0].opts')
       this.opts = item
       this.options.comparer = this.options.cequal
       this.comparer = this.options.cequal[0]
     },
 
-    setupBooleanFilter() {
+    setupBooleanFilter () {
       this.options.comparer = this.options.cequal
       this.comparer = this.options.cequal[0]
     },
 
-    delItem(index) {
+    delItem (index) {
       this.$emit('del', index)
     },
 
-    clearFilter() {
+    clearFilter () {
       this.filter = null
       this.subfield = null
       this.subfilter = null
     },
 
-    clearAll() {
+    clearAll () {
       this.field = null
       this.clearFilter()
     },
 
-    addFilter() {
-      if(this.filter || this.subfilter) {
+    addFilter () {
+      if (this.filter || this.subfilter) {
         const picks = _.pick(this, ['field', 'filter', 'comparer', 'subfield', 'subfilter', 'typ'])
         this.$emit('submit', picks)
         this.clearAll()

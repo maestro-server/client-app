@@ -23,7 +23,7 @@ import imager from './imager/Imager.vue'
 
 
 
-let components = {
+const components = {
   createrConfigList,
   headerViewEntity,
   serviceAccordion,

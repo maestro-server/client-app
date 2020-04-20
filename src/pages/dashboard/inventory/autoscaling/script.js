@@ -10,7 +10,7 @@ export default {
     modalForeignRelation
   },
 
-  data() {
+  data () {
     return {
       entity: Applications
     }

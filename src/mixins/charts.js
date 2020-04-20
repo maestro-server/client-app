@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    factoryData(tLabels, tData, limit = 10) {
+    factoryData (tLabels, tData, limit = 10) {
       const data = tData.slice(0, limit)
       const labels = tLabels.slice(0, data.length)
 

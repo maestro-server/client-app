@@ -16,7 +16,7 @@
             <panel>
               <span slot="header">
                 <b class="text-capitalize">{{props.item.item.region}}</b>
-                <template v-if="props.item.item.zones">({{props.item.item.zones.length}})</template>
+                <template v-if="props.item.item.zones"> ({{props.item.item.zones.length}})</template>
               </span>
 
               <tab-array-items @update="val => props.item.item.zones" label="Zone" :default-value="props.item.item.zones"></tab-array-items>

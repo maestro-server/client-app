@@ -10,7 +10,7 @@ export default {
     dcMenu
   },
 
-  data() {
+  data () {
     return {
       entity: Flavors
     }

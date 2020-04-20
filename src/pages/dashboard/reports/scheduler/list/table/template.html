@@ -13,7 +13,7 @@
     </template>
 
     <template slot="name" slot-scope="props">
-      <router-link :to="{name: 'scheduler.single', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+      <router-link :to="{name: 'scheduler.single', params: { id: props.row._id }}"> {{props.row.name}}</router-link>
     </template>
 
     <template slot="actions" slot-scope="props">

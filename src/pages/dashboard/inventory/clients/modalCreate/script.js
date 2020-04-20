@@ -23,13 +23,15 @@ export default {
       URL_SYSTEM: `${api_url}/system?query=`,
       template: "<b>{{item.name}}</b>",
       data: {
-        name: null, description: null,
-        tags: [], contacts: []
+        name: null,
+        description: null,
+        tags: [],
+        contacts: []
       },
       options: {
-        environment:[],
+        environment: [],
         role: [],
-        deploy:[],
+        deploy: [],
         languages: [],
         clusters: []
       },
@@ -38,17 +40,17 @@ export default {
   },
 
   computed: {
-    tab_channel() {return this.$refs.tab_channel},
-    tab_tags() {return this.$refs.tab_tags}
+    tab_channel () { return this.$refs.tab_channel },
+    tab_tags () { return this.$refs.tab_tags }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Client' : `Edit ${this.model.name} clients`
+      this.text.title = this.create ? 'Create new Client' : `Edit ${this.model.name} clients`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.clearDuplicate()
       this.tab_channel.reset()
@@ -79,13 +81,13 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'clients_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'clients_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 
