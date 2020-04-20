@@ -38,29 +38,29 @@
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import serviceOptions from 'mixins/services-options'
+import TabCreaterList from 'mixins/tab-creater-list'
+import serviceOptions from 'mixins/services-options'
 
-  export default {
-    mixins: [TabCreaterList, serviceOptions],
+export default {
+  mixins: [TabCreaterList, serviceOptions],
 
-    data: function () {
-      return {
-        single: {
-          name: null,
-          version: null
-        },
-        options: {
-          own: []
-        }
+  data: function () {
+    return {
+      single: {
+        name: null,
+        version: null
+      },
+      options: {
+        own: []
       }
-    },
-
-    created () {
-      this.fetchServicesOptions()
     }
+  },
+
+  created () {
+    this.fetchServicesOptions()
   }
+}
 
 </script>

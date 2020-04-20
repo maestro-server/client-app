@@ -25,34 +25,34 @@
 
 
 <script>
-  import _ from 'lodash'
-  import doughnutChart from 'components/charts/doughnut_chart.vue'
+import _ from 'lodash'
+import doughnutChart from 'components/charts/doughnut_chart.vue'
 
-  export default {
+export default {
 
-    components: {
-      doughnutChart
+  components: {
+    doughnutChart
+  },
+  props: ['data', 'options'],
+
+  computed: {
+    total () {
+      const siz = _.get(this.data, 'labels', [])
+      return siz.length
     },
-    props: ['data', 'options'],
 
-    computed: {
-      total () {
-        const siz = _.get(this.data, 'labels', [])
-        return siz.length
-      },
-
-      transfOptions () {
-        return {
-          legend: {
-            position: 'right'
-          },
-          maintainAspectRatio: false
-        }
+    transfOptions () {
+      return {
+        legend: {
+          position: 'right'
+        },
+        maintainAspectRatio: false
       }
-    },
-
-    title () {
-      return _.get(this.options, 'title.text', '')
     }
+  },
+
+  title () {
+    return _.get(this.options, 'title.text', '')
   }
+}
 </script>

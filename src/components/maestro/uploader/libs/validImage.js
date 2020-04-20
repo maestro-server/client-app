@@ -2,12 +2,12 @@
 
 class validateFile {
 
-  constructor(file, opts) {
+  constructor (file, opts) {
 
     this.file = file;
 
     const defaultParams = {
-      maxsize: 1630240, //~1 mb,
+      maxsize: 1630240, // ~1 mb,
       minsize: 1024, // 1 kbs
       type: ["image/jpeg", "image/png"]
     };
@@ -16,8 +16,8 @@ class validateFile {
     this.error = [];
   }
 
-  sizeValidate() {
-    let size = this.file.size;
+  sizeValidate () {
+    const size = this.file.size;
 
     if (size > this.config.minsize && size < this.config.maxsize) {
       return true;
@@ -27,8 +27,8 @@ class validateFile {
     return false;
   }
 
-  typeValidate() {
-    let fileType = this.file.type;
+  typeValidate () {
+    const fileType = this.file.type;
     if (this.config.type.indexOf(fileType) > -1) {
       return true;
     }
@@ -37,9 +37,8 @@ class validateFile {
     return false;
   }
 
-  pass() {
-    if (this.sizeValidate() && this.typeValidate())
-      return true;
+  pass () {
+    if (this.sizeValidate() && this.typeValidate()) { return true; }
 
     return false;
   }

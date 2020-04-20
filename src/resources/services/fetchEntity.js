@@ -15,11 +15,11 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   const tenant = tenantMananger.get()
   const k = _.get(Entity, 'ename')
-  const {path} = opts
+  const { path } = opts
 
   return {
     find (fn, query = {}) {
-      const queryRer =_.reduce(query, queryBuilder, '') || 'list'
+      const queryRer = _.reduce(query, queryBuilder, '') || 'list'
       const fk = `${k}_${queryRer}`
 
       CacheRequester(fk)(opts)(tenant)(fn)
@@ -96,7 +96,7 @@ const FetcherData = (Entity) => (opts = {}, headers = {}) => {
         });
 
       CacheRequester(list_k)(opts)(tenant)(fn)
-        .remove(end=>end);
+        .remove(end => end);
     }
   }
 

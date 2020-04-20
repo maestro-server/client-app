@@ -9,7 +9,7 @@ export default {
         return store.getters.get_spinner.show
       },
       set (show) {
-        store.dispatch('setSpinner', {show})
+        store.dispatch('setSpinner', { show })
       }
     }
 

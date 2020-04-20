@@ -19,8 +19,8 @@ export default {
 
 
   methods: {
-    fetchData() {
-      FectherEntity(Maestro)({path: '/versions'})
+    fetchData () {
+      FectherEntity(Maestro)({ path: '/versions' })
         .find((e) => {
           e.data.unshift(this.clients);
           this.$set(this, 'services', e.data)
@@ -28,7 +28,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

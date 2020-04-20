@@ -2,18 +2,18 @@
 export default {
 
   props: {
-    clearButton: {type: Boolean, default: true},
-    name: {type: String},
-    placeholder: {type: String, default: 'Select your profile'},
-    label: {type: String, default: null},
-    disabled: {type: Boolean, default: false},
-    help: {type: String, default: null},
-    error: {type: String, default: null},
-    multiple: {type: Boolean, default: false},
-    state: {type: String, default: null},
-    formType: {type: String, default: null},
-    horizontalWrapper: {type: String, default: 'col-sm-9'},
-    horizontalLabelWrapper: {type: String, default: 'col-sm-3'}
+    clearButton: { type: Boolean, default: true },
+    name: { type: String },
+    placeholder: { type: String, default: 'Select your profile' },
+    label: { type: String, default: null },
+    disabled: { type: Boolean, default: false },
+    help: { type: String, default: null },
+    error: { type: String, default: null },
+    multiple: { type: Boolean, default: false },
+    state: { type: String, default: null },
+    formType: { type: String, default: null },
+    horizontalWrapper: { type: String, default: 'col-sm-9' },
+    horizontalLabelWrapper: { type: String, default: 'col-sm-3' }
   },
 
   data () {
@@ -23,9 +23,9 @@ export default {
       text: null,
       inState: this.state,
       constants: {
-        SUCCESS: {name: 'success', icon: 'check'},
-        WARNING: {name: 'warning', icon: 'exclamation'},
-        ERROR: {name: 'error', icon: 'times'}
+        SUCCESS: { name: 'success', icon: 'check' },
+        WARNING: { name: 'warning', icon: 'exclamation' },
+        ERROR: { name: 'error', icon: 'times' }
       }
     }
   },
@@ -46,7 +46,7 @@ export default {
       this.text = this.val = null
     },
     changeUploadImage (e) {
-      let files = e.target.files || e.dataTransfer.files
+      const files = e.target.files || e.dataTransfer.files
       if (!files.length) {
         return
       }

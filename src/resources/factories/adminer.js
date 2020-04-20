@@ -6,7 +6,7 @@ class Adminer extends Factory {
 
   static ename = "adminer"
 
-  constructor(model={}) {
+  constructor (model = {}) {
     super(model, Adminer.ename)
   }
 }

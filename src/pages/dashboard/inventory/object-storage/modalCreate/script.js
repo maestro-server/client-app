@@ -11,13 +11,17 @@ export default {
       family: 'ObjectStorage',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {domain: null, endpoint: null, extra_config:null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { domain: null, endpoint: null, extra_config: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'domain', label: 'Domain', validate: 'min:2'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'domain', label: 'Domain', validate: 'min:2' },
+        { name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2' }
       ]
     }
   }

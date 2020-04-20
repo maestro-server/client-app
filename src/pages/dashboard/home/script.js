@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 import mostMulti from './charts/most_multi.vue'
 import mostSingle from './charts/most_single.vue'
@@ -83,7 +83,7 @@ export default {
     getLast (entity, offset = 0, limit = 5) {
       const result = _.get(this.results[entity], 'items', [])
       if (_.isArray(result)) {
-        return _.slice(result, offset, (offset+limit))
+        return _.slice(result, offset, (offset + limit))
       }
     },
 
@@ -91,7 +91,7 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ]),
 
-    fetchData (entity, force=true) {
+    fetchData (entity, force = true) {
       _.forEach(this.results, (v, k) => {
 
         FectherEntity(v.entity)({ force })

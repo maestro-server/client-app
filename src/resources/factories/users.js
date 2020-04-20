@@ -6,7 +6,7 @@ class Users extends Factory {
 
   static ename = 'users'
 
-  constructor(model={}) {
+  constructor (model = {}) {
     const ename = Users.ename
     super(model, ename)
     this.setName(ename)

@@ -16,7 +16,7 @@ export default {
       entity: new Applications(),
       columns: ['name', 'provider', 'ldatacenters', 'lsystem', 'environment', 'qtdtargets', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'provider', 'ldatacenters', 'environment', 'lsystem'],
         listColumns: {
           lsystem: [],
@@ -34,13 +34,13 @@ export default {
   },
 
   computed: {
-    url() {
+    url () {
       return this.entity.getUrl() + '?family=Broker'
     }
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.qtdtargets = _.size(d.deps)
         d.ldatacenters = _.get(d, 'datacenters.name', '-')
@@ -54,7 +54,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(System)()
       .find(this.fetchData('lsystem'))
 

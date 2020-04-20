@@ -12,49 +12,49 @@ export default {
   data: function () {
     return {
       entity: Scheduler,
-      model: {tags: []},
+      model: { tags: [] },
       events: []
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     },
-    viewDisplayer() {
+    viewDisplayer () {
       return [
-        {val: _.get(this.model, 'enabled') ? "Active" : "Disabled", type: _.get(this.model, 'enabled') ? "success" : "danger"},
-        {val: _.get(this.model, 'period_type')},
-        {val: _.get(this.model, 'task')},
-        {val: _.get(this.model, 'total_run_count', 0)}
+        { val: _.get(this.model, 'enabled') ? "Active" : "Disabled", type: _.get(this.model, 'enabled') ? "success" : "danger" },
+        { val: _.get(this.model, 'period_type') },
+        { val: _.get(this.model, 'task') },
+        { val: _.get(this.model, 'total_run_count', 0) }
       ]
     }
   },
 
   methods: {
-    fetchEvents() {
+    fetchEvents () {
 
-      FectherEntity(Scheduler)({force: true})
+      FectherEntity(Scheduler)({ force: true })
         .findOne(this.prepareEvents, `${_.get(this.model, '_id')}/events?orderBy=created_at`)
     },
 
-    prepareEvents(result) {
+    prepareEvents (result) {
       const events = _.chain(result)
-                      .get('data.items', [])
-                      .value()
+        .get('data.items', [])
+        .value()
 
       this.$set(this, 'events', events)
     }
   },
 
-  created() {
+  created () {
     this.$on('finishFetchData', this.fetchEvents)
   },
 
-  destroyed() {
+  destroyed () {
     this.$off('finishFetchData', this.fetchEvents)
   }
 }

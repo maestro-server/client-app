@@ -13,11 +13,11 @@ export default {
   },
 
   computed: {
-    MDeps() {
+    MDeps () {
       return this.$parent.$refs.modal_deps
     }
   },
-  data() {
+  data () {
     return {
       entity: Applications
     }

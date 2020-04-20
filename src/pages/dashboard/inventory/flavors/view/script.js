@@ -10,15 +10,15 @@ export default {
   data: function () {
     return {
       entity: Flavors,
-      model: {tags: [], datacenters: {}},
+      model: { tags: [], datacenters: {} }
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     }
   }

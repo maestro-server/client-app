@@ -39,47 +39,47 @@
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import _ from 'lodash'
+import _ from 'lodash'
 
-  export default {
-    props: {
-      label: {},
-      inputLabel: {
-        type: String,
-        default: 'Name'
-      },
-      inputType: {
-        type: String,
-        default: 'text'
-      },
-      defaultValue: { default: () => [] }
+export default {
+  props: {
+    label: {},
+    inputLabel: {
+      type: String,
+      default: 'Name'
     },
-
-    data: function () {
-      return {
-        item: null,
-        items: _.clone(this.defaultValue)
-      }
+    inputType: {
+      type: String,
+      default: 'text'
     },
+    defaultValue: { default: () => [] }
+  },
 
-    methods: {
-      updaterEdit (data) {
-        this.$set(this, 'items', data || [])
-        this.$emit('update', this.items)
-      },
-
-      reset () {
-        this.items = []
-      },
-
-      addItemTo () {
-        this.items.push(this.item)
-        this.item = null
-        this.updaterEdit(this.items)
-      }
+  data: function () {
+    return {
+      item: null,
+      items: _.clone(this.defaultValue)
     }
+  },
 
+  methods: {
+    updaterEdit (data) {
+      this.$set(this, 'items', data || [])
+      this.$emit('update', this.items)
+    },
+
+    reset () {
+      this.items = []
+    },
+
+    addItemTo () {
+      this.items.push(this.item)
+      this.item = null
+      this.updaterEdit(this.items)
+    }
   }
+
+}
 </script>

@@ -15,8 +15,8 @@ module.exports = {
      * @returns {*}
      */
     maybeAdjustScroll () {
-      let pixelsToPointerTop = this.pixelsToPointerTop()
-      let pixelsToPointerBottom = this.pixelsToPointerBottom()
+      const pixelsToPointerTop = this.pixelsToPointerTop()
+      const pixelsToPointerBottom = this.pixelsToPointerBottom()
 
       if (pixelsToPointerTop <= this.viewport().top) {
         return this.scrollTo(pixelsToPointerTop)
@@ -54,7 +54,7 @@ module.exports = {
      * @returns {number}
      */
     pointerHeight () {
-      let element = this.$refs.dropdownMenu ? this.$refs.dropdownMenu.children[this.typeAheadPointer] : false
+      const element = this.$refs.dropdownMenu ? this.$refs.dropdownMenu.children[this.typeAheadPointer] : false
       return element ? element.offsetHeight : 0
     },
 

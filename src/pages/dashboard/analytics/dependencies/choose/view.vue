@@ -54,71 +54,72 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import System from 'factories/system'
-  import FectherEntity from 'services/fetchEntity'
-  import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
-  import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
+import System from 'factories/system'
+import FectherEntity from 'services/fetchEntity'
+import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
+import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
-  export default {
+export default {
 
-    components: {
-      tabSystem,
-      tabApps
+  components: {
+    tabSystem,
+    tabApps
+  },
+  data () {
+    return {
+      show: 'system',
+      systems: [],
+      apps: []
+    }
+  },
+
+  computed: {
+    tab_system () {
+      return this.$refs.tab_system
     },
-    data () {
-      return {
-        show: 'system',
-        systems: [],
-        apps: []
+    tab_apps () {
+      return this.$refs.tab_apps
+    }
+  },
+
+  methods: {
+    selItems () {
+      if (this.show === 'system') {
+        this.getAppsBySystem(this.systems)
+      } else {
+        this.routePage(this.apps)
       }
     },
 
-    computed: {
-      tab_system () {
-        return this.$refs.tab_system
-      },
-      tab_apps () {
-        return this.$refs.tab_apps
+    getAppsBySystem (dsystems) {
+      const _id = dsystems.map(e => _.get(e, '_id'))
+
+      if (_id.length > 0) {
+        FectherEntity(System)({ force: true })
+          .find(this.fetchApps, { _id })
       }
     },
 
-    methods: {
-      selItems () {
-        if (this.show == 'system') {
-          this.getAppsBySystem(this.systems)
-        } else {
-          this.routePage(this.apps)
+    fetchApps (data) {
+      const items = _.get(data, 'data.items', [])
+      const entries = items.reduce((arr, sys) => _.concat(arr, _.get(sys, 'entry', [])), [])
+      const apps = _.uniqBy(entries, '_id')
+      this.routePage(apps)
+    },
+
+    routePage (apps) {
+      const systems = this.systems
+      this.$router.push({
+        name: 'dependency.tree',
+        params: {
+          systems,
+          apps
         }
-      },
-
-      getAppsBySystem (dsystems) {
-        const _id = dsystems.map(e => _.get(e, '_id'))
-
-        if (_id.length > 0) {
-          FectherEntity(System)({ force: true })
-            .find(this.fetchApps, { _id })
-        }
-      },
-
-      fetchApps (data) {
-        const items = _.get(data, 'data.items', [])
-        const entries = items.reduce((arr, sys) => _.concat(arr, _.get(sys, 'entry', [])), [])
-        const apps = _.uniqBy(entries, '_id')
-        this.routePage(apps)
-      },
-
-      routePage (apps) {
-        const systems = this.systems
-        this.$router.push({ name: 'dependency.tree',
-          params: {
-            systems,
-            apps
-          }
-        })
-      }
+      })
     }
   }
+}
 
 </script>

@@ -24,18 +24,18 @@ export default {
   },
 
   computed: {
-    tab_tags() {
+    tab_tags () {
       return this.$refs.tab_tags
     },
-    tab_chains() {
+    tab_chains () {
       return this.$refs.tab_chains
     },
-    tab_role() {
+    tab_role () {
       return this.$refs.tab_role
     }
   },
 
-  data() {
+  data () {
     const initData = {
       name: null,
       method: 'GET',
@@ -71,8 +71,8 @@ export default {
       options: {},
       showCron: false,
       mapper: [
-        {name: 'max_retries', label: 'Max Retry', validate: 'min:1', help: 'Default is 3'},
-        {name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout'}
+        { name: 'max_retries', label: 'Max Retry', validate: 'min:1', help: 'Default is 3' },
+        { name: 'expires', label: 'Expires', validate: 'min:1', help: 'Timeout' }
       ],
       URL: `${new Connections().getUrl()}?query=`,
       URL_REPORTS: `${new Reports().getUrl()}?query=`,
@@ -82,11 +82,11 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = this.create ? 'Create new Scheduler' : `Edit ${this.model.name} scheduler`
     },
 
-    createLoad() {
+    createLoad () {
       this.tabShow = 0
       this.$set(this, 'data', _.clone(this.initialData))
       this.$set(this, 'cron', _.clone(this.initialCron))
@@ -98,7 +98,7 @@ export default {
       this.$nextTick()
     },
 
-    editLoad() {
+    editLoad () {
       this.tabShow = 0
       this.$set(this, 'data', _.assign({}, this.initialData, this.model))
       this.$set(this.data, 'endpoint', _.get(this.model, 'endpoint'))
@@ -110,7 +110,7 @@ export default {
       this.$nextTick()
     },
 
-    setupModel() {
+    setupModel () {
       const period = this.data.period_type
 
       this.model = _.pickBy(this.data, _.identity)
@@ -120,62 +120,62 @@ export default {
 
       const remove = _.chain(this.options)
         .get('period_type')
-        .filter(e => e != period)
+        .filter(e => e !== period)
         .push('msg')
         .value()
 
       this.$set(this, 'model', _.omit(this.model, remove))
     },
 
-    createSave() {
+    createSave () {
       this.setupModel()
 
       FectherEntity(Scheduler)()
         .create(this.finishJob, this.model)
     },
 
-    editSave() {
+    editSave () {
       this.setupModel()
 
       FectherEntity(Scheduler)()
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'scheduler_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'scheduler_options' })
     },
 
-    getOptions() {
+    getOptions () {
       return _.chain(this.options.configs)
-        .filter(e => e.name == _.get(this.data, 'task'))
+        .filter(e => e.name === _.get(this.data, 'task'))
         .head()
         .get('options')
         .keys()
         .value()
     },
 
-    requestSearch(async, val, key = 'name') {
+    requestSearch (async, val, key = 'name') {
       return `${async}%7B"${key}":"${val}"%7D`
     },
 
-    onHit(item) {
+    onHit (item) {
       this.data.link = _.pick(item, ['_id', 'provider', 'report'])
 
       this.connectionSwap(item)
       return item.name
     },
 
-    changeConnectionsServers(item) {
+    changeConnectionsServers (item) {
       this.$set(this.data.link, 'task', item)
       this.connectionSwap()
     },
 
-    connectionSwap(item={}) {
+    connectionSwap (item = {}) {
       const methd = _.capitalize(this.data.task)
 
-      let conn = _.chain(this.options.configs)
-        .filter(e => e.name == _.get(this.data, 'task'))
+      const conn = _.chain(this.options.configs)
+        .filter(e => e.name === _.get(this.data, 'task'))
         .head()
         .pick(['url', 'method', 'source'])
         .value()
@@ -188,33 +188,33 @@ export default {
       }
     },
 
-    changeConnections(item, conn) {
+    changeConnections (item, conn) {
       this.changeEndpoint(['provider', '_id', 'task'], conn)
     },
 
-    changeReports(item, conn) {
+    changeReports (item, conn) {
       this.changeEndpoint(['report'], conn)
 
       const args = [
-        {'key': 'report_id', 'value': _.get(item, '_id')},
-        {'key': 'owner_user', 'value': _.get(item, 'owner._id')}
+        { key: 'report_id', value: _.get(item, '_id') },
+        { key: 'owner_user', value: _.get(item, 'owner._id') }
       ]
       this.tab_tags.updaterEdit(args)
     },
 
-    changeEndpoint(lst, conn) {
+    changeEndpoint (lst, conn) {
       this.data.endpoint = _.chain(this.data.link)
         .pick(lst)
         .reduce((result, value, key) => _.replace(result, `<${key}>`, value), _.get(conn, 'url'))
         .value()
     },
 
-    clearVal() {
+    clearVal () {
       this.data.link.name = _.get(this.initData, 'link.name')
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

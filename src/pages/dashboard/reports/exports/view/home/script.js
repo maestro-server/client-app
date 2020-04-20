@@ -11,17 +11,17 @@ export default {
   data: function () {
     return {
       entity: Reports,
-      model: {tags: []}
+      model: { tags: [] }
     }
   },
 
   computed: {
-    typeStatus() {
-      const mapp = {'finished': 'success', 'error': 'danger', 'process': 'warning'}
+    typeStatus () {
+      const mapp = { finished: 'success', error: 'danger', process: 'warning' }
       return _.get(mapp, this.model.status, 'info')
     },
 
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'aggr'])
     }
   }

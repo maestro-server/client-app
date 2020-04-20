@@ -4,7 +4,6 @@ process.env.VUE_APP_IMG_AVATAR_DEFAULT = '/static/imgs/avatar_default.jpeg';
 process.env.VUE_APP_VERSION = require("./package.json").version;
 
 module.exports = {
-  lintOnSave: false,
   runtimeCompiler: true,
   chainWebpack: config => {
     config.resolve.alias.set('src', path.resolve('src'));

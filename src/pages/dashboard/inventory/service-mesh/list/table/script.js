@@ -16,7 +16,7 @@ export default {
       entity: new Applications(),
       columns: ['name', 'provider', 'ldatacenters', 'lsystem', 'environment', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'provider', 'ldatacenters', 'environment', 'lsystem'],
         listColumns: {
           lsystem: [],
@@ -33,13 +33,13 @@ export default {
   },
 
   computed: {
-    url() {
+    url () {
       return this.entity.getUrl() + '?family=ServiceMesh'
     }
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.fdatacenters = _.get(d, 'datacenters.name', '-')
 
@@ -52,7 +52,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(System)()
       .find(this.fetchData('lsystem'))
 

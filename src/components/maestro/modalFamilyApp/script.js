@@ -12,9 +12,9 @@ export default {
   mixins: [Modals],
 
   props: {
-    field: {default: "deps"},
-    label: {default: "dependencies"},
-    entity: {default: () => Applications}
+    field: { default: "deps" },
+    label: { default: "dependencies" },
+    entity: { default: () => Applications }
   },
 
   components: {
@@ -23,20 +23,20 @@ export default {
 
   data () {
     return {
-      data: {deps: []},
+      data: { deps: [] },
       options: {
-        protocol:[]
+        protocol: []
       }
     }
   },
 
   computed: {
-    tab_targets() {return this.$refs.tab_targets}
+    tab_targets () { return this.$refs.tab_targets }
   },
 
   methods: {
     afterShow () {
-      this.text.title = this.create ? `Create new ${this.label}`: `Edit ${this.label}`
+      this.text.title = this.create ? `Create new ${this.label}` : `Edit ${this.label}`
     },
 
     editLoad () {
@@ -55,7 +55,7 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    updateData(val) {
+    updateData (val) {
       this.$set(this.data, this.field, val)
     }
   }

@@ -14,43 +14,43 @@ export default {
   data: function () {
     return {
       entity: Clients,
-      model: {tags: [], contacts:[]},
+      model: { tags: [], contacts: [] },
       list_system: []
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'contacts', 'list_system', 'team'])
     }
   },
 
   methods: {
     editM: function () {
-      const {list_system} = this
+      const { list_system } = this
 
       this.MMembers
-        .onFinishCallBack((e)=>{
+        .onFinishCallBack((e) => {
           this.$set(this, 'list_system', _.get(e, 'list_system', []))
-          CacheManager({k: `client_system_${this.model._id}`}).remove()
+          CacheManager({ k: `client_system_${this.model._id}` }).remove()
         })
-        .show(_.merge(this.model, {list_system}))
+        .show(_.merge(this.model, { list_system }))
     },
 
-    fetchSystem(force = true) {
+    fetchSystem (force = true) {
       if (this.id) {
-        FectherEntity(System)({force})
+        FectherEntity(System)({ force })
           .find((e) => {
             this.$set(this, 'list_system', _.get(e, 'data.items', []))
-          }, {"clients._id": this.id})
+          }, { "clients._id": this.id })
       }
     }
   },
 
-  created() {
+  created () {
     this.fetchSystem()
   }
 }

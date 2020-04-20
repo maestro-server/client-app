@@ -14,7 +14,7 @@ export default {
   },
 
   computed: {
-    tab_items() {return this.$refs.tab_items}
+    tab_items () { return this.$refs.tab_items }
   },
 
   data () {

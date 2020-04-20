@@ -1,6 +1,6 @@
 export default {
   props: {
-    size: {type: String}
+    size: { type: String }
   },
   computed: {
     sizeClass () {

@@ -6,7 +6,7 @@ class Teams extends Factory {
 
   static ename = 'teams'
 
-    constructor(model={}) {
+  constructor (model = {}) {
     const ename = Teams.ename
     super(model, ename)
     this.setName(ename)

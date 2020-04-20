@@ -53,53 +53,53 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import Applications from 'factories/applications'
-  import Adminer from 'factories/adminer'
-  import headerLogin from 'src/resources/libs/headerAuthorization'
-  import FectherEntity from 'services/fetchEntity'
+import Applications from 'factories/applications'
+import Adminer from 'factories/adminer'
+import headerLogin from 'src/resources/libs/headerAuthorization'
+import FectherEntity from 'services/fetchEntity'
 
-  import Modals from 'mixins/modals'
-  import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import TabCreaterList from 'mixins/tab-creater-list'
 
-  export default {
-    mixins: [Modals, TabCreaterList],
+export default {
+  mixins: [Modals, TabCreaterList],
 
-    data () {
-      return {
-        headers: headerLogin,
-        URL: `${new Applications().getUrl()}?query=`,
-        label: Applications.ename,
-        options: {
-          families: []
-        },
-        type: 'Application',
-        template_apps: '<b>{{item.name}}</b> <span v-if=\'item.environment\'>({{item.environment}})</span> <h5 class=\'ft15 inline\'><bs-label type=\'default\' v-if=\'item.role\'>{{item.role.role}}</bs-label></h5>',
-        filter: ['_id', 'name', 'family', 'environment']
-      }
-    },
-
-    created () {
-      this.fetchData()
-    },
-
-    methods: {
-      requestSearch (async, val, key = 'name') {
-        return `${async}%7B"${key}":"${val}", "family":"${this.type}"%7D`
+  data () {
+    return {
+      headers: headerLogin,
+      URL: `${new Applications().getUrl()}?query=`,
+      label: Applications.ename,
+      options: {
+        families: []
       },
-
-      updaterEdit (data) {
-        this.$set(this, 'value', data || [])
-        this.$emit('update', data)
-      },
-
-      fetchData () {
-        FectherEntity(Adminer)({ persistence: 'local' })
-          .find(this.fetchAdminer, { key: 'application_options' })
-      }
+      type: 'Application',
+      template_apps: '<b>{{item.name}}</b> <span v-if=\'item.environment\'>({{item.environment}})</span> <h5 class=\'ft15 inline\'><bs-label type=\'default\' v-if=\'item.role\'>{{item.role.role}}</bs-label></h5>',
+      filter: ['_id', 'name', 'family', 'environment']
     }
+  },
 
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    requestSearch (async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}", "family":"${this.type}"%7D`
+    },
+
+    updaterEdit (data) {
+      this.$set(this, 'value', data || [])
+      this.$emit('update', data)
+    },
+
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'application_options' })
+    }
   }
+
+}
 
 </script>

@@ -8,7 +8,7 @@ export default {
     modalCreate
   },
 
-  data() {
+  data () {
     return {
       entity: Scheduler
     }

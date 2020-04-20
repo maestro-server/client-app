@@ -1,10 +1,10 @@
 
 export default {
   props: {
-    total_pages: {type: Number, default: 0},
-    current_page: {type: Number, default: 1},
-    size: {type: String, default: null},
-    only_number: {type: Boolean, default: false}
+    total_pages: { type: Number, default: 0 },
+    current_page: { type: Number, default: 1 },
+    size: { type: String, default: null },
+    only_number: { type: Boolean, default: false }
   },
 
   watch: {

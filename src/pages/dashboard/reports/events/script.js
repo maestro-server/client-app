@@ -3,7 +3,7 @@
 import Events from 'factories/events'
 
 export default {
-  data() {
+  data () {
     return {
       entity: Events
     }

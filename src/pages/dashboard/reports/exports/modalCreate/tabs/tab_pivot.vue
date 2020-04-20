@@ -100,156 +100,156 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import Modals from 'mixins/modals'
-  import Adminer from 'factories/adminer'
-  import FectherEntity from 'services/fetchEntity'
-  import reportFilter from '../modules/reportFilter/ReportFilter'
+import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+import reportFilter from '../modules/reportFilter/ReportFilter'
 
-  export default {
-    components: {
-      reportFilter
-    },
-    mixins: [Modals, TabCreaterList],
+export default {
+  components: {
+    reportFilter
+  },
+  mixins: [Modals, TabCreaterList],
 
-    props: {
-      label: { default: 'Application' },
-      defaultType: { default: 'Application' }
-    },
+  props: {
+    label: { default: 'Application' },
+    defaultType: { default: 'Application' }
+  },
 
-    data: function () {
-      const defaultPivot = {
-        report: 'pivot',
-        component: 'pivot',
-        filters: {
-          clients: {
-            title: 'Clients',
-            icon: 'fa-user-o',
-            enabled: true,
-            filters: [
-              {
-                field: 'active',
-                filter: 'true',
-                comparer: 'equal',
-                typ: 'boolean'
-              }
-            ]
-          },
-          systems: {
-            title: 'Systems',
-            icon: 'fa-briefcase',
-            enabled: true,
-            filters: [
-              {
-                field: 'active',
-                filter: 'true',
-                comparer: 'equal',
-                typ: 'boolean'
-              }
-            ]
-          },
-          applications: {
-            title: 'Applications',
-            icon: 'fa-code',
-            enabled: true,
-            filters: [
-              {
-                field: 'active',
-                filter: 'true',
-                comparer: 'equal',
-                typ: 'boolean'
-              }
-            ]
-          },
-          servers: {
-            title: 'Servers',
-            icon: 'fa-server',
-            enabled: true,
-            filters: [
-              {
-                field: 'active',
-                filter: 'true',
-                comparer: 'equal',
-                typ: 'boolean'
-              }
-            ],
-            arrowhidden: true
-          }
+  data: function () {
+    const defaultPivot = {
+      report: 'pivot',
+      component: 'pivot',
+      filters: {
+        clients: {
+          title: 'Clients',
+          icon: 'fa-user-o',
+          enabled: true,
+          filters: [
+            {
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
+            }
+          ]
+        },
+        systems: {
+          title: 'Systems',
+          icon: 'fa-briefcase',
+          enabled: true,
+          filters: [
+            {
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
+            }
+          ]
+        },
+        applications: {
+          title: 'Applications',
+          icon: 'fa-code',
+          enabled: true,
+          filters: [
+            {
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
+            }
+          ]
+        },
+        servers: {
+          title: 'Servers',
+          icon: 'fa-server',
+          enabled: true,
+          filters: [
+            {
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
+            }
+          ],
+          arrowhidden: true
         }
-      }
-
-      return {
-        showModal: false,
-        entity: false,
-        initialData: _.clone(defaultPivot),
-        submit: _.clone(defaultPivot),
-        options: {
-          tables: false
-        }
-      }
-    },
-
-    created () {
-      this.fetchData()
-    },
-
-    methods: {
-      textEnabled (enabled) {
-        return enabled ? 'Disabled' : 'Enable'
-      },
-
-      toggleEnable (key) {
-        this.submit.filters[key].enabled = !this.submit.filters[key].enabled
-
-        this.updateEvent()
-      },
-
-      sModal (table) {
-        if (_.has(this, 'options.tables')) {
-          this.entity = table.toLowerCase()
-
-          const items = this.options.tables.filter(data => table === data.name)
-          this.$refs.compfilters.updateFilters(_.head(items))
-
-          this.showModal = !this.showModal
-        }
-      },
-
-      addFilter (picks) {
-        if (picks) {
-          this.submit.filters[this.entity].filters.push(picks)
-        }
-
-        this.updateEvent()
-      },
-
-      delItem (index, item) {
-        delete this.submit.filters[item.toLowerCase()].filters.splice(index, 1)
-
-        this.updateEvent()
-      },
-
-      updateEvent () {
-        this.$emit('update', this.submit)
-      },
-
-      fetchData () {
-        FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
-          key: 'reports_options'
-        })
-      },
-
-      updaterEdit (data) {
-        this.$set(this, 'submit', data)
-      },
-
-      reset () {
-        this.$set(this, 'submit', _.clone(this.initialData))
       }
     }
+
+    return {
+      showModal: false,
+      entity: false,
+      initialData: _.clone(defaultPivot),
+      submit: _.clone(defaultPivot),
+      options: {
+        tables: false
+      }
+    }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    textEnabled (enabled) {
+      return enabled ? 'Disabled' : 'Enable'
+    },
+
+    toggleEnable (key) {
+      this.submit.filters[key].enabled = !this.submit.filters[key].enabled
+
+      this.updateEvent()
+    },
+
+    sModal (table) {
+      if (_.has(this, 'options.tables')) {
+        this.entity = table.toLowerCase()
+
+        const items = this.options.tables.filter(data => table === data.name)
+        this.$refs.compfilters.updateFilters(_.head(items))
+
+        this.showModal = !this.showModal
+      }
+    },
+
+    addFilter (picks) {
+      if (picks) {
+        this.submit.filters[this.entity].filters.push(picks)
+      }
+
+      this.updateEvent()
+    },
+
+    delItem (index, item) {
+      delete this.submit.filters[item.toLowerCase()].filters.splice(index, 1)
+
+      this.updateEvent()
+    },
+
+    updateEvent () {
+      this.$emit('update', this.submit)
+    },
+
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
+        key: 'reports_options'
+      })
+    },
+
+    updaterEdit (data) {
+      this.$set(this, 'submit', data)
+    },
+
+    reset () {
+      this.$set(this, 'submit', _.clone(this.initialData))
+    }
   }
+}
 </script>
 
 <style lang="scss">

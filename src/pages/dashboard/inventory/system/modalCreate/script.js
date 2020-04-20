@@ -22,9 +22,9 @@ export default {
 
   data () {
     return {
-      data: {name: null, description: null, links: [], applications:null, tags: [], entry: [], clients: []},
+      data: { name: null, description: null, links: [], applications: null, tags: [], entry: [], clients: [] },
       options: {
-        entry:[],
+        entry: [],
         apps: []
       },
       entity: System
@@ -32,18 +32,18 @@ export default {
   },
 
   computed: {
-    tab_endpoint() {return this.$refs.tab_endpoint},
-    tab_clients() {return this.$refs.tab_clients},
-    tab_tags() {return this.$refs.tab_tags}
+    tab_endpoint () { return this.$refs.tab_endpoint },
+    tab_clients () { return this.$refs.tab_clients },
+    tab_tags () { return this.$refs.tab_tags }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new System' : `Edit ${this.model.name} system`
+      this.text.title = this.create ? 'Create new System' : `Edit ${this.model.name} system`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.clearDuplicate()
       this.tab_tags.reset()
@@ -76,13 +76,13 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'system_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'system_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

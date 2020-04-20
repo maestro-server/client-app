@@ -81,102 +81,102 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import _ from 'lodash'
-  import Modals from 'mixins/modals'
-  import Adminer from 'factories/adminer'
-  import FectherEntity from 'services/fetchEntity'
+import _ from 'lodash'
+import Modals from 'mixins/modals'
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
 
-  import reportFilter from '../modules/reportFilter/ReportFilter'
+import reportFilter from '../modules/reportFilter/ReportFilter'
 
-  export default {
-    components: {
-      reportFilter
-    },
-    mixins: [Modals],
+export default {
+  components: {
+    reportFilter
+  },
+  mixins: [Modals],
 
-    data: function () {
-      const defaultGeneral = {
-        report: 'general',
-        component: null,
-        filters: [
-          {
-            field: 'active',
-            filter: 'true',
-            comparer: 'equal',
-            typ: 'boolean'
-          }
-        ]
-      }
-
-      return {
-        initialData: _.clone(defaultGeneral),
-        submit: _.clone(defaultGeneral),
-        options: {
-          tables: false
+  data: function () {
+    const defaultGeneral = {
+      report: 'general',
+      component: null,
+      filters: [
+        {
+          field: 'active',
+          filter: 'true',
+          comparer: 'equal',
+          typ: 'boolean'
         }
-      }
-    },
+      ]
+    }
 
-    computed: {
-      tables () {
-        if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
-          return this.options.tables.map(data => data.name)
-        }
-        return []
-      }
-    },
-
-    created () {
-      this.fetchData()
-    },
-
-    methods: {
-      updateFilters () {
-        if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
-          const items = this.options.tables.filter(
-            data => this.submit.component === data.name
-          )
-          this.$refs.compfilters.updateFilters(_.head(items))
-
-          this.updateEvent()
-        }
-      },
-
-      addFilter (picks) {
-        if (picks) {
-          this.submit.filters.push(picks)
-        }
-
-        this.updateEvent()
-      },
-
-      delItem (index) {
-        delete this.submit.filters.splice(index, 1)
-
-        this.updateEvent()
-      },
-
-      updateEvent () {
-        this.$emit('update', this.submit)
-      },
-
-      updaterEdit (data) {
-        this.$set(this, 'submit', data)
-      },
-
-      fetchData () {
-        FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
-          key: 'reports_options'
-        })
-      },
-
-      reset () {
-        this.$set(this, 'submit', _.clone(this.initialData))
+    return {
+      initialData: _.clone(defaultGeneral),
+      submit: _.clone(defaultGeneral),
+      options: {
+        tables: false
       }
     }
+  },
+
+  computed: {
+    tables () {
+      if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
+        return this.options.tables.map(data => data.name)
+      }
+      return []
+    }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    updateFilters () {
+      if (_.has(this, 'options.tables') && _.isArray(this.options.tables)) {
+        const items = this.options.tables.filter(
+          data => this.submit.component === data.name
+        )
+        this.$refs.compfilters.updateFilters(_.head(items))
+
+        this.updateEvent()
+      }
+    },
+
+    addFilter (picks) {
+      if (picks) {
+        this.submit.filters.push(picks)
+      }
+
+      this.updateEvent()
+    },
+
+    delItem (index) {
+      delete this.submit.filters.splice(index, 1)
+
+      this.updateEvent()
+    },
+
+    updateEvent () {
+      this.$emit('update', this.submit)
+    },
+
+    updaterEdit (data) {
+      this.$set(this, 'submit', data)
+    },
+
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
+        key: 'reports_options'
+      })
+    },
+
+    reset () {
+      this.$set(this, 'submit', _.clone(this.initialData))
+    }
   }
+}
 </script>
 
 <style lang="scss">

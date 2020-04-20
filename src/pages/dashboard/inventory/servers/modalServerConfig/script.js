@@ -24,13 +24,13 @@ export default {
   },
 
   computed: {
-    tab_items() {
+    tab_items () {
       return this.$refs.tab_items
     },
-    tab_init() {
+    tab_init () {
       return this.$refs.tab_init
     },
-    tab_envs() {
+    tab_envs () {
       return this.$refs.tab_envs
     }
   },
@@ -38,7 +38,7 @@ export default {
   data: function () {
     return {
       fielder: 'setup',
-      initialData: {bin: null, user:null, package: null, init: {}, envs: [], mods:[]},
+      initialData: { bin: null, user: null, package: null, init: {}, envs: [], mods: [] },
       data: {},
       options: {
         managers: []
@@ -47,7 +47,7 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       const name = _.get(this.model, 'item.name')
       this.text.title = `Host Config "${name}"`
     },
@@ -62,8 +62,8 @@ export default {
     },
 
     setupModel () {
-      const {index} = this.model
-      const data = _.pickBy(this.data, e=>!_.isEmpty(e))
+      const { index } = this.model
+      const data = _.pickBy(this.data, e => !_.isEmpty(e))
 
       _.set(this.provider, `services[${index}].${this.fielder}`, data)
     },
@@ -75,13 +75,13 @@ export default {
         .patch(this.finishJob, this.provider)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'services_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'services_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

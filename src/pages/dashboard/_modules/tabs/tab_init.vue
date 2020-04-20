@@ -46,50 +46,50 @@ placeholder="systemctl httpd restart"
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
+import TabCreaterList from 'mixins/tab-creater-list'
 
-  export default {
-    mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-    props: {
-      managers: {}
-    },
+  props: {
+    managers: {}
+  },
 
-    data: function () {
-      const resetData = {init: null, start:null, stop: null, restart:null}
+  data: function () {
+    const resetData = { init: null, start: null, stop: null, restart: null }
 
-      return {
-        resetData: resetData,
-        data: _.clone(resetData),
-        options: {
-          managers: []
-        }
-      }
-    },
-
-    mounted () {
-      this.updaterEdit()
-    },
-
-    methods: {
-      onHit() {
-        this.$emit('update', this.data)
-      },
-
-      updaterEdit(data = {}) {
-        this.$set(this, 'data', data)
-        const dpp = _.pickBy(data, _.identity)
-
-        this.$emit('update', dpp)
-      },
-
-      reset() {
-        this.$set(this, 'data', _.clone(this.resetData))
+    return {
+      resetData: resetData,
+      data: _.clone(resetData),
+      options: {
+        managers: []
       }
     }
+  },
 
+  mounted () {
+    this.updaterEdit()
+  },
+
+  methods: {
+    onHit () {
+      this.$emit('update', this.data)
+    },
+
+    updaterEdit (data = {}) {
+      this.$set(this, 'data', data)
+      const dpp = _.pickBy(data, _.identity)
+
+      this.$emit('update', dpp)
+    },
+
+    reset () {
+      this.$set(this, 'data', _.clone(this.resetData))
+    }
   }
+
+}
 
 </script>

@@ -17,11 +17,11 @@ export default {
   },
 
   methods: {
-    optP(data) {
+    optP (data) {
       this.$parent.optE(data)
     },
 
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         return d
       })

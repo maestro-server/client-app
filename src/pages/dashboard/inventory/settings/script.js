@@ -10,7 +10,7 @@ export default {
     modalOptions
   },
 
-  data() {
+  data () {
     return {
       entity: Services
     }

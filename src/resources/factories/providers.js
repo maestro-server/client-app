@@ -6,7 +6,7 @@ class Providers extends Factory {
 
   static ename = 'providers'
 
-  constructor(model={}, path='') {
+  constructor (model = {}, path = '') {
     const ename = Providers.ename
     super(model, ename + path)
     this.setName(ename)

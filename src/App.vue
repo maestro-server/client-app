@@ -18,12 +18,12 @@ import store from 'src/store'
 
 export default {
   computed: {
-    theme() {
+    theme () {
       return 'theme-' + _.get(store.getters, 'get_options.theme')
     }
   },
 
-  created() {
+  created () {
     new Maestro()
       .get(e => {
         store.dispatch('setOptions', _.get(e, 'data'))

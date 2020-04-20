@@ -1,7 +1,7 @@
 export default {
   props: {
-    disabled: {type: Boolean, default: false},
-    header: {type: String}
+    disabled: { type: Boolean, default: false },
+    header: { type: String }
   },
   data () {
     return {

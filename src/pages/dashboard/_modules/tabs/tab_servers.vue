@@ -79,7 +79,7 @@ export default {
     label: { default: "Server" }
   },
 
-  data: function() {
+  data: function () {
     return {
       headers: headerLogin,
       filter: true,
@@ -91,20 +91,20 @@ export default {
   },
 
   methods: {
-    requestIpSearch(async, val) {
+    requestIpSearch (async, val) {
       return this.requestSearch(async, val, "ipv4_private");
     },
 
-    requestSearch(async, val, key = "hostname") {
+    requestSearch (async, val, key = "hostname") {
       const role = this.makeFilter();
       return `${async}%7B"${key}":"${val}"${role}%7D`;
     },
 
-    makeFilter() {
+    makeFilter () {
       return this.family && this.filter ? `, "role":"${this.family}"` : "";
     },
 
-    updaterEdit(data) {
+    updaterEdit (data) {
       this.$set(this, "value", data || []);
       const m = data.map(e => e._id);
       this.$emit("update", m);

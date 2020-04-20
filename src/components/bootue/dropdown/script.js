@@ -1,10 +1,10 @@
 export default {
   props: {
-    disabled: {type: Boolean, default: false},
-    size: {type: String, default: null},
-    text: {type: String, default: null},
-    type: {type: String, default: 'default'},
-    value: {type: Boolean, default: false}
+    disabled: { type: Boolean, default: false },
+    size: { type: String, default: null },
+    text: { type: String, default: null },
+    type: { type: String, default: 'default' },
+    value: { type: Boolean, default: false }
   },
 
   data () {
@@ -56,7 +56,7 @@ export default {
   },
 
   mounted () {
-    let links = this.$el.querySelectorAll('.dropdown-menu>li>a')
+    const links = this.$el.querySelectorAll('.dropdown-menu>li>a')
     Array.prototype.map.call(links, (el) => {
       el.addEventListener('click', this.hiddeMe, false)
     })
@@ -64,7 +64,7 @@ export default {
   },
 
   beforeDestroy () {
-    let links = this.$el.querySelectorAll('li>a')
+    const links = this.$el.querySelectorAll('li>a')
     Array.prototype.map.call(links, (el) => {
       el.removeEventListener('click', this.hiddeMe, false)
     })

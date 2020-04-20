@@ -24,12 +24,12 @@ const CacheManager = (opts = {}) => {
       storage(opts).clear()
     },
 
-    clearReg(search) {
+    clearReg (search) {
       storage(opts).each((vl, ky) => {
         const regex = new RegExp(`${search}`);
 
-        if(regex.test(ky)) {
-          const topts = _.assign(opts, {k: ky})
+        if (regex.test(ky)) {
+          const topts = _.assign(opts, { k: ky })
           storage(topts).delete()
         }
       });
@@ -37,8 +37,8 @@ const CacheManager = (opts = {}) => {
 
     clearAll () {
       storage({}).clear()
-      storage({persistence: 'local'}).clear()
-      storage({persistence: 'vuex'}).clear()
+      storage({ persistence: 'local' }).clear()
+      storage({ persistence: 'vuex' }).clear()
     }
   }
 

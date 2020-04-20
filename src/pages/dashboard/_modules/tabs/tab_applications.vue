@@ -58,7 +58,7 @@ export default {
     defaultType: { default: "Application" }
   },
 
-  data: function() {
+  data: function () {
     return {
       type: "Application",
       URL: `${new Applications().getUrl()}?query=`,
@@ -71,17 +71,17 @@ export default {
     };
   },
 
-  created() {
+  created () {
     this.type = this.defaultType;
     this.fetchData();
   },
 
   methods: {
-    requestSearch(async, val, key = "name") {
+    requestSearch (async, val, key = "name") {
       return `${async}%7B"${key}":"${val}", "role":"${this.type}"%7D`;
     },
 
-    updaterEdit(data) {
+    updaterEdit (data) {
       if (data) {
         this.$set(this, "value", data || []);
         const m = data.map(e => e._id);
@@ -89,7 +89,7 @@ export default {
       }
     },
 
-    fetchData() {
+    fetchData () {
       FectherEntity(Adminer)({ persistence: "local" }).find(this.fetchAdminer, {
         key: "application_options"
       });

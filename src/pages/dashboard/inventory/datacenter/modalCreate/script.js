@@ -21,7 +21,7 @@ export default {
       zoneT: null,
       zone: null,
       auth: {},
-      options: {provider: [], connections: [], regions:[], zones:[]}
+      options: { provider: [], connections: [], regions: [], zones: [] }
     }
   },
 
@@ -55,7 +55,7 @@ export default {
       this.model.regions = this.regions
       this.model.zones = this.zones
       this.model.provider = this.provider
-      this.model.metas = {ownProvider: this.ownProvider}
+      this.model.metas = { ownProvider: this.ownProvider }
     },
 
     createSave () {
@@ -72,34 +72,34 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    changeProvider(bool) {
+    changeProvider (bool) {
       this.provider = null
       this.ownProvider = bool
       this.createLoad()
     },
 
-    addItems(item, entity) {
-      const exist = _.filter(this[entity], e=>e==item).length
+    addItems (item, entity) {
+      const exist = _.filter(this[entity], e => e === item).length
       if (entity && !_.isEmpty(item) && !exist) {
         this[entity].push(item)
       }
     },
 
-    clearItems() {
-      if(this.create) {
+    clearItems () {
+      if (this.create) {
         this.$set(this, 'zones', [])
         this.$set(this, 'regions', [])
       }
     },
 
-    addItemToTmpList(path, value) {
+    addItemToTmpList (path, value) {
       this.$set(this, path, this[value])
       this[value] = ''
     },
     /*
     Regions functions
      */
-    setupModalRegions() {
+    setupModalRegions () {
       this.showModalRegions = true
       this.options.regions = []
       if (this.options.baser.hasOwnProperty(this.provider)) {
@@ -107,7 +107,7 @@ export default {
       }
     },
 
-    submitRegions() {
+    submitRegions () {
       this.setupZones()
       this.showModalRegions = false
     },
@@ -116,7 +116,7 @@ export default {
     Zones functions
      */
 
-    setupZones() {
+    setupZones () {
       let arr = []
 
       const optProv = this.options.baser.hasOwnProperty(this.provider)
@@ -136,8 +136,8 @@ export default {
   },
 
   created () {
-    FectherEntity(Adminer)({persistence: 'local', time: 42400})
-      .find(this.fetchAdminer, {key: 'datacenter_options'})
+    FectherEntity(Adminer)({ persistence: 'local', time: 42400 })
+      .find(this.fetchAdminer, { key: 'datacenter_options' })
   }
 
 }

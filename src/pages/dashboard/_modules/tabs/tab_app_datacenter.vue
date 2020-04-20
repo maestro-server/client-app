@@ -70,82 +70,82 @@
 
 
 <script>
-  'use strict'
-  import _ from 'lodash'
-  import Datacenters from 'factories/datacenters'
-  import FectherEntity from 'services/fetchEntity'
+'use strict'
+import _ from 'lodash'
+import Datacenters from 'factories/datacenters'
+import FectherEntity from 'services/fetchEntity'
 
-  export default {
-    props: {
-      serverType: {}
+export default {
+  props: {
+    serverType: {}
+  },
+
+  data: function () {
+    return {
+      updated: false,
+      options: [],
+      value: {
+        _id: null,
+        name: null,
+        zone: null,
+        instance_id: null,
+        instance: null,
+        type: null,
+        region: null,
+        provider: null
+      },
+      providers: [],
+      zones: [],
+      regions: []
+    }
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    fetchData: function () {
+      FectherEntity(Datacenters)()
+        .find(this.fetchDatacenter)
     },
 
-    data: function () {
-      return {
-        updated: false,
-        options: [],
-        value: {
-          _id: null,
-          name: null,
-          zone: null,
-          instance_id: null,
-          instance: null,
-          type: null,
-          region: null,
-          provider: null
-        },
-        providers: [],
-        zones: [],
-        regions: []
+    fetchDatacenter (e) {
+      const data = _.get(e, 'data.items')
+      if (!_.isEmpty(data)) {
+        this.options = data.map(item => ({
+          value: item,
+          label: item.name
+        }))
+        this.providers = this.options.map(d => d.label)
       }
     },
 
-    created () {
-      this.fetchData()
+    updateProvider: function (val) {
+      const dc = _.head(this.options.filter(d => d.label === val))
+
+      this.regions = _.get(dc, 'value.regions', [])
+      this.zones = _.get(dc, 'value.zones', [])
+      this.value._id = _.get(dc, 'value._id')
+      this.value.provider = _.get(dc, 'value.provider')
+
+      this.updateModel()
     },
 
-    methods: {
-      fetchData: function () {
-        FectherEntity(Datacenters)()
-          .find(this.fetchDatacenter)
-      },
+    updateModel: function () {
+      this.$emit('update', _.pickBy(this.value, _.identity))
+    },
 
-      fetchDatacenter (e) {
-        const data = _.get(e, 'data.items')
-        if (!_.isEmpty(data)) {
-          this.options = data.map(item => ({
-            value: item,
-            label: item.name
-          }))
-          this.providers = this.options.map(d => d.label)
-        }
-      },
+    updaterEdit (data) {
+      this.updated = _.has(data, 'name')
+      this.$set(this, 'value', data || {})
+    },
 
-      updateProvider: function (val) {
-        const dc = _.head(this.options.filter(d => d.label == val))
-
-        this.regions = _.get(dc, 'value.regions', [])
-        this.zones = _.get(dc, 'value.zones', [])
-        this.value._id = _.get(dc, 'value._id')
-        this.value.provider = _.get(dc, 'value.provider')
-
-        this.updateModel()
-      },
-
-      updateModel: function () {
-        this.$emit('update', _.pickBy(this.value, _.identity))
-      },
-
-      updaterEdit (data) {
-        this.updated = _.has(data, 'name')
-        this.$set(this, 'value', data || {})
-      },
-
-      reset () {
-        this.updated = false
-        this.value = {}
-      }
+    reset () {
+      this.updated = false
+      this.value = {}
     }
   }
+}
 
 </script>

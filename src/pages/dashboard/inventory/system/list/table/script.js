@@ -12,9 +12,9 @@ export default {
   data: function () {
     return {
       entity: new System(),
-      columns: ['name', 'lclients','updated_at', 'created_at', 'actions'],
+      columns: ['name', 'lclients', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'lclients'],
         listColumns: {
           lclients: []
@@ -29,7 +29,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.links = _.reduce(d.check, (o, f, k) => this.viewReducer(o, f, k, 'key'), "")
         d.lclients = _.reduce(d.clients, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
@@ -41,7 +41,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(Clients)()
       .find(this.fetchData('lclients'))
   }

@@ -1,4 +1,4 @@
- 'use strict'
+'use strict'
 import Modals from 'mixins/modals'
 import FectherEntity from 'services/fetchEntity'
 
@@ -7,11 +7,11 @@ export default {
 
   props: {
     entity: {},
-    fielder: {default: "name", type: String}
+    fielder: { default: "name", type: String }
   },
 
   computed: {
-    label() {
+    label () {
       return this.entity.ename
     }
   },

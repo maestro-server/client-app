@@ -10,19 +10,19 @@ export default {
   mixins: [ListBox],
 
   props: {
-    defaultImg: {type: String, default: img_avatar_default}
+    defaultImg: { type: String, default: img_avatar_default }
   },
 
   data: function () {
     return {
       entity: Teams,
-      name: "Team",
+      name: "Team"
     }
   },
 
   methods: {
-    make_avatar(src) {
-      if(src.avatar) {
+    make_avatar (src) {
+      if (src.avatar) {
         return `${_.get(store.getters, 'get_options.static_url')}${src.avatar}`
       }
 

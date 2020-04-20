@@ -15,7 +15,7 @@ export default {
       entity: new Applications(),
       columns: ['name', 'lsystem', 'language', 'environment', 'qtddeploy', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'language', 'environment', 'lsystem'],
         listColumns: {
           lsystem: []
@@ -31,13 +31,13 @@ export default {
   },
 
   computed: {
-    url() {
+    url () {
       return this.entity.getUrl() + '?family=Application'
     }
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.qtddeploy = _.size(d.deploy)
         d.lsystem = _.reduce(d.system, (o, f, k) => this.viewReducer(o, f, k, 'name'), "")
@@ -49,7 +49,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(System)()
       .find(this.fetchData('lsystem'))
   }

@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 const mapper = {
   422: {
@@ -41,23 +41,24 @@ const mapper = {
 export default (e) => {
   const response = _.get(e, 'response', null)
 
-  let data = {
+  const data = {
     show: true,
     msg: "Houston, we have a problem ...",
     title: "Sorry, but occur a problem, contact us",
     type: "danger"
   }
 
-  if(response) {
+  if (response) {
 
     const hash = window.location.hash
 
-    if([401,403].includes(response.status) && hash!="#/login") {
+    if ([401, 403].includes(response.status) && hash !== "#/login") {
       window.location.hash = "/auth/logout"
       return
     }
 
-    if(response.status == 403) {
+    // eslint-disable-next-line eqeqeq
+    if (response.status == 403) {
       window.location.hash = "/auth/logout"
       return
     }

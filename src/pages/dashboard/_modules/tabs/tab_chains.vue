@@ -64,61 +64,61 @@ slot-scope="props"
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import _ from 'lodash'
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import Modals from 'mixins/modals'
-  import Scheduler from 'factories/scheduler'
-  import headerLogin from 'src/resources/libs/headerAuthorization'
+import _ from 'lodash'
+import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import Scheduler from 'factories/scheduler'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
-  export default {
-    mixins: [Modals, TabCreaterList],
+export default {
+  mixins: [Modals, TabCreaterList],
 
-    props: {
-      label: {default: 'Chain Task'}
+  props: {
+    label: { default: 'Chain Task' }
+  },
+
+  data: function () {
+    return {
+      URL: `${new Scheduler().getUrl()}?query=`,
+      template: "<h5><span class='btn btn-success btn-xs' v-if='item.enabled'><i class='fa fa-check-circle-o'></i></span><span class='btn btn-danger btn-xs' v-if='!item.enabled'><i class='fa fa-times-circle-o'></i></span> <b>{{item.name}}</b> - <bs-label type='default'>{{item.module}}</bs-label></h5>",
+      headers: headerLogin,
+      single: {
+        _id: null,
+        name: null,
+        countdown: 0
+      }
+    }
+  },
+
+  methods: {
+    requestSearch (async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}"%7D`
     },
 
-    data: function () {
-      return {
-        URL:  `${new Scheduler().getUrl()}?query=`,
-        template: "<h5><span class='btn btn-success btn-xs' v-if='item.enabled'><i class='fa fa-check-circle-o'></i></span><span class='btn btn-danger btn-xs' v-if='!item.enabled'><i class='fa fa-times-circle-o'></i></span> <b>{{item.name}}</b> - <bs-label type='default'>{{item.module}}</bs-label></h5>",
-        headers: headerLogin,
-        single: {
-          _id: null,
-          name: null,
-          countdown: 0
-        }
+    onHit (item) {
+      this.$set(this.single, '_id', _.get(item, '_id'))
+      this.$set(this.single, 'name', _.get(item, 'name'))
+      return item.name
+    },
+
+    updateSingle (data) {
+      if (_.isString(data) && data.length === 0) {
+        this.$set(this.single, '_id', null)
       }
     },
 
-    methods: {
-      requestSearch(async, val, key = 'name') {
-        return `${async}%7B"${key}":"${val}"%7D`
-      },
+    updaterEdit (data) {
+      const list = data || []
+      const m = list.filter(e => e._id)
 
-      onHit(item) {
-        this.$set(this.single, '_id', _.get(item, '_id'))
-        this.$set(this.single, 'name', _.get(item, 'name'))
-        return item.name
-      },
-
-      updateSingle(data) {
-        if(_.isString(data) && data.length == 0 ) {
-          this.$set(this.single, '_id', null)
-        }
-      },
-
-      updaterEdit(data) {
-        const list = data || []
-        const m = list.filter(e=>e._id)
-
-        if(m) {
-          this.$set(this, 'value', m)
-          this.$emit('update', m)
-        }
+      if (m) {
+        this.$set(this, 'value', m)
+        this.$emit('update', m)
       }
     }
   }
+}
 
 </script>

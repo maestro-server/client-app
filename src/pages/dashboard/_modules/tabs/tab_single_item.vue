@@ -32,23 +32,23 @@ name="list"
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
+import TabCreaterList from 'mixins/tab-creater-list'
 
-  export default {
-    mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-    props: {
-      label: {},
-      fielder: {default: 'name', type: String}
-    },
+  props: {
+    label: {},
+    fielder: { default: 'name', type: String }
+  },
 
-    data: function () {
-      return {
-        single: {[this.fielder]: null}
-      }
+  data: function () {
+    return {
+      single: { [this.fielder]: null }
     }
-
   }
+
+}
 </script>

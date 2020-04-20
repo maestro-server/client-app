@@ -41,12 +41,16 @@ module.exports = {
     "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
     "one-var": [2, "never"],         // http://eslint.org/docs/rules/one-var
     "quotes": 0,
+    "no-prototype-builtins": 0,
     "no-extend-native": 0,
     "padded-blocks": 0,
     "arrow-parens": 0,
     "generator-star-spacing": 0,
     "camelcase": 0,
     "no-console": 0,
+    "new-cap": 0,
+    "no-unused-expressions": 0,
+    "no-return-assign": 0,
     "vue/*": 0,
     "vue/no-parsing-error": 0,
     "vue/html-indent": 0,

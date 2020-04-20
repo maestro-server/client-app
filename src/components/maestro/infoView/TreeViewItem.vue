@@ -42,23 +42,23 @@ export default {
   },
 
   methods: {
-    isObject: function(value) {
+    isObject: function (value) {
       return _.isPlainObject(value);
     },
 
-    isArray: function(value) {
+    isArray: function (value) {
       return _.isArray(value);
     },
 
-    isValue: function(value) {
+    isValue: function (value) {
       return _.isString(value);
     },
 
-    isNumber: function(value) {
+    isNumber: function (value) {
       return _.isNumber(value);
     },
 
-    isBoolean: function(value) {
+    isBoolean: function (value) {
       return _.isBoolean(value);
     }
   }

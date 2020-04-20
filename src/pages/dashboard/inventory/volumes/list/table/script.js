@@ -13,7 +13,7 @@ export default {
       entity: new Volumes(),
       columns: ['status', 'name', 'size', 'iops', 'unique_id', 'ldatacenters', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'unique_id', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
           ldatacenters: []
@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.ldatacenters = _.get(d, 'datacenters.name', '-')
         return d
@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(Datacenters)()
       .find(this.fetchData('ldatacenters'))
   }

@@ -11,28 +11,28 @@ export default {
   },
 
   methods: {
-    verifyDuplicate({target}) {
-      const {name} = target
+    verifyDuplicate ({ target }) {
+      const { name } = target
       const value = this.data[name]
 
-      if(!_.isEmpty(value) && this.create) {
+      if (!_.isEmpty(value) && this.create) {
         FectherEntity(this.entity)()
-          .find(({data}) => this.processVerifyDuplicate(data, value, name), {[name]: value})
+          .find(({ data }) => this.processVerifyDuplicate(data, value, name), { [name]: value })
       }
     },
 
-    processVerifyDuplicate(data, value, name) {
-      const {found} = data
+    processVerifyDuplicate (data, value, name) {
+      const { found } = data
       let text = null
 
-      if(found > 0) {
+      if (found > 0) {
         text = `Found ${found} ${value} at ${name} in inventory, are you sure?`
       }
 
       this.$set(this.duplicate, name, text)
     },
 
-    clearDuplicate() {
+    clearDuplicate () {
       this.duplicate = {}
     }
   }

@@ -25,7 +25,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.os = `${_.get(d, 'os.base', '')} ${_.get(d, 'os.dist', '')}`
         return d
@@ -35,16 +35,16 @@ export default {
     /*
     Before redirect need to cleanup, especially scroll bar
      */
-    linkSingle(id) {
+    linkSingle (id) {
       this.$parent.$emit('closed')
       setTimeout(() => {
-        const path = {name: 'servers.single', params: { id }}
+        const path = { name: 'servers.single', params: { id } }
         this.$router.push(path)
       }, 500);
     },
 
-    deleteP(data) {
+    deleteP (data) {
       this.$parent.$parent.deleteServer(data)
-    },
+    }
   }
 }

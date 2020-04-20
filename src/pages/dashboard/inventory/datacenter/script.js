@@ -14,7 +14,7 @@ export default {
     dcMenu
   },
 
-  data() {
+  data () {
     return {
       entity: Datacenters
     }

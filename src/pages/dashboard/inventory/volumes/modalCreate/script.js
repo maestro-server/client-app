@@ -19,10 +19,10 @@ export default {
   },
 
   computed: {
-    tab_app_dc() {
+    tab_app_dc () {
       return this.$refs.tab_app_dc
     },
-    tab_tags() {
+    tab_tags () {
       return this.$refs.tab_tags
     }
   },
@@ -45,18 +45,18 @@ export default {
       initialData: _.clone(defaultVolume),
       data: _.clone(defaultVolume),
       options: {
-        status:[]
+        status: []
       }
     }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Volume' : `Edit ${this.model.name} volume`
+      this.text.title = this.create ? 'Create new Volume' : `Edit ${this.model.name} volume`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = _.clone(this.initialData)
       this.tab_app_dc.reset()
       this.tab_tags.reset()
@@ -74,9 +74,9 @@ export default {
       this.defaultUniqueId()
     },
 
-    defaultUniqueId() {
-      if(_.isEmpty(this.data.unique_id)) {
-        const {name, size} = _.pick(this.data, ['name', 'size'])
+    defaultUniqueId () {
+      if (_.isEmpty(this.data.unique_id)) {
+        const { name, size } = _.pick(this.data, ['name', 'size'])
         const now = Date.now()
         const random = Math.random()
         const unique_id = `${name}${size}${random}${now}`
@@ -97,13 +97,13 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-      .find(this.fetchAdminer, {key: 'status_volume_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'status_volume_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

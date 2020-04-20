@@ -6,7 +6,7 @@ export default {
   },
 
   methods: {
-    callStep(prv) {
+    callStep (prv) {
       this.$emit('click', prv)
     }
   }
