@@ -9,8 +9,8 @@
     </template>
 
     <template v-if="isObject(items)">
-      <div v-for="item, ok in items" :key="ok">
-        <strong>{{ ok }}:</strong>
+      <div v-for="item, key in items" :key="key">
+        <strong>{{ key }}:</strong>
         <span :class="{'tree-view-item-leaf': !isValue(item)}">
           <tree-view :items="item"/>
         </span>
@@ -18,15 +18,15 @@
     </template>
 
     <template v-if="isValue(items)">
-      <span class="stringColor">{{ items }}</span>
+      <span class="stringColor"> {{ items }}</span>
     </template>
 
     <template v-if="isBoolean(items)">
-      <span class="booleanColor">{{ items }}</span>
+      <span class="booleanColor"> {{ items }}</span>
     </template>
 
     <template v-if="isNumber(items)">
-      <span class="numberColor">{{ items }}</span>
+      <span class="numberColor"> {{ items }}</span>
     </template>
   </span>
 </template>

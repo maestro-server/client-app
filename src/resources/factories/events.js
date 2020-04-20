@@ -4,8 +4,12 @@ import FactoryTenant from './factoryTenant'
 
 class Events extends FactoryTenant {
 
+  static ename = 'events'
+
   constructor(model={}, path='', tenant=false) {
-    super(model, "events"+path, tenant)
+    const ename = Events.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

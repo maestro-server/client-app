@@ -1,17 +1,17 @@
 <template>
-<div>
+  <div>
     <bs-list>
       <li class="list-group-item word-break text-center">
-        <b>Total of {{ options.title.text }}:</b>
+        <b>Total of {{ options.title.text }}: </b>
         <bs-label>{{ total }}</bs-label>
       </li>
     </bs-list>
 
     <div class="col-sm-12">
       <doughnut-chart
-:data="data"
-:options="transfOptions"
-/>
+        :data="data"
+        :options="transfOptions"
+      />
     </div>
   </div>
 </template>
@@ -36,12 +36,12 @@
     props: ['data', 'options'],
 
     computed: {
-      total() {
+      total () {
         const siz = _.get(this.data, 'labels', [])
         return siz.length
       },
 
-      transfOptions() {
+      transfOptions () {
         return {
           legend: {
             position: 'right'
@@ -51,8 +51,8 @@
       }
     },
 
-    title() {
-      return _.get(this.options, 'title.text', "")
+    title () {
+      return _.get(this.options, 'title.text', '')
     }
   }
 </script>

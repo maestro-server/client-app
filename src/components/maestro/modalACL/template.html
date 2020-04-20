@@ -47,8 +47,8 @@
         <creater-list :basket.sync="value" :label="label" :showAddBtn="false">
 
           <template slot="view" slot-scope="props">
-            <b>{{props.item.email}}</b>
-            <span v-if='props.item.name' class="text-capitalize">({{props.item.name}})</span>
+            <b>{{props.item.email}} </b>
+            <span v-if='props.item.name' class="text-capitalize">({{props.item.name}}) </span>
             <bs-label>{{props.item.refs}}</bs-label><br/>
 
             <button-group v-model="props.item.role" type="warning" class="mt5">

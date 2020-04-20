@@ -4,8 +4,12 @@ import FactoryTenant from './factoryTenant'
 
 class Snapshots extends FactoryTenant {
 
+  static ename = 'snapshots'
+
   constructor(model={}, path='', tenant=false) {
-    super(model, "snapshots"+path, tenant)
+    const ename = Snapshots.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

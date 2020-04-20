@@ -9,7 +9,7 @@ export default {
       submenu: {
         'servers': 'Servers',
         'applications': 'Applications',
-        'loadbalances': 'LoadBalances',
+        'loadbalances': 'LoadBalancer',
         'databases': 'Databases',
         'system': 'System',
         'datacenter':'Datacenters',

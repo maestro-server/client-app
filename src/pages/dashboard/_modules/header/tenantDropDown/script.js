@@ -9,6 +9,8 @@ import store from 'src/store'
 import tenantMananger from 'services/tenantManager'
 import { EventBus } from 'src/resources/bus/bus-general.js';
 
+const img_avatar_default = process.env.VUE_APP_IMG_AVATAR_DEFAULT;
+
 export default {
   data: function () {
     return {
@@ -25,7 +27,7 @@ export default {
       showDrop: {tenants: false, settings: false},
       teams: {},
       tenant: {name: null, _id: null},
-      avatar: IMG_AVATAR_DEFAULT,
+      avatar: img_avatar_default,
       users: {},
       vBarOptions: {preventParentScroll: true, resizeRefresh: false, scrollThrottle: 30}
     }
@@ -69,7 +71,7 @@ export default {
         return _.get(store.getters, 'get_options.static_url') + item.avatar
       }
 
-      return IMG_AVATAR_DEFAULT
+      return img_avatar_default
     },
 
     imgBackStr(img) {

@@ -14,7 +14,7 @@ const queryBuilder = (or, rr, kr) => {
 const FetcherData = (Entity) => (opts = {}, headers = {}) => {
 
   const tenant = tenantMananger.get()
-  const k = _.get(Entity, 'name').toLowerCase()
+  const k = _.get(Entity, 'ename')
   const {path} = opts
 
   return {

@@ -17,7 +17,7 @@ export default {
       return `${new this.relation().getUrl()}?query=`
     },
     relName() {
-      return this.relation.name.toLowerCase()
+      return this.relation.ename
     }
   },
 

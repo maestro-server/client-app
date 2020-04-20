@@ -49,7 +49,7 @@
                            v-model="data.method" name="Method" label="Method*" placeholder="GET"></bs-select>
 
                 <bs-input class="mt10" form-type="horizontal" name="endpoint" label="Endpoint*" v-model="data.endpoint"
-                          placeholder="http://myrul:8080/webhook" v-validate="'url'" :error="makeError('endpoint')"></bs-input>
+                          placeholder="http://myrul:8080/webhook"></bs-input>
               </template>
 
               <template v-if="data.task === 'connections'">

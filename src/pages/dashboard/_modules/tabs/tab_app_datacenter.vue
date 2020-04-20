@@ -2,69 +2,69 @@
   <div>
     <div class="clearfix">
       <router-link
-:to="{name: 'datacenter'}"
-class="btn btn-primary btn-xs pull-right"
-target="_blank"
->
-        <i class="fa fa-plus-circle" /> Datacenter
+        :to="{name: 'datacenter'}"
+        class="btn btn-primary btn-xs pull-right"
+        target="_blank"
+      >
+        <i class="fa fa-plus-circle"/> Datacenter
       </router-link>
     </div>
 
-    <div class="mt10 clearfix col-xs-12" />
+    <div class="mt10 clearfix col-xs-12"/>
 
     <bs-select
-v-if="options.length > 0"
-ref="s_provider"
-v-model="value.name"
-:disabled="updated"
-form-type="horizontal"
-               :options="providers"
-label="Datacenter"
-placnewereholder="Select Datacenter"
-               @input="updateProvider"
-/>
+      v-if="options.length > 0"
+      ref="s_provider"
+      v-model="value.name"
+      :disabled="updated"
+      form-type="horizontal"
+      :options="providers"
+      label="Datacenter"
+      placnewereholder="Select Datacenter"
+      @input="updateProvider"
+    />
 
     <div
-v-if="options.length == 0"
-class="row"
->
+      v-if="options.length == 0"
+      class="row"
+    >
       <div class="col-xs-3 text-right">
         <label>Datacenter</label>
       </div>
       <div class="col-xs-9">
         <div class="pull-left">
           <bs-label type="danger">
-None datacenter record.
-</bs-label>
-          <router-link :to="{name: 'datacenter'}">
-Do you like to create one?
-</router-link>
+            None datacenter record.
+          </bs-label>
+          <router-link :to="{name: 'datacenter'}" class="pl3">
+            Do you like to create one?
+          </router-link>
         </div>
       </div>
     </div>
 
-    <div class="col-xs-12 mt10" />
+    <div class="col-xs-12 mt10"/>
 
     <bs-select
-ref="s_regions"
-v-model="value.region"
-form-type="horizontal"
-               :options="regions"
-label="Region"
-placeholder="Select Region"
-@input="updateModel"
-/>
+      ref="s_regions"
+      v-model="value.region"
+      form-type="horizontal"
+      :options="regions"
+      label="Region"
+      placeholder="Select Region"
+      @input="updateModel"
+    />
 
     <bs-select
-v-model="value.zone"
-form-type="horizontal"
-:options="zones"
-               label="Zones"
-placeholder="Select Zone"
-refs="s_zones"
-multiple
-@input="updateModel"
-/>
+      v-model="value.zone"
+      form-type="horizontal"
+      :options="zones"
+      label="Zones"
+      placeholder="Select Zone"
+      refs="s_zones"
+      multiple
+      @input="updateModel"
+    />
   </div>
 </template>
 
@@ -84,17 +84,25 @@ multiple
       return {
         updated: false,
         options: [],
-        value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null, provider: null},
+        value: {
+          _id: null,
+          name: null,
+          zone: null,
+          instance_id: null,
+          instance: null,
+          type: null,
+          region: null,
+          provider: null
+        },
         providers: [],
         zones: [],
         regions: []
       }
     },
 
-    created() {
+    created () {
       this.fetchData()
     },
-
 
     methods: {
       fetchData: function () {
@@ -102,10 +110,13 @@ multiple
           .find(this.fetchDatacenter)
       },
 
-      fetchDatacenter(e) {
+      fetchDatacenter (e) {
         const data = _.get(e, 'data.items')
         if (!_.isEmpty(data)) {
-          this.options = data.map(item => ({value: item, label: item.name}))
+          this.options = data.map(item => ({
+            value: item,
+            label: item.name
+          }))
           this.providers = this.options.map(d => d.label)
         }
       },
@@ -125,12 +136,12 @@ multiple
         this.$emit('update', _.pickBy(this.value, _.identity))
       },
 
-      updaterEdit(data) {
+      updaterEdit (data) {
         this.updated = _.has(data, 'name')
         this.$set(this, 'value', data || {})
       },
 
-      reset() {
+      reset () {
         this.updated = false
         this.value = {}
       }

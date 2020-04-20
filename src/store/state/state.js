@@ -8,13 +8,15 @@ import CacheManager from 'services/cacheManager'
  *
  */
 
+const version = process.env.VUE_APP_VERSION;
+
 const ws_protocol = (protocol) => {
   const map = {'http:': 'ws:', 'https:': 'wss:'};
   return _.get(map, protocol, map['http:'])
 }
 
 export default {
-  version: VERSION,
+  version,
 
   viewer: {
     title: "Dashboard",

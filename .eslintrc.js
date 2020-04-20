@@ -1,24 +1,15 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-//  parser: "babel-eslint",
-  parserOptions: {
-    "sourceType": "module",
-    "parser": "babel-eslint",
-    "ecmaVersion": 6
-  },
   env: {
-    "node": true,
-    "mocha": true
+    node: true
   },
-  extends: 'plugin:vue/essential',
-  // required to lint *.vue files
-  plugins: [
-    'vue',
-    'html'
+  extends: [
+    'plugin:vue/essential',
+    '@vue/standard'
   ],
-  // add your custom rules here
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
   'rules': {
     "linebreak-style": [
       2,
@@ -54,15 +45,28 @@ module.exports = {
     "padded-blocks": 0,
     "arrow-parens": 0,
     "generator-star-spacing": 0,
+    "camelcase": 0,
     "no-console": 0,
     "vue/*": 0,
     "vue/no-parsing-error": 0,
     "vue/html-indent": 0,
     "vue/this-in-template": 0,
     "vue/valid-v-for": 0,
-    "vue/valid-v-bind": 0, 
+    "vue/valid-v-bind": 0,
     "vue/no-unused-components": 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
-  }
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  },
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        mocha: true
+      }
+    }
+  ]
 }

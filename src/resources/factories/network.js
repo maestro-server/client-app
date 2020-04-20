@@ -4,8 +4,12 @@ import FactoryTenant from './factoryTenant'
 
 class Network extends FactoryTenant {
 
+  static ename = 'network'
+
   constructor(model={}, path='', tenant=false) {
-    super(model, "network"+path, tenant)
+    const ename = Network.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

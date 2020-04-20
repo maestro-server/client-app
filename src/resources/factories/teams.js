@@ -4,8 +4,12 @@ import Factory from './factory'
 
 class Teams extends Factory {
 
-  constructor(model={}) {
-    super(model, "teams")
+  static ename = 'teams'
+
+    constructor(model={}) {
+    const ename = Teams.ename
+    super(model, ename)
+    this.setName(ename)
   }
 }
 

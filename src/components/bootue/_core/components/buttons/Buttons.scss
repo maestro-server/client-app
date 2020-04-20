@@ -177,6 +177,11 @@ a.btn {
   margin-top: 5px;
 }
 
+// Properly space out buttons
+.btn + .btn, .label + .btn, .btn + .label {
+  margin-left: 3px;
+}
+
 // Specificity overrides
 input[type="submit"],
 input[type="reset"],

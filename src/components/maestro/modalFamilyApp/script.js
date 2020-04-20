@@ -36,7 +36,7 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? `Create new ${this.label}`: `Edit ${this.model.name} ${this.label}`
+      this.text.title = this.create ? `Create new ${this.label}`: `Edit ${this.label}`
     },
 
     editLoad () {

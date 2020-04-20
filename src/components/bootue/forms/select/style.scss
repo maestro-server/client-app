@@ -188,7 +188,7 @@
   -moz-appearance: none;
   line-height: 1.42857143;
   display: inline-block;
-  height: 32px;
+  height: 31px;
   border: none;
   outline: none;
   margin: 0;
@@ -200,12 +200,18 @@
   box-shadow: none;
   float: left;
   clear: none;
+  box-sizing: border-box;
+
+  box-sizing: border-box;
 }
 
 .v-select .dropdown-single input[type="search"] {
   position: absolute;
 }
 
+.v-select input[type="search"].disabled {
+  max-width: 99% !important;
+}
 
 /* List Items */
 .v-select li {

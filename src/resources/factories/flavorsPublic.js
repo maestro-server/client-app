@@ -5,7 +5,9 @@ import FactoryTenant from './factoryTenant'
 class FlavorsPublic extends FactoryTenant {
 
   constructor(model={}, path='', tenant=false) {
-    super(model, "flavors_public"+path, tenant)
+    const ename = 'flavors_public'
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

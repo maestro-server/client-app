@@ -1,18 +1,10 @@
-language: node_js
-node_js:
-  - '8'
-cache:
-  directories:
-    - node_modules
-services:
-  - docker
+language: minimal
 
 jobs:
   include:
     - stage: build docker image - base
       if: branch != master
       script:
-       - npm run build
        - docker build -f Dockerfile -t $REPO .
       after_success:
        - docker login -u $DOCKER_USER -p $DOCKER_PASS
@@ -22,7 +14,6 @@ jobs:
     - stage: build docker image - latets
       if: branch = master
       script:
-        - npm run build
         - docker build -f Dockerfile -t $REPO .
       after_success:
         - docker login -u $DOCKER_USER -p $DOCKER_PASS

@@ -3,7 +3,7 @@
     <bs-list>
       <li
         v-for="server in servers"
-        :key="server.hostname"
+        :key="server._id"
         class="list-group-item word-break"
       >
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">
@@ -23,13 +23,13 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  export default {
-    props: {
-      servers: {}
-    }
+export default {
+  props: {
+    servers: {}
   }
+}
 </script>
 
 <style lang="scss">

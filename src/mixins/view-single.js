@@ -49,7 +49,7 @@ export default {
     },
 
     del: function () {
-      const call = this.rollbackRoute || this.entity.name.toLowerCase()
+      const call = this.rollbackRoute || this.entity.ename
 
       this.MDelete
         .onFinishCallBack(() => this.$router.push({name: call}))

@@ -14,16 +14,21 @@ class Factory {
   constructor (model={}, e, Requester = DRequester) {
     this.entity = e
     this.header = {}
-    this.model =  model
+    this.model = model
+    this.ename = ''
 
     this.requester = Requester
   }
 
-  getName() {
-    return this.constructor.name.toLowerCase()
+  getName () {
+    return this.ename
   }
 
-  getUrl(path=api_url) {
+  setName (name) {
+    this.ename = name
+  }
+
+  getUrl (path=api_url) {
     return `${path}/${this.entity}`
   }
 

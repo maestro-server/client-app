@@ -7,6 +7,7 @@
     @update="updaterEdit"
   >
     <template slot="forms">
+
       <bs-select
         v-model="single.name"
         v-validate.initial="'required'"
@@ -29,16 +30,8 @@
       slot="view"
       slot-scope="props"
     >
-      {{ props.item.name }} <span v-if="props.item.version">-></span>
+      {{ props.item.name }} <span v-if="props.item.version">-> </span>
       <bs-label>{{ props.item.version }}</bs-label>
-    </template>
-
-
-    <template slot="header">
-      <router-link :to="{name:'settings'}" class="pull-right" target="_blank">
-        Add a new service on the list
-      </router-link>
-      <p class="col-xs-12 clearfix"></p>
     </template>
   </creater-list>
 </template>
@@ -55,14 +48,17 @@
 
     data: function () {
       return {
-        single: {name: null, version: null},
+        single: {
+          name: null,
+          version: null
+        },
         options: {
           own: []
         }
       }
     },
 
-    created() {
+    created () {
       this.fetchServicesOptions()
     }
   }

@@ -67,51 +67,56 @@
       tabSystem,
       tabApps
     },
-    data() {
+    data () {
       return {
-        show: "system",
+        show: 'system',
         systems: [],
         apps: []
       }
     },
 
     computed: {
-      tab_system() {
+      tab_system () {
         return this.$refs.tab_system
       },
-      tab_apps() {
+      tab_apps () {
         return this.$refs.tab_apps
       }
     },
 
     methods: {
-      selItems() {
+      selItems () {
         if (this.show == 'system') {
-          this.getAppsBySystem(this.systems);
+          this.getAppsBySystem(this.systems)
         } else {
-          this.routePage(this.apps);
+          this.routePage(this.apps)
         }
       },
 
-      getAppsBySystem(dsystems) {
-        const _id = dsystems.map(e => _.get(e, '_id'));
+      getAppsBySystem (dsystems) {
+        const _id = dsystems.map(e => _.get(e, '_id'))
 
         if (_id.length > 0) {
-          FectherEntity(System)({force: true})
-            .find(this.fetchApps, {_id});
+          FectherEntity(System)({ force: true })
+            .find(this.fetchApps, { _id })
         }
       },
 
-      fetchApps(data) {
-        const items = _.get(data, 'data.items', []);
-        const entries = items.reduce((arr, sys) => _.concat(arr, _.get(sys, 'entry', [])), []);
-        const apps = _.uniqBy(entries, '_id');
-        this.routePage(apps);
+      fetchApps (data) {
+        const items = _.get(data, 'data.items', [])
+        const entries = items.reduce((arr, sys) => _.concat(arr, _.get(sys, 'entry', [])), [])
+        const apps = _.uniqBy(entries, '_id')
+        this.routePage(apps)
       },
 
-      routePage(apps) {
+      routePage (apps) {
         const systems = this.systems
-        this.$router.push({name: 'dependency.tree', params: {systems, apps}})
+        this.$router.push({ name: 'dependency.tree',
+          params: {
+            systems,
+            apps
+          }
+        })
       }
     }
   }

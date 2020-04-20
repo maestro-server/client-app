@@ -6,8 +6,11 @@ import CacheManager from 'services/cacheManager'
 
 class Auth extends Factory {
 
+  static ename = 'auth'
+
   constructor(model={}, e='users/auth') {
     super(model, e)
+    this.setName(Auth.ename)
   }
 
   auth (callback) {

@@ -3,18 +3,15 @@
   <div class="pb10">
     <div class="mt20 pb10">
       <h3 class="col-sm-6 col-xs-12 mt0">
-        <span class="hidden-xs">{{entity.name}} - </span><span class="text-capitalize">{{model.name}}</span>
+        <span class="text-capitalize">{{model.name}}</span>
       </h3>
       <div class="col-sm-6 col-xs-12 text-right hidden-xs">
-        <b>Export to:</b>
-        <span v-for="item in dwn" :key="item" v-if="dwn">
-          <button class="btn btn-primary btn-xs" @click="down(item)">
-            <i class="fa fa-download"></i> {{item.label}}
-          </button>
-          |
-        </span>
-        |
-        <b>Shared:</b>
+        <b>Export to: </b>
+        <button class="btn btn-primary btn-xs" @click="down(item)" v-for="item, key in dwn" :key="key" v-if="dwn">
+          <i class="fa fa-download"></i> {{item.label}}
+        </button>
+         |
+        <b>Shared: </b>
         <button class="btn btn-primary btn-xs" @click="$parent.editS()">
           <i class="fa fa-share"></i> Embed
         </button>

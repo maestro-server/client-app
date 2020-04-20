@@ -10,7 +10,7 @@
     <template slot="name" slot-scope="props">
 
       <template v-if="props.row.status === 'finished'">
-        <router-link :to="{name: 'reports.single.charts', params: { id: props.row._id }}">{{props.row.name}}</router-link>
+        <router-link :to="{name: 'reports.single.charts', params: { id: props.row._id }}"> {{props.row.name}}</router-link>
       </template>
 
       <template v-if="props.row.status !== 'finished'">

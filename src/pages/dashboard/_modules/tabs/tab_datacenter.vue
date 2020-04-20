@@ -2,68 +2,68 @@
   <div>
     <div class="clearfix">
       <router-link
-:to="{name: 'datacenter'}"
-class="btn btn-primary btn-xs pull-right hidden-xs"
-target="_blank"
->
-        <i class="fa fa-plus-circle" /> Datacenter
+        :to="{name: 'datacenter'}"
+        class="btn btn-primary btn-xs pull-right hidden-xs"
+        target="_blank"
+      >
+        <i class="fa fa-plus-circle"/> Datacenter
       </router-link>
     </div>
 
-    <div class="mt10 clearfix col-xs-12" />
+    <div class="mt10 clearfix col-xs-12"/>
 
     <bs-select
-v-if="options.length > 0"
-ref="s_provider"
-v-model="value.name"
-:disabled="updated"
-form-type="horizontal"
-               :options="providers"
-label="Datacenter"
-placeholder="Select Datacenter"
-               @input="updateProvider"
-/>
+      v-if="options.length > 0"
+      ref="s_provider"
+      v-model="value.name"
+      :disabled="updated"
+      form-type="horizontal"
+      :options="providers"
+      label="Datacenter"
+      placeholder="Select Datacenter"
+      @input="updateProvider"
+    />
 
     <div
-v-if="options.length == 0"
-class="row hidden-xs"
->
+      v-if="options.length == 0"
+      class="row hidden-xs"
+    >
       <div class="col-xs-3 text-right">
         <label>Datacenter</label>
       </div>
       <div class="col-xs-9">
         <div class="pull-left">
           <bs-label type="danger">
-None datacenter record.
-</bs-label>
-          <router-link :to="{name: 'datacenter'}">
-Do you like to create one?
-</router-link>
+            None datacenter record.
+          </bs-label>
+          <router-link :to="{name: 'datacenter'}" class="pl3">
+            Do you like to create one?
+          </router-link>
         </div>
       </div>
     </div>
 
-    <div class="col-xs-12 mt10" />
+    <div class="col-xs-12 mt10"/>
 
     <bs-select
-ref="s_regions"
-v-model="value.region"
-form-type="horizontal"
-               :options="regions"
-label="Region"
-placeholder="Select Region"
-@input="updateModel"
-/>
+      ref="s_regions"
+      v-model="value.region"
+      form-type="horizontal"
+      :options="regions"
+      label="Region"
+      placeholder="Select Region"
+      @input="updateModel"
+    />
 
     <bs-select
-v-model="value.zone"
-form-type="horizontal"
-:options="zones"
-               label="Zones"
-placeholder="Select Zone"
-refs="s_zones"
-@input="updateModel"
-/>
+      v-model="value.zone"
+      form-type="horizontal"
+      :options="zones"
+      label="Zones"
+      placeholder="Select Zone"
+      refs="s_zones"
+      @input="updateModel"
+    />
 
     <div class="row mt20">
       <div class="col-sm-3 col-xs-12 control-label">
@@ -71,30 +71,30 @@ refs="s_zones"
       </div>
       <div class="col-sm-9 col-xs-12">
         <button-group
-v-model="value.type"
-type="primary"
->
+          v-model="value.type"
+          type="primary"
+        >
           <bs-radio v-for="stc in serverType" :key="stc" :selected-value="stc">
-{{ stc }}
-</bs-radio>
+            {{ stc }}
+          </bs-radio>
         </button-group>
       </div>
     </div>
 
     <bs-input
-v-model="value.instance"
-class="mt20"
-form-type="horizontal"
-label="Instance Type"
-              @input="updateModel"
-/>
+      v-model="value.instance"
+      class="mt20"
+      form-type="horizontal"
+      label="Instance Type"
+      @input="updateModel"
+    />
     <bs-input
-v-model="value.instance_id"
-class="mt20"
-form-type="horizontal"
-label="ID Instance"
-              @input="updateModel"
-/>
+      v-model="value.instance_id"
+      class="mt20"
+      form-type="horizontal"
+      label="ID Instance"
+      @input="updateModel"
+    />
   </div>
 </template>
 
@@ -114,17 +114,25 @@ label="ID Instance"
       return {
         updated: false,
         options: [],
-        value: {_id: null, name: null, zone: null, instance_id: null, instance: null, type: null, region: null, provider: null},
+        value: {
+          _id: null,
+          name: null,
+          zone: null,
+          instance_id: null,
+          instance: null,
+          type: null,
+          region: null,
+          provider: null
+        },
         providers: [],
         zones: [],
         regions: []
       }
     },
 
-    created() {
+    created () {
       this.fetchData()
     },
-
 
     methods: {
       fetchData: function () {
@@ -132,10 +140,13 @@ label="ID Instance"
           .find(this.fetchDatacenter)
       },
 
-      fetchDatacenter(e) {
+      fetchDatacenter (e) {
         const data = _.get(e, 'data.items')
         if (!_.isEmpty(data)) {
-          this.options = data.map(item => ({value: item, label: item.name}))
+          this.options = data.map(item => ({
+            value: item,
+            label: item.name
+          }))
           this.providers = this.options.map(d => d.label)
         }
       },
@@ -155,12 +166,12 @@ label="ID Instance"
         this.$emit('update', _.pickBy(this.value, _.identity))
       },
 
-      updaterEdit(data) {
+      updaterEdit (data) {
         this.updated = _.has(data, 'name')
         this.$set(this, 'value', data || {})
       },
 
-      reset() {
+      reset () {
         this.updated = false
         this.value = {}
       }

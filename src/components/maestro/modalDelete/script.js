@@ -12,7 +12,7 @@ export default {
 
   computed: {
     label() {
-      return this.entity.name.toLowerCase()
+      return this.entity.ename
     }
   },
 
