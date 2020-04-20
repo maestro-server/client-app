@@ -12,12 +12,12 @@ export default {
 
   props: {
     entity: {},
-    fielder: {default: "roles", type: String},
-    showUser: {default: true, type: Boolean},
-    showTeam: {default: true, type: Boolean}
+    fielder: { default: "roles", type: String },
+    showUser: { default: true, type: Boolean },
+    showTeam: { default: true, type: Boolean }
   },
 
-  data() {
+  data () {
     return {
       headers: headerLogin,
       label: 'Member',
@@ -30,32 +30,32 @@ export default {
   },
 
   computed: {
-    URL() {
+    URL () {
       return `${new Users().getUrl()}/autocomplete?complete=`
     },
-    URL_TEAM() {
+    URL_TEAM () {
       return `${new Teams().getUrl()}/autocomplete?complete=`
     }
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `Manange access to ${this.model.name}`
     },
 
-    onHitUser(item) {
+    onHitUser (item) {
       this.onHit(item)
     },
 
-    onHitTeams(item) {
+    onHitTeams (item) {
       this.onHit(item, 'teams')
     },
 
-    onHit(item, refs = 'users', role = 1) {
+    onHit (item, refs = 'users', role = 1) {
       const exist = _.find(this.value, ['_id', item._id])
 
       if (!exist) {
-        const nItem = _.assign({}, item, {role, refs})
+        const nItem = _.assign({}, item, { role, refs })
         this.value.push(nItem)
       }
     },
@@ -68,18 +68,18 @@ export default {
       this.model[this.fielder] = this.value
     },
 
-    editSave() {
+    editSave () {
       this.setupModel()
-      const cleanArr = this.model[this.fielder].map(e=>_.pick(e, ['_id', 'email', 'name', 'refs', 'role']))
+      const cleanArr = this.model[this.fielder].map(e => _.pick(e, ['_id', 'email', 'name', 'refs', 'role']))
 
       FectherEntity(this.entity)()
-        .update(this.finishJob, cleanArr, this.model._id+'/'+this.fielder)
+        .update(this.finishJob, cleanArr, this.model._id + '/' + this.fielder)
     },
 
-    updateRolers(item, role) {
+    updateRolers (item, role) {
       const data = this.value.map((e) => {
-        if (e._id == item._id) {
-          _.merge(e, {role})
+        if (e._id === item._id) {
+          _.merge(e, { role })
         }
         return e
       })

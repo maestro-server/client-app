@@ -9,7 +9,7 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Project' : `Edit ${this.model.name} project`
+      this.text.title = this.create ? 'Create new Project' : `Edit ${this.model.name} project`
     },
 
     createSave () {

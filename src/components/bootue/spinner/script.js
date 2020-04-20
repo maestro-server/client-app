@@ -5,11 +5,11 @@ const MIN_WAIT = 500 // in ms
 
 export default {
   props: {
-    fixed: {type: Boolean, default: false},
-    global: {type: Boolean, default: false},
-    size: {type: String, default: 'md'},
-    text: {type: String, default: ''},
-    value: {default: false}
+    fixed: { type: Boolean, default: false },
+    global: { type: Boolean, default: false },
+    size: { type: String, default: 'md' },
+    text: { type: String, default: '' },
+    value: { default: false }
   },
   data () {
     return {
@@ -57,7 +57,7 @@ export default {
     if (this.global) {
       if (!this.$root._globalSpinner) {
         this.$root._globalSpinner = true
-        let self = this
+        const self = this
         this._global = {
           hide () { self.hide() },
           show () { self.show() }

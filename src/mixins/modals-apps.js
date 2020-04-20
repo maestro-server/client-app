@@ -38,47 +38,47 @@ export default {
         size: []
       },
       entity: Applications,
-      other: false,
+      other: false
     }
   },
 
   computed: {
-    tab_servers() {return this.$refs.tab_servers},
-    tab_targets() {return this.$refs.tab_targets},
-    tab_system() {return this.$refs.tab_system},
-    tab_tags() {return this.$refs.tab_tags},
-    tab_role() {return this.$refs.tab_role},
-    tab_app_dc() {return this.$refs.tab_app_dc},
-    providers() {
+    tab_servers () { return this.$refs.tab_servers },
+    tab_targets () { return this.$refs.tab_targets },
+    tab_system () { return this.$refs.tab_system },
+    tab_tags () { return this.$refs.tab_tags },
+    tab_role () { return this.$refs.tab_role },
+    tab_app_dc () { return this.$refs.tab_app_dc },
+    providers () {
       return this.own ? this.options.third : this.options.own
     },
-    labelPService() {
+    labelPService () {
       return this.own ? 'Provider' : 'Service'
     },
-    labelBtnChangeProvider() {
-      return this.other ? 'Back to selection '+this.labelPService : '<i class="fa fa-plus"></i> '+this.labelPService
+    labelBtnChangeProvider () {
+      return this.other ? 'Back to selection ' + this.labelPService : '<i class="fa fa-plus"></i> ' + this.labelPService
     },
-    changeType() {
+    changeType () {
       return this.other ? 'btn-warning' : 'btn-primary'
     }
   },
 
   methods: {
-    hookCreateLoad() {},
-    hookEditLoad() {},
+    hookCreateLoad () {},
+    hookEditLoad () {},
     afterShow () {
-      this.text.title =  this.create ? `Create new ${this.family}` : `Edit ${this.model.name} ${this.family.toLowerCase()}`
+      this.text.title = this.create ? `Create new ${this.family}` : `Edit ${this.model.name} ${this.family.toLowerCase()}`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.resetData()
       this.clearDuplicate()
       this.tab_role.reset()
       this.tab_tags.reset()
       this.tab_system.reset()
 
-      if(this.tab_app_dc) {
+      if (this.tab_app_dc) {
         this.tab_app_dc.reset()
       }
       this.hookCreateLoad()
@@ -93,24 +93,24 @@ export default {
       this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
       this.tab_system.updaterEdit(_.get(this.model, 'system', []))
 
-      if(this.tab_app_dc) {
+      if (this.tab_app_dc) {
         this.tab_app_dc.updaterEdit(_.get(this.model, 'datacenters'))
       }
       this.hookEditLoad()
     },
 
-    editLoadEntities(fielder, entitier = Servers) {
+    editLoadEntities (fielder, entitier = Servers) {
       if (!_.isEmpty(this.model[fielder])) {
         FectherEntity(entitier)()
           .find((e) => {
             this[`tab_${fielder}`].updaterEdit(_.get(e, 'data.items', []))
-          }, {_id: this.model[fielder]})
+          }, { _id: this.model[fielder] })
       } else {
         this[`tab_${fielder}`].updaterEdit([])
       }
     },
 
-    editSwapVars(fielder) {
+    editSwapVars (fielder) {
       this.$set(this, fielder, _.get(this.model, fielder, 0))
     },
 
@@ -137,23 +137,23 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
+    fetchData () {
       const key = `env_options`
-      const family = this.foptions ||  this.family
+      const family = this.foptions || this.family
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key })
 
       this.fetchServicesOptions(family)
     },
 
-    changeProvider() {
+    changeProvider () {
       this.other = !this.other
       this.$set(this.data, 'provider', '')
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

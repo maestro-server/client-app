@@ -17,10 +17,10 @@ export default {
   },
 
   computed: {
-    tab_app_dc() {
+    tab_app_dc () {
       return this.$refs.tab_app_dc
     },
-    tab_tags() {
+    tab_tags () {
       return this.$refs.tab_tags
     }
   },
@@ -29,17 +29,17 @@ export default {
     return {
       data: {
         name: null, tags: [], datacenters: {}
-      },
+      }
     }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Flavor' : `Edit ${this.model.name} flavor`
+      this.text.title = this.create ? 'Create new Flavor' : `Edit ${this.model.name} flavor`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.tab_app_dc.reset()
       this.tab_tags.reset()
@@ -67,7 +67,7 @@ export default {
       this.setupModel()
       FectherEntity(Flavors)()
         .update(this.finishJob, this.model)
-    },
-  },
+    }
+  }
 
 }

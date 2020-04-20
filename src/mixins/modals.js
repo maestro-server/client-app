@@ -5,8 +5,8 @@ import formatAdminer from 'src/resources/libs/formatAdminerData'
 export default {
   data () {
     return {
-      tabShow:0,
-      text: {title:null},
+      tabShow: 0,
+      text: { title: null },
       showModal: false,
       model: {},
       create: true
@@ -19,9 +19,9 @@ export default {
     createSave () {},
     editSave () {},
     callback () {},
-    createLoad() {},
-    editLoad() {},
-    show (model={}, showModal=true) {
+    createLoad () {},
+    editLoad () {},
+    show (model = {}, showModal = true) {
       this.showModal = showModal
       this.model = _.clone(model)
       this.create = !_.has(model, '_id')
@@ -36,7 +36,7 @@ export default {
     },
 
     actionClick () {
-      if(this.create) {
+      if (this.create) {
         this.createSave()
       } else {
         this.editSave()

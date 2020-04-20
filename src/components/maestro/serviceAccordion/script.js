@@ -11,8 +11,8 @@ export default {
   },
 
   methods: {
-    getPrefix(data) {
+    getPrefix (data) {
       return _.get(data, this.prefix)
     }
-  },
+  }
 }

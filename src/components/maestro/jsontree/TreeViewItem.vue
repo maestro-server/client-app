@@ -75,78 +75,78 @@ class="tree-view-item-value"
 
 <script>
 
-  import _ from 'lodash'
+import _ from 'lodash'
 
-  export default {
-    name: "TreeViewItem",
-    props: ["data", "maxDepth", "currentDepth"],
-    data: function () {
-      return {
-        open: this.currentDepth < this.maxDepth
+export default {
+  name: "TreeViewItem",
+  props: ["data", "maxDepth", "currentDepth"],
+  data: function () {
+    return {
+      open: this.currentDepth < this.maxDepth
+    }
+  },
+  methods: {
+    isOpen: function () {
+      return this.open;
+    },
+    toggleOpen: function () {
+      this.open = !this.open;
+    },
+    isObject: function (value) {
+      return value.type === 'object';
+    },
+    isArray: function (value) {
+      return value.type === 'array';
+    },
+    isValue: function (value) {
+      return value.type === 'value';
+    },
+    getKey: function (value) {
+      if (_.isInteger(value.key)) {
+        return value.key + ":";
+      } else {
+        return "\"" + value.key + "\":";
       }
     },
-    methods: {
-      isOpen: function () {
-        return this.open;
-      },
-      toggleOpen: function () {
-        this.open = !this.open;
-      },
-      isObject: function (value) {
-        return value.type === 'object';
-      },
-      isArray: function (value) {
-        return value.type === 'array';
-      },
-      isValue: function (value) {
-        return value.type === 'value';
-      },
-      getKey: function (value) {
-        if (_.isInteger(value.key)) {
-          return value.key + ":";
-        } else {
-          return "\"" + value.key + "\":";
-        }
-      },
-      getValue: function (value) {
-        if (_.isNumber(value.value)) {
-          return value.value
-        }
-        if (_.isNull(value.value)) {
-          return "null"
-        }
-        if (_.isString(value.value)) {
-          return "\"" + value.value + "\"";
-        }
-        return value.value;
-      },
-      getValueType: function (value) {
-
-        const prefix = "tree-view-item-value-";
-
-        if (_.isNumber(value.value)) {
-          return prefix + "number"
-        }
-        if (_.isFunction(value.value)) {
-          return prefix + "function"
-        }
-        if (_.isBoolean(value.value)) {
-          return prefix + "boolean"
-        }
-        if (_.isNull(value.value)) {
-          return prefix + "null"
-        }
-        if (_.isString(value.value)) {
-          return prefix + "string";
-        }
-        return prefix + "unknown";
-
-      },
-      isRootObject: function (value = this.data) {
-        return value.isRoot;
+    getValue: function (value) {
+      if (_.isNumber(value.value)) {
+        return value.value
       }
+      if (_.isNull(value.value)) {
+        return "null"
+      }
+      if (_.isString(value.value)) {
+        return "\"" + value.value + "\"";
+      }
+      return value.value;
+    },
+    getValueType: function (value) {
+
+      const prefix = "tree-view-item-value-";
+
+      if (_.isNumber(value.value)) {
+        return prefix + "number"
+      }
+      if (_.isFunction(value.value)) {
+        return prefix + "function"
+      }
+      if (_.isBoolean(value.value)) {
+        return prefix + "boolean"
+      }
+      if (_.isNull(value.value)) {
+        return prefix + "null"
+      }
+      if (_.isString(value.value)) {
+        return prefix + "string";
+      }
+      return prefix + "unknown";
+
+    },
+    isRootObject: function (value = this.data) {
+      return value.isRoot;
     }
-  };
+  }
+};
 </script>
 
 <style>

@@ -33,7 +33,7 @@ export default {
   },
 
   methods: {
-    event(emitter, item = null) {
+    event (emitter, item = null) {
       this.$emit(emitter, item);
     }
   }

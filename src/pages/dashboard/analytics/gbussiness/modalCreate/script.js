@@ -19,8 +19,8 @@ export default {
 
   watch: {
     tabShow (val) {
-      for (let key in this.filter) {
-        if (key != val) {
+      for (const key in this.filter) {
+        if (key !== val) {
           const item = this.filter[key]
           this.$set(this.data, item, [])
           this[`tab_${item}`].updaterEdit([])
@@ -33,24 +33,24 @@ export default {
     return {
       tabShow: 0,
       type: "bussiness",
-      data: {name:null, clients:[], systems:[], apps: [], tab:0},
+      data: { name: null, clients: [], systems: [], apps: [], tab: 0 },
       filter: ['system', 'clients', 'apps']
     }
   },
 
   computed: {
-    tab_system() {return this.$refs.tab_system},
-    tab_clients() {return this.$refs.tab_clients},
-    tab_apps() {return this.$refs.tab_apps}
+    tab_system () { return this.$refs.tab_system },
+    tab_clients () { return this.$refs.tab_clients },
+    tab_apps () { return this.$refs.tab_apps }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Graph' : `Edit ${this.model.name} graph`
+      this.text.title = this.create ? 'Create new Graph' : `Edit ${this.model.name} graph`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.tab_apps.reset()
       this.tab_clients.reset()

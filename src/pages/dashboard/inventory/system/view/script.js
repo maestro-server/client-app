@@ -15,32 +15,32 @@ export default {
     return {
       entity: System,
       list_apps: [],
-      model: {name: null, description: null, links: [], applications:null, tags: [], check: [], clients: []}
+      model: { name: null, description: null, links: [], applications: null, tags: [], check: [], clients: [] }
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'clients', 'list_apps', 'teams'])
     }
   },
 
   methods: {
     editM: function () {
-      const {list_apps} = this
+      const { list_apps } = this
 
       this.MMembers
-        .onFinishCallBack((e)=>{
+        .onFinishCallBack((e) => {
           this.$set(this, 'list_apps', _.get(e, 'list_apps', []))
-          CacheManager({k: `applications_${this.model._id}_system._id`}).remove()
+          CacheManager({ k: `applications_${this.model._id}_system._id` }).remove()
         })
-        .show(_.merge(this.model, {list_apps}))
+        .show(_.merge(this.model, { list_apps }))
     },
 
-    edit: function (index=0) {
+    edit: function (index = 0) {
       this.MCreate
         .setTabShow(index)
         .onFinishCallBack(() => {
@@ -50,17 +50,17 @@ export default {
         .show(this.model)
     },
 
-    fetchApps(force = true) {
+    fetchApps (force = true) {
       if (this.id) {
-        FectherEntity(Applications)({force})
+        FectherEntity(Applications)({ force })
           .find((e) => {
             this.$set(this, 'list_apps', _.get(e, 'data.items', []))
-          }, {"system._id": this.id})
+          }, { "system._id": this.id })
       }
     }
   },
 
-  created() {
+  created () {
     this.fetchApps()
   }
 }

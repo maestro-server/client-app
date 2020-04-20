@@ -10,15 +10,15 @@ export default {
   data: function () {
     return {
       entity: Images,
-      model: {tags: []},
+      model: { tags: [] }
     }
   },
 
   computed: {
-    MMembers() {
+    MMembers () {
       return this.$parent.$refs.modal_members
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     }
   }

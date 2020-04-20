@@ -1,8 +1,8 @@
 export default {
   props: {
-    header: {type: String},
-    isOpen: {type: Boolean, default: null},
-    type: {type: String, default: null}
+    header: { type: String },
+    isOpen: { type: Boolean, default: null },
+    type: { type: String, default: null }
   },
   data () {
     return {
@@ -31,7 +31,7 @@ export default {
     },
     enter (el) {
       el.style.height = 'auto'
-      let endWidth = getComputedStyle(el).height
+      const endWidth = getComputedStyle(el).height
       el.style.height = '0px'
       el.offsetHeight // force repaint
       el.style.height = endWidth

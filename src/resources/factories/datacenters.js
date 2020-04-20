@@ -3,8 +3,13 @@
 import FactoryTenant from './factoryTenant'
 
 class Datacenters extends FactoryTenant {
-  constructor(model = {}, path='', tenant = false) {
-    super(model, "datacenters"+path, tenant)
+
+  static ename = 'datacenters'
+
+  constructor (model = {}, path = '', tenant = false) {
+    const ename = Datacenters.ename
+    super(model, ename + path, tenant)
+    this.setName(ename)
   }
 }
 

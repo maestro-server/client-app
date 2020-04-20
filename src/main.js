@@ -1,45 +1,34 @@
 'use strict'
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Notifications from 'vue-notifications'
+import VueClipboard from 'vue-clipboard2'
+import VeeValidate from 'vee-validate'
+import VueBar from 'vuebar'
+
+import { ServerTable, ClientTable } from 'maestro-vue-tables-2'
+
 import App from './App'
 import router from './router'
 import store from './store'
-
 import mixins_forms from 'mixins/forms'
-import Notifications from 'vue-notification'
 import components from './components'
-import VeeValidate from 'vee-validate'
-import Vuebar from 'vuebar';
-import VueClipboard from 'vue-clipboard2'
+import notifications_opt from './config/notifications'
 
-import { ServerTable, ClientTable } from 'maestro-vue-tables-2'
-import VueNotifications from 'vue-notifications'
-import iziToast from 'izitoast'
-
-
-const toast = ({title, message, type, timeout, position = 'topRight'}) => iziToast[type]({title, message, timeout, position})
-const options = {
-  success: toast,
-  error: toast,
-  info: toast,
-  warning: toast
-}
-Vue.use(VueNotifications, options)
-
+Vue.use(Notifications, notifications_opt)
+Vue.use(VueRouter)
 
 Vue.use(ServerTable, {})
 Vue.use(ClientTable, {})
-Vue.use(components)
+Vue.use(VueClipboard)
+Vue.use(VueBar);
 Vue.use(VeeValidate)
 Vue.mixin(mixins_forms)
-Vue.use(Notifications)
-Vue.use(VueClipboard)
-Vue.use(Vuebar);
+Vue.use(components)
 
 new Vue({
   store,
-  el: '#app',
   router,
-  components: {App},
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')

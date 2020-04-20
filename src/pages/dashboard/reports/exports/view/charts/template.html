@@ -26,4 +26,8 @@
       </div>
     </div>
   </template>
+
+  <alert v-if="model.status != 'finished' && model.msg" class="alert mt5" :class="'alert-'+model.status">
+    {{model.msg}}
+  </alert>
 </div>

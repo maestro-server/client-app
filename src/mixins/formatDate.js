@@ -2,7 +2,7 @@
 
 export default {
   methods: {
-    formatDate(date) {
+    formatDate (date) {
       return new Date(date).toLocaleString()
     }
   }

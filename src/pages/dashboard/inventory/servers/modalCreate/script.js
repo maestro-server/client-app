@@ -25,8 +25,14 @@ export default {
 
   data: function () {
     const defaultServer = {
-      status: "Active", role: null, storage:[],
-      auth:[], services: [], tags: [], datacenters: {}, os: {base: null, dist: null, version: null}
+      status: "Active",
+      role: null,
+      storage: [],
+      auth: [],
+      services: [],
+      tags: [],
+      datacenters: {},
+      os: { base: null, dist: null, version: null }
     }
 
     return {
@@ -35,49 +41,49 @@ export default {
       showModalZones: false,
       initialData: _.clone(defaultServer),
       data: _.clone(defaultServer),
-      os: {base: null, dist: null, version: null},
+      os: { base: null, dist: null, version: null },
       entity: Servers,
       options: {
-        status:[],
-        environment:[],
-        os:[],
-        serverType:[],
-        storage:[],
-        auth:[],
-        services:[],
-        tags:[]
+        status: [],
+        environment: [],
+        os: [],
+        serverType: [],
+        storage: [],
+        auth: [],
+        services: [],
+        tags: []
       }
     }
   },
 
   computed: {
-    tab_dc() {
+    tab_dc () {
       return this.$refs.tab_dc
     },
-    tab_storage() {
+    tab_storage () {
       return this.$refs.tab_storage
     },
-    tab_auth() {
+    tab_auth () {
       return this.$refs.tab_auth
     },
-    tab_services() {
+    tab_services () {
       return this.$refs.tab_services
     },
-    tab_tags() {
+    tab_tags () {
       return this.$refs.tab_tags
     }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Server' : `Edit ${this.model.hostname} server`
+      this.text.title = this.create ? 'Create new Server' : `Edit ${this.model.hostname} server`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = _.clone(this.initialData)
       this.clearDuplicate()
-      this.os = {base: null, dist: null, version: null}
+      this.os = { base: null, dist: null, version: null }
       this.tab_dc.reset()
       this.tab_storage.reset()
       this.tab_auth.reset()
@@ -86,22 +92,22 @@ export default {
     },
 
     editLoad () {
-      const {_id} = this.model
+      const { _id } = this.model
       this.clearDuplicate()
 
       FectherEntity(Servers)()
-      .findOne((e) => {
-        this.model = e.data
-        this.$set(this, 'data', this.model)
+        .findOne((e) => {
+          this.model = e.data
+          this.$set(this, 'data', this.model)
 
-        this.$set(this, 'os', _.defaults(this.model.os, this.os))
+          this.$set(this, 'os', _.defaults(this.model.os, this.os))
 
-        this.tab_dc.updaterEdit(_.get(this.model, 'datacenters', {}))
-        this.tab_storage.updaterEdit(_.get(this.model, 'storage', []))
-        this.tab_auth.updaterEdit(_.get(this.model, 'auth', []))
-        this.tab_services.updaterEdit(_.get(this.model, 'services', []))
-        this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
-      }, _id)
+          this.tab_dc.updaterEdit(_.get(this.model, 'datacenters', {}))
+          this.tab_storage.updaterEdit(_.get(this.model, 'storage', []))
+          this.tab_auth.updaterEdit(_.get(this.model, 'auth', []))
+          this.tab_services.updaterEdit(_.get(this.model, 'services', []))
+          this.tab_tags.updaterEdit(_.get(this.model, 'tags', []))
+        }, _id)
     },
 
 
@@ -123,16 +129,16 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-      .find(this.fetchAdminer, {key: 'server_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'server_options' })
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'env_options'})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'env_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 }

@@ -1,11 +1,11 @@
 'use strict'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import topmenu from '../_modules/tabMenu/tab-menu.vue'
 
 export default {
   data () {
     return {
-      submenu: {'settings': 'Profile', 'about': 'About'}
+      submenu: { settings: 'Profile' }
     }
   },
 

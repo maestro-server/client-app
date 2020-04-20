@@ -1,6 +1,5 @@
 'use strict'
 
-
 import Login from 'services/login'
 import Graphs from 'factories/graphs'
 import ViewSingle from 'mixins/view-single'
@@ -15,45 +14,49 @@ export default {
     return {
       id: null,
       entity: Graphs,
-      model: {name: null},
+      model: { name: null },
       dwn: []
     }
   },
 
   computed: {
-    base_url() {
-      return new AnalyticsFront().getUrl();
+    base_url () {
+      return new AnalyticsFront().getUrl()
     }
   },
 
   methods: {
-    make_request(path = '') {
-      const jwt = Login.getToken();
-      return `${this.base_url}${path}/${this.id}?jwt=${jwt}`;
+    make_request (path = '') {
+      const jwt = Login.getToken()
+      return `${this.base_url}${path}/${this.id}?hm=true&jwt=${jwt}`
     },
 
-    down({url, type, ext}) {
-      fsuccess({title: "Converting SVG to PNG will take time", msg: "Please dont't refresh you browser.", type: "warning"})
+    down ({ url, type, ext }) {
+      fsuccess({
+        title: 'Converting SVG to PNG will take time',
+        msg: 'Please dont\'t refresh you browser.',
+        type: 'warning'
+      })
       const name = `${this.id}.${ext}`
       download_file(name, url, type)
     },
 
-    setUrls() {
+    setUrls () {
       this.dwn = [{
-        'label': 'svg',
-        'ext': 'svg',
-        'url': this.make_request() + '&ext=svg',
-        'type': 'application/svg+xml'
+        label: 'svg',
+        ext: 'svg',
+        url: this.make_request() + '&ext=svg',
+        type: 'application/svg+xml'
       }, {
-        'label': 'png',
-        'ext': 'png',
-        'url': this.make_request('/png'),
-        'type': 'image/png'
+        label: 'png',
+        ext: 'png',
+        url: this.make_request('/png'),
+        type: 'image/png'
       }]
     }
   },
 
-  created() {
+  created () {
     this.id = this.$route.params.id
     this.setUrls()
   }

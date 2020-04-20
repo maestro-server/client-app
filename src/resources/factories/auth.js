@@ -6,8 +6,11 @@ import CacheManager from 'services/cacheManager'
 
 class Auth extends Factory {
 
-  constructor(model={}, e='users/auth') {
+  static ename = 'auth'
+
+  constructor (model = {}, e = 'users/auth') {
     super(model, e)
+    this.setName(Auth.ename)
   }
 
   auth (callback) {
@@ -18,7 +21,7 @@ class Auth extends Factory {
   }
 
   success (result) {
-    CacheManager({k: 'x-access', persistence: 'local', time: 860000}).set(result.data.token)
+    CacheManager({ k: 'x-access', persistence: 'local', time: 860000 }).set(result.data.token)
   }
 }
 

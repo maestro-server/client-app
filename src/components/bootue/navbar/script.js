@@ -1,8 +1,8 @@
 
 export default {
   props: {
-    type: {type: String, default: 'default'},
-    placement: {type: String, default: ''}
+    type: { type: String, default: 'default' },
+    placement: { type: String, default: '' }
   },
   data () {
     return {

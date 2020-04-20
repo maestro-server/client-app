@@ -35,18 +35,18 @@ export default {
   },
 
   computed: {
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links'])
     }
   },
 
   methods: {
-    makeCharts(data) {
-      const {aggr} = data
+    makeCharts (data) {
+      const { aggr } = data
       this.$set(this, 'charts', _.orderBy(aggr, ['opts.order']))
     },
 
-    transfData(data) {
+    transfData (data) {
       const labels = _.chain(data)
         .get('aggr.label')
         .map(_.truncate)
@@ -55,11 +55,11 @@ export default {
       return this.factoryData(
         labels,
         _.get(data, 'aggr.data'),
-        _.get(data, 'opts.limit', 15),
+        _.get(data, 'opts.limit', 15)
       )
     },
 
-    transfOptions(data) {
+    transfOptions (data) {
       return {
         legend: {
           display: _.get(data, 'opts.legend', true),
@@ -69,42 +69,42 @@ export default {
           display: true,
           text: _.get(data, 'opts.txt', "")
         },
-        maintainAspectRatio: false,
+        maintainAspectRatio: false
       }
     },
 
-    type(data) {
+    type (data) {
       return _.get(data, 'opts.ct', 'pie')
     },
 
-    size(data) {
+    size (data) {
       return _.get(data, 'opts.size', 'col-sm-4')
     },
 
-    activateAnalytics() {
-      const {_id} = this.model
-      FectherEntity(Datacenters)({path: `/${_id}/analytics`}).create(this.finishReport, {_id})
+    activateAnalytics () {
+      const { _id } = this.model
+      FectherEntity(Datacenters)({ path: `/${_id}/analytics` }).create(this.finishReport, { _id })
     },
 
-    finishReport(data) {
-      if(data.status == 200) {
+    finishReport (data) {
+      if (data.status === 200) {
         this.updateAnalyticsInfo();
       }
     },
 
-    updateAnalyticsInfo() {
+    updateAnalyticsInfo () {
       const reports = _.get(this.model, 'reports')
       const report = _.chain(reports)
-        .filter((a) => a.component==this.component)
+        .filter((a) => a.component === this.component)
         .head()
         .value()
 
-      if(report) {
-        const id= _.get(report, '_id')
+      if (report) {
+        const id = _.get(report, '_id')
 
-        FectherEntity(Reports)({force: true})
+        FectherEntity(Reports)({ force: true })
           .findOne((response) => {
-            let kre = _.chain(response)
+            const kre = _.chain(response)
               .get('data', {})
               .value()
 
@@ -114,11 +114,11 @@ export default {
       }
     },
 
-    isEmpty(arr) {
+    isEmpty (arr) {
       return _.isEmpty(arr)
     },
 
-    updateAnalytics() {
+    updateAnalytics () {
       FectherEntity(Reports)()
         .update(this.$parent.finishReportUpdate, this.report)
     }

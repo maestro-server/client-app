@@ -11,30 +11,35 @@ import api_url from 'src/resources/libs/api_url'
 
 class Factory {
 
-  constructor (model={}, e, Requester = DRequester) {
+  constructor (model = {}, e, Requester = DRequester) {
     this.entity = e
     this.header = {}
-    this.model =  model
+    this.model = model
+    this.ename = ''
 
     this.requester = Requester
   }
 
-  getName() {
-    return this.constructor.name.toLowerCase()
+  getName () {
+    return this.ename
   }
 
-  getUrl(path=api_url) {
+  setName (name) {
+    this.ename = name
+  }
+
+  getUrl (path = api_url) {
     return `${path}/${this.entity}`
   }
 
-  setEntity(e) {
+  setEntity (e) {
     this.entity = e
     return this
   }
 
   authorization () {
     const Authorization = Login.Authorization()
-    this.headers({Authorization})
+    this.headers({ Authorization })
     return this
   }
 
@@ -43,14 +48,14 @@ class Factory {
     return this
   }
 
-  getID (id, success=fsuccess) {
+  getID (id, success = fsuccess) {
     this.setEntity(`${this.entity}/${id}`)
     this.get(success)
   }
 
   get (call_success = fsuccess, call_rejected = frejected) {
     const params = this.model
-    this.factoryRequest('get', {params}, call_success, call_rejected)
+    this.factoryRequest('get', { params }, call_success, call_rejected)
   }
 
   create (call_success = fsuccess, call_rejected = frejected) {
@@ -75,14 +80,14 @@ class Factory {
     this.factoryRequest('patch', this.model, call_success, call_rejected)
   }
 
-  deleteID (id, success=fsuccess) {
+  deleteID (id, success = fsuccess) {
     this.setEntity(`${this.entity}/${id}`)
     this.delete(success)
   }
 
   delete (call_success = fsuccess, call_rejected = frejected) {
     const data = this.model
-    this.factoryRequest('delete', {data}, call_success, call_rejected)
+    this.factoryRequest('delete', { data }, call_success, call_rejected)
   }
 
   factoryRequest (caller, args, call_success, call_rejected) {

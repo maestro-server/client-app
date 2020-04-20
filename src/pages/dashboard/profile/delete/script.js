@@ -1,5 +1,5 @@
 'use strict'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   methods: {
@@ -7,7 +7,7 @@ export default {
       'setPage' // map this.increment() to this.$store.dispatch('increment')
     ])
   },
-  mounted() {
+  mounted () {
     this.setPage([
       'Settings',
       'Profile, plan and billing',

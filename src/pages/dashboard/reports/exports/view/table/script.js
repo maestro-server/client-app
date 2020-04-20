@@ -7,7 +7,7 @@ import ViewSingle from 'mixins/view-single'
 import SingleReport from 'mixins/single-report'
 
 import modalSingle from './modalSingle/single'
-import {EventBus} from "../../../../../../resources/bus/bus-general";
+import { EventBus } from "../../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [VueTable, ViewSingle, SingleReport],
@@ -22,7 +22,7 @@ export default {
       entity: Reports,
       options: {
         listColumns: {
-          status: [{text: 'Active'}, {text: 'Avaliable'}, {text: 'Stopped'}]
+          status: [{ text: 'Active' }, { text: 'Avaliable' }, { text: 'Stopped' }]
         },
         filterable: ['status', 'name', 'hostname', 'environment', 'ipv4_private', 'ipv4_public', 'family', 'role', 'language', 'deploy', 'contacts', 'provider', '_id', 'region', 'zone', 'type', 'instance', 'instance_id', 'subnet_id', 'tags'],
         headings: {
@@ -36,18 +36,18 @@ export default {
   },
 
   computed: {
-    MSingle() {
+    MSingle () {
       return this.$refs.modal_single
     },
 
-    columns() {
+    columns () {
       if (_.has(this.model, '_id')) {
         this.model.columns.unshift('-')
         return this.model.columns || ['-', 'active', 'name', 'hostname', 'created_at', 'status']
       }
     },
 
-    url() {
+    url () {
       if (_.has(this.model, '_id')) {
         return `${new this.entity().getUrl()}/${_.get(this.model, '_id')}/result`
       }
@@ -55,7 +55,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.updated_at = new Date(d.updated_at).toLocaleString()
         d.created_at = new Date(d.created_at).toLocaleString()
@@ -68,22 +68,21 @@ export default {
         .show(data)
     },
 
-    tinyFilter(data) {
-      if (_.has(this, 'options.filterable'))
-        return _.pick(data, this.options.filterable)
+    tinyFilter (data) {
+      if (_.has(this, 'options.filterable')) { return _.pick(data, this.options.filterable) }
     },
 
-    updateTable() {
+    updateTable () {
       this.$refs.vTable.refresh();
     }
   },
 
-  created() {
+  created () {
     this.id = this.$route.params.id
     EventBus.$on(`reports-${this.id}`, this.updateTable)
   },
 
-  destroyed() {
+  destroyed () {
     EventBus.$off(`reports-${this.id}`, this.updateTable)
   }
 }

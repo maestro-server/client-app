@@ -16,12 +16,12 @@ export default {
   },
 
   computed: {
-    tabRef() {
+    tabRef () {
       return this.$refs.tab_foreign_relation
     }
   },
 
-  data() {
+  data () {
     return {
       entity: Clients,
       relation: System,

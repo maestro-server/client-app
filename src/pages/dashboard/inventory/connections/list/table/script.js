@@ -12,7 +12,7 @@ export default {
       entity: new Connections(),
       columns: ['name', 'dc', 'updated_at', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'dc'],
         headings: {
           updated_at: 'Updated At',
@@ -23,7 +23,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.updated_at = new Date(d.updated_at).toLocaleString()
         d.created_at = new Date(d.created_at).toLocaleString()

@@ -28,7 +28,7 @@ export default {
     mapper: {}
   },
 
-  data: function() {
+  data: function () {
     const resetData = { name: null, id: null, link: null, notes: null };
 
     return {
@@ -38,17 +38,17 @@ export default {
   },
 
   methods: {
-    onHit() {
+    onHit () {
       this.$emit("update", this.data);
     },
 
-    updaterEdit(data = {}) {
+    updaterEdit (data = {}) {
       this.$set(this, "data", data);
       const dpp = _.pickBy(data, _.identity);
       this.$emit("update", dpp);
     },
 
-    reset() {
+    reset () {
       this.$set(this, "data", _.clone(this.resetData));
     }
   }

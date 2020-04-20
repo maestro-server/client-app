@@ -1,12 +1,12 @@
 'use strict'
 
 const format = (result) => {
-  let clear = [];
+  const clear = [];
 
-  if(result.data) {
+  if (result.data) {
     const data = result.data
 
-    if(data.items && Array.isArray(data.items)) {
+    if (data.items && Array.isArray(data.items)) {
       const first = _.head(data.items);
       return _.get(first, 'value');
     }

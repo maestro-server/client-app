@@ -1,7 +1,7 @@
 export default {
   props: {
-    disabled: {type: Boolean, default: false},
-    header: {type: String}
+    disabled: { type: Boolean, default: false },
+    header: { type: String }
   },
   data () {
     return {
@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     active () {
-      let active = !this._tabs || this._tabs.show === this
+      const active = !this._tabs || this._tabs.show === this
       this.fadein = false
       if (active) {
         setTimeout(() => { this.fadein = true }, 0)
@@ -47,12 +47,12 @@ export default {
     if (this._tabs) {
       if (this._tabs.active === this.index) { this._tabs.index = 0 }
       if (this._ingroup) {
-        let id = this.$parent.tabs.indexOf(this)
+        const id = this.$parent.tabs.indexOf(this)
         if (~id) this.$parent.tabs.splice(id, 1)
       }
     }
     if (this._tabs) {
-      let id = this._tabs.tabs.indexOf(this)
+      const id = this._tabs.tabs.indexOf(this)
       if (~id) this._tabs.tabs.splice(id, 1)
     }
   }

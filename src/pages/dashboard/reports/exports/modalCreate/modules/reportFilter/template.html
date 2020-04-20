@@ -8,13 +8,16 @@
     <div class="ml10">
       <bs-input v-model="filter" name="filter" placeholder="Value" v-if="isString"></bs-input>
       <bs-input type="number" v-model="filter" name="filter" placeholder="Value" v-if="isNumber"></bs-input>
-      <bs-select v-model="filter" :options="['true', 'false']" name="filter" placeholder="true/false" v-if="isBoolean"></bs-select>
+      <bs-select v-model="filter" :options="['true', 'false']" name="filter" placeholder="true/false"
+                 v-if="isBoolean"></bs-select>
 
-      <bs-select v-model="filter" :options="opts" name="filter" placeholder="Select one option" v-if="isSelect"></bs-select>
+      <bs-select v-model="filter" :options="opts" name="filter" placeholder="Select one option"
+                 v-if="isSelect"></bs-select>
     </div>
 
     <div class="ml10" v-if="isArrOrObj">
-      <bs-select v-model="subfield" :options="options.subfield" name="subfield" placeholder="Field" :disabled="subfield === 'value'"></bs-select>
+      <bs-select v-model="subfield" :options="options.subfield" name="subfield" placeholder="Field"
+                 :disabled="subfield === 'value'"></bs-select>
       <bs-input v-model="subfilter" name="subfilter" placeholder="Value"></bs-input>
     </div>
 

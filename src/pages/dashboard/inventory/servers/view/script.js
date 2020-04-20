@@ -28,58 +28,57 @@ export default {
         services: [],
         storage: [],
         logs: [],
-        os: {base: null},
-        datacenters: {name: null},
+        os: { base: null },
+        datacenters: { name: null },
         active: true
       }
     }
   },
 
   computed: {
-    MApps() {
+    MApps () {
       return this.$parent.$refs.modal_apps
     },
-    MCreateConfigServer() {
+    MCreateConfigServer () {
       return this.$refs.modal_config
     },
-    MCreateVolumesServer() {
+    MCreateVolumesServer () {
       return this.$refs.modal_volumes
     },
-    filtered() {
+    filtered () {
       return _.omit(this.model, ['owner', 'roles', '_links', 'applications', 'tags'])
     },
-    viewDisplayer() {
+    viewDisplayer () {
       return [
-        {val: this.model.active ? "Active" : "Terminated", type: this.model.active ? "success" : "danger"},
-        {val: _.get(this.model, 'environment')},
-        {val: _.get(this.model, 'role')},
-        {val: _.get(this.model, 'os.base', false)},
-        {val: _.get(this.model, 'datacenters.name', false)},
-        {val: _.get(this.model, 'ipv4_private')}
+        { val: this.model.active ? "Active" : "Terminated", type: this.model.active ? "success" : "danger" },
+        { val: _.get(this.model, 'environment') },
+        { val: _.get(this.model, 'role') },
+        { val: _.get(this.model, 'os.base', false) },
+        { val: _.get(this.model, 'datacenters.name', false) },
+        { val: _.get(this.model, 'ipv4_private') }
       ]
     }
   },
 
   methods: {
-    callConfig(item) {
+    callConfig (item) {
       this.MCreateConfigServer
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(item)
     },
 
-    callVolumes(item) {
+    callVolumes (item) {
       this.MCreateVolumesServer
         .onFinishCallBack(() => this.fetchData(this.id))
         .show(item)
     },
 
-    showListVolumes(vol, len="", def=null) {
+    showListVolumes (vol, len = "", def = null) {
       if (_.has(vol, 'unique_id') && _.has(this.list_volumes, vol.unique_id)) {
         return _.get(this.list_volumes, `${vol.unique_id}${len}`)
       }
 
-      if (def == true)
-        return vol
+      if (def === true) { return vol }
     },
 
     editM: function () {
@@ -88,7 +87,7 @@ export default {
         .show(this.model)
     },
 
-    fetchVolumes(force = true) {
+    fetchVolumes (force = true) {
       if (this.model) {
         const uniques = _.chain(this.model)
           .get('storage')
@@ -96,7 +95,7 @@ export default {
           .map(e => e.unique_id)
           .value()
 
-        FectherEntity(Volumes)({force})
+        FectherEntity(Volumes)({ force })
           .find((e) => {
             this.list_volumes = _.chain(e)
               .get('data.items')
@@ -106,28 +105,28 @@ export default {
               }, {})
               .value();
 
-          }, {"unique_id": uniques})
+          }, { unique_id: uniques })
       }
     },
 
-    fetchApplications(force = true) {
+    fetchApplications (force = true) {
       const apps = _.get(this.model, 'applications', [])
 
       if (this.model && apps.length > 0) {
-        FectherEntity(Applications)({force})
+        FectherEntity(Applications)({ force })
           .find((e) => {
             this.list_applications = _.get(e, 'data.items');
-          }, {"_id": apps.map(e=>e._id)})
+          }, { _id: apps.map(e => e._id) })
       }
     }
   },
 
-  created() {
+  created () {
     this.$on('finishFetchData', this.fetchVolumes)
     this.$on('finishFetchData', this.fetchApplications)
   },
 
-  destroyed() {
+  destroyed () {
     this.$off('finishFetchData', this.fetchVolumes)
     this.$off('finishFetchData', this.fetchApplications)
   }

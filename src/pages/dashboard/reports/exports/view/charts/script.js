@@ -10,7 +10,7 @@ import polarChart from 'components/charts/polar_chart.vue'
 import barChart from 'components/charts/bar_chart.vue'
 import charts from 'mixins/charts'
 
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 
 export default {
@@ -33,12 +33,12 @@ export default {
   },
 
   methods: {
-    makeCharts(data) {
-      const {aggr} = data
+    makeCharts (data) {
+      const { aggr } = data
       this.$set(this, 'charts', _.orderBy(aggr, ['opts.order']))
     },
 
-    transfData(data) {
+    transfData (data) {
       const labels = _.chain(data)
         .get('aggr.label')
         .map(_.truncate)
@@ -47,11 +47,11 @@ export default {
       return this.factoryData(
         labels,
         _.get(data, 'aggr.data'),
-        _.get(data, 'opts.limit', 15),
+        _.get(data, 'opts.limit', 15)
       )
     },
 
-    transfOptions(data) {
+    transfOptions (data) {
       return {
         legend: {
           display: _.get(data, 'opts.legend', true),
@@ -61,29 +61,29 @@ export default {
           display: true,
           text: _.get(data, 'opts.txt', "")
         },
-        maintainAspectRatio: false,
+        maintainAspectRatio: false
       }
     },
 
-    type(data) {
+    type (data) {
       return _.get(data, 'opts.ct', 'pie')
     },
 
-    size(data) {
+    size (data) {
       return _.get(data, 'opts.size', 'col-sm-4')
     },
 
-    updatePage() {
+    updatePage () {
       this.$router.go()
     }
   },
 
-  created() {
+  created () {
     this.$on('finishFetchData', this.makeCharts)
     EventBus.$on(`reports-${this.id}`, this.updatePage)
   },
 
-  destroyed() {
+  destroyed () {
     this.$off('finishFetchData', this.makeCharts)
     EventBus.$off(`reports-${this.id}`, this.updatePage)
   }

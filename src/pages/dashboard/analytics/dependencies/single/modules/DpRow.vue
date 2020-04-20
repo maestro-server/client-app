@@ -90,7 +90,7 @@ export default {
     types: { type: Array, default: () => [] }
   },
 
-  data: function() {
+  data: function () {
     return {
       type: "Application",
       URL: `${new Applications().getUrl()}?query=`,
@@ -108,19 +108,19 @@ export default {
   },
 
   computed: {
-    wLine() {
+    wLine () {
       const wid = this.apps.length ? (this.apps.length - 1) * 120 + 2 : 0;
       return `width: ${wid}px`;
     }
   },
 
   methods: {
-    addItem(id) {
+    addItem (id) {
       this.$emit("addRow", id, this.step);
       this.$set(this, "selected", id);
     },
 
-    delItem(id) {
+    delItem (id) {
       this.$emit("deleteItem", id, this.step);
 
       if (id === this.selected) {
@@ -128,37 +128,37 @@ export default {
       }
     },
 
-    requestSearch(async, val, key = "name") {
+    requestSearch (async, val, key = "name") {
       return `${async}%7B"${key}":"${val}"%7D`;
     },
 
-    onHit(item) {
-      let app = _.pick(item, ["_id", "name", "family", "environment"]);
+    onHit (item) {
+      const app = _.pick(item, ["_id", "name", "family", "environment"]);
       this.$set(this, "app", app);
     },
 
-    onCommit() {
+    onCommit () {
       if (_.has(this.app, "_id")) {
         const tapp = _.assign(this.app, { endpoint: this.endpoint });
         this.$emit("commitItem", tapp, this.step);
-        this.$refs["pop"].toggle();
+        this.$refs.pop.toggle();
         this.clear();
       }
     },
 
-    singleOpen(state) {
+    singleOpen (state) {
       if (state) {
         this.$parent.activedPopover(this.step);
       }
     },
 
-    clear() {
+    clear () {
       this.app = {};
       this.endpoint = null;
     }
   },
 
-  created() {
+  created () {
     this.$set(this, "bags", this.apps);
   }
 };

@@ -5,7 +5,7 @@ import treeView from './TreeViewItem.vue'
 export default {
   props: {
     data: {},
-    title: {default: 'Info'}
+    title: { default: 'Info' }
   },
 
   components: {

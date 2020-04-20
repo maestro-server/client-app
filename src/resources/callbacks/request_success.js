@@ -1,8 +1,8 @@
 'use strict'
-import {EventBus} from 'src/resources/bus/bus-general.js'
+import { EventBus } from 'src/resources/bus/bus-general.js'
 
 export default (custom = {}) => {
-  let data = {
+  const data = {
     show: true,
     title: "Your wish was successfully conceived",
     msg: "Date saved successfully",

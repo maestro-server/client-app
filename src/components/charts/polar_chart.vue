@@ -1,12 +1,12 @@
 <script>
-  import { PolarArea } from 'vue-chartjs'
+import { PolarArea } from 'vue-chartjs'
 
-  export default {
-    extends: PolarArea,
+export default {
+  extends: PolarArea,
 
-    props: ['data', 'options'],
-    mounted () {
-      this.renderChart(this.data, this.options)
-    }
+  props: ['data', 'options'],
+  mounted () {
+    this.renderChart(this.data, this.options)
   }
+}
 </script>

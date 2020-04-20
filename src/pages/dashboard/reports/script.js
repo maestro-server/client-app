@@ -1,13 +1,13 @@
 'use strict'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import tabMenu from '../_modules/tabMenu/tab-menu.vue'
 
 export default {
   data () {
     return {
       submenu: {
-        'exports': 'Reports',
-        'scheduler': 'Schedulers'
+        exports: 'Reports',
+        scheduler: 'Schedulers'
       },
       reference: null
     }
@@ -23,7 +23,7 @@ export default {
     ])
   },
 
-  mounted() {
+  mounted () {
     this.setPage([
       'Reports',
       'Create your own reports, schedule and exports.',

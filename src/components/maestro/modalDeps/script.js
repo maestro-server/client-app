@@ -17,21 +17,21 @@ export default {
 
   data () {
     return {
-      data: {deps: []},
+      data: { deps: [] },
       options: {
-        protocol:[]
+        protocol: []
       },
       entity: Applications
     }
   },
 
   computed: {
-    tab_endpoint() {return this.$refs.tab_endpoint}
+    tab_endpoint () { return this.$refs.tab_endpoint }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new dependencies' : `Edit ${this.model.name} dependencies`
+      this.text.title = this.create ? 'Create new dependencies' : `Edit ${this.model.name} dependencies`
     },
 
     editLoad () {
@@ -50,14 +50,14 @@ export default {
         .update(this.finishJob, this.model)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'deps_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'deps_options' })
     }
 
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

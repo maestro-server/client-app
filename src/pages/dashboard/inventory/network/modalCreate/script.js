@@ -1,7 +1,7 @@
 'use strict'
 
 import Modals from 'mixins/modals'
-import Networks from 'factories/networks'
+import Network from 'factories/network'
 import FectherEntity from 'services/fetchEntity'
 
 import tabTags from 'src/pages/dashboard/_modules/tabs/tab_tags'
@@ -17,10 +17,10 @@ export default {
   },
 
   computed: {
-    tab_app_dc() {
+    tab_app_dc () {
       return this.$refs.tab_app_dc
     },
-    tab_tags() {
+    tab_tags () {
       return this.$refs.tab_tags
     }
   },
@@ -29,17 +29,17 @@ export default {
     return {
       data: {
         name: null, tags: [], datacenters: {}
-      },
+      }
     }
   },
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Network' : `Edit ${this.model.name} network`
+      this.text.title = this.create ? 'Create new Network' : `Edit ${this.model.name} network`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.tab_app_dc.reset()
       this.tab_tags.reset()
@@ -59,15 +59,15 @@ export default {
     createSave () {
       this.setupModel()
 
-      FectherEntity(Networks)()
+      FectherEntity(Network)()
         .create(this.finishJob, this.model)
     },
 
     editSave () {
       this.setupModel()
-      FectherEntity(Networks)()
+      FectherEntity(Network)()
         .update(this.finishJob, this.model)
-    },
-  },
+    }
+  }
 
 }

@@ -12,10 +12,16 @@ engines:
       languages:
       - javascript:
           mass_threshold: 120
+checks:
+  method-lines:
+    enabled: true
+    config:
+      threshold: 40
 
 ratings:
   paths:
   - src/**.js
+  -
 exclude_paths:
 - "test/"
 - "docs/"

@@ -1,11 +1,11 @@
 export default {
   props: {
-    content: {type: String},
-    effect: {type: String, default: 'fade'},
-    header: {type: Boolean, default: true},
-    placement: {type: String, default: 'top'},
-    title: {type: String},
-    trigger: {type: String}
+    content: { type: String },
+    effect: { type: String, default: 'fade' },
+    header: { type: Boolean, default: true },
+    placement: { type: String, default: 'top' },
+    title: { type: String },
+    trigger: { type: String }
   },
   data () {
     return {
@@ -23,8 +23,8 @@ export default {
       setTimeout(() => this.position(), 5)
     },
     position () {
-      let popover = this.$refs.popover
-      let trigger = this.$refs.trigger.children[0]
+      const popover = this.$refs.popover
+      const trigger = this.$refs.trigger.children[0]
       this.$nextTick(() => {
         if (trigger && popover) {
           switch (this.placement) {
@@ -70,7 +70,7 @@ export default {
     }
 
     this.events.forEach(event => {
-      if (trigger.length == null) {
+      if (trigger.length === null) {
         trigger.addEventListener(event, this.toggle)
       } else {
         Array.prototype.map.call(trigger, (el) => {

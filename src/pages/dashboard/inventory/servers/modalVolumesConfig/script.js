@@ -15,7 +15,7 @@ export default {
   data: function () {
     return {
       enabled: false,
-      initialData: {mount: null, ftype: null, lvm: false, pv: null, vg: null},
+      initialData: { mount: null, ftype: null, lvm: false, pv: null, vg: null },
       data: {},
       options: {
         managers: []
@@ -24,7 +24,7 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `Volume Config "${this.data.name}"`
     },
 
@@ -35,8 +35,8 @@ export default {
     },
 
     setupModel () {
-      const {index} = this.model
-      const {data} = this
+      const { index } = this.model
+      const { data } = this
       this.$set(data, 'lvm', this.enabled)
 
       const merged = _.assign(_.get(this.provider, `storage[${index}]`, {}), data)

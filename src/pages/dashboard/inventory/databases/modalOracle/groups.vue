@@ -64,25 +64,25 @@ Add Groups
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import Modals from 'mixins/modals'
-  import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import TabCreaterList from 'mixins/tab-creater-list'
 
-  export default {
-    mixins: [Modals, TabCreaterList],
+export default {
+  mixins: [Modals, TabCreaterList],
 
-    data () {
-      return {
-        showModal: false,
-        single: {name: null}
-      }
-    },
+  data () {
+    return {
+      showModal: false,
+      single: { name: null }
+    }
+  },
 
-    methods: {
-      clearItems() {
-        this.value = []
-      }
+  methods: {
+    clearItems () {
+      this.value = []
     }
   }
+}
 </script>

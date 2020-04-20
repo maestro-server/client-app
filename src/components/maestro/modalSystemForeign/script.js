@@ -18,12 +18,12 @@ export default {
   },
 
   computed: {
-    tabRef() {
+    tabRef () {
       return this.$refs.tab_family
     }
   },
 
-  data() {
+  data () {
     return {
       entity: System,
       relation: Applications,
@@ -33,9 +33,9 @@ export default {
   },
 
   methods: {
-    transformValue(val) {
+    transformValue (val) {
       if (_.isArray(val)) {
-        const tval = val.map(e=>e._id)
+        const tval = val.map(e => e._id)
         this.$set(this, 'value', tval)
       }
     }

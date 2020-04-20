@@ -11,12 +11,12 @@ Disabled
 
 
 <script>
-  'use strict'
+'use strict'
 
-  export default {
-    props: {
-      act: {type: Boolean, default: true}
-    }
+export default {
+  props: {
+    act: { type: Boolean, default: true }
   }
+}
 
 </script>

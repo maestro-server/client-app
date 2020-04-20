@@ -2,7 +2,7 @@
 
 import svTable from './table/table'
 import ListTable from 'mixins/list-table'
-import {EventBus} from "../../../../../resources/bus/bus-general";
+import { EventBus } from "../../../../../resources/bus/bus-general";
 
 export default {
   mixins: [ListTable],
@@ -17,17 +17,17 @@ export default {
     }
   },
 
-  methods:{
-    onUpdate() {
+  methods: {
+    onUpdate () {
       this.$refs.svTable.$refs.vTable.refresh();
     }
   },
 
-  created() {
+  created () {
     EventBus.$on('connections-update', this.onUpdate)
   },
 
-  destroyed() {
+  destroyed () {
     EventBus.$off('connections-update', this.onUpdate)
   }
 }

@@ -36,18 +36,19 @@
         <div class="col-xs-8 mt10">
           <bs-list class="row">
             <li v-for="filter, index in item.filters" :key="filter.field" class="list-group-item">
-              <b>{{ filter.field }}</b>
-              <small>{{ filter.comparer }}</small>
-              <bs-label>{{ filter.filter }}</bs-label>
+              <div class="sub-ul">
+                <b>{{ filter.field }}</b>
+                <small> {{ filter.comparer }} </small>
+                <bs-label>{{ filter.filter }}</bs-label>
 
-              <ul v-if="filter.subfilter">
-                <li class="text-wrapper">
-                  <b class="primary">{{ filter.subfield }}</b>
-                  <i>{{ filter.comparer }}</i>
-                  <span>{{ filter.subfilter }}</span>
-                </li>
-              </ul>
-
+                <ul v-if="filter.subfilter">
+                  <li class="text-wrapper">
+                    <b class="primary">{{ filter.subfield }}</b>
+                    <i> {{ filter.comparer }}</i>
+                    <span> {{ filter.subfilter }}</span>
+                  </li>
+                </ul>
+              </div>
               <a
                 class="fa fa-trash btn btn-danger btn-xs pull-right"
                 @click.stop="delItem(index, item.title)"
@@ -57,7 +58,8 @@
             <li
               v-if="item.filters.length == 0"
               class="list-group-item list-group-item-default"
-            >No Filter</li>
+            >No Filter
+            </li>
           </bs-list>
 
           <div class="row mnt10">
@@ -98,13 +100,13 @@
 </template>
 
 <script>
-"use strict";
+'use strict'
 
-import TabCreaterList from "mixins/tab-creater-list";
-import Modals from "mixins/modals";
-import Adminer from "factories/adminer";
-import FectherEntity from "services/fetchEntity";
-import reportFilter from "../modules/reportFilter/ReportFilter";
+import TabCreaterList from 'mixins/tab-creater-list'
+import Modals from 'mixins/modals'
+import Adminer from 'factories/adminer'
+import FectherEntity from 'services/fetchEntity'
+import reportFilter from '../modules/reportFilter/ReportFilter'
 
 export default {
   components: {
@@ -113,70 +115,70 @@ export default {
   mixins: [Modals, TabCreaterList],
 
   props: {
-    label: { default: "Application" },
-    defaultType: { default: "Application" }
+    label: { default: 'Application' },
+    defaultType: { default: 'Application' }
   },
 
-  data: function() {
+  data: function () {
     const defaultPivot = {
-      report: "pivot",
-      component: "pivot",
+      report: 'pivot',
+      component: 'pivot',
       filters: {
         clients: {
-          title: "Clients",
-          icon: "fa-user-o",
+          title: 'Clients',
+          icon: 'fa-user-o',
           enabled: true,
           filters: [
             {
-              field: "active",
-              filter: "true",
-              comparer: "equal",
-              typ: "boolean"
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
             }
           ]
         },
         systems: {
-          title: "Systems",
-          icon: "fa-briefcase",
+          title: 'Systems',
+          icon: 'fa-briefcase',
           enabled: true,
           filters: [
             {
-              field: "active",
-              filter: "true",
-              comparer: "equal",
-              typ: "boolean"
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
             }
           ]
         },
         applications: {
-          title: "Applications",
-          icon: "fa-code",
+          title: 'Applications',
+          icon: 'fa-code',
           enabled: true,
           filters: [
             {
-              field: "active",
-              filter: "true",
-              comparer: "equal",
-              typ: "boolean"
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
             }
           ]
         },
         servers: {
-          title: "Servers",
-          icon: "fa-server",
+          title: 'Servers',
+          icon: 'fa-server',
           enabled: true,
           filters: [
             {
-              field: "active",
-              filter: "true",
-              comparer: "equal",
-              typ: "boolean"
+              field: 'active',
+              filter: 'true',
+              comparer: 'equal',
+              typ: 'boolean'
             }
           ],
           arrowhidden: true
         }
       }
-    };
+    }
 
     return {
       showModal: false,
@@ -186,81 +188,87 @@ export default {
       options: {
         tables: false
       }
-    };
+    }
   },
 
-  created() {
-    this.fetchData();
+  created () {
+    this.fetchData()
   },
 
   methods: {
-    textEnabled(enabled) {
-      return enabled ? "Disabled" : "Enable";
+    textEnabled (enabled) {
+      return enabled ? 'Disabled' : 'Enable'
     },
 
-    toggleEnable(key) {
-      this.submit.filters[key].enabled = !this.submit.filters[key].enabled;
+    toggleEnable (key) {
+      this.submit.filters[key].enabled = !this.submit.filters[key].enabled
 
-      this.updateEvent();
+      this.updateEvent()
     },
 
-    sModal(table) {
-      if (_.has(this, "options.tables")) {
-        this.entity = table.toLowerCase();
+    sModal (table) {
+      if (_.has(this, 'options.tables')) {
+        this.entity = table.toLowerCase()
 
-        const items = this.options.tables.filter(data => table === data.name);
-        this.$refs.compfilters.updateFilters(_.head(items));
+        const items = this.options.tables.filter(data => table === data.name)
+        this.$refs.compfilters.updateFilters(_.head(items))
 
-        this.showModal = !this.showModal;
+        this.showModal = !this.showModal
       }
     },
 
-    addFilter(picks) {
+    addFilter (picks) {
       if (picks) {
-        this.submit.filters[this.entity].filters.push(picks);
+        this.submit.filters[this.entity].filters.push(picks)
       }
 
-      this.updateEvent();
+      this.updateEvent()
     },
 
-    delItem(index, item) {
-      delete this.submit.filters[item.toLowerCase()].filters.splice(index, 1);
+    delItem (index, item) {
+      delete this.submit.filters[item.toLowerCase()].filters.splice(index, 1)
 
-      this.updateEvent();
+      this.updateEvent()
     },
 
-    updateEvent() {
-      this.$emit("update", this.submit);
+    updateEvent () {
+      this.$emit('update', this.submit)
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({ persistence: "local" }).find(this.fetchAdminer, {
-        key: "reports_options"
-      });
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
+        key: 'reports_options'
+      })
     },
 
-    updaterEdit(data) {
-      this.$set(this, "submit", data);
+    updaterEdit (data) {
+      this.$set(this, 'submit', data)
     },
 
-    reset() {
-      this.$set(this, "submit", _.clone(this.initialData));
+    reset () {
+      this.$set(this, 'submit', _.clone(this.initialData))
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
-.pivot-modal {
-  min-height: 280px;
-}
+  .pivot-modal {
+    min-height: 280px;
+  }
 
-.title-padding {
-  padding: 3px 0;
-  border-radius: 10px 0px 0 10px;
-}
+  .title-padding {
+    padding: 3px 0;
+    border-radius: 10px 0px 0 10px;
+  }
 
-.mnt10 {
-  margin-top: -10px;
-}
+  .sub-ul {
+    max-width: 315px;
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .mnt10 {
+    margin-top: -10px;
+  }
 </style>

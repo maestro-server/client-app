@@ -11,9 +11,9 @@ export default {
   data: function () {
     return {
       entity: new Scheduler(),
-      columns: ['enabled', 'name' ,'modules', 'period_type', 'total_run_count', 'updated_at', 'actions'],
+      columns: ['enabled', 'name', 'modules', 'period_type', 'total_run_count', 'updated_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'modules', 'period_type'],
         listColumns: {
           period_type: [],
@@ -27,7 +27,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.modules = _.get(d, 'task')
         d.updated_at = new Date(d.updated_at).toLocaleString()
@@ -36,8 +36,8 @@ export default {
     }
   },
 
-  created() {
-    FectherEntity(Adminer)({persistence: 'local'})
-      .find(this.fetchAdminer, {key: 'scheduler_options'})
+  created () {
+    FectherEntity(Adminer)({ persistence: 'local' })
+      .find(this.fetchAdminer, { key: 'scheduler_options' })
   }
 }

@@ -11,7 +11,7 @@ export default {
     modalFamilyApps
   },
 
-  data() {
+  data () {
     return {
       entity: Servers
     }

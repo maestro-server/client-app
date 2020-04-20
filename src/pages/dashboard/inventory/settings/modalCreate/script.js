@@ -17,7 +17,7 @@ export default {
   },
 
   computed: {
-    tab_items() {return this.$refs.tab_items}
+    tab_items () { return this.$refs.tab_items }
   },
 
   data () {
@@ -37,11 +37,11 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  this.create ? 'Create new Service' : `Edit ${this.model.name} service`
+      this.text.title = this.create ? 'Create new Service' : `Edit ${this.model.name} service`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.$set(this, 'families', [])
       this.family = null
@@ -65,7 +65,7 @@ export default {
       FectherEntity(Services)()
         .create(this.finishJob, this.model)
 
-      CacheManager({persistence: 'local'}).clearReg('services')
+      CacheManager({ persistence: 'local' }).clearReg('services')
     },
 
     editSave () {
@@ -75,18 +75,18 @@ export default {
         .patch(this.finishJob, this.model)
     },
 
-    addFamily() {
+    addFamily () {
       this.families.push(this.family)
       this.family = null
     },
 
-    fetchData() {
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key: 'application_options'})
+    fetchData () {
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key: 'application_options' })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

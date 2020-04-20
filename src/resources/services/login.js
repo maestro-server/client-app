@@ -6,23 +6,23 @@ import CacheManager from 'services/cacheManager'
 
 class Login {
 
-  static getToken = () => CacheManager({k: 'x-access', persistence: 'local'}).find()
+  static getToken = () => CacheManager({ k: 'x-access', persistence: 'local' }).find()
 
-  static getUser = () => CacheManager({k: 'me_list', persistence: 'local'}).find(['_id', 'email'])
+  static getUser = () => CacheManager({ k: 'me_list', persistence: 'local' }).find(['_id', 'email'])
 
   static getID = () => _.get(Login.getUser(), '_id')
 
   static Authorization = () => `JWT ${Login.getToken()}`
 
   static setLogin (that, e) {
-    const {user} = e.data
+    const { user } = e.data
     store.dispatch('setUser', user)
 
-    that.$router.push({name: 'dashboard'})
+    that.$router.push({ name: 'dashboard' })
   }
 
   static destroyLogin () {
-    CacheManager({k: 'me_list', persistence: 'local'}).remove()
+    CacheManager({ k: 'me_list', persistence: 'local' }).remove()
     store.dispatch('setUser', {})
   }
 

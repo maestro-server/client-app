@@ -2,34 +2,34 @@
 
 
 export default {
-  setPage ({commit}, [title, subtitle = null, icon = null]) {
+  setPage ({ commit }, [title, subtitle = null, icon = null]) {
     commit('CHANGE_PAGE', ['title', title])
     commit('CHANGE_PAGE', ['subtitle', subtitle])
     commit('CHANGE_PAGE', ['icon', icon])
   },
 
-  setUser ({commit}, args) {
+  setUser ({ commit }, args) {
     commit('SET_USER', args)
   },
 
-  onSpinner ({commit}) {
-    commit('SET_SPINNER', {show: true})
+  onSpinner ({ commit }) {
+    commit('SET_SPINNER', { show: true })
   },
 
-  offSpinner ({commit}) {
-    commit('SET_SPINNER', {show: false})
+  offSpinner ({ commit }) {
+    commit('SET_SPINNER', { show: false })
   },
 
-  setSpinner ({commit}, args) {
-    commit('SET_SPINNER', {...args})
+  setSpinner ({ commit }, args) {
+    commit('SET_SPINNER', { ...args })
   },
 
-  callCache ({commit}, args) {
-    commit('CALL_CACHE', {...args})
+  callCache ({ commit }, args) {
+    commit('CALL_CACHE', { ...args })
   },
 
-  setOptions ({commit}, args) {
-    commit('CALL_OPTIONS', {...args})
+  setOptions ({ commit }, args) {
+    commit('CALL_OPTIONS', { ...args })
   }
 
 }

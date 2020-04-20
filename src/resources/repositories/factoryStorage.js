@@ -3,19 +3,19 @@
 
 class FactoryStorage {
 
-  constructor(key, store, expires = 60) {
+  constructor (key, store, expires = 60) {
     this.ACCESS = key
     this.store = store
     this.expires = expires
     return this
   }
 
-  setKey(key) {
+  setKey (key) {
     this.ACCESS = key
     return this
   }
 
-  createStore(result) {
+  createStore (result) {
     const seconds = this.expires * 1000
     const date = new Date().getTime() + seconds
 
@@ -23,19 +23,19 @@ class FactoryStorage {
     return this
   }
 
-  restoreStore() {
+  restoreStore () {
     return this.store.get(this.ACCESS)
   }
 
-  deleteStore() {
+  deleteStore () {
     this.store.remove(this.ACCESS)
   }
 
-  eachStore(fn) {
+  eachStore (fn) {
     this.store.each(fn)
   }
 
-  clearStore() {
+  clearStore () {
     this.store.clearAll()
   }
 }

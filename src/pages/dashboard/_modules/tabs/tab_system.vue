@@ -54,28 +54,28 @@ Max {{ limit }} items
 
 
 <script>
-  'use strict'
+'use strict'
 
-  import TabCreaterList from 'mixins/tab-creater-list'
-  import System from 'factories/system'
-  import headerLogin from 'src/resources/libs/headerAuthorization'
+import TabCreaterList from 'mixins/tab-creater-list'
+import System from 'factories/system'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
-  export default {
-    mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-    data: function () {
-      return {
-        headers: headerLogin,
-        URL_SYSTEM: `${new System().getUrl()}?query=`,
-        template: "<b>{{item.name}}</b>",
-        filter: ['_id', 'name']
-      }
-    },
+  data: function () {
+    return {
+      headers: headerLogin,
+      URL_SYSTEM: `${new System().getUrl()}?query=`,
+      template: "<b>{{item.name}}</b>",
+      filter: ['_id', 'name']
+    }
+  },
 
-    methods: {
-      requestSearch(async, val, key='name') {
-        return `${async}%7B"${key}":"${val}"%7D`
-      }
+  methods: {
+    requestSearch (async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}"%7D`
     }
   }
+}
 </script>

@@ -15,7 +15,7 @@ export default {
   },
 
   computed: {
-    tab_items() {return this.$refs.tab_items}
+    tab_items () { return this.$refs.tab_items }
   },
 
   data () {
@@ -28,11 +28,11 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title =  `Edit ${this.model.key} config`
+      this.text.title = `Edit ${this.model.key} config`
     },
 
     createLoad () {
-      this.tabShow=0
+      this.tabShow = 0
       this.data = {}
       this.tab_items.reset()
     },
@@ -45,11 +45,11 @@ export default {
       this.model = _.pickBy(this.data, _.identity)
     },
 
-    isArray(item) {
+    isArray (item) {
       return _.isArray(item)
     },
 
-    setValue(fields, val) {
+    setValue (fields, val) {
       this.$set(this.data.value, fields, val)
     },
 

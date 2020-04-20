@@ -16,12 +16,15 @@ export default {
     return {
       family: 'CI/CD',
       initialData: {
-        name: null, description: null, provider:null,
-        tags: [], role: {endpoint: null, extra_config: null}
+        name: null,
+        description: null,
+        provider: null,
+        tags: [],
+        role: { endpoint: null, extra_config: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2' }
       ]
     }
   }

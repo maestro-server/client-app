@@ -1,10 +1,10 @@
 <span>
-  <span class="btn btn-success btn-xs text-capitalize" v-if="status == 'finished'">
+  <span class="btn btn-success btn-xs text-capitalize" v-if="status === 'finished'">
               <i class="fa fa-check-circle-o"></i> {{status}}</span>
-  <span class="btn btn-danger btn-xs text-capitalize" v-if="status == 'error'">
+  <span class="btn btn-danger btn-xs text-capitalize" v-if="status === 'error'">
               <i class="fa fa-times-circle-o"></i> {{status}}</span>
-  <span class="btn btn-warning btn-xs text-capitalize" v-if="status== 'process'">
+  <span class="btn btn-warning btn-xs text-capitalize" v-if="status === 'process'">
               <i class="fa fa-circle-o"></i> {{status}}</span>
-  <span class="btn btn-warning btn-xs text-capitalize" v-if="status== 'warning'">
+  <span class="btn btn-warning btn-xs text-capitalize" v-if="status === 'warning'">
               <i class="fa fa-clock-o"></i> {{status}}</span>
 </span>

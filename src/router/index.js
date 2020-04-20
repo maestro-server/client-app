@@ -10,7 +10,7 @@ import Login from 'services/login'
 
 Vue.use(Router)
 
- let router = new Router({
+const router = new Router({
   routes: [
     home,
     dashboard,
@@ -24,7 +24,7 @@ Vue.use(Router)
 router.beforeEach((to, from, next) => {
   const regex = /dashboard/
 
-  if(regex.test(to.path, from.path) && !Login.getToken()) {
+  if (regex.test(to.path, from.path) && !Login.getToken()) {
     next('/auth/login')
   }
   next()

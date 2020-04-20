@@ -11,12 +11,16 @@ export default {
     return {
       family: 'Monitor',
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {healthcheck: null, endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { healthcheck: null, endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2' }
       ]
     }
   }

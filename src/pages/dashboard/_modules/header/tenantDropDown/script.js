@@ -9,6 +9,8 @@ import store from 'src/store'
 import tenantMananger from 'services/tenantManager'
 import { EventBus } from 'src/resources/bus/bus-general.js';
 
+const img_avatar_default = process.env.VUE_APP_IMG_AVATAR_DEFAULT;
+
 export default {
   data: function () {
     return {
@@ -22,17 +24,17 @@ export default {
         info: ['About', 'fa-info-circle'],
         logout: ['Logout', 'fa-sign-out']
       },
-      showDrop: {tenants: false, settings: false},
+      showDrop: { tenants: false, settings: false },
       teams: {},
-      tenant: {name: null, _id: null},
-      avatar: IMG_AVATAR_DEFAULT,
+      tenant: { name: null, _id: null },
+      avatar: img_avatar_default,
       users: {},
-      vBarOptions: {preventParentScroll: true, resizeRefresh: false, scrollThrottle: 30}
+      vBarOptions: { preventParentScroll: true, resizeRefresh: false, scrollThrottle: 30 }
     }
   },
 
   methods: {
-    toggle(key) {
+    toggle (key) {
       let on = false;
 
       _.forEach(this.showDrop, (v, k) => {
@@ -45,51 +47,51 @@ export default {
       this.eventClickOutside(on)
     },
 
-    eventClickOutside(val) {
+    eventClickOutside (val) {
       return val
         ? document.addEventListener('click', this.clickOutside, false)
         : document.removeEventListener('click', this.clickOutside, false)
     },
 
-    clickOutside(e) {
+    clickOutside (e) {
       if (!this.$el.contains(e.target)) {
         this.toggle('all')
       }
     },
 
     fetchData: function () {
-      FectherEntity(Teams)({k: 'teams', force: true})
+      FectherEntity(Teams)({ k: 'teams', force: true })
         .find((e) => {
           this.$set(this, 'teams', e.data)
         })
     },
 
-    img_default(item) {
-      if(_.get(item, 'avatar')) {
+    img_default (item) {
+      if (_.get(item, 'avatar')) {
         return _.get(store.getters, 'get_options.static_url') + item.avatar
       }
 
-      return IMG_AVATAR_DEFAULT
+      return img_avatar_default
     },
 
-    imgBackStr(img) {
+    imgBackStr (img) {
       const dim = this.img_default(img)
       return this.ctUrl(dim)
     },
 
-    ctUrl(dim) {
+    ctUrl (dim) {
       return `url(${dim})`
     },
 
-    changeTenant(team, refs='teams') {
-      const tn = _.assign({}, team, {refs})
+    changeTenant (team, refs = 'teams') {
+      const tn = _.assign({}, team, { refs })
 
       tenantMananger.set(tn)
       this.updateViewTenant(tn)
       this.$router.go()
     },
 
-    updateViewTenant(tn) {
+    updateViewTenant (tn) {
       this.avatar = this.img_default(tn)
 
       const obj = _.assign({}, this.tenant, tn)
@@ -98,48 +100,48 @@ export default {
       this.toggle('all')
     },
 
-    updateUser() {
+    updateUser () {
       const me = this.$store.getters.get_me
 
-      if(_.isEmpty(me)) {
-        FectherEntity(Me)({persistence: 'local'})
+      if (_.isEmpty(me)) {
+        FectherEntity(Me)({ persistence: 'local' })
           .find(this.fallbackUser)
       }
 
       this.$set(this, 'users', me)
     },
 
-    fallbackUser(e) {
-      store.dispatch('setUser',  e.data)
+    fallbackUser (e) {
+      store.dispatch('setUser', e.data)
       this.$set(this, 'users', e.data)
 
       this.changeTenant(e.data, 'users')
     },
 
-    updateProfile(data){
+    updateProfile (data) {
       this.avatar = this.img_default(data)
     },
 
-    eventActiveProfile(entity, refs='teams') {
+    eventActiveProfile (entity, refs = 'teams') {
       const id1 = _.get(entity, '_id')
       const id2 = _.get(this.tenant, '_id')
 
-      if(id1 === id2) {
-        const tn = _.assign({}, entity, {refs})
+      if (id1 === id2) {
+        const tn = _.assign({}, entity, { refs })
         this.$set(this, 'tenant', tn)
         tenantMananger.set(tn)
         this.updateProfile(tn)
       }
     },
 
-    eventUpdateUser(user) {
+    eventUpdateUser (user) {
       const data = _.pick(user, ['name', 'avatar', 'email', '_id'])
-      store.dispatch('setUser',  data)
+      store.dispatch('setUser', data)
       this.$set(this, 'users', data)
-      this.eventActiveProfile(data, 'users') //check if is this user the actived profile
+      this.eventActiveProfile(data, 'users') // check if is this user the actived profile
     },
 
-    eventUpdateTeams(teams) {
+    eventUpdateTeams (teams) {
       const data = _.pick(teams, ['name', 'avatar', 'email', '_id'])
       this.fetchData()
       this.eventActiveProfile(data, 'teams')
@@ -147,16 +149,16 @@ export default {
   },
 
   computed: {
-    storageTeam() {
+    storageTeam () {
       return tenantMananger.get()
     },
-    hasTeams() {
+    hasTeams () {
       const total = _.get(this.teams, 'items', [])
       return total.length
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
     this.updateUser()
 
@@ -167,7 +169,7 @@ export default {
     EventBus.$on('update-profile', this.eventUpdateUser)
   },
 
-  destroyed() {
+  destroyed () {
     EventBus.$off('update-teams', this.eventUpdateTeams)
     EventBus.$off('update-profile', this.eventUpdateUser)
   }

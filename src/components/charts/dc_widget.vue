@@ -36,7 +36,7 @@ export default {
   },
 
   methods: {
-    toLower(str, app = "") {
+    toLower (str, app = "") {
       return app + _.kebabCase(str.toLowerCase());
     }
   }

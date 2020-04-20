@@ -13,7 +13,7 @@ export default {
       entity: new Snapshots(),
       columns: ['name', 'ldatacenters', 'volume_id', 'size', 'status', 'created_at', 'actions'],
       options: {
-        orderBy: {column: 'updated_at', ascending: false},
+        orderBy: { column: 'updated_at', ascending: false },
         filterable: ['name', 'ldatacenters', 'vpc_id', 'family'],
         listColumns: {
           ldatacenters: []
@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    prepared(data) {
+    prepared (data) {
       return data.map((d) => {
         d.ldatacenters = _.get(d, 'datacenters.name', '-')
         return d
@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     FectherEntity(Datacenters)()
       .find(this.fetchData('ldatacenters'))
   }

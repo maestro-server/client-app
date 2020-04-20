@@ -1,10 +1,10 @@
 'use strict'
 
 export default function getJSON (url, header = []) {
-  let request = new window.XMLHttpRequest()
-  let data = {}
+  const request = new window.XMLHttpRequest()
+  const data = {}
   // p (-simulated- promise)
-  let p = {
+  const p = {
     then (fn1, fn2) {
       return p.done(fn1).fail(fn2)
     },
@@ -25,12 +25,12 @@ export default function getJSON (url, header = []) {
   p.done(JSON.parse)
   request.onreadystatechange = () => {
     if (request.readyState === 4) {
-      let e = {status: request.status}
+      const e = { status: request.status }
       if (request.status === 200) {
         try {
           let response = request.responseText
-          for (let i in data.done) {
-            let value = data.done[i](response)
+          for (const i in data.done) {
+            const value = data.done[i](response)
             if (value != null) {
               response = value
             }

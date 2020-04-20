@@ -1,7 +1,7 @@
 'use strict'
 
 import modalCreate from './modalCreate/create'
-import Networks from 'factories/networks'
+import Network from 'factories/network'
 import dcMenu from '../../_modules/dcMenu/menu.vue'
 
 export default {
@@ -10,9 +10,9 @@ export default {
     dcMenu
   },
 
-  data() {
+  data () {
     return {
-      entity: Networks
+      entity: Network
     }
   }
 }

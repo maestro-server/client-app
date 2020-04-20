@@ -8,14 +8,14 @@ export default {
       type: String,
       default: null
     },
-    name: {type: String, default: null},
-    readonly: {type: Boolean, default: null},
-    required: {type: Boolean, default: null},
-    disabled: {type: Boolean, default: false},
-    search: {type: Boolean, default: true},
-    labelCountry: {type: String, default: 'Country'},
-    labelState: {type: String, default: 'State/Province'},
-    value: {type: Object}
+    name: { type: String, default: null },
+    readonly: { type: Boolean, default: null },
+    required: { type: Boolean, default: null },
+    disabled: { type: Boolean, default: false },
+    search: { type: Boolean, default: true },
+    labelCountry: { type: String, default: 'Country' },
+    labelState: { type: String, default: 'State/Province' },
+    value: { type: Object }
   },
 
   data () {
@@ -44,18 +44,18 @@ export default {
 
   methods: {
     selectCountryChange (index) {
-      let key = finderK(country, index)
+      const key = finderK(country, index)
 
       this.flagStart ? this.vstates = null : this.flagStart = true
 
       this.options.state = states[key + 1].split('|')
 
-      this.$emit('input', {country: index})
+      this.$emit('input', { country: index })
     },
 
     selectStateChange (index) {
 
-      this.$emit('input', {country: this.vcountry, state: index})
+      this.$emit('input', { country: this.vcountry, state: index })
     }
   },
 

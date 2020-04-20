@@ -11,11 +11,14 @@ export default {
     return {
       family: 'Auth',
       initialData: {
-        name: null, description: null, provider:null,
-        tags: [], role: {endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        tags: [],
+        role: { endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' }
       ]
     }
   }

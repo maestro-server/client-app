@@ -10,98 +10,98 @@ class="tree-view-item-root"
 </template>
 
 <script>
-  import _ from 'lodash';
-  import TreeViewItem from './TreeViewItem.vue';
+import _ from 'lodash';
+import TreeViewItem from './TreeViewItem.vue';
 
-  export default {
-    name: "TreeView",
-    components: {
-      TreeViewItem
+export default {
+  name: "TreeView",
+  components: {
+    TreeViewItem
+  },
+  props: ["data", "options"],
+  computed: {
+    allOptions: function () {
+      return _.extend({}, {
+        rootObjectKey: "root",
+        maxDepth: 4
+      }, (this.options || {}))
     },
-    props: ["data", "options"],
-    computed: {
-      allOptions: function () {
-        return _.extend({}, {
-          rootObjectKey: "root",
-          maxDepth: 4,
-        }, (this.options || {}))
-      },
-      parsedData: function () {
-        // Take the JSON data and transform
-        // it into the Tree View DSL
+    parsedData: function () {
+      // Take the JSON data and transform
+      // it into the Tree View DSL
 
-        // Strings or Integers should not be attempted to be split, so we generate
-        // a new object with the string/number as the value
-        if (this.isValue(this.data)) {
-          return this.transformValue(this.data, this.allOptions.rootObjectKey);
-        }
-
-        // If it's an object or an array, transform as an object
-        return this.transformObject(this.data, this.allOptions.rootObjectKey, true);
+      // Strings or Integers should not be attempted to be split, so we generate
+      // a new object with the string/number as the value
+      if (this.isValue(this.data)) {
+        return this.transformValue(this.data, this.allOptions.rootObjectKey);
       }
-    },
-    methods: {
 
-      // Transformer for the non-Collection types,
-      // like String, Integer of Float
-      transformValue: function (valueToTransform, keyForValue) {
-        return {
-          key: keyForValue,
-          type: "value",
-          value: valueToTransform
-        }
-      },
-
-      // Since we use lodash, the _.map method will work on
-      // both Objects and Arrays, returning either the Key as
-      // a string or the Index as an integer
-      generateChildrenFromCollection: function (collection) {
-        return _.map(collection, (value, keyOrIndex) => {
-          if (this.isObject(value)) {
-            return this.transformObject(value, keyOrIndex);
-          }
-          if (this.isArray(value)) {
-            return this.transformArray(value, keyOrIndex);
-          }
-          if (this.isValue(value)) {
-            return this.transformValue(value, keyOrIndex);
-          }
-        });
-      },
-
-      // Transformer for the Array type
-      transformArray: function (arrayToTransform, keyForArray) {
-        return {
-          key: keyForArray,
-          type: "array",
-          children: this.generateChildrenFromCollection(arrayToTransform)
-        }
-      },
-
-      // Transformer for the Object type
-      transformObject: function (objectToTransform, keyForObject, isRootObject = false) {
-        return {
-          key: keyForObject,
-          type: "object",
-          isRoot: isRootObject,
-          children: this.generateChildrenFromCollection(objectToTransform)
-        }
-      },
-
-      // Helper Methods for value type detection
-      isObject: function (value) {
-        return _.isPlainObject(value);
-      },
-
-      isArray: function (value) {
-        return _.isArray(value);
-      },
-
-      isValue: function (value) {
-        return !this.isObject(value) && !this.isArray(value);
-      }
+      // If it's an object or an array, transform as an object
+      return this.transformObject(this.data, this.allOptions.rootObjectKey, true);
     }
-  };
+  },
+  methods: {
+
+    // Transformer for the non-Collection types,
+    // like String, Integer of Float
+    transformValue: function (valueToTransform, keyForValue) {
+      return {
+        key: keyForValue,
+        type: "value",
+        value: valueToTransform
+      }
+    },
+
+    // Since we use lodash, the _.map method will work on
+    // both Objects and Arrays, returning either the Key as
+    // a string or the Index as an integer
+    generateChildrenFromCollection: function (collection) {
+      return _.map(collection, (value, keyOrIndex) => {
+        if (this.isObject(value)) {
+          return this.transformObject(value, keyOrIndex);
+        }
+        if (this.isArray(value)) {
+          return this.transformArray(value, keyOrIndex);
+        }
+        if (this.isValue(value)) {
+          return this.transformValue(value, keyOrIndex);
+        }
+      });
+    },
+
+    // Transformer for the Array type
+    transformArray: function (arrayToTransform, keyForArray) {
+      return {
+        key: keyForArray,
+        type: "array",
+        children: this.generateChildrenFromCollection(arrayToTransform)
+      }
+    },
+
+    // Transformer for the Object type
+    transformObject: function (objectToTransform, keyForObject, isRootObject = false) {
+      return {
+        key: keyForObject,
+        type: "object",
+        isRoot: isRootObject,
+        children: this.generateChildrenFromCollection(objectToTransform)
+      }
+    },
+
+    // Helper Methods for value type detection
+    isObject: function (value) {
+      return _.isPlainObject(value);
+    },
+
+    isArray: function (value) {
+      return _.isArray(value);
+    },
+
+    isValue: function (value) {
+      return !this.isObject(value) && !this.isArray(value);
+    }
+  }
+};
 </script>
 
 <style scoped>

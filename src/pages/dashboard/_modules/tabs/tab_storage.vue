@@ -139,37 +139,37 @@ type="default"
 
 
 <script>
- 'use strict'
+'use strict'
 
- import TabCreaterList from 'mixins/tab-creater-list'
- import Volumes from 'factories/volumes'
- import headerLogin from 'src/resources/libs/headerAuthorization'
+import TabCreaterList from 'mixins/tab-creater-list'
+import Volumes from 'factories/volumes'
+import headerLogin from 'src/resources/libs/headerAuthorization'
 
- export default {
-   mixins: [TabCreaterList],
+export default {
+  mixins: [TabCreaterList],
 
-   data: function () {
-     return {
-       tabShow: 0,
-       headers: headerLogin,
-       URL_VOLUME: `${new Volumes().getUrl()}?query=`,
-       template: "<b>{{item.name}}</b>",
-       advanced: false,
-       single: {name: null, size: null, root: null},
-       filter: ['name', 'unique_id']
-     }
-   },
-
-   methods: {
-     requestIDSearch(async, val) {
-        return this.requestSearch(async, val, 'unique_id')
-      },
-
-      requestSearch(async, val, key='name') {
-        return `${async}%7B"${key}":"${val}"%7D`
-      }
+  data: function () {
+    return {
+      tabShow: 0,
+      headers: headerLogin,
+      URL_VOLUME: `${new Volumes().getUrl()}?query=`,
+      template: "<b>{{item.name}}</b>",
+      advanced: false,
+      single: { name: null, size: null, root: null },
+      filter: ['name', 'unique_id']
     }
+  },
 
- }
+  methods: {
+    requestIDSearch (async, val) {
+      return this.requestSearch(async, val, 'unique_id')
+    },
+
+    requestSearch (async, val, key = 'name') {
+      return `${async}%7B"${key}":"${val}"%7D`
+    }
+  }
+
+}
 
 </script>

@@ -2,7 +2,7 @@
 
 export default {
   props: {
-    limit: {type: Number, default: 30},
+    limit: { type: Number, default: 30 }
   },
 
   data: function () {
@@ -12,20 +12,20 @@ export default {
   },
 
   computed: {
-    isFull() {
+    isFull () {
       return this.limit <= this.value.length;
     }
   },
 
   methods: {
-    updaterEdit(data) {
+    updaterEdit (data) {
       if (data) {
         this.$set(this, 'value', data || [])
         this.$emit('update', this.value)
       }
     },
 
-    onHit(item) {
+    onHit (item) {
       const exist = _.find(this.value, ['_id', item._id])
 
       if (!exist && !this.isFull) {
@@ -35,7 +35,7 @@ export default {
       }
     },
 
-    reset() {
+    reset () {
       this.value = []
     }
   }

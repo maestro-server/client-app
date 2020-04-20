@@ -8,11 +8,11 @@ export default {
   props: {
     // effect: {type: String, default: 'fadein'},
     justified: false,
-    navStyle: {type: String, default: null},
-    value: {type: Number, default: 0}
+    navStyle: { type: String, default: null },
+    value: { type: Number, default: 0 }
   },
   data () {
-    let index = this.value || 0
+    const index = this.value || 0
     return {
       index,
       headers: [],

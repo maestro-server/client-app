@@ -39,18 +39,18 @@ export default {
   },
 
   computed: {
-    showASM() {
-      return this.data.storage_types == 'ASM' || this.data.storage_types == 'ACFS'
+    showASM () {
+      return this.data.storage_types === 'ASM' || this.data.storage_types === 'ACFS'
     },
-    findServices() {
+    findServices () {
       return _(this.services)
-                .map(this.wrapperReduce)
-                .value()
+        .map(this.wrapperReduce)
+        .value()
     },
-    listStorage() {
+    listStorage () {
       return _.get(this.model, 'storage', [])
     },
-    serviceMsg() {
+    serviceMsg () {
       let msg = ''
 
       switch (this.findServices.length) {
@@ -70,7 +70,7 @@ export default {
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `DB Config "${this.model.hostname}"`
     },
 
@@ -81,24 +81,24 @@ export default {
       this.$set(this.data, 'dataguard', _.get(this, 'provider.dataguard'))
     },
 
-    requestSearch(async, val, key = 'name', type='Database') {
+    requestSearch (async, val, key = 'name', type = 'Database') {
       return `${async}%7B"${key}":"${val}", "type":"^Storage", "family":"${type}"%7D`
     },
 
     setupModel () {
-      let services = _.get(this.model, 'services', [])
-                      .map(this.findMatchesServices(this.service))
+      const services = _.get(this.model, 'services', [])
+        .map(this.findMatchesServices(this.service))
 
-      return _.assign(this.model, {services})
+      return _.assign(this.model, { services })
     },
 
     findMatchesServices (service) {
       return (serv) => {
         const str = this.wrapperReduce(serv)
 
-        if(str === service) {
+        if (str === service) {
           const configs = _.pickBy(this.data, _.identity)
-          _.assign(serv, {configs})
+          _.assign(serv, { configs })
         }
         return serv
       }
@@ -111,20 +111,20 @@ export default {
         .patch(this.finishJob, this.model)
     },
 
-    onHit(item) {
+    onHit (item) {
       this.clearASM()
       this.$set(this.data, 'asm', _.pick(item, ['_id', 'name']))
       this.$set(this.data, 'asm_name', null)
       return item.name
     },
 
-    clearASM() {
+    clearASM () {
       this.$set(this.data, 'asm', {})
     },
 
-    fetchServer (force=true) {
-      if(_.has(this, 'model._id')) {
-        FectherEntity(Servers)({force})
+    fetchServer (force = true) {
+      if (_.has(this, 'model._id')) {
+        FectherEntity(Servers)({ force })
           .findOne((e) => {
             this.$set(this, 'model', e.data)
             this.initialService(e.data)
@@ -132,21 +132,21 @@ export default {
       }
     },
 
-    initialService(services) {
+    initialService (services) {
       const list = this.findServicesBy(services, this.provider.provider)
       this.$set(this, 'services', list)
       this.$set(this, 'service', this.wrapperReduce(_.head(list)))
       this.setService(this.service)
     },
 
-    setService(search) {
-      if(!_.isEmpty(search)) {
+    setService (search) {
+      if (!_.isEmpty(search)) {
         const service = _.head(
           this.services.filter(e => this.wrapperReduce(e) === search)
         )
 
-        let configs = _.clone(this.initialData)
-        if(_.has(service, 'configs')) {
+        const configs = _.clone(this.initialData)
+        if (_.has(service, 'configs')) {
           _.assign(configs, this.data, service.configs)
         }
         _.defaults(configs, _.pick(this.provider, ['storage_types', 'dataguard']))
@@ -154,15 +154,15 @@ export default {
         this.$set(this, 'data', configs)
       }
     },
-    fetchData() {
+    fetchData () {
       const key = `database_options`
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key })
     }
   },
 
-  created() {
+  created () {
     this.fetchData()
   }
 

@@ -8,7 +8,7 @@ export default {
   mixins: [Modals],
 
   components: {
-    svTable,
+    svTable
   },
 
   data: function () {
@@ -18,13 +18,13 @@ export default {
   },
 
   computed: {
-    MDelete() {
+    MDelete () {
       return this.$refs.modal_delete_server
     }
   },
 
   methods: {
-    afterShow() {
+    afterShow () {
       this.text.title = `Orphans servers into ${this.model.name}`
     },
 

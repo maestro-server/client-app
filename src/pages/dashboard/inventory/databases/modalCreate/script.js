@@ -26,11 +26,14 @@ export default {
     return {
       family: 'Database',
       initialData: {
-        name: null, description: null, provider:null,
-        tags: [], role: {healthcheck: null, endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        tags: [],
+        role: { healthcheck: null, endpoint: null }
       },
       options: {
-        status:[],
+        status: [],
         third: [],
         own: [],
         types: [],
@@ -38,25 +41,25 @@ export default {
         cluster: []
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'},
-        {name: 'version', label: 'Version', validate: 'min:2'},
-        {name: 'patch', label: 'Patch', validate: 'min:2'},
-        {name: 'port', label: 'Port', validate: 'alpha_num'},
-        {name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' },
+        { name: 'version', label: 'Version', validate: 'min:2' },
+        { name: 'patch', label: 'Patch', validate: 'min:2' },
+        { name: 'port', label: 'Port', validate: 'alpha_num' },
+        { name: 'extra_config', label: 'Extra Config', type: 'textarea', validate: 'min:2' }
       ]
     }
   },
 
   methods: {
-    fetchOptions() {
+    fetchOptions () {
       const key = `database_options`
 
-      FectherEntity(Adminer)({persistence: 'local'})
-        .find(this.fetchAdminer, {key})
+      FectherEntity(Adminer)({ persistence: 'local' })
+        .find(this.fetchAdminer, { key })
     }
   },
 
-  created() {
+  created () {
     this.fetchOptions()
   }
 }

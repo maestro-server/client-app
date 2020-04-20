@@ -41,7 +41,7 @@ export default {
     roles: {}
   },
 
-  data: function() {
+  data: function () {
     const resetData = {
       role: "Application",
       name: null,
@@ -132,18 +132,18 @@ export default {
   },
 
   computed: {
-    forms() {
+    forms () {
       const role = _.get(this, "role");
       return _.get(this.mapper, role, []);
     }
   },
 
-  mounted() {
+  mounted () {
     this.updaterEdit();
   },
 
   methods: {
-    updaterEdit(data = null) {
+    updaterEdit (data = null) {
       if (!data) data = this.resetData;
 
       this.$set(this, "data", data);
@@ -151,17 +151,17 @@ export default {
       this.commitChange();
     },
 
-    commitChange() {
+    commitChange () {
       const dpp = _.pickBy(this.data, _.identity);
       this.$emit("update", dpp);
     },
 
-    changeData() {
+    changeData () {
       this.$set(this.data, "role", this.role);
       this.commitChange();
     },
 
-    reset() {
+    reset () {
       this.updaterEdit(null);
     }
   }

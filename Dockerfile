@@ -1,18 +1,33 @@
-# docker.nginx
+#
+# It uses 3 multi stage to be able to cache the npm install
+#
+FROM node:lts AS compiler-nodejs
+
+WORKDIR /data/
+COPY ./ ./
+RUN npm install
+
+FROM node:lts AS build-nodejs
+COPY --from=compiler-nodejs /data/ /data/
+
+WORKDIR /data/
+COPY .eslintrc.js .eslintrc.js
+RUN npm run build
+
+
 FROM nginx:stable-alpine
-MAINTAINER Felipe Signorini <felipe.signorini@maestroserver.io>
+COPY --from=build-nodejs /data/dist /var/www
 
-EXPOSE 80 443
-
-RUN apk add --no-cache tini
+RUN apk add --no-cache tini bash
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./dist /var/www
-COPY ./static /var/www/static
+COPY ./public/static /var/www/static
+COPY ./public/favicon.ico /var/www/favicon.ico
 
-ADD ./run_start_container.sh /opt/run_start_container.sh
-
+COPY ./run_start_container.sh /opt/run_start_container.sh
 RUN chmod +x /opt/run_start_container.sh
+
+EXPOSE 80 443
 
 ENTRYPOINT ["/sbin/tini","-g","--"]
 CMD ["/opt/run_start_container.sh"]

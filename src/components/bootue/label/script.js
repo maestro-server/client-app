@@ -1,6 +1,6 @@
 export default {
   props: {
-    type: {type: String, default: "primary"}
+    type: { type: String, default: "primary" }
   },
 
   methods: {

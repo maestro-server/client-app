@@ -11,11 +11,15 @@ export default {
     return {
       family: 'NAS',
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {endpoint: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { endpoint: null }
       },
       mapper: [
-        {name: 'endpoint', label: 'Endpoint', validate: 'url'}
+        { name: 'endpoint', label: 'Endpoint', validate: 'url' }
       ]
     }
   }

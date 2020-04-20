@@ -11,14 +11,18 @@ export default {
       family: 'Serverless',
       own: 1,
       initialData: {
-        name: null, description: null, provider:null, datacenters: {},
-        tags: [], role: {language: null}
+        name: null,
+        description: null,
+        provider: null,
+        datacenters: {},
+        tags: [],
+        role: { language: null }
       },
       mapper: [
-        {name: 'memory', label: 'Memory (MB)', validate: 'alpha_num'},
-        {name: 'timeout', label: 'Timeout', validate: 'min:2'},
-        {name: 'trigger', label: 'Triggers', type: 'textarea', validate: 'min:2'},
-        {name: 'handler', label: 'Handler', validate: 'min:2'},
+        { name: 'memory', label: 'Memory (MB)', validate: 'alpha_num' },
+        { name: 'timeout', label: 'Timeout', validate: 'min:2' },
+        { name: 'trigger', label: 'Triggers', type: 'textarea', validate: 'min:2' },
+        { name: 'handler', label: 'Handler', validate: 'min:2' }
       ]
     }
   }

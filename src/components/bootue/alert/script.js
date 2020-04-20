@@ -3,12 +3,12 @@ import delayer from '../_core/_utils/delayer.js'
 
 export default {
   props: {
-    dismissable: {type: Boolean, default: false},
-    duration: {default: 0},
-    placement: {type: String},
-    type: {type: String},
-    value: {type: Boolean, default: true},
-    width: {type: String}
+    dismissable: { type: Boolean, default: false },
+    duration: { default: 0 },
+    placement: { type: String },
+    type: { type: String },
+    value: { type: Boolean, default: true },
+    width: { type: String }
   },
   data () {
     return {

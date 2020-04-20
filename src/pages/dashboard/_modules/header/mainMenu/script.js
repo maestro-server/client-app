@@ -3,7 +3,7 @@
 export default {
 
   methods: {
-    collapse() {
+    collapse () {
       this.$refs.nav.toggleCollapse()
     }
   }
