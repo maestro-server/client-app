@@ -5,7 +5,7 @@
       <span class="hidden-xs">{{label}} - </span><span class="text-capitalize">{{name}}</span>
     </h3>
 
-    <router-link :to="{name: 'tracking.single', params: { id: id, entity: entity }}" v-if="id" class="btn btn-primary btn-xs">
+    <router-link :to="{name: 'tracking.single', params: { id: id, entity: entity }}" v-if="id" class="btn btn-primary btn-xs hidden-xs">
       <i class="fa fa-history"></i>
       History tracking
     </router-link>
