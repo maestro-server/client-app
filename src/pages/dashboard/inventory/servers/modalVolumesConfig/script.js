@@ -25,7 +25,8 @@ export default {
 
   methods: {
     afterShow () {
-      this.text.title = `Volume Config "${this.data.name}"`
+      const name = _.get(this.model, 'item.name')
+      this.text.title = `Volume Config "${name}"`
     },
 
     createLoad () {
