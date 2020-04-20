@@ -11,6 +11,7 @@ FROM node:lts AS build-nodejs
 COPY --from=compiler-nodejs /data/ /data/
 
 WORKDIR /data/
+COPY .eslintrc.js .eslintrc.js
 RUN npm run build
 
 
