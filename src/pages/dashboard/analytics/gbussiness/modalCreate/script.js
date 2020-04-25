@@ -20,7 +20,7 @@ export default {
   watch: {
     tabShow (val) {
       for (const key in this.filter) {
-        if (key !== val) {
+        if (parseInt(key) !== parseInt(val)) {
           const item = this.filter[key]
           this.$set(this.data, item, [])
           this[`tab_${item}`].updaterEdit([])
@@ -58,12 +58,12 @@ export default {
     },
 
     editLoad () {
+      this.$set(this, 'tabShow', this.model.tab)
+
       this.$set(this, 'data', this.model)
       this.tab_apps.updaterEdit(_.get(this.model, 'apps', []))
       this.tab_system.updaterEdit(_.get(this.model, 'systems', []))
       this.tab_clients.updaterEdit(_.get(this.model, 'clients', []))
-
-      this.$set(this, 'tabShow', this.model.tab)
     },
 
     setupModel () {

@@ -12,13 +12,11 @@ import modal from './modal/Modal.vue'
 import navbar from './navbar/Navbar.vue'
 import pagination from './pagination/Pagination.vue'
 import panel from './panel/Panel.vue'
-import popover from './popover/Popover.vue'
 import spinner from './spinner/Spinner.vue'
 import tab from './tab/Tab.vue'
 import tabGroup from './tabgroup/TabGroup.vue'
 import tabs from './tabs/Tabs.vue'
 import toggleButton from './togglebutton/ToggleButton.vue'
-import tooltip from './tooltip/Tooltip.vue'
 import toast from './toast/Toast'
 import well from './wells/Wells.vue'
 
@@ -38,13 +36,11 @@ let components = {
   navbar,
   pagination,
   panel,
-  popover,
   spinner,
   tab,
   tabGroup,
   tabs,
   toggleButton,
-  tooltip,
   toast,
   well
 }

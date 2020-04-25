@@ -18,6 +18,7 @@
     "lodash": "^4.17.15",
     "maestro-vue-tables-2": "^0.1.14",
     "store": "^2.0.12",
+    "v-tooltip": "^2.0.3",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",

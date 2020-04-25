@@ -1,0 +1,76 @@
+<div class="dp-wrapper">
+  <div class="dp-lines-t" :style="wLine"></div>
+
+  <div class="dp-row">
+    <div
+      class="dp-item text-center"
+      :class="{'dp-select': app._id == selected}"
+      @click="addItem(app._id)"
+      v-for="app, k in apps"
+      :key="app._id"
+    >
+      <h5>{{app.name}}</h5>
+      <p v-if="app.endpoint">
+        <span class="dst">{{app.endpoint}}</span>
+      </p>
+      <p v-if="app.environment">
+        <span class="dst">{{app.environment}}</span>
+      </p>
+      <p v-if="app.family">
+        <span class="dst">{{app.family}}</span>
+      </p>
+
+      <a class="more more-del" @click.stop.prevent="delItem(app._id)">X</a>
+    </div>
+
+    <well class="bg-white" v-if="apps.length == 0">Select the first dependency</well>
+  </div>
+
+  <bs-label type="default" class="pull-right mt5">{{step}}</bs-label>
+
+  <div class="dp-lines-b" :style="wLine"></div>
+
+  <v-popover class="more-popover">
+    <a class="more tooltip-target">+</a>
+    <template slot="popover">
+      <div class="popover-deps">
+        <h4 class="popover-title col-xs-12 pt0">Add a child</h4>
+        <typeahead
+          label
+          placeholder="MyWebApp"
+          :async="URL"
+          async-key="items"
+          :onSearch="requestSearch"
+          :template="template"
+          :on-hit="onHit"
+          class="col-xs-12"
+          :headers="headers"
+        ></typeahead>
+
+        <div v-if="app._id" class="col-xs-12 pb10">
+            <span class="btn btn-primary btn-large col-xs-12 text-right bkline">
+              {{app.name}}
+              <br>
+              <label class="label label-info">{{app.family}}</label>
+              <label class="label label-info">{{app.environment}}</label>
+            </span>
+        </div>
+
+        <bs-select
+          :options="types"
+          v-model="endpoint"
+          name="type"
+          placeholder="Protocol"
+          class="col-xs-12"
+          v-if="this.step > 0 "
+        ></bs-select>
+
+        <div class="col-xs-12 text-center pb10">
+          <button class="btn btn-primary" @click.stop="onCommit" v-close-popover>Add Dep</button>
+        </div>
+
+      </div>
+    </template>
+  </v-popover>
+
+</div>

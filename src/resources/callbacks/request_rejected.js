@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 'use strict'
 
 import _ from 'lodash'
@@ -41,14 +42,17 @@ const mapper = {
 export default (e) => {
   const response = _.get(e, 'response', null)
 
-  const data = {
+  // eslint-disable-next-line prefer-const
+  let data = {
     show: true,
     msg: "Houston, we have a problem ...",
-    title: "Sorry, but occur a problem, contact us",
+    title: "I can't connect to Maestro Server",
     type: "danger"
   }
 
   if (response) {
+    _.set(data, "msg", "Houston, we have a problem ...")
+    _.set(data, "title", "Sorry, but occur a problem, contact us")
 
     const hash = window.location.hash
 

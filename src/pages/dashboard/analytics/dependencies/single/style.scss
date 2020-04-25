@@ -164,61 +164,68 @@ $dp-item-width: 110px;
     }
 
     .more {
-        text-align: center;
-        width: 30px;
-        line-height: 30px;
-        height: 30px;
-        margin: auto 10px;
-        position: relative;
-        display: inline-block;
-        background: #fff;
-        border-radius: 20px;
+       text-align: center;
+       width: 30px;
+       line-height: 30px;
+       height: 30px;
+       margin: auto 10px;
+       position: relative;
+       display: inline-block;
+       background: #fff;
+       border-radius: 20px;
 
-        font-weight: bold;
-        box-shadow: 0 0 20px #848484;
-        cursor: pointer;
-        text-decoration: none;
+       font-weight: bold;
+       box-shadow: 0 0 20px #848484;
+       cursor: pointer;
+       text-decoration: none;
 
-        color: $brand-primary;
-        @include themify($themes) {
-            color: themed('brand-primary');
-        }
-    }
+       color: $brand-primary;
+       @include themify($themes) {
+         color: themed('brand-primary');
+       }
+     }
 
-    .more-del {
-      width: 16px;
-      height: 16px;
-      line-height: 16px;
-      left: 100%;
-      margin-left: -10px;
-      color: #fff;
+  .more-del {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    left: 100%;
+    margin-left: -10px;
+    color: #fff;
 
-      background: $brand-danger;
-      box-shadow: 0 1px 4px #000;
-      position: absolute;
-      bottom: 5px;
-      font-size: 10px;
-    }
+    background: $brand-danger;
+    box-shadow: 0 1px 4px #000;
+    position: absolute;
+    bottom: 5px;
+    font-size: 10px;
+  }
 
-    .more-del:hover {
-      background: #fff;
-      color: $brand-danger;
-    }
+  .more-del:hover {
+    background: #fff;
+    color: $brand-danger;
+  }
 
-    .more-right {
-      position: absolute;
-      margin: 0 50%;
-      top: -25px;
-      left: -15px;
-    }
+  .more-right {
+    margin: 0 50%;
+  }
 
-    .more:hover {
-        background: #ededed;
-    }
+  .more:hover {
+    background: #ededed;
+  }
 
-    h5 {
-      word-wrap: break-word;
-    }
+  .more-popover {
+    position: absolute;
+    top: -25px;
+    left: calc(50% - 25px);
+  }
+
+  h5 {
+    word-wrap: break-word;
+  }
+}
+
+.popover-deps {
+  max-width: 250px;
 }
 
 .btn-fixed {
@@ -238,4 +245,9 @@ $dp-item-width: 110px;
 .btn-fixed-hidden {
   bottom: -20px;
   opacity: 0;
+}
+
+.bkline {
+  overflow: hidden;
+  word-wrap: break-word;
 }

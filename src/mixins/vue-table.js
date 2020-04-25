@@ -10,8 +10,8 @@ export default {
       options: {
         headers: { Authorization: Login.Authorization() },
         responseAdapter: (resp) => ({
-          data: this.prepared(resp.data.items),
-          count: resp.data.found
+          data: this.prepared(_.get(resp, 'data.items', [])),
+          count: _.get(resp, 'data.found', 0)
         }
         )
       }

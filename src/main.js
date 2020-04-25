@@ -6,8 +6,9 @@ import Notifications from 'vue-notifications'
 import VueClipboard from 'vue-clipboard2'
 import VeeValidate from 'vee-validate'
 import VueBar from 'vuebar'
+import VTooltip from 'v-tooltip'
 
-import { ServerTable, ClientTable } from 'maestro-vue-tables-2'
+import { ServerTable } from 'maestro-vue-tables-2'
 
 import App from './App'
 import router from './router'
@@ -20,10 +21,10 @@ Vue.use(Notifications, notifications_opt)
 Vue.use(VueRouter)
 
 Vue.use(ServerTable, {})
-Vue.use(ClientTable, {})
 Vue.use(VueClipboard)
 Vue.use(VueBar);
 Vue.use(VeeValidate)
+Vue.use(VTooltip)
 Vue.mixin(mixins_forms)
 Vue.use(components)
 
