@@ -55,7 +55,7 @@
 
           <div class="col-sm-6 col-xs-12 text-right">
             <span v-for="job in schedulers[key]" :key="job._id">
-              <tooltip effect="scale" placement="bottom" :content="`Job: ${job.name} (${job._id})`">
+              <span v-tooltip.left="`Job: ${job.name}`">
                 <button class="btn btn-xs btn-success" v-if="job.enabled" @click="processEnable(job, false)">
                   <i class="fa fa-toggle-on"></i>
                   On
@@ -64,7 +64,7 @@
                   <i class="fa fa-toggle-off"></i>
                   Off
                 </button>
-              </tooltip>
+              </span>
             </span>
             <template v-if="!schedulers[key]">
               <button class="btn btn-xs btn-warning" @click="createJob(key)">
@@ -73,12 +73,12 @@
               </button>
             </template>
             |
-            <tooltip effect="scale" placement="bottom" content="Force to sync">
+            <span v-tooltip="'Force to sync'">
               <button class="btn btn-xs btn-success" @click="task(key, 'parcial')">
                 <i class="fa fa-hourglass-end"></i>
                 Sync
               </button>
-            </tooltip>
+            </span>
           </div>
         </div>
 

@@ -89,11 +89,6 @@ export default {
       return `${async}%7B"${key}":"${val}", "family":"${this.type}"%7D`
     },
 
-    updaterEdit (data) {
-      this.$set(this, 'value', data || [])
-      this.$emit('update', data)
-    },
-
     fetchData () {
       FectherEntity(Adminer)({ persistence: 'local' })
         .find(this.fetchAdminer, { key: 'application_options' })
