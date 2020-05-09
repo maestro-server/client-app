@@ -11,7 +11,11 @@ To test out the demo, [Demo Online](http://demo.maestroserver.io "Demo Online")
 
 # Maestro Server - Client APP #
 
-SPA application, comunicate only with Server API and Websocket API
+The front end application, made using Vue2.
+
+* Html and Js client
+* Single page app (SPA)
+* Cache layer
 
 ## Tools
 
