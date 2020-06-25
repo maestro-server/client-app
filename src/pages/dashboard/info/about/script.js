@@ -1,7 +1,7 @@
 "use strict";
 
 import Maestro from "factories/maestro";
-import FectherEntity from "services/fetchEntity";
+import FetchEntity from "services/fetchEntity";
 
 export default {
   data: function() {
@@ -19,7 +19,7 @@ export default {
 
   methods: {
     fetchData() {
-      FectherEntity(Maestro)({ path: "/versions" }).find(e => {
+      FetchEntity(Maestro)({ path: "/versions" }).find(e => {
         e.data.unshift(this.clients);
         this.$set(this, "services", e.data);
       });

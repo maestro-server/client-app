@@ -7,9 +7,9 @@
     ref="vTable"
   >
 
-    <template slot="hostname" slot-scope="props">
-      <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.hostname"></button>
-      <router-link :to="{name: 'servers.single', params: { id: props.row._id }}"> {{props.row.hostname}}</router-link>
+    <template slot="name" slot-scope="props">
+      <button class="btn btn-default btn-xs fa fa-copy" v-clipboard="props.row.name"></button>
+      <router-link :to="{name: 'servers.single', params: { id: props.row._id }}"> {{props.row.name}}</router-link>
     </template>
 
     <template slot="ipv4_private" slot-scope="props">

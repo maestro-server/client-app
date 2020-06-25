@@ -1,83 +1,83 @@
 <div>
   <modal :title="text.title" effect="fade" width="800" v-model="showModal" @closed="closed">
 
-    <template>
-      <p>
-        Configure yours connections, <br>you able to use multiple connections with single datacenter.
-        <button class="btn btn-warning btn-sm pull-right" @click="createLoad" v-if="provider">Back</button>
-      </p>
+    <p>
+      Choose your connection, each provider have your way to configure.
+      <button class="btn btn-warning btn-sm pull-right" @click="createLoad" v-if="provider">Back</button>
+    </p>
 
-      <list-options :lists="options.providers" @click="callStep" v-if="!service"></list-options>
+    <list-options :lists="options.providers" @click="callStep" v-if="!provider"></list-options>
 
-      <form class="row">
+    <div class="row" v-if="provider">
+      <h3 class="col-xs-12">
+        <i :class="toIcon"></i>
+        <span> {{provider}}</span>
+      </h3>
 
-        <h3 class="col-xs-12" v-if="service">
-          <i :class="toIcon"></i>
-          <span class="text-uppercase">{{provider}}</span>
-        </h3>
+      <tabs v-model="tabShow" nav-style="tabs" justified class="col-xs-12">
+        <template v-for="template in methods">
+          <tab :header="template.label">
+          <form class="row">
 
-        <template v-if="template && template.dc">
+              <div class="col-xs-6">
+                <p v-if="template.template.intro">
+                  {{template.template.intro}}
+                </p>
 
-          <div class="col-xs-6">
-            <p v-if="template.template.intro">
-              {{template.template.intro}}
-            </p>
+                <bs-select v-if="template.template.dc[0]" :options="dcs" v-model="data.dc"
+                           label="Datacenter" placeholder="Select Datacenter" @input="updateRegions"
+                           ref="s_provider"></bs-select>
 
-            <bs-select v-if="template.template.dc[0]" :options="dcs" v-model="data.dc"
-                       label="Datacenter" placeholder="Select Datacenter" @input="updateRegions"
-                       ref="s_provider"></bs-select>
+                <bs-select v-if="template.template.dc[1]" :options="regions" v-model="data.regions"
+                           label="Regions" placeholder="Select Regions" multiple></bs-select>
 
+                <well v-if="!create">
+                  If you like to update the access provider, please delete this connection and create a new one.
+                </well>
 
-            <bs-select v-if="template.template.dc[1]" :options="regions" v-model="data.regions"
-                       label="Regions" placeholder="Select Regions" multiple></bs-select>
+                <template v-if="create">
+                  <component
+                    v-for="component in template.template.conn"
+                    :is="component.comp"
+                    :key="component.metas.name"
+                    v-bind="component.metas"
+                    v-model="data.conn[component.metas.name]"
+                    v-validate.initial="component.validate"
+                    :error="makeError(component.metas.name)"
+                  />
+                </template>
+              </div>
 
-            <well v-if="!create">
-              If you like to update the access provider, please delete this connection and create a new one.
-            </well>
+              <div class="col-xs-6">
+                <template v-for="component in template.template.extra">
+                  <template v-if="component.html">
+                    <div v-html="component.html"/>
+                  </template>
 
-            <template v-if="create">
-              <component
-                v-for="component in template.template.conn"
-                :is="component.comp"
-                :key="component.metas.name"
-                v-bind="component.metas"
-                v-model="data.conn[component.metas.name]"
-                v-validate.initial="component.validate"
-                :error="makeError(component.metas.name)"
-              />
-            </template>
-          </div>
+                  <template v-if="component.panel">
+                    <component :is="component.comp">
+                      <panel :header="item.header" v-for="item, key in component.panel" :key="key">
+                        <div v-html="item.body"/>
+                      </panel>
+                    </component>
+                  </template>
 
-          <div class="col-xs-6">
-            <template v-for="component in template.template.extra">
-              <template v-if="component.html">
-                <div v-html="component.html"/>
-              </template>
-
-              <template v-if="component.panel">
-                <component :is="component.comp">
-                  <panel :header="item.header" v-for="item, key in component.panel" :key="key">
-                    <div v-html="item.body"/>
-                  </panel>
-                </component>
-              </template>
-
-              <template v-if="!component.html">
-                <component
-                  :is="component.comp"
-                  v-bind="component.metas"
-                  v-model="data[component.metas.name]"
-                  v-validate.initial="component.validate"
-                  :error="makeError(component.metas.name)"
-                />
-              </template>
-            </template>
-          </div>
-
+                  <template v-if="!component.html">
+                    <component
+                      :is="component.comp"
+                      v-bind="component.metas"
+                      v-model="data[component.metas.name]"
+                      v-validate.initial="component.validate"
+                      :error="makeError(component.metas.name)"
+                    />
+                  </template>
+                </template>
+              </div>
+            </form>
+        </tab>
         </template>
-
-      </form>
-    </template>
+      </tabs>
+    </div>
 
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-default" @click="closed">Cancel</button>

@@ -45,7 +45,7 @@
             <panel>
                 <span slot="header">
                   <i class="fa fa-hdd-o text-center w18"></i>
-                  {{props.item.name}} -
+                  {{ props.item.name || props.item.device_name }} -
                   <bs-label type="info" v-if="props.item.unique_id">{{showListVolumes(props.item, '.status')}}</bs-label>
 
                   <bs-label v-if="props.item.unique_id">Attached</bs-label>

@@ -32,9 +32,3 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .word-break {
-    word-wrap: break-word;
-  }
-</style>
-
