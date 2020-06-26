@@ -84,11 +84,8 @@ export default {
 
     editLoad() {
       this.$set(this, "data", this.model);
-      this.provider = this.model.provider;
-
+      this.setTemplate(this.model.provider);
       this.tabShow = this.model.tab;
-      this.setTemplate(this.model.method);
-      this.fetchData(this.provider);
     },
 
     editSave() {
