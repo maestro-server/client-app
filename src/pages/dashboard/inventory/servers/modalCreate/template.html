@@ -20,7 +20,7 @@
             </div>
           </div>
 
-          <bs-input class="mt20" form-type="horizontal" name="hostname" label="Name*" v-model="data.name"
+          <bs-input class="mt20" form-type="horizontal" name="name" label="Name*" v-model="data.name"
                     v-validate.initial="'required'" :error="makeError('name')" @blur="verifyDuplicate">
             <template slot="dropper" v-if="duplicate.name">
               <span class="btn btn-danger btn-xs col-xs-12 mt5">{{duplicate.name}}</span>

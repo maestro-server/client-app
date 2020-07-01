@@ -25,7 +25,7 @@ export default {
 
   computed: {
     getName() {
-      return _.get(this.model, "name", _.get(this.model, "hostname", ""));
+      return _.get(this.model, "name", _.get(this.model, "name", ""));
     }
   },
 

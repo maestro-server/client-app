@@ -62,7 +62,7 @@ export default {
   methods: {
     prepared(data) {
       return data.map(d => {
-        d.name = _.get(d, "name", d.hostname);
+        d.name = _.get(d, "name", d.name);
         d.os = `${_.get(d, "os.base", "")} ${_.get(d, "os.dist", "")}`;
         d.datacenters = _.get(d, "datacenters.name", "-");
 

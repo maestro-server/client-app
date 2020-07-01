@@ -7,7 +7,7 @@
         class="list-group-item word-break"
       >
         <router-link :to="{name: 'servers.single', params: { id: server._id }}">
-          <b>{{ server.hostname }}</b> <span v-if="server.os && server.os.base">({{ server.os.base }})</span>
+          <b>{{ server.name }}</b> <span v-if="server.os && server.os.base">({{ server.os.base }})</span>
           <span v-if="server.datacenters"> - {{ server.datacenters.name }}</span>
         </router-link>
         <br>

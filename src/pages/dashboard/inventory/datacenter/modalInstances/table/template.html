@@ -7,8 +7,8 @@
     ref="vTable"
   >
 
-    <template slot="hostname" slot-scope="props">
-      <a href="#" @click.prevent.stop="linkSingle(props.row._id)">{{props.row.hostname}}</a>
+    <template slot="name" slot-scope="props">
+      <a href="#" @click.prevent.stop="linkSingle(props.row._id)">{{props.row.name}}</a>
     </template>
     <template slot="actions" slot-scope="props">
       <div>
