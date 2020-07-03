@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>{{ data.hostname }}</b>
+    <b>{{ data.name }}</b>
     <span v-if="data.os && data.os.base">({{ data.os.base }})</span>
     <span v-if="data.datacenters">- {{ data.datacenters.name }}</span>
     <router-link :to="{name: 'servers.single', params: { id: data._id }}">

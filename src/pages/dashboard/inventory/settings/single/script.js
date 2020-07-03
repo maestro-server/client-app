@@ -1,12 +1,12 @@
-'use strict'
+"use strict";
 
-import Maestro from 'factories/maestro'
-import svTable from './services/table'
-import adminTable from './adminer/table'
-import regionsTable from './regions/table'
+import Maestro from "factories/maestro";
+import svTable from "./services/table";
+import adminTable from "./adminer/table";
+import regionsTable from "./regions/table";
 
-import ListTable from 'mixins/list-table'
-import FectherEntity from 'services/fetchEntity'
+import ListTable from "mixins/list-table";
+import FetchEntity from "services/fetchEntity";
 
 export default {
   mixins: [ListTable],
@@ -18,37 +18,36 @@ export default {
   },
 
   computed: {
-    MOptions () {
-      return this.$parent.$refs.modal_options
+    MOptions() {
+      return this.$parent.$refs.modal_options;
     }
   },
 
-  data: function () {
+  data: function() {
     return {
       title: "Settings",
       name: "Services",
       options: {
         info: {}
       }
-    }
+    };
   },
 
   methods: {
-    optE: function (entity) {
-      this.MOptions
-        .onFinishCallBack(this.$refs.svTable.$refs.vTable.refresh)
-        .show(entity)
+    optE: function(entity) {
+      this.MOptions.onFinishCallBack(
+        this.$refs.svTable.$refs.vTable.refresh
+      ).show(entity);
     },
 
-    fetchData () {
-      FectherEntity(Maestro)()
-        .find((e) => {
-          this.$set(this.options, 'info', e.data)
-        })
+    fetchData() {
+      FetchEntity(Maestro)().find(e => {
+        this.$set(this.options, "info", e.data);
+      });
     }
   },
 
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   }
-}
+};

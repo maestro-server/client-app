@@ -73,7 +73,7 @@
 'use strict'
 import _ from 'lodash'
 import Datacenters from 'factories/datacenters'
-import FectherEntity from 'services/fetchEntity'
+import FetchEntity from 'services/fetchEntity'
 
 export default {
   props: {
@@ -106,7 +106,7 @@ export default {
 
   methods: {
     fetchData: function () {
-      FectherEntity(Datacenters)()
+      FetchEntity(Datacenters)()
         .find(this.fetchDatacenter)
     },
 

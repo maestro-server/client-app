@@ -1,13 +1,13 @@
 <div>
-  <div class="row wrapper-btn">
+  <div class="row wrapper-providers-btn">
     <template v-for="prv in lists">
-      <div class="col-sm-4 col-xs-6">
+      <div class="col-sm-3 col-xs-6 providers-btn">
         <h4>{{prv.label}}</h4>
         <div class="btn btn-primary text-center" @click="callStep(prv)">
           <i :class="prv.icon"></i>
         </div><br/>
         <template v-for="item in prv.method">
-          <span class="small">+ {{item.label}}</span><br/>
+          <span class="small">- {{item}}</span><br/>
         </template>
       </div>
     </template>

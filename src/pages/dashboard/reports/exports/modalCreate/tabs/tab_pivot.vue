@@ -105,7 +105,7 @@
 import TabCreaterList from 'mixins/tab-creater-list'
 import Modals from 'mixins/modals'
 import Adminer from 'factories/adminer'
-import FectherEntity from 'services/fetchEntity'
+import FetchEntity from 'services/fetchEntity'
 import reportFilter from '../modules/reportFilter/ReportFilter'
 
 export default {
@@ -236,7 +236,7 @@ export default {
     },
 
     fetchData () {
-      FectherEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
+      FetchEntity(Adminer)({ persistence: 'local' }).find(this.fetchAdminer, {
         key: 'reports_options'
       })
     },

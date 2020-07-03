@@ -1,14 +1,13 @@
-'use strict'
+"use strict";
 
-import Modals from 'mixins/modals'
-import ModalsApps from 'mixins/modals-apps'
+import Modals from "mixins/modals";
+import ModalsApps from "mixins/modals-apps";
 
-import Adminer from 'factories/adminer'
-import FectherEntity from 'services/fetchEntity'
+import Adminer from "factories/adminer";
+import FetchEntity from "services/fetchEntity";
 
-import tabDeploy from 'src/pages/dashboard/_modules/tabs/tab_deploy'
-import tabRole from 'src/pages/dashboard/_modules/tabs/tab_apps_role'
-
+import tabDeploy from "src/pages/dashboard/_modules/tabs/tab_deploy";
+import tabRole from "src/pages/dashboard/_modules/tabs/tab_apps_role";
 
 export default {
   mixins: [Modals, ModalsApps],
@@ -18,9 +17,9 @@ export default {
     tabRole
   },
 
-  data () {
+  data() {
     return {
-      family: 'Application',
+      family: "Application",
       initialData: {
         name: null,
         description: null,
@@ -31,7 +30,7 @@ export default {
         deploy: [],
         tags: [],
         servers: [],
-        role: { role: 'Application' }
+        role: { role: "Application" }
       },
       options: {
         environment: [],
@@ -40,37 +39,42 @@ export default {
         own: [],
         clusters: []
       }
-    }
+    };
   },
 
   computed: {
-    tab_role () { return this.$refs.tab_role },
-    tab_deploy () { return this.$refs.tab_deploy }
-  },
-
-  methods: {
-    hookCreateLoad () {
-      this.tab_role.reset()
-      this.tab_deploy.reset()
+    tab_role() {
+      return this.$refs.tab_role;
     },
-
-    hookEditLoad () {
-      const role = _.get(this.data, 'role')
-      const deploy = _.get(this.model, 'deploy', [])
-
-      this.tab_role.updaterEdit(role)
-      this.tab_deploy.updaterEdit(deploy)
-    },
-
-    fetchOptions () {
-      const key = `application_options`
-
-      FectherEntity(Adminer)({ persistence: 'local' })
-        .find(this.fetchAdminer, { key })
+    tab_deploy() {
+      return this.$refs.tab_deploy;
     }
   },
 
-  created () {
-    this.fetchOptions()
+  methods: {
+    hookCreateLoad() {
+      this.tab_role.reset();
+      this.tab_deploy.reset();
+    },
+
+    hookEditLoad() {
+      const role = _.get(this.data, "role");
+      const deploy = _.get(this.model, "deploy", []);
+
+      this.tab_role.updaterEdit(role);
+      this.tab_deploy.updaterEdit(deploy);
+    },
+
+    fetchOptions() {
+      const key = `application_options`;
+
+      FetchEntity(Adminer)({ persistence: "local" }).find(this.fetchAdminer, {
+        key
+      });
+    }
+  },
+
+  created() {
+    this.fetchOptions();
   }
-}
+};

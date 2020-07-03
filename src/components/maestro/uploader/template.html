@@ -1,17 +1,26 @@
 <div>
   <div :class="imgSize">
     <div class="wrapper-img img-circle">
-    <img :src="showAvatar">
-  </div>
+      <img :src="showAvatar">
+    </div>
   </div>
 
   <bs-input-file
-    label="Upload your avatar"
+    :label="slabel"
     v-model="label"
     :class="inputSize"
+    :multiple="multiple"
     v-bind:value="value"
     @input="upload">
   </bs-input-file>
+
+  <template v-if="value">
+    <creater-list :basket.sync="value" :show-add-btn="false" :show-form="false" label="File" class="row" v-if="multiple">
+      <template slot="view" slot-scope="props">
+        {{props.item}}
+      </template>
+    </creater-list>
+  </template>
 
   <spinner v-model="spinner" size="lg" text="Loading..."></spinner>
 </div>

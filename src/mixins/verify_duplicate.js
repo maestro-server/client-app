@@ -1,39 +1,41 @@
-'use strict'
+"use strict";
 
-import _ from 'lodash'
-import FectherEntity from 'services/fetchEntity'
+import _ from "lodash";
+import FetchEntity from "services/fetchEntity";
 
 export default {
-  data () {
+  data() {
     return {
       duplicate: {}
-    }
+    };
   },
 
   methods: {
-    verifyDuplicate ({ target }) {
-      const { name } = target
-      const value = this.data[name]
+    verifyDuplicate({ target }) {
+      const { name } = target;
+      const value = this.data[name];
 
       if (!_.isEmpty(value) && this.create) {
-        FectherEntity(this.entity)()
-          .find(({ data }) => this.processVerifyDuplicate(data, value, name), { [name]: value })
+        FetchEntity(this.entity)().find(
+          ({ data }) => this.processVerifyDuplicate(data, value, name),
+          { [name]: value }
+        );
       }
     },
 
-    processVerifyDuplicate (data, value, name) {
-      const { found } = data
-      let text = null
+    processVerifyDuplicate(data, value, name) {
+      const { found } = data;
+      let text = null;
 
       if (found > 0) {
-        text = `Found ${found} ${value} at ${name} in inventory, are you sure?`
+        text = `Found ${found} ${value} at ${name} in inventory, are you sure?`;
       }
 
-      this.$set(this.duplicate, name, text)
+      this.$set(this.duplicate, name, text);
     },
 
-    clearDuplicate () {
-      this.duplicate = {}
+    clearDuplicate() {
+      this.duplicate = {};
     }
   }
-}
+};

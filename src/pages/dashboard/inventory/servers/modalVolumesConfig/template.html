@@ -9,30 +9,87 @@
         <!-- ============================================== -->
         <tab header="Setup">
 
-          <bs-input class="mt20" form-type="horizontal" name="mount" label="Mount Path" v-model="data.mount" placeholder="/dev/sda1"></bs-input>
-          <bs-input class="mt20" form-type="horizontal" name="ftype" label="File Type" v-model="data.ftype" placeholder="ext4"></bs-input>
+          <bs-input class="mt20" form-type="horizontal" name="name" label="Name" v-model="data.name" placeholder="my device"></bs-input>
+          <bs-input class="mt20" form-type="horizontal" name="name" label="Unique Id" v-model="data.unique_id" placeholder="Unique ID"></bs-input>
 
-          <hr>
+        </tab>
 
-          <div class="col-xs-12">
-            <h5>LVM - Logical volume mananger</h5>
-          </div>
+        <!-- ================= Partitions ================= -->
+        <!-- ============================================== -->
+        <tab header="Partitions">
 
-          <div class="row">
-            <div class="mt10 col-sm-9 col-sm-offset-3">
-              <button class="btn btn-sm btn-success" v-if="enabled" @click.prevent="enabled = false">
-                <i class="fa fa-toggle-on"></i>
-                Enabled
-              </button>
-              <button class="btn btn-sm btn-danger" v-if="!enabled" @click.prevent="enabled = true">
-                <i class="fa fa-toggle-off"></i>
-                Disabled
-              </button>
-            </div>
-          </div>
+          <creater-list
+            :single.sync="single"
+            :basket="data.partitions"
+            label="Partitions"
+            @update="updaterEdit"
+          >
+            <template slot="forms">
 
-          <bs-input class="mt20" form-type="horizontal" name="pv" label="PV name" v-model="data.pv" placeholder="pv-name"></bs-input>
-          <bs-input class="mt20" form-type="horizontal" name="vg" label="VG comprises" v-model="data.vg" placeholder="vg-group"></bs-input>
+              <bs-input
+                v-model="single.device"
+                form-type="horizontal"
+                name="device"
+                label="Device"
+                placeholder="/dev/xdva1"
+              />
+
+              <bs-input
+                v-model="single.mount"
+                form-type="horizontal"
+                name="name"
+                label="Mount path"
+                placeholder="/"
+              />
+
+              <bs-input
+                v-model="single.ftype"
+                class="mt20"
+                form-type="horizontal"
+                label="File type"
+                placeholder="ext4"
+              />
+
+              <bs-input
+                v-model="single.size"
+                class="mt20"
+                form-type="horizontal"
+                label="Size"
+                type="number"
+              />
+            </template>
+
+            <template slot="view" slot-scope="props">
+              {{ props.item.name }} <bs-label v-if="props.item.ftype">{{ props.item.ftype }}</bs-label> <bs-label v-if="props.item.size">{{ props.item.size }} GB</bs-label>
+               <bs-label v-if="props.item.mount">Mount: <b>{{ props.item.mount }}</b></bs-label>
+            </template>
+          </creater-list>
+
+        </tab>
+
+        <!-- ================= LVM ================= -->
+        <!-- ============================================== -->
+        <tab header="LVM">
+
+          <creater-list
+            :single.sync="single_lvm"
+            :basket="data.lvm"
+            label="Logical volume"
+            @update="updaterEdit"
+          >
+            <template slot="forms">
+              <div class="col-xs-12"><h5>LVM - Logical volume mananger</h5></div><br/><hr/>
+
+              <bs-input class="mt20" form-type="horizontal" name="pv" label="PV name" v-model="single_lvm.pv" placeholder="pv-name"></bs-input>
+              <bs-input class="mt20" form-type="horizontal" name="vg" label="VG name" v-model="single_lvm.vg" placeholder="vg-group"></bs-input>
+              <bs-input class="mt20" form-type="horizontal" name="size" label="Size" v-model="single_lvm.size" type="number" placeholder="vg-group"></bs-input>
+            </template>
+
+            <template slot="view" slot-scope="props">
+              <bs-label v-if="props.item.pv">{{ props.item.pv }}</bs-label> <bs-label v-if="props.item.size">{{ props.item.size }} GB</bs-label>
+              - {{ props.item.vg }}
+            </template>
+          </creater-list>
 
         </tab>
 

@@ -57,7 +57,7 @@
 'use strict'
 
 import System from 'factories/system'
-import FectherEntity from 'services/fetchEntity'
+import FetchEntity from 'services/fetchEntity'
 import tabApps from 'src/pages/dashboard/_modules/tabs/tab_family_applications'
 import tabSystem from 'src/pages/dashboard/_modules/tabs/tab_system'
 
@@ -97,7 +97,7 @@ export default {
       const _id = dsystems.map(e => _.get(e, '_id'))
 
       if (_id.length > 0) {
-        FectherEntity(System)({ force: true })
+        FetchEntity(System)({ force: true })
           .find(this.fetchApps, { _id })
       }
     },

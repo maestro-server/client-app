@@ -1,14 +1,13 @@
-'use strict'
-import Modals from 'mixins/modals'
-import Datacenters from 'factories/datacenters'
-import Adminer from 'factories/adminer'
-import FectherEntity from 'services/fetchEntity'
-
+"use strict";
+import Modals from "mixins/modals";
+import Datacenters from "factories/datacenters";
+import Adminer from "factories/adminer";
+import FetchEntity from "services/fetchEntity";
 
 export default {
   mixins: [Modals],
 
-  data () {
+  data() {
     return {
       showModalRegions: false,
       showModalZones: false,
@@ -22,122 +21,122 @@ export default {
       zone: null,
       auth: {},
       options: { provider: [], connections: [], regions: [], zones: [] }
-    }
+    };
   },
 
   watch: {
-    region (val) {
-      this.addItems(val, 'regions')
+    region(val) {
+      this.addItems(val, "regions");
     },
-    zone (val) {
-      this.addItems(val, 'zones')
+    zone(val) {
+      this.addItems(val, "zones");
     }
   },
 
   methods: {
-    afterShow () {
-      this.text.title = this.create ? 'Create new Datacenter' : `Edit ${this.model.name} datacenter`
+    afterShow() {
+      this.text.title = this.create
+        ? "Create new Datacenter"
+        : `Edit ${this.model.name} datacenter`;
     },
 
-    createLoad () {
-      this.regions = []
-      this.zones = []
+    createLoad() {
+      this.regions = [];
+      this.zones = [];
     },
 
-    editLoad () {
-      this.$set(this, 'provider', this.model.provider)
-      this.$set(this, 'regions', this.model.regions)
-      this.$set(this, 'zones', this.model.zones)
-      this.$set(this, 'ownProvider', this.model.metas.ownProvider)
+    editLoad() {
+      this.$set(this, "provider", this.model.provider);
+      this.$set(this, "regions", this.model.regions);
+      this.$set(this, "zones", this.model.zones);
+      this.$set(this, "ownProvider", this.model.metas.ownProvider);
     },
 
-    setupModel () {
-      this.model.regions = this.regions
-      this.model.zones = this.zones
-      this.model.provider = this.provider
-      this.model.metas = { ownProvider: this.ownProvider }
+    setupModel() {
+      this.model.regions = this.regions;
+      this.model.zones = this.zones;
+      this.model.provider = this.provider;
+      this.model.metas = { ownProvider: this.ownProvider };
     },
 
-    createSave () {
-      this.setupModel()
+    createSave() {
+      this.setupModel();
 
-      FectherEntity(Datacenters)()
-        .create(this.finishJob, this.model)
+      FetchEntity(Datacenters)().create(this.finishJob, this.model);
     },
 
-    editSave () {
-      this.setupModel()
+    editSave() {
+      this.setupModel();
 
-      FectherEntity(Datacenters)()
-        .update(this.finishJob, this.model)
+      FetchEntity(Datacenters)().update(this.finishJob, this.model);
     },
 
-    changeProvider (bool) {
-      this.provider = null
-      this.ownProvider = bool
-      this.createLoad()
+    changeProvider(bool) {
+      this.provider = null;
+      this.ownProvider = bool;
+      this.createLoad();
     },
 
-    addItems (item, entity) {
-      const exist = _.filter(this[entity], e => e === item).length
+    addItems(item, entity) {
+      const exist = _.filter(this[entity], e => e === item).length;
       if (entity && !_.isEmpty(item) && !exist) {
-        this[entity].push(item)
+        this[entity].push(item);
       }
     },
 
-    clearItems () {
+    clearItems() {
       if (this.create) {
-        this.$set(this, 'zones', [])
-        this.$set(this, 'regions', [])
+        this.$set(this, "zones", []);
+        this.$set(this, "regions", []);
       }
     },
 
-    addItemToTmpList (path, value) {
-      this.$set(this, path, this[value])
-      this[value] = ''
+    addItemToTmpList(path, value) {
+      this.$set(this, path, this[value]);
+      this[value] = "";
     },
     /*
     Regions functions
      */
-    setupModalRegions () {
-      this.showModalRegions = true
-      this.options.regions = []
+    setupModalRegions() {
+      this.showModalRegions = true;
+      this.options.regions = [];
       if (this.options.baser.hasOwnProperty(this.provider)) {
-        this.options.regions = this.options.baser[this.provider].map(e => e.region)
+        this.options.regions = this.options.baser[this.provider].map(
+          e => e.region
+        );
       }
     },
 
-    submitRegions () {
-      this.setupZones()
-      this.showModalRegions = false
+    submitRegions() {
+      this.setupZones();
+      this.showModalRegions = false;
     },
 
     /*
     Zones functions
      */
 
-    setupZones () {
-      let arr = []
+    setupZones() {
+      let arr = [];
 
-      const optProv = this.options.baser.hasOwnProperty(this.provider)
+      const optProv = this.options.baser.hasOwnProperty(this.provider);
       if (optProv && this.regions.length > 0) {
-
-        this.options.baser[this.provider].map((reg) => {
+        this.options.baser[this.provider].map(reg => {
           if (this.regions.indexOf(reg.region) > -1) {
-            arr = arr.concat(reg.zones)
+            arr = arr.concat(reg.zones);
           }
-        })
-
+        });
       }
-      this.zones = arr
-      this.options.zones = _.clone(arr)
+      this.zones = arr;
+      this.options.zones = _.clone(arr);
     }
-
   },
 
-  created () {
-    FectherEntity(Adminer)({ persistence: 'local', time: 42400 })
-      .find(this.fetchAdminer, { key: 'datacenter_options' })
+  created() {
+    FetchEntity(Adminer)({ persistence: "local", time: 42400 }).find(
+      this.fetchAdminer,
+      { key: "datacenter_options" }
+    );
   }
-
-}
+};

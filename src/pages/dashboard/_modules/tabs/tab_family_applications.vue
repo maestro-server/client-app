@@ -58,7 +58,7 @@
 import Applications from 'factories/applications'
 import Adminer from 'factories/adminer'
 import headerLogin from 'src/resources/libs/headerAuthorization'
-import FectherEntity from 'services/fetchEntity'
+import FetchEntity from 'services/fetchEntity'
 
 import Modals from 'mixins/modals'
 import TabCreaterList from 'mixins/tab-creater-list'
@@ -90,7 +90,7 @@ export default {
     },
 
     fetchData () {
-      FectherEntity(Adminer)({ persistence: 'local' })
+      FetchEntity(Adminer)({ persistence: 'local' })
         .find(this.fetchAdminer, { key: 'application_options' })
     }
   }

@@ -63,7 +63,7 @@
       <h5>{{serviceMsg}}</h5>
       <router-link v-if="model._id" :to="{name: 'servers.single', params: { id: model._id }}" class="btn btn-primary" target="_blank">
         <i class="fa  fa-server" aria-hidden="true"></i>
-        Go to <b>{{model.hostname}}</b>
+        Go to <b>{{model.name}}</b>
       </router-link>
     </div>
 

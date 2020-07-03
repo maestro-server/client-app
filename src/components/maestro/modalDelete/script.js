@@ -1,6 +1,6 @@
-'use strict'
-import Modals from 'mixins/modals'
-import FectherEntity from 'services/fetchEntity'
+"use strict";
+import Modals from "mixins/modals";
+import FetchEntity from "services/fetchEntity";
 
 export default {
   mixins: [Modals],
@@ -11,20 +11,18 @@ export default {
   },
 
   computed: {
-    label () {
-      return this.entity.ename
+    label() {
+      return this.entity.ename;
     }
   },
 
   methods: {
-    afterShow () {
-      this.text.title = `DELETE ${this.model[this.fielder]} ?`
+    afterShow() {
+      this.text.title = `DELETE ${this.model[this.fielder]} ?`;
     },
 
-    editSave () {
-      FectherEntity(this.entity)()
-        .remove(this.finishJob, this.model)
+    editSave() {
+      FetchEntity(this.entity)().remove(this.finishJob, this.model);
     }
   }
-
-}
+};
