@@ -15,7 +15,7 @@
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
     "izitoast": "^1.4.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "maestro-vue-tables-2": "^0.1.14",
     "store": "^2.0.12",
     "v-tooltip": "^2.0.3",
