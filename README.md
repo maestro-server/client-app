@@ -1,5 +1,5 @@
-[![Code Climate](https://codeclimate.com/github/maestro-server/client-app/badges/gpa.svg)](https://codeclimate.com/github/maestro-server/client-app) [![Build Status](https://travis-ci.org/maestro-server/client-app.svg?branch=master)](https://travis-ci.org/maestro-server/client-app) [![Issue Count](https://codeclimate.com/github/maestro-server/client-app/badges/issue_count.svg)](https://codeclimate.com/github/maestro-server/client-app)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/12101716a7a64a07a38c8dd0ea645606)](https://www.codacy.com/app/maestro/client-app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maestro-server/client-app&amp;utm_campaign=Badge_Grade)
+[![Code Climate](https://codeclimate.com/github/maestro-server/client-app/badges/gpa.svg)](https://codeclimate.com/github/maestro-server/client-app) [![Build Status](https://travis-ci.com/maestro-server/client-app.svg?branch=master)](https://travis-ci.com/maestro-server/client-app) [![Issue Count](https://codeclimate.com/github/maestro-server/client-app/badges/issue_count.svg)](https://codeclimate.com/github/maestro-server/client-app)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a3410af7b3fa4e3ab60f5473595fe256)](https://www.codacy.com/gh/maestro-server/client-app/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maestro-server/client-app&amp;utm_campaign=Badge_Grade)
 
 # Maestro Server #
 
@@ -105,4 +105,4 @@ The donation will be user to:
 
 ### Sponsor ###
 
-[<img src="docs/_imgs/jetbrains.png" width="100">](https://www.jetbrains.com/?from=maestroserver) 
+[<img src="docs/_imgs/jetbrains.png" width="100">](https://www.jetbrains.com/?from=maestroserver)
